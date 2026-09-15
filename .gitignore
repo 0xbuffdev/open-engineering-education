@@ -3,12 +3,17 @@ books/*.pdf
 
 # Local environments and tool caches
 .DS_Store
+
+# Python
 .venv/
 __pycache__/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
 .ipynb_checkpoints/
+
+# Rust
+target/
 
 # Secrets and locally generated AI/data artifacts
 .env
