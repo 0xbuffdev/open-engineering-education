@@ -1,6 +1,6 @@
 # Labs
 
-Before each course, run `./scripts/new-course-workspace <track> <course-slug>`. It creates the matching lab, exercise, and notes directories from the shared templates. Create individual experiments inside `labs/<track>/<course>/<number>-<slug>/`.
+Before each course, read its bounded recommendations in [practice](../practice/README.md), then run `./scripts/new-course-workspace <track> <course-slug>`. It creates matching lab, exercise, and notes directories plus a `PRACTICE.md` link to the correct track guide. Create individual experiments inside `labs/<track>/<course>/<number>-<slug>/`.
 
 Every lab must contain a `README.md` with this template:
 

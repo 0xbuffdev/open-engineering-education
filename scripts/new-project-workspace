@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [ "$#" -ne 1 ]; then
+  echo "Usage: $0 <project-slug>" >&2
+  echo "Example: $0 P1-reliable-cli-data-tool" >&2
+  exit 64
+fi
+
+project="$1"
+
+case "$project" in
+  P1-reliable-cli-data-tool|P2-systems-service|P3-durable-distributed-store|P4-evaluated-ml-system|P5-safe-generative-ai-service|P6-authorized-security-assessment) ;;
+  *)
+    echo "Unknown project: $project. Choose a planned P1–P6 slug from projects/briefs.md." >&2
+    exit 64
+    ;;
+esac
+
+repository_root="$(cd "$(dirname "$0")/.." && pwd)"
+template_dir="$repository_root/templates/project-workspace"
+project_dir="$repository_root/projects/$project"
+
+if [ -e "$project_dir" ]; then
+  echo "Project workspace already exists: $project_dir" >&2
+  exit 1
+fi
+
+mkdir -p "$project_dir/docs"
+sed "s/<project>/$project/g" "$template_dir/README.md" > "$project_dir/README.md"
+sed "s/<project>/$project/g" "$template_dir/design.md" > "$project_dir/docs/design.md"
+sed "s/<project>/$project/g" "$template_dir/evaluation.md" > "$project_dir/docs/evaluation.md"
+sed "s/<project>/$project/g" "$template_dir/retrospective.md" > "$project_dir/docs/retrospective.md"
+
+printf '# %s project brief\n\nRead [the planned capstone brief](../briefs.md) before writing code. [curriculum.md](../../curriculum.md) defines the prerequisite gate.\n' \
+  "$project" > "$project_dir/BRIEF.md"
+
+echo "Created project workspace for $project."

@@ -12,7 +12,18 @@ track="$1"
 course="$2"
 
 case "$track" in
-  01-foundations|02-systems-engineering|03-ai-machine-learning|04-security-engineering) ;;
+  01-foundations)
+    practice_guide="foundations.md"
+    ;;
+  02-systems-engineering)
+    practice_guide="systems-engineering.md"
+    ;;
+  03-ai-machine-learning)
+    practice_guide="ai-machine-learning.md"
+    ;;
+  04-security-engineering)
+    practice_guide="security-engineering.md"
+    ;;
   *)
     echo "Unknown track: $track" >&2
     exit 64
@@ -22,6 +33,30 @@ esac
 case "$course" in
   ''|*[!A-Za-z0-9-]*)
     echo "Course slug must contain only letters, numbers, and hyphens." >&2
+    exit 64
+    ;;
+esac
+
+case "$track:$course" in
+  01-foundations:F0-foundation-setup|01-foundations:F1-computing-and-programming-foundations|01-foundations:F2-data-structures-and-algorithms|\
+  01-foundations:F3-engineering-practice-git-testing-debugging-c-and-linux-cli|01-foundations:F4-mathematics-for-computing-and-ai|\
+  02-systems-engineering:S1-computer-systems-foundations|02-systems-engineering:S2-machine-code-cpu-and-computer-architecture|\
+  02-systems-engineering:S3-memory-hierarchy-and-locality|02-systems-engineering:S4-cpu-caches|02-systems-engineering:S5-virtual-memory|\
+  02-systems-engineering:S6-concurrency-atomics-and-memory-models|02-systems-engineering:S7-cache-coherence-and-false-sharing|\
+  02-systems-engineering:S8-numa-and-memory-topology|02-systems-engineering:S9-performance-engineering-and-observability|\
+  02-systems-engineering:S10-linux-systems-programming-and-networking|02-systems-engineering:S11-distributed-systems|\
+  02-systems-engineering:S12-data-systems-and-storage-engines|02-systems-engineering:S13-ai-infrastructure-systems-lens|\
+  03-ai-machine-learning:AI1-python-for-data-and-ai|03-ai-machine-learning:AI2-mathematics-for-machine-learning|\
+  03-ai-machine-learning:AI3-classical-machine-learning|03-ai-machine-learning:AI4-deep-learning-foundations|\
+  03-ai-machine-learning:AI5-vision-and-sequence-architectures|03-ai-machine-learning:AI6-transformers-nlp-and-large-language-models|\
+  03-ai-machine-learning:AI7-training-fine-tuning-and-alignment|03-ai-machine-learning:AI8-distributed-and-large-scale-training|\
+  03-ai-machine-learning:AI9-inference-serving-and-optimization|03-ai-machine-learning:AI10-retrieval-agents-and-applied-generative-ai|\
+  03-ai-machine-learning:AI11-mlops-and-production-deployment|03-ai-machine-learning:AI12-responsible-ai-safety-alignment-and-governance|\
+  04-security-engineering:D1-security-foundations-and-threat-modeling|04-security-engineering:D2-memory-corruption-and-binary-exploitation|\
+  04-security-engineering:D3-network-and-web-application-security|04-security-engineering:D4-systems-and-infrastructure-penetration-testing|\
+  04-security-engineering:D5-applied-cryptography-and-secure-systems-design|04-security-engineering:D6-ai-security-and-red-teaming) ;;
+  *)
+    echo "Course '$course' is not defined for track '$track'. Use the canonical workspace slug derived from its curriculum title." >&2
     exit 64
     ;;
 esac
@@ -44,5 +79,10 @@ sed "s/<course>/$course/g" "$template_dir/lab-README.md" > "$lab_dir/README.md"
 sed "s/<course>/$course/g" "$template_dir/exercises-README.md" > "$exercise_dir/README.md"
 sed "s/<course>/$course/g" "$template_dir/resources.md" > "$notes_dir/resources.md"
 sed "s/<course>/$course/g" "$template_dir/summary.md" > "$notes_dir/summary.md"
+
+for workspace_dir in "$lab_dir" "$exercise_dir"; do
+  printf '# %s practical backlog\n\nFollow the recommended labs and exercises in [the track practice guide](../../../practice/%s). Find the section for `%s`; [curriculum.md](../../../curriculum.md) remains canonical for prerequisites, readings, and exit checks.\n' \
+    "$course" "$practice_guide" "$course" > "$workspace_dir/PRACTICE.md"
+done
 
 echo "Created workspace for $course in $track."

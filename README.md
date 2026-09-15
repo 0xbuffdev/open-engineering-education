@@ -9,10 +9,12 @@ Begin with [curriculum.md](curriculum.md). It is the source of truth for course 
 1. Read the first section of [curriculum.md](curriculum.md).
 2. Open [books/README.md](books/README.md) to see what is already available and exactly where it is used.
 3. Review [resources/README.md](resources/README.md) before a course that needs material not in `books/`.
-4. Create work folders from the templates in [labs](labs/README.md), [exercises](exercises/README.md), and [notes](notes/README.md).
-5. Commit the artifact and retrospective for each completed course.
+4. Read the ready-to-use lab and exercise prompts in [practice](practice/README.md), then create a course workspace from [labs](labs/README.md), [exercises](exercises/README.md), and [notes](notes/README.md).
+5. Update [progress.md](progress.md) only after a course exit check is demonstrable, then commit the artifact and retrospective.
 
 The F0 and F1 workspaces are already created. For every later course, run `./scripts/new-course-workspace <track> <course-slug>`; for example, `./scripts/new-course-workspace 01-foundations F2-data-structures-and-algorithms`.
+
+The six planned capstones are scoped in [projects/briefs.md](projects/briefs.md). Once a capstone's prerequisite gate is passed, run `./scripts/new-project-workspace <project-slug>`; for example, `./scripts/new-project-workspace P1-reliable-cli-data-tool`.
 
 ## Tracks
 

@@ -1,6 +1,6 @@
 # Exercises
 
-Use `exercises/<track>/<course>/` for short implementations, written solutions, traces, and tests. Name files by topic, for example `01-binary-search.py` or `03-page-table-walk.md`.
+Use `exercises/<track>/<course>/` for short implementations, written solutions, traces, and tests. The ready-to-use sequence for each course is in [practice](../practice/README.md), and every generated workspace has a `PRACTICE.md` pointer. Name files by topic, for example `01-binary-search.py` or `03-page-table-walk.md`.
 
 For every programming exercise, include:
 

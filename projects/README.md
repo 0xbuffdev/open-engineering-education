@@ -1,6 +1,6 @@
 # Projects and Capstones
 
-Use one top-level folder per project: `projects/P1-reliable-cli-data-tool/`, for example. The capstone definitions and prerequisites are in [curriculum.md](../curriculum.md#capstones).
+Choose a scoped project from [briefs.md](briefs.md) after passing its prerequisite gate in [curriculum.md](../curriculum.md#capstones). Start it with `./scripts/new-project-workspace <project-slug>`; for example, `./scripts/new-project-workspace P1-reliable-cli-data-tool`. This creates `projects/<project>/` with the required project/docs skeleton.
 
 Every project needs:
 
