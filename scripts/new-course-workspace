@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [ "$#" -ne 2 ]; then
+  echo "Usage: $0 <track> <course-slug>" >&2
+  echo "Example: $0 01-foundations F1-computing-and-programming-foundations" >&2
+  exit 64
+fi
+
+track="$1"
+course="$2"
+
+case "$track" in
+  01-foundations|02-systems-engineering|03-ai-machine-learning|04-security-engineering) ;;
+  *)
+    echo "Unknown track: $track" >&2
+    exit 64
+    ;;
+esac
+
+case "$course" in
+  ''|*[!A-Za-z0-9-]*)
+    echo "Course slug must contain only letters, numbers, and hyphens." >&2
+    exit 64
+    ;;
+esac
+
+repository_root="$(cd "$(dirname "$0")/.." && pwd)"
+template_dir="$repository_root/templates/course-workspace"
+lab_dir="$repository_root/labs/$track/$course"
+exercise_dir="$repository_root/exercises/$track/$course"
+notes_dir="$repository_root/notes/$track/$course"
+
+for destination in "$lab_dir" "$exercise_dir" "$notes_dir"; do
+  if [ -e "$destination" ]; then
+    echo "Workspace already exists: $destination" >&2
+    exit 1
+  fi
+done
+
+mkdir -p "$lab_dir" "$exercise_dir" "$notes_dir"
+sed "s/<course>/$course/g" "$template_dir/lab-README.md" > "$lab_dir/README.md"
+sed "s/<course>/$course/g" "$template_dir/exercises-README.md" > "$exercise_dir/README.md"
+sed "s/<course>/$course/g" "$template_dir/resources.md" > "$notes_dir/resources.md"
+sed "s/<course>/$course/g" "$template_dir/summary.md" > "$notes_dir/summary.md"
+
+echo "Created workspace for $course in $track."

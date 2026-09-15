@@ -1,6 +1,6 @@
 # Local Library and Required Reading Map
 
-The following PDFs are already present locally. This table is the chapter-level source of truth; [plan.md](../plan.md) repeats the same requirements in the appropriate course.
+The following PDFs are already present locally. This is a navigation index of the chapter requirements in the canonical [curriculum.md](../curriculum.md); update `curriculum.md` first if the curriculum changes.
 
 | Code | Book | Required by course |
 | --- | --- | --- |

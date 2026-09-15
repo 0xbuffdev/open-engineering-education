@@ -1,6 +1,6 @@
 # Track 2 — Systems Engineering
 
-Use C for raw-interface learning labs and Rust for systems you will maintain. You need a Linux environment before `S1`.
+Use C for raw-interface learning labs and Rust for systems you will maintain. You need a Linux environment before `S1`. This is a navigation index; [curriculum.md](../../curriculum.md) is canonical.
 
 | Course | Prerequisite | Time | Primary artifact |
 | --- | --- | --- | --- |
@@ -18,4 +18,4 @@ Use C for raw-interface learning labs and Rust for systems you will maintain. Yo
 | S12 — Storage Engines | S5, S9 | 5 weeks | Crash-safe LSM store |
 | S13 — AI Infrastructure | S8, S9, S11 | 4 weeks | Inference gateway/simulator |
 
-The exact chapter readings, safety constraints, and exit checks are in [plan.md](../../plan.md#track-2--systems-engineering).
+The exact chapter readings, safety constraints, and exit checks are in [curriculum.md](../../curriculum.md#track-2--systems-engineering).

@@ -1,6 +1,6 @@
 # Projects and Capstones
 
-Use one top-level folder per project: `projects/P1-reliable-cli-data-tool/`, for example. The capstone definitions and prerequisites are in [plan.md](../plan.md#capstones).
+Use one top-level folder per project: `projects/P1-reliable-cli-data-tool/`, for example. The capstone definitions and prerequisites are in [curriculum.md](../curriculum.md#capstones).
 
 Every project needs:
 

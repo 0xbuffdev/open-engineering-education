@@ -1,6 +1,6 @@
 # Track 4 — Security Engineering and Ethical Hacking
 
-Only assess systems you own or have explicit written authorization to test. Use isolated targets, snapshots, and the rules of engagement created in `D1`. Never scan or attack public or third-party systems.
+Only assess systems you own or have explicit written authorization to test. Use isolated targets, snapshots, and the rules of engagement created in `D1`. Never scan or attack public or third-party systems. `D` means the Defense/Security course prefix inherited from the original curriculum. This is a navigation index; [curriculum.md](../../curriculum.md) is canonical.
 
 | Course | Prerequisite | Time | Primary artifact |
 | --- | --- | --- | --- |
@@ -11,4 +11,4 @@ Only assess systems you own or have explicit written authorization to test. Use 
 | D5 — Applied Cryptography | D1, S6 | 3 weeks | Threat-modeled protocol using vetted APIs |
 | D6 — AI Security and Red Teaming | D1, AI6, AI12 | 3 weeks | In-scope AI red-team/retest report |
 
-The exact readings and safety limitations are in [plan.md](../../plan.md#track-4--security-engineering-and-ethical-hacking). The dedicated security/cryptography resources are not in `books/`; see [resources/README.md](../../resources/README.md).
+The exact readings and safety limitations are in [curriculum.md](../../curriculum.md#track-4--security-engineering-and-ethical-hacking). The dedicated security/cryptography resources are not in `books/`; see [resources/README.md](../../resources/README.md).

@@ -6,20 +6,79 @@ For every course: **read → explain → solve → build → measure/test → wr
 
 ## How to use this repository
 
-1. Complete `F1` → `F2` → `F3`; `F4` may run alongside `F3`.
+1. Complete the Foundation Setup checklist, then `F1` → `F2` → `F3`; `F4` may run alongside `F3`. All four Foundation courses must be complete before a specialization begins.
 2. Set up Linux before `S1`. Later Systems labs use Linux-specific APIs and tools; macOS alone is not an equivalent substitute. A VM, a Linux machine, or a development container is fine.
-3. Create matching course folders under `labs/`, `exercises/`, and `notes/` using the templates in those directories. Put substantial portfolio work in `projects/`.
+3. Create matching course folders with `./scripts/new-course-workspace <track> <course-slug>` before starting a course. The script copies the tracked lab, exercise, resource-log, and retrospective templates. Put substantial portfolio work in `projects/`.
 4. Do not advance because you finished a reading. Advance only after meeting the course exit check.
 5. Keep datasets, model weights, credentials, third-party course files, and personal information out of Git.
 
-```text
-F1 → F2 → F3 ─┬─→ Systems: S1 → S2 → S3 → {S4, S5} → S6 → S7 → S8 → S9 → S10 → S11 → S12 → S13
-              ├─→ AI:      AI1 + AI2 → AI3 → AI4 → AI5 → AI6 → {AI7, AI10, AI12} → AI8/AI9 → AI11
-              └─→ Security: D1 → D5; D2 after S2+S5; D3 after S10; D4 after D2+D3+S11; D6 after AI6+AI12
-F4 ───────────┘
+```mermaid
+flowchart TB
+  F0[F0 Setup] --> F1[F1]
+  F0 --> F4[F4]
+  F1 --> F2[F2]
+  F1 --> F3[F3]
+  F2 --> F3
+  F4 --> FC[Foundations complete]
+  F3 --> FC
+
+  FC --> S1[S1]
+  S1 --> S2[S2]
+  S2 --> S3[S3]
+  S3 --> S4[S4]
+  S3 --> S5[S5]
+  S1 --> S6[S6]
+  S4 --> S7[S7]
+  S6 --> S7
+  S7 --> S8[S8]
+  S4 --> S9[S9]
+  S6 --> S9
+  S1 --> S10[S10]
+  S6 --> S10
+  S9 --> S11[S11]
+  S10 --> S11
+  S5 --> S12[S12]
+  S9 --> S12
+  S8 --> S13[S13]
+  S9 --> S13
+  S11 --> S13
+
+  FC --> AI1[AI1]
+  FC --> AI2[AI2]
+  AI1 --> AI3[AI3]
+  AI2 --> AI3
+  AI3 --> AI4[AI4]
+  AI4 --> AI5[AI5]
+  AI5 --> AI6[AI6]
+  AI6 --> AI7[AI7]
+  AI6 --> AI9[AI9]
+  AI6 --> AI10[AI10]
+  AI6 --> AI12[AI12]
+  AI7 --> AI8[AI8]
+  AI7 --> AI11[AI11]
+  AI9 --> AI11
+  S11 -. strongly recommended .-> AI8
+  S9 -. strongly recommended .-> AI9
+
+  FC --> D1[D1]
+  D1 --> D2[D2]
+  S2 --> D2
+  S5 --> D2
+  D1 --> D3[D3]
+  S10 --> D3
+  D2 --> D4[D4]
+  D3 --> D4
+  S11 --> D4
+  D1 --> D5[D5]
+  S6 --> D5
+  D1 --> D6[D6]
+  AI6 --> D6
+  AI12 --> D6
 ```
 
-The systems-first path is recommended for completing every track. An AI-first learner can begin `AI1` and `AI2` after Foundations, but should finish `S9` before `AI9` and `S11` before `AI8`. Security starts with `D1` after Foundations but its other courses wait for the specific systems or AI knowledge they need.
+Solid arrows are required prerequisites; dashed arrows are strongly recommended preparation. The graph deliberately leaves independent courses side-by-side: for example, `S6` begins after `S1`, not after `S5`, and `AI10`/`AI12` may run beside `AI7` after `AI6`.
+
+The systems-first path is recommended for completing every track. An AI-first learner starts `AI1` and `AI2` after completing Foundations, but should finish `S9` before `AI9` and `S11` before `AI8`. Security starts with `D1` after Foundations; its later courses wait for the specific systems or AI knowledge they need.
 
 ## Reading and access legend
 
@@ -43,16 +102,18 @@ The PDFs are excluded from Git so this repository does not redistribute personal
 ## Repository layout
 
 ```text
-books/                         personal PDF library; tracked reading map only
-tracks/                        indexes for the four curriculum tracks
-labs/<track>/<course>/          reproducible experiments and implementation notes
-exercises/<track>/<course>/     drills, written answers, and tests
-projects/<track>/<project>/     portfolio-quality projects and capstones
-notes/<track>/<course>/         concept notes, reading log, and retrospectives
-resources/                      acquisition and environment checklist
+books/                          personal PDF library; tracked reading map only
+tracks/                         indexes for the four curriculum tracks
+labs/<track>/<course>/           reproducible experiments and implementation notes
+exercises/<track>/<course>/      drills, written answers, and tests
+projects/<track>/<project>/      portfolio-quality projects and capstones
+notes/<track>/<course>/          concept notes, resource logs, and retrospectives
+resources/                       acquisition and environment checklist
+templates/course-workspace/     starter files copied for each course
+scripts/new-course-workspace    creates a per-course workspace from templates
 ```
 
-Each non-trivial lab or project must have a `README.md` that states: goal, prerequisites, setup, commands to run, tests/measurements, result, and next improvement. Name directories predictably, for example `labs/02-systems-engineering/S4-cpu-caches/01-cache-simulator/`.
+Each non-trivial lab or project must have a `README.md` that states: goal, prerequisites, setup, commands to run, tests/measurements, result, and next improvement. The workspace script creates the course-level starter files; name individual labs predictably, for example `labs/02-systems-engineering/S4-cpu-caches/01-cache-simulator/`.
 
 ## External materials: important gap report
 
@@ -71,9 +132,19 @@ At 12–15 focused hours per week, plan about 3–4 months for Foundations, 10�
 
 # Track 1 — Foundations
 
+## F0 — Foundation Setup
+
+**Prerequisites:** none · **Time:** 1–2 days
+
+**Set up:** a code editor, Git, Python, a terminal, a Git identity, and a private backup/remote. Create and run a Python “hello” script, initialise a scratch repository, make one commit, and record your operating system and tool versions in `notes/01-foundations/F0-foundation-setup/resources.md`.
+
+**Read:** no book required. Use the official installation guides for your operating system, Python, Git, and editor. Linux is required before `S1`, not before F1.
+
+**Exit check:** you can open a terminal, create/edit/run a file, inspect Git status, make a commit, and restore a previous file version.
+
 ## F1 — Computing and Programming Foundations (Python)
 
-**Prerequisites:** none · **Time:** 4 weeks
+**Prerequisites:** F0 · **Time:** 4 weeks
 
 **Learn:** computer components, binary, Python values/control flow/functions, files, exceptions, and terminal basics.
 
@@ -109,11 +180,11 @@ At 12–15 focused hours per week, plan about 3–4 months for Foundations, 10�
 
 ## F4 — Mathematics for Computing and AI
 
-**Prerequisites:** high-school algebra · **Time:** 4 weeks
+**Prerequisites:** F0 and high-school algebra · **Time:** 4 weeks
 
 **Learn:** logic, sets, combinatorics, vectors/matrices, derivatives/gradients, probability, Bayes’ rule, distributions, and descriptive statistics.
 
-**Read:** no local book covers ML mathematics. Obtain the free 🌐 *Mathematics for Machine Learning* and study its introductory linear algebra, calculus, probability, and optimization material.
+**Read:** no local book covers ML mathematics. Obtain the free 🌐 *Mathematics for Machine Learning* and read Chapters **2–3** (linear algebra and analytic geometry) and **5–6** (vector calculus and probability/distribution). Basic discrete-math drills are supplied by the exercises rather than this text.
 
 **Do:** implement vector addition, dot product, matrix multiplication, finite-difference derivatives, and dice/coin simulations without NumPy; verify with NumPy.
 
@@ -177,7 +248,7 @@ At 12–15 focused hours per week, plan about 3–4 months for Foundations, 10�
 
 **Prerequisites:** S1 · **Time:** 5 weeks
 
-**Read:** `B4` Chapters **26–33**; `B5` Chapters **29–33** and **53**; `B6` §**6.4** and §**8.1**. Obtain 🌐 *Rust Atomics and Locks*.
+**Read:** `B4` Chapters **26–33**; `B5` Chapters **29–33** and **53**; `B6` §**6.4** and §**8.1**. Obtain 🌐 *Rust Atomics and Locks* and read Chapters **1–4, 8–9** (Rust concurrency, atomics, memory ordering, spin locks, OS primitives, and locks).
 
 **Build:** a bounded queue, thread pool, atomic counter benchmark, and a deliberately racy program; repair the race and state its happens-before argument.
 
@@ -227,7 +298,7 @@ At 12–15 focused hours per week, plan about 3–4 months for Foundations, 10�
 
 **Prerequisites:** S9 and S10 · **Time:** 6 weeks
 
-**Read:** `B4` Chapters **47–49**; selectively revisit `B5` Chapters **43–44** and **56, 59–61**. These are introductory only: obtain 🛒 *Designing Data-Intensive Applications* and use 🌐 MIT 6.5840 materials.
+**Read:** `B4` Chapters **47–49**; selectively revisit `B5` Chapters **43–44** and **56, 59–61**. These are introductory only: obtain 🛒 *Designing Data-Intensive Applications*, **2nd edition**, and read Chapters **1–2 and 5–10** (architecture trade-offs, nonfunctional requirements, encoding, replication, sharding, transactions, distributed failures, and consensus). Use the 🌐 MIT 6.5840 materials for its corresponding RPC, fault-tolerance, and consensus labs.
 
 **Build:** a private Rust replicated key-value store in stages: RPC, durable log, leader/replication, fault injection, and metrics.
 
@@ -237,7 +308,7 @@ At 12–15 focused hours per week, plan about 3–4 months for Foundations, 10�
 
 **Prerequisites:** S5 and S9 · **Time:** 5 weeks
 
-**Read:** `B4` Chapters **36–44**; `B5` Chapters **13–14, 49–50, and 55**. Obtain 🛒 *Database Internals* for storage-engine implementation depth.
+**Read:** `B4` Chapters **36–44**; `B5` Chapters **13–14, 49–50, and 55**. Obtain 🛒 *Database Internals* and read Chapters **1–5 and 7** (storage organization, B-trees, file formats, recovery, and log-structured storage).
 
 **Build:** a Rust LSM key-value store with WAL, sorted tables, compaction, checksums, crash-recovery tests, and a stated workload benchmark.
 
@@ -259,7 +330,7 @@ At 12–15 focused hours per week, plan about 3–4 months for Foundations, 10�
 
 ## AI1 — Python for Data and AI
 
-**Prerequisites:** F1 · **Time:** 3 weeks
+**Prerequisites:** F1–F4 · **Time:** 3 weeks
 
 **Read:** **no local book.** Obtain 🌐 *Python for Data Analysis* or the NumPy/pandas user guides; record completed chapters/tutorials in the course resource note.
 
@@ -269,9 +340,9 @@ At 12–15 focused hours per week, plan about 3–4 months for Foundations, 10�
 
 ## AI2 — Mathematics for Machine Learning
 
-**Prerequisites:** F4 · **Time:** 4 weeks
+**Prerequisites:** F1–F4 · **Time:** 4 weeks
 
-**Read:** **no local book.** Continue 🌐 *Mathematics for Machine Learning* through linear algebra, vector calculus, probability, continuous optimization, and PCA.
+**Read:** **no local book.** Continue 🌐 *Mathematics for Machine Learning* with Chapters **2, 5–7, and 10** (linear algebra, vector calculus, probability, continuous optimization, and PCA). Revisit Chapter **3** if the F4 analytic-geometry work is not yet fluent.
 
 **Build:** derive linear-regression gradients; implement gradient descent; compare analytic and finite-difference gradients; implement PCA with NumPy.
 
@@ -361,7 +432,7 @@ At 12–15 focused hours per week, plan about 3–4 months for Foundations, 10�
 
 **Prerequisites:** AI7 and AI9 · **Time:** 4 weeks
 
-**Read:** **no local book.** Obtain 🛒 *Designing Machine Learning Systems* or an equivalent 🌐 production-ML course.
+**Read:** **no local book.** Obtain 🛒 *Designing Machine Learning Systems* (Chip Huyen, 2022) and read Chapters **1–2 and 6–11** (system objectives, offline evaluation, deployment, monitoring, continual learning, MLOps tooling, and human/responsible-ML concerns). Chapters **3–5** are optional remediation when the project needs deeper data/feature-pipeline work.
 
 **Build:** package an earlier model/service with tests, container build, deployment manifest, dashboards, alert conditions, runbook, versions, and a rollback simulation.
 
@@ -379,13 +450,13 @@ At 12–15 focused hours per week, plan about 3–4 months for Foundations, 10�
 
 # Track 4 — Security Engineering and Ethical Hacking
 
-**Entry standard:** complete Foundations. Offensive testing is allowed only against systems you own or are explicitly authorized to test, in an isolated lab. `D1` establishes the rules of engagement for every later course.
+**Entry standard:** complete Foundations. `D` is the Defense/Security course prefix inherited from the original curriculum. Offensive testing is allowed only against systems you own or are explicitly authorized to test, in an isolated lab. `D1` establishes the rules of engagement for every later course.
 
 ## D1 — Security Foundations and Threat Modeling
 
 **Prerequisites:** F1–F4 · **Time:** 3 weeks
 
-**Read:** `B5` Chapters **8–9, 15, 17, 38, and 39**. Obtain 🛒 a threat-modeling text and use the current 🌐 OWASP Top 10.
+**Read:** `B5` Chapters **8–9, 15, 17, 38, and 39**. Obtain 🛒 the currently available *Threat Modeling: Designing for Security*, 1st edition (2014), and read Chapters **1–5 and 7–10** (approaches, STRIDE, attack trees/libraries, threat management, defenses, trade-offs, and validation). The 2nd edition, *Threat Modeling: Designing for Security in an AI World*, is announced for February 2027, so it is not a required resource yet. Use the current 🌐 OWASP Top 10.
 
 **Build:** rules of engagement; STRIDE model and abuse cases for an F1, S10, or AI10 artifact; turn the highest risks into verification tests.
 
@@ -425,7 +496,7 @@ At 12–15 focused hours per week, plan about 3–4 months for Foundations, 10�
 
 **Prerequisites:** D1 and S6 · **Time:** 3 weeks
 
-**Read:** **no local book.** Obtain 🛒 *Serious Cryptography* or an equivalent current applied-cryptography text and 🌐 vetted-library documentation. Do not invent primitives.
+**Read:** **no local book.** Obtain 🛒 *Serious Cryptography*, **2nd edition** (2024), and read Chapters **1–4, 6–8, and 10–13** (security goals, randomness, AES/modes, hashes, MACs, AEAD, RSA, Diffie–Hellman, elliptic curves, and TLS). Pair it with 🌐 vetted-library documentation. Do not invent primitives.
 
 **Build:** a small protocol using established library APIs, with a threat model, transcript, nonce/key handling, failure behavior, tests, and format-compatibility check.
 
@@ -452,7 +523,7 @@ Each capstone belongs in `projects/` and needs a design doc, setup instructions,
 | P3 — Durable distributed store | S11–S12 | replicated/durable KV store with fault injection and recovery proof |
 | P4 — Evaluated ML system | AI1–AI7 | reproducible pipeline, dataset/model cards, evaluation suite, and limitations |
 | P5 — Safe generative-AI service | AI8–AI12 and S13 | observable private model service/simulator with bounded RAG or agent behavior and incident plan |
-| P6 — Authorized security assessment | D1–D6 | full assessment and retest of P3/P5 in the private lab |
+| P6 — Authorized security assessment | D1–D6 and one completed assessment target: P3 or P5 | full assessment and retest of the selected private P3/P5 system |
 
 ## Completion standard
 

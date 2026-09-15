@@ -1,6 +1,6 @@
 # Labs
 
-Create a folder for each experiment at `labs/<track>/<course>/<number>-<slug>/`.
+Before each course, run `./scripts/new-course-workspace <track> <course-slug>`. It creates the matching lab, exercise, and notes directories from the shared templates. Create individual experiments inside `labs/<track>/<course>/<number>-<slug>/`.
 
 Every lab must contain a `README.md` with this template:
 
