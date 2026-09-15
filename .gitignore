@@ -1,0 +1,21 @@
+# Personal/copyrighted reference copies are local only. The reading map is tracked.
+books/*.pdf
+
+# Local environments and tool caches
+.DS_Store
+.venv/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Secrets and locally generated AI/data artifacts
+.env
+.env.*
+!.env.example
+data/
+artifacts/
+models/
+wandb/
+mlruns/
