@@ -1,10 +1,12 @@
 # Learning Lab
 
-A build-first curriculum for becoming a professional systems engineer, AI/ML engineer, or security engineer — starting from programming fundamentals and ending with an operated, evaluated, or security-reviewed capstone.
+A build-first curriculum for people who want to become systems, AI/ML, or security engineers. It starts with programming fundamentals and ends with a capstone you operate, evaluate, or put through a security review.
 
-This repository is the **plan and the evidence log**, not a book collection. The curriculum is split into one file per course so you can open exactly the page you need.
+Learning Lab is the free curriculum from [0xBUFF](https://github.com/0xbuffdev). We build everyday tools for the general public, developer tools, and 0xNAND, a learning platform for engineers who want to understand hard systems.
 
-> **Mentorship (optional):** The curriculum is free and will stay free. If you want a human guide, I take a small number of engineers 1:1 — a realistic plan, code review on your actual work, and help with the parts where tutorials stop. [Read the details and apply →](MENTORSHIP.md)
+This repository holds the plan and the evidence log. Each course has its own file, so you can open the page you need. The books stay out of Git.
+
+> Mentorship is optional. The curriculum is free and will stay free. If you want help, I take 3–5 engineers at a time. We make a plan for where you are, review your code and designs, and work through the parts that tutorials skip. [Read how it works](MENTORSHIP.md).
 
 ## Start here
 
@@ -70,7 +72,7 @@ notes/<track>/<CODE>/resources.md
 notes/<track>/<CODE>/summary.md
 ```
 
-The course file remains the assignment. The workspace is where you do it. Do not create a workspace for a course you have not reached; an empty directory is not progress.
+The course file is the assignment. The workspace is where you do it. Do not create a workspace for a course you have not reached; an empty directory is not progress.
 
 ## Create a project workspace
 
@@ -82,10 +84,10 @@ The course file remains the assignment. The workspace is where you do it. Do not
 
 The project brief is in [curriculum/projects/project-ladder.md](curriculum/projects/project-ladder.md) or [curriculum/projects/capstones.md](curriculum/projects/capstones.md). Start only after the stated gate. The script creates the README, design doc, evaluation plan, and retrospective skeleton under `projects/<slug>/`.
 
-## What each course file gives you
+## What each course file contains
 
 - purpose, outcomes, prerequisites, and a realistic hour budget;
-- **required reading** with exact chapter/section identifiers (not page numbers);
+- required reading with exact chapter and section identifiers (not page numbers);
 - a topic checklist grouped into modules;
 - labs that produce runnable evidence;
 - exercises that force recall and implementation;
@@ -101,7 +103,7 @@ The six core reference books are mapped in [curriculum/books/](curriculum/books/
 - Keep legally obtained PDFs/EPUBs in `books/`; that directory is ignored by Git except for its README.
 - Do **not** commit copyrighted books, scans, paywalled chapters, datasets, model weights, credentials, or private data.
 - The curriculum works without local books: each course names a legal primary source and an alternative.
-- Modern distributed systems, ML, web security, cloud-native security, and AI safety are **not** covered by the local library. Use [curriculum/resources.md](curriculum/resources.md).
+- Modern distributed systems, ML, web security, cloud-native security, and AI safety are not covered by the local library. Use [curriculum/resources.md](curriculum/resources.md).
 
 ## Progress and evidence
 
@@ -115,7 +117,7 @@ Each substantial lab or project should leave:
 - a design/threat model where relevant;
 - a retrospective naming one wrong assumption and what changed.
 
-## Tracks at a glance
+## Tracks
 
 | Track | Entry | Core | Electives | Capstone |
 | --- | --- | --- | --- | --- |
@@ -126,9 +128,9 @@ Each substantial lab or project should leave:
 
 \*D6 is the AI-security elective and assumes AI1–AI6 plus AI12. The core Security path does not include it; take it after the AI prerequisites if you target AI security.
 
-At 15 focused hours/week, one specialization after Foundations is realistically **2.5–3.5 years**. At 25 hours/week it is **18–24 months**. Doing all three tracks at once is not recommended; see the [roadmap](curriculum/roadmap.md) for honest timelines and useful stopping points.
+At 15 hours a week, one specialization after Foundations is realistically **2.5–3.5 years**. At 25 hours a week it is **18–24 months**. Doing all three tracks at once is not recommended; see the [roadmap](curriculum/roadmap.md) for honest timelines and useful stopping points.
 
-## Non-negotiable rules
+## Working rules
 
 - Security work only on systems you own or have **explicit written authorization** to test.
 - Keep secrets, private data, model weights, and copyrighted books out of Git.
@@ -139,14 +141,15 @@ At 15 focused hours/week, one specialization after Foundations is realistically 
 
 ## Mentorship
 
-The curriculum is free. Mentorship is optional: a realistic plan from your current level, code and design review on your own work, and help with the parts where tutorials stop. I take 3–5 active 1:1 mentees at a time.
+Mentorship is optional. I take 3–5 engineers at a time. We start with where you are, make a plan, and review the code and designs you write. I do not write the work for you.
 
-- **Roadmap Audit** — 90 minutes plus a written 4-week plan.
-- **Guided Month** — two sessions plus async code review.
-- **Guided Sprint** — 12 weeks, six sessions, one phase of a track.
-- **Group Cohort** — six weeks with a small peer group.
+- **Roadmap Audit:** 90 minutes and a written 4-week plan.
+- **Guided Month:** two sessions and code review between them.
+- **Guided Sprint:** 12 weeks and six sessions, enough for one phase of a track.
+- **Async Review:** a written review of a project or PR, plus a 30-minute call.
+- **Group Cohort:** six weeks with a small group.
 
-[Read the details and apply →](MENTORSHIP.md)
+[Read the plans and apply](MENTORSHIP.md).
 
 ## License
 
@@ -154,7 +157,7 @@ Curriculum text and course materials are licensed under [CC BY 4.0](LICENSE). Co
 
 ## Reference
 
-- [Professional practice](curriculum/appendices/professional-practice.md) — the standard the evidence must meet.
-- [Coverage map](curriculum/appendices/coverage-map.md) — every course, topic, and deliberate boundary.
-- [Glossary](curriculum/appendices/glossary.md) — precise working definitions.
-- [Study method](curriculum/study-method.md) — the weekly loop and review cadence.
+- [Professional practice](curriculum/appendices/professional-practice.md): the standard the evidence must meet.
+- [Coverage map](curriculum/appendices/coverage-map.md): every course, topic, and deliberate boundary.
+- [Glossary](curriculum/appendices/glossary.md): precise working definitions.
+- [Study method](curriculum/study-method.md): the weekly loop and review cadence.
