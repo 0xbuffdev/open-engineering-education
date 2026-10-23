@@ -141,7 +141,7 @@ At 15 hours a week, one specialization after Foundations is realistically **2.5�
 
 ## Mentorship
 
-Mentorship is optional. I take 3–5 engineers at a time. We start with where you are, make a plan, and review the code and designs you write. I do not write the work for you.
+I take 3–5 engineers at a time. We start with where you are, make a plan, and review the code and designs you write. I do not write the work for you.
 
 - **Roadmap Audit:** 90 minutes and a written 4-week plan.
 - **Guided Month:** two sessions and code review between them.
