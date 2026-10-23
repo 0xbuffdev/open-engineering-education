@@ -4,6 +4,8 @@ A build-first curriculum for becoming a professional systems engineer, AI/ML eng
 
 This repository is the **plan and the evidence log**, not a book collection. The curriculum is split into one file per course so you can open exactly the page you need.
 
+> **Mentorship (optional):** The curriculum is free and will stay free. If you want a human guide, I take a small number of engineers 1:1 — a realistic plan, code review on your actual work, and help with the parts where tutorials stop. [Read the details and apply →](MENTORSHIP.md)
+
 ## Start here
 
 1. Read [curriculum/README.md](curriculum/README.md) for the structure and study rules.
@@ -43,6 +45,7 @@ books/                      legal local copies only; ignored by Git
 templates/                  workspace starters
 scripts/                    workspace creation
 progress.md                 completion and evidence log
+MENTORSHIP.md               optional 1:1 mentorship, pricing, and policies
 ```
 
 Tracks use short codes: `foundations`, `systems`, `ai`, `security`; courses use `F0`–`F6`, `S1`–`S17`, `AI1`–`AI19`, `D1`–`D14`.
@@ -131,6 +134,21 @@ At 15 focused hours/week, one specialization after Foundations is realistically 
 - Prefer one primary resource per course; finish it before adding another.
 - Commit small, explain what changed, and keep a runnable artifact.
 - Stop and write down a blocker instead of silently substituting a book, dataset, or model.
+
+## Mentorship
+
+The curriculum is free. Mentorship is optional: a realistic plan from your current level, code and design review on your own work, and help with the parts where tutorials stop. I take 3–5 active mentees at a time.
+
+- **Roadmap Audit** — 90 minutes plus a written 4-week plan.
+- **Guided Month** — two sessions plus async code review.
+- **Guided Sprint** — 12 weeks, six sessions, one phase of a track.
+- **Group Cohort** — six weeks with a small peer group.
+
+[Read the details and apply →](MENTORSHIP.md)
+
+## License
+
+Curriculum text and course materials are licensed under [CC BY 4.0](LICENSE). Code samples, scripts, and templates are licensed under [MIT](LICENSE-MIT). Attribution: © 2026 Christopher S. Aondona.
 
 ## Reference
 
