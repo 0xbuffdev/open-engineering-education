@@ -66,6 +66,12 @@ Each session has one concrete outcome. We might:
 
 After each session you get written notes: decisions, action items, and the next check.
 
+## Three ways in
+
+- **Book a one-off:** the Roadmap Audit or Async Review. No subscription.
+- **Subscribe:** the Guided Month renews monthly until cancelled. Cancel before the next renewal date.
+- **Ask first:** email **support@memofs.dev** with the subject **“Mentorship application”**. I will tell you if a plan is a fit before you pay.
+
 ## How to apply
 
 Email **support@memofs.dev** with the subject **“Mentorship application”** and include:
