@@ -36,6 +36,22 @@ Prices are in USD. The first three mentees get **25% off** in exchange for a tes
 - **Teams:** custom quote.
 - **No per-course pricing.** A course is already available on its own; mentorship is sold as time and feedback. A sprint covers one phase of a track, not an entire multi-month track.
 
+## How the offer is organized
+
+Use the smallest plan that solves the current problem. Do not buy a multi-year package before you have tested the fit.
+
+| Your situation | Start with | Why |
+| --- | --- | --- |
+| You are unsure what to study next | **Roadmap Audit** | A one-off diagnosis is cheaper than months of drift. |
+| One course lab or project is stuck | **Async Review** | A written review plus 30 minutes is enough to unblock most concrete problems. |
+| You want steady accountability | **Guided Month** | Two sessions a month, with async review between them. |
+| You are finishing one phase of a track | **Guided Sprint** | Twelve weeks gives enough time to build and review a real increment. |
+| You want peers, not 1:1 | **Group Cohort** | Cheaper per person, with shared critique and deadlines. |
+
+A full track is **not** a single mentorship SKU. Foundations is 720 hours; a specialisation after it is another 675–1,110 core hours. At 15 hours a week, that is roughly two to three years of consistent work. Buy one sprint, reassess, and continue only if the work is paying off.
+
+There is no per-course mentorship rate. If you want help with one course, the **Async Review** ($100) or **Roadmap Audit** ($99) is the smallest useful unit.
+
 ## What a session looks like
 
 Before the first session, you complete a short intake: where you are, what you have built, what you want in six months, and what is blocking you.
@@ -64,7 +80,7 @@ Email **support@memofs.dev** with the subject **“Mentorship application”** a
 
 [Start an application email](mailto:support@memofs.dev?subject=Mentorship%20application)
 
-I reply within **two business days**. If it looks like a fit, I send a Cal.com link for a free 15-minute call. After that call, I send a Paystack payment link and we schedule the first paid session.
+I reply within **two business days**. If it looks like a fit, I send a booking link for a free 15-minute call. After that call, I send a Paystack payment link and we schedule the first paid session.
 
 ## Payment and scheduling
 
