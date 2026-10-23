@@ -107,12 +107,12 @@ I reply within **two business days**. If it looks like a fit, I send a booking l
 - **Privacy:** I keep notes and code private. I will ask before using any outcome or testimonial, and I will anonymize it if you prefer.
 - **Scope:** mentorship is education and feedback, not legal, tax, financial, or employment advice.
 
-Mentorship is provided by **MemoFS**. These are the plain-language service terms; payment and refund terms are confirmed before you pay.
+Mentorship is provided by **0xBUFF**. These are the plain-language service terms; payment and refund terms are confirmed before you pay.
 
 ## FAQ
 
 **Is the curriculum included?**
-Yes. The curriculum in this repository is free. [Engram](https://engram.memofs.dev), the interactive teaching platform, is still in development; mentorship does not promise a seat there. If that changes, it will be stated in the plan.
+Yes. The curriculum in this repository is free. **0xNAND**, the interactive teaching platform, is still in development; mentorship does not promise a seat there. If that changes, it will be stated in the plan.
 
 **Can I pay per course?**
 No. The course content is separate. If you want help with one course, the Roadmap Audit or a Guided Month is the right entry point.
