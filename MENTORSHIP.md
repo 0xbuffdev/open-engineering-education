@@ -2,7 +2,7 @@
 
 The curriculum in this repository is free and will stay free. Mentorship is the optional human layer: a realistic plan, feedback on your actual work, and help with the parts where tutorials stop.
 
-I take **3–5 active mentees at a time**. If the spots are full, you can ask to join the waitlist.
+I take **3–5 active 1:1 mentees at a time**; group cohorts run separately. If the spots are full, you can ask to join the waitlist.
 
 ## Who this is for
 
@@ -31,7 +31,7 @@ Prices are in USD. The first three mentees get **25% off** in exchange for a tes
 | **Async Review** | Written review of a project or PR, plus a 30-minute call | $100 |
 | **Group Cohort** | Six weeks, 8–12 people, weekly session and peer work | $99–199/person |
 
-- **Students and PPP:** 40% off the monthly and sprint plans. Two full scholarships per quarter.
+- **Students and PPP:** 40% off the monthly and sprint plans. Two full Guided Month scholarships per quarter.
 - **Discounts do not stack:** the larger eligible discount applies.
 - **Teams:** custom quote.
 - **No per-course pricing.** A course is already available on its own; mentorship is sold as time and feedback. A sprint covers one phase of a track, not an entire multi-month track.
@@ -82,7 +82,8 @@ Email **support@memofs.dev** with the subject **“Mentorship application”** a
 4. how many focused hours a week you can commit;
 5. your budget range;
 6. the single biggest thing blocking you;
-7. one link to work you are proud of.
+7. one link to work you are proud of;
+8. whether you are applying for the student/PPP rate or a scholarship.
 
 [Start an application email](mailto:support@memofs.dev?subject=Mentorship%20application)
 

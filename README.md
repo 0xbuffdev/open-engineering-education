@@ -139,7 +139,7 @@ At 15 focused hours/week, one specialization after Foundations is realistically 
 
 ## Mentorship
 
-The curriculum is free. Mentorship is optional: a realistic plan from your current level, code and design review on your own work, and help with the parts where tutorials stop. I take 3–5 active mentees at a time.
+The curriculum is free. Mentorship is optional: a realistic plan from your current level, code and design review on your own work, and help with the parts where tutorials stop. I take 3–5 active 1:1 mentees at a time.
 
 - **Roadmap Audit** — 90 minutes plus a written 4-week plan.
 - **Guided Month** — two sessions plus async code review.
