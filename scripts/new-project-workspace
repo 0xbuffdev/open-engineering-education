@@ -2,18 +2,117 @@
 
 set -euo pipefail
 
+usage() {
+  cat >&2 <<'EOF'
+Usage: ./scripts/new-project-workspace <project-slug>
+
+Ladder projects:
+  ledgerlab               P1  — CLI + data tool
+  sysprobe                P2  — systems inspection tool
+  cachebench              P3  — cache/memory measurement suite
+  workbenchd              P4  — concurrent network service
+  minikv                  P5  — durable storage engine
+  raftkv                  P6  — replicated key-value store
+  signal-score            P7  — evaluated ML pipeline
+  tinygpt                 P8  — small transformer
+  doc-compass             P9  — bounded RAG/agent service
+  secure-review           P10 — vulnerable/fixed pair review
+  authorized-assessment   P11 — authorized security assessment
+
+Capstones:
+  c1-resilient-backend-platform
+  c2-distributed-storage-service
+  c3-evaluated-ai-assistant
+  c4-authorized-security-assessment
+EOF
+}
+
 if [ "$#" -ne 1 ]; then
-  echo "Usage: $0 <project-slug>" >&2
-  echo "Example: $0 P1-reliable-cli-data-tool" >&2
+  usage
   exit 64
 fi
 
 project="$1"
 
 case "$project" in
-  P1-reliable-cli-data-tool|P2-systems-service|P3-durable-distributed-store|P4-evaluated-ml-system|P5-safe-generative-ai-service|P6-authorized-security-assessment) ;;
+  ledgerlab)
+    project_title="P1 — ledgerlab"
+    brief_link="../../curriculum/projects/project-ladder.md#p1--ledgerlab"
+    security=0
+    ;;
+  sysprobe)
+    project_title="P2 — sysprobe"
+    brief_link="../../curriculum/projects/project-ladder.md#p2--sysprobe"
+    security=0
+    ;;
+  cachebench)
+    project_title="P3 — cachebench"
+    brief_link="../../curriculum/projects/project-ladder.md#p3--cachebench"
+    security=0
+    ;;
+  workbenchd)
+    project_title="P4 — workbenchd"
+    brief_link="../../curriculum/projects/project-ladder.md#p4--workbenchd"
+    security=0
+    ;;
+  minikv)
+    project_title="P5 — minikv"
+    brief_link="../../curriculum/projects/project-ladder.md#p5--minikv"
+    security=0
+    ;;
+  raftkv)
+    project_title="P6 — raftkv"
+    brief_link="../../curriculum/projects/project-ladder.md#p6--raftkv"
+    security=0
+    ;;
+  signal-score)
+    project_title="P7 — signal-score"
+    brief_link="../../curriculum/projects/project-ladder.md#p7--signal-score"
+    security=0
+    ;;
+  tinygpt)
+    project_title="P8 — tinygpt"
+    brief_link="../../curriculum/projects/project-ladder.md#p8--tinygpt"
+    security=0
+    ;;
+  doc-compass)
+    project_title="P9 — doc-compass"
+    brief_link="../../curriculum/projects/project-ladder.md#p9--doc-compass"
+    security=0
+    ;;
+  secure-review)
+    project_title="P10 — secure-review"
+    brief_link="../../curriculum/projects/project-ladder.md#p10--secure-review"
+    security=1
+    ;;
+  authorized-assessment)
+    project_title="P11 — authorized-assessment"
+    brief_link="../../curriculum/projects/project-ladder.md#p11--authorized-assessment"
+    security=1
+    ;;
+  c1-resilient-backend-platform)
+    project_title="C1 — Resilient Backend Platform"
+    brief_link="../../curriculum/projects/capstones.md#c1--resilient-backend-platform"
+    security=0
+    ;;
+  c2-distributed-storage-service)
+    project_title="C2 — Distributed Storage Service"
+    brief_link="../../curriculum/projects/capstones.md#c2--distributed-storage-service"
+    security=0
+    ;;
+  c3-evaluated-ai-assistant)
+    project_title="C3 — Evaluated AI Assistant"
+    brief_link="../../curriculum/projects/capstones.md#c3--evaluated-ai-assistant"
+    security=0
+    ;;
+  c4-authorized-security-assessment)
+    project_title="C4 — Authorized Security Assessment"
+    brief_link="../../curriculum/projects/capstones.md#c4--authorized-security-assessment"
+    security=1
+    ;;
   *)
-    echo "Unknown project: $project. Choose a planned P1–P6 slug from projects/briefs.md." >&2
+    echo "Unknown project: $project" >&2
+    usage
     exit 64
     ;;
 esac
@@ -28,12 +127,37 @@ if [ -e "$project_dir" ]; then
 fi
 
 mkdir -p "$project_dir/docs"
-sed "s/<project>/$project/g" "$template_dir/README.md" > "$project_dir/README.md"
-sed "s/<project>/$project/g" "$template_dir/design.md" > "$project_dir/docs/design.md"
-sed "s/<project>/$project/g" "$template_dir/evaluation.md" > "$project_dir/docs/evaluation.md"
-sed "s/<project>/$project/g" "$template_dir/retrospective.md" > "$project_dir/docs/retrospective.md"
 
-printf '# %s project brief\n\nRead [the planned capstone brief](../briefs.md) before writing code. [curriculum.md](../../curriculum.md) defines the prerequisite gate.\n' \
-  "$project" > "$project_dir/BRIEF.md"
+for template_and_destination in \
+  "README.md:$project_dir/README.md" \
+  "design.md:$project_dir/docs/design.md" \
+  "evaluation.md:$project_dir/docs/evaluation.md" \
+  "retrospective.md:$project_dir/docs/retrospective.md"; do
+  template="${template_and_destination%%:*}"
+  destination="${template_and_destination#*:}"
+  sed -e "s|<project_title>|$project_title|g" \
+      -e "s|<brief_link>|$brief_link|g" \
+      "$template_dir/$template" > "$destination"
+done
 
-echo "Created project workspace for $project."
+if [ "$security" -eq 1 ]; then
+  sed -e "s|<project_title>|$project_title|g" \
+      "$template_dir/authorization.md" > "$project_dir/docs/authorization.md"
+fi
+
+cat > "$project_dir/BRIEF.md" <<EOF
+# $project_title project brief
+
+The canonical brief, gate, milestones, and acceptance evidence are in the curriculum:
+
+- [$project_title]($brief_link)
+
+Read the brief before writing code. Do not start until the prerequisite gate is recorded in [../../progress.md](../../progress.md).
+EOF
+
+echo "Created project workspace: projects/$project/"
+echo "Brief: $project_title"
+echo "Canonical assignment: curriculum/${brief_link#../../curriculum/}"
+if [ "$security" -eq 1 ]; then
+  echo "Security: complete docs/authorization.md before collecting any evidence."
+fi

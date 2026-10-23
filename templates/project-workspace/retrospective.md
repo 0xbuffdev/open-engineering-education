@@ -1,4 +1,6 @@
-# <project> retrospective
+# <project_title> retrospective
+
+**Brief:** [<project_title>](../BRIEF.md)
 
 ## Outcome
 
@@ -13,3 +15,10 @@ Describe one wrong assumption, failure, or rejected approach; give its evidence 
 - Technical:
 - Process/evaluation:
 - Scope or safety:
+
+## Evidence and next steps
+
+- Clean-checkout command:
+- Demo:
+- Known limitation:
+- Next smallest improvement:

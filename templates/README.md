@@ -1,5 +1,10 @@
-# Course Workspace Templates
+# Workspace Templates
 
-These templates are copied by `scripts/new-course-workspace` when a learner begins a course. They deliberately contain no course-specific reading assignments: [curriculum.md](../curriculum.md) is the canonical source for prerequisites, required chapters, labs, and exit checks.
+These templates are copied by the workspace scripts. They contain no course-specific reading assignments: the canonical course file holds the prerequisites, readings, labs, and exit check.
 
-Generated workspaces are intentional snapshots: a learner may customise their copy, and later template changes do not rewrite existing course work. Do not edit a copy merely to change the shared template; improve this source template when a shared practice needs to change.
+- `course-workspace/` is used by `scripts/new-course-workspace`.
+- `project-workspace/` is used by `scripts/new-project-workspace`.
+
+Generated workspaces are snapshots: customise your copy, and later template changes will not rewrite existing work. Improve the source template only when a shared practice should change for future workspaces.
+
+The course template is intentionally small. The course file is the assignment; the workspace is the evidence container.

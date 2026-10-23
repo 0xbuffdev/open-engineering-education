@@ -1,26 +1,83 @@
-# Personal/copyrighted reference copies are local only. The reading map is tracked.
-books/*.pdf
+# Local reference library. Legal copies only; never commit books or scans.
+books/*
+!books/README.md
+*.epub
+*.mobi
 
-# Local environments and tool caches
-.DS_Store
+# Secrets and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+.ssh/
+.kubeconfig
+kubeconfig*
 
 # Python
 .venv/
+venv/
 __pycache__/
+*.py[cod]
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
 .ipynb_checkpoints/
 
-# Rust
+# Rust and native builds
 target/
+*.o
+*.so
+*.a
+build/
+dist/
 
-# Secrets and locally generated AI/data artifacts
-.env
-.env.*
-!.env.example
-data/
-artifacts/
-models/
-wandb/
-mlruns/
+# Node tooling, if a course uses it
+node_modules/
+
+# Local datasets, model weights, checkpoints, and generated runs
+/data/
+/datasets/
+/artifacts/
+/models/
+/checkpoints/
+/runs/
+/wandb/
+/mlruns/
+projects/*/data/
+projects/*/datasets/
+projects/*/artifacts/
+projects/*/models/
+projects/*/checkpoints/
+projects/*/runs/
+*.safetensors
+*.gguf
+*.ckpt
+*.pt
+*.pth
+*.onnx
+*.parquet
+*.arrow
+*.h5
+*.pkl
+
+# Large or sensitive lab captures
+*.pcap
+*.pcapng
+
+# Infrastructure state
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# Logs, caches, and editor/OS noise
+*.log
+.cache/
+tmp/
+.DS_Store
+.idea/
+.vscode/
+*.swp

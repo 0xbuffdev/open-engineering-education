@@ -1,4 +1,6 @@
-# <project> design
+# <project_title> design
+
+**Brief:** [<project_title>](../BRIEF.md)
 
 ## Requirements and non-goals
 
@@ -14,6 +16,16 @@ Add a diagram and explain component responsibilities, interfaces, state ownershi
 | --- | --- | --- | --- |
 | | | | |
 
+## Failure model
+
+| Failure | Expected behavior | Detection | Recovery / rollback |
+| --- | --- | --- | --- |
+| | | | |
+
 ## Threat model and safety boundaries
 
 List assets, trust boundaries, likely misuse/failure paths, controls, residual risks, scope/authorization, and stop conditions. Link to a dedicated model if the project needs more detail.
+
+## Open questions
+
+What is still unknown, and what is the next experiment that would resolve it?

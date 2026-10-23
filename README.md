@@ -1,26 +1,140 @@
 # Learning Lab
 
-A build-first, zero-to-professional curriculum for Foundations, Systems Engineering, AI & Machine Learning, and Security Engineering.
+A build-first curriculum for becoming a professional systems engineer, AI/ML engineer, or security engineer — starting from programming fundamentals and ending with an operated, evaluated, or security-reviewed capstone.
 
-Begin with [curriculum.md](curriculum.md). It is the source of truth for course order, prerequisites, required local-book readings, external-resource gaps, labs, exit checks, and capstones.
+This repository is the **plan and the evidence log**, not a book collection. The curriculum is split into one file per course so you can open exactly the page you need.
 
-## Start today
+## Start here
 
-1. Read the first section of [curriculum.md](curriculum.md).
-2. Open [books/README.md](books/README.md) to see what is already available and exactly where it is used.
-3. Review [resources/README.md](resources/README.md) before a course that needs material not in `books/`.
-4. Read the ready-to-use lab and exercise prompts in [practice](practice/README.md), then create a course workspace from [labs](labs/README.md), [exercises](exercises/README.md), and [notes](notes/README.md).
-5. Update [progress.md](progress.md) only after a course exit check is demonstrable, then commit the artifact and retrospective.
+1. Read [curriculum/README.md](curriculum/README.md) for the structure and study rules.
+2. Read [curriculum/roadmap.md](curriculum/roadmap.md) and choose **one primary track**. Do not start three.
+3. Read [curriculum/study-method.md](curriculum/study-method.md) and block the time.
+4. Check [curriculum/books/README.md](curriculum/books/README.md) for the local-library policy and exact chapter maps.
+5. Check [curriculum/resources.md](curriculum/resources.md) for the one primary external source per course.
+6. Create the workspace for the course you are starting, then open its course file and do its labs. Do not create workspaces for later courses.
 
-The F0 and F1 workspaces are already created. For every later course, run `./scripts/new-course-workspace <track> <course-slug>`; for example, `./scripts/new-course-workspace 01-foundations F2-data-structures-and-algorithms`.
+If you are starting from zero, the first course is [F0 — Setup, Tools & Study System](curriculum/foundations/F0-setup-tools-and-study-system.md). Create its workspace with:
 
-The six planned capstones are scoped in [projects/briefs.md](projects/briefs.md). Once a capstone's prerequisite gate is passed, run `./scripts/new-project-workspace <project-slug>`; for example, `./scripts/new-project-workspace P1-reliable-cli-data-tool`.
+```bash
+./scripts/new-course-workspace foundations F0
+```
 
-## Tracks
+## Repository map
 
-- [01 Foundations](tracks/01-foundations/README.md) — required starting point.
-- [02 Systems Engineering](tracks/02-systems-engineering/README.md) — operating systems, architecture, performance, networking, distributed systems, and AI infrastructure.
-- [03 AI & Machine Learning](tracks/03-ai-machine-learning/README.md) — data, ML, deep learning, LLMs, serving, agents, and MLOps.
-- [04 Security Engineering](tracks/04-security-engineering/README.md) — threat modeling, secure systems, authorized lab security, cryptography, and AI red teaming.
+```text
+curriculum/                 the curriculum (source of truth)
+  README.md                 how the curriculum works
+  roadmap.md                realistic pace, sequences, gates, cuts
+  study-method.md           how to read, practise, review, and record
+  resources.md              primary external sources and legal access
+  books/                    per-book chapter/section maps (B1–B6)
+  foundations/              F0–F6
+  systems/                  S1–S15 core, S16–S17 electives
+  ai/                       AI1–AI13 core, AI14–AI19 electives
+  security/                 D1–D5, D7–D10 core; D6, D11–D14 electives
+  projects/                 P1–P11 ladder, C1–C4 capstones
+  appendices/               professional practice, coverage map, glossary
 
-The PDFs in `books/` are personal reference materials and are intentionally ignored by Git. Do not add copyrighted copies, credentials, model weights, or sensitive datasets to this repository.
+labs/<track>/<CODE>/        experiments and implementation notes
+exercises/<track>/<CODE>/   drills, written answers, tests
+notes/<track>/<CODE>/       resource log, summary, retrospective
+projects/<slug>/            portfolio project created by script
+books/                      legal local copies only; ignored by Git
+templates/                  workspace starters
+scripts/                    workspace creation
+progress.md                 completion and evidence log
+```
+
+Tracks use short codes: `foundations`, `systems`, `ai`, `security`; courses use `F0`–`F6`, `S1`–`S17`, `AI1`–`AI19`, `D1`–`D14`.
+
+## Create a course workspace
+
+```bash
+./scripts/new-course-workspace foundations F2
+./scripts/new-course-workspace systems S1
+./scripts/new-course-workspace ai AI6
+./scripts/new-course-workspace security D3
+```
+
+The script validates that the course exists, then creates:
+
+```text
+labs/<track>/<CODE>/README.md
+exercises/<track>/<CODE>/README.md
+notes/<track>/<CODE>/resources.md
+notes/<track>/<CODE>/summary.md
+```
+
+The course file remains the assignment. The workspace is where you do it. Do not create a workspace for a course you have not reached; an empty directory is not progress.
+
+## Create a project workspace
+
+```bash
+./scripts/new-project-workspace ledgerlab
+./scripts/new-project-workspace workbenchd
+./scripts/new-project-workspace c1-resilient-backend-platform
+```
+
+The project brief is in [curriculum/projects/project-ladder.md](curriculum/projects/project-ladder.md) or [curriculum/projects/capstones.md](curriculum/projects/capstones.md). Start only after the stated gate. The script creates the README, design doc, evaluation plan, and retrospective skeleton under `projects/<slug>/`.
+
+## What each course file gives you
+
+- purpose, outcomes, prerequisites, and a realistic hour budget;
+- **required reading** with exact chapter/section identifiers (not page numbers);
+- a topic checklist grouped into modules;
+- labs that produce runnable evidence;
+- exercises that force recall and implementation;
+- a project increment linked to the ladder;
+- an exit check, failure modes, evidence to commit, and optional depth.
+
+A course is complete only when the exit check is demonstrable, the artifact is committed, and the retrospective is written. Reading a chapter is not completion.
+
+## Books and resources
+
+The six core reference books are mapped in [curriculum/books/](curriculum/books/README.md). Maps use chapter and section titles because page numbers differ across print, PDF, and reflowed editions.
+
+- Keep legally obtained PDFs/EPUBs in `books/`; that directory is ignored by Git except for its README.
+- Do **not** commit copyrighted books, scans, paywalled chapters, datasets, model weights, credentials, or private data.
+- The curriculum works without local books: each course names a legal primary source and an alternative.
+- Modern distributed systems, ML, web security, cloud-native security, and AI safety are **not** covered by the local library. Use [curriculum/resources.md](curriculum/resources.md).
+
+## Progress and evidence
+
+Record completion in [progress.md](progress.md), but only with a link to evidence. A checked box without a reproducible artifact is not progress.
+
+Each substantial lab or project should leave:
+
+- a README with setup, commands, and limitations;
+- tests covering normal, boundary, invalid, and failure cases;
+- a measurement or evaluation with environment and variance;
+- a design/threat model where relevant;
+- a retrospective naming one wrong assumption and what changed.
+
+## Tracks at a glance
+
+| Track | Entry | Core | Electives | Capstone |
+| --- | --- | --- | --- | --- |
+| [Foundations](curriculum/foundations/README.md) | none | F0–F6, 720 h | none | P1 |
+| [Systems Engineering](curriculum/systems/README.md) | Foundations | S1–S15, 1,110 h | S16–S17 | C1 or C2 |
+| [AI & Machine Learning](curriculum/ai/README.md) | Foundations | AI1–AI13, 990 h | AI14–AI19 | C3 |
+| [Security Engineering](curriculum/security/README.md) | Foundations + systems prerequisites | D1–D5, D7–D10, 675 h | D6*, D11–D14 | C4 |
+
+\*D6 is the AI-security elective and assumes AI1–AI6 plus AI12. The core Security path does not include it; take it after the AI prerequisites if you target AI security.
+
+At 15 focused hours/week, one specialization after Foundations is realistically **2.5–3.5 years**. At 25 hours/week it is **18–24 months**. Doing all three tracks at once is not recommended; see the [roadmap](curriculum/roadmap.md) for honest timelines and useful stopping points.
+
+## Non-negotiable rules
+
+- Security work only on systems you own or have **explicit written authorization** to test.
+- Keep secrets, private data, model weights, and copyrighted books out of Git.
+- Record versions, seeds, hardware, commands, and limitations for every measurement.
+- Prefer one primary resource per course; finish it before adding another.
+- Commit small, explain what changed, and keep a runnable artifact.
+- Stop and write down a blocker instead of silently substituting a book, dataset, or model.
+
+## Reference
+
+- [Professional practice](curriculum/appendices/professional-practice.md) — the standard the evidence must meet.
+- [Coverage map](curriculum/appendices/coverage-map.md) — every course, topic, and deliberate boundary.
+- [Glossary](curriculum/appendices/glossary.md) — precise working definitions.
+- [Study method](curriculum/study-method.md) — the weekly loop and review cadence.
