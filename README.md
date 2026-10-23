@@ -46,6 +46,8 @@ templates/                  workspace starters
 scripts/                    workspace creation
 progress.md                 completion and evidence log
 MENTORSHIP.md               optional 1:1 mentorship, pricing, and policies
+LICENSE                     CC BY 4.0 for curriculum text
+LICENSE-MIT                 MIT for code, scripts, and templates
 ```
 
 Tracks use short codes: `foundations`, `systems`, `ai`, `security`; courses use `F0`–`F6`, `S1`–`S17`, `AI1`–`AI19`, `D1`–`D14`.
