@@ -6,15 +6,15 @@ Complete this track before any specialisation. It is deliberately broader than t
 
 ## Courses
 
-| Code | Course | Prerequisite | Weeks | Hours | Project |
-| --- | --- | --- | ---: | ---: | --- |
-| [F0](F0-setup-tools-and-study-system.md) | Setup, Tools & Study System | none | 1 | 15 | environment + study log |
-| [F1](F1-programming-i-python.md) | Programming I: Python | F0 | 8 | 120 | P1 ledgerlab v1 |
-| [F2](F2-data-structures-and-algorithms.md) | Data Structures & Algorithms | F1 | 10 | 150 | P1 query/index work |
-| [F3](F3-engineering-practice.md) | Engineering Practice: Git, Testing, Debugging, C & Linux | F1, F2 | 8 | 120 | P1 hardened + C drills |
-| [F4](F4-mathematics-i.md) | Mathematics I: Discrete Math, Linear Algebra, Calculus & Probability | F1 | 10 | 150 | math notebook |
-| [F5](F5-rust-foundations.md) | Rust Foundations | F3 | 6 | 90 | P2 sysprobe in Rust |
-| [F6](F6-data-sql-and-web-foundations.md) | Data, SQL & Web Foundations | F2, F3 | 5 | 75 | P1 API/SQL increment |
+| Code | Course | Prerequisite | Weeks | Hours | Project | Status |
+| --- | --- | --- | ---: | ---: | --- | --- |
+| [F0](F0-setup-tools-and-study-system.md) | Setup, Tools & Study System | none | 1 | 15 | environment + study log | `draft` |
+| [F1](F1-programming-i-python.md) | Programming I: Python | F0 | 8 | 120 | P1 ledgerlab v1 | `draft` |
+| [F2](F2-data-structures-and-algorithms.md) | Data Structures & Algorithms | F1 | 10 | 150 | P1 query/index work | `draft` |
+| [F3](F3-engineering-practice.md) | Engineering Practice: Git, Testing, Debugging, C & Linux | F1, F2 | 8 | 120 | P1 hardened + C drills | `draft` |
+| [F4](F4-mathematics-i.md) | Mathematics I: Discrete Math, Linear Algebra, Calculus & Probability | F1 | 10 | 150 | math notebook | `draft` |
+| [F5](F5-rust-foundations.md) | Rust Foundations | F3 | 6 | 90 | P2 sysprobe in Rust | `draft` |
+| [F6](F6-data-sql-and-web-foundations.md) | Data, SQL & Web Foundations | F2, F3 | 5 | 75 | P1 API/SQL increment | `draft` |
 
 F5 is required for the Systems and Security tracks and strongly recommended for AI. F6 is required for every track.
 
@@ -44,10 +44,10 @@ The local books used here are B1 (*But How Do It Know?*), B2 (*The C Programming
 
 ## Practice and project workspaces
 
-Create a workspace with:
+Create a workspace in **your own study workspace repository** (see the [root README](../../README.md#your-study-workspace)):
 
 ```bash
-./scripts/new-course-workspace foundations F1
+./scripts/new-course-workspace foundations F1 /path/to/your-workspace
 ```
 
 This creates `labs/foundations/F1/`, `exercises/foundations/F1/`, and `notes/foundations/F1/`. The course file is the assignment; the workspace is where you do it.

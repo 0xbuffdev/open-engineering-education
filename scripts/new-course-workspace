@@ -2,10 +2,27 @@
 
 set -euo pipefail
 
-if [ "$#" -ne 2 ]; then
-  echo "Usage: $0 <track> <course-code>" >&2
-  echo "Example: $0 foundations F2" >&2
-  echo "Tracks: foundations, systems, ai, security" >&2
+usage() {
+  cat >&2 <<'EOF'
+Usage: new-course-workspace <track> <course-code> [workspace-dir]
+
+Creates the learner workspace files (labs, exercises, notes) for one course.
+The course file itself is never copied: it stays in the OEE curriculum and the
+generated files link to it.
+
+Arguments:
+  track          foundations | systems | ai | security
+  course-code    e.g. F2, S1, AI6, D3
+  workspace-dir  where to create the workspace. Defaults to $OEE_WORKSPACE,
+                 then to the current directory.
+
+The workspace must be your own study workspace repository. Run this from its
+root, or pass its path. It refuses to write into the OEE repository itself.
+EOF
+}
+
+if [ "$#" -lt 2 ] || [ "$#" -gt 3 ]; then
+  usage
   exit 64
 fi
 
@@ -50,12 +67,33 @@ fi
 
 course_file="${matches[0]}"
 course_name="$(basename "$course_file")"
-relative_course="../../../curriculum/$track/$course_name"
+
+# The course file lives in the OEE repository, not in the workspace, so
+# generated files link to it there. Override with OEE_CURRICULUM_URL when
+# working from a fork or a local clone.
+oee_url="${OEE_CURRICULUM_URL:-https://github.com/0xbuffdev/open-engineering-education/blob/main}"
+course_link="$oee_url/curriculum/$track/$course_name"
+
+# Target: argument, then $OEE_WORKSPACE, then the current directory.
+workspace="${3:-${OEE_WORKSPACE:-.}}"
+if [ ! -d "$workspace" ]; then
+  echo "Workspace directory does not exist: $workspace" >&2
+  echo "Run this from your study workspace root, or pass its path." >&2
+  exit 1
+fi
+workspace="$(cd "$workspace" && pwd)"
+
+if [ "$workspace" = "$repository_root" ]; then
+  echo "Refusing to create a learner workspace inside the OEE repository." >&2
+  echo "Learner work belongs in your own study workspace; see README.md." >&2
+  echo "Run this from your workspace root, or pass it: $0 $track $course <workspace-dir>" >&2
+  exit 1
+fi
 
 template_dir="$repository_root/templates/course-workspace"
-lab_dir="$repository_root/labs/$track/$course"
-exercise_dir="$repository_root/exercises/$track/$course"
-notes_dir="$repository_root/notes/$track/$course"
+lab_dir="$workspace/labs/$track/$course"
+exercise_dir="$workspace/exercises/$track/$course"
+notes_dir="$workspace/notes/$track/$course"
 
 for destination in "$lab_dir" "$exercise_dir" "$notes_dir"; do
   if [ -e "$destination" ]; then
@@ -74,12 +112,12 @@ for template_and_destination in \
   template="${template_and_destination%%:*}"
   destination="${template_and_destination#*:}"
   sed -e "s|<course>|$course|g" \
-      -e "s|<course_link>|$relative_course|g" \
+      -e "s|<course_link>|$course_link|g" \
       "$template_dir/$template" > "$destination"
 done
 
-echo "Created workspace for $course:"
+echo "Created workspace for $course in $workspace:"
 echo "  labs/$track/$course/"
 echo "  exercises/$track/$course/"
 echo "  notes/$track/$course/"
-echo "Course file: curriculum/$track/$course_name"
+echo "Course file: $course_link"

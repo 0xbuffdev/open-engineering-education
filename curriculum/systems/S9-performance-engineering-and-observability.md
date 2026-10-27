@@ -1,8 +1,9 @@
 # S9 — Performance Engineering & Observability
 
 **Track:** Systems · **Prerequisite:** S4, S6 · **Core** · **Time:** 5 weeks, 75 hours · **Project:** P3/P4 performance investigations
+**Status:** `draft` · [status labels](../../spec/status-labels.md)
 
-> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../progress.md)
+> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../templates/progress.md)
 
 ## Purpose
 

@@ -1,8 +1,9 @@
 # S6 — Concurrency, Atomics & Memory Models
 
 **Track:** Systems · **Prerequisite:** S1, F5 · **Core** · **Time:** 6 weeks, 90 hours · **Project:** P4 bounded queue/thread pool
+**Status:** `draft` · [status labels](../../spec/status-labels.md)
 
-> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../progress.md)
+> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../templates/progress.md)
 
 ## Purpose
 

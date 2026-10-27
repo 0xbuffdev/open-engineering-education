@@ -2,7 +2,7 @@
 
 This directory is the single source of truth for what to study, in what order, from which book sections, what to build, and how to prove you are done.
 
-The old `curriculum.md` has been split into course files so you can open exactly one page at a time. The old `tracks/`, `practice/`, and `resources/` directories are gone; their useful content now lives here.
+Each course has its own file so you can open exactly one page at a time. The structure of a course file is defined in [../spec/course-format.md](../spec/course-format.md), and every course currently carries the [`draft`](../spec/status-labels.md) status label.
 
 ## Start here
 
@@ -11,7 +11,7 @@ The old `curriculum.md` has been split into course files so you can open exactly
 3. Check [books/README.md](books/README.md) for the local library policy and reading maps.
 4. Check [resources.md](resources.md) for the small set of external materials you actually need now.
 5. Open the first course file in your track. Do its labs and project increment before moving on.
-6. Record completion in [../progress.md](../progress.md) only after the course exit check is demonstrable.
+6. Record completion in the progress log ([../templates/progress.md](../templates/progress.md), copied into your study workspace) only after the course exit check is demonstrable.
 
 ## The curriculum is organised by track and course code
 
@@ -62,7 +62,7 @@ Use a six-week block: five weeks of new material, one consolidation week for the
 
 ## The study loop
 
-```
+```text
 read a bounded section
   -> write the mechanism in your own words
   -> predict an outcome
@@ -93,15 +93,12 @@ curriculum/                 the curriculum itself
   security/                  D1–D5, D7–D10 core; D6, D11–D14 electives
   projects/                  project ladder and capstones
   appendices/                professional practice, coverage map, glossary
-labs/<track>/<code>/         experiments and implementation notes
-exercises/<track>/<code>/    drills, written answers, tests
-notes/<track>/<code>/        resource log, summary, retrospective
-projects/<slug>/             portfolio projects created by script
 books/                       local PDFs only; ignored by Git
-templates/                   workspace starters
-scripts/                     workspace creation
-progress.md                  completion and evidence log
+templates/                   workspace starters (course, project, progress log)
+scripts/                     workspace creation and repository checks
 ```
+
+Learner state — `labs/`, `exercises/`, `notes/`, `projects/`, and `progress.md` — lives in **your own study workspace**, not in this repository. The root [README](../README.md#your-study-workspace) explains how to create one with the scripts.
 
 ## Time expectations at a glance
 

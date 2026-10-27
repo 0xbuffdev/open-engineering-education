@@ -1,8 +1,9 @@
 # S5 — Virtual Memory
 
 **Track:** Systems · **Prerequisite:** S3 · **Core** · **Time:** 5 weeks, 75 hours · **Project:** P2 mmap/page-fault lab
+**Status:** `draft` · [status labels](../../spec/status-labels.md)
 
-> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../progress.md)
+> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../templates/progress.md)
 
 ## Purpose
 

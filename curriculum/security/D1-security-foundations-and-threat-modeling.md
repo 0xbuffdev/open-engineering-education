@@ -1,8 +1,9 @@
 # D1 — Security Foundations & Threat Modeling
 
 **Track:** Security · **Prerequisite:** Foundations · **Core** · **Time:** 4 weeks, 60 hours · **Project:** P10 rules of engagement
+**Status:** `draft` · [status labels](../../spec/status-labels.md)
 
-> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../progress.md)
+> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../templates/progress.md)
 
 ## Purpose
 

@@ -1,8 +1,9 @@
 # D3 — Network & Web Application Security
 
 **Track:** Security · **Prerequisite:** S10, D1 · **Core** · **Time:** 6 weeks, 90 hours · **Project:** P10 secure-review
+**Status:** `draft` · [status labels](../../spec/status-labels.md)
 
-> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../progress.md)
+> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../templates/progress.md)
 
 ## Purpose
 

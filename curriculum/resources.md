@@ -1,6 +1,6 @@
 # Resources
 
-A deliberately small external library. Each course has **one primary spine**; everything else is reference or practice. Do not collect ten courses for the same topic. Record the exact edition, URL, and date in `notes/<track>/<course>/resources.md`.
+A deliberately small external library. Each course has **one primary spine**; everything else is reference or practice. Do not collect ten courses for the same topic. Record the exact edition, URL, and date in your study workspace's `notes/<track>/<course>/resources.md`.
 
 **Access key:** 🌐 free/legal online · 🛒 purchase or library · 🔐 account or hardware required · ⚠️ verify current edition before use.
 

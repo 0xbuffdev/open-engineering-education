@@ -1,8 +1,9 @@
 # S1 — Computer Systems Foundations
 
 **Track:** Systems · **Prerequisite:** F3, F5 · **Core** · **Time:** 6 weeks, 90 hours · **Project:** P2 sysprobe
+**Status:** `draft` · [status labels](../../spec/status-labels.md)
 
-> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../progress.md)
+> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../templates/progress.md)
 
 ## Purpose
 

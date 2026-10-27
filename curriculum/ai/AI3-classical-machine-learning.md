@@ -1,8 +1,9 @@
 # AI3 — Classical Machine Learning
 
 **Track:** AI & ML · **Prerequisite:** AI1, AI2 · **Core** · **Time:** 6 weeks, 90 hours · **Project:** P7 signal-score
+**Status:** `draft` · [status labels](../../spec/status-labels.md)
 
-> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../progress.md)
+> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../templates/progress.md)
 
 ## Purpose
 

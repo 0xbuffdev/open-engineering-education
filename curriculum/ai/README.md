@@ -6,27 +6,27 @@ This track treats ML as an engineering discipline: data quality, baselines, eval
 
 ## Courses
 
-| Code | Course | Prerequisite | Weeks | Hours | Project |
-| --- | --- | --- | ---: | ---: | --- |
-| [AI1](AI1-python-for-data-and-ai.md) | Python for Data & AI | F1, F6 | 4 | 60 | P7 data audit |
-| [AI2](AI2-optimization-and-probabilistic-ml.md) | Optimization & Probabilistic ML | F4 | 4 | 60 | P7 math checks |
-| [AI3](AI3-classical-machine-learning.md) | Classical Machine Learning | AI1, AI2 | 6 | 90 | P7 signal-score |
-| [AI4](AI4-deep-learning-foundations.md) | Deep Learning Foundations | AI3 | 6 | 90 | P7 neural baseline |
-| [AI5](AI5-vision-and-sequence-architectures.md) | Vision & Sequence Architectures | AI4 | 5 | 75 | P8 architecture study |
-| [AI6](AI6-transformers-nlp-and-llms.md) | Transformers, NLP & LLMs | AI5 | 7 | 105 | P8 tinygpt |
-| [AI7](AI7-training-fine-tuning-and-alignment.md) | Training, Fine-Tuning & Alignment | AI6 | 5 | 75 | P8 LoRA comparison |
-| [AI8](AI8-distributed-and-large-scale-training.md) | Distributed & Large-Scale Training | AI7; S11 recommended | 5 | 75 | P8 scaling report |
-| [AI9](AI9-inference-serving-and-optimization.md) | Inference, Serving & Optimization | AI6; S9 recommended | 5 | 75 | P9 serving benchmark |
-| [AI10](AI10-retrieval-agents-and-applied-genai.md) | Retrieval, Agents & Applied GenAI | AI6 | 5 | 75 | P9 doc-compass |
-| [AI11](AI11-mlops-and-production-deployment.md) | MLOps & Production Deployment | AI7, AI9 | 5 | 75 | P9 deployment/rollback |
-| [AI12](AI12-responsible-ai-safety-and-governance.md) | Responsible AI, Safety & Governance | AI6 | 4 | 60 | P9 system card/risk register |
-| [AI13](AI13-data-engineering-for-ml.md) | Data Engineering for ML | F6, AI1 | 5 | 75 | P7 data pipeline |
-| [AI14](AI14-generative-and-multimodal-models.md) | Generative & Multimodal Models | AI6 | 5 | 75 | elective |
-| [AI15](AI15-reinforcement-learning-and-rlhf.md) | Reinforcement Learning & RLHF | AI7, F4 | 6 | 90 | elective |
-| [AI16](AI16-gpu-programming-and-kernels.md) | GPU Programming & Kernels | S13 or AI9 | 5 | 75 | elective |
-| [AI17](AI17-causal-inference-and-experimentation.md) | Causal Inference & Experimentation | AI3, F4 | 4 | 60 | elective |
-| [AI18](AI18-recommender-systems-and-ranking.md) | Recommender Systems & Ranking | AI3 | 4 | 60 | elective |
-| [AI19](AI19-time-series-and-forecasting.md) | Time Series & Forecasting | AI3, F4 | 4 | 60 | elective |
+| Code | Course | Prerequisite | Weeks | Hours | Project | Status |
+| --- | --- | --- | ---: | ---: | --- | --- |
+| [AI1](AI1-python-for-data-and-ai.md) | Python for Data & AI | F1, F6 | 4 | 60 | P7 data audit | `draft` |
+| [AI2](AI2-optimization-and-probabilistic-ml.md) | Optimization & Probabilistic ML | F4 | 4 | 60 | P7 math checks | `draft` |
+| [AI3](AI3-classical-machine-learning.md) | Classical Machine Learning | AI1, AI2 | 6 | 90 | P7 signal-score | `draft` |
+| [AI4](AI4-deep-learning-foundations.md) | Deep Learning Foundations | AI3 | 6 | 90 | P7 neural baseline | `draft` |
+| [AI5](AI5-vision-and-sequence-architectures.md) | Vision & Sequence Architectures | AI4 | 5 | 75 | P8 architecture study | `draft` |
+| [AI6](AI6-transformers-nlp-and-llms.md) | Transformers, NLP & LLMs | AI5 | 7 | 105 | P8 tinygpt | `draft` |
+| [AI7](AI7-training-fine-tuning-and-alignment.md) | Training, Fine-Tuning & Alignment | AI6 | 5 | 75 | P8 LoRA comparison | `draft` |
+| [AI8](AI8-distributed-and-large-scale-training.md) | Distributed & Large-Scale Training | AI7; S11 recommended | 5 | 75 | P8 scaling report | `draft` |
+| [AI9](AI9-inference-serving-and-optimization.md) | Inference, Serving & Optimization | AI6; S9 recommended | 5 | 75 | P9 serving benchmark | `draft` |
+| [AI10](AI10-retrieval-agents-and-applied-genai.md) | Retrieval, Agents & Applied GenAI | AI6 | 5 | 75 | P9 doc-compass | `draft` |
+| [AI11](AI11-mlops-and-production-deployment.md) | MLOps & Production Deployment | AI7, AI9 | 5 | 75 | P9 deployment/rollback | `draft` |
+| [AI12](AI12-responsible-ai-safety-and-governance.md) | Responsible AI, Safety & Governance | AI6 | 4 | 60 | P9 system card/risk register | `draft` |
+| [AI13](AI13-data-engineering-for-ml.md) | Data Engineering for ML | F6, AI1 | 5 | 75 | P7 data pipeline | `draft` |
+| [AI14](AI14-generative-and-multimodal-models.md) | Generative & Multimodal Models | AI6 | 5 | 75 | elective | `draft` |
+| [AI15](AI15-reinforcement-learning-and-rlhf.md) | Reinforcement Learning & RLHF | AI7, F4 | 6 | 90 | elective | `draft` |
+| [AI16](AI16-gpu-programming-and-kernels.md) | GPU Programming & Kernels | S13 or AI9 | 5 | 75 | elective | `draft` |
+| [AI17](AI17-causal-inference-and-experimentation.md) | Causal Inference & Experimentation | AI3, F4 | 4 | 60 | elective | `draft` |
+| [AI18](AI18-recommender-systems-and-ranking.md) | Recommender Systems & Ranking | AI3 | 4 | 60 | elective | `draft` |
+| [AI19](AI19-time-series-and-forecasting.md) | Time Series & Forecasting | AI3, F4 | 4 | 60 | elective | `draft` |
 
 Core AI1–AI13: **66 course-weeks, 990 hours**. Calendar at 15 h/week with buffer: ~2.5–3 years after Foundations.
 

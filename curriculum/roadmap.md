@@ -1,6 +1,6 @@
 # Realistic Roadmap
 
-This roadmap replaces the optimistic calendar in the old `curriculum.md`. It assumes you are building professional competence, not collecting certificates or watching playlists.
+The roadmap assumes you are building professional competence, not collecting certificates or watching playlists.
 
 ## Assumptions
 
@@ -192,7 +192,7 @@ Do **not** cut:
 
 ## Progress tracking
 
-Use [../progress.md](../progress.md) for course completion and [../projects/](../projects/) for portfolio work. A checked box without a link to evidence is not progress.
+Use the progress log in your study workspace (starter: [../templates/progress.md](../templates/progress.md)) for course completion, and your workspace's `projects/` directory for portfolio work. A checked box without a link to evidence is not progress.
 
 At the end of each month, answer:
 

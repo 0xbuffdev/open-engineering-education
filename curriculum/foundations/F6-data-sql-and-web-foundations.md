@@ -1,8 +1,9 @@
 # F6 — Data, SQL & Web Foundations
 
 **Track:** Foundations · **Prerequisite:** F2, F3 · **Core for all tracks** · **Time:** 5 weeks, 75 hours · **Project:** P1 SQL/API increment
+**Status:** `draft` · [status labels](../../spec/status-labels.md)
 
-> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../progress.md)
+> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../templates/progress.md)
 
 ## Purpose
 

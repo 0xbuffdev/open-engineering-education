@@ -1,8 +1,9 @@
 # F5 — Rust Foundations
 
 **Track:** Foundations · **Prerequisite:** F3 · **Core for Systems and Security, strongly recommended for AI** · **Time:** 6 weeks, 90 hours · **Project:** P2 sysprobe in Rust
+**Status:** `draft` · [status labels](../../spec/status-labels.md)
 
-> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../progress.md)
+> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../templates/progress.md)
 
 ## Purpose
 

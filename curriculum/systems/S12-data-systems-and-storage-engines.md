@@ -1,8 +1,9 @@
 # S12 — Data Systems & Storage Engines
 
 **Track:** Systems · **Prerequisite:** S5, S9 · **Core** · **Time:** 6 weeks, 90 hours · **Project:** P5 minikv
+**Status:** `draft` · [status labels](../../spec/status-labels.md)
 
-> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../progress.md)
+> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../templates/progress.md)
 
 ## Purpose
 

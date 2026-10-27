@@ -1,0 +1,19 @@
+name: Markdown lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  markdownlint:
+    name: markdownlint-cli2
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lint Markdown
+        # Uses .markdownlint-cli2.jsonc for globs, ignores, and rules.
+        run: npx --yes markdownlint-cli2@0.24.0

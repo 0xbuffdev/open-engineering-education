@@ -1,0 +1,15 @@
+{
+  // Repository-wide markdown lint. Rules are relaxed where they would fight
+  // the format of this corpus: long lines (tables and navigate bars),
+  // repeated section names across course files, and HTML comments in
+  // issue templates.
+  "globs": ["**/*.md"],
+  "ignores": ["new-plan.md"],
+  "config": {
+    "default": true,
+    "MD013": false,
+    "MD024": { "siblings_only": true },
+    "MD033": false,
+    "MD034": false
+  }
+}

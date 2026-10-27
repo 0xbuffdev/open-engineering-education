@@ -1,8 +1,9 @@
 # F3 — Engineering Practice: Git, Testing, Debugging, C & Linux
 
 **Track:** Foundations · **Prerequisite:** F1, F2 · **Core** · **Time:** 8 weeks, 120 hours · **Project:** P1 hardened + P2 sysprobe (C)
+**Status:** `draft` · [status labels](../../spec/status-labels.md)
 
-> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../progress.md)
+> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../templates/progress.md)
 
 ## Purpose
 

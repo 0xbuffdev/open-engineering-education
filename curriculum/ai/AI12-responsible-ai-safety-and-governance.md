@@ -1,8 +1,9 @@
 # AI12 — Responsible AI, Safety & Governance
 
 **Track:** AI & ML · **Prerequisite:** AI6 · **Core** · **Time:** 4 weeks, 60 hours · **Project:** P9 system card/risk register
+**Status:** `draft` · [status labels](../../spec/status-labels.md)
 
-> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../progress.md)
+> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../templates/progress.md)
 
 ## Purpose
 

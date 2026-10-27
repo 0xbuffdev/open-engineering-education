@@ -1,0 +1,35 @@
+name: DCO
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  signed-off-by:
+    name: Signed-off-by
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Every commit must carry a Signed-off-by line
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          fail=0
+          for sha in $(git rev-list --no-merges "$BASE_SHA..$HEAD_SHA"); do
+            if ! git log -1 --format=%B "$sha" | grep -qE '^Signed-off-by: .+ <.+>$'; then
+              echo "::error::Commit $sha is missing a Signed-off-by line. Amend with: git commit --amend -s --no-edit"
+              fail=1
+            fi
+          done
+          if [ "$fail" -eq 0 ]; then
+            echo "All commits carry a Signed-off-by line (see governance/DCO.md)."
+          fi
+          exit "$fail"

@@ -1,8 +1,9 @@
 # S2 — Machine Code, CPU & Computer Architecture
 
 **Track:** Systems · **Prerequisite:** S1 · **Core** · **Time:** 6 weeks, 90 hours · **Project:** P2 disassembly/report
+**Status:** `draft` · [status labels](../../spec/status-labels.md)
 
-> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../progress.md)
+> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../templates/progress.md)
 
 ## Purpose
 

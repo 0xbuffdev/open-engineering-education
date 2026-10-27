@@ -1,8 +1,9 @@
 # AI5 — Vision & Sequence Architectures
 
 **Track:** AI & ML · **Prerequisite:** AI4 · **Core** · **Time:** 5 weeks, 75 hours · **Project:** P8 architecture study
+**Status:** `draft` · [status labels](../../spec/status-labels.md)
 
-> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../progress.md)
+> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../templates/progress.md)
 
 ## Purpose
 

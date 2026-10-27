@@ -4,7 +4,16 @@ set -euo pipefail
 
 usage() {
   cat >&2 <<'EOF'
-Usage: ./scripts/new-project-workspace <project-slug>
+Usage: new-project-workspace <project-slug> [workspace-dir]
+
+Creates the project workspace (README, brief, design, evaluation,
+retrospective) in your own study workspace. The canonical brief stays in the
+OEE curriculum; generated files link to it there.
+
+Arguments:
+  project-slug   one of the slugs listed below
+  workspace-dir  where to create the workspace. Defaults to $OEE_WORKSPACE,
+                 then to the current directory.
 
 Ladder projects:
   ledgerlab               P1  — CLI + data tool
@@ -27,7 +36,7 @@ Capstones:
 EOF
 }
 
-if [ "$#" -ne 1 ]; then
+if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
   usage
   exit 64
 fi
@@ -37,77 +46,92 @@ project="$1"
 case "$project" in
   ledgerlab)
     project_title="P1 — ledgerlab"
-    brief_link="../../curriculum/projects/project-ladder.md#p1--ledgerlab"
+    brief_fragment="#p1--ledgerlab"
+    brief_doc="curriculum/projects/project-ladder.md"
     security=0
     ;;
   sysprobe)
     project_title="P2 — sysprobe"
-    brief_link="../../curriculum/projects/project-ladder.md#p2--sysprobe"
+    brief_fragment="#p2--sysprobe"
+    brief_doc="curriculum/projects/project-ladder.md"
     security=0
     ;;
   cachebench)
     project_title="P3 — cachebench"
-    brief_link="../../curriculum/projects/project-ladder.md#p3--cachebench"
+    brief_fragment="#p3--cachebench"
+    brief_doc="curriculum/projects/project-ladder.md"
     security=0
     ;;
   workbenchd)
     project_title="P4 — workbenchd"
-    brief_link="../../curriculum/projects/project-ladder.md#p4--workbenchd"
+    brief_fragment="#p4--workbenchd"
+    brief_doc="curriculum/projects/project-ladder.md"
     security=0
     ;;
   minikv)
     project_title="P5 — minikv"
-    brief_link="../../curriculum/projects/project-ladder.md#p5--minikv"
+    brief_fragment="#p5--minikv"
+    brief_doc="curriculum/projects/project-ladder.md"
     security=0
     ;;
   raftkv)
     project_title="P6 — raftkv"
-    brief_link="../../curriculum/projects/project-ladder.md#p6--raftkv"
+    brief_fragment="#p6--raftkv"
+    brief_doc="curriculum/projects/project-ladder.md"
     security=0
     ;;
   signal-score)
     project_title="P7 — signal-score"
-    brief_link="../../curriculum/projects/project-ladder.md#p7--signal-score"
+    brief_fragment="#p7--signal-score"
+    brief_doc="curriculum/projects/project-ladder.md"
     security=0
     ;;
   tinygpt)
     project_title="P8 — tinygpt"
-    brief_link="../../curriculum/projects/project-ladder.md#p8--tinygpt"
+    brief_fragment="#p8--tinygpt"
+    brief_doc="curriculum/projects/project-ladder.md"
     security=0
     ;;
   doc-compass)
     project_title="P9 — doc-compass"
-    brief_link="../../curriculum/projects/project-ladder.md#p9--doc-compass"
+    brief_fragment="#p9--doc-compass"
+    brief_doc="curriculum/projects/project-ladder.md"
     security=0
     ;;
   secure-review)
     project_title="P10 — secure-review"
-    brief_link="../../curriculum/projects/project-ladder.md#p10--secure-review"
+    brief_fragment="#p10--secure-review"
+    brief_doc="curriculum/projects/project-ladder.md"
     security=1
     ;;
   authorized-assessment)
     project_title="P11 — authorized-assessment"
-    brief_link="../../curriculum/projects/project-ladder.md#p11--authorized-assessment"
+    brief_fragment="#p11--authorized-assessment"
+    brief_doc="curriculum/projects/project-ladder.md"
     security=1
     ;;
   c1-resilient-backend-platform)
     project_title="C1 — Resilient Backend Platform"
-    brief_link="../../curriculum/projects/capstones.md#c1--resilient-backend-platform"
+    brief_fragment="#c1--resilient-backend-platform"
+    brief_doc="curriculum/projects/capstones.md"
     security=0
     ;;
   c2-distributed-storage-service)
     project_title="C2 — Distributed Storage Service"
-    brief_link="../../curriculum/projects/capstones.md#c2--distributed-storage-service"
+    brief_fragment="#c2--distributed-storage-service"
+    brief_doc="curriculum/projects/capstones.md"
     security=0
     ;;
   c3-evaluated-ai-assistant)
     project_title="C3 — Evaluated AI Assistant"
-    brief_link="../../curriculum/projects/capstones.md#c3--evaluated-ai-assistant"
+    brief_fragment="#c3--evaluated-ai-assistant"
+    brief_doc="curriculum/projects/capstones.md"
     security=0
     ;;
   c4-authorized-security-assessment)
     project_title="C4 — Authorized Security Assessment"
-    brief_link="../../curriculum/projects/capstones.md#c4--authorized-security-assessment"
+    brief_fragment="#c4--authorized-security-assessment"
+    brief_doc="curriculum/projects/capstones.md"
     security=1
     ;;
   *)
@@ -119,7 +143,30 @@ esac
 
 repository_root="$(cd "$(dirname "$0")/.." && pwd)"
 template_dir="$repository_root/templates/project-workspace"
-project_dir="$repository_root/projects/$project"
+
+# The brief lives in the OEE curriculum, not in the workspace, so generated
+# files link to it there. Override with OEE_CURRICULUM_URL for a fork or a
+# local clone.
+oee_url="${OEE_CURRICULUM_URL:-https://github.com/0xbuffdev/open-engineering-education/blob/main}"
+brief_link="$oee_url/$brief_doc$brief_fragment"
+
+# Target: argument, then $OEE_WORKSPACE, then the current directory.
+workspace="${2:-${OEE_WORKSPACE:-.}}"
+if [ ! -d "$workspace" ]; then
+  echo "Workspace directory does not exist: $workspace" >&2
+  echo "Run this from your study workspace root, or pass its path." >&2
+  exit 1
+fi
+workspace="$(cd "$workspace" && pwd)"
+
+if [ "$workspace" = "$repository_root" ]; then
+  echo "Refusing to create a learner workspace inside the OEE repository." >&2
+  echo "Learner work belongs in your own study workspace; see README.md." >&2
+  echo "Run this from your workspace root, or pass it: $0 $project <workspace-dir>" >&2
+  exit 1
+fi
+
+project_dir="$workspace/projects/$project"
 
 if [ -e "$project_dir" ]; then
   echo "Project workspace already exists: $project_dir" >&2
@@ -148,16 +195,16 @@ fi
 cat > "$project_dir/BRIEF.md" <<EOF
 # $project_title project brief
 
-The canonical brief, gate, milestones, and acceptance evidence are in the curriculum:
+The canonical brief, gate, milestones, and acceptance evidence are in the OEE curriculum:
 
 - [$project_title]($brief_link)
 
 Read the brief before writing code. Do not start until the prerequisite gate is recorded in [../../progress.md](../../progress.md).
 EOF
 
-echo "Created project workspace: projects/$project/"
+echo "Created project workspace in $workspace: projects/$project/"
 echo "Brief: $project_title"
-echo "Canonical assignment: curriculum/${brief_link#../../curriculum/}"
+echo "Canonical assignment: $brief_link"
 if [ "$security" -eq 1 ]; then
   echo "Security: complete docs/authorization.md before collecting any evidence."
 fi

@@ -1,8 +1,9 @@
 # D8 — Cloud, Container & Kubernetes Security
 
 **Track:** Security · **Prerequisite:** D1, S14 · **Core** · **Time:** 5 weeks, 75 hours · **Project:** P11 cloud assessment
+**Status:** `draft` · [status labels](../../spec/status-labels.md)
 
-> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../progress.md)
+> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../templates/progress.md)
 
 ## Purpose
 

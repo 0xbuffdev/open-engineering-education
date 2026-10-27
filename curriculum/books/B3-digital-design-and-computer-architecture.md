@@ -85,7 +85,7 @@ The 2nd edition is MIPS. The RISC-V edition (Harris & Harris, 2021) reorganizes 
 
 - use its architecture/microarchitecture chapters for S2/S17;
 - use its memory chapter for S3–S5;
-- record the edition and section mapping in `notes/systems/*/resources.md`;
+- record the edition and section mapping in your study workspace's `notes/systems/*/resources.md`;
 - never cite MIPS section numbers for a RISC-V edition.
 
 ## Acquisition

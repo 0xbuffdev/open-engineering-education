@@ -1,8 +1,9 @@
 # S3 — Memory Hierarchy & Locality
 
 **Track:** Systems · **Prerequisite:** S2 · **Core** · **Time:** 4 weeks, 60 hours · **Project:** P3 memory mountain
+**Status:** `draft` · [status labels](../../spec/status-labels.md)
 
-> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../progress.md)
+> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../templates/progress.md)
 
 ## Purpose
 

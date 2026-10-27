@@ -1,8 +1,9 @@
 # AI9 — Inference, Serving & Optimization
 
 **Track:** AI & ML · **Prerequisite:** AI6; S9 recommended · **Core** · **Time:** 5 weeks, 75 hours · **Project:** P9 serving benchmark
+**Status:** `draft` · [status labels](../../spec/status-labels.md)
 
-> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../progress.md)
+> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../templates/progress.md)
 
 ## Purpose
 

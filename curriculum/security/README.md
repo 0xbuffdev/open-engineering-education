@@ -19,22 +19,22 @@ D1 produces the rules of engagement used by every later course and project.
 
 ## Courses
 
-| Code | Course | Prerequisite | Weeks | Hours | Project |
-| --- | --- | --- | ---: | ---: | --- |
-| [D1](D1-security-foundations-and-threat-modeling.md) | Security Foundations & Threat Modeling | Foundations | 4 | 60 | P10 rules of engagement |
-| [D2](D2-memory-corruption-and-binary-exploitation.md) | Memory Corruption & Binary Exploitation | S2, S5, D1 | 6 | 90 | P10 vulnerable/fixed pair |
-| [D3](D3-network-and-web-application-security.md) | Network & Web Application Security | S10, D1 | 6 | 90 | P10 secure-review |
-| [D4](D4-systems-and-infrastructure-penetration-testing.md) | Systems & Infrastructure Penetration Testing | D2, D3, S11 | 6 | 90 | P11 assessment |
-| [D5](D5-applied-cryptography-and-secure-systems-design.md) | Applied Cryptography & Secure Systems Design | D1, S6, F4 | 5 | 75 | P11 protocol review |
-| [D6](D6-ai-security-and-red-teaming.md) | AI Security & Red Teaming — elective for the AI-security profile | D1, AI6, AI12 | 4 | 60 | P11 AI red-team |
-| [D7](D7-detection-incident-response-and-forensics.md) | Detection, Incident Response & Forensics | D1, S10 | 5 | 75 | P11 detection/IR drill |
-| [D8](D8-cloud-container-and-kubernetes-security.md) | Cloud, Container & Kubernetes Security | D1, S14 | 5 | 75 | P11 cloud assessment |
-| [D9](D9-secure-sdlc-appsec-and-supply-chain.md) | Secure SDLC, AppSec & Supply Chain | D1, D3 | 4 | 60 | P10 secure SDLC review |
-| [D10](D10-privacy-compliance-and-governance.md) | Privacy, Compliance & Governance | D1, D7, D8 | 4 | 60 | P11 risk register |
-| [D11](D11-reverse-engineering-and-malware-analysis.md) | Reverse Engineering & Malware Analysis | D2, S2 | 5 | 75 | elective |
-| [D12](D12-hardware-embedded-and-iot-security.md) | Hardware, Embedded & IoT Security | D2, S5 | 5 | 75 | elective |
-| [D13](D13-mobile-application-security.md) | Mobile Application Security | D3 | 4 | 60 | elective |
-| [D14](D14-red-team-operations-and-adversary-emulation.md) | Red Team Operations & Adversary Emulation | D4, D7 | 5 | 75 | elective |
+| Code | Course | Prerequisite | Weeks | Hours | Project | Status |
+| --- | --- | --- | ---: | ---: | --- | --- |
+| [D1](D1-security-foundations-and-threat-modeling.md) | Security Foundations & Threat Modeling | Foundations | 4 | 60 | P10 rules of engagement | `draft` |
+| [D2](D2-memory-corruption-and-binary-exploitation.md) | Memory Corruption & Binary Exploitation | S2, S5, D1 | 6 | 90 | P10 vulnerable/fixed pair | `draft` |
+| [D3](D3-network-and-web-application-security.md) | Network & Web Application Security | S10, D1 | 6 | 90 | P10 secure-review | `draft` |
+| [D4](D4-systems-and-infrastructure-penetration-testing.md) | Systems & Infrastructure Penetration Testing | D2, D3, S11 | 6 | 90 | P11 assessment | `draft` |
+| [D5](D5-applied-cryptography-and-secure-systems-design.md) | Applied Cryptography & Secure Systems Design | D1, S6, F4 | 5 | 75 | P11 protocol review | `draft` |
+| [D6](D6-ai-security-and-red-teaming.md) | AI Security & Red Teaming — elective for the AI-security profile | D1, AI6, AI12 | 4 | 60 | P11 AI red-team | `draft` |
+| [D7](D7-detection-incident-response-and-forensics.md) | Detection, Incident Response & Forensics | D1, S10 | 5 | 75 | P11 detection/IR drill | `draft` |
+| [D8](D8-cloud-container-and-kubernetes-security.md) | Cloud, Container & Kubernetes Security | D1, S14 | 5 | 75 | P11 cloud assessment | `draft` |
+| [D9](D9-secure-sdlc-appsec-and-supply-chain.md) | Secure SDLC, AppSec & Supply Chain | D1, D3 | 4 | 60 | P10 secure SDLC review | `draft` |
+| [D10](D10-privacy-compliance-and-governance.md) | Privacy, Compliance & Governance | D1, D7, D8 | 4 | 60 | P11 risk register | `draft` |
+| [D11](D11-reverse-engineering-and-malware-analysis.md) | Reverse Engineering & Malware Analysis | D2, S2 | 5 | 75 | elective | `draft` |
+| [D12](D12-hardware-embedded-and-iot-security.md) | Hardware, Embedded & IoT Security | D2, S5 | 5 | 75 | elective | `draft` |
+| [D13](D13-mobile-application-security.md) | Mobile Application Security | D3 | 4 | 60 | elective | `draft` |
+| [D14](D14-red-team-operations-and-adversary-emulation.md) | Red Team Operations & Adversary Emulation | D4, D7 | 5 | 75 | elective | `draft` |
 
 Core D1–D5 and D7–D10: **45 course-weeks, 675 hours**. D6 is an AI-security elective and assumes AI1–AI6 plus AI12; it is not counted in the core path. With the required systems prerequisites (S1, S2, S5, S6, S10, S11, S14; 42 weeks, 630 hours), the full Security path is **2,205 hours**, or about 3.4 years at 15 h/week with buffer.
 

@@ -1,8 +1,9 @@
 # S13 — AI Infrastructure (Systems Lens)
 
 **Track:** Systems · **Prerequisite:** S8, S9, S11 · **Core** · **Time:** 5 weeks, 75 hours · **Project:** P9 serving/gateway
+**Status:** `draft` · [status labels](../../spec/status-labels.md)
 
-> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../progress.md)
+> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../templates/progress.md)
 
 ## Purpose
 

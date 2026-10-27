@@ -1,8 +1,9 @@
 # D6 — AI Security & Red Teaming
 
 **Track:** Security · **Prerequisite:** D1, AI6, AI12 · **Elective (AI-security profile)** · **Time:** 4 weeks, 60 hours · **Project:** P11 AI red-team
+**Status:** `draft` · [status labels](../../spec/status-labels.md)
 
-> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../progress.md)
+> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../templates/progress.md)
 
 ## Purpose
 

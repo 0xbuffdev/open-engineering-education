@@ -1,0 +1,16 @@
+# Authors
+
+The people and organisations behind Open Engineering Education. Contributors keep their own copyright; this file is credit, not assignment.
+
+## Author and steward
+
+- **Christopher S. Aondona** <christohybrid185@gmail.com> — author of the original curriculum; steward of OEE on behalf of 0xBUFF.
+- **0xBUFF** — copyright holder and steward of this repository (see [NOTICE](NOTICE)).
+
+## Contributors
+
+As contributions land under the DCO, contributors are added here in the same pull request that contains their work:
+
+- _your name here_
+
+To be added: sign your commits (`git commit -s`, see [CONTRIBUTING](governance/CONTRIBUTING.md)) and include this file in your pull request.

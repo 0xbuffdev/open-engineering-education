@@ -1,8 +1,9 @@
 # AI13 — Data Engineering for ML
 
 **Track:** AI & ML · **Prerequisite:** F6, AI1 · **Core** · **Time:** 5 weeks, 75 hours · **Project:** P7 data pipeline
+**Status:** `draft` · [status labels](../../spec/status-labels.md)
 
-> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../progress.md)
+> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../templates/progress.md)
 
 ## Purpose
 

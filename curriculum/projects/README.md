@@ -44,11 +44,11 @@ A capstone is not a new ladder project. It is a **hardening, evaluation, and int
 Create a project workspace only when you start it:
 
 ```bash
-./scripts/new-project-workspace ledgerlab
-./scripts/new-project-workspace workbenchd
+./scripts/new-project-workspace ledgerlab /path/to/your-workspace
+./scripts/new-project-workspace workbenchd /path/to/your-workspace
 ```
 
-The script creates `projects/<slug>/` with a README, design doc, evaluation plan, and retrospective. The full brief stays in [project-ladder.md](project-ladder.md).
+The script creates `projects/<slug>/` in your study workspace, with a README, design doc, evaluation plan, and retrospective. The full brief stays in [project-ladder.md](project-ladder.md).
 
 ## Portfolio
 

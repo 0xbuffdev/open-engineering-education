@@ -1,8 +1,9 @@
 # D5 — Applied Cryptography & Secure Systems Design
 
 **Track:** Security · **Prerequisite:** D1, S6, F4 · **Core** · **Time:** 5 weeks, 75 hours · **Project:** P11 protocol review
+**Status:** `draft` · [status labels](../../spec/status-labels.md)
 
-> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../progress.md)
+> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../templates/progress.md)
 
 ## Purpose
 

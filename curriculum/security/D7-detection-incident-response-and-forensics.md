@@ -1,8 +1,9 @@
 # D7 — Detection, Incident Response & Forensics
 
 **Track:** Security · **Prerequisite:** D1, S10 · **Core** · **Time:** 5 weeks, 75 hours · **Project:** P11 detection/IR drill
+**Status:** `draft` · [status labels](../../spec/status-labels.md)
 
-> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../progress.md)
+> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../templates/progress.md)
 
 ## Purpose
 

@@ -1,8 +1,9 @@
 # S15 — Reliability, Incident Response & SRE
 
 **Track:** Systems · **Prerequisite:** S9, S11, S14 · **Core** · **Time:** 4 weeks, 60 hours · **Project:** P4 SLO/incident drill
+**Status:** `draft` · [status labels](../../spec/status-labels.md)
 
-> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../progress.md)
+> **Navigate:** [Track](../README.md) · [Book maps](../books/README.md) · [Resources](../resources.md) · [Projects](../projects/README.md) · [Glossary](../appendices/glossary.md) · [Progress](../../templates/progress.md)
 
 ## Purpose
 

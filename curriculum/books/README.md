@@ -7,7 +7,7 @@ These pages are navigation aids for the six core reference books used by the cur
 - Keep legally obtained PDFs/EPUBs in `books/` locally. That directory is ignored by Git for PDFs.
 - Do **not** commit copyrighted books, purchased files, or scans.
 - Do not rely on a search engine's page number. Use the section title and the book's own table of contents.
-- If your edition differs, write the mapping in `notes/<track>/<course>/resources.md` and use the closest matching title.
+- If your edition differs, write the mapping in your workspace's `notes/<track>/<course>/resources.md` and use the closest matching title.
 - When a book has numbered sections that differ by edition, the course file names the topic as well as the number.
 
 ## The library
@@ -42,7 +42,7 @@ If you want page-level checkpoints:
 
 1. Open the exact edition listed above.
 2. Compare its table of contents with the section titles on the book page.
-3. Record the printed page range in `notes/<track>/<course>/resources.md`.
+3. Record the printed page range in your workspace's `notes/<track>/<course>/resources.md`.
 4. Never copy a page range from an online search result into the curriculum; editions and PDF offsets differ.
 
 No PDFs are currently tracked in this repository. If you place legal local copies in `books/`, they remain untracked by design.

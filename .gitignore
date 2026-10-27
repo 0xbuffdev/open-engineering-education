@@ -17,62 +17,6 @@ id_rsa*
 .kubeconfig
 kubeconfig*
 
-# Python
-.venv/
-venv/
-__pycache__/
-*.py[cod]
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-.ipynb_checkpoints/
-
-# Rust and native builds
-target/
-*.o
-*.so
-*.a
-build/
-dist/
-
-# Node tooling, if a course uses it
-node_modules/
-
-# Local datasets, model weights, checkpoints, and generated runs
-/data/
-/datasets/
-/artifacts/
-/models/
-/checkpoints/
-/runs/
-/wandb/
-/mlruns/
-projects/*/data/
-projects/*/datasets/
-projects/*/artifacts/
-projects/*/models/
-projects/*/checkpoints/
-projects/*/runs/
-*.safetensors
-*.gguf
-*.ckpt
-*.pt
-*.pth
-*.onnx
-*.parquet
-*.arrow
-*.h5
-*.pkl
-
-# Large or sensitive lab captures
-*.pcap
-*.pcapng
-
-# Infrastructure state
-.terraform/
-*.tfstate
-*.tfstate.*
-
 # Logs, caches, and editor/OS noise
 *.log
 .cache/

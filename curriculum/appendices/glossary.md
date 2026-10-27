@@ -273,7 +273,7 @@ A working vocabulary for the curriculum. Definitions are deliberately short: eno
 | Chain rule | The rule for differentiating a composition of functions. | F4 |
 | Probability | A measure of uncertainty over outcomes, between 0 and 1. | F4 |
 | Conditional probability | The probability of an event given that another event occurred. | F4 |
-| Bayes' theorem | A rule relating conditional probabilities: `P(A|B) = P(B|A)P(A)/P(B)`. | F4 |
+| Bayes' theorem | A rule relating conditional probabilities: `P(A\|B) = P(B\|A)P(A)/P(B)`. | F4 |
 | Expectation | The probability-weighted average of a random variable. | F4 |
 | Variance | The expected squared deviation from the mean. | F4 |
 | Distribution | A function or rule assigning probabilities to the values of a random variable. | F4 |
