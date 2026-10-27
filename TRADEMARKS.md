@@ -10,13 +10,11 @@ The following marks, including their logos, are registered:
 
 - **0xBUFF®**: the house mark of this project and its steward.
 - **0xNAND®**: the steward's platform, offered under the 0xBUFF mark and hosted on a subdomain of 0xbuff.com.
-- **Open Engineering Education®**, also written **OEE®**: the final name of this standard.
+- **Open Engineering Education®**, also written **OEE®**: the name of this standard.
 
 0xNAND is a sub-brand of 0xBUFF; the two marks form one brand family. External references should make that relationship clear, for example "0xNAND, a service of 0xBUFF®".
 
 Use the ® symbol on the first prominent appearance of a registered mark in a document, product listing, or announcement. Later appearances of the same mark within the same document may omit the symbol.
-
-Note that "OEE" is also in common use in manufacturing for *overall equipment effectiveness*; that usage is unrelated to this project. "OSEE" is deliberately not used, as it names an existing OffSec certification.
 
 ## Reserved names
 

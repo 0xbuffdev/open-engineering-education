@@ -145,7 +145,7 @@ Start with [governance/CONTRIBUTING.md](governance/CONTRIBUTING.md): DCO sign-of
 
 Curriculum text and the spec are licensed under [CC BY 4.0](LICENSE). Code, scripts, and templates are licensed under [MIT](LICENSE-MIT). Open Engineering Education® (OEE®), 0xBUFF®, and 0xNAND® are registered trademarks, and names and marks are not licensed; see [TRADEMARKS.md](TRADEMARKS.md).
 
-Attribution: © 2026 Christopher S. Aondona. Stewarded by 0xBUFF (see [NOTICE](NOTICE)). To cite this work, see [CITATION.cff](CITATION.cff).
+Attribution: © 2026 0xBUFF. Created by Christopher S. Aondona; stewarded by 0xBUFF (see [NOTICE](NOTICE)). To cite this work, see [CITATION.cff](CITATION.cff).
 
 ## Reference
 
