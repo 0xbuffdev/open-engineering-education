@@ -1,6 +1,6 @@
 # Trademark Policy
 
-This policy governs the names and marks associated with Open Engineering Education (OEE) and with the products of its steward. It states which marks are registered, which names are reserved, and what use is permitted without further permission. It is not legal advice and will be reviewed by legal counsel once the Open Engineering Education name is final.
+This policy governs the names and marks associated with Open Engineering Education (OEE) and with the products of its steward. It states which marks are registered, which names are reserved, and what use is permitted without further permission. It is not legal advice and will be reviewed by legal counsel.
 
 The CC BY 4.0 and MIT licenses cover the text and code of this repository respectively; neither grants any right to use the names, logos, or marks identified below.
 
@@ -15,16 +15,12 @@ Use the ® symbol on the first prominent appearance of a registered mark in a do
 
 ## Reserved names
 
-The following names are reserved for this project and are not registered. Use ™ or no symbol with them until they are registered, and do not use ®:
+**Open Engineering Education**, written out or as **OEE**, is the final name of this standard. The following names are reserved for this project and are not registered as trademarks; use ™ or no symbol with them, and do not use ®:
 
 - **Open Engineering Education** and its acronym **OEE**
-- The future **"conforms to OEE"** conformance mark, which is not yet in use
+- The **"conforms to OEE"** conformance mark, reserved for future use
 
-## Naming checks for OEE
-
-"Open Engineering Education" and "OEE" are the selected names for this standard. Before an application is filed, the following checks will be completed: availability of the GitHub organisation and repository names, availability of matching domains, a trademark search in the relevant jurisdictions, and a search for existing uses.
-
-Note that "OEE" is widely used in manufacturing for *overall equipment effectiveness*; that usage is unrelated to this project. "OSEE" is deliberately not used, as it names an existing OffSec certification.
+"OEE" is also in common use in manufacturing for *overall equipment effectiveness*; that usage is unrelated to this project. "OSEE" is deliberately not used, as it names an existing OffSec certification.
 
 ## Permitted without permission
 
