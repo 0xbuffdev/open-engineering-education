@@ -1,41 +1,45 @@
-# Trademarks
+# Trademark Policy
 
-This document reserves the names and marks of this project and its steward's products. It is not legal advice; it will be reviewed by a lawyer once the name is final.
+This policy governs the names and marks associated with Open Engineering Education (OEE) and with the products of its steward. It states which marks are registered, which names are reserved, and what use is permitted without further permission. It is not legal advice and will be reviewed by legal counsel once the Open Engineering Education name is final.
 
-The content of this repository is licensed (CC BY 4.0 for text, MIT for code). **CC and MIT licenses do not license trademark rights.** Reusing the text under its license does not give anyone the right to use these names or marks.
+The CC BY 4.0 and MIT licenses cover the text and code of this repository respectively; neither grants any right to use the names, logos, or marks identified below.
 
-## Registered
+## Registered trademarks
 
-- **0xBUFF®** and its logos. Registered trademark: use the ® symbol on first prominent use of the name in any document, product, or announcement; later uses in the same document may drop it.
+The following marks, including their logos, are registered:
 
-## Reserved (not yet registered)
+- **0xBUFF®**
+- **0xNAND®**
 
-- **0xNAND** and its logos: reserved; use ™ or no symbol until registered.
-- **Open Engineering Education** and the acronym **OEE**: the name is decided (see below); use ™ or no symbol until registered.
-- Any future **"conforms to OEE"** mark: use ™ or no symbol until registered.
+Use the ® symbol on the first prominent appearance of a registered mark in a document, product listing, or announcement. Later appearances of the same mark within the same document may omit the symbol.
 
-Using ® for a mark that is not registered is improper; only 0xBUFF® carries ® until the others are registered.
+## Reserved names
+
+The following names are reserved for this project and are not registered. Use ™ or no symbol with them until they are registered, and do not use ®:
+
+- **Open Engineering Education** and its acronym **OEE**
+- The future **"conforms to OEE"** conformance mark, which is not yet in use
+
+## Naming checks for OEE
+
+"Open Engineering Education" and "OEE" are the selected names for this standard. Before an application is filed, the following checks will be completed: availability of the GitHub organisation and repository names, availability of matching domains, a trademark search in the relevant jurisdictions, and a search for existing uses.
+
+Note that "OEE" is widely used in manufacturing for *overall equipment effectiveness*; that usage is unrelated to this project. "OSEE" is deliberately not used, as it names an existing OffSec certification.
 
 ## Permitted without permission
 
-- Factual references: "based on Open Engineering Education", "uses the OEE course format".
+- Factual references, for example "based on Open Engineering Education" or "uses the OEE course format".
 - Links to this repository and its documents.
 - Descriptions of compatibility or interoperability that do not imply endorsement.
-- Quotation of the CC-licensed text within the terms of that license (attribution required).
+- Quotation of CC-licensed text within the terms of that license, with attribution.
 
 ## Not permitted
 
-- Implying endorsement, sponsorship, or official status by 0xBUFF® or this project.
-- Using any reserved name as part of a product, course, or company name.
-- Applying the "conforms to OEE" mark before that mark and [conformance](spec/conformance.md) exist.
+- Implying endorsement, sponsorship, or official status by 0xBUFF®, 0xNAND®, or this project.
+- Using 0xBUFF, 0xNAND, or any reserved name as part of a product, course, or company name without permission.
+- Applying the "conforms to OEE" mark before [conformance](spec/conformance.md) is defined.
 - Removing or altering copyright or attribution notices.
 
-## Registration and name status
+## Requests for permission
 
-- **0xBUFF®**: registered trademark.
-- **Open Engineering Education / OEE**: name decided. Before filing, the naming checks must still be run: GitHub org/repo availability, domain availability, trademark search in the relevant jurisdictions, and a web search for existing uses. Note that "OEE" is widely used in manufacturing for *overall equipment effectiveness*, and that "OSEE" is deliberately avoided as it names an existing OffSec certification.
-- **0xNAND**: reserved, registration pending.
-
-## Asking for permission
-
-Open an issue describing: the name or mark you want to use, the product or work it will appear on, and the context. Permission, when granted, is recorded in the issue so it can be cited later.
+Submit an issue that states which mark you want to use, the product or work on which it will appear, and the context of the use. Permissions that are granted are recorded in the issue so that they can be referenced later.
