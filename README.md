@@ -6,8 +6,8 @@ OEE® is written principles, a course-file format, evidence rules, and public st
 
 **Status:** `v0.0.1` draft. The standard is not final, every course is currently labeled [`draft`](spec/status-labels.md), and nothing here has been verified yet. Nothing is published as final.
 
-- **Steward:** [0xBUFF®](https://github.com/0xbuffdev) 
-- **Author:** Christopher S. Aondona 
+- **Steward:** [0xBUFF®](https://github.com/0xbuffdev)
+- **Author:** Christopher S. Aondona
 - **License:** [CC BY 4.0](LICENSE) for text, [MIT](LICENSE-MIT) for code.
 
 > 0xBUFF, the steward of this standard, offers optional paid mentorship separately. The standard does not require it.
