@@ -4,9 +4,11 @@
 
 OEE® is written principles, a course-file format, evidence rules, and public status labels, and the curriculum built to those rules: Foundations, Systems, AI/ML, and Security tracks with exact chapter maps, labs that leave runnable evidence, and exit checks that must be demonstrated.
 
-**Status:** `v0.1.0` draft. The standard is not final, every course is currently labeled [`draft`](spec/status-labels.md), and nothing here has been verified yet. Nothing is published as final.
+**Status:** `v0.0.1` draft. The standard is not final, every course is currently labeled [`draft`](spec/status-labels.md), and nothing here has been verified yet. Nothing is published as final.
 
-**Steward:** [0xBUFF®](https://github.com/0xbuffdev) · **Author:** Christopher S. Aondona · **License:** [CC BY 4.0](LICENSE) for text, [MIT](LICENSE-MIT) for code.
+- **Steward:** [0xBUFF®](https://github.com/0xbuffdev) 
+- **Author:** Christopher S. Aondona 
+- **License:** [CC BY 4.0](LICENSE) for text, [MIT](LICENSE-MIT) for code.
 
 > 0xBUFF, the steward of this standard, offers optional paid mentorship separately. The standard does not require it.
 
