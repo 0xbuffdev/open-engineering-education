@@ -8,8 +8,10 @@ The CC BY 4.0 and MIT licenses cover the text and code of this repository respec
 
 The following marks, including their logos, are registered:
 
-- **0xBUFF®**
-- **0xNAND®**
+- **0xBUFF®**: the house mark of this project and its steward.
+- **0xNAND®**: the steward's platform, offered under the 0xBUFF mark and hosted on a subdomain of 0xbuff.com.
+
+0xNAND is a sub-brand of 0xBUFF; the two marks form one brand family. External references should make that relationship clear, for example "0xNAND, a service of 0xBUFF®".
 
 Use the ® symbol on the first prominent appearance of a registered mark in a document, product listing, or announcement. Later appearances of the same mark within the same document may omit the symbol.
 
@@ -33,6 +35,7 @@ Use the ® symbol on the first prominent appearance of a registered mark in a do
 
 - Implying endorsement, sponsorship, or official status by 0xBUFF®, 0xNAND®, or this project.
 - Using 0xBUFF, 0xNAND, or any reserved name as part of a product, course, or company name without permission.
+- Registering or operating domains or subdomains that imitate or misspell 0xbuff.com.
 - Applying the "conforms to OEE" mark before [conformance](spec/conformance.md) is defined.
 - Removing or altering copyright or attribution notices.
 
