@@ -15,7 +15,7 @@ This is deliberately small. A council or foundation at the current scale would b
 
 ## Adding a second maintainer
 
-When a contributor is doing sustained, reviewed work — not before — the steward adds them as a maintainer by pull request to this file, recording:
+When a contributor is doing sustained, reviewed work, and only then, the steward adds them as a maintainer by pull request to this file, recording:
 
 - who they are and what they have contributed;
 - what they may merge without review (normally: `curriculum/` fixes within one track);
@@ -25,8 +25,13 @@ Maintainer status can be withdrawn the same way it is granted, with reasons reco
 
 ## Neutrality and future governance
 
-The steward's commercial products (0xNAND, mentorship) are separate from this repository; the free/paid line in the README is the boundary. If real outside contributors accumulate — that is, once strangers are routinely shipping accepted changes — the next step is a neutral home (an org or foundation) and a wider decision process. Until then, one steward with written decisions is the honest form of governance this project has.
+The steward's commercial products (0xNAND, mentorship) are separate from this repository; the free/paid line in the README is the boundary. Two commitments hold in the meantime:
+
+- changes to `spec/` go through public RFCs (see [rfcs/](../rfcs/README.md));
+- the trademark policy in [TRADEMARKS.md](../TRADEMARKS.md) will not be used to block compatible implementations.
+
+Revisit a wider governance arrangement when at least one of these is true: two or more outside maintainers regularly merge changes; other organisations adopt or implement the standard; a third party uses a conformance mark; an adopter or funder asks for neutral governance; or a dispute arises about direction or credit. Until then, decisions stay with one steward and are recorded in writing.
 
 ## Conflict of interest
 
-The steward sells products that implement parts of this standard. The rule is disclosure, not abstention: the README states the relationship in one line, paid material never enters this repository, and no course's status label can be influenced by a product launch.
+The steward sells products that implement parts of this standard. The rule is to disclose: the README states the relationship in one line, paid material never enters this repository, and no course's status label can be influenced by a product launch.

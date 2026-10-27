@@ -8,7 +8,7 @@ assignees: ""
 
 **Course**:
 
-<!-- Course code and file, e.g. F0 — curriculum/foundations/F0-setup-tools-and-study-system.md -->
+<!-- Course code and file, e.g. F0: curriculum/foundations/F0-setup-tools-and-study-system.md -->
 
 **Current label**:
 

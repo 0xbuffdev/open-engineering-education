@@ -8,7 +8,7 @@ assignees: ""
 
 **Course**:
 
-<!-- Course code and file, e.g. F2 — curriculum/foundations/F2-data-structures-and-algorithms.md -->
+<!-- Course code and file, e.g. F2: curriculum/foundations/F2-data-structures-and-algorithms.md -->
 
 **Lab or exercise**:
 

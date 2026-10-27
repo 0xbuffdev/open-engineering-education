@@ -6,7 +6,7 @@ This file defines what counts as an exit check and what counts as a demonstrable
 
 An exit check is a short list of statements a learner **demonstrates without notes** at the end of a course. Each statement must satisfy all of the following:
 
-1. **Observable.** It describes something a third party can watch happen — build it, run it, measure it, explain it on a whiteboard — not a feeling of familiarity.
+1. **Observable.** It describes something a third party can watch happen (build it, run it, measure it, explain it on a whiteboard), not a feeling of familiarity.
 2. **Decidable.** Someone reading only the linked evidence can tell pass from fail. "Knows about X" fails this test; "traces X through Y and predicts the output" passes it.
 3. **Includes a limit.** At least one item requires the learner to state what the artifact does **not** prove.
 4. **Not passable by reading.** The answer cannot be looked up in the section it came from.
@@ -33,11 +33,11 @@ An artifact demonstrates completion when **all** of these hold:
 - A benchmark with no environment, no repetitions, and no variance.
 - A claim of completion whose evidence links are broken.
 
-A checked box without a reproducible artifact is not progress. This is the whole rule.
+A checked box without a reproducible artifact is not progress.
 
 ## Where evidence lives
 
-Evidence lives in the learner's **study workspace** — `labs/`, `exercises/`, `notes/`, `projects/`, and `progress.md` — in their own repository. This repository ships only the [templates](../templates/) for that state, including [templates/progress.md](../templates/progress.md).
+Evidence lives in the learner's **study workspace** (`labs/`, `exercises/`, `notes/`, `projects/`, and `progress.md`) in their own repository. This repository ships only the [templates](../templates/) for that state, including [templates/progress.md](../templates/progress.md).
 
 The evidence log links to committed artifacts. It never records completion as a bare checkbox.
 

@@ -2,11 +2,11 @@
 
 **An open standard for how software engineering is taught and proven, plus a reference curriculum that follows it.**
 
-OEE is written principles, a course-file format, evidence rules, and public status labels — and the curriculum built to those rules: Foundations, Systems, AI/ML, and Security tracks with exact chapter maps, labs that leave runnable evidence, and exit checks that must be demonstrated, not read.
+OEE is written principles, a course-file format, evidence rules, and public status labels, and the curriculum built to those rules: Foundations, Systems, AI/ML, and Security tracks with exact chapter maps, labs that leave runnable evidence, and exit checks that must be demonstrated.
 
 **Status:** `v0.1.0` draft. The standard is not final, every course is currently labeled [`draft`](spec/status-labels.md), and nothing here has been verified yet. Nothing is published as final.
 
-**Steward:** [0xBUFF](https://github.com/0xbuffdev) · **Author:** Christopher S. Aondona · **License:** [CC BY 4.0](LICENSE) for text, [MIT](LICENSE-MIT) for code.
+**Steward:** [0xBUFF®](https://github.com/0xbuffdev) · **Author:** Christopher S. Aondona · **License:** [CC BY 4.0](LICENSE) for text, [MIT](LICENSE-MIT) for code.
 
 > 0xBUFF, the steward of this standard, offers optional paid mentorship separately. The standard does not require it.
 
@@ -21,7 +21,7 @@ Full text with what each one rules out: [spec/principles.md](spec/principles.md)
 
 ## Free and paid
 
-The line between the free standard and paid products. It never moves silently; changes to it require an [RFC](rfcs/README.md).
+This line is written down and never moves silently; changing it requires an [RFC](rfcs/README.md).
 
 ### Always free, forever, in this repository
 
@@ -36,7 +36,7 @@ The line between the free standard and paid products. It never moves silently; c
 - Hidden-test grading and the grading harness
 - Code-execution sandbox and instructor agent with per-student memory
 - Throughline visualizations, the Prove arena, and certificates
-- Cohort access, live sessions, and mentor review — offered by 0xBUFF (disclosure above)
+- Cohort access, live sessions, and mentor review, offered by 0xBUFF (disclosure above)
 
 Hidden tests and grading harnesses are deliberately **not** here: they cannot be cloned by copying a repository, and they cost money to run. Everything needed to learn from this curriculum is in the free layer.
 
@@ -68,7 +68,7 @@ mkdir my-study-workspace && cd my-study-workspace && git init
 ./scripts/new-project-workspace ledgerlab /path/to/my-study-workspace
 ```
 
-The script validates that the course exists, then creates `labs/`, `exercises/`, and `notes/` for it in your workspace, linking back to the course file here. Project briefs stay canonical in the curriculum; your implementation goes in your workspace. Start only the course you are actually on — an empty directory is not progress.
+The script validates that the course exists, then creates `labs/`, `exercises/`, and `notes/` for it in your workspace, linking back to the course file here. Project briefs stay canonical in the curriculum; your implementation goes in your workspace. Start only the course you are actually on; an empty directory is not progress.
 
 The full starter content lives in [templates/](templates/README.md), including [templates/progress.md](templates/progress.md), the evidence log you copy into your workspace.
 
@@ -139,17 +139,17 @@ Purpose, outcomes, prerequisites, and a realistic hour budget · required readin
 
 ## Contributing
 
-Start with [governance/CONTRIBUTING.md](governance/CONTRIBUTING.md): DCO sign-off (`git commit -s`), what is in scope, and the starter issues. Changes to the standard go through an [RFC](rfcs/README.md). The single steward and how decisions are recorded: [governance/GOVERNANCE.md](governance/GOVERNANCE.md). Everyone in community spaces is covered by the [code of conduct](governance/CODE_OF_CONDUCT.md).
+Start with [governance/CONTRIBUTING.md](governance/CONTRIBUTING.md): DCO sign-off (`git commit -s`), what is in scope, and the starter issues. Changes to the standard go through an [RFC](rfcs/README.md). [governance/GOVERNANCE.md](governance/GOVERNANCE.md) covers the single-steward model and how decisions are recorded. Everyone in community spaces is covered by the [code of conduct](governance/CODE_OF_CONDUCT.md).
 
 ## License and attribution
 
-Curriculum text and the spec are licensed under [CC BY 4.0](LICENSE). Code, scripts, and templates are licensed under [MIT](LICENSE-MIT). Names and marks are not licensed; see [TRADEMARKS.md](TRADEMARKS.md).
+Curriculum text and the spec are licensed under [CC BY 4.0](LICENSE). Code, scripts, and templates are licensed under [MIT](LICENSE-MIT). 0xBUFF® is a registered trademark, and names and marks are not licensed; see [TRADEMARKS.md](TRADEMARKS.md).
 
-Attribution: © 2026 0xBUFF. Created by Christopher S. Aondona; stewarded by 0xBUFF (see [NOTICE](NOTICE)). To cite this work, see [CITATION.cff](CITATION.cff).
+Attribution: © 2026 Christopher S. Aondona. Stewarded by 0xBUFF (see [NOTICE](NOTICE)). To cite this work, see [CITATION.cff](CITATION.cff).
 
 ## Reference
 
-- [spec/](spec/principles.md): the standard — principles, course format, evidence rules, status labels.
+- [spec/](spec/principles.md): the standard itself: principles, course format, evidence rules, status labels.
 - [Professional practice](curriculum/appendices/professional-practice.md): the standard the evidence must meet.
 - [Coverage map](curriculum/appendices/coverage-map.md): every course, topic, and deliberate boundary.
 - [Glossary](curriculum/appendices/glossary.md): precise working definitions.

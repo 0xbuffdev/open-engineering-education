@@ -19,7 +19,7 @@ What should change, concretely: which files, which sections, what the text says 
 | --- | --- |
 | | |
 
-At least one alternative must be real — something you seriously considered, not a token.
+At least one alternative must be real: something you seriously considered, not a token.
 
 ## Impact on conformance
 

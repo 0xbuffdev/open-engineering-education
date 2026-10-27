@@ -2,7 +2,7 @@
 
 Requests for Comments are how changes to the **standard** are decided: anything that changes `spec/`, the required course structure in [course-format.md](../spec/course-format.md), or the free/paid line in the [README](../README.md#free-and-paid).
 
-Routine fixes — a wrong chapter reference, a broken link, a clearer paragraph — do not need an RFC. Open a pull request directly (see [CONTRIBUTING](../governance/CONTRIBUTING.md)).
+Routine fixes (a wrong chapter reference, a broken link, a clearer paragraph) do not need an RFC. Open a pull request directly (see [CONTRIBUTING](../governance/CONTRIBUTING.md)).
 
 ## When you need one
 

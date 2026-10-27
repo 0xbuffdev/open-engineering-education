@@ -49,4 +49,4 @@ Requirements:
 
 ## Where learner work goes
 
-A course file is the assignment. The learner's work — labs, exercises, notes, project increments, and the evidence log — lives in their own study workspace, created with the scripts in [`../scripts/`](../scripts/). Nothing in this format requires, or permits, committing learner state to this repository.
+A course file is the assignment. The learner's work (labs, exercises, notes, project increments, and the evidence log) lives in their own study workspace, created with the scripts in [`../scripts/`](../scripts/). Nothing in this format requires, or permits, committing learner state to this repository.

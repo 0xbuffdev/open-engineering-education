@@ -159,4 +159,4 @@ Copy this block at the end of each month:
 - Next smallest deliverable:
 ```
 
-A plan that never records actual hours is a wish, not a plan.
+A plan that never records actual hours cannot tell you where the time went.

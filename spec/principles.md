@@ -10,7 +10,7 @@ A course is done when its exit check is demonstrable and the artifact runs from 
 
 ## 2. Mechanism before tooling
 
-Learners must be able to explain what happens underneath — source to syscall to CPU to memory; metric to data to model; asset to boundary to control — before they lean on a framework.
+Learners must be able to explain what happens underneath (source to syscall to CPU to memory; metric to data to model; asset to boundary to control) before they lean on a framework.
 
 **What this rules out:** courses that start and end at a framework's public API, and any exit check that can be passed by rote API use.
 
@@ -22,7 +22,7 @@ Every course, benchmark, and result states its limits and what it does not prove
 
 ## 4. Open by default, paid where it costs to run
 
-The curriculum is free forever. Paid products exist for things that cost money to operate — grading, execution, agents, certification, cohorts — and the line between the two is stated in writing and never moved silently.
+The curriculum is free forever. Paid products exist for things that cost money to operate (grading, execution, agents, certification, cohorts), and the line between the two is stated in writing and never moved silently.
 
 **What this rules out:** moving free material behind a paywall, and describing the free/paid boundary in marketing language instead of a list.
 
