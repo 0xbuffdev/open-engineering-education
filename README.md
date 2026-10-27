@@ -2,7 +2,7 @@
 
 **An open standard for how software engineering is taught and proven, plus a reference curriculum that follows it.**
 
-OEE is written principles, a course-file format, evidence rules, and public status labels, and the curriculum built to those rules: Foundations, Systems, AI/ML, and Security tracks with exact chapter maps, labs that leave runnable evidence, and exit checks that must be demonstrated.
+OEE® is written principles, a course-file format, evidence rules, and public status labels, and the curriculum built to those rules: Foundations, Systems, AI/ML, and Security tracks with exact chapter maps, labs that leave runnable evidence, and exit checks that must be demonstrated.
 
 **Status:** `v0.1.0` draft. The standard is not final, every course is currently labeled [`draft`](spec/status-labels.md), and nothing here has been verified yet. Nothing is published as final.
 
@@ -143,7 +143,7 @@ Start with [governance/CONTRIBUTING.md](governance/CONTRIBUTING.md): DCO sign-of
 
 ## License and attribution
 
-Curriculum text and the spec are licensed under [CC BY 4.0](LICENSE). Code, scripts, and templates are licensed under [MIT](LICENSE-MIT). 0xBUFF® and 0xNAND® are registered trademarks, and names and marks are not licensed; see [TRADEMARKS.md](TRADEMARKS.md).
+Curriculum text and the spec are licensed under [CC BY 4.0](LICENSE). Code, scripts, and templates are licensed under [MIT](LICENSE-MIT). Open Engineering Education® (OEE®), 0xBUFF®, and 0xNAND® are registered trademarks, and names and marks are not licensed; see [TRADEMARKS.md](TRADEMARKS.md).
 
 Attribution: © 2026 Christopher S. Aondona. Stewarded by 0xBUFF (see [NOTICE](NOTICE)). To cite this work, see [CITATION.cff](CITATION.cff).
 

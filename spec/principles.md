@@ -1,6 +1,6 @@
 # Principles
 
-Four principles define Open Engineering Education (OEE). They bind the spec, the reference curriculum, and anything added later. Each one is written to cost something: the "what this rules out" line is the part that matters.
+Four principles define Open Engineering Education® (OEE®). They bind the spec, the reference curriculum, and anything added later. Each one is written to cost something: the "what this rules out" line is the part that matters.
 
 ## 1. Evidence over completion
 
