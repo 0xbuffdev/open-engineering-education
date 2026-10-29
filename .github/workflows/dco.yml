@@ -30,6 +30,6 @@ jobs:
             fi
           done
           if [ "$fail" -eq 0 ]; then
-            echo "All commits carry a Signed-off-by line (see governance/DCO.md)."
+            echo "All commits carry a Signed-off-by line (see DCO.md)."
           fi
           exit "$fail"

@@ -6,10 +6,10 @@ By contributing, you agree to follow this repository's governance, licensing, si
 
 ## Before contributing
 
-1. Read the [OEE principles](../spec/principles.md).
+1. Read the [OEE principles](spec/principles.md).
 2. Review the [Code of Conduct](CODE_OF_CONDUCT.md).
-3. Read the [governance policy](GOVERNANCE.md).
-4. Search existing issues and [Requests for Comments](../rfcs/README.md) to check whether the proposed change has already been discussed.
+3. Read the [governance policy](governance/GOVERNANCE.md).
+4. Search existing issues and [Requests for Comments](rfcs/README.md) to check whether the proposed change has already been discussed.
 
 For a small correction, open a pull request. For a change to the normative specification or its governance, follow the RFC process first.
 

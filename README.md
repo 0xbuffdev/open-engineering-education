@@ -105,7 +105,7 @@ Contributions should improve clarity, correctness, reproducibility, or consisten
 Before submitting a change:
 
 1. Read the [principles](spec/principles.md).
-2. Review the [contribution guidelines](governance/CONTRIBUTING.md).
+2. Review the [contribution guidelines](CONTRIBUTING.md).
 3. Search existing issues and [RFCs](rfcs/README.md).
 4. Follow the repository's sign-off, review, and validation requirements.
 
