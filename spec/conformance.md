@@ -53,7 +53,7 @@ A finding that the course structure is conforming does not automatically make th
 
 A program may be assessed as conforming only when:
 
-1. Its course catalogue and program definition agree.
+1. Its course catalog and program definition agree.
 2. Every required course is identified, and any stated course code is unique.
 3. Course titles, prerequisites, ordering, and durations are consistent.
 4. Required course files exist and satisfy course-level requirements.

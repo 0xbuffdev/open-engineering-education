@@ -24,7 +24,7 @@ Requirements:
 - If a program is stated, the program code MUST match the program to which the course belongs.
 - The type MUST be `course` or `project`.
 - Prerequisites MUST identify specific course codes or state `none`.
-- Duration MUST be stated in weeks. When the course belongs to a program, duration MUST agree with the program catalogue.
+- Duration MUST be stated in weeks. When the course belongs to a program, duration MUST agree with the program catalog.
 - Every new or unproven course MUST start with the `draft` status.
 - Status requirements are defined in [Status Labels](status-labels.md).
 
@@ -138,7 +138,7 @@ See [Evidence Rules](./evidence-rules.md).
 
 All relative internal links MUST resolve.
 
-Where stated, course identifiers, titles, program assignments, prerequisites, durations, and status labels MUST agree with the corresponding program catalogue and course metadata.
+Where stated, course identifiers, titles, program assignments, prerequisites, durations, and status labels MUST agree with the corresponding program catalog and course metadata.
 
 A change that updates only one location while leaving conflicting information elsewhere is incomplete.
 

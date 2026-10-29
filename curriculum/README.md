@@ -2,7 +2,7 @@
 
 The OEE curriculum is the canonical educational framework of Open Engineering Education (OEE). It defines five engineering programs, their courses, learning outcomes, prerequisites, assessments, practical work, and completion requirements.
 
-The curriculum is complete and ready to use by learners, educators, mentors, curriculum authors, reviewers, and platform developers. It provides a consistent structure for independent study, organized instruction, course development, quality review, and software systems that support engineering education.
+The curriculum is written for learners, educators, mentors, curriculum authors, reviewers, and platform developers. It provides a consistent structure for independent study, organized instruction, course development, quality review, and software systems that support engineering education. Course files are being added to the program directories.
 
 This directory is the authoritative source for the curriculum's educational content. Its structure is governed by the public OEE specification, including [Course Format](../spec/course-format.md), [Evidence Rules](../spec/evidence-rules.md), [Status Labels](../spec/status-labels.md), and [Conformance](../spec/conformance.md).
 
@@ -97,7 +97,7 @@ The individual course file is the authoritative definition of that course's requ
 
 ## Course status and validation
 
-The curriculum is complete and available for use. Individual course status labels describe the evidence supporting course validation and readiness.
+Each course carries a status label that describes the evidence supporting its validation and readiness.
 
 | Status | Meaning |
 | --- | --- |

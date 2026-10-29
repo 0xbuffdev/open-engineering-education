@@ -18,7 +18,7 @@ The detailed promotion requirements are defined in [Evidence Rules](evidence-rul
 
 Every new course MUST begin as `draft`.
 
-A course MUST NOT be labelled `tested` or `verified` until the corresponding evidence requirements have been met and recorded.
+A course MUST NOT be labeled `tested` or `verified` until the corresponding evidence requirements have been met and recorded.
 
 A well-written course is not necessarily a tested course. A tested course is not necessarily a verified course.
 
@@ -48,7 +48,7 @@ A status correction SHOULD include a brief explanation of the reason for the cha
 
 The status MUST appear in the course metadata.
 
-The course catalogue or other authoritative program summary MUST agree with the course file. If the same status is displayed in more than one place, every published value MUST be kept consistent.
+The course catalog or other authoritative program summary MUST agree with the course file. If the same status is displayed in more than one place, every published value MUST be kept consistent.
 
 A mismatch is a documentation defect and MUST be corrected.
 
