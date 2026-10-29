@@ -1,108 +1,167 @@
-# Curriculum
+# OEE Curriculum
 
-This directory is the single source of truth for what to study, in what order, from which book sections, what to build, and how to prove you are done.
+The OEE curriculum is the canonical educational framework of Open Engineering Education (OEE). It defines five engineering programs, their courses, learning outcomes, prerequisites, assessments, practical work, and completion requirements.
 
-Each course has its own file so you can open exactly one page at a time. The structure of a course file is defined in [../spec/course-format.md](../spec/course-format.md), and every course currently carries the [`draft`](../spec/status-labels.md) status label.
+The curriculum is complete and ready to use by learners, educators, mentors, curriculum authors, reviewers, and platform developers. It provides a consistent structure for independent study, organized instruction, course development, quality review, and software systems that support engineering education.
 
-## Start here
+This directory is the authoritative source for the curriculum's educational content. Its structure is governed by the public OEE specification, including [Course Format](../spec/course-format.md), [Evidence Rules](../spec/evidence-rules.md), [Status Labels](../spec/status-labels.md), and [Conformance](../spec/conformance.md).
 
-1. Pick **one primary program**. Do not study three programs at once.
-2. Set up your weekly block before starting.
-3. Check the local library policy and reading maps before buying books.
-4. Check the small set of external materials you actually need now.
-5. Open the first course file in your program. Do its labs and project increment before moving on.
-6. Record completion in the progress log (kept in your study workspace) only after the course exit check is demonstrable.
+## The five engineering programs
 
-## The curriculum is organised by program
+| Code | Program | Courses | Directory |
+| --- | --- | ---: | --- |
+| `SEF` | Software Engineering Foundations | 10 | [SEF/](SEF/) |
+| `APP` | Application Engineering | 9 | [APP/](APP/) |
+| `SYS` | Systems Engineering | 9 | [SYS/](SYS/) |
+| `AI` | AI Engineering | 9 | [AI/](AI/) |
+| `SEC` | Security Engineering | 9 | [SEC/](SEC/) |
+| **Total** | **Five engineering programs** | **46** | |
 
-| Code | Program | Directory |
-| --- | --- | --- |
-| `SEF` | Software Engineering Foundations | [SEF/](SEF/) |
-| `APP` | Application Engineering | [APP/](APP/) |
-| `SYS` | Systems Engineering | [SYS/](SYS/) |
-| `AI` | AI Engineering | [AI/](AI/) |
-| `SEC` | Security Engineering | [SEC/](SEC/) |
+Each program has a defined course sequence and a culminating project or capstone course. Course codes provide stable identifiers for prerequisites, progression, assessment definitions, cross-course relationships, and platform integrations.
 
-Course files are being re-added under each program directory.
+The five programs cover complementary areas of engineering while maintaining distinct learning objectives and professional capabilities.
 
-## What every course file contains
+## How to use the curriculum
 
-- **Purpose** and the professional capability it develops.
-- **Prerequisites** and a realistic time budget.
-- **Required reading** with exact chapter/section identifiers and a time estimate.
-- **Topic checklist** grouped into modules.
-- **Labs** that produce runnable evidence.
-- **Exercises** that force recall and implementation.
-- **Project increment** linked to the project ladder (core courses) or an optional elective extension.
-- **Exit check** you must demonstrate without notes.
-- **Common failure modes**, evidence to commit, and optional depth.
+### For learners
 
-Electives keep the same structure but do not require a ladder project. F0 has no project; it produces the environment and study system that P1 depends on.
+Use the curriculum to select a program, understand its sequence, satisfy prerequisites, and work toward its defined outcomes.
 
-A course is complete when the exit check is demonstrable, the artifact is committed, and the retrospective is written. Reading a chapter is not completion.
+Each course specifies what you are expected to understand, build, test, explain, and demonstrate. Follow its completion requirements and retain evidence of your work.
 
-## Core versus elective
+Use [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) to organize your actual implementations, labs, exercises, projects, notes, and progress records. The curriculum defines the required work; your workspace contains the work you produce.
 
-**Core** means the minimum defensible professional foundation for that track. Do not replace it with a different book, a shorter tutorial, or an LLM-generated summary.
+### For educators and mentors
 
-**Elective** means depth for a role, a project, or curiosity. Electives are not required to finish the track. Add them only after the core and the capstone, or when a specific job description demands one.
+Use the curriculum as a consistent foundation for teaching, mentoring, assessment, and learner progression.
 
-## Weekly rhythm (15-hour default)
+Course definitions establish shared expectations for outcomes, prerequisites, practical work, and completion. Educators may adapt delivery methods to their teaching context, but material changes to canonical requirements should be documented and handled through the appropriate governance process.
 
-| Activity | Hours/week | What counts |
-| --- | ---: | --- |
-| Reading and annotated notes | 3–4 | One primary source, active notes, no passive video |
-| Labs and implementation | 7–8 | Code, tests, measurements, debugging |
-| Exercises and recall | 2 | Closed-book problems, derivations, traces |
-| Writing and review | 2 | Lab report, retrospective, spaced review, commit |
-| Buffer | 1 | Overflow, debugging, rest |
+When supporting learners, distinguish between completing an activity and demonstrating the capability that the activity is intended to develop.
 
-If you only have 8 hours/week, use the same proportions and accept a longer calendar. Do not compress the labs.
+### For curriculum and course authors
 
-Use a six-week block: five weeks of new material, one consolidation week for the project increment, review, and cleanup. Add one full buffer week every twelve weeks. A plan without slack is a plan that breaks.
+Course authors are responsible for maintaining clear, technically accurate, internally consistent, and assessable course definitions.
 
-## The study loop
+Every course must follow the required OEE structure and specify:
+
+- **Purpose and learning outcomes:** the professional capability being developed and what learners must demonstrate.
+- **Prerequisites:** the prior knowledge and course requirements needed to proceed.
+- **Course structure:** the ordered modules and lessons.
+- **Assessments:** the intended outcomes and criteria for evaluating them.
+- **Labs and exercises:** the practical work required to develop and demonstrate capability.
+- **Completion requirements:** the conditions that must be satisfied to complete the course.
+- **Evidence and retrospective:** the artifacts and explanations needed to support completion and document learning from experience.
+
+Authors must follow [Course Format](../spec/course-format.md). Course definitions must remain consistent with the governing specification and must not introduce conflicting requirements or unsupported completion claims.
+
+### For reviewers and maintainers
+
+Review course changes for technical correctness, educational clarity, prerequisite consistency, valid identifiers, working links, and alignment with OEE requirements.
+
+Changes should preserve consistency across the affected course files, program structure, and shared specification.
+
+The status of a course must reflect the evidence available for its validation. Curriculum completeness does not automatically establish that every course has been tested or verified with learners.
+
+Routine corrections may proceed through a pull request. Changes to normative requirements must follow the [RFC process](../rfcs/README.md).
+
+### For platform developers
+
+The OEE curriculum is canonical content that platforms may display, organize, and use to support learning workflows.
+
+Platform implementations should preserve course identifiers, titles, prerequisites, program relationships, learning outcomes, assessment definitions, and completion requirements.
+
+A platform may provide additional capabilities, including progress tracking, assessment workflows, analytics, or instructor tools. Such capabilities must remain distinguishable from the requirements defined by the curriculum and specification.
+
+An interface's completion indicator does not replace the evidence required to establish course completion. Similarly, implementing curriculum features does not automatically establish conformance to OEE.
+
+Consult [Conformance](../spec/conformance.md) when evaluating whether a course, program, or implementation satisfies the applicable requirements.
+
+## Course structure
+
+Every course follows the common OEE course format. The specification establishes the shared structure, while each course defines its subject-specific content and expectations.
+
+Course definitions cover:
+
+- The capability the course develops.
+- Learning outcomes and prerequisites.
+- The sequence of modules and lessons.
+- Assessments and practical investigations.
+- Required exercises and substantial lab work.
+- Completion conditions and evidence to retain.
+- Common failure modes and technical retrospectives.
+
+Project-based courses additionally define their deliverables, evaluation criteria, and project defense.
+
+The individual course file is the authoritative definition of that course's requirements. Program summaries, external interfaces, and platform representations should remain consistent with it.
+
+## Course status and validation
+
+The curriculum is complete and available for use. Individual course status labels describe the evidence supporting course validation and readiness.
+
+| Status | Meaning |
+| --- | --- |
+| `draft` | The course is written but does not yet meet the evidence requirements for `tested`. |
+| `tested` | At least one learner has completed the course, recorded feedback has informed a revision, and the required evidence is documented. |
+| `verified` | At least two learners have completed the course, the exit check and labs have been reproduced or reviewed, and a qualified reviewer has signed off. |
+
+New courses begin as `draft`. Promotion requires the evidence specified by [Status Labels](../spec/status-labels.md) and [Evidence Rules](../spec/evidence-rules.md).
+
+These labels measure the evidence supporting course validation. They do not indicate whether the curriculum directory is complete, nor do they represent course difficulty, accreditation, or guaranteed learner outcomes.
+
+## Completion and evidence
+
+Course completion is determined by the requirements stated in the individual course definition and the applicable OEE specification.
+
+Depending on the course, completion may require conceptual checkpoints, exercises, tests or evaluations, substantial lab work, explained design decisions, and a technical retrospective.
+
+Where executable artifacts are required, the evidence must support reproduction and review. It should establish what was done, how the result was obtained, whether the stated outcomes were demonstrated, and what limitations remain.
+
+Project-based courses also require their specified deliverables, project evaluation, and defense.
+
+Completion must not be inferred solely from attendance, elapsed time, activity completion, or an unsupported declaration of success.
+
+## Curriculum maintenance and change control
+
+The curriculum is maintained as a coherent system. A change to one course may affect prerequisites, progression, assessments, program summaries, and platform integrations.
+
+Contributors should:
+
+1. Identify the problem or improvement being addressed.
+2. Check the effect on related courses and program relationships.
+3. Follow the required course format and applicable specification.
+4. Validate identifiers, cross-references, and internal links.
+5. Document significant changes and necessary transition steps.
+6. Update affected summaries and metadata so they agree with the canonical course definitions.
+
+Changes to normative OEE requirements must follow the RFC process. Curriculum changes must not silently introduce requirements that contradict the specification.
+
+The governance process preserves a consistent standard while allowing the curriculum to improve through documented, reviewable changes.
+
+## Repository structure
 
 ```text
-read a bounded section
-  -> write the mechanism in your own words
-  -> predict an outcome
-  -> build or measure
-  -> compare prediction with evidence
-  -> explain the gap
-  -> write the retrospective
-  -> revisit after 1 day, 1 week, 1 month
+curriculum/
+  README.md    Curriculum overview and maintenance guidance
+  SEF/         Software Engineering Foundations
+  APP/         Application Engineering
+  SYS/         Systems Engineering
+  AI/          AI Engineering
+  SEC/         Security Engineering
 ```
 
-If you cannot state a prediction before running the experiment, you are following a tutorial, not studying engineering.
+The `spec/` directory contains the governing OEE specification. The program directories contain the canonical course definitions for the five engineering programs.
 
-## Using an AI assistant without damaging your learning
+Practical learner work and progress records belong in [OEE Workspace](https://github.com/0xbuffdev/oee-workspace), which provides the structure and tools for organizing implementations, exercises, labs, projects, notes, and evidence.
 
-Use an assistant for explanation, review, test ideas, and debugging questions. Do not let it produce the artifact you are supposed to learn. A useful rule: the assistant may write at most 10% of a course lab, and you must be able to explain every line you keep. For exercises and exit checks, close the assistant.
+## Guiding principle
 
-## Repository map
+The OEE curriculum provides one consistent educational framework for multiple audiences:
 
-```text
-curriculum/                 the curriculum itself
-  SEF/                      Software Engineering Foundations
-  APP/                      Application Engineering
-  SYS/                      Systems Engineering
-  AI/                       AI Engineering
-  SEC/                      Security Engineering
-scripts/                     repository checks
-```
+- Learners use it to develop and demonstrate engineering capability.
+- Educators and mentors use it to guide instruction, practice, and assessment.
+- Course authors use it to define clear, assessable learning requirements.
+- Reviewers and maintainers use it to preserve quality and consistency.
+- Platform developers use it to build systems that represent and support the curriculum.
 
-Learner state — `labs/`, `exercises/`, `notes/`, `projects/`, and `progress.md` — lives in **your own study workspace**, not in this repository. The root [README](../README.md#learner-workspaces) explains how to create one with the scripts.
-
-## Time expectations at a glance
-
-At 15 focused hours/week, one specialisation at a time is realistically 2.5–3.5 years. At 25 hours/week it is 18–24 months. At 35–40 hours/week it is 12–16 months.
-
-## Non-negotiable rules
-
-- Keep secrets, private data, model weights, and copyrighted books out of Git.
-- Security work only on systems you own or have explicit written authorization to test.
-- Record versions, seeds, hardware, commands, and limitations for every measurement.
-- Prefer one primary resource per course. Finish it before adding another.
-- Commit small, explain what changed, and keep a runnable artifact.
-- Stop and write down a blocker instead of silently substituting a book, dataset, or model.
+The objective is a complete, practical, and maintainable engineering curriculum whose requirements are explicit, whose changes are traceable, and whose claims about course readiness and learner achievement are supported by evidence.
