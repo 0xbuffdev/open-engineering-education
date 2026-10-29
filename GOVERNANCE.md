@@ -22,13 +22,13 @@ Routine changes may proceed through a pull request. The pull request and its rev
 
 ### Normative changes
 
-Changes to `spec/`, required course structure, assessment requirements, status-label definitions, conformance criteria, or other binding requirements MUST follow the [RFC process](../rfcs/README.md).
+Changes to `spec/`, required course structure, assessment requirements, status-label definitions, conformance criteria, or other binding requirements MUST follow the [RFC process](rfcs/README.md).
 
 An accepted RFC does not itself update the specification. The resulting change must be implemented in a pull request, reviewed, and merged.
 
 ### Course status changes
 
-Status changes MUST be supported by the evidence required by [Status Labels](../spec/status-labels.md) and [Evidence Rules](../spec/evidence-rules.md).
+Status changes MUST be supported by the evidence required by [Status Labels](spec/status-labels.md) and [Evidence Rules](spec/evidence-rules.md).
 
 Reviewers must be able to inspect the basis for the status change. A product release, publication date, or steward preference is not evidence of course readiness.
 

@@ -8,7 +8,7 @@ By contributing, you agree to follow this repository's governance, licensing, si
 
 1. Read the [OEE principles](spec/principles.md).
 2. Review the [Code of Conduct](CODE_OF_CONDUCT.md).
-3. Read the [governance policy](governance/GOVERNANCE.md).
+3. Read the [governance policy](GOVERNANCE.md).
 4. Search existing issues and [Requests for Comments](rfcs/README.md) to check whether the proposed change has already been discussed.
 
 For a small correction, open a pull request. For a change to the normative specification or its governance, follow the RFC process first.
@@ -45,7 +45,7 @@ Contributors retain their copyright. Contributions are submitted under the appli
 | Documentation corrections   | Markdown files                     | Preserve meaning, consistency, and correct attribution.             |
 | Course improvements         | `curriculum/`                      | Follow the current course format and assessment requirements.       |
 | OEE repository checks       | `scripts/check-links`, `.github/`  | Keep repository validation working.                                 |
-| Governance changes          | `governance/`                      | Follow the RFC process where policy changes are involved.           |
+| Governance changes          | `GOVERNANCE.md`                    | Follow the RFC process where policy changes are involved.           |
 | Repository automation       | `.github/` and configuration files | Explain the behavior being changed and validate it where practical. |
 | Bug reports                 | Relevant area                      | Include a reproducible example and expected versus actual behavior. |
 

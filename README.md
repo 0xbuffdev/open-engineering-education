@@ -92,7 +92,7 @@ The [OEE Workspace repository](https://github.com/0xbuffdev/oee-workspace) provi
 | `spec/` | Normative documents that define OEE |
 | `curriculum/` | Programs and course definitions |
 | `scripts/` | Repository checks for the specification and curriculum |
-| `governance/` | Contribution policy, conduct, and decision-making |
+| `GOVERNANCE.md` | Stewardship, contribution policy, conduct, and decision-making |
 | `rfcs/` | Proposals for significant changes to the specification |
 | `.github/` | Repository automation and contribution templates |
 
