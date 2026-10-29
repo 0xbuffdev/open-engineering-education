@@ -1,15 +1,12 @@
 # Governance and Community Policies
 
-This directory contains the policies that govern contributions, decision-making, and community participation in Open Engineering Education (OEE).
+This directory contains governance process documents for Open Engineering Education (OEE). The community membership policies ([CONTRIBUTING](../CONTRIBUTING.md), [Code of Conduct](../CODE_OF_CONDUCT.md), and [DCO](../DCO.md)) live at the repository root, where GitHub's community standards detection expects them.
 
 ## Documents
 
 | Document | Purpose |
 | --- | --- |
-| [Contributing](CONTRIBUTING.md) | Explains how to prepare and submit a contribution |
 | [Governance](GOVERNANCE.md) | Defines stewardship and the decision-making process |
-| [Code of Conduct](CODE_OF_CONDUCT.md) | Defines expected community behavior and reporting |
-| [Developer Certificate of Origin](DCO.md) | Defines the contributor sign-off requirements |
 
 ## How the policies work together
 

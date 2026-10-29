@@ -8,7 +8,7 @@ assignees: ""
 
 <!-- Copy rfcs/TEMPLATE.md and fill it in. RFCs are for changes to spec/, the
      required course structure, or the free/paid line. Routine fixes do not need
-     one: open a pull request directly (see governance/CONTRIBUTING.md). -->
+     one: open a pull request directly (see CONTRIBUTING.md). -->
 
 **Problem**:
 
