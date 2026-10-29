@@ -1,37 +1,112 @@
 # Governance
 
-## Steward
+This document defines how decisions about Open Engineering Education (OEE) are proposed, reviewed, recorded, and adopted.
 
-OEE has one steward: **0xBUFF**, exercised by Christopher S. Aondona. The steward has final say on what enters `spec/` and on the structure of the curriculum.
+OEE is currently stewarded by 0xBUFF. Its governance is intentionally lightweight, but decisions affecting the public specification must remain transparent and traceable.
 
-This is deliberately small. A council or foundation at the current scale would be theatre. Governance grows only when contributions justify it.
+## 1. Stewardship
 
-## How decisions are recorded
+**0xBUFF is the steward of OEE.** Christopher S. Aondona exercises the stewardship role on its behalf.
 
-- **Ordinary changes** (typos, chapter-map fixes, lab fixes, documentation): a pull request. The pull request is the decision record.
-- **Changes to `spec/` or to the required course structure**: an [RFC](../rfcs/README.md) first, then a pull request that links it. RFCs are accepted, rejected, or returned for revision by the steward, with reasons in the RFC itself.
-- **Status-label promotions**: a pull request containing the evidence links and revision note required by [status-labels.md](../spec/status-labels.md).
-- **Anything that moves the free/paid line**: an RFC. The list in the [README](../README.md#free-and-paid) may only change in the direction it states, openly, in a pull request.
+The steward is responsible for maintaining the public specification, making decisions under the current governance process, coordinating reviews, and ensuring that material decisions are recorded.
 
-## Adding a second maintainer
+Stewardship does not eliminate the need for public reasoning. Significant decisions should explain their rationale, consequences, and relationship to the existing specification.
 
-When a contributor is doing sustained, reviewed work, and only then, the steward adds them as a maintainer by pull request to this file, recording:
+## 2. Decision categories
 
-- who they are and what they have contributed;
-- what they may merge without review (normally: `curriculum/` fixes within one track);
-- that changes to `spec/` remain steward decisions until a wider process exists.
+### Routine changes
 
-Maintainer status can be withdrawn the same way it is granted, with reasons recorded.
+Examples include spelling corrections, broken-link fixes, formatting improvements, and clarifications that do not change a normative requirement.
 
-## Neutrality and future governance
+Routine changes may proceed through a pull request. The pull request and its review history form the decision record.
 
-The steward's commercial products (0xNAND, mentorship) are separate from this repository; the free/paid line in the README is the boundary. Two commitments hold in the meantime:
+### Normative changes
 
-- changes to `spec/` go through public RFCs (see [rfcs/](../rfcs/README.md));
-- the trademark policy in [TRADEMARKS.md](../TRADEMARKS.md) will not be used to block compatible implementations.
+Changes to `spec/`, required course structure, assessment requirements, status-label definitions, conformance criteria, or other binding requirements MUST follow the [RFC process](../rfcs/README.md).
 
-Revisit a wider governance arrangement when at least one of these is true: two or more outside maintainers regularly merge changes; other organisations adopt or implement the standard; a third party uses a conformance mark; an adopter or funder asks for neutral governance; or a dispute arises about direction or credit. Until then, decisions stay with one steward and are recorded in writing.
+An accepted RFC does not itself update the specification. The resulting change must be implemented in a pull request, reviewed, and merged.
 
-## Conflict of interest
+### Course status changes
 
-The steward sells products that implement parts of this standard. The rule is to disclose: the README states the relationship in one line, paid material never enters this repository, and no course's status label can be influenced by a product launch.
+Status changes MUST be supported by the evidence required by [Status Labels](../spec/status-labels.md) and [Evidence Rules](../spec/evidence-rules.md).
+
+Reviewers must be able to inspect the basis for the status change. A product release, publication date, or steward preference is not evidence of course readiness.
+
+### Governance and licensing changes
+
+Changes to governance, contributor obligations, licensing policy, or the scope of the public specification MUST follow the RFC process.
+
+Legal or licensing changes must identify the affected files and explain the implications for existing contributions and downstream users.
+
+## 3. RFC decisions
+
+The steward accepts, rejects, or returns an RFC for revision. Each decision MUST be recorded in the relevant RFC discussion or associated decision record.
+
+A decision record should identify:
+
+- The decision and its date.
+- The reasoning behind the decision.
+- Important alternatives or objections considered.
+- The affected specification requirements.
+- Required follow-up work or migration steps.
+
+An RFC that is returned for revision is not accepted. Discussion or preliminary approval must not be represented as an adopted specification change.
+
+## 4. Maintainers
+
+Additional maintainers may be appointed when sustained contributions and review experience justify the responsibility.
+
+An appointment SHOULD record:
+
+- The maintainer's identity and relevant contribution history.
+- The areas they are authorized to review or maintain.
+- Any limits on their authority to approve or merge changes.
+- The process for revisiting or withdrawing the appointment.
+
+Until broader authority is explicitly recorded, the steward retains responsibility for final normative specification decisions.
+
+Maintainer status does not authorize a person to change the specification outside the documented process.
+
+## 5. Independence and conflicts of interest
+
+0xBUFF may develop or offer products that implement OEE. That commercial relationship MUST remain distinct from the governance of the public specification.
+
+People participating in a decision SHOULD disclose a material conflict of interest when it could reasonably affect the decision.
+
+The following principles apply:
+
+- The public specification is changed through the same documented process regardless of who proposes the change.
+- A commercial product's implementation choices do not automatically become normative requirements.
+- Product adoption or purchase MUST NOT determine a course's published status.
+- Compatibility with alternative implementations MUST NOT be rejected solely because an implementation is not a 0xBUFF product.
+- Decisions with a material commercial implication SHOULD explain the relevant reasoning.
+
+## 6. Intellectual property and attribution
+
+Contributions are submitted under the applicable repository license and sign-off policy. The DCO is an attestation of the contributor's right to submit the work; it is not a copyright assignment.
+
+Authorship, copyright, trademark rights, and stewardship are separate matters. A trademark registration does not, by itself, establish ownership of every text or code contribution in the repository.
+
+The repository MUST preserve appropriate notices and follow the terms of its declared licenses.
+
+## 7. Revisiting the governance model
+
+The steward SHOULD review whether a broader governance model is warranted as external adoption, recurring contributions, or implementation activity increases.
+
+Relevant triggers include:
+
+- Multiple independent maintainers regularly reviewing and merging changes.
+- Adoption of OEE by external organizations.
+- Formal use of an OEE conformance claim or mark.
+- A material dispute over stewardship, attribution, or the direction of the specification.
+- A reasonable request for greater institutional independence.
+
+Any change to the governance model MUST be documented and adopted through the established process.
+
+## 8. Public decision record
+
+Material decisions about the specification MUST be recorded in public issues, RFCs, pull requests, or other repository records.
+
+Private communication may help resolve a question, but it MUST NOT be the sole record of a normative decision that changes the public specification.
+
+The repository's public history is the reference for determining which requirements were adopted and when.

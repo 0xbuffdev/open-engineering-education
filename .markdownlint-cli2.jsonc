@@ -4,7 +4,6 @@
   // repeated section names across course files, and HTML comments in
   // issue templates.
   "globs": ["**/*.md"],
-  "ignores": ["new-plan.md"],
   "config": {
     "default": true,
     "MD013": false,

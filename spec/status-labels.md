@@ -1,38 +1,71 @@
 # Status Labels
 
-The curriculum is thousands of hours of material at varying stages of proof. Status labels say which stage each course is actually at. They exist so the repository never implies readiness it has not earned.
+OEE uses status labels to communicate how much evidence supports a course's readiness. A status label describes evidence, not popularity, difficulty, prestige, or the confidence of the author.
 
-## The labels
+The only course status labels defined by this specification are `draft`, `tested`, and `verified`.
 
-| Label | Meaning | Requirement |
+## 1. Labels and requirements
+
+| Label | Meaning | Required evidence |
 | --- | --- | --- |
-| `draft` | Written, not yet run by a learner. | The course file exists and follows [course-format.md](course-format.md). |
-| `tested` | At least one learner completed it and the course was revised from their feedback. | Evidence link, revision note. |
-| `verified` | Multiple learners completed it; exit check and labs reproduced; chapter maps checked against the cited editions. | Evidence links, reviewer sign-off. |
+| `draft` | The course is written but does not yet meet the requirements for `tested`. | A course file that follows the required course format. |
+| `tested` | At least one learner has completed the course, and the course has been revised using recorded feedback. | Completion evidence, learner feedback, and a revision note linked to the course. |
+| `verified` | At least two learners have completed the course, the exit check and labs have been reproduced or reviewed, and a qualified reviewer has signed off. | Evidence supporting both completions, records of reproduction or review, and reviewer sign-off. |
 
-Evidence requirements are defined in [evidence-rules.md](evidence-rules.md).
+The detailed promotion requirements are defined in [Evidence Rules](evidence-rules.md).
 
-## Where a label appears
+## 2. Initial status
 
-1. In the course file header: `**Status:** \`draft\` · [status labels](../spec/status-labels.md)`.
-2. In the course's row in the track README table (for example [curriculum/foundations/README.md](../curriculum/foundations/README.md)).
+Every new course MUST begin as `draft`.
 
-Both must agree. A pull request that changes one and not the other is incomplete.
+A course MUST NOT be labelled `tested` or `verified` until the corresponding evidence requirements have been met and recorded.
 
-## Promotion rules
+A well-written course is not necessarily a tested course. A tested course is not necessarily a verified course.
 
-- **Start at `draft`.** Every course starts as `draft`; all courses are `draft` today.
-- **Promote only on evidence.** No date, effort, or good intention promotes a course. Only the requirements in the table above do.
-- **Promotion is a commit like any other.** The evidence links and the revision note go in the same commit that changes the label.
-- **Labels come down too.** If a `tested` or `verified` course's evidence links stop resolving, or a defect is found that the course's own exit check missed, relabel to the level the evidence still supports and say so.
+## 3. Promotion
 
-## What labels are for
+A course may be promoted only when its evidence supports the higher status.
 
-- Learners can decide what to trust before spending 100 hours.
-- Contributors know what a course needs to be promoted (`chapter-map-verify`, `lab-test-case`; see [CONTRIBUTING](../governance/CONTRIBUTING.md)).
-- The steward cannot quietly overstate readiness, because the label is next to the course name.
+A promotion MUST:
 
-## What labels are not
+1. Meet every requirement for the target status.
+2. Include links or references to the supporting evidence.
+3. Include the required feedback, revision, or review record.
+4. Update the course's published status consistently in every required location.
+5. Be submitted for review through the repository's normal contribution process.
 
-- Not a quality ranking between tracks. A `draft` systems course is not worse than a `draft` foundations course; it is less proven.
-- Not a license to imply the rest of the repository is ready. Label status is per course, and the repository-level status is in the [README](../README.md).
+Elapsed time, author seniority, completion of unrelated courses, or an intention to test the course MUST NOT be used as a substitute for the required evidence.
+
+## 4. Status must remain accurate
+
+A status label MUST be reassessed when significant defects are discovered or required evidence becomes unavailable.
+
+If the evidence no longer supports the current label, the status MUST be lowered to the highest level still supported by the available evidence.
+
+A status correction SHOULD include a brief explanation of the reason for the change and any required follow-up work.
+
+## 5. Where status appears
+
+The status MUST appear in the course metadata.
+
+The course catalogue or other authoritative program summary MUST agree with the course file. If the same status is displayed in more than one place, every published value MUST be kept consistent.
+
+A mismatch is a documentation defect and MUST be corrected.
+
+## 6. Status does not imply
+
+A status label is not:
+
+- A ranking of a course's importance or difficulty.
+- A guarantee that every learner will achieve the same result.
+- Proof that the course covers every topic in its field.
+- An accreditation, professional license, or employment guarantee.
+- Evidence that a whole program or implementation has the same status.
+
+A course status MUST NOT be used to imply the status of another course or of the repository as a whole.
+
+## 7. Governance
+
+Changes to the meaning or evidence requirements of a status label MUST be proposed through the [RFC process](../rfcs/README.md).
+
+A course author MUST NOT redefine the labels locally or use them with meanings that contradict this specification.

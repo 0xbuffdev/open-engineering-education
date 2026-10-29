@@ -1,22 +1,3 @@
-# Local reference library. Legal copies only; never commit books or scans.
-books/*
-!books/README.md
-*.epub
-*.mobi
-
-# Secrets and credentials
-.env
-.env.*
-!.env.example
-*.pem
-*.key
-*.p12
-*.pfx
-id_rsa*
-.ssh/
-.kubeconfig
-kubeconfig*
-
 # Logs, caches, and editor/OS noise
 *.log
 .cache/
