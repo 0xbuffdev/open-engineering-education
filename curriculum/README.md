@@ -6,23 +6,24 @@ Each course has its own file so you can open exactly one page at a time. The str
 
 ## Start here
 
-1. Read [roadmap.md](roadmap.md) and pick **one primary track**. Do not study three tracks at once.
-2. Read [study-method.md](study-method.md) and set up your weekly block.
-3. Check [books/README.md](books/README.md) for the local library policy and reading maps.
-4. Check [resources.md](resources.md) for the small set of external materials you actually need now.
-5. Open the first course file in your track. Do its labs and project increment before moving on.
-6. Record completion in the progress log ([../templates/progress.md](../templates/progress.md), copied into your study workspace) only after the course exit check is demonstrable.
+1. Pick **one primary program**. Do not study three programs at once.
+2. Set up your weekly block before starting.
+3. Check the local library policy and reading maps before buying books.
+4. Check the small set of external materials you actually need now.
+5. Open the first course file in your program. Do its labs and project increment before moving on.
+6. Record completion in the progress log (kept in your study workspace) only after the course exit check is demonstrable.
 
-## The curriculum is organised by track and course code
+## The curriculum is organised by program
 
-| Track | Directory | Codes | Core courses | Electives |
-| --- | --- | --- | --- | --- |
-| Foundations | [foundations/](foundations/README.md) | F0–F6 | 7 | none |
-| Systems Engineering | [systems/](systems/README.md) | S1–S15 | 15 | S16–S17 |
-| AI & Machine Learning | [ai/](ai/README.md) | AI1–AI13 | 13 | AI14–AI19 |
-| Security Engineering | [security/](security/README.md) | D1–D14 | 9 | D6, D11–D14 |
+| Code | Program | Directory |
+| --- | --- | --- |
+| `SEF` | Software Engineering Foundations | [SEF/](SEF/) |
+| `APP` | Application Engineering | [APP/](APP/) |
+| `SYS` | Systems Engineering | [SYS/](SYS/) |
+| `AI` | AI Engineering | [AI/](AI/) |
+| `SEC` | Security Engineering | [SEC/](SEC/) |
 
-Foundations is required for every track. A specialisation is not a list of videos to watch; it is a set of systems you can build, measure, explain, and secure.
+Course files are being re-added under each program directory.
 
 ## What every course file contains
 
@@ -83,28 +84,19 @@ Use an assistant for explanation, review, test ideas, and debugging questions. D
 
 ```text
 curriculum/                 the curriculum itself
-  roadmap.md                realistic pace, sequences, milestones
-  study-method.md            how to study and review
-  resources.md               external books, courses, docs, labs
-  books/                     per-book reading maps
-  foundations/               F0–F6
-  systems/                   S1–S15, electives S16–S17
-  ai/                        AI1–AI13, electives AI14–AI19
-  security/                  D1–D5, D7–D10 core; D6, D11–D14 electives
-  projects/                  project ladder and capstones
-  appendices/                professional practice, coverage map, glossary
-books/                       local PDFs only; ignored by Git
-templates/                   workspace starters (course, project, progress log)
-scripts/                     workspace creation and repository checks
+  SEF/                      Software Engineering Foundations
+  APP/                      Application Engineering
+  SYS/                      Systems Engineering
+  AI/                       AI Engineering
+  SEC/                      Security Engineering
+scripts/                     repository checks
 ```
 
-Learner state — `labs/`, `exercises/`, `notes/`, `projects/`, and `progress.md` — lives in **your own study workspace**, not in this repository. The root [README](../README.md#your-study-workspace) explains how to create one with the scripts.
+Learner state — `labs/`, `exercises/`, `notes/`, `projects/`, and `progress.md` — lives in **your own study workspace**, not in this repository. The root [README](../README.md#learner-workspaces) explains how to create one with the scripts.
 
 ## Time expectations at a glance
 
-At 15 focused hours/week, one specialisation after Foundations is realistically **2.5–3.5 years**. At 25 hours/week it is **18–24 months**. At 35–40 hours/week it is **12–16 months**. Doing all three tracks is a **5–7 year** part-time project and is not recommended.
-
-The detailed assumptions, per-track schedules, and stopping points are in [roadmap.md](roadmap.md).
+At 15 focused hours/week, one specialisation at a time is realistically 2.5–3.5 years. At 25 hours/week it is 18–24 months. At 35–40 hours/week it is 12–16 months.
 
 ## Non-negotiable rules
 
