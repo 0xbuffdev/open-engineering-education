@@ -83,11 +83,7 @@ Read [Evidence Rules](spec/evidence-rules.md) and [Status Labels](spec/status-la
 
 Learner work belongs in a workspace controlled by the learner, not in the OEE specification repository.
 
-OEE provides a public workspace for individual learners and groups to use: [oee-workspace](https://github.com/0xbuffdev/oee-workspace).
-
-The OEE repository may also provide templates and scripts to help learners set up their workspaces. Learners should keep their exercises, experiments, project implementations, notes, and evidence logs in their own workspace. Only changes intended for the public OEE repository should be committed to that repository.
-
-Never commit credentials, secrets, private learner data, or unrelated personal material.
+The [OEE Workspace repository](https://github.com/0xbuffdev/oee-workspace) provides the reusable structure, templates, and generation scripts for practical learning and evidence. Use it as the starting point for a personal or group workspace, where you keep your actual implementations, labs, exercises, notes, projects, progress records, and supporting evidence.
 
 ## Repository structure
 
@@ -95,13 +91,12 @@ Never commit credentials, secrets, private learner data, or unrelated personal m
 | --- | --- |
 | `spec/` | Normative documents that define OEE |
 | `curriculum/` | Programs and course definitions |
-| `templates/` | Templates for learner work and project documentation |
-| `scripts/` | Utilities that support local workflows and repository checks |
+| `scripts/` | Repository checks for the specification and curriculum |
 | `governance/` | Contribution policy, conduct, and decision-making |
 | `rfcs/` | Proposals for significant changes to the specification |
 | `.github/` | Repository automation and contribution templates |
 
-The specification defines the common requirements. Curriculum files apply those requirements to particular programs and courses. Templates, scripts, and implementations may support the process, but must not silently redefine the specification.
+The specification defines the common requirements. Curriculum files apply those requirements to particular programs and courses. Workspace templates, generation scripts, and implementations may support the process, but must not silently redefine the specification.
 
 ## Contributing
 
@@ -127,3 +122,16 @@ Contributors must have the rights needed to submit their work under the applicab
 OEE is a draft specification. Its requirements may change through the documented governance process.
 
 A published course, program, or implementation must not be described as `verified`, conforming, accredited, or certified unless the applicable criteria and documented review support that claim. OEE does not, by itself, guarantee employment outcomes, professional accreditation, or mastery of every subject associated with a course.
+
+## Optional mentorship
+
+0xBUFF offers optional paid mentorship for learners who want personalized
+guidance, technical feedback, project reviews, and accountability while
+working through engineering material.
+
+Mentorship is a separate service. It is not required to access or use the
+public OEE specification and curriculum, and it does not affect course
+status or conformance requirements.
+
+See [0xBUFF Mentorship](https://0xbuff.com/mentorship) for plans, pricing,
+eligibility, and application details.

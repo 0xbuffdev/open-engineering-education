@@ -27,13 +27,13 @@ git commit -s
 
 A sign-off looks like this:
 
-```
+```text
 Signed-off-by: Jane Doe <jane@example.com>
 ```
 
 Use your own name and email address. Do not add a sign-off on behalf of someone who has not made the required certification.
 
-Read the [DCO policy](https://DCO.md?utm_source=chatgpt.com) for the complete terms.
+Read the [DCO policy](DCO.md) for the complete terms.
 
 Contributors retain their copyright. Contributions are submitted under the applicable repository license; the sign-off does not transfer ownership to the steward.
 
@@ -44,8 +44,7 @@ Contributors retain their copyright. Contributions are submitted under the appli
 | Specification clarification | `spec/`                            | Follow the RFC process for normative changes.                       |
 | Documentation corrections   | Markdown files                     | Preserve meaning, consistency, and correct attribution.             |
 | Course improvements         | `curriculum/`                      | Follow the current course format and assessment requirements.       |
-| Template improvements       | `templates/`                       | Keep generated workspace files clear and usable.                    |
-| Script improvements         | `scripts/`                         | Include appropriate error handling and validation.                  |
+| OEE repository checks       | `scripts/check-links`, `.github/`  | Keep repository validation working.                                 |
 | Governance changes          | `governance/`                      | Follow the RFC process where policy changes are involved.           |
 | Repository automation       | `.github/` and configuration files | Explain the behavior being changed and validate it where practical. |
 | Bug reports                 | Relevant area                      | Include a reproducible example and expected versus actual behavior. |
@@ -86,7 +85,7 @@ Changes to scripts or executable code SHOULD include tests or clear verification
 
 Run the repository's available checks before submitting:
 
-```
+```bash
 python3 scripts/check-links
 npx --yes markdownlint-cli2
 ```

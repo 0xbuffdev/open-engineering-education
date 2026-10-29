@@ -21,11 +21,6 @@ INLINE_CODE_RE = re.compile(r"`[^`\n]*`")
 FENCE_RE = re.compile(r"^(```|~~~).*?^\1\s*$", re.MULTILINE | re.DOTALL)
 NON_SLUG_RE = re.compile(r"[^\w\- ]")
 
-# Links in workspace templates that only resolve after the script has
-# generated a workspace (the file they point to is created alongside).
-GENERATED_ONLY_TARGETS = {"../BRIEF.md"}
-TEMPLATE_DIRS = ("templates/course-workspace/", "templates/project-workspace/")
-
 
 def slugify(heading: str, seen: dict) -> str:
     """GitHub's heading anchor algorithm (GFM slugger)."""
@@ -78,11 +73,9 @@ def main() -> int:
             target = match.group(2).strip()
             if " " in target:  # optional link title after the target
                 target = target.split(" ", 1)[0]
-            # placeholder targets such as <course_link> are filled in by the
-            # workspace scripts; external links are not fetched offline.
+            # angle-bracket targets are HTML or autolinks; external links are
+            # not fetched offline.
             if not target or target.startswith(("<", "http://", "https://", "mailto:", "tel:")):
-                continue
-            if rel_md.startswith(TEMPLATE_DIRS) and target in GENERATED_ONLY_TARGETS:
                 continue
             checked += 1
             where = f"{rel_md}: ...{match.group(0)[:60]}"
