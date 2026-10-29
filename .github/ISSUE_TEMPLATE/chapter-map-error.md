@@ -8,7 +8,7 @@ assignees: ""
 
 **Course**:
 
-<!-- Course code and file, e.g. S4: curriculum/systems/S4-cpu-caches.md -->
+<!-- Course code and file, e.g. SYS2: curriculum/SYS/SYS2-course-slug.md -->
 
 **Where in the course**:
 

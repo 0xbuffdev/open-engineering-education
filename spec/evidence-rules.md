@@ -1,53 +1,137 @@
 # Evidence Rules
 
-This file defines what counts as an exit check and what counts as a demonstrable artifact. It is the operational form of principle 1, "Evidence over completion", and it is what the status labels in [status-labels.md](status-labels.md) are measured against.
+This document defines the evidence required to demonstrate course completion and support claims about course readiness. It gives practical meaning to the principle of evidence over completion.
 
-## What an exit check is
+## 1. Evidence must demonstrate an outcome
 
-An exit check is a short list of statements a learner **demonstrates without notes** at the end of a course. Each statement must satisfy all of the following:
+An exit check is a set of requirements that a learner demonstrates at the end of a course.
 
-1. **Observable.** It describes something a third party can watch happen (build it, run it, measure it, explain it on a whiteboard), not a feeling of familiarity.
-2. **Decidable.** Someone reading only the linked evidence can tell pass from fail. "Knows about X" fails this test; "traces X through Y and predicts the output" passes it.
-3. **Includes a limit.** At least one item requires the learner to state what the artifact does **not** prove.
-4. **Not passable by reading.** The answer cannot be looked up in the section it came from.
+Each requirement MUST be:
 
-An exit check is written in the course file. It is not a quiz in this repository; nothing here is auto-graded.
+- **Observable:** a reviewer can see the learner perform the task, produce the result, or explain the reasoning.
+- **Decidable:** the evidence and criteria allow a reviewer to distinguish an acceptable result from an unacceptable one.
+- **Relevant:** the requirement directly measures a stated learning outcome.
+- **Substantive:** success requires the intended capability, not merely recognition of terminology or reproduction of an unexplained answer.
+- **Bounded:** the evidence identifies material assumptions, limitations, and claims it does not establish.
 
-## What a demonstrable artifact is
+A course MUST state its exit requirements in advance. Those requirements MUST be specific enough that learners and reviewers can understand what successful completion entails.
 
-An artifact demonstrates completion when **all** of these hold:
+## 2. Course completion requirements
 
-1. **Committed.** The artifact lives in a commit or public repository the evidence log links to directly.
-2. **Runs from a clean checkout.** A stranger can clone it, follow the documented commands, and get the result without undocumented steps, files, or environment state.
-3. **Tested where code is involved.** Tests cover normal, boundary, invalid, and failure cases.
-4. **Environment recorded.** OS, hardware where it matters, versions, compiler/runtime flags, seeds, and the exact commands used.
-5. **Limitations stated.** The README or report says what the result cannot support.
-6. **Retrospective included.** One wrong assumption, its evidence, and the change it caused.
+A learner completes a course only when all of the course's required completion conditions have been met.
 
-## What does not count
+Unless a course explicitly defines a different justified assessment arrangement, completion MUST include:
 
-- A checked box with no link to an artifact.
-- "I read the chapter", "I watched the lecture", "I followed along".
-- Output pasted without the command that produced it.
-- A demo that runs only on the author's machine, with no reproduction steps.
-- A benchmark with no environment, no repetitions, and no variance.
-- A claim of completion whose evidence links are broken.
+1. Required conceptual checkpoints passed.
+2. Required exercises completed.
+3. The final lab completed.
+4. Required tests and evaluations documented.
+5. Relevant design decisions explained.
+6. A technical retrospective written.
+7. Required evidence recorded and linked.
 
-A checked box without a reproducible artifact is not progress.
+A course MAY impose additional requirements, provided they are stated before the learner begins the assessed work.
 
-## Where evidence lives
+For a project course, completion MUST also include:
 
-Evidence lives in the learner's **study workspace** (`labs/`, `exercises/`, `notes/`, `projects/`, and `progress.md`) in their own repository. This repository ships only the [templates](../templates/) for that state, including [templates/progress.md](../templates/progress.md).
+- The specified project deliverables.
+- A documented project evaluation against stated criteria.
+- A project defense in which the learner explains the design, implementation, trade-offs, results, and limitations.
 
-The evidence log links to committed artifacts. It never records completion as a bare checkbox.
+A project defense may be conducted through a live demonstration, recorded walkthrough, written technical defense, or another documented format appropriate to the course. The format MUST still allow the learner's understanding and responsibility for the work to be evaluated.
 
-## Evidence and status labels
+## 3. Requirements for demonstrable artifacts
 
-Evidence is also how courses move between labels (see [status-labels.md](status-labels.md)):
+An artifact used as evidence MUST meet the applicable requirements below.
+
+### 3.1 Traceability
+
+The evidence record MUST link to the relevant artifact or clearly identify where the artifact can be reviewed.
+
+Where version control is used, the record SHOULD identify the relevant repository and commit.
+
+### 3.2 Reproducibility
+
+Where an executable result is required, the artifact MUST be reproducible from a clean checkout using documented instructions, subject to explicitly stated environment assumptions.
+
+Instructions MUST NOT rely on undocumented files, hidden configuration, or unexplained manual steps.
+
+### 3.3 Testing
+
+Where code is involved, the evidence SHOULD cover the applicable normal, boundary, invalid-input, and failure cases.
+
+The expected behavior and the observed result MUST be distinguishable.
+
+A test result MUST NOT be presented as proof of properties the test does not establish.
+
+### 3.4 Environment
+
+Evidence MUST record environment details when those details materially affect the result. Depending on the work, this may include:
+
+- Operating system and relevant hardware.
+- Language, compiler, interpreter, runtime, or dependency versions.
+- Relevant build flags and configuration.
+- Commands used to build, run, test, or measure the artifact.
+- Random seeds, repetitions, and measurement conditions where applicable.
+
+Unnecessary environment details need not be recorded when they do not affect reproduction or interpretation.
+
+### 3.5 Limitations
+
+A report MUST identify material assumptions, limitations, and unresolved issues.
+
+A benchmark or performance claim SHOULD include the measurement conditions, number of repetitions, and variability needed to interpret the result.
+
+### 3.6 Technical retrospective
+
+The learner MUST explain at least one meaningful incorrect assumption, failed approach, unexpected result, or design decision that changed during the work.
+
+The retrospective MUST identify the evidence that prompted the change and explain what was learned. It MUST NOT be reduced to a generic statement that the work was difficult or successful.
+
+## 4. Evidence that is insufficient on its own
+
+The following do not establish course completion by themselves:
+
+- A checked box without supporting evidence.
+- A declaration that the learner understands a concept.
+- A statement that an activity was completed without the required output.
+- Pasted output without identifying how it was produced.
+- A demonstration that only works in an unexplained local environment.
+- A benchmark without sufficient information to interpret the measurement.
+- A project report that omits important failures or limitations.
+- A completion claim whose required evidence cannot be accessed or reviewed.
+
+Such material may be included as context, but it MUST NOT replace the required demonstration.
+
+## 5. Evidence records and learner privacy
+
+Evidence records SHOULD identify the course, completion requirements, artifact locations, evaluation results, and relevant review notes.
+
+Evidence MUST be sufficient for its intended reviewer to determine whether the requirements have been met. Access restrictions MUST be disclosed where they affect review.
+
+Personal data, credentials, secrets, and private learner information MUST NOT be published as part of an evidence record unless publication is appropriate and authorized. Public summaries SHOULD disclose only what is necessary to substantiate the claim.
+
+A status claim MUST NOT rely on evidence that its intended reviewer cannot reasonably inspect.
+
+## 6. Evidence and course status
+
+Course status is determined by evidence, not by the author's confidence or the age of the course.
 
 | Promotion | Minimum evidence |
 | --- | --- |
-| `draft` → `tested` | One learner completed the course; links to their artifacts; a revision note describing what their feedback changed. |
-| `tested` → `verified` | Multiple learners completed it; exit check and labs reproduced; chapter maps checked against the cited editions; reviewer sign-off recorded. |
+| `draft` to `tested` | At least one learner completes the course; completion evidence is recorded; feedback is reviewed; and a revision note explains what changed as a result. |
+| `tested` to `verified` | At least two learners complete the course; the exit check and labs are reproduced or reviewed; and a qualified reviewer records sign-off. |
 
-If a promotion's evidence links stop resolving, the label comes down until they are fixed.
+A status change MUST be accompanied by a record of the evidence supporting it.
+
+If required evidence becomes unavailable, materially incorrect, or insufficient, the course status MUST be reassessed and lowered when the evidence no longer supports the published claim.
+
+See [Status Labels](status-labels.md).
+
+## 7. Assessment integrity
+
+Course authors MUST define what is being assessed and what evidence is sufficient. The requirements MUST remain understandable without relying on an undocumented grading implementation.
+
+Where automated evaluation is used, its result SHOULD be recorded alongside the relevant context. Automated results MUST NOT be represented as proving skills or properties that were not actually evaluated.
+
+The specification defines educational and evidentiary expectations. It does not prescribe a proprietary assessment implementation.

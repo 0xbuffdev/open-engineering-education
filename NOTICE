@@ -1,12 +1,21 @@
-Open Engineering Education (OEE)
+Open Engineering Education® (OEE®)
 
-Copyright (c) 2026 0xBUFF. Created by Christopher S. Aondona; stewarded by 0xBUFF.
+Original curriculum and specification material: Copyright © 2026
+Christopher S. Aondona, except where another copyright holder is
+identified or rights have been assigned in writing.
 
-Spec and curriculum text: CC BY 4.0 (see LICENSE).
-Code, scripts and templates: MIT (see LICENSE-MIT).
-Open Engineering Education® (OEE®), 0xBUFF® and 0xNAND® are
-registered trademarks. Other names and marks are not licensed;
-see TRADEMARKS.md.
+Steward: 0xBUFF®.
 
-Contributors are listed in AUTHORS.
-If you use this standard or curriculum, cite it as described in CITATION.cff.
+The standard and curriculum text are licensed under CC BY 4.0
+(see LICENSE).
+
+Code and repository checks are licensed under MIT
+(see LICENSE-MIT).
+
+Open Engineering Education®, OEE®, 0xBUFF®, and 0xNAND® are
+registered marks, as described in TRADEMARKS.md.
+
+The applicable content licenses do not grant trademark rights.
+
+Authors and contributors are identified in AUTHORS.
+For citation information, see CITATION.cff.

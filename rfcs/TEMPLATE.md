@@ -1,34 +1,113 @@
-# RFC: <title>
+# RFC: <Title>
 
-- **Status:** draft | accepted | rejected | withdrawn
-- **Author:** <name>
-- **Date:** <YYYY-MM-DD>
-- **Related:** <issue, pull request, or course file>
+- **Status:** `draft`
+- **Author:** <Name>
+- **Created:** <YYYY-MM-DD>
+- **Last updated:** <YYYY-MM-DD>
+- **Related issue:** <Issue link or `none`>
+- **Affected specification version:** <Version or `draft`>
 
-## Problem
+## 1. Summary
 
-What is wrong or missing, and who is affected. State the problem before the solution. If this is changing something that exists today, link to it.
+Summarize the proposal in a few sentences. State what should change and the intended result.
 
-## Proposal
+## 2. Problem
 
-What should change, concretely: which files, which sections, what the text says after the change. Include the actual proposed wording where the wording is the change.
+Describe the problem before presenting the solution.
 
-## Alternatives considered
+Explain:
 
-| Alternative | Why it was not chosen |
-| --- | --- |
-| | |
+- What is incorrect, incomplete, or difficult to apply.
+- Who or what is affected.
+- Evidence that the problem exists.
+- Why the issue cannot be adequately resolved through a routine correction.
 
-At least one alternative must be real: something you seriously considered, not a token.
+## 3. Proposed change
 
-## Impact on conformance
+Describe the proposed change precisely.
 
-What this does to existing courses, existing implementations, and the meaning of the status labels. If nothing currently conforms (see [conformance](../spec/conformance.md)), say what this change implies for whoever implements it first.
+Identify the affected files, sections, requirements, and terminology. When wording is part of the change, include the proposed replacement wording.
 
-## Impact on the free/paid line
+Separate mandatory requirements from recommendations and examples.
 
-Does this move anything between the free and paid sides? If yes, say exactly what and why. If no, say no.
+## 4. Alternatives considered
 
-## Open questions
+| Alternative | Advantages | Disadvantages | Reason for acceptance or rejection |
+| --- | --- | --- | --- |
+| <Alternative 1> | <Advantages> | <Disadvantages> | <Reason> |
+| <Alternative 2> | <Advantages> | <Disadvantages> | <Reason> |
 
-What still needs an answer before this can be decided.
+Include at least one credible alternative to the preferred proposal.
+
+## 5. Impact assessment
+
+### Existing courses and programs
+
+Describe which existing course definitions, dependencies, or program expectations would be affected.
+
+Identify any required updates or migration steps.
+
+### Implementations
+
+Explain the effect on existing or future implementations, including any changes needed to represent or enforce the requirement.
+
+### Evidence and status labels
+
+Explain whether the proposal changes the evidence needed to demonstrate completion or to promote a course status.
+
+If there is no impact, state that explicitly.
+
+### Conformance
+
+Explain how the proposal affects conformance requirements or previously recorded conformance assessments.
+
+### Licensing and governance
+
+Identify any impact on licensing, attribution, contribution requirements, or decision-making authority.
+
+If there is no impact, state that explicitly.
+
+## 6. Compatibility and transition
+
+State whether the change is backward-compatible.
+
+If it is not, identify:
+
+- The existing requirements that will change.
+- Who must update existing material or implementations.
+- The migration steps needed.
+- Any proposed transition period.
+- How obsolete behavior will be identified.
+
+## 7. Risks and mitigations
+
+| Risk | Likelihood or impact | Mitigation |
+| --- | --- | --- |
+| <Risk> | <Assessment> | <Mitigation> |
+
+Identify technical, educational, operational, and governance risks where relevant.
+
+## 8. Validation plan
+
+Describe how reviewers can evaluate whether the change solves the stated problem.
+
+Include applicable examples, acceptance criteria, checks, experiments, or review steps.
+
+Do not claim that a requirement has been validated when the proposed validation has not yet been performed.
+
+## 9. Open questions
+
+Record questions that remain unresolved and could affect the decision.
+
+Use `None` if there are no outstanding questions.
+
+## 10. Decision
+
+- **Decision:** <Pending / Accepted / Rejected / Withdrawn>
+- **Decision date:** <YYYY-MM-DD or `pending`>
+- **Decision-maker:** <Name or role>
+- **Rationale:** <Reason for the decision>
+- **Conditions:** <Conditions or `none`>
+- **Implementation pull request:** <Link or `pending`>
+
+Complete this section when a decision is recorded. Keep the original proposal and the decision history available for future reference.

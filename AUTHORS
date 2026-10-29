@@ -1,16 +1,23 @@
-# Authors and contributors
+# Authors and Contributors
 
-The people and organisations behind Open Engineering Education. Contributors keep their own copyright; this file is credit, not assignment.
+This file records authorship and contributor credit for Open Engineering Education® (OEE®).
 
-## Author and steward
+Credit is separate from copyright ownership. Contributors retain copyright in their contributions unless they separately agree to an assignment.
 
-- **Christopher S. Aondona** <christohybrid185@gmail.com>: author of the original curriculum and steward of OEE on behalf of 0xBUFF (see [NOTICE](NOTICE)).
-- **0xBUFF**: the legal entity behind this project; copyright holder and steward of this repository. 0xBUFF® is a registered trademark (see [TRADEMARKS.md](TRADEMARKS.md)).
+## Originating author
+
+- **Christopher S. Aondona** — originating author of the reference curriculum and specification material; current steward representative for OEE.
+
+## Steward
+
+- **0xBUFF®** — steward of OEE, responsible for maintaining the public standard, reference curriculum, governance records, and contribution process.
+
+Stewardship does not, by itself, establish ownership of every contribution. Copyright ownership and assignments are governed by the applicable written agreements and notices.
 
 ## Contributors
 
-As contributions land under the DCO, contributors are added here in the same pull request that contains their work:
+Additional contributors should be listed here as their contributions are accepted.
 
-- _your name here_
+Each addition should identify the contributor and, where useful, the nature of their contribution. Additions should be made through a reviewed pull request.
 
-To be added: sign your commits (`git commit -s`, see [CONTRIBUTING](governance/CONTRIBUTING.md)) and include this file in your pull request.
+Contributors must follow the project's DCO process. See [CONTRIBUTING](governance/CONTRIBUTING.md) and [DCO](governance/DCO.md).
