@@ -50,7 +50,10 @@ def anchors_of(path: Path) -> set:
 def markdown_files(root: Path):
     out = subprocess.run(
         ["git", "ls-files", "-z", "*.md", "AUTHORS", "NOTICE"],
-        cwd=root, capture_output=True, text=True, check=True,
+        cwd=root,
+        capture_output=True,
+        text=True,
+        check=True,
     )
     return [root / f for f in out.stdout.split("\0") if f]
 
@@ -75,7 +78,9 @@ def main() -> int:
                 target = target.split(" ", 1)[0]
             # angle-bracket targets are HTML or autolinks; external links are
             # not fetched offline.
-            if not target or target.startswith(("<", "http://", "https://", "mailto:", "tel:")):
+            if not target or target.startswith(
+                ("<", "http://", "https://", "mailto:", "tel:")
+            ):
                 continue
             checked += 1
             where = f"{rel_md}: ...{match.group(0)[:60]}"
@@ -91,12 +96,17 @@ def main() -> int:
             if not resolved.exists():
                 failures.append(f"{where} -> no such file: {path_part}")
                 continue
-            if fragment and resolved.is_file() and resolved.suffix == ".md":
-                if fragment not in anchors_of(resolved):
-                    failures.append(
-                        f"{where} -> missing anchor #{fragment} in "
-                        f"{resolved.relative_to(root) if root in resolved.parents else resolved}"
-                    )
+
+            if (
+                fragment
+                and resolved.is_file()
+                and resolved.suffix == ".md"
+                and fragment not in anchors_of(resolved)
+            ):
+                failures.append(
+                    f"{where} -> missing anchor #{fragment} in "
+                    f"{resolved.relative_to(root) if root in resolved.parents else resolved}"
+                )
 
     if failures:
         print(f"Broken links ({len(failures)} of {checked} relative links checked):\n")
