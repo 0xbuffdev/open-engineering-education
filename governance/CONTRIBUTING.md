@@ -23,7 +23,7 @@ Create a signed commit with:
 
 ```bash
 git commit -s
-````
+```
 
 A sign-off looks like this:
 
@@ -87,7 +87,7 @@ Run the repository's available checks before submitting:
 
 ```bash
 python3 scripts/check-links
-npx --yes markdownlint-cli2
+npx --yes markdownlint-cli2@0.24.0
 ```
 
 Run both commands from the repository root. If a check cannot be completed, explain why and identify any remaining validation work in the pull request.

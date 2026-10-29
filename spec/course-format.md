@@ -15,7 +15,7 @@ Every course MUST begin with the following metadata. The course code and program
 **Prerequisites:** <course codes or `none`>
 **Duration:** <number of weeks or stated range>
 **Status:** `draft`
-````
+```
 
 Requirements:
 
