@@ -1,31 +1,17 @@
-> [Software Engineering Foundations](README.md) · [OEE curriculum](../README.md) · [Course format](../../spec/course-format.md)
-
 # SEF5 — Software Engineering Practice
 
 **Program:** SEF — Software Engineering Foundations
 **Type:** `course`
-**Prerequisites:** SEF2
+**Prerequisites:** [SEF2](SEF2.md)
 **Duration:** 5 weeks
 **Status:** `draft`
 **Expected workload:** 10–15 focused hours/week
 
+> [Software Engineering Foundations](README.md) · [OEE curriculum](../README.md) · [Course format](../../spec/course-format.md)
+
 ## Overview
 
 This course teaches the practices professional engineers use to keep software working: Git, testing, debugging, refactoring, code organization, logging, and code review. Each practice is applied to software the learner has already built.
-
-## Course brief
-
-The course introduction is the first lesson of the first module. It combines the overview above with these fields.
-
-- **Introduction:** Writing code is a small part of software engineering. This course teaches the practices that keep software working as it grows and as more people work on it.
-- **History:** The term software engineering was popularized by a NATO conference in 1968, convened in response to what participants called the software crisis. Version control, automated testing, refactoring, and code review each developed over the following decades and are now standard practice.
-- **Usage:** The learner applies each practice to software they have already written: committing and branching in Git, writing tests, debugging from evidence, refactoring, and reviewing changes.
-- **Applications:** Every professional software team, open-source project, and long-lived codebase.
-- **Strengths:** These practices make change safe and make failures visible early.
-- **Limitations:** They cost time up front, and they work only when the whole team follows them consistently.
-- **Key concepts:** repository; commit; branch; merge; test; assertion; debugging; refactoring; code smell; code review; continuous integration
-
-## Prerequisites
 
 - [**SEF2 — Programming & Computational Thinking**](SEF2.md)
 
@@ -47,145 +33,67 @@ By the end of the course, the learner will be able to:
 
 ### Module 1 — Version Control & Collaboration
 
-#### Module brief
+#### Outcomes
 
-- **Introduction:** Software changes constantly and is built by many people. Version control records every change and lets people work in parallel.
-- **Overview:** It covers repositories and commits, history and diffs, branches, merging, merge conflicts, and remotes and pull requests.
-- **History:** SCCS in 1972 and RCS in 1982 tracked file versions, CVS and Subversion added shared repositories, Linus Torvalds created Git in 2005, and GitHub popularized pull requests from 2008.
-- **Strengths:** Complete history, safe experimentation, and parallel work.
-- **Limitations:** Merge conflicts need human judgment, large binary files are handled poorly, and rewriting shared history confuses teams.
-- **Key concepts:** repository; commit; branch; merge; conflict; remote; pull request
+- Integrate and demonstrate the course capabilities through the module's final practical work.
 
-#### Module outcomes
+#### Lessons
 
-By the end of this module, the learner can:
-
-- Record, inspect, and navigate project history with Git.
-- Create, merge, and resolve conflicts between branches, and collaborate through a remote.
-
-1. **Course introduction: Software Engineering Practice** — what the subject is, where it came from, where it is used, and its strengths and limits
-2. **Introduction: Version Control & Collaboration** — what the topic is, where it is used, and its strengths and limits
-3. **Repositories and commits**
-4. **History and diffs**
-5. **Branches**
-6. **Merging**
-7. **Merge conflicts**
-8. **Remotes and pull requests**
-9. **Git workflows**
-   - kind: `test`
-10. **Resolve a conflict**
-
-- kind: `lab`
+1. **Course introduction: Software Engineering Practice** — `lesson` — what the subject is, where it came from, where it is used, and its strengths and limits
+2. **Repositories and commits** — `lesson`
+3. **History and diffs** — `lesson`
+4. **Branches** — `lesson`
+5. **Merging** — `lesson`
+6. **Merge conflicts** — `lesson`
+7. **Remotes and pull requests** — `lesson`
+8. **Git workflows** — `test`
+9. **Resolve a conflict** — `lab`
 
 ### Module 2 — Testing & Debugging
 
-#### Module brief
+#### Outcomes
 
-- **Introduction:** Programs fail in ways their authors did not expect. Tests find failures early, and debugging finds their causes.
-- **Overview:** It covers assertions, unit tests with pytest, choosing test cases, reproducing failures, and debugging by evidence.
-- **History:** The xUnit family of testing frameworks descends from Kent Beck's SUnit for Smalltalk in the 1990s, and pytest is a widely used Python framework.
-- **Strengths:** Tests are repeatable and document intended behavior.
-- **Limitations:** Tests can show that bugs exist but never that none remain, and poorly designed tests are brittle or slow.
-- **Key concepts:** assertion; unit test; test-case selection; reproduction; hypothesis; regression
+- Integrate and demonstrate the course capabilities through the module's final practical work.
 
-#### Module outcomes
+#### Lessons
 
-By the end of this module, the learner can:
-
-- Write unit tests and choose test cases that expose failures.
-- Diagnose a failing program from evidence rather than guesses.
-
-1. **Introduction: Testing & Debugging** — what the topic is, where it is used, and its strengths and limits
-2. **Assertions**
-3. **Unit tests with pytest**
-4. **Choosing test cases**
-5. **Reproducing failures**
-6. **Debugging by evidence**
-7. **Testing and debugging**
-   - kind: `test`
-8. **Diagnose a broken program**
-   - kind: `lab`
+1. **Assertions** — `lesson`
+2. **Unit tests with pytest** — `lesson`
+3. **Choosing test cases** — `lesson`
+4. **Reproducing failures** — `lesson`
+5. **Debugging by evidence** — `lesson`
+6. **Testing and debugging** — `test`
+7. **Diagnose a broken program** — `lab`
 
 ### Module 3 — Maintainable Software
 
-#### Module brief
+#### Outcomes
 
-- **Introduction:** Most of a program's life is spent being changed. This module covers the practices that keep code easy to change.
-- **Overview:** It covers code smells, refactoring, style guides, logging, code review, and reading unfamiliar code.
-- **History:** Michael Fagan formalized code inspections at IBM in 1976, and Martin Fowler's 1999 book popularized refactoring.
-- **Strengths:** Clean code is cheaper to change and easier for newcomers to understand.
-- **Limitations:** Refactoring without tests is risky, and style rules become busywork when they are not tied to a purpose.
-- **Key concepts:** code smell; refactoring; style guide; logging; code review
+- Integrate and demonstrate the course capabilities through the module's final practical work.
 
-#### Module outcomes
+#### Lessons
 
-By the end of this module, the learner can:
-
-- Recognize code smells and improve code with behavior-preserving refactorings.
-- Use logging, style guides, and code review to keep software maintainable, and read unfamiliar code.
-
-1. **Introduction: Maintainable Software** — what the topic is, where it is used, and its strengths and limits
-2. **Code smells**
-3. **Refactoring**
-4. **Style guides**
-5. **Logging**
-6. **Code review**
-7. **Reading unfamiliar code**
-8. **Maintainability**
-   - kind: `test`
-9. **Review a pull request**
-   - kind: `lab`
+1. **Code smells** — `lesson`
+2. **Refactoring** — `lesson`
+3. **Style guides** — `lesson`
+4. **Logging** — `lesson`
+5. **Code review** — `lesson`
+6. **Reading unfamiliar code** — `lesson`
+7. **Maintainability** — `test`
+8. **Review a pull request** — `lab`
 
 ### Module 4 — Tested CLI Application
 
-#### Module brief
+#### Outcomes
 
-- **Introduction:** This lab integrates the course. The learner turns the SEF2 application into a maintainable, tested, reviewed project.
-- **Overview:** It combines Git history, automated tests, logging, refactoring, continuous integration, and documentation in one repository.
-- **Applications:** Every team that ships software maintains projects in this way.
-- **Key concepts integrated:** version control; testing; debugging; refactoring; logging; continuous integration
+- Integrate and demonstrate the course capabilities through the module's final practical work.
 
-1. **Tested CLI application**
-   - kind: `lab`
+#### Lessons
 
-## Topics
+1. **Tested CLI application** — `lab`
 
-- Git
-- Branches and merges
-- Commit design
-- Code organization
-- Testing
-- Assertions
-- Debugging
-- Logging
-- Refactoring
-- Command-line workflows
-- Basic code review
-- Reading unfamiliar code
+## Completion requirements
 
-## Practical exercises
-
-2. Resolve a controlled merge conflict.
-3. Debug a deliberately broken application.
-4. Turn untested code into tested code.
-5. Refactor duplicated code without changing behavior.
-6. Review another learner's pull request.
-
-## Course lab
-
-**Tested CLI Application**
-
-Convert the SEF2 application into a maintainable software project with:
-
-- Meaningful Git history
-- Automated tests
-- Linting/formatting
-- Structured logging
-- Error handling
-- Refactored modules
-- CI test execution
-- Documentation
-
-## Exit check
-
-The learner must diagnose a failing test or bug from evidence rather than by guesswork.
+- Complete the required exercises and checkpoints described in the [public course requirements](requirements/SEF5.md).
+- Complete the final integrated `lab` in the last module and meet its observable exit criteria.
+- Retain reproducible artifacts, verification results, design explanations, and a technical retrospective as required by the [OEE Evidence Rules](../../spec/evidence-rules.md).
