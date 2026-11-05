@@ -2,7 +2,6 @@
 
 > [OEE curriculum](../README.md) · [Specification](../../spec/README.md) · [OEE Workspace](https://github.com/0xbuffdev/oee-workspace)
 
-
 ## Overview
 
 Software Engineering Foundations is the common entry program for learners with no programming experience. It begins with how a computer works, from bits and logic gates to memory, processors, operating systems, and booting. It then introduces software and software engineering, sets up a terminal, an editor, and Python, and teaches programming in Python, data structures and algorithms, Git and testing, C and Linux, and the mathematics that later courses build on. Learners build, debug, and explain their work, and finish with a complete project that prepares them for Application, Systems, AI, or Security Engineering.
