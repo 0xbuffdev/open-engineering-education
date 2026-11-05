@@ -71,4 +71,4 @@ Add a row for each substantive RFC so contributors can find previous decisions.
 
 | RFC | Title | Status | Decision |
 | --- | --- | --- | --- |
-| — | No RFCs recorded yet | — | — |
+| [0001](0001-lean-course-module-structure.md) | Lean course and module structure | `draft` | Pending |
