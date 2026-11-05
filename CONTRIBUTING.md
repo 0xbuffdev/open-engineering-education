@@ -41,7 +41,7 @@ Contributors retain their copyright. Contributions are submitted under the appli
 
 | Contribution                | Area                               | Expectations                                                        |
 | --------------------------- | ---------------------------------- | ------------------------------------------------------------------- |
-| Specification clarification | `spec/`                            | RFC required after bootstrap.                       |
+| Specification clarification | `spec/`                            | RFC required after bootstrap.                                       |
 | Documentation corrections   | Markdown files                     | Preserve meaning, consistency, and correct attribution.             |
 | Course improvements         | `curriculum/`                      | Follow the current course format and assessment requirements.       |
 | OEE repository checks       | `scripts/check-links`, `.github/`  | Keep repository validation working.                                 |
