@@ -36,11 +36,14 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Reason with propositions, quantifiers, sets, and functions.
+- Count arrangements and selections with the standard counting rules.
 
 #### Lessons
 
-1. **Course introduction: Mathematics for Computing & AI** — `lesson` — what the subject is, where it came from, where it is used, and its strengths and limits
+1. **Course introduction: Mathematics for Computing & AI** — `lesson`
+
+   Mathematics supplies the exact language of computing and the foundation of machine learning. This course teaches the parts that later courses rely on and applies each one in code.
 2. **Propositional logic** — `lesson`
 3. **Quantifiers** — `lesson`
 4. **Sets** — `lesson`
@@ -54,7 +57,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Compute with vectors, norms, dot products, and angles, and explain their geometry.
+- Multiply matrices and use them to solve linear systems.
 
 #### Lessons
 
@@ -72,7 +76,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Compute probabilities, conditional probabilities, and apply Bayes' theorem.
+- Describe data and random variables with distributions, expectation, variance, and summary statistics.
 
 #### Lessons
 
@@ -90,7 +95,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Compute derivatives and gradients and approximate them numerically.
+- Compare the growth of functions and state an algorithm's complexity.
 
 #### Lessons
 
@@ -107,14 +113,34 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Complete and explain the **Numerical Computing Notebook** integration lab, demonstrating the relevant course outcomes and retained evidence.
 
 #### Lessons
 
 1. **Numerical Computing Notebook** — `lab`
 
+   **Final integration lab — required work**
+
+   **Numerical Computing Notebook**
+
+   Build a small collection of numerical functions without scientific libraries first, then verify them with NumPy.
+
 ## Completion requirements
 
-- Complete the required exercises and checkpoints described in the [public course requirements](requirements/SEF8.md).
+- Complete the required course exercises, checkpoints and evaluated labs below.
 - Complete the final integrated `lab` in the last module and meet its observable exit criteria.
 - Retain reproducible artifacts, verification results, design explanations, and a technical retrospective as required by the [OEE Evidence Rules](../../spec/evidence-rules.md).
+
+**Required exercises**
+
+**Practical practice:**
+
+- Implement vector operations.
+- Implement matrix multiplication.
+- Simulate probability distributions.
+- Estimate a derivative numerically.
+- Compare a numerical gradient with an analytic gradient.
+
+**Exit demonstration:**
+
+The learner can calculate small matrix operations, conditional probabilities, and simple derivatives by hand and explain where these ideas appear in software and machine learning.

@@ -34,11 +34,14 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Write a user story from a persona, a need, and a purpose, without describing the implementation.
+- Write acceptance criteria that can be checked, and state a definition of done.
 
 #### Lessons
 
-1. **Course introduction: Professional Workflow & AI-Assisted Engineering** — `lesson` — what the subject is, where it came from, where it is used, and its strengths and limits
+1. **Course introduction: Professional Workflow & AI-Assisted Engineering** — `lesson`
+
+   Professional software is built by teams who agree on needs, track work, record decisions, review each other's changes, and increasingly use AI assistants. This course teaches those habits and the discipline needed to use assistants without surrendering understanding.
 2. **Users and personas** — `lesson`
 3. **Writing user stories** — `lesson`
 4. **Acceptance criteria and definition of done** — `lesson`
@@ -51,7 +54,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Break a feature into issues and sub-issues, with dependencies and labels.
+- Organize issues on a project board and link pull requests to the issues they close.
 
 #### Lessons
 
@@ -67,7 +71,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Write a decision record with context, options, outcome, consequences, and a way to confirm it.
+- Keep decision records in the repository with a status and links to superseding records.
 
 #### Lessons
 
@@ -83,7 +88,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Review a change for design, correctness, tests, and clarity, and write feedback that is specific and actionable.
+- Write a small, well-described change and respond to review comments.
 
 #### Lessons
 
@@ -99,7 +105,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Explain how an AI coding assistant works at the level of context, tools, and an action loop.
+- Give an assistant the context, constraints, and a written plan it needs to complete a small change.
 
 #### Lessons
 
@@ -115,7 +122,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Verify generated code with tests written first, a critical reading of the diff, and checks for known failure modes.
+- Explain the privacy, licensing, and disclosure obligations that apply to AI-assisted work.
 
 #### Lessons
 
@@ -132,14 +140,44 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Complete and explain the **Feature Delivery Workflow** integration lab, demonstrating the relevant course outcomes and retained evidence.
 
 #### Lessons
 
 1. **Plan, build, review, and defend a feature delivered through the full workflow** — `lab`
 
+   **Final integration lab — required work**
+
+   **Feature Delivery Workflow**
+
+   Take a feature request for the SEF5 tested command-line application and deliver it through the full workflow. The submission must include:
+
+   - User stories with acceptance criteria
+   - Issues and a project board for the feature
+   - At least one decision record
+   - An implementation developed with an AI assistant from a written plan, with tests written first
+   - A pull request reviewed by a peer against a published standard
+   - An evidence log recording where the assistant was wrong, what was changed or rejected, and what the learner did without assistance
+
+   The defense includes a live modification made without the assistant.
+
 ## Completion requirements
 
-- Complete the required exercises and checkpoints described in the [public course requirements](requirements/SEF9.md).
+- Complete the required course exercises, checkpoints and evaluated labs below.
 - Complete the final integrated `lab` in the last module and meet its observable exit criteria.
 - Retain reproducible artifacts, verification results, design explanations, and a technical retrospective as required by the [OEE Evidence Rules](../../spec/evidence-rules.md).
+
+**Required exercises**
+
+**Practical practice:**
+
+- Convert a feature request into stories with acceptance criteria.
+- Set up issues, labels, and a project board for a feature.
+- Write a decision record for a real design choice.
+- Review a pull request and revise your own in response to review.
+- Complete a small change with an assistant under a written plan.
+- Find defects in a generated change and write tests for them.
+
+**Exit demonstration:**
+
+The learner can take a need through stories, tracked work, recorded decisions, and a reviewed change, use an assistant without surrendering understanding, and explain and modify every line delivered.

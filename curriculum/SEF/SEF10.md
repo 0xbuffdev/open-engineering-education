@@ -35,11 +35,13 @@ By the end of the project, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Turn a vague idea into a scoped problem with users, requirements, constraints, and success criteria.
 
 #### Lessons
 
-1. **Course introduction: Software Engineering Foundations Capstone** — `lesson` — what the subject is, where it came from, where it is used, and its strengths and limits
+1. **Course introduction: Software Engineering Foundations Capstone** — `lesson`
+
+   The capstone shows that the learner can carry a project from an open-ended brief to a delivered, measured, documented tool and defend it.
 2. **Project brief** — `lesson`
 3. **Users** — `lesson`
 4. **Requirements** — `lesson`
@@ -52,7 +54,8 @@ By the end of the project, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Decompose a project into components with clear interfaces and a sensible structure.
+- Review a design against its requirements.
 
 #### Lessons
 
@@ -68,7 +71,7 @@ By the end of the project, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Build the project incrementally, with tests and version control, and debug it from evidence.
 
 #### Lessons
 
@@ -83,7 +86,8 @@ By the end of the project, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Measure performance, document the project, and make it reproducible.
+- Review a project's readiness for release.
 
 #### Lessons
 
@@ -99,15 +103,46 @@ By the end of the project, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Complete and explain the **Final Project Lab** integration lab, demonstrating the relevant course outcomes and retained evidence.
 
 #### Lessons
 
 1. **Developer utility** — `lab`
 
+   **Final integration lab — required work**
+
+   The project must include:
+
+   - Clear requirements
+   - Modular architecture
+   - Git history
+   - Automated tests
+   - Input validation
+   - Error handling
+   - Documentation
+   - Reproducible setup
+   - CI
+   - Basic performance measurements
+   - Release/package instructions
+   - Architecture diagram
+   - Decision records
+   - Technical retrospective
+
 ## Completion requirements
 
-- Complete the required exercises and checkpoints described in the [public course requirements](requirements/SEF10.md).
+- Complete the required course exercises, checkpoints and evaluated labs below.
 - Complete the final integrated `lab` in the last module and meet its observable exit criteria.
 - Retain reproducible artifacts, verification results, design explanations, and a technical retrospective as required by the [OEE Evidence Rules](../../spec/evidence-rules.md).
 - Deliver, evaluate, and defend the capstone project against the published criteria.
+**Project defense:**
+
+The learner demonstrates the application live and explains:
+
+- Architecture
+- Data structures
+- Important design decisions
+- Failures encountered
+- Testing strategy
+- One measured improvement
+
+This is the **Program 1 graduation requirement**.
