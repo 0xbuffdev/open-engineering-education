@@ -195,7 +195,7 @@ By the end of the course, the learner will be able to:
 - Complete the final integrated `lab` in the last module and meet its stated observable exit criteria.
 - Retain reproducible artifacts, verification results, design explanations, and a meaningful technical retrospective in accordance with [OEE Evidence Rules](../../spec/evidence-rules.md).
 
-**Required exercises**
+Complete these required exercises:
 
 **Conceptual practice:**
 
