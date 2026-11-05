@@ -18,3 +18,11 @@ Program overview, ten course documents, learning outcomes, course sequences, mod
 
 ## Boundaries
 This branch does not modify the private content repository, 0xNAND, OEE Workspace, affiliate infrastructure or the normative specification. Original source files are retained until resource extraction is verified.
+
+## Refinement on the same import branch
+
+The ten draft course files were further simplified to **Overview, Learning outcomes, Modules, Completion requirements**. Each module now contains only **Outcomes** and **Lessons**; entries have explicit `lesson`, `test` or `lab` kinds. The original Course briefs, Module briefs, historical notes, and topic inventories are preserved in `authoring-notes/`, while required exercises, labs, exit criteria, and capstone defense are publicly available in `requirements/`. OEE source requirements remain free and do not depend on 0xNAND.
+
+This layout anticipates [draft RFC 0001](https://github.com/0xbuffdev/open-engineering-education/pull/6) and is *not* a claim that the normative format has already changed. The RFC and this import branch must each be reviewed before the specification or curriculum is merged.
+
+The repository's DCO workflow requires a personal sign-off on every commit. The migration's automated commits currently lack that attestation and require authorized sign-off prior to merging. Do not represent these commits as DCO-compliant until this is resolved.
