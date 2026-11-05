@@ -64,13 +64,4 @@ SEF8 may be taken alongside SEF4–SEF7. Instructional lessons, assessments and 
 
 OEE curriculum requirements are public and free to use. [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) helps learners organize practical work and evidence. Books, free online materials, chapter references and optional purchase links are curated outside the OEE specification; using 0xNAND or purchasing a resource is not required to follow the curriculum.
 
-## Migration status
-
-These ten course definitions are imported as drafts. They have not been reviewed for full OEE conformance or educational quality. See [migration notes](MIGRATION.md) for pending decisions.
-
-## Detailed public requirements and lesson guidance
-
-- [Required practical work and evaluation](requirements/README.md) — exercises, labs, exit criteria, and capstone requirements that independent learners can follow.
-- [Optional lesson authoring notes](authoring-notes/README.md) — historical context and teaching prompts preserved from the imported source.
-
-The simplified outlines follow the structure proposed in [RFC 0001](../../rfcs/README.md) (see [review PR #6](https://github.com/0xbuffdev/open-engineering-education/pull/6)). The RFC is not yet accepted, so these imported drafts are **not claimed to conform** to the currently published course-format specification.
+The imported courses retain `draft` status. Their learning outcomes, module sequence, practical requirements, and completion expectations are specified in the individual course files. The streamlined course format is proposed in [RFC 0001](https://github.com/0xbuffdev/open-engineering-education/pull/6) and is pending approval; these drafts do not yet claim conformance to the published format.

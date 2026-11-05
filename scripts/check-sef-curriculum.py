@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check the draft SEF course layout and public requirement links.
+"""Check the draft SEF course structure and inlined practical requirements.
 
 This structural gate does not assert OEE conformance or learner mastery.
 """
@@ -72,22 +72,20 @@ def validate():
         if not lesson_kinds or lesson_kinds[-1] != "lab":
             ERRORS.append(f"{code}: final lesson must be an integration lab")
 
-        req = SEF / "requirements" / f"{code}.md"
-        notes = SEF / "authoring-notes" / f"{code}.md"
-        for companion in (req, notes):
-            if not companion.is_file():
-                ERRORS.append(f"{code}: missing public companion {companion.name}")
-            else:
-                check_links(companion, companion.read_text(encoding="utf-8"))
-        if req.is_file():
-            body = req.read_text(encoding="utf-8")
-            if code == "SEF10":
-                if "## Required qualities" not in body or "## Project defense" not in body:
-                    ERRORS.append(f"{code}: missing capstone evaluation")
-            elif "## Course lab" not in body or "## Exit check" not in body:
-                ERRORS.append(f"{code}: missing lab or exit criteria")
-        if f"(requirements/{code}.md)" not in text:
-            ERRORS.append(f"{code}: missing public requirements link")
+        completion = text.split("## Completion requirements", 1)[-1]
+        if "Required exercises" not in completion and code not in ("SEF10",):
+            ERRORS.append(f"{code}: required exercises missing from completion requirements")
+        if code == "SEF10":
+            if "Project defense:" not in completion or "graduation requirement" not in completion:
+                ERRORS.append(f"{code}: missing capstone defense or graduation criterion")
+            if "The project must include:" not in text:
+                ERRORS.append(f"{code}: missing capstone deliverable qualities")
+        else:
+            if "Final integration lab" not in text or "Exit demonstration:" not in completion:
+                ERRORS.append(f"{code}: final lab or exit demonstration missing")
+        if "requirements/" in text or "authoring-notes/" in text:
+            ERRORS.append(f"{code}: obsolete companion file reference")
+        
         prereq = re.search(r"^\*\*Prerequisites:\*\* ([^\n]+)", text, re.M)
         value = prereq.group(1) if prereq else ""
         DEPS[code] = [f"SEF{i}" for i in range(1, 10)] if "SEF1–SEF9" in value else re.findall(r"\bSEF[0-9]+\b", value)
@@ -96,7 +94,7 @@ def validate():
                 ERRORS.append(f"{code}: invalid prerequisite {dep}")
         check_links(path, text)
 
-    for name in ("README.md", "MIGRATION.md"):
+    for name in ("README.md",):
         path = SEF / name
         check_links(path, path.read_text(encoding="utf-8"))
 
@@ -119,7 +117,7 @@ def validate():
     if ERRORS:
         print("\n".join("ERROR: " + issue for issue in ERRORS), file=sys.stderr)
         return 1
-    print(f"SEF structural validation passed: {len(courses)} draft courses and public companion briefs")
+    print(f"SEF structural validation passed: {len(courses)} self-contained draft courses")
     return 0
 
 

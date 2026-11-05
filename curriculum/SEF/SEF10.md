@@ -134,6 +134,7 @@ By the end of the project, the learner will be able to:
 - Complete the final integrated `lab` in the last module and meet its observable exit criteria.
 - Retain reproducible artifacts, verification results, design explanations, and a technical retrospective as required by the [OEE Evidence Rules](../../spec/evidence-rules.md).
 - Deliver, evaluate, and defend the capstone project against the published criteria.
+
 **Project defense:**
 
 The learner demonstrates the application live and explains:

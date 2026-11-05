@@ -15,8 +15,6 @@ This course starts from a single bit and builds the machine piece by piece: byte
 
 This is the first course in the Foundations program because programming should begin with a concrete model of the machine being programmed. The course uses an educational computer model rather than reproducing every detail of a modern CPU.
 
-**None.**
-
 No prior programming experience is required. Basic computer skills (typing, managing files, and browsing the web) are helpful.
 
 ## Learning outcomes
@@ -189,7 +187,7 @@ By the end of the course, the learner will be able to:
    I/O
    ```
 
-   The artifact may be implemented in a digital-logic simulator, an educational emulator, or another transparent environment that lets the learner inspect the state of the machine; a transparent digital-logic simulator can be used to implement and inspect the model. The learner must document the data path, execute a short program, trace at least one instruction cycle, and explain how software reaches the hardware operations that produce the result.
+   The artifact may be implemented in a digital-logic simulator, an educational emulator, or another transparent environment that lets the learner inspect the state of the machine. The learner must document the data path, execute a short program, trace at least one instruction cycle, and explain how software reaches the hardware operations that produce the result.
 
 ## Completion requirements
 
