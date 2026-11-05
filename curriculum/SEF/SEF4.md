@@ -32,11 +32,14 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Explain how arrays, linked lists, stacks, queues, maps, and sets store data and what each operation costs.
+- Choose a data structure from the requirements of a problem.
 
 #### Lessons
 
-1. **Course introduction: Data Structures & Algorithms** — `lesson` — what the subject is, where it came from, where it is used, and its strengths and limits
+1. **Course introduction: Data Structures & Algorithms** — `lesson`
+
+   Every program stores and processes data, and the choice of structure and algorithm decides whether it is fast or unusable. This course teaches the standard structures and algorithms, how to implement them, and how to compare them.
 2. **Arrays and lists** — `lesson`
 3. **Linked lists** — `lesson`
 4. **Stacks** — `lesson`
@@ -50,7 +53,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Write recursive solutions and trace recursive calls.
+- Implement trees, binary search trees, and graphs, and traverse them with breadth-first and depth-first search.
 
 #### Lessons
 
@@ -68,7 +72,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Express the time and space cost of an algorithm in Big-O notation.
+- Implement, compare, and choose between searching and sorting algorithms.
 
 #### Lessons
 
@@ -86,14 +91,58 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Complete and explain the **Algorithm Toolkit** integration lab, demonstrating the relevant course outcomes and retained evidence.
 
 #### Lessons
 
 1. **Algorithm Toolkit** — `lab`
 
+   **Final integration lab — required work**
+
+   **Algorithm Toolkit**
+
+   Implement and test:
+
+   - Stack
+   - Queue
+   - Linked list
+   - BST
+   - BFS
+   - DFS
+   - Binary search
+   - Merge sort
+   - Quicksort
+
+   Then benchmark selected operations and explain the results.
+
 ## Completion requirements
 
-- Complete the required exercises and checkpoints described in the [public course requirements](requirements/SEF4.md).
+- Complete the required course exercises, checkpoints and evaluated labs below.
 - Complete the final integrated `lab` in the last module and meet its observable exit criteria.
 - Retain reproducible artifacts, verification results, design explanations, and a technical retrospective as required by the [OEE Evidence Rules](../../spec/evidence-rules.md).
+
+**Required exercises**
+
+**Conceptual practice:**
+
+- Implementation drills
+- Tracing exercises
+- Complexity analysis
+- Recursive-call tracing
+- Algorithm comparison
+
+**Practical practice:**
+
+- Implement a stack and queue.
+- Compare linear search and binary search.
+- Implement BFS and DFS.
+- Measure sorting algorithms on increasingly large inputs.
+
+**Exit demonstration:**
+
+Given a new problem, the learner must:
+
+- Choose an appropriate data structure
+- Propose an algorithm
+- Derive its complexity
+- Explain why an obvious alternative approach is less suitable

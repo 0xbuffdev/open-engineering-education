@@ -35,11 +35,14 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Record, inspect, and navigate project history with Git.
+- Create, merge, and resolve conflicts between branches, and collaborate through a remote.
 
 #### Lessons
 
-1. **Course introduction: Software Engineering Practice** — `lesson` — what the subject is, where it came from, where it is used, and its strengths and limits
+1. **Course introduction: Software Engineering Practice** — `lesson`
+
+   Writing code is a small part of software engineering. This course teaches the practices that keep software working as it grows and as more people work on it.
 2. **Repositories and commits** — `lesson`
 3. **History and diffs** — `lesson`
 4. **Branches** — `lesson`
@@ -53,7 +56,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Write unit tests and choose test cases that expose failures.
+- Diagnose a failing program from evidence rather than guesses.
 
 #### Lessons
 
@@ -69,7 +73,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Recognize code smells and improve code with behavior-preserving refactorings.
+- Use logging, style guides, and code review to keep software maintainable, and read unfamiliar code.
 
 #### Lessons
 
@@ -86,14 +91,43 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Complete and explain the **Tested CLI Application** integration lab, demonstrating the relevant course outcomes and retained evidence.
 
 #### Lessons
 
 1. **Tested CLI application** — `lab`
 
+   **Final integration lab — required work**
+
+   **Tested CLI Application**
+
+   Convert the SEF2 application into a maintainable software project with:
+
+   - Meaningful Git history
+   - Automated tests
+   - Linting/formatting
+   - Structured logging
+   - Error handling
+   - Refactored modules
+   - CI test execution
+   - Documentation
+
 ## Completion requirements
 
-- Complete the required exercises and checkpoints described in the [public course requirements](requirements/SEF5.md).
+- Complete the required course exercises, checkpoints and evaluated labs below.
 - Complete the final integrated `lab` in the last module and meet its observable exit criteria.
 - Retain reproducible artifacts, verification results, design explanations, and a technical retrospective as required by the [OEE Evidence Rules](../../spec/evidence-rules.md).
+
+**Required exercises**
+
+**Practical practice:**
+
+- Resolve a controlled merge conflict.
+- Debug a deliberately broken application.
+- Turn untested code into tested code.
+- Refactor duplicated code without changing behavior.
+- Review another learner's pull request.
+
+**Exit demonstration:**
+
+The learner must diagnose a failing test or bug from evidence rather than by guesswork.

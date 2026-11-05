@@ -35,11 +35,14 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Read and write C values in binary and hexadecimal and explain how integers are stored.
+- Write C programs using types, operators, expressions, and control flow.
 
 #### Lessons
 
-1. **Course introduction: C Programming & Machine Memory** — `lesson` — what the subject is, where it came from, where it is used, and its strengths and limits
+1. **Course introduction: C Programming & Machine Memory** — `lesson`
+
+   C is the language closest to the machine that is still widely used. Learning it shows what higher-level languages hide: memory addresses, manual lifetimes, and how source code becomes an executable.
 2. **C types and values** — `lesson`
 3. **Operators and expressions** — `lesson`
 4. **C control flow** — `lesson`
@@ -53,7 +56,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Define functions, explain argument passing, and use scope and `static` correctly.
+- Split a program into source and header files.
 
 #### Lessons
 
@@ -68,7 +72,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Explain addresses and use pointers, including the relationship between pointers and arrays, correctly.
+- Pass data to functions by value and by address, and predict the effect.
 
 #### Lessons
 
@@ -85,7 +90,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Describe how a process lays out the stack, the heap, and static data.
+- Allocate and release memory with `malloc` and `free`, and recognize leaks, double frees, use after free, and buffer overruns.
 
 #### Lessons
 
@@ -102,7 +108,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Define and use structures, arrays of structures, and pointers to structures.
+- Read and write text and formatted data with the standard library.
 
 #### Lessons
 
@@ -118,7 +125,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Explain how C source becomes a linked, loadable executable, and build it with Make.
+- Use a debugger and sanitizers to locate memory errors.
 
 #### Lessons
 
@@ -135,14 +143,39 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Complete and explain the **C Data-Structure Library** integration lab, demonstrating the relevant course outcomes and retained evidence.
 
 #### Lessons
 
 1. **Build, test, and defend the C Data-Structure Library** — `lab`
 
+   **Final integration lab — required work**
+
+   **C Data-Structure Library**
+
+   Implement a small, tested library in C containing a dynamic array, a linked list, and a hash map, each with a documented interface. The library must include:
+
+   - Separate header and source files with a Makefile
+   - A test program that exercises normal use and failure cases
+   - A clean run under a memory sanitizer, with no leaks or errors
+   - A short written comparison of how the same structures manage memory in Python and in C
+
 ## Completion requirements
 
-- Complete the required exercises and checkpoints described in the [public course requirements](requirements/SEF6.md).
+- Complete the required course exercises, checkpoints and evaluated labs below.
 - Complete the final integrated `lab` in the last module and meet its observable exit criteria.
 - Retain reproducible artifacts, verification results, design explanations, and a technical retrospective as required by the [OEE Evidence Rules](../../spec/evidence-rules.md).
+
+**Required exercises**
+
+**Practical practice:**
+
+- Inspect the bytes of values of different types.
+- Trace a pointer program by hand and compare it with real output.
+- Repair a program with a leak, a double free, and an overrun.
+- Compile and inspect object files.
+- Diagnose a segmentation fault with a debugger.
+
+**Exit demonstration:**
+
+The learner can write a multi-file C program, explain every allocation and its lifetime, and explain the path from source code to a running process.
