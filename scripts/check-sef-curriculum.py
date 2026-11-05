@@ -73,7 +73,7 @@ def validate():
             ERRORS.append(f"{code}: final lesson must be an integration lab")
 
         completion = text.split("## Completion requirements", 1)[-1]
-        if "Required exercises" not in completion and code not in ("SEF10",):
+        if "required exercises" not in completion.lower() and code != "SEF10":
             ERRORS.append(f"{code}: required exercises missing from completion requirements")
         if code == "SEF10":
             if "Project defense:" not in completion or "graduation requirement" not in completion:
