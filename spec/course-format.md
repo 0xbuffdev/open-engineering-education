@@ -1,149 +1,133 @@
 # Course Format
 
-This document defines the required structure for an OEE course file. The format is intended to make each course understandable, reviewable, and usable without relying on undocumented expectations.
+This document defines the required structure for an Open Engineering Education (OEE) course. A course identifies the capabilities learners must demonstrate and the requirements for assessing them. A product may provide more extensive teaching material, but independent learners MUST be able to understand the public curriculum's requirements without a commercial platform or paid book.
 
-## 1. Required metadata
+## 1. Metadata
 
-Every course MUST begin with the following metadata. The course code and program are optional: use the title-only heading when no code is assigned, and omit the Program line when the course does not belong to a program.
+A course MUST begin with one level-one heading containing its title and, where assigned, its unique code. The following metadata MUST follow the heading:
 
 ```markdown
-# <CODE> — <Course Title>
-# <Course Title>
+# SEF1 — Demystifying the Computer System
 
-**Program:** <program code and name>
-**Type:** `course` or `project`
-**Prerequisites:** <course codes or `none`>
-**Duration:** <number of weeks or stated range>
+**Program:** SEF — Software Engineering Foundations
+**Type:** `course`
+**Prerequisites:** none
+**Duration:** 4 weeks
 **Status:** `draft`
 ```
 
-Requirements:
+The `Program` line MAY be omitted for a standalone course. The assigned code and program MUST agree with the curriculum catalog. The `Type` MUST be `course` or `project`. Prerequisites MUST identify stable course codes, with links to existing prerequisite files where applicable, or be stated as `none`. An unambiguous range MAY describe multiple prerequisites. Duration MUST be expressed in weeks and agree with the program catalog. New and unproven courses MUST begin in `draft` status; promotion follows [Status Labels](status-labels.md) and [Evidence Rules](evidence-rules.md). Optional workload estimates MAY be included.
 
-- If a course code is stated, it MUST be unique within the OEE curriculum.
-- The title MUST identify the course clearly.
-- If a program is stated, the program code MUST match the program to which the course belongs.
-- The type MUST be `course` or `project`.
-- Prerequisites MUST identify specific course codes or state `none`.
-- Duration MUST be stated in weeks. When the course belongs to a program, duration MUST agree with the program catalog.
-- Every new or unproven course MUST start with the `draft` status.
-- Status requirements are defined in [Status Labels](status-labels.md).
+A repeated `Course brief` metadata block containing Introduction, History, Usage, Applications, Strengths, Limitations, and Key Concepts is not required. Pertinent background belongs in the Overview or the appropriate instructional lesson.
 
-A project course is an advanced, integrated project or capstone. It MUST include the additional deliverables and evaluation requirements defined in [Evidence Rules](evidence-rules.md).
+## 2. Required course sections
 
-## 2. Required sections
+Every course MUST contain these four top-level sections, in order:
 
-Every course MUST contain the following sections. A course may use additional sections where they improve clarity, but additional sections MUST NOT replace the required ones.
+| Section | Required content |
+| --- | --- |
+| **Overview** | Purpose, scope, practical relevance, and any additional entry-readiness explanation |
+| **Learning outcomes** | Observable capabilities that can be evaluated |
+| **Modules** | An ordered module sequence with module outcomes and typed lesson entries |
+| **Completion requirements** | Required exercises, tests, labs, deliverables, evaluations, evidence, explanations, and retrospective |
 
-| #  | Section                 | Requirements                                                                                                    |
-| -- | ----------------------- | --------------------------------------------------------------------------------------------------------------- |
-| 1  | Purpose                 | Explain the capability the course is intended to develop and why it matters in engineering practice.            |
-| 2  | Learning Outcomes       | State observable outcomes that can be demonstrated and evaluated.                                               |
-| 3  | Prerequisites           | Identify prior knowledge or course requirements and state what a learner should already be able to demonstrate. |
-| 4  | Course Structure        | Organize the course into ordered modules and identify their learning objectives.                                |
-| 5  | Lessons                 | Explain concepts, mechanisms, constraints, and examples needed to reach the outcomes.                           |
-| 6  | Assessments             | Identify conceptual checkpoints, tests, or other evaluations and the outcomes they measure.                     |
-| 7  | Labs                    | Define practical work that produces inspectable evidence of learning.                                           |
-| 8  | Required Exercises      | Identify exercises that the learner must complete.                                                              |
-| 9  | Completion Requirements | State the conditions that must be met to complete the course.                                                   |
-| 10 | Common Failure Modes    | Identify likely misconceptions, implementation errors, and debugging challenges.                                |
-| 11 | Evidence to Retain      | Identify the artifacts and records needed to support the completion claim.                                      |
-| 12 | Technical Retrospective | Require the learner to explain a wrong assumption, the evidence that challenged it, and the resulting change.   |
+These are the only mandatory top-level headings. Additional sections MAY be used where useful, but authors SHOULD NOT repeat the same information under multiple headings. Separate Course brief, Topics, Prerequisites, Course Structure, Lessons, Assessments, Labs, Required Exercises, Common Failure Modes, Evidence to Retain, and Technical Retrospective headings are not mandatory.
 
-The course MUST link to relevant prerequisite courses by their current identifiers. Internal links MUST resolve.
+**Simplifying headings MUST NOT remove the underlying educational requirements.** The course or its publicly linked briefs MUST still disclose all required practical work, success criteria, evidence, failure analysis, and completion conditions. A proprietary implementation MUST NOT be the sole source of these requirements.
 
-## 3. Course and lesson types
+## 3. Modules and lesson kinds
 
-A course MUST identify its type as either `course` or `project`.
+Every module MUST have a sequential position and descriptive title, followed by exactly two core subsections:
 
-Lesson entries MUST use one of the following kinds:
+- **Outcomes:** observable module-level capabilities.
+- **Lessons:** ordered and explicitly typed entries describing what is taught, tested, or practiced.
 
-| Kind     | Purpose                                                         |
-| -------- | --------------------------------------------------------------- |
-| `lesson` | Explains concepts, mechanisms, design decisions, or techniques. |
-| `test`   | Evaluates specified learning outcomes.                          |
-| `lab`    | Requires practical work and produces inspectable evidence.      |
+A `Module brief` with repeated Introduction, Overview, History, Applications, Strengths, Limitations, or Key Concepts fields is not required. Background that materially contributes to understanding SHOULD be presented in the relevant lesson. The first lesson of the first module SHOULD orient the learner to the course; there is no requirement to add an otherwise redundant introduction lesson.
 
-A lesson file or entry MUST identify its kind consistently. A course MUST NOT use an undefined kind to represent required assessed work.
+A lesson entry MUST use one of the following kinds:
 
-## 4. Module ordering
+| Kind | Purpose |
+| --- | --- |
+| `lesson` | Teach concepts, mechanisms, decisions, or techniques |
+| `test` | Assess identified learning outcomes |
+| `lab` | Require practical work that yields inspectable evidence |
 
-Modules MUST have a clear learning sequence. Each module MUST identify its intended outcomes and its required lesson entries.
+For example:
 
-Where a module includes both a test and a micro-lab, the order MUST be:
+```markdown
+### Module 1 — Inside the Machine
 
-1. Instructional lessons.
-2. Test.
-3. Micro-lab.
+#### Outcomes
 
-In that arrangement, the test MUST be the second-to-last lesson entry and the micro-lab MUST be the final entry in the module.
+- Explain and model binary states, bits, and bytes.
 
-A module without a micro-lab MAY still include a test. Any assessment used in a module MUST have a clear purpose and identify the outcomes it measures. A test MUST NOT be appended to the end of a module merely to fill the final position.
+#### Lessons
 
-Every course MUST end with a lab module. The final lesson entry in that module MUST be a lab that demonstrates practical integration of the course's intended outcomes.
+1. **Course orientation** — `lesson`
+2. **Bits and two-state systems** — `lesson`
+3. **Understanding bits and bytes** — `test`
+4. **Model a byte** — `lab`
+```
 
-## 5. Assessment requirements
+This is a course navigation and assessment contract, not a mandate to publish a complete lecture script. A public course MUST nevertheless include or link to any instructions necessary for learners to complete its required activities.
 
-Each assessment MUST identify the learning outcomes it evaluates and make the success criteria clear enough for a learner and reviewer to understand.
+## 4. Learning sequence and final lab
 
-Where a test uses typed questions, the supported question types are:
+Modules MUST follow a coherent learning sequence. Where instructional lessons, a conceptual test, and a micro-lab occur in the same module, the normal order SHOULD be `lesson` → `test` → `lab`, with the test preceding the practical work it prepares the learner to perform. Tests MUST NOT be added solely to satisfy a positional convention.
 
-| Type         | Intended use                                |
-| ------------ | ------------------------------------------- |
-| `single`     | Select one answer.                          |
-| `multi`      | Select more than one answer.                |
-| `free`       | Provide a free-form written answer.         |
-| `math`       | Express or calculate a mathematical result. |
-| `code`       | Produce, complete, or analyze code.         |
+A module MAY omit tests or micro-labs when the outcomes and overall assessment design justify this. Each included assessment MUST have a clear purpose.
 
-A course MAY use only the question types appropriate to its outcomes. Listing a question type does not require every course to use it.
+Every course, including a project course, MUST culminate in a final integration `lab`: the final lesson entry of the final module MUST be of kind `lab` and demonstrate integration of the intended course outcomes. **The final module does not need to be a separate lab-only module.** A lab-only module MAY be retained when it makes educational sense.
 
-Assessment instructions MUST state what the learner is expected to demonstrate. Course files MUST describe the educational requirement rather than depend on an undocumented implementation detail.
+## 5. Assessment and exercise requirements
+
+Each required assessment MUST identify the outcomes evaluated, the work expected, and success criteria sufficient for a learner and reviewer to distinguish acceptable from unacceptable results. Required and optional exercises MUST be distinguished.
+
+Where typed questions are used, supported question types are:
+
+| Type | Intended use |
+| --- | --- |
+| `single` | Select one answer |
+| `multi` | Select multiple answers |
+| `free` | Provide a written explanation |
+| `math` | Express or compute a mathematical result |
+| `code` | Produce, complete, or analyze code |
+
+Implementations MAY use additional presentation or evaluation mechanisms, but they MUST preserve the public assessment requirements. Assessment criteria MAY be placed near the typed `test` entry, under Completion requirements, or in a linked public assessment brief.
 
 ## 6. Lab requirements
 
-Every required lab MUST specify:
+Every required `lab` MUST provide, within the course or in a publicly accessible linked brief:
 
-- Objective: the question, capability, or behavior being investigated.
-- Prerequisites: concepts, tools, and prior work needed to begin.
-- Environment: relevant operating system, dependencies, versions, and configuration.
-- Procedure: the work the learner is expected to perform.
-- Expected result: the observable behavior or artifact to produce.
-- Verification: how the learner or reviewer determines whether the result is correct.
-- Evidence: the files, output, measurements, tests, or explanations to retain.
-- Failure analysis: relevant failure cases and what the learner should learn from them.
+- Objective: the capability or behavior to investigate.
+- Prerequisites: relevant concepts, tools, and prior work.
+- Environment: relevant platform, dependencies, versions, and configuration when material.
+- Procedure: work the learner must perform.
+- Expected result: observable behavior or artifact.
+- Verification: how correctness will be determined.
+- Evidence: files, output, tests, measurements, and explanations to retain.
+- Failure analysis: expected difficulties and the learning they reveal.
 
-A lab MUST require meaningful work. Copying a provided result without producing or explaining it MUST NOT satisfy a lab's completion criteria.
+A concise lab MAY include these instructions directly under its lesson entry. A substantial lab MAY link to a separate public brief. No generic `requirements/` directory is required. Copying a result without producing or explaining it MUST NOT establish completion.
 
-## 7. Course completion
+## 7. Completion, evidence, and reproducibility
 
-The course MUST state completion requirements before the learner reaches the final assessment.
+Completion requirements MUST be clear before the learner undertakes the final assessment. They MUST identify required conceptual checkpoints, exercises, evaluated work, the final integration lab, design explanations, reproducibility instructions where applicable, a meaningful technical retrospective, and the evidence required under [Evidence Rules](evidence-rules.md).
 
-These requirements MUST align with [Evidence Rules](./evidence-rules.md). They MUST identify all required checkpoints, exercises, labs, evaluations, explanations, and retrospective work.
+For executable artifacts, applicable build and verification instructions, environment assumptions, expected behavior, and known limitations MUST be documented sufficiently to reproduce and interpret the result. Learner artifacts belong in the learner's workspace or another appropriate record, not in the public course definition.
 
-For a project course, the completion requirements MUST additionally identify the required deliverables, project evaluation, and defense.
+A `project` course MUST additionally identify required deliverables, evaluation against criteria, and a project defense. Reading, attendance, elapsed time, or an unsupported claim of success cannot alone satisfy completion.
 
-Completion MUST NOT depend solely on reading, attendance, elapsed time, or an unsubstantiated declaration of success.
+## 8. Consistency and independence
 
-## 8. Evidence and reproducibility
+Course codes, titles, prerequisites, program assignments, duration, type, and status MUST agree with the corresponding program catalog. Relative internal links MUST resolve.
 
-Course instructions MUST identify the evidence needed to demonstrate completion.
+OEE MUST NOT depend on particular books, affiliate purchases, proprietary educational platforms, or commercial subscriptions for the public requirements. Implementations MAY offer guided instruction and feedback without changing the underlying requirements.
 
-Where code or an executable artifact is required, the course SHOULD specify how to run and verify it from a clean checkout. Relevant environment details, test commands, expected behavior, and known limitations MUST be documented.
+Passing a structural validation script does not establish course conformance or justify `tested` or `verified` status.
 
-Learner work belongs in the learner's own workspace. The course file defines the assignment and expected evidence; it does not serve as the learner's personal progress record.
+## 9. Changes to the format
 
-See [Evidence Rules](./evidence-rules.md).
+This initial v0.0.1 baseline is being established under the narrowly scoped [bootstrap procedure](../GOVERNANCE.md). Once the first stabilization pull request is merged, subsequent changes to normative requirements MUST follow the [RFC process](../rfcs/README.md), except for corrections with no change in normative meaning.
 
-## 9. Links and consistency
-
-All relative internal links MUST resolve.
-
-Where stated, course identifiers, titles, program assignments, prerequisites, durations, and status labels MUST agree with the corresponding program catalog and course metadata.
-
-A change that updates only one location while leaving conflicting information elsewhere is incomplete.
-
-## 10. Changes to the format
-
-Changes to required metadata, lesson kinds, module ordering, assessment types, or completion requirements affect the normative course format. Such changes MUST be proposed through the RFC process.
-
-Course authors MUST NOT introduce a conflicting structure and treat it as conforming by default.
+Curriculum authors and implementations MUST NOT silently introduce conflicting requirements or represent unassessed material as conforming.
