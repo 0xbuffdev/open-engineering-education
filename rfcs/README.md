@@ -4,9 +4,17 @@ An RFC is the formal proposal process for changes that affect the normative requ
 
 The process gives contributors a place to explain a problem, evaluate alternatives, identify consequences, and record a decision before implementing a significant change.
 
+## One-time initial course-format stabilization
+
+OEE v0.0.1 began with a draft specification but no populated canonical curriculum. The first usable course-format baseline can therefore be established by the steward through a **focused public pull request**, without an additional RFC.
+
+**This exception applies only to the initial format-stabilization pull request** and changes directly necessary to align its course-format requirements, conformance checks, and related governance documentation. The pull request MUST explain the reasons for the change, affected requirements, compatibility considerations, and review decision. The exception expires when that pull request is merged. It does not waive contributor sign-off, licensing obligations, public review, learning-evidence requirements, or course status checks, and it does not authorize unrelated changes to principles, commercial boundaries, or status evidence.
+
+Until the first format-stabilization pull request is merged, the published draft specification remains authoritative. All subsequent normative changes MUST follow the RFC process. The prior [RFC proposal PR #6](https://github.com/0xbuffdev/open-engineering-education/pull/6) was closed as superseded without being accepted or merged; its discussion remains accessible.
+
 ## When an RFC is required
 
-An RFC MUST be proposed for changes that affect:
+After this one-time initial course-format stabilization, an RFC MUST be proposed for changes that affect:
 
 - The principles or normative documents in `spec/`.
 - Required course metadata, structure, assessment, or completion requirements.
