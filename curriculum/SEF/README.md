@@ -1,6 +1,7 @@
+# Program 1 — SEF: Software Engineering Foundations
+
 > [OEE curriculum](../README.md) · [Specification](../../spec/README.md) · [OEE Workspace](https://github.com/0xbuffdev/oee-workspace)
 
-# Program 1 — SEF: Software Engineering Foundations
 
 ## Overview
 
