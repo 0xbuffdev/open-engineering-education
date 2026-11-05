@@ -40,7 +40,7 @@ Read the documents in this order:
 
 The specification defines the common requirements. Curriculum authors and implementation maintainers may add detail within their scope, but they MUST NOT silently contradict a normative requirement.
 
-A proposed change to a normative document MUST follow the [RFC process](../rfcs/README.md). Until a change is accepted and published, existing normative text remains the reference for the draft version.
+A proposed normative change MUST follow the [RFC process](../rfcs/README.md), apart from the one-time initial v0.0.1 course-format stabilization described in [Governance](../GOVERNANCE.md). Until a change is approved and merged, the published normative text remains the reference for the draft version.
 
 ## Current limitations
 
