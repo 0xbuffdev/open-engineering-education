@@ -15,6 +15,10 @@ This course introduces software, code, and software engineering, and sets up the
 
 - [**SEF1 — Demystifying the Computer System**](SEF1.md)
 
+**Python** is the primary teaching language.
+
+The objective is programming fundamentals, not Python specialization. Python is used because it allows beginners to focus on programming concepts before low-level complexity becomes dominant.
+
 ## Learning outcomes
 
 By the end of the course, the learner will be able to:
@@ -35,11 +39,15 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Explain what software, a program, coding, and software engineering are, and how they differ.
+- Explain how source code written in a programming language becomes a running program.
+- Describe how CPython compiles source code to bytecode and runs it on a virtual machine, and inspect the bytecode of a small function.
 
 #### Lessons
 
-1. **Course introduction: Programming & Computational Thinking** — `lesson` — what the subject is, where it came from, where it is used, and its strengths and limits
+1. **Course introduction: Programming & Computational Thinking** — `lesson`
+
+   Programming is the central skill of the curriculum. This course teaches it from the first terminal command to a finished command-line application, with an emphasis on understanding what the computer does at each step.
 2. **What software is** — `lesson`
 3. **What coding is** — `lesson`
 4. **What software engineering is** — `lesson`
@@ -53,7 +61,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Use a terminal to move between directories, list files, and run commands.
+- Install Python, write a program in an editor, run it, and read the error message when it fails.
 
 #### Lessons
 
@@ -69,7 +78,9 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Explain how a program is built from ordered steps that operate on values.
+- Trace short code by hand and predict the state and output it produces.
+- Explain that a name refers to an object, and that assignment rebinds the name instead of copying the object.
 
 #### Lessons
 
@@ -86,7 +97,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Explain how Boolean conditions select which code runs and how loops repeat work.
+- Choose between conditionals, `while` loops, and `for` loops for a given task.
 
 #### Lessons
 
@@ -102,7 +114,9 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Define and call functions with parameters, local state, and return values.
+- Explain where a call keeps its names and what happens to them when it returns.
+- Decompose a problem into small functions with clear responsibilities.
 
 #### Lessons
 
@@ -119,7 +133,9 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Explain the behavior of strings, lists, dictionaries, tuples, and sets.
+- Choose an appropriate collection for a problem and use it correctly.
+- Predict the effect of aliasing, mutation, and shallow copies on mutable objects.
 
 #### Lessons
 
@@ -136,7 +152,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Read from and write to files, including structured data such as JSON.
+- Navigate paths and directories from a program.
 
 #### Lessons
 
@@ -150,7 +167,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Explain what a traceback reports and handle expected failures with exceptions.
+- Validate input and diagnose a failing program by forming and testing hypotheses.
 
 #### Lessons
 
@@ -166,7 +184,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Explain how a command-line program receives input and reports results.
+- Build a tested, documented command-line application from a specification.
 
 #### Lessons
 
@@ -175,8 +194,50 @@ By the end of the course, the learner will be able to:
 3. **Logging and messages** — `lesson`
 4. **Task manager** — `lab`
 
+   **Final integration lab — required work**
+
+   **Command-Line Task Manager**
+
+   Build a tested CLI application with:
+
+   - Add, list, update, and delete operations
+   - Persistence to JSON
+   - Input validation
+   - Useful error messages
+   - Doctests or unit tests
+   - README and usage examples
+
 ## Completion requirements
 
-- Complete the required exercises and checkpoints described in the [public course requirements](requirements/SEF2.md).
+- Complete the required course exercises, checkpoints and evaluated labs below.
 - Complete the final integrated `lab` in the last module and meet its stated observable exit criteria.
 - Retain reproducible artifacts, verification results, design explanations, and a meaningful technical retrospective in accordance with [OEE Evidence Rules](../../spec/evidence-rules.md).
+
+**Required exercises**
+
+**Conceptual practice:**
+
+- Terminal navigation drills
+- Number and string problems
+- Expression and variable tracing
+- Condition and loop problems
+- Function and decomposition exercises
+- List, dictionary, and set problems
+- File parsing and structured data
+- Input validation
+- Search and counting programs
+- Command-line utilities
+- Deliberately broken programs to diagnose and repair
+
+**Practical practice:**
+
+- Install Python, run a three-line file, break it, and fix it from the error message.
+- Trace a program by hand and predict its output.
+- Write and run a small program that solves a stated problem.
+- Parse a real text or CSV dataset into structured records.
+- Add validation and error handling to a broken program.
+- Turn a written specification into a small command-line tool.
+
+**Exit demonstration:**
+
+The learner writes a small program from a specification without a template and explains the control flow.

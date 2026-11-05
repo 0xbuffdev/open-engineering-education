@@ -40,11 +40,14 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Explain why computers appear complex even though they perform a small set of simple operations very quickly.
+- Explain bits and bytes as the physical foundation for computer state and information.
 
 #### Lessons
 
-1. **Course introduction: Demystifying the Computer System** — `lesson` — what the subject is, where it came from, where it is used, and its strengths and limits
+1. **Course introduction: Demystifying the Computer System** — `lesson`
+
+   Every later topic in the curriculum runs on a computer, and most difficulties in programming come from treating that computer as magic. This course builds a small computer from a single bit and leaves the learner able to explain what happens when a program runs.
 2. **Why computers seem complicated** — `lesson`
 3. **Bits and two-state systems** — `lesson`
 4. **Bits in hardware** — `lesson`
@@ -56,7 +59,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Explain how bit patterns can represent different kinds of information.
+- Reason about bytes, numbers, and addresses.
 
 #### Lessons
 
@@ -71,7 +75,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Explain basic logic gates and truth-table behavior.
+- Describe a circuit in a hardware description language and test it in a simulator.
 
 #### Lessons
 
@@ -85,7 +90,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Explain how registers, enablers, buses, and RAM create a usable memory system.
+- Predict the contents of registers after a sequence of bus transfers.
 
 #### Lessons
 
@@ -98,7 +104,9 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Explain bitwise logic, shifting, arithmetic, comparison, and zero detection.
+- Explain how simple circuits combine into an **Arithmetic and Logic Unit (ALU)**.
+- Trace an ALU operation and its zero result.
 
 #### Lessons
 
@@ -113,7 +121,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Explain how registers, the ALU, control logic, and a clock cooperate inside a processor.
+- Trace step-by-step processor execution.
 
 #### Lessons
 
@@ -128,7 +137,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Explain instruction registers, instruction addresses, data movement, arithmetic/logic instructions, and control flow.
+- Trace instructions and the execution of simple programs.
 
 #### Lessons
 
@@ -143,7 +153,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Explain I/O, peripherals, storage, software, programs, operating systems, file systems, firmware, and booting.
+- Trace a complete path from stored instructions through CPU execution to external I/O.
 
 #### Lessons
 
@@ -154,8 +165,61 @@ By the end of the course, the learner will be able to:
 5. **Firmware and booting** — `lesson`
 6. **Tiny computer model** — `lab`
 
+   **Final integration lab — required work**
+
+   **Tiny Computer Model**
+
+   Build a small, inspectable computer model that demonstrates the complete chain:
+
+   ```text
+   bits
+     ↓
+   logic gates
+     ↓
+   registers + bus + RAM
+     ↓
+   ALU
+     ↓
+   control + clock
+     ↓
+   instructions
+     ↓
+   program execution
+     ↓
+   I/O
+   ```
+
+   The artifact may be implemented in a digital-logic simulator, an educational emulator, or another transparent environment that lets the learner inspect the state of the machine; a transparent digital-logic simulator can be used to implement and inspect the model. The learner must document the data path, execute a short program, trace at least one instruction cycle, and explain how software reaches the hardware operations that produce the result.
+
 ## Completion requirements
 
-- Complete the required exercises and checkpoints described in the [public course requirements](requirements/SEF1.md).
+- Complete the required course exercises, checkpoints and evaluated labs below.
 - Complete the final integrated `lab` in the last module and meet its stated observable exit criteria.
 - Retain reproducible artifacts, verification results, design explanations, and a meaningful technical retrospective in accordance with [OEE Evidence Rules](../../spec/evidence-rules.md).
+
+**Required exercises**
+
+**Conceptual practice:**
+
+- Convert small bit patterns to decimal values and back.
+- Complete truth tables for logic gates.
+- Predict a register value after a sequence of bus operations.
+- Determine which memory address a register selects.
+- Trace an ALU operation step by step.
+- Decode a small instruction byte.
+- Trace the fetch/decode/execute cycle for a short program.
+- Explain what changes when a program reads keyboard data or writes display data.
+- Distinguish hardware, software, firmware, and operating-system responsibilities in concrete scenarios.
+
+**Practical practice:**
+
+- Build a small set of gates from NAND behavior.
+- Model an 8-bit register and shared bus.
+- Trace an ALU operation and its zero result.
+- Hand-assemble a few instructions and execute them on paper.
+- Model a simple I/O exchange between CPU and a keyboard/display adapter.
+- Trace the boot path from persistent program storage into memory and execution.
+
+**Exit demonstration:**
+
+Given a simple program running on the course computer model, the learner can explain, step by step, what happens from instruction fetch through processor operations, memory access, and external I/O.

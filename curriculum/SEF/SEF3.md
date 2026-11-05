@@ -34,11 +34,14 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Create, copy, move, rename, and remove files and directories, and predict the result before running the command.
+- Use wildcards to select groups of files and explain the difference between hard links and symbolic links.
 
 #### Lessons
 
-1. **Course introduction: Linux & the Command Line** — `lesson` — what the subject is, where it came from, where it is used, and its strengths and limits
+1. **Course introduction: Linux & the Command Line** — `lesson`
+
+   Servers, containers, cloud platforms, and developer machines run Linux, and the command line is how people operate them. This course makes the shell a tool the learner controls, not a place to paste commands.
 2. **The filesystem tree** — `lesson`
 3. **Copying, moving, and removing** — `lesson`
 4. **Wildcards** — `lesson`
@@ -50,7 +53,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Identify what kind of command is being run and find its documentation.
+- Redirect standard input, standard output, and standard error, and connect commands with pipelines.
 
 #### Lessons
 
@@ -66,7 +70,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Explain the order in which the shell performs expansions and the effect of each kind of quoting.
+- Use command-line editing and history to work faster and to repeat commands accurately.
 
 #### Lessons
 
@@ -81,7 +86,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Read and change file modes and ownership, and explain how a permission denial arises.
+- List, control, and end processes, and explain signals and job control at the command line.
 
 #### Lessons
 
@@ -97,7 +103,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Explain environment variables, `PATH`, and shell startup files, and configure a shell environment.
+- Edit files with vi(m), install and remove software with a package manager, and use basic networking tools to inspect connectivity.
 
 #### Lessons
 
@@ -113,7 +120,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Find files by name, type, time, and size, and act on the results safely.
+- Write regular expressions and use standard tools to extract, sort, compare, and transform text.
 
 #### Lessons
 
@@ -130,7 +138,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Write an executable script and explain how the shell finds and runs it.
+- Use conditions and input to make a script behave differently, and design a script top-down from functions.
 
 #### Lessons
 
@@ -146,7 +155,8 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Use loops, `case`, positional parameters, strings, arithmetic, and arrays in scripts.
+- Find and fix script defects with tracing and defensive checks.
 
 #### Lessons
 
@@ -163,14 +173,41 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Integrate and demonstrate the course capabilities through the module's final practical work.
+- Complete and explain the **Shell Toolkit** integration lab, demonstrating the relevant course outcomes and retained evidence.
 
 #### Lessons
 
 1. **Build, test, and document the Shell Toolkit** — `lab`
 
+   **Final integration lab — required work**
+
+   **Shell Toolkit**
+
+   Build a small set of related shell scripts that automate a real task, such as organizing downloads, backing up a directory with rotation, or summarizing logs. The toolkit must include:
+
+   - Argument and option handling with a usage message
+   - Input validation and clear error messages with correct exit status
+   - At least one pipeline and one regular expression
+   - A test script that exercises success and failure paths
+   - A README with installation and usage examples
+
 ## Completion requirements
 
-- Complete the required exercises and checkpoints described in the [public course requirements](requirements/SEF3.md).
+- Complete the required course exercises, checkpoints and evaluated labs below.
 - Complete the final integrated `lab` in the last module and meet its observable exit criteria.
 - Retain reproducible artifacts, verification results, design explanations, and a technical retrospective as required by the [OEE Evidence Rules](../../spec/evidence-rules.md).
+
+**Required exercises**
+
+**Practical practice:**
+
+- Restructure a directory tree using only commands.
+- Answer a data question with a pipeline.
+- Predict shell expansions, then verify them.
+- Diagnose a permission failure and a runaway process.
+- Extract a report from log files.
+- Write and debug a script that takes options and handles errors.
+
+**Exit demonstration:**
+
+Given an unfamiliar task, the learner can solve it at the command line, turn the solution into a script that handles bad input, and explain what the shell does with each part of the command line.
