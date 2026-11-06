@@ -145,7 +145,7 @@ def validate():
                         ERRORS.append(f"SEF8 module {number}: missing lab {field.lower()}")
 
 
-        if code in {"SEF4", "SEF5"}:
+        if code in {"SEF4", "SEF5", "SEF7"}:
             # Detailed assessments are embedded in the canonical course, not REVIEW.md.
             # Check the actual module count without imposing a fixed lesson cap.
             module_count = len(sections)
@@ -165,6 +165,26 @@ def validate():
                 )
                 if len(labels) != module_count:
                     ERRORS.append(f"{code}: missing or duplicated {kind} briefs")
+        if code == "SEF7":
+            # Detailed field checks for Unix safety and reproducibility.
+            # Every module has one checkpoint and one lab, without a fixed module cap.
+            lab_headers = list(re.finditer(
+                r"^\*\*Module (\d+) — [^\n]+: required lab\*\* — Required assessment details$",
+                completion, re.M,
+            ))
+            if [int(x.group(1)) for x in lab_headers] != list(range(1, len(sections) + 1)):
+                ERRORS.append("SEF7: required lab descriptions must follow module order")
+            for i, heading in enumerate(lab_headers):
+                end = lab_headers[i + 1].start() if i + 1 < len(lab_headers) else len(completion)
+                lab = completion[heading.end():end]
+                for label in ("Objective", "Prerequisites", "Environment", "Procedure",
+                              "Expected result", "Verification", "Evidence",
+                              "Failure analysis", "Acceptance"):
+                    if f"- **{label}:**" not in lab:
+                        ERRORS.append(f"SEF7 module {heading.group(1)}: missing lab {label.lower()}")
+            for safety in ("127.0.0.1", "disposable", "waitpid", "EINTR"):
+                if safety not in completion:
+                    ERRORS.append(f"SEF7: documented Unix safety/failure case missing: {safety}")
         if "required exercises" not in completion.lower() and code != "SEF10":
             ERRORS.append(f"{code}: required exercises missing from completion requirements")
         if code == "SEF10":
