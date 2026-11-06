@@ -1,0 +1,23 @@
+name: APP curriculum import integrity
+
+on:
+  pull_request:
+    paths:
+      - 'curriculum/APP/**'
+      - 'curriculum/README.md'
+      - 'scripts/check-app-curriculum.py'
+      - '.github/workflows/app-curriculum.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'curriculum/APP/**'
+      - 'curriculum/README.md'
+      - 'scripts/check-app-curriculum.py'
+
+jobs:
+  validate-app:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check APP import integrity
+        run: python3 scripts/check-app-curriculum.py
