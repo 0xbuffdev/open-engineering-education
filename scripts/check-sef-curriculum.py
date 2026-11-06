@@ -84,7 +84,7 @@ def validate():
                 ERRORS.append(f"{code} module {i+1}: lesson numbering is not sequential")
             if i == 0 and entries and not entries[0][1].startswith("Course introduction:"):
                 ERRORS.append(f"{code}: first module must start with course orientation")
-            if code in {"SEF2", "SEF3", "SEF6"}:
+            if code in {"SEF2", "SEF3", "SEF6", "SEF9"}:
                 # These courses require a purposeful checkpoint preceding
                 # each hands-on lab in the current authored curriculum.
                 kinds = [entry[2] for entry in entries]
@@ -153,7 +153,7 @@ def validate():
                         ERRORS.append(f"SEF8 module {number}: missing lab {field.lower()}")
 
 
-        if code in {"SEF1", "SEF2", "SEF3", "SEF4", "SEF5", "SEF6", "SEF7"}:
+        if code in {"SEF1", "SEF2", "SEF3", "SEF4", "SEF5", "SEF6", "SEF7", "SEF9"}:
             # Detailed assessments are embedded in the canonical course, not REVIEW.md.
             # Check the actual module count without imposing a fixed lesson cap.
             module_count = len(sections)
@@ -173,6 +173,29 @@ def validate():
                 )
                 if len(labels) != module_count:
                     ERRORS.append(f"{code}: missing or duplicated {kind} briefs")
+        if code == "SEF9":
+            # Check each module's evaluable engineering-workflow contract
+            # without limiting future module or lesson counts.
+            labs = list(re.finditer(
+                r"^\*\*Module (\d+) — [^\n]+: required lab\*\* — Required assessment details$",
+                completion, re.M,
+            ))
+            if [int(h.group(1)) for h in labs] != list(range(1, len(sections) + 1)):
+                ERRORS.append("SEF9: required labs must align with ordered modules")
+            for i, heading in enumerate(labs):
+                stop = labs[i + 1].start() if i + 1 < len(labs) else len(completion)
+                lab = completion[heading.end():stop]
+                for field in ("Objective", "Prerequisites", "Environment", "Procedure",
+                              "Expected result", "Verification", "Evidence",
+                              "Failure analysis", "Acceptance"):
+                    if f"- **{field}:**" not in lab:
+                        ERRORS.append(f"SEF9 module {heading.group(1)}: missing {field.lower()}")
+            # Verify that public requirements preserve meaningful model
+            # skepticism and do not make paid access a completion condition.
+            for required in ("No paid AI service", "synthetic", "untrusted",
+                             "independent reviewer", "unassisted", "permissions"):
+                if required not in completion:
+                    ERRORS.append(f"SEF9: missing AI-assisted engineering safeguard: {required}")
         if code == "SEF6":
             # C memory-safety contracts are inline with the canonical course,
             # checked against current modules rather than a module count cap.
