@@ -82,6 +82,14 @@ def validate():
                 errors.append(f"{code} module {i+1}: nonsequential lessons")
             if i == 0 and entries and not entries[0][1].startswith("Course introduction:"):
                 errors.append(f"{code}: first lesson must orient the learner")
+            if code == "APP2":
+                # APP2's tested component and browser workflows culminate in
+                # a practical lab; compare to actual authored module count.
+                kinds = [e[2] for e in entries]
+                if kinds.count("test") != 1 or kinds.count("lab") != 1:
+                    errors.append(f"APP2 module {i+1}: expected one test and lab")
+                elif kinds.index("test") > kinds.index("lab"):
+                    errors.append(f"APP2 module {i+1}: test must precede lab")
             if code == "APP1":
                 # Every APP1 module has one purposeful checkpoint preceding
                 # its lab. No assumption about future module/lesson counts.
@@ -95,6 +103,47 @@ def validate():
         completion = data.split("## Completion requirements", 1)[-1]
         if not re.search(r"\*\*Final integration lab — [^\n]+:\*\*", completion):
             errors.append(f"{code}: final lab brief missing")
+        if code == "APP2":
+            # Structural checks for public typed assessments and browser labs.
+            # They do not claim the learner or tooling actually reproduced them.
+            checkpoints = list(re.finditer(
+                r"^\*\*Module (\d+) — [^\n]+: checkpoint\*\* — Required assessment details$",
+                completion, re.M,
+            ))
+            labs = list(re.finditer(
+                r"^\*\*Module (\d+) — [^\n]+: required lab\*\* — Required assessment details$",
+                completion, re.M,
+            ))
+            expected = list(range(1, len(sections) + 1))
+            if [int(h.group(1)) for h in checkpoints] != expected:
+                errors.append("APP2: checkpoints must match ordered modules")
+            if [int(h.group(1)) for h in labs] != expected:
+                errors.append("APP2: lab contracts must match ordered modules")
+            for i, checkpoint in enumerate(checkpoints):
+                if i >= len(labs):
+                    break
+                lab_header = labs[i]
+                if checkpoint.start() >= lab_header.start() or checkpoint.group(1) != lab_header.group(1):
+                    errors.append(f"APP2 module {checkpoint.group(1)}: checkpoint must precede its lab")
+                    continue
+                questions = completion[checkpoint.end():lab_header.start()]
+                if len(re.findall(r"^- \*\*Q[12] \(free\):\*\*", questions, re.M)) != 2:
+                    errors.append(f"APP2 module {checkpoint.group(1)}: two explained questions needed")
+                if questions.count("Expected answer and scoring:") != 2:
+                    errors.append(f"APP2 module {checkpoint.group(1)}: answer guidance missing")
+            for i, heading in enumerate(labs):
+                end = labs[i + 1].start() if i + 1 < len(labs) else len(completion)
+                lab = completion[heading.end():end]
+                for field in ("Objective", "Prerequisites", "Environment", "Procedure",
+                              "Expected result", "Verification", "Evidence",
+                              "Failure analysis", "Acceptance"):
+                    if f"- **{field}:**" not in lab:
+                        errors.append(f"APP2 module {heading.group(1)}: missing {field.lower()}")
+            for keyword in ("TypeScript", "strict", "runtime", "127.0.0.1",
+                            "keyboard", "stale", "accessibility",
+                            "performance", "free", "framework"):
+                if keyword.lower() not in completion.lower():
+                    errors.append(f"APP2: missing frontend safety/evidence topic: {keyword}")
         if code == "APP1":
             # These checks assert the published assessment contract, not
             # executed network behavior or readiness beyond 'draft'.
