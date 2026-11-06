@@ -1,0 +1,21 @@
+name: SEF curriculum import integrity
+
+on:
+  pull_request:
+    paths:
+      - 'curriculum/SEF/**'
+      - 'scripts/check-sef-curriculum.py'
+      - '.github/workflows/sef-curriculum.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'curriculum/SEF/**'
+      - 'scripts/check-sef-curriculum.py'
+
+jobs:
+  validate-sef:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check SEF import integrity
+        run: python3 scripts/check-sef-curriculum.py
