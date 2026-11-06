@@ -145,7 +145,7 @@ def validate():
                         ERRORS.append(f"SEF8 module {number}: missing lab {field.lower()}")
 
 
-        if code in {"SEF4", "SEF5", "SEF7"}:
+        if code in {"SEF1", "SEF4", "SEF5", "SEF7"}:
             # Detailed assessments are embedded in the canonical course, not REVIEW.md.
             # Check the actual module count without imposing a fixed lesson cap.
             module_count = len(sections)
@@ -165,6 +165,28 @@ def validate():
                 )
                 if len(labels) != module_count:
                     ERRORS.append(f"{code}: missing or duplicated {kind} briefs")
+        if code == "SEF1":
+            # Foundation-level assessment is self-contained: no programming
+            # prerequisite, simulator gate work and consistent toy ISA.
+            lab_headers = list(re.finditer(
+                r"^\*\*Module (\d+) — [^\n]+: required lab\*\* — Required assessment details$",
+                completion, re.M,
+            ))
+            if [int(x.group(1)) for x in lab_headers] != list(range(1, len(sections) + 1)):
+                ERRORS.append("SEF1: required lab descriptions must follow module order")
+            for i, heading in enumerate(lab_headers):
+                stop = lab_headers[i + 1].start() if i + 1 < len(lab_headers) else len(completion)
+                lab = completion[heading.end():stop]
+                for field in ("Objective", "Prerequisites", "Environment", "Procedure",
+                              "Expected result", "Verification", "Evidence",
+                              "Failure analysis", "Acceptance"):
+                    if f"- **{field}:**" not in lab:
+                        ERRORS.append(f"SEF1 module {heading.group(1)}: missing lab {field.lower()}")
+            for requirement in ("**Shared educational machine model", "0xF0", "0xF1",
+                                "LDI", "ADDI", "STORE", "JZ", "HALT", "modulo 256",
+                                "No programming experience"):
+                if requirement not in text:
+                    ERRORS.append(f"SEF1: missing beginner/reference machine requirement: {requirement}")
         if code == "SEF7":
             # Detailed field checks for Unix safety and reproducibility.
             # Every module has one checkpoint and one lab, without a fixed module cap.
