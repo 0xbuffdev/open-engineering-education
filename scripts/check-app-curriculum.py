@@ -82,11 +82,61 @@ def validate():
                 errors.append(f"{code} module {i+1}: nonsequential lessons")
             if i == 0 and entries and not entries[0][1].startswith("Course introduction:"):
                 errors.append(f"{code}: first lesson must orient the learner")
+            if code == "APP1":
+                # Every APP1 module has one purposeful checkpoint preceding
+                # its lab. No assumption about future module/lesson counts.
+                kinds = [e[2] for e in entries]
+                if kinds.count("test") != 1 or kinds.count("lab") != 1:
+                    errors.append(f"APP1 module {i+1}: one test and lab required")
+                elif kinds.index("test") > kinds.index("lab"):
+                    errors.append(f"APP1 module {i+1}: test must precede lab")
             if i == len(sections)-1 and entries and entries[-1][2] != "lab":
                 errors.append(f"{code}: final integration lab missing")
         completion = data.split("## Completion requirements", 1)[-1]
         if not re.search(r"\*\*Final integration lab — [^\n]+:\*\*", completion):
             errors.append(f"{code}: final lab brief missing")
+        if code == "APP1":
+            # These checks assert the published assessment contract, not
+            # executed network behavior or readiness beyond 'draft'.
+            checkpoint_headers = list(re.finditer(
+                r"^\*\*Module (\d+) — [^\n]+: checkpoint\*\* — Required assessment details$",
+                completion, re.M,
+            ))
+            lab_headers = list(re.finditer(
+                r"^\*\*Module (\d+) — [^\n]+: required lab\*\* — Required assessment details$",
+                completion, re.M,
+            ))
+            expected = list(range(1, len(sections) + 1))
+            if [int(h.group(1)) for h in checkpoint_headers] != expected:
+                errors.append("APP1: checkpoints must match the actual modules in order")
+            if [int(h.group(1)) for h in lab_headers] != expected:
+                errors.append("APP1: lab contracts must match the actual modules in order")
+            for index, heading in enumerate(checkpoint_headers):
+                if index >= len(lab_headers):
+                    break
+                lab_heading = lab_headers[index]
+                if int(heading.group(1)) != int(lab_heading.group(1)):
+                    continue
+                if heading.start() >= lab_heading.start():
+                    errors.append(f"APP1 module {heading.group(1)}: checkpoint must precede lab")
+                    continue
+                questions = completion[heading.end():lab_heading.start()]
+                if len(re.findall(r"^- \*\*Q[12] \(free\):\*\*", questions, re.M)) != 2:
+                    errors.append(f"APP1 module {heading.group(1)}: expected two explained questions")
+                if questions.count("Expected answer and scoring:") != 2:
+                    errors.append(f"APP1 module {heading.group(1)}: answer guidance missing")
+            for i, heading in enumerate(lab_headers):
+                end = lab_headers[i+1].start() if i+1 < len(lab_headers) else len(completion)
+                lab = completion[heading.end():end]
+                for field in ("Objective", "Prerequisites", "Environment", "Procedure",
+                              "Expected result", "Verification", "Evidence",
+                              "Failure analysis", "Acceptance"):
+                    if f"- **{field}:**" not in lab:
+                        errors.append(f"APP1 module {heading.group(1)}: missing lab {field.lower()}")
+            for required in ("127.0.0.1", "DNS", "TLS", "304", "CORS",
+                             "idempotency", "shared", "framework", "no paid service"):
+                if required.lower() not in completion.lower():
+                    errors.append(f"APP1: missing HTTP safety or reproducibility term: {required}")
         if code == "APP9":
             if "**Project defense:**" not in completion or "graduation requirement" not in completion:
                 errors.append("APP9: project defense or graduation requirement missing")
