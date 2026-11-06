@@ -3,7 +3,7 @@
 **Program:** SEF — Software Engineering Foundations
 **Type:** `course`
 **Prerequisites:** [SEF3](SEF3.md), [SEF4](SEF4.md), [SEF5](SEF5.md)
-**Duration:** 6 weeks
+**Duration:** 8 weeks
 **Status:** `draft`
 **Expected workload:** 10–15 focused hours/week
 
@@ -28,6 +28,7 @@ By the end of the course, the learner will be able to:
 - Explain how C source becomes a linked, loadable executable.
 - Diagnose segmentation faults, leaks, and other memory errors with a debugger and sanitizers.
 - Implement familiar data structures in C and compare C's manual lifetimes with Python's reference model.
+- Recognize defined versus undefined C behavior and enforce ownership, buffer-length and failure-handling contracts.
 
 ## Modules
 
@@ -139,7 +140,41 @@ By the end of the course, the learner will be able to:
 7. **Source to executable** — `test`
 8. **Diagnose a segmentation fault** — `lab`
 
-### Module 7 — C Data-Structure Library
+### Module 7 — C Semantics & Undefined Behavior
+
+#### Outcomes
+
+- Distinguish portable, defined behavior from compiler-dependent assumptions.
+- Diagnose or prevent one material error.
+
+#### Lessons
+
+1. **Integer promotions, signedness and overflow** — `lesson`
+2. **Arrays, pointer arithmetic and bounds** — `lesson`
+3. **Object lifetime and aliasing basics** — `lesson`
+4. **Undefined versus implementation-defined behavior** — `lesson`
+5. **Const correctness and interfaces** — `lesson`
+6. **C Semantics & Undefined Behavior reasoning** — `test`
+7. **Repair a C undefined-behavior defect** — `lab`
+
+### Module 8 — Ownership, Interfaces & Defensive Parsing
+
+#### Outcomes
+
+- Build a robust C interface with explicit resource ownership.
+- Diagnose or prevent one material error.
+
+#### Lessons
+
+1. **Resource ownership and cleanup paths** — `lesson`
+2. **Header contracts and separate compilation** — `lesson`
+3. **Buffer lengths and binary/text representation** — `lesson`
+4. **Recoverable error returns and diagnostics** — `lesson`
+5. **Parser validation and testing malformed inputs** — `lesson`
+6. **Ownership, Interfaces & Defensive Parsing reasoning** — `test`
+7. **Harden a length-bounded parser** — `lab`
+
+### Module 9 — C Data-Structure Library
 
 #### Outcomes
 
@@ -184,6 +219,27 @@ Complete these required exercises:
 - **Fix memory errors:** Repair a program containing a leak, a double free, and an overrun, and explain how each corrupts or wastes memory.
 - **Model a record file:** Define a structure, read and write records to a file, and handle malformed input without crashing.
 - **Diagnose a segmentation fault:** Locate and fix a segmentation fault in an unfamiliar program using the debugger and a sanitizer, recording each hypothesis and its result.
+
+**Additional required practical assessments:**
+
+- **Module 7 — Repair a C undefined-behavior defect:**
+  - Objective: Distinguish portable, defined behavior from compiler-dependent assumptions.
+  - Environment: Document safe fixtures, runtime/compiler versions and necessary command lines.
+  - Procedure: Use compiler warnings and sanitizers to locate a signed-overflow or bounds error and repair it with checked operations.
+  - Verification: Boundary tests pass with configured toolchains and no known sanitizer findings.
+  - Evidence: Include source, failing and passing checks, diagnostic output, assumptions and a retrospective.
+  - Failure analysis: Identify an invalid assumption or negative path and justify the verified correction.
+- **Module 8 — Harden a length-bounded parser:**
+  - Objective: Build a robust C interface with explicit resource ownership.
+  - Environment: Document safe fixtures, runtime/compiler versions and necessary command lines.
+  - Procedure: Write a parser that rejects empty, truncated and oversized records, and prove cleanup on failure.
+  - Verification: Tests reject malformed cases, memory is released, and the header defines ownership.
+  - Evidence: Include source, failing and passing checks, diagnostic output, assumptions and a retrospective.
+  - Failure analysis: Identify an invalid assumption or negative path and justify the verified correction.
+
+**Final integration extension:**
+
+- Include an explicit negative case, reproducible build and explanation of the expanded outcomes in the final lab or defense.
 
 **Exit demonstration:**
 

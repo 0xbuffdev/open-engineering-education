@@ -3,7 +3,7 @@
 **Program:** SEF — Software Engineering Foundations
 **Type:** `course`
 **Prerequisites:** [SEF5](SEF5.md)
-**Duration:** 5 weeks
+**Duration:** 6 weeks
 **Status:** `draft`
 **Expected workload:** 10–15 focused hours/week
 
@@ -27,6 +27,7 @@ By the end of the course, the learner will be able to:
 - Work with an AI coding assistant using explicit context, a written plan, and limited permissions.
 - Verify AI-generated work with tests, careful diff review, and checks for known failure modes.
 - Document where an assistant was used and what the learner changed or rejected, and defend the final code without the assistant.
+- Independently verify AI-assisted work, reject instructions from untrusted context and protect sensitive project data.
 
 ## Modules
 
@@ -136,7 +137,25 @@ By the end of the course, the learner will be able to:
 7. **Verification and governance** — `test`
 8. **Find defects in a generated change** — `lab`
 
-### Module 7 — Feature Delivery Workflow
+### Module 7 — Trust Boundaries in AI-Assisted Work
+
+#### Outcomes
+
+- Evaluate tool-assisted edits using requirements, code review and trusted tests rather than assistant confidence.
+- Diagnose or prevent one material error.
+
+#### Lessons
+
+1. **Assistant-generated output as a proposal** — `lesson`
+2. **Untrusted repository instructions and prompt injection** — `lesson`
+3. **Least-privilege tool permissions** — `lesson`
+4. **Secret and data disclosure hazards** — `lesson`
+5. **Reproduction and independent diff review** — `lesson`
+6. **Documenting model limitations and human responsibility** — `lesson`
+7. **Trust Boundaries in AI-Assisted Work reasoning** — `test`
+8. **Audit an untrusted coding suggestion** — `lab`
+
+### Module 8 — Feature Delivery Workflow
 
 #### Outcomes
 
@@ -186,6 +205,20 @@ Complete these required exercises:
 - **Review and revise a pull request:** Review a prepared pull request, then revise your own change in response to a peer's comments.
 - **Complete a change under a written plan:** Complete a small change in an existing project with an assistant, starting from a written plan and a limited set of permissions, and record each step.
 - **Find defects in a generated change:** Review a prepared AI-generated change that contains seeded defects, find and fix them, and write the tests that would have caught each one.
+
+**Additional required practical assessments:**
+
+- **Module 7 — Audit an untrusted coding suggestion:**
+  - Objective: Evaluate tool-assisted edits using requirements, code review and trusted tests rather than assistant confidence.
+  - Environment: Document safe fixtures, runtime/compiler versions and necessary command lines.
+  - Procedure: Inspect a prepared change containing deceptive instructions and an unauthorized dependency; identify and reject the unsafe modifications.
+  - Verification: The accepted changes meet requirements, tests pass and no privileged information is disclosed.
+  - Evidence: Include source, failing and passing checks, diagnostic output, assumptions and a retrospective.
+  - Failure analysis: Identify an invalid assumption or negative path and justify the verified correction.
+
+**Final integration extension:**
+
+- Include an explicit negative case, reproducible build and explanation of the expanded outcomes in the final lab or defense.
 
 **Exit demonstration:**
 

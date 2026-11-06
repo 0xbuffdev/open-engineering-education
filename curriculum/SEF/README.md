@@ -34,18 +34,18 @@ The learner must be able to take an unfamiliar programming problem, design a sol
 
 ## Courses
 
-| Course            | Title                                           | Duration  | Prerequisite              | Kind      |
-| ----------------- | ----------------------------------------------- | --------- | ------------------------- | --------- |
-| [SEF1](SEF1.md)   | Demystifying the Computer System                | 4 weeks   | —                         | `course`  |
-| [SEF2](SEF2.md)   | Programming & Computational Thinking            | 7 weeks   | SEF1                      | `course`  |
-| [SEF3](SEF3.md)   | Linux & the Command Line                        | 6 weeks   | SEF2                      | `course`  |
-| [SEF4](SEF4.md)   | Data Structures & Algorithms                    | 6 weeks   | SEF2                      | `course`  |
-| [SEF5](SEF5.md)   | Software Engineering Practice                   | 5 weeks   | SEF2                      | `course`  |
-| [SEF6](SEF6.md)   | C Programming & Machine Memory                  | 6 weeks   | SEF3, SEF4, SEF5          | `course`  |
-| [SEF7](SEF7.md)   | Unix System Interfaces                          | 4 weeks   | SEF3, SEF6                | `course`  |
-| [SEF8](SEF8.md)   | Mathematics for Computing & AI                  | 5 weeks   | SEF2 (plus basic algebra) | `course`  |
-| [SEF9](SEF9.md)   | Professional Workflow & AI-Assisted Engineering | 5 weeks   | SEF5                      | `course`  |
-| [SEF10](SEF10.md) | Software Engineering Foundations Capstone       | 6–8 weeks | SEF1–SEF9                 | `project` |
+| Course            | Title                                           | Duration   | Prerequisite              | Kind      |
+| ----------------- | ----------------------------------------------- | ---------- | ------------------------- | --------- |
+| [SEF1](SEF1.md)   | Demystifying the Computer System                | 5 weeks    | —                         | `course`  |
+| [SEF2](SEF2.md)   | Programming & Computational Thinking            | 8 weeks    | SEF1                      | `course`  |
+| [SEF3](SEF3.md)   | Linux & the Command Line                        | 8 weeks    | SEF2                      | `course`  |
+| [SEF4](SEF4.md)   | Data Structures & Algorithms                    | 10 weeks   | SEF2                      | `course`  |
+| [SEF5](SEF5.md)   | Software Engineering Practice                   | 8 weeks    | SEF2                      | `course`  |
+| [SEF6](SEF6.md)   | C Programming & Machine Memory                  | 8 weeks    | SEF3, SEF4, SEF5          | `course`  |
+| [SEF7](SEF7.md)   | Unix System Interfaces                          | 7 weeks    | SEF3, SEF6                | `course`  |
+| [SEF8](SEF8.md)   | Mathematics for Computing & AI                  | 10 weeks   | SEF2 (plus basic algebra) | `course`  |
+| [SEF9](SEF9.md)   | Professional Workflow & AI-Assisted Engineering | 6 weeks    | SEF5                      | `course`  |
+| [SEF10](SEF10.md) | Software Engineering Foundations Capstone       | 8–10 weeks | SEF1–SEF9                 | `project` |
 
 ```text
 SEF1 → SEF2
@@ -58,7 +58,7 @@ SEF1–SEF9 → SEF10
 
 SEF8 may be taken alongside SEF4–SEF7. Instructional lessons, assessments and practical labs are identified separately in each course.
 
-Typed lesson entries must use the uniform format `1. **Title** — \`lesson\`` (or `\`test\`` / `\`lab\``). Do not add trailing inline explanations; required exercises and lab procedures belong in the course's **Completion requirements**.
+**Draft duration estimates** reflect expanded topics and require calibration with learner evidence. Typed lesson entries must use the uniform format `1. **Title** — \`lesson\`` (or `\`test\`` / `\`lab\``). Do not add trailing inline explanations; required exercises and lab procedures belong in the course's **Completion requirements**.
 
 ---
 
@@ -66,4 +66,4 @@ Typed lesson entries must use the uniform format `1. **Title** — \`lesson\`` (
 
 OEE curriculum requirements are public and free to use. [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) helps learners organize practical work and evidence. Books, free online materials, chapter references and optional purchase links are curated outside the OEE specification; using 0xNAND or purchasing a resource is not required to follow the curriculum.
 
-The imported courses retain `draft` status. Their learning outcomes, module sequence, practical requirements, and completion expectations are specified in the individual course files. The streamlined course format is proposed for initial stabilization in [specification PR #7](https://github.com/0xbuffdev/open-engineering-education/pull/7) and is pending review; these drafts do not yet claim conformance to the currently published format. The superseded RFC discussion is preserved in closed PR #6.
+All ten courses remain `draft`. This curriculum underwent an initial technical-depth expansion, but it still needs independent subject-matter review, hands-on lab reproduction, assessment question/rubric authoring, realistic pacing checks and learner evidence. The published [Course Format](../../spec/course-format.md) governs the structure. The number of modules and lessons varies with the subject rather than an arbitrary cap. See the [SEF coverage review](REVIEW.md) for the work completed and the outstanding quality gates.

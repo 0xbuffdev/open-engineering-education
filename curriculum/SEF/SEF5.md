@@ -3,7 +3,7 @@
 **Program:** SEF — Software Engineering Foundations
 **Type:** `course`
 **Prerequisites:** [SEF2](SEF2.md)
-**Duration:** 5 weeks
+**Duration:** 8 weeks
 **Status:** `draft`
 **Expected workload:** 10–15 focused hours/week
 
@@ -28,6 +28,7 @@ By the end of the course, the learner will be able to:
 - Organize a growing codebase into maintainable components.
 - Review code and explain engineering improvements.
 - Automate basic testing and quality checks with CI.
+- Develop reproducible test and CI workflows, review code changes, diagnose failures, and refactor a documented software project without altering behavior.
 
 ## Modules
 
@@ -37,6 +38,8 @@ By the end of the course, the learner will be able to:
 
 - Record, inspect, and navigate project history with Git.
 - Create, merge, and resolve conflicts between branches, and collaborate through a remote.
+
+- Recover a Git mistake without destroying unrelated work or rewriting shared history.
 
 #### Lessons
 
@@ -49,8 +52,11 @@ By the end of the course, the learner will be able to:
 5. **Merging** — `lesson`
 6. **Merge conflicts** — `lesson`
 7. **Remotes and pull requests** — `lesson`
-8. **Git workflows** — `test`
-9. **Resolve a conflict** — `lab`
+8. **Staged versus working-tree changes** — `lesson`
+9. **Reverting published changes versus rewriting history** — `lesson`
+10. **Generated files, ignore rules and secret hygiene** — `lesson`
+11. **Git workflows** — `test`
+12. **Resolve a conflict** — `lab`
 
 ### Module 2 — Testing & Debugging
 
@@ -59,6 +65,8 @@ By the end of the course, the learner will be able to:
 - Write unit tests and choose test cases that expose failures.
 - Diagnose a failing program from evidence rather than guesses.
 
+- Seed failures to establish which test layer detects which risk.
+
 #### Lessons
 
 1. **Assertions** — `lesson`
@@ -66,8 +74,11 @@ By the end of the course, the learner will be able to:
 3. **Choosing test cases** — `lesson`
 4. **Reproducing failures** — `lesson`
 5. **Debugging by evidence** — `lesson`
-6. **Testing and debugging** — `test`
-7. **Diagnose a broken program** — `lab`
+6. **Unit and integration testing responsibilities** — `lesson`
+7. **Parameterized cases, fixtures and isolation** — `lesson`
+8. **Regression cases for previously observed defects** — `lesson`
+9. **Testing and debugging** — `test`
+10. **Diagnose a broken program** — `lab`
 
 ### Module 3 — Maintainable Software
 
@@ -75,6 +86,8 @@ By the end of the course, the learner will be able to:
 
 - Recognize code smells and improve code with behavior-preserving refactorings.
 - Use logging, style guides, and code review to keep software maintainable, and read unfamiliar code.
+
+- Show a tested, reversible refactor with clear module contracts.
 
 #### Lessons
 
@@ -84,10 +97,66 @@ By the end of the course, the learner will be able to:
 4. **Logging** — `lesson`
 5. **Code review** — `lesson`
 6. **Reading unfamiliar code** — `lesson`
-7. **Maintainability** — `test`
-8. **Review a pull request** — `lab`
+7. **Module boundaries and dependency direction** — `lesson`
+8. **Behavior-preserving refactoring strategies** — `lesson`
+9. **User-facing documentation and review evidence** — `lesson`
+10. **Maintainability** — `test`
+11. **Review a pull request** — `lab`
 
-### Module 4 — Tested CLI Application
+### Module 4 — Testing Strategy & Reliability
+
+#### Outcomes
+
+- Design stable tests that expose meaningful behavioral defects.
+- Demonstrate reasoning with both ordinary and deliberately failing inputs.
+
+#### Lessons
+
+1. **Equivalence classes and boundary values** — `lesson`
+2. **State-based testing and invariants** — `lesson`
+3. **Unit, integration and end-to-end test selection** — `lesson`
+4. **Property-based testing principles** — `lesson`
+5. **Flaky tests, time and randomness** — `lesson`
+6. **Testing negative paths and side effects** — `lesson`
+7. **Testing Strategy & Reliability reasoning and diagnosis** — `test`
+8. **Repair a flaky CLI test suite** — `lab`
+
+### Module 5 — Continuous Integration & Build Reproducibility
+
+#### Outcomes
+
+- Create quality gates that fail safely and reproduce locally.
+- Demonstrate reasoning with both ordinary and deliberately failing inputs.
+
+#### Lessons
+
+1. **Dependency lockfiles and isolated environments** — `lesson`
+2. **Formatter, linter and static type checks** — `lesson`
+3. **CI workflows, stages and failure gates** — `lesson`
+4. **Secrets, permissions and untrusted CI input** — `lesson`
+5. **Clean-checkout builds and release artifacts** — `lesson`
+6. **Continuous Integration & Build Reproducibility reasoning and diagnosis** — `test`
+7. **Build a red-green CI workflow** — `lab`
+
+### Module 6 — Code Maintenance, Documentation & Handoff
+
+#### Outcomes
+
+- Produce a small reviewable change another engineer can reproduce and maintain.
+- Demonstrate reasoning with both ordinary and deliberately failing inputs.
+
+#### Lessons
+
+1. **Contracts, coupling and interface stability** — `lesson`
+2. **Logging, error context and sensitive data** — `lesson`
+3. **Small reversible changes and meaningful commit history** — `lesson`
+4. **Peer review and actionable feedback** — `lesson`
+5. **README setup and contributor guidance** — `lesson`
+6. **Dependency upgrades and technical-debt decisions** — `lesson`
+7. **Code Maintenance, Documentation & Handoff reasoning and diagnosis** — `test`
+8. **Refactor a shared feature and prepare a review** — `lab`
+
+### Module 7 — Tested CLI Application
 
 #### Outcomes
 
@@ -127,6 +196,42 @@ Complete these required exercises:
 - Turn untested code into tested code.
 - Refactor duplicated code without changing behavior.
 - Review another learner's pull request.
+
+**Expanded assessment and lab criteria:**
+
+- **Module 1 checkpoint:** Recover a Git mistake without destroying unrelated work or rewriting shared history.
+- **Module 2 checkpoint:** Seed failures to establish which test layer detects which risk.
+- **Module 3 checkpoint:** Show a tested, reversible refactor with clear module contracts.
+
+- **Module 4 — Repair a flaky CLI test suite:**
+  - Objective: Design stable tests that expose meaningful behavioral defects.
+  - Prerequisites: Complete the teaching lessons and conceptual checkpoint.
+  - Environment: Record the language/runtime and tool versions and provide self-contained safe input fixtures.
+  - Work: Add cases for invalid inputs, a previously missed edge case and a nondeterministic fixture; prove the suite runs repeatedly.
+  - Verification: Failure occurs before repair, all cases pass afterward and fixtures are deterministic.
+  - Evidence: Test matrix, failing trace, corrected code and rerun logs.
+  - Failure analysis: Explain at least one incorrect result, boundary condition or runtime failure and the correction.
+- **Module 5 — Build a red-green CI workflow:**
+  - Objective: Create quality gates that fail safely and reproduce locally.
+  - Prerequisites: Complete the teaching lessons and conceptual checkpoint.
+  - Environment: Record the language/runtime and tool versions and provide self-contained safe input fixtures.
+  - Work: Add automated tests and static checks; inject a failing test and formatting defect to verify both block delivery.
+  - Verification: CI fails for each injected defect and passes on a clean checkout with pinned tool versions.
+  - Evidence: Workflow, lockfile, logs, clean build and review record.
+  - Failure analysis: Explain at least one incorrect result, boundary condition or runtime failure and the correction.
+- **Module 6 — Refactor a shared feature and prepare a review:**
+  - Objective: Produce a small reviewable change another engineer can reproduce and maintain.
+  - Prerequisites: Complete the teaching lessons and conceptual checkpoint.
+  - Environment: Record the language/runtime and tool versions and provide self-contained safe input fixtures.
+  - Work: Improve an unfamiliar feature, preserve observed behavior, add regression tests and document setup and trade-offs.
+  - Verification: A reviewer can reproduce the feature, inspect failures and verify unchanged external behavior.
+  - Evidence: Diff, test report, review notes and updated instructions.
+  - Failure analysis: Explain at least one incorrect result, boundary condition or runtime failure and the correction.
+
+**Final integration lab extension:**
+
+- The final integrated lab must demonstrate the existing course outcomes and the additional outcomes in this expanded software engineering pathway.
+- Provide explicit negative tests, clean-checkout reproduction, explanation of assumptions, and a technical retrospective.
 
 **Exit demonstration:**
 
