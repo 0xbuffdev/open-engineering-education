@@ -2,8 +2,8 @@
 
 **Program:** SEF — Software Engineering Foundations
 **Type:** `course`
-**Prerequisites:** [SEF2](SEF2.md) (plus basic algebra)
-**Duration:** 10 weeks
+**Prerequisites:** [SEF2](SEF2.md)
+**Duration:** 11–12 weeks
 **Status:** `draft`
 **Expected workload:** 10–15 focused hours/week
 
@@ -11,17 +11,20 @@
 
 ## Overview
 
-This course teaches the mathematics that software engineering and machine learning rely on: logic, sets, combinatorics, vectors, matrices, probability, statistics, derivatives, gradients, and Big-O notation. Each topic is applied in code rather than studied in isolation.
+This course starts with mathematical literacy and pre-algebra, and then builds logic, sets, combinatorics, vectors, matrices, probability, statistics, derivatives, gradients and Big-O notation. Learners practice mathematical reasoning by hand and use Python to verify results.
 
 - [**SEF2 — Programming & Computational Thinking**](SEF2.md)
-- Basic high-school algebra.
+- No prior algebra, calculus, probability or formal mathematics course is required.
 
-SEF3–SEF7 are not prerequisites; this course may be taken alongside them.
+SEF3–SEF7 are not prerequisites; this course may be taken alongside them. The opening mathematics bridge has an ungraded entry diagnostic and a mastery check. Learners needing more practice can extend its pace; those with prior knowledge may proceed after demonstrating the same required skills.
 
 ## Learning outcomes
 
 By the end of the course, the learner will be able to:
 
+- Use whole and signed numbers, fractions, decimals, percentages, rates and exponents correctly.
+- Read mathematical notation and solve elementary equations, inequalities and input-output functions.
+- Check mathematical calculations using estimates, substitution and simple Python programs.
 - Use logical, set, and combinatorial reasoning in computational problems.
 - Perform basic vector and matrix operations.
 - Explain and calculate conditional probability and Bayes' rule.
@@ -33,7 +36,38 @@ By the end of the course, the learner will be able to:
 
 ## Modules
 
-### Module 1 — Logic, Sets & Discrete Reasoning
+### Module 1 — Mathematical Literacy & Pre-Algebra
+
+#### Outcomes
+
+- Represent and compare whole, signed, fractional, decimal and percentage quantities.
+- Perform basic operations, interpret rates and powers, and check answers through estimates and units.
+- Read symbols and expressions, solve elementary equations, and interpret inequalities, function tables and coordinates.
+- Explain reasoning by hand and verify simple mathematical results using Python.
+
+#### Lessons
+
+1. **Course introduction: Mathematics for Computing & AI** — `lesson`
+
+   Mathematics describes quantities, patterns, relationships and change. This course begins with arithmetic and simple algebraic reasoning instead of assuming prior mathematics study. Learners progress from number sense to logic, linear algebra, probability, statistics and numerical computing, using Python to check their work.
+2. **Ungraded starting-point numeracy check** — `test`
+3. **What mathematics describes: quantities, patterns and relationships** — `lesson`
+4. **Counting, whole numbers, place value and number lines** — `lesson`
+5. **Addition, subtraction, multiplication and division** — `lesson`
+6. **Order of operations, grouping and estimation** — `lesson`
+7. **Negative numbers and absolute value** — `lesson`
+8. **Fractions and their operations** — `lesson`
+9. **Decimals, percentages and conversions** — `lesson`
+10. **Ratios, proportions, rates and measurement units** — `lesson`
+11. **Powers, roots and scientific notation** — `lesson`
+12. **Symbols, variables and arithmetic expressions** — `lesson`
+13. **Solving simple linear equations and checking answers** — `lesson`
+14. **Inequalities and coordinate pairs** — `lesson`
+15. **Functions, input-output tables and basic graphs** — `lesson`
+16. **Pre-algebra readiness checkpoint** — `test`
+17. **Mathematics-to-Python workbook** — `lab`
+
+### Module 2 — Logic, Sets & Discrete Reasoning
 
 #### Outcomes
 
@@ -44,22 +78,19 @@ By the end of the course, the learner will be able to:
 
 #### Lessons
 
-1. **Course introduction: Mathematics for Computing & AI** — `lesson`
+1. **Propositional logic** — `lesson`
+2. **Quantifiers** — `lesson`
+3. **Sets** — `lesson`
+4. **Functions** — `lesson`
+5. **Counting rules** — `lesson`
+6. **Permutations and combinations** — `lesson`
+7. **Proof by contradiction and induction** — `lesson`
+8. **Relations, equivalence and orderings** — `lesson`
+9. **Graphs as mathematical objects** — `lesson`
+10. **Discrete reasoning** — `test`
+11. **Count and verify** — `lab`
 
-   Mathematics supplies the exact language of computing and the foundation of machine learning. This course teaches the parts that later courses rely on and applies each one in code.
-2. **Propositional logic** — `lesson`
-3. **Quantifiers** — `lesson`
-4. **Sets** — `lesson`
-5. **Functions** — `lesson`
-6. **Counting rules** — `lesson`
-7. **Permutations and combinations** — `lesson`
-8. **Proof by contradiction and induction** — `lesson`
-9. **Relations, equivalence and orderings** — `lesson`
-10. **Graphs as mathematical objects** — `lesson`
-11. **Discrete reasoning** — `test`
-12. **Count and verify** — `lab`
-
-### Module 2 — Vectors & Matrices
+### Module 3 — Vectors & Matrices
 
 #### Outcomes
 
@@ -83,7 +114,7 @@ By the end of the course, the learner will be able to:
 11. **Linear algebra basics** — `test`
 12. **Matrices without NumPy** — `lab`
 
-### Module 3 — Probability & Statistics
+### Module 4 — Probability & Statistics
 
 #### Outcomes
 
@@ -107,7 +138,7 @@ By the end of the course, the learner will be able to:
 11. **Probabilistic reasoning** — `test`
 12. **Simulate an experiment** — `lab`
 
-### Module 4 — Derivatives, Gradients & Complexity
+### Module 5 — Derivatives, Gradients & Complexity
 
 #### Outcomes
 
@@ -130,7 +161,7 @@ By the end of the course, the learner will be able to:
 10. **Calculus and complexity** — `test`
 11. **Check a derivative** — `lab`
 
-### Module 5 — Proofs, Relations & Graph Mathematics
+### Module 6 — Proofs, Relations & Graph Mathematics
 
 #### Outcomes
 
@@ -147,7 +178,7 @@ By the end of the course, the learner will be able to:
 6. **Proofs, Relations & Graph Mathematics reasoning and diagnosis** — `test`
 7. **Verify graph and recurrence identities** — `lab`
 
-### Module 6 — Linear Algebra for Computation
+### Module 7 — Linear Algebra for Computation
 
 #### Outcomes
 
@@ -164,7 +195,7 @@ By the end of the course, the learner will be able to:
 6. **Linear Algebra for Computation reasoning and diagnosis** — `test`
 7. **Check a linear transform** — `lab`
 
-### Module 7 — Statistical Inference & Experimental Reasoning
+### Module 8 — Statistical Inference & Experimental Reasoning
 
 #### Outcomes
 
@@ -182,7 +213,7 @@ By the end of the course, the learner will be able to:
 7. **Statistical Inference & Experimental Reasoning reasoning and diagnosis** — `test`
 8. **Analyze a simulated experiment** — `lab`
 
-### Module 8 — Numerical Methods & Optimization Foundations
+### Module 9 — Numerical Methods & Optimization Foundations
 
 #### Outcomes
 
@@ -199,7 +230,7 @@ By the end of the course, the learner will be able to:
 6. **Numerical Methods & Optimization Foundations reasoning and diagnosis** — `test`
 7. **Study gradient descent on a simple function** — `lab`
 
-### Module 9 — Numerical Computing Notebook
+### Module 10 — Numerical Computing Notebook
 
 #### Outcomes
 
@@ -225,20 +256,67 @@ Complete these required exercises:
 
 **Practical practice:**
 
+- Calculate and verify signed numbers, fractions, percentages, elementary equations and function tables by hand and in Python.
 - Implement vector operations.
 - Implement matrix multiplication.
 - Simulate probability distributions.
 - Estimate a derivative numerically.
 - Compare a numerical gradient with an analytic gradient.
 
+**Module 1 — Mathematical Literacy & Pre-Algebra: assessment** — Required details
+
+**Ungraded starting-point check:** Attempt comparable examples involving arithmetic, fractions, signed values, equations and a function table before instruction. This diagnostic identifies needed practice and is never a gatekeeping test; no entry score or prior algebra course is required.
+
+**Required pre-algebra readiness questions (or equivalent previously unseen variations):**
+
+- **Q1 — place value and comparison:** Write 307 in hundreds, tens and ones; compare 0.7 and 0.65.
+  - Expected reasoning: 3 hundreds, 0 tens, 7 ones; 0.70 > 0.65.
+- **Q2 — arithmetic order:** Evaluate `8 + 3 × 4` and `(8 + 3) × 4`.
+  - Expected reasoning: 20 and 44, respectively; multiplication has precedence unless grouped.
+- **Q3 — signed numbers:** Evaluate `-9 + 14` on a number line.
+  - Expected reasoning: 5; start at -9 and move 14 positions to the right.
+- **Q4 — fractions:** Evaluate `1/2 + 1/4` and justify the denominator.
+  - Expected reasoning: 3/4; rewrite one-half as two-quarters and add the numerators.
+- **Q5 — percentages:** Convert 0.35 to a percentage; find 20% of 150.
+  - Expected reasoning: 35% and 30, respectively.
+- **Q6 — ratios and rates:** A service processes 12 jobs in 3 minutes at a constant rate. How many jobs per minute and in 5 minutes?
+  - Expected reasoning: 4 jobs/minute, then 20 jobs, conditional on the constant-rate assumption.
+- **Q7 — powers and notation:** Expand `3.2 × 10³` and calculate `2³`.
+  - Expected reasoning: 3,200 and 8.
+- **Q8 — algebra and substitution:** Solve `3x + 4 = 19` and verify by substitution.
+  - Expected reasoning: x = 5; 3×5+4 = 19.
+- **Q9 — functions and coordinates:** For `f(x) = 2x + 1`, calculate f(3) and write its graph point.
+  - Expected reasoning: f(3) = 7 and coordinate (3,7).
+- **Q10 — inequalities and units:** Solve `x + 2 < 5`; express 6 metres in 3 seconds in metres per second.
+  - Expected reasoning: x < 3 and 2 m/s. Explain the inequality and division of units.
+
+**Checkpoint acceptance:** Demonstrate every essential skill: number sense and order of operations, signed arithmetic, fractions and percentages, ratios and units, powers, equations and coordinate/function interpretation. If a category is incorrect, teach it again and reassess with new numbers and a reasoned explanation. No penalty or fixed attempt limit applies. A correct guess without an explanation does not demonstrate mastery.
+
+**Module 1 — Mathematics-to-Python workbook: required lab** — Required details
+
+- **Objective:** Connect elementary mathematical reasoning to reproducible Python calculations and explain discrepancies.
+- **Prerequisites:** Complete SEF2 and the bridge lessons, or demonstrate equivalent mastery in the readiness checkpoint.
+- **Environment:** Local Python 3.11+ standard library, editor or REPL, and paper/digital notes. Record actual runtime version. No packages, payment or internet connection required.
+- **Procedure:**
+  1. Show handwritten or typed steps for a signed-number operation, a fraction addition, a percentage calculation and a simple linear equation.
+  2. Verify the same examples with a short Python script. Use `fractions.Fraction` to represent exact rational numbers.
+  3. Produce an input/output table for `f(x) = 2x + 1` at x = -2, -1, 0, 1 and 2; describe its coordinate points.
+  4. Check normal and edge cases including division by zero, incorrect operator precedence and a fraction-denominator mistake.
+  5. Reproduce one intentional incorrect calculation and explain the correction and which mathematical rule was applied.
+- **Expected result:** Exact fractional results agree with the hand calculations; the function table is (-2,-3), (-1,-1), (0,1), (1,3), (2,5); invalid operations are handled or clearly explained.
+- **Verification:** Run the documented Python script from a clean environment and compare its printed results with the independently computed expected values and manual work.
+- **Evidence:** Calculations, Python source, commands, actual output, function table, wrong/corrected result, tool version and a brief reflection.
+- **Failure analysis:** Distinguish a mathematical error from a precedence error or binary floating-point approximation.
+- **Acceptance:** A reviewer can reproduce results and verify every required arithmetic/algebra capability; remediate any missing skill before Module 2.
+
 **Expanded assessment and lab criteria:**
 
-- **Module 1 checkpoint:** Use a short proof or counterexample to verify a combinatorial claim.
-- **Module 2 checkpoint:** Classify a matrix computation and detect a singular system rather than silently returning a result.
-- **Module 3 checkpoint:** Verify a probability claim analytically and by simulation, describing uncertainty.
-- **Module 4 checkpoint:** Compare finite-difference gradients at different step sizes and explain error.
+- **Module 2 checkpoint:** Use a short proof or counterexample to verify a combinatorial claim.
+- **Module 3 checkpoint:** Classify a matrix computation and detect a singular system rather than silently returning a result.
+- **Module 4 checkpoint:** Verify a probability claim analytically and by simulation, describing uncertainty.
+- **Module 5 checkpoint:** Compare finite-difference gradients at different step sizes and explain error.
 
-- **Module 5 — Verify graph and recurrence identities:**
+- **Module 6 — Verify graph and recurrence identities:**
   - Objective: Construct elementary proofs and identify false claims with counterexamples.
   - Prerequisites: Complete the teaching lessons and conceptual checkpoint.
   - Environment: Record the language/runtime and tool versions and provide self-contained safe input fixtures.
@@ -246,7 +324,7 @@ Complete these required exercises:
   - Verification: State conditions precisely and compare code outputs with an independently reasoned result.
   - Evidence: Proof, counterexample, enumerator and assumptions.
   - Failure analysis: Explain at least one incorrect result, boundary condition or runtime failure and the correction.
-- **Module 6 — Check a linear transform:**
+- **Module 7 — Check a linear transform:**
   - Objective: Interpret ranks, transformations and degeneracy in small numerical problems.
   - Prerequisites: Complete the teaching lessons and conceptual checkpoint.
   - Environment: Record the language/runtime and tool versions and provide self-contained safe input fixtures.
@@ -254,7 +332,7 @@ Complete these required exercises:
   - Verification: Compute expected results by hand and compare with code, including a singular input.
   - Evidence: Computations, code and error analysis.
   - Failure analysis: Explain at least one incorrect result, boundary condition or runtime failure and the correction.
-- **Module 7 — Analyze a simulated experiment:**
+- **Module 8 — Analyze a simulated experiment:**
   - Objective: Interpret uncertainty and resist overclaiming from small samples.
   - Prerequisites: Complete the teaching lessons and conceptual checkpoint.
   - Environment: Record the language/runtime and tool versions and provide self-contained safe input fixtures.
@@ -262,7 +340,7 @@ Complete these required exercises:
   - Verification: Show coverage or uncertainty across repeated samples and explain what cannot be concluded.
   - Evidence: Scripts, plots or tables, assumptions and inference note.
   - Failure analysis: Explain at least one incorrect result, boundary condition or runtime failure and the correction.
-- **Module 8 — Study gradient descent on a simple function:**
+- **Module 9 — Study gradient descent on a simple function:**
   - Objective: Analyze basic numerical error and execute an iterative optimization with explicit stopping criteria.
   - Prerequisites: Complete the teaching lessons and conceptual checkpoint.
   - Environment: Record the language/runtime and tool versions and provide self-contained safe input fixtures.

@@ -89,6 +89,22 @@ def validate():
             ERRORS.append(f"{code}: final lesson must be an integration lab")
 
         completion = text.split("## Completion requirements", 1)[-1]
+        if code == "SEF8":
+            # No external algebra qualification; verify the beginner bridge,
+            # while keeping the module and lesson counts flexible.
+            if "plus basic algebra" in text.lower() or "basic high-school algebra" in text.lower():
+                ERRORS.append("SEF8: algebra cannot be an external prerequisite")
+            if not sections or sections[0].group(2) != "Mathematical Literacy & Pre-Algebra":
+                ERRORS.append("SEF8: beginner bridge must be the first module")
+            if "Ungraded starting-point numeracy check" not in text:
+                ERRORS.append("SEF8: ungraded diagnostic missing")
+            if "Pre-algebra readiness checkpoint" not in text or "Mathematics-to-Python workbook" not in text:
+                ERRORS.append("SEF8: readiness checkpoint and practical workbook missing")
+            if len(re.findall(r"^- \*\*Q\d+ — [^\n]+:", completion, re.M)) < 8:
+                ERRORS.append("SEF8: beginner bridge needs assessable numeracy examples")
+            if "No prior algebra" not in text:
+                ERRORS.append("SEF8: accessible mathematics entry requirement missing")
+
         if code in {"SEF4", "SEF5"}:
             # Detailed assessments are embedded in the canonical course, not REVIEW.md.
             # Check the actual module count without imposing a fixed lesson cap.
