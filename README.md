@@ -1,5 +1,6 @@
+
 <!-- markdownlint-disable MD041 -->
-<img width="1600" height="600" alt="open-engineering-education-banner" src="https://github.com/user-attachments/assets/cb738e29-6abe-461b-9d6e-4e1555d87cc6" />
+<img width="1800" height="287" alt="open-engineering-education-banner" src="https://github.com/user-attachments/assets/a6b8c842-9a5e-47e4-ae1a-6d3fabaf1c52" />
 
 # Open Engineering Education (OEE)
 
