@@ -34,18 +34,18 @@ The learner must be able to take an unfamiliar programming problem, design a sol
 
 ## Courses
 
-| Course            | Title                                           | Duration   | Prerequisite              | Kind      |
-| ----------------- | ----------------------------------------------- | ---------- | ------------------------- | --------- |
-| [SEF1](SEF1.md)   | Demystifying the Computer System                | 5 weeks    | —                         | `course`  |
-| [SEF2](SEF2.md)   | Programming & Computational Thinking            | 8 weeks    | SEF1                      | `course`  |
-| [SEF3](SEF3.md)   | Linux & the Command Line                        | 8 weeks    | SEF2                      | `course`  |
-| [SEF4](SEF4.md)   | Data Structures & Algorithms                    | 10 weeks   | SEF2                      | `course`  |
-| [SEF5](SEF5.md)   | Software Engineering Practice                   | 8 weeks    | SEF2                      | `course`  |
-| [SEF6](SEF6.md)   | C Programming & Machine Memory                  | 8 weeks    | SEF3, SEF4, SEF5          | `course`  |
-| [SEF7](SEF7.md)   | Unix System Interfaces                          | 7 weeks    | SEF3, SEF6                | `course`  |
-| [SEF8](SEF8.md)   | Mathematics for Computing & AI                  | 10 weeks   | SEF2 (plus basic algebra) | `course`  |
-| [SEF9](SEF9.md)   | Professional Workflow & AI-Assisted Engineering | 6 weeks    | SEF5                      | `course`  |
-| [SEF10](SEF10.md) | Software Engineering Foundations Capstone       | 8–10 weeks | SEF1–SEF9                 | `project` |
+| Course            | Title                                           | Duration    | Prerequisite              | Kind      |
+| ----------------- | ----------------------------------------------- | ----------- | ------------------------- | --------- |
+| [SEF1](SEF1.md)   | Demystifying the Computer System                | 5 weeks     | —                         | `course`  |
+| [SEF2](SEF2.md)   | Programming & Computational Thinking            | 8 weeks     | SEF1                      | `course`  |
+| [SEF3](SEF3.md)   | Linux & the Command Line                        | 8 weeks     | SEF2                      | `course`  |
+| [SEF4](SEF4.md)   | Data Structures & Algorithms                    | 10 weeks    | SEF2                      | `course`  |
+| [SEF5](SEF5.md)   | Software Engineering Practice                   | 8 weeks     | SEF2                      | `course`  |
+| [SEF6](SEF6.md)   | C Programming & Machine Memory                  | 8 weeks     | SEF3, SEF4, SEF5          | `course`  |
+| [SEF7](SEF7.md)   | Unix System Interfaces                          | 7 weeks     | SEF3, SEF6                | `course`  |
+| [SEF8](SEF8.md)   | Mathematics for Computing & AI                  | 11–12 weeks | SEF2                      | `course`  |
+| [SEF9](SEF9.md)   | Professional Workflow & AI-Assisted Engineering | 6 weeks     | SEF5                      | `course`  |
+| [SEF10](SEF10.md) | Software Engineering Foundations Capstone       | 8–10 weeks  | SEF1–SEF9                 | `project` |
 
 ```text
 SEF1 → SEF2
@@ -56,7 +56,7 @@ SEF5 → SEF9
 SEF1–SEF9 → SEF10
 ```
 
-SEF8 may be taken alongside SEF4–SEF7. Instructional lessons, assessments and practical labs are identified separately in each course.
+SEF8 may be taken alongside SEF4–SEF7. It begins with a self-paced mathematical literacy and pre-algebra bridge, so prior algebra is **not** an entry prerequisite; the ungraded diagnostic identifies where more practice is needed. Every learner must demonstrate basic numeracy/algebra readiness before advancing. Instructional lessons, assessments and practical labs are identified separately in each course.
 
 **Draft duration estimates** reflect expanded topics and require calibration with learner evidence. Typed lesson entries must use the uniform format `1. **Title** — \`lesson\`` (or `\`test\`` / `\`lab\``). Do not add trailing inline explanations; required exercises and lab procedures belong in the course's **Completion requirements**.
 
