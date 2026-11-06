@@ -28,7 +28,7 @@ Curriculum authors are responsible for defining course outcomes, teaching sequen
 
 Curriculum files MAY provide more specific requirements than the general specification when those requirements are appropriate to the subject. They MUST NOT contradict the specification.
 
-A course-specific requirement does not automatically become a new global requirement for OEE. A proposed change to the shared standard MUST follow the [RFC process](../rfcs/README.md).
+A course-specific requirement does not automatically become a new global requirement for OEE. A proposed change to the shared standard MUST follow the [RFC process](../rfcs/README.md), except for the one-time initial course-format stabilization documented in [Governance](../GOVERNANCE.md).
 
 ## 3. Supporting tools
 
@@ -80,4 +80,4 @@ Credentials, secrets, and private learner information MUST be handled responsibl
 
 Changes that alter the responsibilities of the specification, curriculum, tools, or reference implementation MUST be proposed through the [RFC process](../rfcs/README.md).
 
-The proposal MUST explain the affected requirements, the reason for the change, and its consequences for existing material and implementations.
+The proposal MUST explain the affected requirements, the reason for the change, and its consequences for existing material and implementations. The initial course-format stabilization exception does not authorize changes to the responsibility boundaries in this document.

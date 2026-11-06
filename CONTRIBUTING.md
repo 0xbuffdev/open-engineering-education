@@ -11,7 +11,7 @@ By contributing, you agree to follow this repository's governance, licensing, si
 3. Read the [governance policy](GOVERNANCE.md).
 4. Search existing issues and [Requests for Comments](rfcs/README.md) to check whether the proposed change has already been discussed.
 
-For a small correction, open a pull request. For a change to the normative specification or its governance, follow the RFC process first.
+For a small correction, open a pull request. For a normative change, follow the RFC process first, except for the one-time initial course-format stabilization described in [Governance](GOVERNANCE.md).
 
 ## Developer Certificate of Origin
 
@@ -41,7 +41,7 @@ Contributors retain their copyright. Contributions are submitted under the appli
 
 | Contribution                | Area                               | Expectations                                                        |
 | --------------------------- | ---------------------------------- | ------------------------------------------------------------------- |
-| Specification clarification | `spec/`                            | Follow the RFC process for normative changes.                       |
+| Specification clarification | `spec/`                            | RFC required after bootstrap.                                       |
 | Documentation corrections   | Markdown files                     | Preserve meaning, consistency, and correct attribution.             |
 | Course improvements         | `curriculum/`                      | Follow the current course format and assessment requirements.       |
 | OEE repository checks       | `scripts/check-links`, `.github/`  | Keep repository validation working.                                 |
@@ -53,7 +53,7 @@ Small spelling, grammar, formatting, and broken-link fixes generally do not requ
 
 ## Changes that require an RFC
 
-Submit an RFC before proposing changes that affect:
+Except for the one-time initial course-format stabilization described in [Governance](GOVERNANCE.md), submit an RFC before proposing changes that affect:
 
 - The principles or normative requirements in `spec/`.
 - Required course structure, assessment rules, or completion requirements.
@@ -65,7 +65,7 @@ Submit an RFC before proposing changes that affect:
 
 The RFC guide explains the proposal and decision process.
 
-A pull request MUST link to the relevant RFC when it implements an accepted normative change.
+A pull request MUST link to the relevant RFC when it implements an accepted normative change. The one-time initial course-format stabilization MUST instead record the reasons for the exception directly in its pull request.
 
 ## Quality expectations
 

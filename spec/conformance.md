@@ -35,17 +35,17 @@ An unassessed item MUST NOT be described as conforming by implication.
 A course may be assessed as conforming only when all applicable requirements below are satisfied:
 
 1. Required course metadata is present and internally consistent.
-2. Required course sections are present.
+2. The four required course sections (Overview, Learning outcomes, Modules, and Completion requirements) are present and contain the required information.
 3. Learning outcomes are observable and suitable for assessment.
 4. Prerequisites and any stated course identifiers resolve correctly.
-5. Lessons, assessments, and labs follow the required course structure.
+5. Each module identifies observable outcomes and ordered, typed lessons, including any required tests and labs; the final lesson of the final module is an integration lab.
 6. Completion requirements align with the stated outcomes.
 7. Evidence requirements are explicit and follow [Evidence Rules](evidence-rules.md).
 8. The published status label is supported by the evidence required in [Status Labels](status-labels.md).
 9. Internal links and cross-references resolve.
 10. No course instruction contradicts a normative requirement without an approved specification change.
 
-A course cannot be assessed as conforming solely because it has the required headings. Its substantive requirements and assessment design must also be reviewed.
+A course cannot be assessed as conforming solely because it has the four required headings. Its substantive outcomes, required exercises, assessment design, lab instructions, reproducibility, and completion evidence must also be reviewed. Required details MAY be included in the course or a linked public activity brief.
 
 A finding that the course structure is conforming does not automatically make the course `tested` or `verified`. Structural conformance and evidence-based course status are related but distinct determinations.
 
@@ -100,6 +100,6 @@ OEE conformance is not, by itself, proof of professional accreditation, employme
 
 ## 8. Updating the conformance rules
 
-This baseline may be revised through the [RFC process](../rfcs/README.md).
+The first draft v0.0.1 course-format baseline MAY be established through the one-time [bootstrap procedure](../GOVERNANCE.md). Subsequent normative revisions MUST follow the [RFC process](../rfcs/README.md).
 
 Changes MUST explain how the new requirements affect existing courses, program assessments, and implementations. A new requirement MUST NOT be treated as retrospectively satisfied without reviewing the relevant evidence.
