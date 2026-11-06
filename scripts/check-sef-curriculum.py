@@ -84,9 +84,9 @@ def validate():
                 ERRORS.append(f"{code} module {i+1}: lesson numbering is not sequential")
             if i == 0 and entries and not entries[0][1].startswith("Course introduction:"):
                 ERRORS.append(f"{code}: first module must start with course orientation")
-            if code in {"SEF2", "SEF3"}:
-                # Every current SEF2 module has a purposeful conceptual
-                # checkpoint preceding its practical programming lab.
+            if code in {"SEF2", "SEF3", "SEF6"}:
+                # These courses require a purposeful checkpoint preceding
+                # each hands-on lab in the current authored curriculum.
                 kinds = [entry[2] for entry in entries]
                 if kinds.count("test") < 1 or kinds.count("lab") != 1:
                     ERRORS.append(f"{code} module {i+1}: checkpoint and one required lab expected")
@@ -153,7 +153,7 @@ def validate():
                         ERRORS.append(f"SEF8 module {number}: missing lab {field.lower()}")
 
 
-        if code in {"SEF1", "SEF2", "SEF3", "SEF4", "SEF5", "SEF7"}:
+        if code in {"SEF1", "SEF2", "SEF3", "SEF4", "SEF5", "SEF6", "SEF7"}:
             # Detailed assessments are embedded in the canonical course, not REVIEW.md.
             # Check the actual module count without imposing a fixed lesson cap.
             module_count = len(sections)
@@ -173,6 +173,27 @@ def validate():
                 )
                 if len(labels) != module_count:
                     ERRORS.append(f"{code}: missing or duplicated {kind} briefs")
+        if code == "SEF6":
+            # C memory-safety contracts are inline with the canonical course,
+            # checked against current modules rather than a module count cap.
+            lab_headers = list(re.finditer(
+                r"^\*\*Module (\d+) — [^\n]+: required lab\*\* — Required assessment details$",
+                completion, re.M,
+            ))
+            if [int(h.group(1)) for h in lab_headers] != list(range(1, len(sections) + 1)):
+                ERRORS.append("SEF6: required lab contracts must follow module order")
+            for i, heading in enumerate(lab_headers):
+                end = lab_headers[i + 1].start() if i + 1 < len(lab_headers) else len(completion)
+                lab = completion[heading.end():end]
+                for field in ("Objective", "Prerequisites", "Environment", "Procedure",
+                              "Expected result", "Verification", "Evidence",
+                              "Failure analysis", "Acceptance"):
+                    if f"- **{field}:**" not in lab:
+                        ERRORS.append(f"SEF6 module {heading.group(1)}: missing lab {field.lower()}")
+            for required in ("C11", "CHAR_BIT", "signed overflow", "realloc",
+                             "AddressSanitizer", "ownership", "collision"):
+                if required not in completion:
+                    ERRORS.append(f"SEF6: missing C semantics/failure case: {required}")
         if code == "SEF3":
             # Check each required shell lab without fixing the course size.
             headers = list(re.finditer(
