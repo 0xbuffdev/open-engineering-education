@@ -33,7 +33,7 @@ Electives provide optional specialization and are **not** prerequisites for the 
 
 ## Courses
 
-Core and elective courses appear in the **same list**. **Status** here indicates `Core · draft` versus `Elective · planned`; for authored courses, the actual OEE readiness status is separately specified in each course as `draft`, `tested` or `verified`. Elective classification is not a fourth readiness status.
+Core and elective courses appear in the **same list**. Catalogue statuses combine a course's required/optional classification with its OEE readiness status: `Core · draft` or `Elective · draft`. The underlying OEE readiness status is independently `draft`, `tested` or `verified`; `elective` is a classification, **not** a fourth readiness status. Elective course files explicitly declare the `Classification` metadata field with the value `elective`.
 
 | Course | Title | Duration | Prerequisites | Kind | Status |
 | --- | --- | --- | --- | --- | --- |
@@ -46,15 +46,15 @@ Core and elective courses appear in the **same list**. **Status** here indicates
 | [APP7](APP7.md) | Deployment, Cloud & DevOps | 5 weeks | APP3, APP6 | `course` | Core · draft |
 | [APP8](APP8.md) | Production Application Architecture | 5 weeks | APP5, APP6, APP7 | `course` | Core · draft |
 | [APP9](APP9.md) | Application Engineering Capstone | 8–10 weeks | APP1–APP8 | `project` | Core · draft |
-| — | Advanced Frontend Performance | To be defined | Core APP knowledge; specific prerequisites pending | `course` (proposed) | **Elective · planned** |
-| — | Advanced Backend Architecture | To be defined | Core APP knowledge; specific prerequisites pending | `course` (proposed) | **Elective · planned** |
-| — | Realtime Systems | To be defined | Core APP knowledge; specific prerequisites pending | `course` (proposed) | **Elective · planned** |
-| — | Mobile Application Engineering | To be defined | Core APP knowledge; specific prerequisites pending | `course` (proposed) | **Elective · planned** |
-| — | API Gateways & Edge Delivery | To be defined | Core APP knowledge; specific prerequisites pending | `course` (proposed) | **Elective · planned** |
-| — | Advanced TypeScript/Rust Application Development | To be defined | Core APP knowledge; specific prerequisites pending | `course` (proposed) | **Elective · planned** |
-| — | Platform Engineering | To be defined | Core APP knowledge; specific prerequisites pending | `course` (proposed) | **Elective · planned** |
+| [APP10](APP10.md) | Advanced Frontend Performance | 5 weeks | APP2, APP6 | `course` | **Elective · draft** |
+| [APP11](APP11.md) | Advanced Backend Architecture | 6 weeks | APP3, APP4, APP6 | `course` | **Elective · draft** |
+| [APP12](APP12.md) | Realtime Systems | 5 weeks | APP3, APP5, APP6 | `course` | **Elective · draft** |
+| [APP13](APP13.md) | Mobile Application Engineering | 6 weeks | APP2, APP3 | `course` | **Elective · draft** |
+| [APP14](APP14.md) | API Gateways & Edge Delivery | 5 weeks | APP3, APP7 | `course` | **Elective · draft** |
+| [APP15](APP15.md) | Advanced TypeScript/Rust Application Development | 7 weeks | APP2, APP3, APP6 | `course` | **Elective · draft** |
+| [APP16](APP16.md) | Platform Engineering | 6 weeks | APP6, APP7 | `course` | **Elective · draft** |
 
-**Totals:** 9 core courses (8 taught courses and one project capstone), plus 7 proposed electives. Electives are listed to make the intended catalog visible; their final titles, stable identifiers, prerequisites, durations, outcomes, and course files have **not** been defined or approved. They must be authored and reviewed before being represented as available courses.
+**Totals:** 9 core courses (8 taught courses and one project capstone), plus 7 optional elective courses, all initially `draft`. Course definitions are public curriculum specifications, **not** finished teaching materials or readiness claims. APP9 remains the core capstone: APP10–APP16 are not required for graduation.
 
 ```text
 SEF10 → APP1
@@ -71,4 +71,4 @@ APP1–APP8 → APP9
 
 Every authored APP course is currently `draft`. Course files define public outcomes, module structure, required practical work and completion requirements. Reading lists, affiliate purchases and commercial teaching content remain outside OEE. Learners can work through the core sequence independently; a commercial course or proprietary platform is not a graduation requirement.
 
-**Initial import limitations:** This port preserves the source's nine core course scopes, course-level outcomes, five-module structures and practical requirements but still requires review for unambiguous test success criteria, precise lab evaluation rubrics, reproducible environment instructions and evidence collection. The seven electives are planning entries only; no elective course has been invented or declared ready.
+**Draft limitations:** The nine imported core courses and seven newly authored elective definitions need educational review of test success criteria, lab rubrics, reproducible environments, expected evidence and technical accuracy. The electives extend the public curriculum but do not alter the core progression, program completion or commercial content.

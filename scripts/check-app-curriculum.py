@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-"""Validate the nine draft APP core courses and listed proposed electives."""
+"""Validate the nine draft APP core courses and seven elective drafts."""
 from pathlib import Path
 import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 APP = ROOT / "curriculum" / "APP"
-CODES = {f"APP{i}" for i in range(1, 10)}
+CORE_CODES = {f"APP{i}" for i in range(1, 10)}
+ELECTIVE_CODES = {f"APP{i}" for i in range(10, 17)}
+CODES = CORE_CODES | ELECTIVE_CODES
 REQUIRED = ["Overview", "Learning outcomes", "Modules", "Completion requirements"]
 ELECTIVES = [
     "Advanced Frontend Performance", "Advanced Backend Architecture",
@@ -21,7 +23,7 @@ def validate():
     errors = []
     files = sorted(APP.glob("APP[0-9]*.md"))
     if {p.stem for p in files} != CODES:
-        errors.append("APP: expected APP1.md through APP9.md")
+        errors.append("APP: expected APP1.md through APP16.md")
     dependencies = {}
     for file in files:
         code = file.stem
@@ -35,6 +37,10 @@ def validate():
             errors.append(f"{code}: incorrect type")
         if f"**Status:** {TICK}draft{TICK}" not in data:
             errors.append(f"{code}: expected draft status")
+        if code in ELECTIVE_CODES and f"**Classification:** {TICK}elective{TICK}" not in data:
+            errors.append(f"{code}: expected elective classification")
+        if code in CORE_CODES and "**Classification:** `elective`" in data:
+            errors.append(f"{code}: core course cannot be an elective")
         if re.findall(r"^## (.+)$", data, re.M) != REQUIRED:
             errors.append(f"{code}: required sections must be ordered")
         if re.search(r"\b[BR][0-9]{1,3}\b|^## Course brief|^### Resource map", data, re.M):
@@ -66,7 +72,7 @@ def validate():
             if i == len(sections)-1 and entries and entries[-1][2] != "lab":
                 errors.append(f"{code}: final integration lab missing")
         completion = data.split("## Completion requirements", 1)[-1]
-        if "**Final integration lab — required work:**" not in completion:
+        if not re.search(r"\*\*Final integration lab — [^\n]+:\*\*", completion):
             errors.append(f"{code}: final lab brief missing")
         if code == "APP9":
             if "**Project defense:**" not in completion or "graduation requirement" not in completion:
@@ -90,12 +96,13 @@ def validate():
     for code in CODES:
         if f"[{code}]({code}.md)" not in catalog:
             errors.append(f"APP catalog: missing core course {code}")
-    for title in ELECTIVES:
+    for index, title in enumerate(ELECTIVES, 10):
+        code = f"APP{index}"
         line = next((x for x in catalog.splitlines() if x.startswith("|") and title in x), "")
-        if "**Elective · planned**" not in line:
-            errors.append(f"APP catalog: missing planned elective {title}")
-    if catalog.count("**Elective · planned**") != len(ELECTIVES):
-        errors.append("APP catalog: seven electives expected")
+        if f"[{code}]({code}.md)" not in line or "**Elective · draft**" not in line:
+            errors.append(f"APP catalog: missing linked draft elective {code}: {title}")
+    if catalog.count("**Elective · draft**") != len(ELECTIVES):
+        errors.append("APP catalog: exactly seven elective drafts expected")
     if "Electives provide optional specialization" not in catalog:
         errors.append("APP catalog: electives must not be graduation requirements")
 
@@ -116,7 +123,7 @@ def validate():
     if errors:
         print("\n".join("ERROR: " + x for x in errors), file=sys.stderr)
         return 1
-    print(f"APP structural validation passed: {len(files)} core drafts and {len(ELECTIVES)} planned electives")
+    print(f"APP structural validation passed: {len(CORE_CODES)} core drafts and {len(ELECTIVE_CODES)} elective drafts")
     return 0
 
 if __name__ == "__main__":
