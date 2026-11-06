@@ -89,18 +89,26 @@ def validate():
             ERRORS.append(f"{code}: final lesson must be an integration lab")
 
         completion = text.split("## Completion requirements", 1)[-1]
-        if code == "SEF4":
-            # The assessment quality contract is embedded in the canonical course,
-            # rather than maintained in a separate review document.
-            for module_number in range(1, 9):
-                if f"**Module {module_number} — " not in completion:
-                    ERRORS.append(f"SEF4: missing detailed assessment for module {module_number}")
-            if len(re.findall(r"^- \*\*Q[12] \(free\):\*\*", completion, re.M)) != 16:
-                ERRORS.append("SEF4: expected two scored review prompts for each of eight modules")
-            if len(re.findall(r"^- \*\*Objective:\*\*", completion, re.M)) != 8:
-                ERRORS.append("SEF4: every module must specify its required lab objective")
-            if len(re.findall(r"^- \*\*Acceptance:\*\*", completion, re.M)) != 8:
-                ERRORS.append("SEF4: each lab must specify reproducible acceptance criteria")
+        if code in {"SEF4", "SEF5"}:
+            # Detailed assessments are embedded in the canonical course, not REVIEW.md.
+            # Check the actual module count without imposing a fixed lesson cap.
+            module_count = len(sections)
+            for number in range(1, module_count + 1):
+                if f"**Module {number} — " not in completion:
+                    ERRORS.append(f"{code}: missing detailed assessment for module {number}")
+            if len(re.findall(r"^- \*\*Q[12] \(free\):\*\*", completion, re.M)) != 2 * module_count:
+                ERRORS.append(f"{code}: expected two checkpoint questions per module")
+            for label in ("Objective", "Acceptance"):
+                matches = re.findall(r"^- \*\*" + label + r":\*\*", completion, re.M)
+                if len(matches) != module_count:
+                    ERRORS.append(f"{code}: expected one lab {label.lower()} for each module")
+            for kind in ("checkpoint", "required lab"):
+                labels = re.findall(
+                    r"^\*\*Module \d+ — [^\n]+: " + kind + r"\*\* — Required assessment details$",
+                    completion, re.M,
+                )
+                if len(labels) != module_count:
+                    ERRORS.append(f"{code}: missing or duplicated {kind} briefs")
         if "required exercises" not in completion.lower() and code != "SEF10":
             ERRORS.append(f"{code}: required exercises missing from completion requirements")
         if code == "SEF10":
