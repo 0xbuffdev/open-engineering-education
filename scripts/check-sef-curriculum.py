@@ -105,6 +105,46 @@ def validate():
             if "No prior algebra" not in text:
                 ERRORS.append("SEF8: accessible mathematics entry requirement missing")
 
+            # Every post-bridge module requires an inspectable checkpoint and
+            # laboratory brief; newly authored modules are automatically checked.
+            for match in sections[1:]:
+                number = int(match.group(1))
+                checkpoint_pattern = (
+                    r"^\*\*Module " + str(number) +
+                    r" — [^\n]+: checkpoint\*\* — Required assessment details$"
+                )
+                lab_pattern = (
+                    r"^\*\*Module " + str(number) +
+                    r" — [^\n]+: required lab\*\* — Required assessment details$"
+                )
+                checkpoint_matches = list(re.finditer(checkpoint_pattern, completion, re.M))
+                lab_matches = list(re.finditer(lab_pattern, completion, re.M))
+                if len(checkpoint_matches) != 1 or len(lab_matches) != 1:
+                    ERRORS.append(f"SEF8 module {number}: checkpoint and required lab briefs missing or duplicated")
+                    continue
+                checkpoint_start = checkpoint_matches[0].end()
+                lab_start = lab_matches[0].start()
+                lab_end = next(
+                    (m.start() for m in re.finditer(r"^\*\*Module \d+ — ", completion, re.M)
+                     if m.start() > lab_matches[0].start()),
+                    len(completion),
+                )
+                if lab_start <= checkpoint_start:
+                    ERRORS.append(f"SEF8 module {number}: assessment must precede practical lab")
+                    continue
+                checkpoint_text = completion[checkpoint_start:lab_start]
+                lab_text = completion[lab_matches[0].end():lab_end]
+                if len(re.findall(r"^- \*\*Q\d+ \(free\):\*\*", checkpoint_text, re.M)) < 2:
+                    ERRORS.append(f"SEF8 module {number}: at least two explained checkpoint questions required")
+                if "Expected answer and scoring:" not in checkpoint_text:
+                    ERRORS.append(f"SEF8 module {number}: expected-answer guidance missing")
+                for field in ("Objective", "Prerequisites", "Environment", "Procedure",
+                              "Expected result", "Verification", "Evidence",
+                              "Failure analysis", "Acceptance"):
+                    if f"- **{field}:**" not in lab_text:
+                        ERRORS.append(f"SEF8 module {number}: missing lab {field.lower()}")
+
+
         if code in {"SEF4", "SEF5"}:
             # Detailed assessments are embedded in the canonical course, not REVIEW.md.
             # Check the actual module count without imposing a fixed lesson cap.
