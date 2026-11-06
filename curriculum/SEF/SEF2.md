@@ -3,7 +3,7 @@
 **Program:** SEF — Software Engineering Foundations
 **Type:** `course`
 **Prerequisites:** [SEF1](SEF1.md)
-**Duration:** 7 weeks
+**Duration:** 8 weeks
 **Status:** `draft`
 **Expected workload:** 10–15 focused hours/week
 
@@ -32,6 +32,7 @@ By the end of the course, the learner will be able to:
 - Read and debug small programs written by others.
 - Explain the control flow and major design decisions of programs they have written.
 - Build a small command-line application from a specification.
+- Test program state, mutable aliases, input parsing and file failure behavior independently of tutorials.
 
 ## Modules
 
@@ -180,7 +181,41 @@ By the end of the course, the learner will be able to:
 6. **Errors and debugging** — `test`
 7. **Repair a program** — `lab`
 
-### Module 9 — Command-Line Task Manager
+### Module 9 — Mutation & Function Contracts
+
+#### Outcomes
+
+- Predict and test state mutation across function calls.
+- Diagnose an unexpected result using observable evidence.
+
+#### Lessons
+
+1. **Names, objects and identity** — `lesson`
+2. **Mutable aliases and copies** — `lesson`
+3. **Nested collection behavior** — `lesson`
+4. **Parameters, side effects and returns** — `lesson`
+5. **Preconditions and assertions** — `lesson`
+6. **Mutation & Function Contracts reasoning** — `test`
+7. **Repair an aliasing defect** — `lab`
+
+### Module 10 — Reliable Files & Input
+
+#### Outcomes
+
+- Build a robust file-processing command with predictable failure behavior.
+- Diagnose an unexpected result using observable evidence.
+
+#### Lessons
+
+1. **Text encodings and newlines** — `lesson`
+2. **CSV and JSON error handling** — `lesson`
+3. **Exceptions versus result values** — `lesson`
+4. **Safe file writes and temporary files** — `lesson`
+5. **Boundary tests and CLI contracts** — `lesson`
+6. **Reliable Files & Input reasoning** — `test`
+7. **Harden a dataset converter** — `lab`
+
+### Module 11 — Command-Line Task Manager
 
 #### Outcomes
 
@@ -237,6 +272,27 @@ Complete these required exercises:
 - Parse a real text or CSV dataset into structured records.
 - Add validation and error handling to a broken program.
 - Turn a written specification into a small command-line tool.
+
+**Additional required practical assessments:**
+
+- **Module 9 — Repair an aliasing defect:**
+  - Objective: Predict and test state mutation across function calls.
+  - Environment: Document local tools, versions and input fixtures.
+  - Procedure: Reproduce a shallow-copy bug and repair it with explicit ownership of nested state.
+  - Verification: Tests demonstrate correct isolation and explain changed object identities.
+  - Evidence: Retain implementation, failure test, trace and a short engineering explanation.
+  - Failure analysis: Explain the injected or encountered error and the verified repair.
+- **Module 10 — Harden a dataset converter:**
+  - Objective: Build a robust file-processing command with predictable failure behavior.
+  - Environment: Document local tools, versions and input fixtures.
+  - Procedure: Parse malformed input and write output without corrupting an existing valid result.
+  - Verification: Invalid data fails predictably, prior output remains intact, and tests cover edge cases.
+  - Evidence: Retain implementation, failure test, trace and a short engineering explanation.
+  - Failure analysis: Explain the injected or encountered error and the verified repair.
+
+**Final integration extension:**
+
+- Demonstrate the added course outcomes in the final lab with clean-checkout reproduction, invalid-input tests and a technical retrospective.
 
 **Exit demonstration:**
 

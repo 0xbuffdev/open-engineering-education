@@ -3,7 +3,7 @@
 **Program:** SEF — Software Engineering Foundations
 **Type:** `project`
 **Prerequisites:** [SEF1](SEF1.md)–[SEF9](SEF9.md)
-**Duration:** 6–8 weeks
+**Duration:** 8–10 weeks
 **Status:** `draft`
 **Expected workload:** 10–15 focused hours/week
 
@@ -28,6 +28,7 @@ By the end of the project, the learner will be able to:
 - Package and document the tool so another person can install, run, and extend it.
 - Measure one meaningful property of the tool and use the evidence to improve it.
 - Defend the implementation and explain the major design and trade-off decisions.
+- Demonstrate integrated foundations outcomes with reproducible artifacts and defensible evidence, not just a successful demo.
 
 ## Modules
 
@@ -99,7 +100,24 @@ By the end of the project, the learner will be able to:
 6. **Readiness review** — `test`
 7. **Baseline measurement** — `lab`
 
-### Module 5 — Final Project Lab
+### Module 5 — Integration, Risk & Independent Review
+
+#### Outcomes
+
+- Connect each graduation outcome to a testable project artifact and independent reproduction.
+- Diagnose or prevent one material error.
+
+#### Lessons
+
+1. **Requirements traceability and acceptance matrix** — `lesson`
+2. **Validation and error-path coverage** — `lesson`
+3. **Algorithm analysis and measurement claims** — `lesson`
+4. **Reproducible packaging and setup** — `lesson`
+5. **Technical defense and evidence indexing** — `lesson`
+6. **Integration, Risk & Independent Review reasoning** — `test`
+7. **Conduct a capstone rehearsal** — `lab`
+
+### Module 6 — Final Project Lab
 
 #### Outcomes
 
@@ -134,6 +152,20 @@ By the end of the project, the learner will be able to:
 - Complete the final integrated `lab` in the last module and meet its observable exit criteria.
 - Retain reproducible artifacts, verification results, design explanations, and a technical retrospective as required by the [OEE Evidence Rules](../../spec/evidence-rules.md).
 - Deliver, evaluate, and defend the capstone project against the published criteria.
+
+**Additional required practical assessments:**
+
+- **Module 5 — Conduct a capstone rehearsal:**
+  - Objective: Connect each graduation outcome to a testable project artifact and independent reproduction.
+  - Environment: Document safe fixtures, runtime/compiler versions and necessary command lines.
+  - Procedure: Have another environment reproduce the project setup, run negative-input tests and request one scoped change.
+  - Verification: An acceptance matrix links each requirement to evidence, and an independent build and change request succeed.
+  - Evidence: Include source, failing and passing checks, diagnostic output, assumptions and a retrospective.
+  - Failure analysis: Identify an invalid assumption or negative path and justify the verified correction.
+
+**Final integration extension:**
+
+- Include an explicit negative case, reproducible build and explanation of the expanded outcomes in the final lab or defense.
 
 **Project defense:**
 

@@ -3,7 +3,7 @@
 **Program:** SEF — Software Engineering Foundations
 **Type:** `course`
 **Prerequisites:** [SEF2](SEF2.md)
-**Duration:** 6 weeks
+**Duration:** 8 weeks
 **Status:** `draft`
 **Expected workload:** 10–15 focused hours/week
 
@@ -27,6 +27,7 @@ By the end of the course, the learner will be able to:
 - Edit files with a terminal editor and install software with a package manager.
 - Write, debug, and structure shell scripts that handle arguments, input, errors, and control flow.
 - Build a tested, documented command-line toolkit that automates a real task.
+- Build defensive shell automation with safe quoting, controlled temporary files and explicit exit/error behavior.
 
 ## Modules
 
@@ -169,7 +170,42 @@ By the end of the course, the learner will be able to:
 7. **Script control flow** — `test`
 8. **Repair a broken script** — `lab`
 
-### Module 9 — Shell Toolkit
+### Module 9 — Shell Safety & Process Boundaries
+
+#### Outcomes
+
+- Handle interrupts and unsafe pathnames predictably in scripts.
+- Diagnose an unexpected result using observable evidence.
+
+#### Lessons
+
+1. **Pipeline exit status and command failures** — `lesson`
+2. **Signals and trap cleanup** — `lesson`
+3. **Safe temporary files** — `lesson`
+4. **Pathnames with whitespace and newlines** — `lesson`
+5. **Subshell scope and environment** — `lesson`
+6. **When shell is the wrong tool** — `lesson`
+7. **Shell Safety & Process Boundaries reasoning** — `test`
+8. **Build a safe batch processor** — `lab`
+
+### Module 10 — Automation Diagnostics & Portability
+
+#### Outcomes
+
+- Diagnose a scheduled script failure from environment and process evidence.
+- Diagnose an unexpected result using observable evidence.
+
+#### Lessons
+
+1. **System logs and process inspection** — `lesson`
+2. **Scheduled jobs and PATH assumptions** — `lesson`
+3. **Process and socket diagnostics** — `lesson`
+4. **POSIX versus Bash portability** — `lesson`
+5. **Structured command-line status reporting** — `lesson`
+6. **Automation Diagnostics & Portability reasoning** — `test`
+7. **Repair a restricted-environment task** — `lab`
+
+### Module 11 — Shell Toolkit
 
 #### Outcomes
 
@@ -218,6 +254,27 @@ Complete these required exercises:
 - **Extract a report from logs:** Produce a summary report from a set of log files using only command-line tools, then adapt it to a changed log format.
 - **Write a first script:** Turn a repeated manual task into a script with a usage message, input checks, and a deliberately injected failure to diagnose.
 - **Repair a broken script:** Diagnose and fix five seeded defects in a script, using tracing, and add checks so each failure is reported clearly.
+
+**Additional required practical assessments:**
+
+- **Module 9 — Build a safe batch processor:**
+  - Objective: Handle interrupts and unsafe pathnames predictably in scripts.
+  - Environment: Document local tools, versions and input fixtures.
+  - Procedure: Process hostile filenames, inject an interrupt and verify cleanup.
+  - Verification: Unrelated files remain intact; failures are reported and reruns are safe.
+  - Evidence: Retain implementation, failure test, trace and a short engineering explanation.
+  - Failure analysis: Explain the injected or encountered error and the verified repair.
+- **Module 10 — Repair a restricted-environment task:**
+  - Objective: Diagnose a scheduled script failure from environment and process evidence.
+  - Environment: Document local tools, versions and input fixtures.
+  - Procedure: Run a job with limited PATH and permission errors, diagnose and repair it.
+  - Verification: Clean environment reproduces the failure and repaired invocation succeeds.
+  - Evidence: Retain implementation, failure test, trace and a short engineering explanation.
+  - Failure analysis: Explain the injected or encountered error and the verified repair.
+
+**Final integration extension:**
+
+- Demonstrate the added course outcomes in the final lab with clean-checkout reproduction, invalid-input tests and a technical retrospective.
 
 **Exit demonstration:**
 

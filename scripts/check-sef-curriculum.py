@@ -32,8 +32,14 @@ def validate():
     for path in courses:
         code = path.stem
         text = path.read_text(encoding="utf-8")
-        if not re.search(r"^# " + code + r" — .+", text):
+        title_match = re.search(r"^# " + code + r" — (.+)$", text, re.M)
+        if not title_match:
             ERRORS.append(f"{code}: heading or code missing")
+        catalog = (SEF / "README.md").read_text(encoding="utf-8")
+        duration = re.search(r"^\*\*Duration:\*\* (.+)$", text, re.M)
+        row = next((line for line in catalog.splitlines() if line.strip().startswith(f"| [{code}]({code}.md)")), "")
+        if title_match and duration and (not row or title_match.group(1) not in row or duration.group(1) not in row):
+            ERRORS.append(f"{code}: catalog title/duration mismatch")
         if not text.startswith("# "):
             ERRORS.append(f"{code}: heading must be first")
         for key in ("Program", "Type", "Prerequisites", "Duration", "Status"):
@@ -127,7 +133,8 @@ def validate():
     if ERRORS:
         print("\n".join("ERROR: " + issue for issue in ERRORS), file=sys.stderr)
         return 1
-    print(f"SEF structural validation passed: {len(courses)} self-contained draft courses")
+    modules = sum(len(re.findall(r"^### Module \d+ — ", course.read_text(encoding="utf-8"), re.M)) for course in courses)
+    print(f"SEF structural validation passed: {len(courses)} draft courses across {modules} modules, without fixed module/lesson caps")
     return 0
 
 

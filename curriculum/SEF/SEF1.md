@@ -3,7 +3,7 @@
 **Program:** SEF — Software Engineering Foundations
 **Type:** `course`
 **Prerequisites:** none
-**Duration:** 4 weeks
+**Duration:** 5 weeks
 **Status:** `draft`
 **Expected workload:** 10–15 focused hours/week
 
@@ -31,6 +31,7 @@ By the end of the course, the learner will be able to:
 - Explain how keyboards, displays, disks, and other peripherals communicate with the CPU.
 - Distinguish hardware, software, programs, operating systems, file systems, firmware, and the boot process.
 - Trace a simple end-to-end path from stored program to CPU execution and external output.
+- Trace instruction encoding, processor control, device output and boot boundaries in a complete simple-computer model.
 
 ## Modules
 
@@ -147,7 +148,39 @@ By the end of the course, the learner will be able to:
 5. **Instructions** — `test`
 6. **A tiny program** — `lab`
 
-### Module 8 — Hardware, Software & Booting
+### Module 8 — Instruction Encoding & Control
+
+#### Outcomes
+
+- Encode and trace a tiny instruction stream.
+- Diagnose an unexpected result using observable evidence.
+
+#### Lessons
+
+1. **Instruction fields and binary encoding** — `lesson`
+2. **Register and memory operand addressing** — `lesson`
+3. **Branch targets and status flags** — `lesson`
+4. **Instruction decoding and control signals** — `lesson`
+5. **Instruction Encoding & Control reasoning** — `test`
+6. **Hand-assemble a tiny program** — `lab`
+
+### Module 9 — I/O, Firmware & Boot
+
+#### Outcomes
+
+- Explain the processor/software/device boundary through observable state.
+- Diagnose an unexpected result using observable evidence.
+
+#### Lessons
+
+1. **Memory-mapped I/O concepts** — `lesson`
+2. **Interrupts versus polling** — `lesson`
+3. **Firmware, bootloader and OS responsibility** — `lesson`
+4. **Device adapters and error states** — `lesson`
+5. **I/O, Firmware & Boot reasoning** — `test`
+6. **Trace boot and device output** — `lab`
+
+### Module 10 — Hardware, Software & Booting
 
 #### Outcomes
 
@@ -222,6 +255,27 @@ Complete these required exercises:
 
 - **Build memory:** Predict register contents after a sequence of bus transfers on paper, then build the corresponding chip in a simulator.
 - **Build the ALU:** Trace ALU operations on paper, including the zero result, then implement the ALU in a simulator.
+
+**Additional required practical assessments:**
+
+- **Module 8 — Hand-assemble a tiny program:**
+  - Objective: Encode and trace a tiny instruction stream.
+  - Environment: Document local tools, versions and input fixtures.
+  - Procedure: Encode four instructions, trace program counter and registers, and demonstrate a conditional branch.
+  - Verification: Trace and simulator state match step by step.
+  - Evidence: Retain implementation, failure test, trace and a short engineering explanation.
+  - Failure analysis: Explain the injected or encountered error and the verified repair.
+- **Module 9 — Trace boot and device output:**
+  - Objective: Explain the processor/software/device boundary through observable state.
+  - Environment: Document local tools, versions and input fixtures.
+  - Procedure: Trace a stored program through load, fetch, execution and device output, including a missing device.
+  - Verification: The trace identifies responsible layers and explains failure behavior.
+  - Evidence: Retain implementation, failure test, trace and a short engineering explanation.
+  - Failure analysis: Explain the injected or encountered error and the verified repair.
+
+**Final integration extension:**
+
+- Demonstrate the added course outcomes in the final lab with clean-checkout reproduction, invalid-input tests and a technical retrospective.
 
 **Exit demonstration:**
 
