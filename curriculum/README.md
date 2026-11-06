@@ -2,7 +2,7 @@
 
 The OEE curriculum is the canonical educational framework of Open Engineering Education (OEE). It defines five engineering programs, their courses, learning outcomes, prerequisites, assessments, practical work, and completion requirements.
 
-The curriculum is written for learners, educators, mentors, curriculum authors, reviewers, and platform developers. It provides a consistent structure for independent study, organized instruction, course development, quality review, and software systems that support engineering education. SEF now includes ten imported draft course definitions. The other program directories are still being populated; imported material awaits format, assessment, and evidence review.
+The curriculum is written for learners, educators, mentors, curriculum authors, reviewers, and platform developers. It provides a consistent structure for independent study, organized instruction, course development, quality review, and software systems that support engineering education. SEF contains ten imported draft course definitions, and APP contains nine imported draft core course definitions. APP also lists seven proposed electives that have not yet been authored. The remaining program directories are still being populated; imported material awaits format, assessment, and evidence review.
 
 This directory is the authoritative source for the curriculum's educational content. Its structure is governed by the public OEE specification, including [Course Format](../spec/course-format.md), [Evidence Rules](../spec/evidence-rules.md), [Status Labels](../spec/status-labels.md), and [Conformance](../spec/conformance.md).
 
@@ -11,11 +11,13 @@ This directory is the authoritative source for the curriculum's educational cont
 | Code | Program | Courses | Directory |
 | --- | --- | ---: | --- |
 | `SEF` | Software Engineering Foundations | 10 | [SEF/](SEF/) |
-| `APP` | Application Engineering | 9 | [APP/](APP/) |
+| `APP` | Application Engineering | 9 core + 7 proposed electives | [APP/](APP/) |
 | `SYS` | Systems Engineering | 9 | [SYS/](SYS/) |
 | `AI` | AI Engineering | 9 | [AI/](AI/) |
 | `SEC` | Security Engineering | 9 | [SEC/](SEC/) |
-| **Total** | **Five engineering programs** | **46** | |
+| **Total** | **Five engineering programs** | **46 core + 7 proposed electives** | |
+
+The totals distinguish defined core courses from proposed electives. Proposed electives are not yet authored, validated, or required for graduation.
 
 Each program has a defined course sequence and a culminating project or capstone course. Course codes provide stable identifiers for prerequisites, progression, assessment definitions, cross-course relationships, and platform integrations.
 
