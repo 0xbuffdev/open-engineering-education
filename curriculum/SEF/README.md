@@ -58,6 +58,8 @@ SEF1–SEF9 → SEF10
 
 SEF8 may be taken alongside SEF4–SEF7. Instructional lessons, assessments and practical labs are identified separately in each course.
 
+Typed lesson entries must use the uniform format `1. **Title** — \`lesson\`` (or `\`test\`` / `\`lab\``). Do not add trailing inline explanations; required exercises and lab procedures belong in the course's **Completion requirements**.
+
 ---
 
 ## Independent study

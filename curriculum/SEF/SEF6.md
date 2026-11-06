@@ -50,7 +50,7 @@ By the end of the course, the learner will be able to:
 6. **Integer representation** — `lesson`
 7. **Characters and text** — `lesson`
 8. **C data and binary** — `test`
-9. **Inspect integer representations** — `lab` — print the bytes of values of different types, predict the output first, and explain overflow and sign behavior
+9. **Inspect integer representations** — `lab`
 
 ### Module 2 — Functions & Program Structure
 
@@ -66,7 +66,7 @@ By the end of the course, the learner will be able to:
 3. **Header files and multiple source files** — `lesson`
 4. **The C preprocessor** — `lesson`
 5. **Functions and structure** — `test`
-6. **Split a program into modules** — `lab` — reorganize a single-file program into modules with headers and verify that behavior is unchanged
+6. **Split a program into modules** — `lab`
 
 ### Module 3 — Addresses & Pointers
 
@@ -84,7 +84,7 @@ By the end of the course, the learner will be able to:
 5. **Address arithmetic** — `lesson`
 6. **Strings as arrays of characters** — `lesson`
 7. **Values and addresses** — `test`
-8. **Trace pointers** — `lab` — trace a program that uses pointers by hand, record each address and value, and compare the trace with real output
+8. **Trace pointers** — `lab`
 
 ### Module 4 — Stack, Heap & Dynamic Memory
 
@@ -102,7 +102,7 @@ By the end of the course, the learner will be able to:
 5. **Buffer overruns** — `lesson`
 6. **C and Python lifetimes compared** — `lesson`
 7. **Memory behavior** — `test`
-8. **Fix memory errors** — `lab` — repair a program containing a leak, a double free, and an overrun, and explain how each corrupts or wastes memory
+8. **Fix memory errors** — `lab`
 
 ### Module 5 — Structures & Input/Output
 
@@ -119,7 +119,7 @@ By the end of the course, the learner will be able to:
 4. **Formatted output and input** — `lesson`
 5. **File access with the standard library** — `lesson`
 6. **Structures and I/O** — `test`
-7. **Model a record file** — `lab` — define a structure, read and write records to a file, and handle malformed input without crashing
+7. **Model a record file** — `lab`
 
 ### Module 6 — Building & Debugging C Programs
 
@@ -137,7 +137,7 @@ By the end of the course, the learner will be able to:
 5. **Debugging with GDB** — `lesson`
 6. **Finding memory errors with sanitizers** — `lesson`
 7. **Source to executable** — `test`
-8. **Diagnose a segmentation fault** — `lab` — locate and fix a segmentation fault in an unfamiliar program using the debugger and a sanitizer, recording each hypothesis and its result
+8. **Diagnose a segmentation fault** — `lab`
 
 ### Module 7 — C Data-Structure Library
 
@@ -175,6 +175,15 @@ Complete these required exercises:
 - Repair a program with a leak, a double free, and an overrun.
 - Compile and inspect object files.
 - Diagnose a segmentation fault with a debugger.
+
+**Additional required micro-lab steps:**
+
+- **Inspect integer representations:** Print the bytes of values of different types, predict the output first, and explain overflow and sign behavior.
+- **Split a program into modules:** Reorganize a single-file program into modules with headers and verify that behavior is unchanged.
+- **Trace pointers:** Trace a program that uses pointers by hand, record each address and value, and compare the trace with real output.
+- **Fix memory errors:** Repair a program containing a leak, a double free, and an overrun, and explain how each corrupts or wastes memory.
+- **Model a record file:** Define a structure, read and write records to a file, and handle malformed input without crashing.
+- **Diagnose a segmentation fault:** Locate and fix a segmentation fault in an unfamiliar program using the debugger and a sanitizer, recording each hypothesis and its result.
 
 **Exit demonstration:**
 

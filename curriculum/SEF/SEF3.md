@@ -47,7 +47,7 @@ By the end of the course, the learner will be able to:
 4. **Wildcards** — `lesson`
 5. **Hard links and symbolic links** — `lesson`
 6. **Files and directories** — `test`
-7. **Reorganize a directory tree** — `lab` — restructure a deliberately messy tree using only commands, predicting each result before running it
+7. **Reorganize a directory tree** — `lab`
 
 ### Module 2 — Commands & Redirection
 
@@ -64,7 +64,7 @@ By the end of the course, the learner will be able to:
 4. **Standard input, output, and error** — `lesson`
 5. **Pipelines and filters** — `lesson`
 6. **Commands and redirection** — `test`
-7. **Build a pipeline** — `lab` — answer a question about a data file using a pipeline of standard tools, then change one stage and explain the effect
+7. **Build a pipeline** — `lab`
 
 ### Module 3 — Expansion & the Keyboard
 
@@ -80,7 +80,7 @@ By the end of the course, the learner will be able to:
 3. **Quoting** — `lesson`
 4. **Command-line editing and history** — `lesson`
 5. **Expansion and quoting** — `test`
-6. **Predict and verify expansions** — `lab` — predict what the shell passes to a command for ten tricky command lines, then verify with a harmless echo-based tool
+6. **Predict and verify expansions** — `lab`
 
 ### Module 4 — Permissions & Processes
 
@@ -97,7 +97,7 @@ By the end of the course, the learner will be able to:
 4. **Processes and the process table** — `lesson`
 5. **Signals, job control, and foreground and background work** — `lesson`
 6. **Permissions and processes** — `test`
-7. **Diagnose two failures** — `lab` — find and fix a permission problem and a runaway process on a prepared system, recording the evidence for each
+7. **Diagnose two failures** — `lab`
 
 ### Module 5 — Environment, Editing & System Tasks
 
@@ -114,7 +114,7 @@ By the end of the course, the learner will be able to:
 4. **Package management** — `lesson`
 5. **Networking tools** — `lesson`
 6. **Environment and tools** — `test`
-7. **Configure an environment** — `lab` — build a reproducible shell setup in a fresh account, install a tool, and verify connectivity
+7. **Configure an environment** — `lab`
 
 ### Module 6 — Searching & Text Processing
 
@@ -132,7 +132,7 @@ By the end of the course, the learner will be able to:
 5. **Sorting, cutting, and comparing** — `lesson`
 6. **Stream editing** — `lesson`
 7. **Search and text processing** — `test`
-8. **Extract a report from logs** — `lab` — produce a summary report from a set of log files using only command-line tools, then adapt it to a changed log format
+8. **Extract a report from logs** — `lab`
 
 ### Module 7 — Shell Scripts: Foundations
 
@@ -149,7 +149,7 @@ By the end of the course, the learner will be able to:
 4. **Testing conditions with `if`** — `lesson`
 5. **Reading input** — `lesson`
 6. **Script foundations** — `test`
-7. **Write a first script** — `lab` — turn a repeated manual task into a script with a usage message, input checks, and a deliberately injected failure to diagnose
+7. **Write a first script** — `lab`
 
 ### Module 8 — Shell Scripts: Control Flow & Robustness
 
@@ -167,7 +167,7 @@ By the end of the course, the learner will be able to:
 5. **Arrays** — `lesson`
 6. **Troubleshooting scripts** — `lesson`
 7. **Script control flow** — `test`
-8. **Repair a broken script** — `lab` — diagnose and fix five seeded defects in a script, using tracing, and add checks so each failure is reported clearly
+8. **Repair a broken script** — `lab`
 
 ### Module 9 — Shell Toolkit
 
@@ -207,6 +207,17 @@ Complete these required exercises:
 - Diagnose a permission failure and a runaway process.
 - Extract a report from log files.
 - Write and debug a script that takes options and handles errors.
+
+**Additional required micro-lab steps:**
+
+- **Reorganize a directory tree:** Restructure a deliberately messy tree using only commands, predicting each result before running it.
+- **Build a pipeline:** Answer a question about a data file using a pipeline of standard tools, then change one stage and explain the effect.
+- **Predict and verify expansions:** Predict what the shell passes to a command for ten tricky command lines, then verify with a harmless echo-based tool.
+- **Diagnose two failures:** Find and fix a permission problem and a runaway process on a prepared system, recording the evidence for each.
+- **Configure an environment:** Build a reproducible shell setup in a fresh account, install a tool, and verify connectivity.
+- **Extract a report from logs:** Produce a summary report from a set of log files using only command-line tools, then adapt it to a changed log format.
+- **Write a first script:** Turn a repeated manual task into a script with a usage message, input checks, and a deliberately injected failure to diagnose.
+- **Repair a broken script:** Diagnose and fix five seeded defects in a script, using tracing, and add checks so each failure is reported clearly.
 
 **Exit demonstration:**
 

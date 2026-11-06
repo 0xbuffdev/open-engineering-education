@@ -61,7 +61,17 @@ def validate():
             module = text[match.start():end]
             if module.count("#### Outcomes") != 1 or module.count("#### Lessons") != 1:
                 ERRORS.append(f"{code} module {i+1}: expected Outcomes and Lessons only")
-            entries = re.findall(r"^(\d+)\. \*\*([^\n]+?)\*\* — " + chr(96) + r"(lesson|test|lab)" + chr(96), module, re.M)
+            # Typed lesson lines are a navigation index, without inline commentary.
+            candidates = re.findall(
+                r"^\d+\. \*\*[^\n]+?\*\* — " + chr(96) + r"(?:lesson|test|lab)" + chr(96) + r"[^\n]*$",
+                module, re.M,
+            )
+            entries = re.findall(
+                r"^(\d+)\. \*\*([^\n]+?)\*\* — " + chr(96) + r"(lesson|test|lab)" + chr(96) + r"[ \t]*$",
+                module, re.M,
+            )
+            if len(candidates) != len(entries):
+                ERRORS.append(f"{code} module {i+1}: lesson entries must end at the kind; no trailing comments")
             if not entries:
                 ERRORS.append(f"{code} module {i+1}: missing typed lessons")
             if [int(x[0]) for x in entries] != list(range(1, len(entries) + 1)):

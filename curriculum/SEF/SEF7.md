@@ -47,7 +47,7 @@ By the end of the course, the learner will be able to:
 5. **Reading, writing, and file offsets** — `lesson`
 6. **Descriptors, duplication, and redirection** — `lesson`
 7. **System interfaces** — `test`
-8. **Trace file descriptors** — `lab` — trace the system calls made by a small program, predict which descriptors exist at each step, and explain how shell redirection changes them
+8. **Trace file descriptors** — `lab`
 
 ### Module 2 — Processes
 
@@ -64,7 +64,7 @@ By the end of the course, the learner will be able to:
 4. **Waiting for children and exit status** — `lesson`
 5. **What a child inherits** — `lesson`
 6. **Processes** — `test`
-7. **Start a child process** — `lab` — write a launcher that starts a program, waits for it, and reports how it ended, including a deliberate failure case
+7. **Start a child process** — `lab`
 
 ### Module 3 — Files, Directories & Permissions
 
@@ -80,7 +80,7 @@ By the end of the course, the learner will be able to:
 3. **Directories** — `lesson`
 4. **Hard and symbolic links in code** — `lesson`
 5. **Files and directories** — `test`
-6. **Read file metadata** — `lab` — build a small program that lists directory entries with type, size, and permissions, matching the output of a standard tool
+6. **Read file metadata** — `lab`
 
 ### Module 4 — Networking Basics
 
@@ -96,7 +96,7 @@ By the end of the course, the learner will be able to:
 3. **The sockets interface** — `lesson`
 4. **A minimal TCP server and client** — `lesson`
 5. **OS and network boundaries** — `test`
-6. **Connect two programs over TCP** — `lab` — build a client and a server that exchange one message, trace the connection, and explain what each system call does
+6. **Connect two programs over TCP** — `lab`
 
 ### Module 5 — Mini Unix Utility
 
@@ -134,6 +134,13 @@ Complete these required exercises:
 - Start a child process with `fork()` and `exec`.
 - List a directory with metadata.
 - Connect two programs over TCP.
+
+**Additional required micro-lab steps:**
+
+- **Trace file descriptors:** Trace the system calls made by a small program, predict which descriptors exist at each step, and explain how shell redirection changes them.
+- **Start a child process:** Write a launcher that starts a program, waits for it, and reports how it ended, including a deliberate failure case.
+- **Read file metadata:** Build a small program that lists directory entries with type, size, and permissions, matching the output of a standard tool.
+- **Connect two programs over TCP:** Build a client and a server that exchange one message, trace the connection, and explain what each system call does.
 
 **Exit demonstration:**
 

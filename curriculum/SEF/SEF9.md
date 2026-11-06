@@ -48,7 +48,7 @@ By the end of the course, the learner will be able to:
 5. **Epics, stories, and tasks** — `lesson`
 6. **Sizing work** — `lesson`
 7. **Stories and criteria** — `test`
-8. **Turn a request into stories** — `lab` — convert a vague feature request into small stories with acceptance criteria and identify which story to build first
+8. **Turn a request into stories** — `lab`
 
 ### Module 2 — Planning & Tracking Work
 
@@ -65,7 +65,7 @@ By the end of the course, the learner will be able to:
 4. **Milestones and project boards** — `lesson`
 5. **Linking pull requests to issues** — `lesson`
 6. **Planning and tracking** — `test`
-7. **Set up tracking for a feature** — `lab` — create issues from the stories, add templates, labels, and dependencies, and arrange them on a board
+7. **Set up tracking for a feature** — `lab`
 
 ### Module 3 — Recording Decisions
 
@@ -82,7 +82,7 @@ By the end of the course, the learner will be able to:
 4. **Outcome, consequences, and confirmation** — `lesson`
 5. **Status and superseding decisions** — `lesson`
 6. **Decision records** — `test`
-7. **Write three decision records** — `lab` — record three real design decisions for one project, including one that is later superseded
+7. **Write three decision records** — `lab`
 
 ### Module 4 — Code Review as Practice
 
@@ -99,7 +99,7 @@ By the end of the course, the learner will be able to:
 4. **Giving feedback** — `lesson`
 5. **Responding to feedback** — `lesson`
 6. **Review practice** — `test`
-7. **Review and revise a pull request** — `lab` — review a prepared pull request, then revise your own change in response to a peer's comments
+7. **Review and revise a pull request** — `lab`
 
 ### Module 5 — Working with AI Assistants
 
@@ -110,13 +110,13 @@ By the end of the course, the learner will be able to:
 
 #### Lessons
 
-1. **How a coding assistant works** — `lesson` — a model, a limited context window, tools, and a loop
+1. **How a coding assistant works** — `lesson`
 2. **Giving context and instructions** — `lesson`
 3. **Explore, plan, code, verify** — `lesson`
 4. **Managing context** — `lesson`
 5. **Permissions and what the assistant may do** — `lesson`
 6. **Working with assistants** — `test`
-7. **Complete a change under a written plan** — `lab` — complete a small change in an existing project with an assistant, starting from a written plan and a limited set of permissions, and record each step
+7. **Complete a change under a written plan** — `lab`
 
 ### Module 6 — Verifying & Governing AI-Generated Work
 
@@ -129,12 +129,12 @@ By the end of the course, the learner will be able to:
 
 1. **Tests as the contract** — `lesson`
 2. **Reading a generated diff critically** — `lesson`
-3. **Common failure modes** — `lesson` — invented interfaces, needless complexity, insecure code, and ignored project conventions
+3. **Common failure modes** — `lesson`
 4. **Secrets and data exposure** — `lesson`
 5. **Licensing, ownership, and disclosure** — `lesson`
 6. **Staying able to explain your own code** — `lesson`
 7. **Verification and governance** — `test`
-8. **Find defects in a generated change** — `lab` — review a prepared AI-generated change that contains seeded defects, find and fix them, and write the tests that would have caught each one
+8. **Find defects in a generated change** — `lab`
 
 ### Module 7 — Feature Delivery Workflow
 
@@ -177,6 +177,15 @@ Complete these required exercises:
 - Review a pull request and revise your own in response to review.
 - Complete a small change with an assistant under a written plan.
 - Find defects in a generated change and write tests for them.
+
+**Additional required micro-lab steps:**
+
+- **Turn a request into stories:** Convert a vague feature request into small stories with acceptance criteria and identify which story to build first.
+- **Set up tracking for a feature:** Create issues from the stories, add templates, labels, and dependencies, and arrange them on a board.
+- **Write three decision records:** Record three real design decisions for one project, including one that is later superseded.
+- **Review and revise a pull request:** Review a prepared pull request, then revise your own change in response to a peer's comments.
+- **Complete a change under a written plan:** Complete a small change in an existing project with an assistant, starting from a written plan and a limited set of permissions, and record each step.
+- **Find defects in a generated change:** Review a prepared AI-generated change that contains seeded defects, find and fix them, and write the tests that would have caught each one.
 
 **Exit demonstration:**
 
