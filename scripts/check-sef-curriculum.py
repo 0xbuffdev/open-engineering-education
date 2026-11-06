@@ -84,7 +84,7 @@ def validate():
                 ERRORS.append(f"{code} module {i+1}: lesson numbering is not sequential")
             if i == 0 and entries and not entries[0][1].startswith("Course introduction:"):
                 ERRORS.append(f"{code}: first module must start with course orientation")
-            if code in {"SEF2", "SEF3", "SEF6", "SEF9"}:
+            if code in {"SEF2", "SEF3", "SEF6", "SEF9", "SEF10"}:
                 # These courses require a purposeful checkpoint preceding
                 # each hands-on lab in the current authored curriculum.
                 kinds = [entry[2] for entry in entries]
@@ -153,7 +153,7 @@ def validate():
                         ERRORS.append(f"SEF8 module {number}: missing lab {field.lower()}")
 
 
-        if code in {"SEF1", "SEF2", "SEF3", "SEF4", "SEF5", "SEF6", "SEF7", "SEF9"}:
+        if code in {"SEF1", "SEF2", "SEF3", "SEF4", "SEF5", "SEF6", "SEF7", "SEF9", "SEF10"}:
             # Detailed assessments are embedded in the canonical course, not REVIEW.md.
             # Check the actual module count without imposing a fixed lesson cap.
             module_count = len(sections)
@@ -173,6 +173,66 @@ def validate():
                 )
                 if len(labels) != module_count:
                     ERRORS.append(f"{code}: missing or duplicated {kind} briefs")
+        if code == "SEF10":
+            # A capstone is one project over successive milestones, not a
+            # tutorial or a project begun only in the final module.
+            # Count the authored modules rather than imposing a module cap.
+            briefs = list(re.finditer(
+                r"^- \*\*(Local log analyzer|Read-only duplicate-file finder|"
+                r"Dependency explorer|Test-result reporter):\*\*",
+                completion, re.M,
+            ))
+            if len(briefs) < 3:
+                ERRORS.append("SEF10: fewer than three accessible project options")
+            for required in (
+                "**Public project brief template",
+                "**Minimum core scope",
+                "**Optional stretch work",
+                "**Guidance ladder",
+                "**Milestone gates",
+                "**Assessment rubric",
+                "**Project-independent defense",
+                "No secret credentials",
+                "unassisted",
+                "same project",
+                "clean checkout",
+            ):
+                if required.lower() not in completion.lower():
+                    ERRORS.append(f"SEF10: missing capstone requirement {required}")
+            headings = list(re.finditer(
+                r"^\*\*Module (\d+) — [^\n]+: (checkpoint|required lab)\*\*"
+                r" — Required assessment details$",
+                completion, re.M,
+            ))
+            pairs = [(int(h.group(1)), h.group(2)) for h in headings]
+            expected_pairs = [
+                (i, kind) for i in range(1, len(sections) + 1)
+                for kind in ("checkpoint", "required lab")
+            ]
+            if pairs != expected_pairs:
+                ERRORS.append(
+                    "SEF10: each module needs one checkpoint followed by "
+                    "one required lab in module order"
+                )
+            for i, heading in enumerate(headings):
+                stop = headings[i + 1].start() if i + 1 < len(headings) else len(completion)
+                part = completion[heading.end():stop]
+                module_num, kind = int(heading.group(1)), heading.group(2)
+                if kind == "checkpoint":
+                    if len(re.findall(r"^- \*\*Q[12] \(free\):\*\*", part, re.M)) != 2:
+                        ERRORS.append(f"SEF10 module {module_num}: two checkpoint questions required")
+                    if part.count("Expected answer and scoring:") != 2:
+                        ERRORS.append(f"SEF10 module {module_num}: two answer rubrics required")
+                else:
+                    for field in (
+                        "Objective", "Prerequisites", "Environment", "Procedure",
+                        "Expected result", "Verification", "Evidence",
+                        "Failure analysis", "Acceptance",
+                    ):
+                        if f"- **{field}:**" not in part:
+                            ERRORS.append(
+                                f"SEF10 module {module_num}: missing lab {field.lower()}"
+                            )
         if code == "SEF9":
             # Check each module's evaluable engineering-workflow contract
             # without limiting future module or lesson counts.
