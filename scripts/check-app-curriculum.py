@@ -37,6 +37,15 @@ def validate():
             errors.append(f"{code}: incorrect type")
         if f"**Status:** {TICK}draft{TICK}" not in data:
             errors.append(f"{code}: expected draft status")
+        title_match = re.search(r"^# (APP\d+) — ([^\n]+)$", data, re.M)
+        duration_match = re.search(r"^\*\*Duration:\*\* ([^\n]+)$", data, re.M)
+        if not title_match or not duration_match:
+            errors.append(f"{code}: title and duration required")
+        else:
+            catalog = (APP / "README.md").read_text(encoding="utf-8")
+            row = next((line for line in catalog.splitlines() if line.startswith(f"| [{code}]({code}.md) |")), "")
+            if not row or f"| {title_match.group(2)} | {duration_match.group(1)} |" not in row:
+                errors.append(f"{code}: title/duration differ from catalog")
         if code in ELECTIVE_CODES and f"**Classification:** {TICK}elective{TICK}" not in data:
             errors.append(f"{code}: expected elective classification")
         if code in CORE_CODES and "**Classification:** `elective`" in data:
@@ -46,8 +55,8 @@ def validate():
         if re.search(r"\b[BR][0-9]{1,3}\b|^## Course brief|^### Resource map", data, re.M):
             errors.append(f"{code}: private resource references or obsolete headings")
         sections = list(re.finditer(r"^### Module (\d+) — (.+)$", data, re.M))
-        if len(sections) != 5:
-            errors.append(f"{code}: expected five imported modules")
+        if not sections:
+            errors.append(f"{code}: at least one module required; no fixed module cap")
         for i, m in enumerate(sections):
             if int(m.group(1)) != i + 1:
                 errors.append(f"{code}: module numbering")
@@ -55,6 +64,10 @@ def validate():
             section = data[m.start():end]
             if section.count("#### Outcomes") != 1 or section.count("#### Lessons") != 1:
                 errors.append(f"{code} module {i+1}: missing Outcomes/Lessons headings")
+            if "#### Outcomes" in section and "#### Lessons" in section:
+                outcomes = section.split("#### Outcomes", 1)[1].split("#### Lessons", 1)[0]
+                if not re.search(r"^- .+", outcomes, re.M):
+                    errors.append(f"{code} module {i+1}: measurable module outcomes missing")
             entries = re.findall(
                 r"^(\d+)\. \*\*([^\n]+?)\*\* — " + TICK + r"(lesson|test|lab)" + TICK + r"[ \t]*$",
                 section, re.M,
@@ -123,7 +136,8 @@ def validate():
     if errors:
         print("\n".join("ERROR: " + x for x in errors), file=sys.stderr)
         return 1
-    print(f"APP structural validation passed: {len(CORE_CODES)} core drafts and {len(ELECTIVE_CODES)} elective drafts")
+    modules = sum(len(re.findall(r"^### Module \d+ — ", file.read_text(encoding="utf-8"), re.M)) for file in files)
+    print(f"APP structural validation passed: {len(CORE_CODES)} core, {len(ELECTIVE_CODES)} electives, {modules} modules; no fixed module cap")
     return 0
 
 if __name__ == "__main__":
