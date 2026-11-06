@@ -53,8 +53,8 @@ By the end of the course, the learner will be able to:
 4. **What software engineering is** — `lesson`
 5. **Programming languages** — `lesson`
 6. **Source code** — `lesson`
-7. **Interpreters and compilers** — `lesson` — two ways to run a language; real languages mix them
-8. **Bytecode and the virtual machine** — `lesson` — CPython compiles source to bytecode, then a virtual machine runs it; this is how CPython works, not a rule for every language; inspect bytecode with `dis`
+7. **Interpreters and compilers** — `lesson`
+8. **Bytecode and the virtual machine** — `lesson`
 9. **Software and code** — `test`
 
 ### Module 2 — Your Workspace
@@ -87,7 +87,7 @@ By the end of the course, the learner will be able to:
 1. **Programs as steps** — `lesson`
 2. **Values and types** — `lesson`
 3. **Expressions and arithmetic** — `lesson`
-4. **Variables and state** — `lesson` — a name is bound to an object; assignment rebinds the name and does not copy the object; objects live on the heap
+4. **Variables and state** — `lesson`
 5. **Printing output** — `lesson`
 6. **Tracing execution** — `lesson`
 7. **Programs, values, and state** — `test`
@@ -122,7 +122,7 @@ By the end of the course, the learner will be able to:
 
 1. **Defining functions** — `lesson`
 2. **Parameters and arguments** — `lesson`
-3. **Local variables and scope** — `lesson` — each call gets a frame on the call stack that holds its names; parameters bind to the argument objects; the frame goes away when the call returns
+3. **Local variables and scope** — `lesson`
 4. **Return values** — `lesson`
 5. **Interfaces and decomposition** — `lesson`
 6. **Modules and imports** — `lesson`
@@ -140,9 +140,9 @@ By the end of the course, the learner will be able to:
 #### Lessons
 
 1. **Strings** — `lesson`
-2. **Lists** — `lesson` — lists are mutable; two names can refer to the same list (aliasing); a change through one name shows through the other; a copy is shallow
+2. **Lists** — `lesson`
 3. **Dictionaries** — `lesson`
-4. **Tuples** — `lesson` — tuples and strings are immutable; why immutability makes sharing an object safe
+4. **Tuples** — `lesson`
 5. **Sets** — `lesson`
 6. **Choosing a collection** — `lesson`
 7. **Strings and collections** — `test`

@@ -96,7 +96,7 @@ By the end of the course, the learner will be able to:
 1. **Registers and enablers** — `lesson`
 2. **Buses and RAM** — `lesson`
 3. **Registers and memory** — `test`
-4. **Build memory** — `lab` — predict register contents after a sequence of bus transfers on paper, then build the corresponding chip in a simulator
+4. **Build memory** — `lab`
 
 ### Module 5 — How Hardware Computes
 
@@ -113,7 +113,7 @@ By the end of the course, the learner will be able to:
 3. **The adder** — `lesson`
 4. **Comparison and the ALU** — `lesson`
 5. **ALU reasoning** — `test`
-6. **Build the ALU** — `lab` — trace ALU operations on paper, including the zero result, then implement the ALU in a simulator
+6. **Build the ALU** — `lab`
 
 ### Module 6 — Building the Processor
 
@@ -217,6 +217,11 @@ Complete these required exercises:
 - Hand-assemble a few instructions and execute them on paper.
 - Model a simple I/O exchange between CPU and a keyboard/display adapter.
 - Trace the boot path from persistent program storage into memory and execution.
+
+**Additional required micro-lab steps:**
+
+- **Build memory:** Predict register contents after a sequence of bus transfers on paper, then build the corresponding chip in a simulator.
+- **Build the ALU:** Trace ALU operations on paper, including the zero result, then implement the ALU in a simulator.
 
 **Exit demonstration:**
 
