@@ -213,10 +213,6 @@ class APPCatalogTests(unittest.TestCase):
             "| [APP9](APP9.md) | Application Engineering Capstone | 12–16 weeks | APP1–APP8 |",
             "| [APP9](APP9.md) | Application Engineering Capstone | 12–16 weeks | APP1–APP8, APP10 |",
         )
-        self.change_course(
-            "APP9", "**Duration:** 12–16 weeks",
-            "**Duration:** 12–16 weeks",
-        )
         app9 = self.app.APP / "APP9.md"
         content = app9.read_text(encoding="utf-8")
         old = next(line for line in content.splitlines() if line.startswith("**Prerequisites:**"))
