@@ -213,9 +213,11 @@ equivalent.
 
 - **State:** One unsigned eight-bit accumulator `A`, eight-bit program counter
   `PC`, and zero flag `Z`; all initially zero. The display-output latch
-  starts **unset** until written. Any instruction that writes `A` sets
-  `Z=1` exactly when the new eight-bit result is zero. Arithmetic wraps
-  modulo 256. Each completed instruction commits one state transition.
+  starts **unset** until written. The reset `Z=0` is an explicit initial
+  condition even though `A=0`; `Z` is recalculated only after an
+  instruction writes `A`. Any such instruction sets `Z=1` exactly
+  when the new eight-bit result is zero. Arithmetic wraps modulo 256.
+  Each completed instruction commits one state transition.
 - **Memory map:** `0x00`–`0x7F` contains read-only preloaded program bytes;
   `0x80`–`0xEF` contains RAM; `0xF0` is a write-only display latch;
   `0xF1` is a read-only keyboard-input latch. Other addresses are reserved.
@@ -235,7 +237,13 @@ equivalent.
   - `21 addr` — `STORE`: write `A` to RAM or display latch; do not update `Z`.
   - `30 addr` — `JMP`: set `PC` to a valid branch target.
   - `31 addr` — `JZ`: branch to a valid target when `Z=1`; otherwise advance.
-  - `FF 00` — `HALT`: terminate execution without changing `A` or `Z`.
+  - `FF 00` — `HALT`: terminate execution, leaving `PC` at the
+    HALT instruction address and preserving `A` and `Z`.
+- **State and fault rules:** `LDI`, `ADDI`, `ANDI`, and `LOAD` update
+  `Z` through `A`; `STORE`, `JMP`, `JZ`, and `HALT` do not.
+  Invalid instructions or forbidden accesses cause a visible fault
+  without committing a partial state update. A conditional branch's
+  destination must be valid before it can be taken.
 - **Mapped-device behavior:** `STORE F0` sets the display latch; `LOAD F1`
   reads an initialized keyboard latch. An absent required device produces
   a simulated device fault. Reading the write-only display address or
