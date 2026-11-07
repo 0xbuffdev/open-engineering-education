@@ -79,4 +79,4 @@ Add a row for each substantive RFC so contributors can find previous decisions.
 
 | RFC | Title | Status | Decision |
 | --- | --- | --- | --- |
-| [0001](0001-outcome-driven-curriculum.md) | Outcome-Driven Curriculum and Proportionate Assessment | `draft` | Pending steward review |
+| [0001](0001-outcome-driven-curriculum.md) | Outcome-Driven Curriculum and Proportionate Assessment | `accepted` | Accepted in principle; normative implementation pending |
