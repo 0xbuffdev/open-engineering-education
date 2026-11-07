@@ -10,7 +10,7 @@ Open Engineering Education (OEE) defines how engineering courses are structured,
 
 OEE emphasizes underlying mechanisms, practical engineering work, reproducible results, and transparent claims about what learners can demonstrate.
 
-**Project status:** `v0.0.1` — draft. The specification is evolving and is not a finalized standard. Course status labels describe the evidence available for each course.
+**Project status:** `v0.1.0` — draft. The specification is evolving and is not a finalized standard. Course status labels describe the evidence available for each course.
 
 - **Steward:** [0xBUFF](https://github.com/0xbuffdev)
 - **Author:** Christopher S. Aondona
@@ -77,7 +77,7 @@ An implementation's relationship to OEE does not, by itself, establish that it c
 
 OEE distinguishes between completing activities and demonstrating engineering capability.
 
-Depending on the course, completion may require conceptual checkpoints, implementation exercises, practical labs, tests or evaluations, explained design decisions, and a technical retrospective. Project-based courses also require their specified deliverables and evaluation.
+Courses must evaluate required learning outcomes against public success criteria with suitable evidence. They may use conceptual checkpoints, implementation exercises, investigations, practical labs, or project work when those methods serve the outcomes. No universal per-module test/lab pair or final lab is required. Project-based courses also require published deliverables, evaluation, and a suitable technical defense.
 
 Evidence should make it possible for a reviewer to understand what was done, how the result was produced, whether it can be reproduced, and what limitations remain.
 
@@ -123,7 +123,7 @@ Contributors must have the rights needed to submit their work under the applicab
 
 ## Current limitations
 
-OEE is a draft specification. Its requirements may change through the documented governance process.
+OEE is a draft specification. The `v0.1.0` course contract is being rolled out progressively; earlier course revisions may still follow the previous test/lab pattern and must not be treated as conforming to the updated requirements until reviewed and migrated. Its requirements may change through the documented governance process.
 
 A published course, program, or implementation must not be described as `verified`, conforming, accredited, or certified unless the applicable criteria and documented review support that claim. OEE does not, by itself, guarantee employment outcomes, professional accreditation, or mastery of every subject associated with a course.
 
