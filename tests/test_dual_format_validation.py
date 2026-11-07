@@ -75,7 +75,7 @@ Develop and demonstrate a coherent capability without prescribed test/lab pairs.
   - Criteria: correct causal explanation supported by observations.
   - Evidence: diagnostic record and concise reasoning.
 {extra}
-""".replace("\\`", "`")
+"""
 
 
 class DualFormatValidationTests(unittest.TestCase):
