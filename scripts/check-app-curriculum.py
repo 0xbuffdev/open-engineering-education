@@ -4,6 +4,8 @@ from pathlib import Path
 import re
 import sys
 
+from course_format_versions import is_outcome_course, validate_outcome_course
+
 ROOT = Path(__file__).resolve().parents[1]
 APP = ROOT / "curriculum" / "APP"
 CORE_CODES = {f"APP{i}" for i in range(1, 10)}
@@ -25,9 +27,15 @@ def validate():
     if {p.stem for p in files} != CODES:
         errors.append("APP: expected APP1.md through APP16.md")
     dependencies = {}
+    migrated_count = 0
     for file in files:
         code = file.stem
         data = file.read_text(encoding="utf-8")
+        try:
+            migrated = is_outcome_course(data)
+        except ValueError as exc:
+            errors.append(f"{code}: {exc}")
+            continue
         if not data.startswith(f"# {code} — "):
             errors.append(f"{code}: heading mismatch")
         if "**Program:** APP — Application Engineering" not in data:
@@ -35,7 +43,10 @@ def validate():
         kind = "project" if code == "APP9" else "course"
         if f"**Type:** {TICK}{kind}{TICK}" not in data:
             errors.append(f"{code}: incorrect type")
-        if f"**Status:** {TICK}draft{TICK}" not in data:
+        if migrated:
+            if not re.search(r"^\*\*Status:\*\* `(?:draft|tested|verified)`$", data, re.M):
+                errors.append(f"{code}: invalid course readiness status")
+        elif f"**Status:** {TICK}draft{TICK}" not in data:
             errors.append(f"{code}: expected draft status")
         title_match = re.search(r"^# (APP\d+) — ([^\n]+)$", data, re.M)
         duration_match = re.search(r"^\*\*Duration:\*\* ([^\n]+)$", data, re.M)
@@ -54,6 +65,25 @@ def validate():
             errors.append(f"{code}: required sections must be ordered")
         if re.search(r"\b[BR][0-9]{1,3}\b|^## Course brief|^### Resource map", data, re.M):
             errors.append(f"{code}: private resource references or obsolete headings")
+        match = re.search(r"^\*\*Prerequisites:\*\* (.+)$", data, re.M)
+        source = match.group(1) if match else ""
+        deps = re.findall(r"\bAPP[0-9]+\b", source)
+        dependencies[code] = deps
+        if any(dep not in CODES or dep == code for dep in deps):
+            errors.append(f"{code}: invalid APP prerequisite")
+        if code == "APP1" and "SEF10" not in source:
+            errors.append("APP1: expected SEF10 entry prerequisite")
+        for href in re.findall(r"\]\(([^)]+\.md)\)", data):
+            if "://" not in href and not (file.parent / href).resolve().is_file():
+                errors.append(f"{code}: broken internal link {href}")
+
+        if migrated:
+            # Keep catalog, prerequisite, metadata, and link checks above.
+            # Only legacy lesson-kind/assessment-count gates are bypassed.
+            migrated_count += 1
+            errors.extend(f"{code}: {issue}" for issue in validate_outcome_course(file))
+            continue
+
         sections = list(re.finditer(r"^### Module (\d+) — (.+)$", data, re.M))
         if not sections:
             errors.append(f"{code}: at least one module required; no fixed module cap")
@@ -153,17 +183,6 @@ def validate():
                 errors.append("APP9: project defense or graduation requirement missing")
         elif "**Exit demonstration:**" not in completion:
             errors.append(f"{code}: exit demonstration missing")
-        match = re.search(r"^\*\*Prerequisites:\*\* (.+)$", data, re.M)
-        source = match.group(1) if match else ""
-        deps = re.findall(r"\bAPP[0-9]+\b", source)
-        dependencies[code] = deps
-        if any(dep not in CODES or dep == code for dep in deps):
-            errors.append(f"{code}: invalid APP prerequisite")
-        if code == "APP1" and "SEF10" not in source:
-            errors.append("APP1: expected SEF10 entry prerequisite")
-        for href in re.findall(r"\]\(([^)]+\.md)\)", data):
-            if "://" not in href and not (file.parent / href).resolve().is_file():
-                errors.append(f"{code}: broken internal link {href}")
 
     catalog_path = APP / "README.md"
     catalog = catalog_path.read_text(encoding="utf-8") if catalog_path.exists() else ""
@@ -198,7 +217,7 @@ def validate():
         print("\n".join("ERROR: " + x for x in errors), file=sys.stderr)
         return 1
     modules = sum(len(re.findall(r"^### Module \d+ — ", file.read_text(encoding="utf-8"), re.M)) for file in files)
-    print(f"APP structural validation passed: {len(CORE_CODES)} core, {len(ELECTIVE_CODES)} electives, {modules} modules; no fixed module cap")
+    print(f"APP structural validation passed: {len(CORE_CODES)} core, {len(ELECTIVE_CODES)} electives, {modules} modules; {migrated_count} v0.2.0 courses, {len(files) - migrated_count} legacy; no fixed module cap")
     return 0
 
 if __name__ == "__main__":

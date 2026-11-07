@@ -28,6 +28,8 @@ from pathlib import Path
 import re
 import sys
 
+from course_format_versions import is_outcome_course
+
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_SECTIONS = (
     "Overview",
@@ -44,13 +46,6 @@ FIELD_RE = re.compile(
     r"^\s*-\s+(?:\*\*)?(Outcomes|Work|Criteria|Evidence):(?:\*\*)?\s*(.*?)\s*$",
     re.IGNORECASE,
 )
-VERSION_RE = re.compile(
-    r"^\*\*(?:Specification|OEE specification):\*\*\s*`?v0\.2\.0`?\s*$",
-    re.IGNORECASE | re.MULTILINE,
-)
-ID_HINT_RE = re.compile(r"^\s*-\s+\*\*[A-Z]{2,6}[1-9]\d*-(?:O|AS)[1-9]\d*", re.MULTILINE)
-
-
 def block_after_heading(text: str, heading: str) -> str:
     sections = list(SECTION_RE.finditer(text))
     for index, match in enumerate(sections):
@@ -211,7 +206,12 @@ def main() -> int:
             errors.append(f"{path}: file does not exist")
             continue
         content = path.read_text(encoding="utf-8")
-        if args.all and not (VERSION_RE.search(content) or ID_HINT_RE.search(content)):
+        try:
+            migrated = is_outcome_course(content)
+        except ValueError as exc:
+            errors.append(f"{path}: {exc}")
+            continue
+        if args.all and not migrated:
             skipped += 1
             continue
         checked += 1
