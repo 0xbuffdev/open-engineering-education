@@ -94,6 +94,9 @@ class DualFormatValidationTests(unittest.TestCase):
         self.app.APP = self.root / "curriculum" / "APP"
         self.sef.ROOT = self.root
         self.sef.SEF = self.root / "curriculum" / "SEF"
+        app1_source = (self.root / "curriculum" / "APP" / "APP1.md").read_text(encoding="utf-8")
+        match = __import__("re").search(r"^\*\*Duration:\*\* (.+)$", app1_source, __import__("re").M)
+        self.app1_duration = match.group(1)
 
     def replace_course(self, code: str, content: str):
         area = "APP" if code.startswith("APP") else "SEF"
@@ -107,7 +110,7 @@ class DualFormatValidationTests(unittest.TestCase):
     def test_migrated_app1_has_no_required_lab_or_quiz(self):
         course = example_course(
             "APP1", "Web & Internet Foundations", "APP — Application Engineering",
-            "7 weeks", "[SEF10](../SEF/SEF10.md) — Software Engineering Foundations",
+            self.app1_duration, "[SEF10](../SEF/SEF10.md) — Software Engineering Foundations",
         )
         self.replace_course("APP1", course)
         self.assertEqual(self.app.validate(), 0)
@@ -132,7 +135,7 @@ class DualFormatValidationTests(unittest.TestCase):
     def test_modern_app_course_with_missing_assessment_criteria_fails(self):
         course = example_course(
             "APP1", "Web & Internet Foundations", "APP — Application Engineering",
-            "7 weeks", "[SEF10](../SEF/SEF10.md) — Software Engineering Foundations",
+            self.app1_duration, "[SEF10](../SEF/SEF10.md) — Software Engineering Foundations",
         )
         self.replace_course("APP1", course.replace(
             "  - Criteria: correct causal explanation supported by observations.\n", ""
@@ -152,7 +155,7 @@ class DualFormatValidationTests(unittest.TestCase):
     def test_modern_app_preserves_catalog_validation(self):
         course = example_course(
             "APP1", "Web & Internet Foundations", "APP — Application Engineering",
-            "17 weeks", "[SEF10](../SEF/SEF10.md) — Software Engineering Foundations",
+            "999 weeks", "[SEF10](../SEF/SEF10.md) — Software Engineering Foundations",
         )
         self.replace_course("APP1", course)
         self.assertNotEqual(self.app.validate(), 0)
@@ -160,7 +163,7 @@ class DualFormatValidationTests(unittest.TestCase):
     def test_modern_app_preserves_prerequisite_validation(self):
         course = example_course(
             "APP1", "Web & Internet Foundations", "APP — Application Engineering",
-            "7 weeks", "none",
+            self.app1_duration, "none",
         )
         self.replace_course("APP1", course)
         self.assertNotEqual(self.app.validate(), 0)
@@ -189,7 +192,7 @@ class DualFormatValidationTests(unittest.TestCase):
     def test_legacy_marker_cannot_coexist_with_new_ids(self):
         course = example_course(
             "APP1", "Web & Internet Foundations", "APP — Application Engineering",
-            "7 weeks", "[SEF10](../SEF/SEF10.md) — Software Engineering Foundations",
+            self.app1_duration, "[SEF10](../SEF/SEF10.md) — Software Engineering Foundations",
         ).replace("**Specification:** `v0.2.0`", "**Specification:** `v0.1.0`")
         with self.assertRaisesRegex(ValueError, "conflicts"):
             is_outcome_course(course)
