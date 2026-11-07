@@ -33,10 +33,9 @@ The APP validator compares every linked catalog row with exactly one
 course file and rejects missing, duplicate, extra, or malformed rows,
 missing files, contradictory metadata, prerequisite cycles, and new
 core prerequisites omitted from the APP9 graduation capstone.
-A core course cannot require an elective. Electives must retain
-`**Classification:** `elective`` in course metadata; the catalog
-explicitly classifies every course and a core course may optionally
-also declare `**Classification:** `core``.
+A core course cannot require an elective. Elective course files must declare the `elective` classification
+in metadata. The catalog explicitly classifies every course, and a core
+course may optionally declare the `core` classification as well.
 
 A catalog entry's displayed prerequisite codes must agree with
 the course's own prerequisite metadata, including expanded ranges
