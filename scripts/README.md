@@ -10,9 +10,16 @@ purposes, and **none** replaces a substantive conformance review.
 - `python3 scripts/check-app-curriculum.py` validates the published APP
   courses against their legacy structure and assessment briefs.
 
-These scripts currently enforce historical per-module test/lab and final-lab
-rules. They must be adapted during course migration before a migrated course
-can pass all applicable CI checks. Legacy success is not v0.2.0 conformance.
+Both program validators now classify courses using the shared
+`course_format_versions.py` helper. **Untouched legacy courses** retain
+their original per-module test/lab, final-lab, and public brief checks.
+**Migrated v0.2.0 courses** are routed to the outcome-based validator
+instead of being required to preserve legacy assessment patterns.
+
+Both program validators continue checking shared metadata, catalog
+consistency, course prerequisites, and local links. A failed outcome check
+also fails the applicable APP or SEF validator. Neither type of successful
+structural check proves educational conformance or learner mastery.
 
 ## Outcome-based v0.2.0 courses
 
@@ -31,9 +38,10 @@ python3 scripts/check-outcome-curriculum.py --all
 Run regression tests:
 
 ```sh
-python3 -m unittest discover -s tests -p 'test_outcome_curriculum.py' -v
+python3 -m unittest discover -s tests -p 'test_*.py' -v
 ```
 
+All three validators use the same course-revision classification rules.
 The `--all` mode checks courses that either contain v0.2.0-style outcome or
 assessment IDs, or declare this optional metadata:
 
@@ -43,7 +51,11 @@ assessment IDs, or declare this optional metadata:
 
 The metadata prevents partially migrated courses from being silently
 classified as legacy, but is a **validator opt-in convention** rather than
-a new mandatory field in the public specification.
+a new mandatory field in the public specification. An unmarked course
+that has begun defining stable outcome or assessment IDs is also routed
+to v0.2.0 checks; malformed new requirements cannot escape review by
+omitting the marker. An explicitly declared unknown version, or a
+legacy version declaration mixed with new IDs, fails closed.
 
 ### Inline assessment example
 
@@ -94,10 +106,14 @@ review of assessment quality, evidence, and independence from paid tools.
 
 ## Migration order
 
-1. Adapt legacy validators to recognize explicitly migrated courses while
-   retaining their historical checks for untouched files.
-2. Pilot SEF1, APP1, and a project course such as SEF10.
-3. Verify the two generations coexist in CI without regressions.
-4. Migrate additional courses in reviewable batches.
+1. **Completed by validator routing:** retain historical checks for legacy
+   courses and dispatch migrated v0.2.0 courses to the new checker. The
+   mixed-format regression suite exercises APP and SEF together.
+2. Pilot SEF1, APP1, and a project course such as SEF10; maintain the
+   original program catalog and prerequisite invariants as each migrates.
+3. Review the outcome-to-assessment mapping and run manual pedagogical
+   assessment in addition to the structural tests.
+4. Migrate additional courses in reviewable batches without rewriting
+   historical learner evidence.
 5. Add a versioned export for OEE Workspace, 0xNAND, and other consumers
    after the public evaluation contract has been proven.
