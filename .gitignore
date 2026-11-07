@@ -9,3 +9,6 @@ tmp/
 __pycache__/
 *.pyc
 .codex
+
+# Release notes are maintained in GitHub Releases
+releases/
