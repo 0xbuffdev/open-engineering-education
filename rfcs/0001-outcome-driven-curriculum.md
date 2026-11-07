@@ -56,11 +56,11 @@ An automated test of software behavior is not the same thing as a learner knowle
 Proposed normative wording:
 
 > Every course MUST define observable learning outcomes and a publicly understandable means of evaluating each required outcome. Every required summative assessment MUST identify the outcomes assessed, the work expected, the applicable success criteria, and sufficient evidence for a reviewer to make an evaluation decision. One assessment MAY address multiple outcomes, and an outcome MAY be evaluated through multiple assessments.
-
+>
 > OEE MUST NOT require a fixed number or sequence of tests, exercises, labs, or projects for every module or course. A course MUST provide an appropriate integrated demonstration of its outcomes, but that demonstration need not be designated a `lab`. Course authors SHOULD choose assessment methods that are authentic to the capabilities evaluated and avoid requiring repetitive evidence for the same outcome without an educational justification.
-
+>
 > An instructional module MUST describe its expected outcomes and an ordered learning sequence. It MAY contain practical activities or checks. Assessment definitions MAY be linked from the module, the Completion requirements section, or a public assessment brief, provided there is one authoritative set of requirements.
-
+>
 > Required activities and optional practice MUST be distinguishable. Optional practice or formative checks MUST NOT silently become a condition of completion.
 
 Preserve the four existing course-level headings (`Overview`, `Learning outcomes`, `Modules`, `Completion requirements`) for the first transition to minimize disruption. Remove the requirement to type every item inside `Lessons` as exactly `lesson`, `test`, or `lab`. Keep concise typed activity labels where pedagogically useful; do not prescribe a closed universal taxonomy.
@@ -72,9 +72,9 @@ Project courses MUST still define public deliverables, evaluation criteria, and 
 Replace the default completion checklist with:
 
 > A learner completes a course only after the course's required learning outcomes are demonstrated against the published criteria and the required evidence is recorded. The course MUST make these requirements available before assessment. Reading, attendance, elapsed time, activity checkmarks, or unsubstantiated claims MUST NOT alone establish completion.
-
+>
 > Evidence obligations MUST be proportionate to the assessed work. For executable engineering artifacts, applicable reproduction instructions, environment assumptions, verification results, and material limitations MUST be available. For non-executable conceptual or analytical work, an inspectable explanation or evaluated performance MAY be suitable evidence. A course MUST NOT impose a generic build log, project retrospective, or complete lab report on every small exercise.
-
+>
 > Substantial engineering work MUST include an appropriate account of important trade-offs, failures, corrections, or limitations when they are relevant to interpreting the result. A substantive project MUST include a reviewable explanation of the learner's technical decisions. Self-check activities MAY supply feedback without generating a permanent evidence record.
 
 The existing privacy, traceability, reproducibility, evidence-integrity, and truthful-claims principles remain in force.
@@ -147,6 +147,7 @@ Additional instructional exercises, resources, mentoring, adaptive guidance, fee
 Existing course and project definitions remain the canonical published requirements until an implementation PR is merged. A course must not silently drop previously required completion activities while the old normative specification still applies.
 
 Pilot with:
+
 1. SEF1 (foundational/conceptual-plus-simulation).
 2. APP1 (web investigation and diagnosis, with draft PR #31 reviewed).
 3. SEF10 or APP9 (one cumulative project with milestones and defense).
