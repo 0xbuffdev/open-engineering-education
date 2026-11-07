@@ -51,9 +51,9 @@ Every course must follow the required OEE structure and specify:
 - **Prerequisites:** the prior knowledge and course requirements needed to proceed.
 - **Course structure:** the ordered modules and lessons.
 - **Assessments:** the intended outcomes and criteria for evaluating them.
-- **Labs and exercises:** the practical work required to develop and demonstrate capability.
+- **Practice and practical work:** exercises, investigations, and labs chosen to develop and demonstrate the relevant capabilities.
 - **Completion requirements:** the conditions that must be satisfied to complete the course.
-- **Evidence and retrospective:** the artifacts and explanations needed to support completion and document learning from experience.
+- **Evidence:** proportionate artifacts, explanations, and evaluation records required to demonstrate outcomes.
 
 Authors must follow [Course Format](../spec/course-format.md). Course definitions must remain consistent with the governing specification and must not introduce conflicting requirements or unsupported completion claims.
 
@@ -81,6 +81,8 @@ Consult [Conformance](../spec/conformance.md) when evaluating whether a course, 
 
 ## Course structure
 
+The outcome-driven specification draft `v0.1.0` governs newly authored or explicitly migrated courses. Existing course definitions may still use the earlier test/lab structure and remain subject to their historical revision requirements until migrated. Current repository scripts may still validate those legacy formats; a passing legacy check does not constitute conformance to the revised specification.
+
 Every course follows the common OEE course format. The specification establishes the shared structure, while each course defines its subject-specific content and expectations.
 
 Course definitions cover:
@@ -89,11 +91,11 @@ Course definitions cover:
 - Learning outcomes and prerequisites.
 - The sequence of modules and lessons.
 - Assessments and practical investigations.
-- Required exercises and substantial lab work.
+- Required summative evaluations and any practical work needed to demonstrate the outcomes.
 - Completion conditions and evidence to retain.
-- Common failure modes and technical retrospectives.
+- Relevant failure analysis, limitations, and engineering reasoning for substantial assessed work.
 
-Project-based courses additionally define their deliverables, evaluation criteria, and project defense.
+Project-based courses additionally define their deliverables, evaluation criteria, and project defense. Legacy course revisions retain their published requirements until explicitly migrated.
 
 The individual course file is the authoritative definition of that course's requirements. Program summaries, external interfaces, and platform representations should remain consistent with it.
 
@@ -115,7 +117,7 @@ These labels measure the evidence supporting course validation. They do not indi
 
 Course completion is determined by the requirements stated in the individual course definition and the applicable OEE specification.
 
-Depending on the course, completion may require conceptual checkpoints, exercises, tests or evaluations, substantial lab work, explained design decisions, and a technical retrospective.
+Depending on the course, completion may require conceptual evaluation, investigations, lab evidence, projects, or another appropriate summative demonstration. The revised specification does not mandate per-module tests or labs, or an end-of-course final lab.
 
 Where executable artifacts are required, the evidence must support reproduction and review. It should establish what was done, how the result was obtained, whether the stated outcomes were demonstrated, and what limitations remain.
 
