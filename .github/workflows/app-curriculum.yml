@@ -6,6 +6,8 @@ on:
       - 'curriculum/APP/**'
       - 'curriculum/README.md'
       - 'scripts/check-app-curriculum.py'
+      - 'scripts/app_catalog.py'
+      - 'tests/test_app_catalog.py'
       - 'scripts/course_format_versions.py'
       - 'scripts/check-outcome-curriculum.py'
       - '.github/workflows/app-curriculum.yml'
@@ -15,6 +17,8 @@ on:
       - 'curriculum/APP/**'
       - 'curriculum/README.md'
       - 'scripts/check-app-curriculum.py'
+      - 'scripts/app_catalog.py'
+      - 'tests/test_app_catalog.py'
       - 'scripts/course_format_versions.py'
       - 'scripts/check-outcome-curriculum.py'
 
