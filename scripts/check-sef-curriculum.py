@@ -7,6 +7,8 @@ from pathlib import Path
 import re
 import sys
 
+from course_format_versions import is_outcome_course, validate_outcome_course
+
 ROOT = Path(__file__).resolve().parents[1]
 SEF = ROOT / "curriculum" / "SEF"
 EXPECTED = {f"SEF{i}" for i in range(1, 11)}
@@ -25,6 +27,9 @@ def check_links(path, content):
 
 
 def validate():
+    ERRORS.clear()
+    DEPS.clear()
+    migrated_count = 0
     courses = sorted(SEF.glob("SEF[0-9]*.md"))
     if {p.stem for p in courses} != EXPECTED:
         ERRORS.append("Expected SEF1.md through SEF10.md, exactly")
@@ -32,6 +37,11 @@ def validate():
     for path in courses:
         code = path.stem
         text = path.read_text(encoding="utf-8")
+        try:
+            migrated = is_outcome_course(text)
+        except ValueError as exc:
+            ERRORS.append(f"{code}: {exc}")
+            continue
         title_match = re.search(r"^# " + code + r" — (.+)$", text, re.M)
         if not title_match:
             ERRORS.append(f"{code}: heading or code missing")
@@ -45,7 +55,10 @@ def validate():
         for key in ("Program", "Type", "Prerequisites", "Duration", "Status"):
             if not re.search(r"^\*\*" + key + r":\*\* \S+", text, re.M):
                 ERRORS.append(f"{code}: missing {key} metadata")
-        if "**Status:** " + chr(96) + "draft" + chr(96) not in text:
+        if migrated:
+            if not re.search(r"^\*\*Status:\*\* `(?:draft|tested|verified)`$", text, re.M):
+                ERRORS.append(f"{code}: invalid course readiness status")
+        elif "**Status:** " + chr(96) + "draft" + chr(96) not in text:
             ERRORS.append(f"{code}: expected draft status")
         if not re.search(r"^\*\*Type:\*\* " + chr(96) + ("project" if code == "SEF10" else "course") + chr(96) + "$", text, re.M):
             ERRORS.append(f"{code}: incorrect course type")
@@ -55,6 +68,22 @@ def validate():
             ERRORS.append(f"{code}: expected exactly {SECTIONS}; got {headings}")
         if re.search(r"\b[BR][0-9]{1,3}\b|^#### Module brief|^## Course brief|^\s*- kind: ", text, re.M):
             ERRORS.append(f"{code}: legacy brief or resource format found")
+
+        if migrated:
+            # Check the public outcome contract without applying historical
+            # per-module quiz/lab or final-integration-lab requirements.
+            migrated_count += 1
+            ERRORS.extend(f"{code}: {issue}" for issue in validate_outcome_course(path))
+            if "requirements/" in text or "authoring-notes/" in text:
+                ERRORS.append(f"{code}: obsolete companion file reference")
+            prereq = re.search(r"^\*\*Prerequisites:\*\* ([^\n]+)", text, re.M)
+            value = prereq.group(1) if prereq else ""
+            DEPS[code] = [f"SEF{i}" for i in range(1, 10)] if "SEF1–SEF9" in value else re.findall(r"\bSEF[0-9]+\b", value)
+            for dep in DEPS[code]:
+                if dep not in EXPECTED or dep == code:
+                    ERRORS.append(f"{code}: invalid prerequisite {dep}")
+            check_links(path, text)
+            continue
 
         sections = list(re.finditer(r"^### Module (\d+) — ([^\n]+)$", text, re.M))
         if not sections:
@@ -405,7 +434,7 @@ def validate():
         print("\n".join("ERROR: " + issue for issue in ERRORS), file=sys.stderr)
         return 1
     modules = sum(len(re.findall(r"^### Module \d+ — ", course.read_text(encoding="utf-8"), re.M)) for course in courses)
-    print(f"SEF structural validation passed: {len(courses)} draft courses across {modules} modules, without fixed module/lesson caps")
+    print(f"SEF structural validation passed: {len(courses)} courses across {modules} modules ({migrated_count} v0.2.0, {len(courses) - migrated_count} legacy), without fixed module/lesson caps")
     return 0
 
 
