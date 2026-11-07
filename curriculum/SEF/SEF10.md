@@ -159,7 +159,7 @@ SEF10-AS2.
 6. **Defense Preparation** — Organize a reviewer-accessible explanation without supplying scripted answers.
 
 **Milestone M5 — Rehearse:** A clean isolated checkout reproduces
-the project; the requirements/evidence map is usable; critical
+the project; the requirements-to-evidence map is usable; critical
 findings are resolved or explicitly reopen the relevant earlier
 milestone. A self-directed learner may provide a dated independent
 replay and self-review, disclosing the lack of external sign-off.
