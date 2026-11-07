@@ -1,0 +1,26 @@
+name: OEE v0.2.0 outcome curriculum validation
+
+on:
+  pull_request:
+    paths:
+      - 'curriculum/**'
+      - 'scripts/check-outcome-curriculum.py'
+      - 'tests/test_outcome_curriculum.py'
+      - '.github/workflows/outcome-curriculum.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'curriculum/**'
+      - 'scripts/check-outcome-curriculum.py'
+      - 'tests/test_outcome_curriculum.py'
+      - '.github/workflows/outcome-curriculum.yml'
+
+jobs:
+  outcome-curriculum:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unit-test v0.2.0 checks
+        run: python3 -m unittest discover -s tests -p 'test_outcome_curriculum.py' -v
+      - name: Validate migrated v0.2.0 courses
+        run: python3 scripts/check-outcome-curriculum.py --all
