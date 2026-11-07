@@ -11,10 +11,10 @@ SCRIPT = Path(__file__).resolve().parents[1] / "scripts/check-outcome-curriculum
 COURSE = """# APP1 — Web and Internet Foundations
 
 **Program:** APP — Application Engineering
-**Type:** \`course\`
+**Type:** `course`
 **Prerequisites:** none
 **Duration:** 8 weeks
-**Status:** \`draft\`
+**Status:** `draft`
 
 ## Overview
 
@@ -116,13 +116,13 @@ class OutcomeCurriculumValidatorTests(unittest.TestCase):
         self.assertIn("ordered learning sequence is empty", result.stderr)
 
     def test_project_requires_deliverables_and_defense(self):
-        result = validate(COURSE.replace("**Type:** \`course\`", "**Type:** \`project\`"))
+        result = validate(COURSE.replace("**Type:** `course`", "**Type:** `project`"))
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("requires public deliverables", result.stderr)
         self.assertIn("requires a reviewable technical defense", result.stderr)
 
     def test_project_with_public_deliverables_and_defense_passes(self):
-        project = COURSE.replace("**Type:** \`course\`", "**Type:** \`project\`")
+        project = COURSE.replace("**Type:** `course`", "**Type:** `project`")
         project += "\nRequired deliverables: reproducible artifact.\n"
         project += "Project defense: review design choices and limitations.\n"
         result = validate(project)
