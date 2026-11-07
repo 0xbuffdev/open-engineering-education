@@ -5,14 +5,22 @@ on:
     paths:
       - 'curriculum/**'
       - 'scripts/check-outcome-curriculum.py'
+      - 'scripts/course_format_versions.py'
+      - 'scripts/check-app-curriculum.py'
+      - 'scripts/check-sef-curriculum.py'
       - 'tests/test_outcome_curriculum.py'
+      - 'tests/test_dual_format_validation.py'
       - '.github/workflows/outcome-curriculum.yml'
   push:
     branches: [main]
     paths:
       - 'curriculum/**'
       - 'scripts/check-outcome-curriculum.py'
+      - 'scripts/course_format_versions.py'
+      - 'scripts/check-app-curriculum.py'
+      - 'scripts/check-sef-curriculum.py'
       - 'tests/test_outcome_curriculum.py'
+      - 'tests/test_dual_format_validation.py'
       - '.github/workflows/outcome-curriculum.yml'
 
 jobs:
@@ -20,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Unit-test v0.2.0 checks
-        run: python3 -m unittest discover -s tests -p 'test_outcome_curriculum.py' -v
+      - name: Unit-test outcome and mixed-format validators
+        run: python3 -m unittest discover -s tests -p 'test_*.py' -v
       - name: Validate migrated v0.2.0 courses
         run: python3 scripts/check-outcome-curriculum.py --all
