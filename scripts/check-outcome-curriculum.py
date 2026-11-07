@@ -16,7 +16,7 @@ courses as skipped. This keeps historical definitions unchanged while
 courses are migrated in separate pull requests.
 
 For an explicit version marker, use this OPTIONAL course metadata line:
-    **Specification:** \`v0.2.0\`
+    **Specification:** `v0.2.0`
 
 Do not use --all's legacy skip as proof of new-format conformance.
 """
@@ -45,7 +45,7 @@ FIELD_RE = re.compile(
     re.IGNORECASE,
 )
 VERSION_RE = re.compile(
-    r"^\*\*(?:Specification|OEE specification):\*\*\s*\`?v0\.2\.0\`?\s*$",
+    r"^\*\*(?:Specification|OEE specification):\*\*\s*`?v0\.2\.0`?\s*$",
     re.IGNORECASE | re.MULTILINE,
 )
 ID_HINT_RE = re.compile(r"^\s*-\s+\*\*[A-Z]{2,6}[1-9]\d*-(?:O|AS)[1-9]\d*", re.MULTILINE)
@@ -73,7 +73,7 @@ def validate_course(path: Path) -> list[str]:
     for field in ("Type", "Prerequisites", "Duration", "Status"):
         if not re.search(rf"^\*\*{field}:\*\*\s*\S", metadata, re.MULTILINE):
             errors.append(f"missing {field} metadata")
-    kind_match = re.search(r"^\*\*Type:\*\*\s*\`?(course|project)\`?\s*$", metadata, re.MULTILINE)
+    kind_match = re.search(r"^\*\*Type:\*\*\s*`?(course|project)`?\s*$", metadata, re.MULTILINE)
     if not kind_match:
         errors.append("Type must be 'course' or 'project'")
     kind = kind_match.group(1) if kind_match else ""
