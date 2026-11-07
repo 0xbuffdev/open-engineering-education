@@ -81,7 +81,9 @@ Consult [Conformance](../spec/conformance.md) when evaluating whether a course, 
 
 ## Course structure
 
-The outcome-driven specification draft `v0.1.0` governs newly authored or explicitly migrated courses. Existing course definitions may still use the earlier test/lab structure and remain subject to their historical revision requirements until migrated. Current repository scripts may still validate those legacy formats; a passing legacy check does not constitute conformance to the revised specification.
+For practical decisions about course boundaries, module cohesion, lesson objectives, naming, and workload, see the non-normative [Curriculum Design Guide](DESIGN-GUIDE.md). It supplements, but does not replace, the OEE specification.
+
+The outcome-driven specification draft `v0.2.0` (following the `v0.1.0` baseline) governs newly authored or explicitly migrated courses. Existing course definitions may still use the earlier test/lab structure and remain subject to their historical revision requirements until migrated. Current repository scripts may still validate those legacy formats; a passing legacy check does not constitute conformance to the revised specification.
 
 Every course follows the common OEE course format. The specification establishes the shared structure, while each course defines its subject-specific content and expectations.
 
@@ -107,7 +109,7 @@ Each course carries a status label that describes the evidence supporting its va
 | --- | --- |
 | `draft` | The course is written but does not yet meet the evidence requirements for `tested`. |
 | `tested` | At least one learner has completed the course, recorded feedback has informed a revision, and the required evidence is documented. |
-| `verified` | At least two learners have completed the course, the exit check and labs have been reproduced or reviewed, and a qualified reviewer has signed off. |
+| `verified` | At least two learners have completed the course, the required summative evaluations and applicable engineering artifacts have been reproduced or reviewed, and a qualified reviewer has signed off. |
 
 New courses begin as `draft`. Promotion requires the evidence specified by [Status Labels](../spec/status-labels.md) and [Evidence Rules](../spec/evidence-rules.md).
 
