@@ -6,6 +6,8 @@ on:
       - 'curriculum/APP/**'
       - 'curriculum/README.md'
       - 'scripts/check-app-curriculum.py'
+      - 'scripts/course_format_versions.py'
+      - 'scripts/check-outcome-curriculum.py'
       - '.github/workflows/app-curriculum.yml'
   push:
     branches: [main]
@@ -13,6 +15,8 @@ on:
       - 'curriculum/APP/**'
       - 'curriculum/README.md'
       - 'scripts/check-app-curriculum.py'
+      - 'scripts/course_format_versions.py'
+      - 'scripts/check-outcome-curriculum.py'
 
 jobs:
   validate-app:
