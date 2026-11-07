@@ -2,15 +2,15 @@
 
 This directory defines the requirements that govern Open Engineering Education (OEE). The documents apply to the public curriculum and to implementations that claim to follow the specification.
 
-**Specification status:** Draft, version `v0.0.1`.
+**Specification status:** Draft, version `v0.1.0`.
 
 ## Documents
 
 | Document | Purpose |
 | --- | --- |
 | [Principles](principles.md) | Defines the commitments that govern OEE |
-| [Course Format](course-format.md) | Defines the required structure of a course |
-| [Evidence Rules](evidence-rules.md) | Defines completion evidence and reproducible engineering work |
+| [Course Format](course-format.md) | Defines outcome-driven course structure and public assessment requirements |
+| [Evidence Rules](evidence-rules.md) | Defines proportionate evidence, course completion, and reproducible engineering work |
 | [Status Labels](status-labels.md) | Defines `draft`, `tested`, and `verified` |
 | [Conformance](conformance.md) | Defines how adherence to OEE is evaluated |
 | [Implementation Boundary](implementation-boundary.md) | Separates specification requirements from curriculum and implementation choices |
@@ -41,6 +41,10 @@ Read the documents in this order:
 The specification defines the common requirements. Curriculum authors and implementation maintainers may add detail within their scope, but they MUST NOT silently contradict a normative requirement.
 
 A proposed normative change MUST follow the [RFC process](../rfcs/README.md), apart from the one-time initial v0.0.1 course-format stabilization described in [Governance](../GOVERNANCE.md). Until a change is approved and merged, the published normative text remains the reference for the draft version.
+
+## Revision note
+
+The `v0.1.0` draft adopts [RFC 0001](../rfcs/0001-outcome-driven-curriculum.md), replacing mandatory activity counts and final-lab placement with outcome-based evaluation. Earlier published course revisions must be interpreted under their original rules until they are explicitly migrated. A validator passing, or a course file existing, does not establish conformance to this revision.
 
 ## Current limitations
 
