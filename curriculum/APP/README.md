@@ -56,6 +56,8 @@ Core and elective courses appear in the **same list**. Durations are draft workl
 
 **Totals:** 9 core courses (8 taught courses and one project capstone), plus 7 optional elective courses, all initially `draft`. Course definitions are public curriculum specifications, **not** finished teaching materials or readiness claims. APP9 remains the core capstone: APP10–APP16 are not required for graduation.
 
+**Proposed restructuring (not yet adopted):** The [APP Course Architecture Proposal](ARCHITECTURE.md) audits the existing course boundaries, proposes standalone HTML/CSS, JavaScript, TypeScript, React and Node.js courses, and records a stable-identifier migration approach. This page and the linked course definitions **remain authoritative** until reviewed implementation PRs explicitly update them.
+
 ```text
 SEF10 → APP1
 APP1 → APP2, APP3
