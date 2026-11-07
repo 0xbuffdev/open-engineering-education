@@ -82,6 +82,7 @@ class APPCatalogTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         shutil.copytree(ROOT / "curriculum", self.root / "curriculum")
+        shutil.copytree(ROOT / "spec", self.root / "spec")
         self.app.ROOT = self.root
         self.app.APP = self.root / "curriculum" / "APP"
         self.catalog = self.app.APP / "README.md"
