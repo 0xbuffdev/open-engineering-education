@@ -6,17 +6,17 @@ It is intended to protect accurate attribution and prevent users from confusing 
 
 The content and code licenses in this repository do not grant trademark rights.
 
-## Registered marks
+## Unregistered marks
 
-The following names are registered marks, as represented by the project steward:
+The following names are used as unregistered trademarks by the project steward. The ™ symbol indicates a trademark claim; it does not represent registration.
 
-- **Open Engineering Education®** and **OEE®**: the name and short form of the open engineering-education standard.
-- **0xBUFF®**: the steward's house mark.
-- **0xNAND®**: the paid reference implementation operated under the 0xBUFF brand.
+- **Open Engineering Education™** and **OEE™**: the name and short form of the open engineering-education standard.
+- **0xBUFF™**: the steward's house mark.
+- **0xNAND™**: the paid reference implementation operated under the 0xBUFF brand.
 
 0xNAND is part of the 0xBUFF brand family. Where the relationship is relevant, use wording such as "0xNAND, a 0xBUFF product."
 
-Use the registered-mark symbol on the first prominent occurrence of a registered name in a document or announcement where practical. Later occurrences in the same document may omit it.
+Use the ™ symbol on the first prominent occurrence of a mark in a document or announcement where practical. Later occurrences in the same document may omit it.
 
 ## Reserved conformance wording
 
@@ -44,7 +44,7 @@ Permitted references must not imply endorsement, certification, or official stat
 Do not:
 
 - imply sponsorship, endorsement, certification, or official status without authorization;
-- use a registered name as the name of another product, course, company, or service in a way that creates confusion;
+- use one of these marks as the name of another product, course, company, or service in a way that creates confusion;
 - use a reserved conformance mark before its criteria and authorization process exist;
 - falsely present a modified curriculum as the canonical OEE reference;
 - remove or alter copyright, attribution, or license notices;
@@ -62,7 +62,7 @@ A compatible implementation may describe its material as "based on OEE" or "uses
 
 ## Permission requests
 
-To request permission for a use of a registered mark or reserved conformance mark, contact the steward through the official 0xBUFF contact channel.
+To request permission for a use of one of these marks or a reserved conformance mark, contact the steward through the official 0xBUFF contact channel.
 
 A request should identify:
 
