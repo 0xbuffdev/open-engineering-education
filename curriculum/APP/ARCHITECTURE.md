@@ -29,6 +29,9 @@ module count, lesson count, assessment quota, or universal duration.
 4. **Teach React in its own course.** React-specific reconciliation,
    component boundaries, state, effects, routing/data integration, testing,
    and architectural trade-offs are not generic browser fundamentals.
+   Modern React application tooling requires basic Node.js/npm literacy:
+   provide that within APP18 rather than making the full backend
+   foundations course APP21 a prerequisite for React.
 5. **Separate Node.js/backend fundamentals from backend framework
    engineering.** The former explains runtime/event loop, asynchronous
    I/O, HTTP service primitives, streams, process behavior, security,
@@ -90,7 +93,7 @@ new files, or classifications is yet implemented.
 | --- | --- | --- | --- | --- |
 | 1 | APP1 | Web & Internet Foundations | Diagnose a complete network-to-pixels Web visit | SEF10 |
 | 2 | APP17 | HTML & CSS Engineering | Author semantic, accessible, responsive documents and styles | APP1 |
-| 3 | APP18 | JavaScript Programming | Build and debug programs using JavaScript language and async semantics | APP1 |
+| 3 | APP18 | JavaScript Programming | Build and debug JavaScript programs, including basic Node/npm tooling | APP1 |
 | 4 | APP19 | TypeScript Programming | Design and verify useful static type contracts over JavaScript behavior | APP18 |
 | 5 | APP2 | Browser & Frontend Engineering | Build framework-neutral, accessible, interactive browser applications | APP17, APP19 |
 | 6 | APP20 | React Application Engineering | Engineer a maintainable React application with tested state and data behavior | APP2 |
@@ -115,7 +118,9 @@ APP1 is complete:
   understanding and data-modeling competencies; it does not
   require React first.
 - React (APP20) needs browser/frontend and TypeScript knowledge,
-  but it does not require backend framework engineering first.
+  plus basic Node.js/npm development-tooling literacy gained in APP18;
+  it does **not** require APP21 backend-runtime engineering or
+  backend framework engineering first.
 - Full-stack architecture (APP5) is the intentional integration
   boundary where the paths converge.
 
@@ -146,9 +151,22 @@ Owns values, types and coercion, control flow, scopes,
 functions/closures, objects/prototypes, modules, exceptions,
 collections/iteration, asynchronous promises and scheduling,
 testing, debugging, and program design. Include enough
-language runtime reasoning to prevent cargo-culted
-async code, but not a compulsory React/Node.js framework
-or TypeScript type system.
+language runtime reasoning to prevent cargo-culted async code.
+
+**Also owns basic Node.js development tooling**, without becoming a
+backend course: installing and selecting a Node.js version,
+running JavaScript with Node, using npm or a compatible package
+manager, understanding `package.json`, dependency installation,
+lockfiles, package scripts, ES modules, environment variables,
+and local development/build commands. Practical evidence should
+include reproducing a small JavaScript project from a clean checkout,
+installing its declared dependencies, running a script/test, and
+explaining the distinction between development tooling and code
+that actually executes in a browser.
+
+APP18 does **not** require implementing HTTP servers, streams,
+production process lifecycle management, React, or TypeScript's
+type system. Those belong to later capabilities.
 
 ### APP19 — TypeScript Programming
 
@@ -187,9 +205,21 @@ client-side navigation/routing, accessibility,
 testing, error boundaries, performance investigation,
 and React application architecture. Explain where
 React's model differs from browser primitives.
+
+APP20 **uses** the Node.js/npm toolchain knowledge established
+in APP18, including `package.json`, reproducible installs,
+scripts and lockfiles. Teach creating/running/building a
+React application with a modern open frontend toolchain
+such as Vite, and how the resulting browser application
+differs from the Node-hosted development/build process.
+APP20 may refresh this setup, but must not duplicate an
+entire Node.js programming curriculum.
+
 React-specific server-side features may be evaluated
 in later architecture/integration work if required
-by genuine outcomes, not imported by default.
+by genuine outcomes, not imported by default. A
+React browser application is not inherently a Node.js
+HTTP service.
 
 ### APP21 — Node.js & Backend Foundations
 
@@ -201,10 +231,12 @@ handling, cancellation, configuration, error
 boundaries, security, local testing and diagnostic
 observability.
 
-This is not an introductory second JavaScript course.
-It should demonstrate a reliable small service using
-already acquired JS/TS skills before layering on a
-framework or application persistence.
+This is not an introductory second JavaScript course,
+and is **not a prerequisite for APP20 React**. It develops
+backend-runtime understanding beyond APP18's package-manager
+and script-runner familiarity. It should demonstrate a
+reliable small service using already acquired JS/TS skills
+before layering on a framework or application persistence.
 
 ### APP4 — Databases & Data Modeling
 
@@ -292,11 +324,11 @@ the OEE course outcomes. At a minimum, verify:
 | --- | --- | --- |
 | Internet, DNS, TLS, HTTP, browser engines, rendering model | APP1 | APP2, APP7 |
 | Semantic HTML, CSS, responsive layout, foundational accessibility | APP17 | APP2, APP20 |
-| JavaScript language/async semantics | APP18 | APP2, APP21 |
+| JavaScript language/async semantics and basic Node/npm tooling | APP18 | APP2, APP19, APP20, APP21 |
 | TypeScript language/type design | APP19 | APP2, APP20, APP21 |
 | Browser APIs, events, accessibility verification, client-side failures | APP2 | APP20, APP10 |
-| React components/state/data architecture | APP20 | APP5, APP10 |
-| Node runtime and raw HTTP-service fundamentals | APP21 | APP3 |
+| React components/state/data architecture and Vite-based frontend builds | APP20 | APP5, APP10 |
+| Node backend runtime and raw HTTP-service fundamentals | APP21 | APP3 |
 | Relational database and SQL correctness | APP4 | APP3, APP5 |
 | API framework, security, backend service correctness | APP3 | APP5, APP11 |
 | Integrated application architecture | APP5 | APP8, APP9 |
