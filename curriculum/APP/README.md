@@ -37,7 +37,7 @@ Core and elective courses appear in the **same list**. Durations are draft workl
 
 | Course | Title | Duration | Prerequisites | Kind | Status |
 | --- | --- | --- | --- | --- | --- |
-| [APP1](APP1.md) | Web & Internet Foundations | 16–18 weeks | SEF10 | `course` | Core · draft |
+| [APP1](APP1.md) | Web & Internet Foundations | 12–16 weeks | SEF10 | `course` | Core · draft |
 | [APP2](APP2.md) | Frontend Engineering | 9 weeks | APP1 | `course` | Core · draft |
 | [APP3](APP3.md) | Backend Engineering & API Design | 9 weeks | APP1 | `course` | Core · draft |
 | [APP4](APP4.md) | Databases & Data Modeling | 8 weeks | APP3 | `course` | Core · draft |
@@ -71,8 +71,8 @@ APP1–APP8 → APP9
 
 Every authored APP course is currently `draft`. Course files define public outcomes, module structure, required practical work and completion requirements. Reading lists, affiliate purchases and commercial teaching content remain outside OEE. Learners can work through the core sequence independently; a commercial course or proprietary platform is not a graduation requirement.
 
-**APP1 scope note:** The current APP1 draft has been redesigned around how the Internet, HTTP, DNS, hosting and browsers work, including document parsing and page rendering. It does not require learner-written JavaScript or a backend service. Subsequent APP course splits, codes and prerequisites remain under architectural review in [Issue #30](https://github.com/0xbuffdev/open-engineering-education/issues/30); this revision does not adopt or renumber those courses.
+**APP1 scope note:** The APP1 course uses the OEE `v0.2.0` outcome-driven format. Its fifteen modules preserve first-principles Internet-to-browser coverage while four public assessments evaluate evidence across connected capabilities rather than enforcing a quiz/lab pair for each module. No learner-written JavaScript or backend service is required. The 12–16-week estimate is provisional and subject to learner evidence. Subsequent APP course splits, codes and prerequisites remain under architectural review in [Issue #30](https://github.com/0xbuffdev/open-engineering-education/issues/30); this revision does not adopt or renumber those courses.
 
-**Draft limitations:** The nine core and seven elective courses have expanded learning sequences and additional assessment/lab briefs. They still require educational review, independent lab reproduction, completed question banks, detailed tool-version checks, and learner feedback before any readiness promotion. The electives extend the public curriculum but do not alter the core progression, graduation or commercial content.
+**Draft limitations:** APP1 follows the outcome-driven `v0.2.0` draft specification; other APP courses may still use historical checkpoint/lab formats until explicitly migrated. All courses remain subject to educational review, applicable reproducibility checks, validation of required assessment evidence, realistic workload calibration, and learner feedback before any readiness promotion. Electives extend the public curriculum but do not alter the core progression or graduation requirements.
 
-**Depth policy:** No course or module has an arbitrary fixed lesson or module count. The number and sequence follow distinct technical mechanisms, prerequisite knowledge, application, assessment, and evidence needs. A module may omit an assessment if an explicit outcome-based justification exists; the course must end in a substantial integration lab.
+**Depth policy:** No course or module has a universal lesson or module count. Size and sequencing follow distinct mechanisms, prerequisite relationships, coherent capabilities, appropriate practice, and evidence needs. Under OEE `v0.2.0`, a fixed per-module test/lab pattern and a mandatory final lab are not conformance requirements. An integrated evaluation is appropriate when the actual outcomes require one, as in APP1's Internet-to-pixels investigation. See the [Curriculum Design Guide](../DESIGN-GUIDE.md).
