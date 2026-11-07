@@ -10,7 +10,7 @@ Open Engineering Education (OEE) defines how engineering courses are structured,
 
 OEE emphasizes underlying mechanisms, practical engineering work, reproducible results, and transparent claims about what learners can demonstrate.
 
-**Project status:** `v0.1.0` — draft. The specification is evolving and is not a finalized standard. Course status labels describe the evidence available for each course.
+**Project status:** `v0.2.0` — draft. The specification is evolving and is not a finalized standard. Course status labels describe the evidence available for each course.
 
 - **Steward:** [0xBUFF](https://github.com/0xbuffdev)
 - **Author:** Christopher S. Aondona
@@ -123,7 +123,7 @@ Contributors must have the rights needed to submit their work under the applicab
 
 ## Current limitations
 
-OEE is a draft specification. The `v0.1.0` course contract is being rolled out progressively; earlier course revisions may still follow the previous test/lab pattern and must not be treated as conforming to the updated requirements until reviewed and migrated. Its requirements may change through the documented governance process.
+OEE is a draft specification. The `v0.2.0` course contract replaces the `v0.1.0` baseline and is being rolled out progressively; earlier course revisions may still follow the previous test/lab pattern and must not be treated as conforming to the updated requirements until reviewed and migrated. Its requirements may change through the documented governance process.
 
 A published course, program, or implementation must not be described as `verified`, conforming, accredited, or certified unless the applicable criteria and documented review support that claim. OEE does not, by itself, guarantee employment outcomes, professional accreditation, or mastery of every subject associated with a course.
 
