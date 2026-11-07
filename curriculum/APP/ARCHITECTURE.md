@@ -1,13 +1,10 @@
-# Application Engineering — Course Architecture Proposal
+# Application Engineering — Migration Architecture Decision
 
-**Status:** Proposed program-level architecture for review in [Issue #30](https://github.com/0xbuffdev/open-engineering-education/issues/30). **Not an adopted or published course catalog.**
+**Decision status:** Approved migration architecture **upon merge of this decision PR**. **Implementation status:** planned and incremental, tracked in [Issue #30](https://github.com/0xbuffdev/open-engineering-education/issues/30). **The current [APP catalog](README.md) and course files remain authoritative until separate curriculum PRs merge.**
 
 The current authoritative program, course codes, prerequisites, and graduation
 requirements remain in [APP README](README.md) and its linked course files
-until separately reviewed migration pull requests change them. This document
-is a **temporary migration design**, not another normative OEE specification,
-authoring format, or course-completion contract. Retire it or reconcile it
-into the canonical program catalog once migration is complete.
+until separately reviewed migration pull requests change them. This document records the **temporary program migration decision**; it is not another normative OEE specification, authoring format, or course-completion contract. Once implementation is complete, reconcile the decision into the canonical APP catalog and retain only the historical rationale needed for traceability.
 
 The objective is a curriculum that starts at first principles, teaches
 individual engineering capabilities deeply, and remains navigable for
@@ -51,9 +48,7 @@ module count, lesson count, assessment quota, or universal duration.
    and platform engineering are extensions, not hidden graduation gates.
 
 The program's core remains an integrated Application Engineering pathway.
-The **fourteen-course proposal is provisional**; final course counts and
-durations follow audited capabilities, prerequisite load, and evidence,
-not an arbitrary target.
+The **fourteen-course core capability structure is the approved migration target**, not an arbitrary course-count constraint or an immediate change to graduation requirements. Course durations, learning outcomes and any justified later split/merge must follow documented competency, prerequisite, workload and evidence review. Such changes require another explicit program-level decision.
 
 ## 2. Course identity is not course sequence
 
@@ -63,7 +58,7 @@ contiguous would silently change the meaning of identifiers used by
 prerequisites, assessments, OEE Workspace, resource maps, citations, and
 future learner history.
 
-**Preferred migration policy:** preserve existing course identities
+**Adopted migration policy (effective upon merge):** preserve existing course identities
 where the underlying capability remains recognizable, revise course
 scope/version explicitly, and allocate **new IDs APP17–APP21** for five
 new core capabilities. The course catalog's **ordered rows** are the
@@ -84,12 +79,11 @@ A future machine-readable export must expose **catalog order**
 independently of course code and must not infer core/elective status
 from number ranges.
 
-## 3. Proposed core course progression
+## 3. Target core course progression
 
-The table is **prospective**. None of the new titles, dependencies,
-new files, or classifications is yet implemented.
+The table records the **approved target architecture**, not a live program catalog. The new course files, dependencies and classifications take effect only through separately reviewed migration PRs.
 
-| Sequence | Code | Proposed course | Public exit capability | Proposed direct prerequisites |
+| Sequence | Code | Target course | Public exit capability | Target direct prerequisites |
 | --- | --- | --- | --- | --- |
 | 1 | APP1 | Web & Internet Foundations | Diagnose a complete network-to-pixels Web visit | SEF10 |
 | 2 | APP17 | HTML & CSS Engineering | Author semantic, accessible, responsive documents and styles | APP1 |
@@ -361,17 +355,8 @@ authoring review, not a completed claim.
 Implement the approved architecture in short,
 independently reviewable stages:
 
-1. **Architecture decision:** review this proposal against the
-   current APP catalog, competency map and Issue #30.
-   Settle whether retaining old IDs and appending APP17–APP21
-   is acceptable before creating course files.
-2. **Validator/catalog preparation:** remove the current
-   fixed assumption that APP1–APP9 are core and
-   APP10–APP16 are electives. Use explicit catalog
-   classification and a validated **ordered program list**;
-   preserve the old validation behavior until each
-   course is migrated. A numeric ID must not silently
-   imply completion order or elective status.
+1. **Architecture decision:** adopt the competency boundaries, preserve existing APP1–APP16 identities, and reserve APP17–APP21 for the five new core capabilities as recorded here; effective when this PR merges. Course migration remains separate.
+2. **Validator/catalog preparation — completed in [PR #44](https://github.com/0xbuffdev/open-engineering-education/pull/44):** use explicit catalog classification and validated **ordered program rows** rather than assuming APP1–APP9 are always core and APP10–APP16 are always elective. Preserve historical course validation while migrating. A numeric ID must not imply order or elective status.
 3. **First new foundations:** add APP17 HTML/CSS, APP18
    JavaScript and APP19 TypeScript as distinct
    v0.2.0 draft courses, with outcomes, public
@@ -400,36 +385,96 @@ independently reviewable stages:
    the revised program. Do not move the published
    `v0.2.0` tag.
 
-The validator changes must be merged **before**
-introducing the new core IDs, otherwise current
-APP CI will fail by design. Curriculum PRs must
-prove existing and newly added courses coexist
-without weakening checks for historical files.
+The required catalog-driven validator changes **are already merged** in PR #44. Each curriculum PR must demonstrate that existing and newly added course files coexist without weakening legacy checks, required prerequisite closure, or explicit classification.
 A future machine-readable course index can
 express explicit order, but this proposal
 does not create that serialization contract.
 
-## 8. Review and decision record
+## 8. Decision record and implementation gates
 
-Pending decisions before migration:
+**Decision date:** 2026-11-07 (effective only when this decision PR merges).
 
-- Confirm the fourteen-course core *capability
-  structure*, or identify independent capabilities
-  that warrant merging/splitting after workload review.
-- Confirm stable-ID preservation and APP17–APP21
-  allocation, accepting that numeric IDs do not
-  directly indicate study sequence.
-- Confirm React as the dedicated frontend
-  framework and Fastify as an **open reference
-  candidate** for backend framework engineering.
-- Confirm minimum core graduation outcomes and
-  which advanced deployment/performance topics
-  belong in electives or later courses.
-- Confirm the prerequisite DAG and a
-  non-disruptive consumer/resource migration path.
+**Scope:** APP program design, public reference curriculum boundaries and
+migration sequencing; this decision changes **no normative OEE v0.2.0 rule**.
+The [APP catalog](README.md) remains authoritative for learners until the
+individual course migration PRs merge.
 
-**No approval, migration, or renumbering is
-implied by publishing this proposal.**
-All new and migrated course definitions remain
-`draft` until the OEE status evidence rules
-support a different label.
+### Accepted decisions
+
+1. **Core architecture:** adopt the fourteen capability/course boundaries in
+   Section 3 as the target for reviewable implementation, without treating the
+   number fourteen as a normative constraint or a guarantee of fixed duration.
+   Course-specific evaluation may justify a later separately recorded revision.
+2. **Stable identities:** keep the meaning of existing `APP1`–`APP16`
+   course identifiers wherever recognizable. Assign `APP17`–`APP21`
+   to HTML/CSS, JavaScript, TypeScript, React and Node.js/backend foundations,
+   respectively. **Catalog row order**, not numeric course suffix, is the
+   learning-order authority.
+3. **Course ownership:** preserve APP1 unchanged. Relocate legacy APP2
+   language, HTML/CSS and framework introduction into the correct new
+   courses; narrow APP2 to framework-neutral browser/frontend engineering
+   and APP3 to backend framework engineering. APP4 keeps relational/data
+   engineering and no longer needs APP3 as a prerequisite after migration.
+4. **Reference technologies:** React is the core open-source frontend
+   framework subject, following framework-neutral browser work. Fastify
+   with TypeScript is the open reference **candidate** for APP3, and
+   PostgreSQL is an open reference for APP4. Publish transferable
+   capabilities and criteria; avoid a proprietary-service completion gate.
+   A further recorded decision is required if the reference framework
+   choice materially changes a required course outcome.
+5. **Graduation competencies:** the required core must cover web diagnosis;
+   accessible documents and styles; JavaScript and TypeScript correctness;
+   browser interaction; React application design; backend runtime and
+   framework services; relational data; full-stack integration; testing,
+   CI and observability; deployment/recovery; evidence-based production
+   architecture; and APP9's reproducible engineering defense.
+6. **Optional specializations:** keep APP10–APP16 elective. Advanced frontend
+   optimization, distributed/backend systems, realtime, mobile, edge,
+   cross-language interoperation and platform engineering do not become
+   hidden APP9 graduation prerequisites.
+7. **Dependency model:** use the direct prerequisites in Section 3.
+   After APP1, APP17, APP18 and APP4 can proceed independently; APP19
+   follows APP18. APP2 needs APP17 and APP19; APP20 follows APP2.
+   APP21 follows APP19, and APP3 needs APP21 and APP4.
+   APP5 converges APP20 and APP3. APP6, APP7 and APP8 follow the
+   dependencies in Section 3. APP9 must cover **all core courses**
+   through the validated prerequisite closure, with no elective required.
+8. **Versioned migration:** never reinterpret a previously recorded course
+   completion as meeting a newly revised course's assessment contract.
+   Track the course/spec revision, maintain stable references, update
+   workspace/resource/0xNAND consumers explicitly, and document breaking
+   prerequisite or completion changes in the subsequent release. Do not
+   move the published `v0.2.0` tag.
+
+### Implementation gates
+
+- **Before first course PR:** the dual-format APP validator and
+  catalog-driven classification/order checks must be present; met by PR #44.
+- **For each new or migrated course:** include explicit
+  `**Specification:**` metadata with value `v0.2.0`, stable required outcome and
+  assessment IDs, public assessment criteria/evidence, a substantive
+  outcome-coverage review, realistic prerequisite justification, and
+  appropriate practical work without fixed test/lab quotas.
+- **For APP17–APP21 introduction:** update the authoritative catalog
+  in the same course PR so the course has an explicit classification,
+  correct study order and prerequisites; preserve validation for legacy
+  courses. Unchanged course definitions must not be relabeled as
+  v0.2.0-conforming.
+- **For existing course dependency changes:** update the affected course
+  metadata and catalog together, and preserve a passing APP9
+  all-core prerequisite closure. Stage downstream adaptations
+  deliberately rather than silently changing historical learner records.
+- **Before declaring program migration complete:** conduct the coverage
+  audit against the open reference sources listed in Issue #30, verify
+  substantive assessment quality and free/public reproducibility, align
+  consumer mappings and recorded revisions, and publish a release with
+  the migration impact explained.
+- **For readiness claims:** all new and migrated course definitions
+  remain `draft` until learner evidence and independent review satisfy
+  the OEE status requirements. Automated validation alone is not a
+  conformance or educational-quality finding.
+
+The next implementation PR should introduce **APP17 — HTML & CSS
+Engineering** under this architecture, without editing APP1. Subsequent
+reviewable PRs introduce APP18 and APP19 before narrowing APP2 or
+adding the framework- and backend-specific courses.
