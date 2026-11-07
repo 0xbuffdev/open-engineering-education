@@ -1,6 +1,6 @@
 # RFC 0001: Outcome-Driven Curriculum and Proportionate Assessment
 
-- **Status:** `draft`
+- **Status:** `accepted`
 - **Author:** 0xBUFF (proposal for steward review)
 - **Created:** 2026-11-07
 - **Last updated:** 2026-11-07
@@ -13,7 +13,7 @@ Make demonstrated learning outcomes, rather than a uniform activity template, th
 
 The curriculum will continue to be independently usable without any paid platform. OEE Workspace and 0xNAND will share a stable public educational contract rather than independently redefining course completion.
 
-This is a **proposal**, not adopted normative text. No course or implementation should claim compliance with it until the relevant specification and validation changes are accepted and merged.
+This RFC is accepted as a design decision. Its requirements are **not yet normative**: the current published specification remains in force until separate implementation changes are reviewed and merged.
 
 ## 2. Problem
 
@@ -214,20 +214,20 @@ A pilot is successful only if reviewers can:
 
 Track learner time and reviewer burden when pilot learners are available, rather than claiming these are improved before testing.
 
-## 9. Open questions
+## 9. Decisions and follow-up questions
 
-1. Should the new evaluation contract require one integrated end-of-course demonstration, or only adequate cumulative evidence across the course? **Recommendation:** require adequate overall evidence; integration where the outcomes demand it.
-2. Should stable module and lesson IDs be normative now or after the pilot? **Recommendation:** only outcome and required assessment IDs initially.
-3. What release/version transition communicates the incompatible spec change? **Recommendation:** decide during implementation after confirming the published baseline and affected consumers.
-4. Should status-label promotion thresholds be strengthened? **Recommendation:** discuss in a separate RFC, not this one.
+1. **Resolved — integration:** required outcomes need adequate cumulative summative evidence; require an integrated demonstration only where course outcomes justify it. No universal mandatory final lab.
+2. **Resolved — identifiers:** introduce stable identifiers for required course outcomes and summative assessments during the pilot; defer mandatory module and lesson identifiers.
+3. **Implementation condition — versioning:** the normative implementation PR must identify the actual published baseline and select, document, and consistently apply the appropriate new draft specification version and migration rules. Until then, published `v0.0.1` requirements remain authoritative.
+4. **Deferred — status-label strength:** existing learner-count thresholds and reviewer requirements remain unchanged by this decision; evaluate any strengthening in a separate RFC.
 
 ## 10. Decision
 
-- **Decision:** Pending steward review
-- **Decision date:** pending
-- **Decision-maker:** 0xBUFF steward
-- **Rationale:** pending
-- **Conditions:** pending
-- **Implementation pull request:** pending
+- **Decision:** Accepted (decision record proposed following the merge of [PR #32](https://github.com/0xbuffdev/open-engineering-education/pull/32))
+- **Decision date:** 2026-11-07
+- **Decision-maker:** 0xBUFF steward (subject to review and confirmation of this record)
+- **Rationale:** Observable competence and published assessment criteria provide a stronger, less repetitive contract than mandated activity counts. The approach preserves serious engineering evidence, public independence, and multiple learning implementations, while allowing appropriate instructional and project assessment designs.
+- **Conditions:** Make no normative change until an implementation PR is reviewed and merged; preserve current completion contracts for existing courses until separately migrated; reconcile specification versioning and downstream compatibility; require outcome-to-assessment coverage and an explicit manual quality review beyond structural checks. Keep 0xNAND-only delivery features non-normative. Do not change existing course status promotion thresholds through this RFC.
+- **Implementation pull request:** pending (to be created after this decision record is confirmed)
 
-This draft does not modify the normative specification and must not be treated as an adopted standard.
+**Governance boundary:** Acceptance authorizes implementation work but does not change the published normative specification. This document records the accepted direction; adoption takes effect only through a separate merged implementation PR.
