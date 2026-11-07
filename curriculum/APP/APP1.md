@@ -3,784 +3,609 @@
 **Program:** APP — Application Engineering
 **Type:** `course`
 **Prerequisites:** [SEF10](../SEF/SEF10.md) — Software Engineering Foundations
-**Duration:** 16–18 weeks
+**Duration:** 12–16 weeks
 **Status:** `draft`
+**Specification:** `v0.2.0`
 **Expected workload:** 10–15 focused hours/week (provisional; calibrate with learner evidence)
 
 > [Application Engineering](README.md) · [OEE curriculum](../README.md) · [Course format](../../spec/course-format.md)
 
 ## Overview
 
-Start at the absolute foundations of the Internet and World Wide Web, then trace how an address becomes a visible page. Learners examine access networks, packets, routing, transport, domains, DNS, hosting, URLs, HTTP, caching, HTTPS, browser processes and engines, navigation, resource loading, HTML and CSS parsing, layout, painting, compositing, security and evidence-based diagnostics.
+Understand the mechanisms that make a website reachable, trustworthy as
+a connection, and visible in a browser. Start with connected devices,
+Internet packets, routing, transport, naming, hosting, and HTTP; continue
+through TLS, browser processes, resource discovery, HTML/CSS parsing,
+layout, paint, and composition. Finish by diagnosing unfamiliar failures
+using observable evidence rather than assumptions or memorized labels.
 
-This course develops the **mechanisms behind the Web**, not a programming framework. Learners use a browser and supplied or locally served static fixtures to explain and diagnose behavior. They do **not** have to write JavaScript, TypeScript, a frontend framework, a backend HTTP service, production infrastructure or a database. HTML/CSS authoring is only a small observational fixture here; it is taught systematically in a subsequent dedicated course. DNS/TLS and HTTP examples may use sanitized simulated traces when actual networks or tooling are unavailable. An offline local setup is sufficient for mandatory work.
+This is **one connected introductory capability**: trace a Web
+navigation from a device to visible pixels and identify where it can
+fail. The modules divide that journey into coherent learning stages;
+they are not separate specialist courses.
 
-The course is a **draft curriculum contract**, not complete teaching materials and not evidence that learners have completed its labs. The 16–18 week estimate is intentionally provisional: more subjects than the original seven-week course are included, but depth is calibrated by meaningful lessons, practice and demonstrations rather than a fixed module quota.
+APP1 teaches *how* the Internet and Web work, **not** the systematic
+authoring of HTML/CSS, JavaScript or TypeScript programming, React,
+backend services, authentication implementation, databases, production
+network operations, or browser-engine internals. Those belong to
+subsequent courses. Learners may inspect or minimally edit static
+HTML/CSS fixtures to observe browser behavior, but need not write
+a backend HTTP server, dynamic application, or framework code.
+
+All mandatory work can be completed using a standards-capable browser,
+developer tools, local static-file serving on loopback, and supplied
+synthetic or sanitized reference traces. Concepts that cannot be
+honestly observed in a local offline environment, such as public DNS
+delegation and TLS certificate validation, must be evaluated using
+**explicitly labeled synthetic evidence**. No paid service, public
+domain, hosted account, custom trust root, packet interception,
+administrator access, or external network is required.
+
+The 12–16-week duration is a revised **draft planning estimate**,
+not a rigid learner pace or evidence of course validation. Focused
+lessons develop one primary objective; practical investigations and
+summative assessments are assigned where they actually measure a
+course capability.
 
 ## Learning outcomes
 
-By the end of this course, the learner will be able to:
-
-- Distinguish Internet connectivity from Web applications and explain the roles of browser, network, client, server and intermediary.
-- Trace local connectivity through gateways, IP addressing, routing, ports and TCP/UDP transport and classify link, name, transport and application failures.
-- Explain domain registration, delegation and DNS resolution, including caching, record types, response failures and observation limits.
-- Distinguish domain names, DNS services, web hosting, origin servers, reverse proxies, CDNs and content delivery paths.
-- Parse URLs and explain relative resolution, origins, ports, fragments, resource identity and navigation.
-- Interpret HTTP request and response semantics, methods, status codes, headers, representations, redirects, caching and conditional requests.
-- Explain why HTTPS uses TLS and how certificate-chain and hostname validation establish connection trust without proving content integrity beyond that boundary.
-- Distinguish browser UI, renderer, graphics/compositor and JavaScript engines; compare architecture choices without assuming all browsers behave identically.
-- Describe browser navigation, incremental resource discovery and the difference between parser-blocking and render-blocking resources.
-- Explain how HTML and CSS are parsed into document/style representations and how semantics, computed style and accessibility relate without claiming prior HTML/CSS mastery.
-- Trace style resolution, layout, paint, rasterization and composition, including why incremental rendering and layout shifts may occur.
-- Classify origin restrictions, cookies, cache, local storage, mixed content and privacy responsibilities at a conceptual level.
-- Use safe, reproducible tools and evidence to diagnose a faulty website end-to-end, explain limits and defend appropriate fixes.
+- **APP1-O1:** Distinguish Internet infrastructure, the World Wide Web, browsers, resources, clients, servers, and intermediaries, and explain their responsibilities in a complete website visit.
+- **APP1-O2:** Trace local connectivity, IPv4/IPv6 addressing, packet forwarding, routing, and observable network failure boundaries using appropriately qualified evidence.
+- **APP1-O3:** Explain ports, TCP connection and stream behavior, UDP datagrams, QUIC fundamentals, and the relationship between transport and HTTP versions.
+- **APP1-O4:** Trace domain registration, DNS delegation and resolution through resolvers and caches, interpreting record types, TTLs, and common failure responses.
+- **APP1-O5:** Distinguish domain names, hosted content, origin servers, reverse proxies, CDNs, load balancers, and distributed content-delivery paths.
+- **APP1-O6:** Parse and resolve URLs and explain schemes, authority, ports, paths, queries, fragments, browser origins, and the distinction between origin and site.
+- **APP1-O7:** Interpret HTTP messages, request methods, response codes, representation headers, redirects, caching, validators, and the behavior of intermediaries.
+- **APP1-O8:** Explain HTTPS and TLS negotiation, certificate-chain and hostname validation, protocol selection, mixed-content behavior, and the limits of connection trust.
+- **APP1-O9:** Compare browser, renderer, networking, graphics, and JavaScript-engine responsibilities, including process isolation and implementation differences.
+- **APP1-O10:** Trace navigation and incremental document/resource loading, identifying blocking and deferred resources and interpreting browser network waterfalls.
+- **APP1-O11:** Explain HTML parsing, DOM creation, CSS parsing, selector matching, the cascade, computed styles, and the distinction between document and accessibility representations.
+- **APP1-O12:** Trace the visible rendering pipeline through style resolution, layout, paint, rasterization, and compositing, diagnosing representative delays or visual changes.
+- **APP1-O13:** Classify same-origin and CORS boundaries, cookies, browser storage and caching, secure contexts, mixed content, permissions, and relevant privacy risks.
+- **APP1-O14:** Investigate an unfamiliar static website's network-to-pixels behavior, reproduce and classify failures, apply safe repairs, and defend observed versus inferred evidence.
 
 ## Modules
 
-### Module 1 — Understanding the Internet and the Web
+### Module 1 — Internet and Web
 
 #### Outcomes
 
-- Distinguish the Internet, the World Wide Web, the browser and an application without collapsing their responsibilities.
-- Construct a basic explanation of how a website is reached and represented, with explicit unknowns.
+- APP1-O1
 
 #### Lessons
 
-1. **Course introduction: Web & Internet Foundations** — `lesson`
+1. **Course Orientation** — Trace what this course explains, why it matters, and where its model ends.
+2. **Internet History** — Explain the relationship between packet networking, open protocols, and the Web's development.
+3. **Internet and Web** — Distinguish network infrastructure from applications built on it.
+4. **Web Resources** — Distinguish pages, websites, applications, documents, and referenced resources.
+5. **Client and Server** — Explain request/response responsibility without assuming every server is a web framework.
+6. **Standards and Interoperability** — Relate published protocols and browser variation to compatible delivery.
+7. **The Web Journey** — Sketch a first device-to-visible-page model with identified unknown steps.
 
-   Introduce what learners will investigate, why the Web matters to application engineering, its history and limits, where these mechanisms are used, and how evidence-based explanation differs from tool memorization.
-2. **A brief history of packet networking and the Web** — `lesson`
-3. **What the Internet is, and what the Web is not** — `lesson`
-4. **Websites, pages, web applications and resources** — `lesson`
-5. **Clients, servers, requests and responses** — `lesson`
-6. **Open standards, browsers and interoperability** — `lesson`
-7. **A first end-to-end website-loading mental model** — `lesson`
-8. **Understanding the Internet and the Web reasoning checkpoint** — `test`
-9. **Draw and critique a complete web visit** — `lab`
-
-### Module 2 — Devices, Access Networks and Connectivity
+### Module 2 — Connectivity and Routing
 
 #### Outcomes
 
-- Explain how a device joins a network and reaches a configured gateway.
-- Diagnose local link, configuration and upstream connectivity failures without assuming every failure is DNS or HTTP.
+- APP1-O2
+- APP1-O1
 
 #### Lessons
 
-1. **Network interface, link and physical versus wireless media** — `lesson`
-2. **Home and campus networks, switches and routers** — `lesson`
-3. **Wi-Fi association and Ethernet connectivity** — `lesson`
-4. **IP configuration and DHCP as a provisioning mechanism** — `lesson`
-5. **Default gateways, local delivery and NAT overview** — `lesson`
-6. **Internet service providers, last-mile links and upstream networks** — `lesson`
-7. **Local connectivity diagnostics and safe troubleshooting** — `lesson`
-8. **Devices, Access Networks and Connectivity reasoning checkpoint** — `test`
-9. **Inspect and classify local connectivity states** — `lab`
+1. **Network Interfaces** — Explain link media and the roles of interfaces on a connected device.
+2. **Local Networks** — Distinguish wireless access, Ethernet, switches, and routers.
+3. **IP Configuration** — Explain host addresses, DHCP, default gateways, and basic NAT.
+4. **Internet Access** — Relate last-mile connections, ISPs, and upstream networks.
+5. **Packets and Frames** — Distinguish link-layer delivery from IP datagrams and packet forwarding.
+6. **IPv4 Addresses** — Interpret addresses, prefixes, and local versus routed destinations.
+7. **IPv6 Addresses** — Interpret basic IPv6 address and prefix structure without assuming IPv4 behavior.
+8. **Routing Decisions** — Read a route and next hop; explain forwarding and hop-limit consequences.
+9. **Network Measurements** — Distinguish latency, bandwidth, throughput, jitter, loss, and their evidence limits.
+10. **Connectivity Failures** — Classify link, gateway, routing, ICMP, and upstream symptoms using safe observations.
 
-### Module 3 — Internet Protocol, Packets and Routing
+### Module 3 — Transport and Connections
 
 #### Outcomes
 
-- Distinguish link, network and transport responsibilities and explain packet forwarding.
-- Read an IPv4/IPv6 address, prefix and route in sufficient detail to predict a packet's next hop.
+- APP1-O3
+- APP1-O2
 
 #### Lessons
 
-1. **Why large messages are divided into packets** — `lesson`
-2. **Link-layer frames versus IP datagrams** — `lesson`
-3. **IPv4 addressing and prefixes** — `lesson`
-4. **IPv6 addressing and basic differences from IPv4** — `lesson`
-5. **Routing tables, next hops and default routes** — `lesson`
-6. **Hop limits, ICMP, packet loss and path changes** — `lesson`
-7. **Latency, bandwidth, throughput and jitter** — `lesson`
-8. **Traceroute-style evidence and its limitations** — `lesson`
-9. **Internet Protocol, Packets and Routing reasoning checkpoint** — `test`
-10. **Explain a packet path using sanitized routes** — `lab`
+1. **Ports and Sockets** — Relate transport endpoints and listeners to IP addressing.
+2. **TCP Handshakes** — Trace a connection attempt at a conceptual level.
+3. **TCP Streams** — Explain ordering, retransmission, and why an application must define message boundaries.
+4. **Connection Failures** — Distinguish refusal, reset, timeout, and the limitations of each observation.
+5. **UDP Datagrams** — Compare datagram delivery with TCP's reliable stream semantics.
+6. **QUIC and HTTP/3** — Explain why QUIC uses UDP while providing transport features to HTTP/3.
+7. **Connection Reuse** — Relate latency, multiplexing, and protocol choices without treating them as identical.
+8. **Loopback and Dual Stack** — Explain local listener tests and IPv4/IPv6 address-family differences.
 
-### Module 4 — Transport Connections and Delivery
+### Module 4 — Domain Names and DNS
 
 #### Outcomes
 
-- Explain the roles of ports, sockets, TCP and UDP and their relationship to IP.
-- Compare connection-oriented byte streams and datagrams; explain how QUIC and HTTP versions fit at a high level.
+- APP1-O4
+- APP1-O5
 
 #### Lessons
 
-1. **Ports, endpoint tuples and listening services** — `lesson`
-2. **TCP connection establishment and handshake concepts** — `lesson`
-3. **Streams, reliability, ordering and retransmission** — `lesson`
-4. **Connection refusal, reset and timeouts** — `lesson`
-5. **UDP datagrams and delivery trade-offs** — `lesson`
-6. **QUIC overview and how HTTP/3 differs from TCP-based HTTP** — `lesson`
-7. **Connection reuse, multiplexing and network latency** — `lesson`
-8. **Local loopback and dual-stack address behavior** — `lesson`
-9. **Transport Connections and Delivery reasoning checkpoint** — `test`
-10. **Distinguish listener, refusal and timeout** — `lab`
+1. **Domain Names** — Explain human-readable labels, subdomains, and the DNS namespace.
+2. **DNS Hierarchy** — Distinguish root, top-level domains, and delegated zones.
+3. **Domain Registration** — Trace registrant, registrar, registry, ICANN, renewal, transfer, and expiration roles.
+4. **Nameserver Delegation** — Explain how delegated authority differs from owning a website or hosting it.
+5. **DNS Resolvers** — Distinguish local stub, recursive, and authoritative resolvers.
+6. **Resolution Walkthrough** — Trace referrals, records, caching, and the resulting answer.
+7. **DNS Records** — Interpret A, AAAA, CNAME, NS, and the limited role of MX.
+8. **DNS Caching** — Explain TTLs, positive/negative caching, stale answers, and hosts-file overrides.
+9. **DNS Failures** — Distinguish NXDOMAIN, SERVFAIL, timeout, and local cache effects.
+10. **DNS Observation Limits** — Explain why a local or browser lookup does not prove a public-network query and where DoH/privacy affects visibility.
 
-### Module 5 — Domain Names and Registration
+### Module 5 — Hosting and Delivery
 
 #### Outcomes
 
-- Explain the naming hierarchy and distinguish domain ownership arrangements from hosting and DNS resolution.
-- Describe registrants, registrars, registries, delegation and the lifecycle of a registered name.
+- APP1-O5
+- APP1-O1
 
 #### Lessons
 
-1. **Human-readable names and the DNS namespace** — `lesson`
-2. **Labels, subdomains and fully qualified names** — `lesson`
-3. **Top-level domains and the root zone** — `lesson`
-4. **Registrant, registrar, registry and ICANN roles** — `lesson`
-5. **Registration, renewal, transfer and expiry** — `lesson`
-6. **Nameservers, zone ownership and delegation** — `lesson`
-7. **Domain name versus website versus hosting** — `lesson`
-8. **Domain-control and ownership misconceptions** — `lesson`
-9. **Domain Names and Registration reasoning checkpoint** — `test`
-10. **Model a domain's administrative and technical ownership** — `lab`
+1. **Web Hosting** — Distinguish hosted files/content, servers, and domain-name services.
+2. **Static and Dynamic** — Compare static resource delivery with dynamically produced responses conceptually.
+3. **Hosting Models** — Compare shared hosting, virtual machines, managed hosting, and serverless at a high level.
+4. **Origin Servers** — Relate a listening HTTP process to an origin and its hosted resources.
+5. **Reverse Proxies** — Explain intermediated requests and origin visibility.
+6. **CDN Edges** — Explain geographically distributed delivery and shared caching boundaries.
+7. **Load Balancing** — Trace requests among origin instances and describe availability limitations.
+8. **Delivery Paths** — Distinguish DNS answers, origin identity, intermediary responses, and the actual serving location.
 
-### Module 6 — DNS Resolution and Caching
+### Module 6 — URLs and Origins
 
 #### Outcomes
 
-- Trace recursive resolution through caches, authoritative servers and delegated zones.
-- Interpret common DNS records, TTL behavior and DNS failure responses without making claims that a lookup necessarily reached the public network.
+- APP1-O6
+- APP1-O13
 
 #### Lessons
 
-1. **Stub resolvers and recursive resolvers** — `lesson`
-2. **Root, TLD and authoritative nameservers** — `lesson`
-3. **DNS delegation and iterative resolution concept** — `lesson`
-4. **A and AAAA records, CNAME aliases and MX/NS overview** — `lesson`
-5. **TTL, positive caching and stale/negative responses** — `lesson`
-6. **NXDOMAIN, SERVFAIL and timeout distinctions** — `lesson`
-7. **Local hosts files, browser/OS caches and DNS over HTTPS overview** — `lesson`
-8. **DNS observation limits and privacy considerations** — `lesson`
-9. **DNS Resolution and Caching reasoning checkpoint** — `test`
-10. **Trace DNS records and controlled resolution failures** — `lab`
+1. **Resource Identifiers** — Explain why addresses identify resources and what a URL does not guarantee.
+2. **URL Components** — Parse scheme, authority, hostname, port, path, query, and fragment.
+3. **Relative URLs** — Resolve paths against a document or declared base URL.
+4. **Encoding and Names** — Explain percent encoding, Unicode domain-name concepts, and ambiguous interpretation.
+5. **Browser Origins** — Derive origins from scheme, host, and port.
+6. **Sites and Domains** — Distinguish registrable sites, subdomains, and origins.
+7. **Navigation Targets** — Predict how redirects, changed paths, and fragment-only navigation affect requests.
 
-### Module 7 — Web Hosting, Origins and Delivery Infrastructure
+### Module 7 — HTTP Requests and Responses
 
 #### Outcomes
 
-- Distinguish site content, an HTTP origin server, hosting arrangements and distributed delivery.
-- Explain how proxies, CDNs and load balancers influence delivery and trust boundaries without implementing backend infrastructure.
+- APP1-O7
+- APP1-O6
 
 #### Lessons
 
-1. **What it means to host a website** — `lesson`
-2. **Static files versus dynamically generated responses** — `lesson`
-3. **Shared hosting, managed hosting, virtual machines and serverless overview** — `lesson`
-4. **Server processes, listening ports and basic deployment concepts** — `lesson`
-5. **Reverse proxies and HTTP gateway responsibilities** — `lesson`
-6. **Content delivery networks, edges and cached responses** — `lesson`
-7. **Load balancing, availability and geographical placement** — `lesson`
-8. **DNS answers, origin identity and hosting misconceptions** — `lesson`
-9. **Web Hosting, Origins and Delivery Infrastructure reasoning checkpoint** — `test`
-10. **Compare origin, reverse proxy and cache paths** — `lab`
+1. **HTTP Exchange** — Interpret the application-layer request and response model.
+2. **Message Structure** — Explain request targets, fields, bodies, and representation metadata.
+3. **Request Methods** — Distinguish GET, HEAD, POST, PUT, PATCH, and DELETE semantics.
+4. **Safety and Idempotence** — Separate protocol method properties from application retry behavior.
+5. **Response Status** — Classify successful, redirected, client-error, and server-error responses.
+6. **Representations** — Interpret Content-Type, negotiation, compression, and body-length constraints.
+7. **Authority and Headers** — Explain the request's target authority and selected headers.
+8. **HTTP Versions** — Distinguish shared HTTP semantics from HTTP/1.1, HTTP/2, and HTTP/3 framing and transport.
 
-### Module 8 — URLs, Origins and Web Navigation Identities
+### Module 8 — HTTP Caching and Redirects
 
 #### Outcomes
 
-- Decompose URLs into their components and explain the implications of authority, scheme and fragments.
-- Distinguish origin, site and resource identity and predict when browser navigation changes network requests.
+- APP1-O7
 
 #### Lessons
 
-1. **URI, URL and resource identifier basics** — `lesson`
-2. **Scheme, authority, host and port** — `lesson`
-3. **Paths, query parameters and fragments** — `lesson`
-4. **Relative URLs and base URL resolution** — `lesson`
-5. **Percent encoding, Unicode names and normalization concepts** — `lesson`
-6. **Origins: scheme, host and port** — `lesson`
-7. **Sites, subdomains, navigation and redirect targets** — `lesson`
-8. **When fragments do not cause a new HTTP request** — `lesson`
-9. **URLs, Origins and Web Navigation Identities reasoning checkpoint** — `test`
-10. **Resolve and classify web addresses** — `lab`
+1. **Cache Purposes** — Distinguish browser/private caches, shared caches, and origin responses.
+2. **Freshness Controls** — Interpret Cache-Control, freshness lifetime, no-store, and private scope.
+3. **Cache Validators** — Explain ETag and Last-Modified as representation validation mechanisms.
+4. **Conditional Requests** — Trace If-None-Match, If-Modified-Since, and 304 Not Modified decisions.
+5. **Redirect Behavior** — Interpret redirect locations, status codes, and follow-up requests.
+6. **Cache Keys** — Explain Vary, representation differences, and why a URL alone may be insufficient.
+7. **Intermediary Effects** — Distinguish cache hits, proxy behavior, and origin observability.
+8. **Storage Boundaries** — Separate HTTP caching from browser application storage and persistent content.
 
-### Module 9 — HTTP Messages and Resource Semantics
+### Module 9 — HTTPS and TLS
 
 #### Outcomes
 
-- Interpret HTTP methods, status codes, headers and representation metadata.
-- Reconstruct and classify request/response behavior using reproducible traces rather than framework-specific code.
+- APP1-O8
+- APP1-O13
 
 #### Lessons
 
-1. **HTTP as an application-layer request-response protocol** — `lesson`
-2. **Start lines, fields, message bodies and representation metadata** — `lesson`
-3. **GET, HEAD, POST, PUT, PATCH, DELETE semantics** — `lesson`
-4. **Safe and idempotent method meaning (not retry policy)** — `lesson`
-5. **Status codes: success, redirect, client and server errors** — `lesson`
-6. **Content-Type, negotiation, compression and content length concepts** — `lesson`
-7. **URL requests, headers, Host/authority and origins** — `lesson`
-8. **HTTP/1.1, HTTP/2 and HTTP/3: stable semantics versus framing** — `lesson`
-9. **HTTP Messages and Resource Semantics reasoning checkpoint** — `test`
-10. **Inspect and explain HTTP exchanges** — `lab`
+1. **HTTPS Guarantees** — Explain protected transport and the risks of plaintext HTTP.
+2. **TLS Handshake** — Describe negotiated cryptography and authenticated key establishment conceptually.
+3. **Certificate Chains** — Explain trust anchors, issuers, and certificate validation.
+4. **Hostname Verification** — Relate requested host identity to a certificate without equating it to content honesty.
+5. **Protocol Negotiation** — Explain SNI and ALPN at an appropriate introductory level.
+6. **TLS and QUIC** — Distinguish TLS use with TCP-based HTTPS and HTTP/3 over QUIC.
+7. **Mixed Content** — Explain security warnings, downgrade risks, and secure-context boundaries.
+8. **Trust Failures** — Classify supplied certificate/hostname errors without bypassing browser validation.
 
-### Module 10 — HTTP Caching, Redirects and Intermediaries
+### Module 10 — Browser Architecture
 
 #### Outcomes
 
-- Explain cache freshness, validation, redirects and intermediate response behavior.
-- Predict how caches and conditional requests change traffic, including when a `304 Not Modified` can occur.
+- APP1-O9
+- APP1-O13
 
 #### Lessons
 
-1. **Why HTTP caching exists and who may cache** — `lesson`
-2. **Cache-Control freshness, no-store and private/shared scope** — `lesson`
-3. **ETag and Last-Modified validators** — `lesson`
-4. **Conditional requests and HTTP 304 responses** — `lesson`
-5. **Redirect codes and browser navigation changes** — `lesson`
-6. **Vary, representation selection and cache keys** — `lesson`
-7. **Proxies, response transformation and origin visibility** — `lesson`
-8. **Caching versus application storage and correctness limits** — `lesson`
-9. **HTTP Caching, Redirects and Intermediaries reasoning checkpoint** — `test`
-10. **Reason about freshness and validator timelines** — `lab`
+1. **Browser Responsibilities** — Identify UI, navigation, networking, rendering, and device interaction roles.
+2. **Browser Processes** — Explain conceptual process separation, threads, and sandbox boundaries.
+3. **Rendering Engines** — Distinguish Blink, Gecko, and WebKit as engine implementations.
+4. **JavaScript Engines** — Distinguish V8, SpiderMonkey, and JavaScriptCore from layout/rendering engines.
+5. **Engine Variations** — Explain how shared standards coexist with implementation differences.
+6. **Site Isolation** — Explain why browsers isolate potentially untrusted content.
+7. **Browser Inspection** — Relate developer-tool observations to engine behavior without unsupported generalization.
 
-### Module 11 — HTTPS, TLS and Web Trust
+### Module 11 — Navigation and Resource Loading
 
 #### Outcomes
 
-- Explain TLS negotiation and the role of certificate validation in HTTPS security.
-- Distinguish transport encryption, domain identity, origin authorization and application trust.
+- APP1-O10
+- APP1-O7
+- APP1-O9
 
 #### Lessons
 
-1. **HTTP versus HTTPS and secure transport goals** — `lesson`
-2. **TLS handshake and authenticated key establishment at a conceptual level** — `lesson`
-3. **Certificate chains, certificate authorities and hostname validation** — `lesson`
-4. **SNI, ALPN and selecting a secure application protocol** — `lesson`
-5. **TLS 1.3 and QUIC high-level relationship** — `lesson`
-6. **Mixed content, downgrade and certificate-warning behavior** — `lesson`
-7. **Security limits: encryption is not proof of honest content** — `lesson`
-8. **Safe TLS inspection without bypassing trust verification** — `lesson`
-9. **HTTPS, TLS and Web Trust reasoning checkpoint** — `test`
-10. **Evaluate synthetic TLS trust outcomes** — `lab`
+1. **Navigation Lifecycle** — Trace address entry, history, navigation decisions, and document commitment.
+2. **Connections and Redirects** — Relate redirects and existing connections to navigation timing.
+3. **Document Streaming** — Explain incremental arrival and discovery of document content.
+4. **Resource Discovery** — Explain how stylesheets, images, fonts, and scripts are requested.
+5. **Preload and Priority** — Describe speculative discovery and relative resource scheduling at a high level.
+6. **Blocking Behavior** — Distinguish parser-blocking scripts, deferred/async loading, and render-blocking stylesheets.
+7. **Readiness Milestones** — Distinguish load events, first paint, and interactive readiness conceptually.
+8. **Network Waterfalls** — Interpret request ordering, reuse, caching, and failure evidence in browser tools.
 
-### Module 12 — Browser Architecture and Engines
+### Module 12 — HTML and CSS Parsing
 
 #### Outcomes
 
-- Describe browser, renderer and GPU responsibilities as a conceptual architecture while distinguishing implementations.
-- Explain how rendering engines and JavaScript engines differ and why process isolation matters.
+- APP1-O11
+- APP1-O10
 
 #### Lessons
 
-1. **What a browser does beyond downloading HTML** — `lesson`
-2. **Browser UI, networking, renderer and GPU responsibilities** — `lesson`
-3. **Processes, threads and sandboxing concepts** — `lesson`
-4. **Rendering engines: Blink, Gecko and WebKit** — `lesson`
-5. **JavaScript engines: V8, SpiderMonkey and JavaScriptCore** — `lesson`
-6. **HTML/CSS standards versus engine-specific implementations** — `lesson`
-7. **Site isolation, origins and failure containment** — `lesson`
-8. **Browser task and performance inspection without engine-specific assumptions** — `lesson`
-9. **Browser Architecture and Engines reasoning checkpoint** — `test`
-10. **Compare two browser architecture implementations** — `lab`
+1. **HTML Decoding** — Explain byte/character decoding and tokenization at a conceptual level.
+2. **DOM Construction** — Trace tree building and common parser recovery effects.
+3. **DOM Representation** — Distinguish the DOM from source bytes and rendered boxes.
+4. **CSS Parsing** — Explain declarations, rule parsing, and error recovery.
+5. **Selector Matching** — Trace a simple selector to affected elements.
+6. **Cascade and Inheritance** — Explain why competing style declarations produce specific computed values.
+7. **Computed Styles** — Inspect an element's computed styling and distinguish it from authored CSS.
+8. **Semantics and Accessibility** — Relate meaningful document structure to the accessibility tree without requiring authoring mastery.
 
-### Module 13 — Navigation, Discovery and Resource Loading
+### Module 13 — Layout to Pixels
 
 #### Outcomes
 
-- Trace browser navigation, network requests, redirects and resource discovery without requiring learners to program JavaScript.
-- Distinguish parser-blocking, render-blocking and deferred resources with reproducible observations.
+- APP1-O12
+- APP1-O11
 
 #### Lessons
 
-1. **Entering a URL, navigation and session history** — `lesson`
-2. **Connection reuse, redirects and navigation commit** — `lesson`
-3. **Document responses, streams and incremental parsing** — `lesson`
-4. **Discovering stylesheets, images, fonts and scripts** — `lesson`
-5. **The preload scanner and resource prioritization concepts** — `lesson`
-6. **Parser-blocking scripts and deferred or async loading overview** — `lesson`
-7. **Stylesheets, render blocking and critical resources** — `lesson`
-8. **Load events versus initial paint and interactive readiness** — `lesson`
-9. **Network waterfall interpretation and caching effects** — `lesson`
-10. **Navigation, Discovery and Resource Loading reasoning checkpoint** — `test`
-11. **Investigate a static document's resource waterfall** — `lab`
+1. **Rendered Boxes** — Distinguish the box/render representation from DOM nodes.
+2. **Layout Constraints** — Explain geometry, containing blocks, and basic formatting context.
+3. **Text and Viewports** — Relate font metrics and viewport changes to layout results.
+4. **Paint Order** — Explain painting instructions, stacking, and visible order.
+5. **Rasterization** — Explain conversion of paint operations into pixels.
+6. **Compositing** — Explain compositing layers and conceptual GPU responsibilities.
+7. **Incremental Rendering** — Describe what changes can require style, layout, paint, or compositing work.
+8. **Visual Diagnostics** — Identify layout shifts, missing styles, and delayed paint using controlled comparisons.
 
-### Module 14 — HTML and CSS Parsing: Document to Style Data
+### Module 14 — Security, State and Privacy
 
 #### Outcomes
 
-- Explain how browser parsers build the DOM and CSSOM and how styles are matched to elements.
-- Relate semantic HTML structure and accessible representations to later specialized HTML/CSS and accessibility coursework.
+- APP1-O13
+- APP1-O6
+- APP1-O8
 
 #### Lessons
 
-1. **HTML bytes, character encodings and tokenization overview** — `lesson`
-2. **HTML tree building and error recovery concepts** — `lesson`
-3. **The DOM as an internal document representation** — `lesson`
-4. **CSS stylesheet parsing, declarations and error handling** — `lesson`
-5. **Selectors, matching and the CSS object model** — `lesson`
-6. **Cascade, inheritance and computed style overview** — `lesson`
-7. **Semantic structure and the accessibility tree overview** — `lesson`
-8. **Stylesheet failure and computed-style inspection** — `lesson`
-9. **Difference between DOM tree and visual/rendered boxes** — `lesson`
-10. **HTML and CSS Parsing: Document to Style Data reasoning checkpoint** — `test`
-11. **Reconstruct a document and computed-style change** — `lab`
+1. **Same-Origin Policy** — Explain default cross-origin access restrictions.
+2. **CORS Boundaries** — Explain controlled permission for cross-origin reads, not a way to bypass transport rules.
+3. **Cookies and Sessions** — Distinguish cookie state and conceptual session identifiers.
+4. **Browser Storage** — Compare local storage, HTTP caches, and service-worker-controlled resources.
+5. **Secure Contexts** — Explain mixed content, permission prompts, and trustworthy-context restrictions.
+6. **Web Attack Concepts** — Recognize CSRF, credential handling, and untrusted-content boundaries without implementing backend authentication.
+7. **Privacy and Evidence** — Protect browsing histories, credentials, local data, and observation context.
+8. **Security Diagnostics** — Distinguish TLS, CORS, HTTP, permission, and storage symptoms using available evidence.
 
-### Module 15 — Layout, Paint, Rasterization and Compositing
+### Module 15 — End-to-End Diagnosis
 
 #### Outcomes
 
-- Trace the high-level rendering pipeline from computed styles to visible pixels.
-- Explain why layout, paint and compositing work can recur after content changes and why browser-specific performance observations need qualification.
+- APP1-O14
+- APP1-O1
+- APP1-O2
+- APP1-O4
+- APP1-O7
+- APP1-O8
+- APP1-O10
+- APP1-O12
+- APP1-O13
 
 #### Lessons
 
-1. **The render tree and boxes versus DOM nodes** — `lesson`
-2. **Style resolution and layout constraints** — `lesson`
-3. **Formatting context, flow and geometry overview** — `lesson`
-4. **Viewport dimensions, font metrics and reflow** — `lesson`
-5. **Paint instructions, stacking and visual order** — `lesson`
-6. **Rasterization and pixel generation concepts** — `lesson`
-7. **Compositing layers and GPU responsibilities** — `lesson`
-8. **Incremental rendering and browser invalidation** — `lesson`
-9. **Diagnosing delayed paint and layout shift conceptually** — `lesson`
-10. **Layout, Paint, Rasterization and Compositing reasoning checkpoint** — `test`
-11. **Explain a measured render and layout change** — `lab`
-
-### Module 16 — Browser Security, State and Privacy Boundaries
-
-#### Outcomes
-
-- Explain the browser origin trust model, basic state storage and privacy risks without implementing authentication or backend services.
-- Classify common browser warnings and cross-origin limitations at a conceptual level.
-
-#### Lessons
-
-1. **Same-origin policy and site concepts revisited** — `lesson`
-2. **Cross-origin resource sharing (CORS) as a controlled access mechanism** — `lesson`
-3. **Cookies, sessions and attributes overview** — `lesson`
-4. **Local storage, browser cache and service workers: different purposes** — `lesson`
-5. **Secure contexts, mixed content and permission prompts** — `lesson`
-6. **Browser isolation, untrusted content and sandbox principles** — `lesson`
-7. **CSRF and credential handling as future backend topics** — `lesson`
-8. **Data minimization, private browsing and shared-device risk** — `lesson`
-9. **Safe browser troubleshooting and responsible evidence collection** — `lesson`
-10. **Browser Security, State and Privacy Boundaries reasoning checkpoint** — `test`
-11. **Classify browser security and storage scenarios** — `lab`
-
-### Module 17 — End-to-End Website Loading and Diagnostic Defense
-
-#### Outcomes
-
-- Independently explain the full journey from address entry to rendered page, including alternate paths, caching and failures.
-- Produce reproducible evidence that isolates DNS, transport, TLS, HTTP, resource-loading, parsing, style and paint faults without writing backend or framework code.
-
-#### Lessons
-
-1. **End-to-end journey review: connectivity to visible page** — `lesson`
-2. **A layered diagnostic decision tree** — `lesson`
-3. **Evidence quality, uncertainty and negative paths** — `lesson`
-4. **Comparing network waterfall, document tree and computed styles** — `lesson`
-5. **Communicating a repair recommendation without untested claims** — `lesson`
-6. **End-to-End Website Loading and Diagnostic Defense reasoning checkpoint** — `test`
-7. **Defend a complete web-page loading investigation** — `lab`
+1. **The Complete Journey** — Explain how connection, name resolution, transport, HTTP, parsing, and rendering connect.
+2. **Failure Boundaries** — Classify link/routing, DNS, transport, TLS, HTTP, resource, parsing, and visual failures.
+3. **Static-Site Fixtures** — Prepare or inspect a controlled HTML/CSS/image site using an unprivileged local server.
+4. **Evidence Collection** — Record request traces, document/style observations, tool versions, and uncertainty.
+5. **Controlled Failures** — Compare four distinct fault cases and explicit nonfault controls.
+6. **Repair Verification** — Apply narrow safe changes and re-run observations to verify at least two repairs.
+7. **Diagnostic Defense** — Present a reproducible Internet-to-pixels explanation and justified next observations.
 
 ## Completion requirements
 
-- Complete the conceptual checkpoint and required lab for every module, with evidence that matches the published acceptance criteria. The final integration lab is required.
-- Retain original or sanitized outputs, tool/version information, assumptions and corrections under the [OEE Evidence Rules](../../spec/evidence-rules.md). Never publish credentials, unredacted browsing histories, real client data or intrusive diagnostics.
-- Complete required practical exercises and present a reasoned independent defense of the final investigation, including at least one negative-path scenario, reproduced corrections, and a technical retrospective.
-- The mandatory environment requires **no paid service** or deployed domain. Use unprivileged local static serving on 127.0.0.1; local resolver outputs do not prove external DNS traffic and HTTP over localhost does not prove TLS.
-- CORS and same-origin restrictions are introduced conceptually. JavaScript/TypeScript coding, backend API/framework implementation, mutating HTTP endpoints, retry and idempotency implementation, and production operations belong to later courses.
-
-**Required practical exercises:**
-
-- Draw layered diagrams for connectivity, DNS and browser navigation and label observed versus inferred steps.
-- Reconstruct synthetic packets/routes, DNS records, TLS certificate outcomes and HTTP exchanges without presenting them as live captures.
-- Use a local browser and static fixture to observe successful and failing requests, document parsing/style effects and inspect visible layout differences.
-- Explain at least four distinct failure classes (for example refused connection, DNS failure, HTTP 404 and missing CSS), with a safe next-step observation for each.
-
-**Final integration lab — required work:**
-
-Required artifact: **End-to-End Web Loading Investigation**. Reproduce the Module 17 lab in a local, unprivileged environment, show how a valid static website loads and renders, introduce and diagnose four controlled failures, repair at least two, defend the full browser loading model and document limits. Supplied DNS/TLS scenarios are explicitly simulated and cannot be represented as captured local network traffic.
-
-**Expanded module assessments and practical work:**
-
-**Module 1 — Understanding the Internet and the Web: checkpoint** — Required assessment details
-
-- **Q1 (free):** Is the Internet the same thing as the World Wide Web? Give two examples of non-web Internet use.
-  - Expected answer and scoring: No. The Internet interconnects networks; the Web is an application ecosystem using URLs, HTTP, browsers and documents. Email and DNS are examples of other Internet services.
-- **Q2 (free):** Does opening a page necessarily mean one request to one computer? Explain.
-  - Expected answer and scoring: No. A page may require multiple resources and intermediaries; name resolution, redirects, caches and distributed delivery can affect its loading. Score for identifying at least two distinct dependencies.
-
-**Module 1 — Draw and critique a complete web visit: required lab** — Required assessment details
-
-- **Objective:** Build an evidence-labelled dependency map from a person entering a URL to the first visible page.
-- **Prerequisites:** Complete Module 1's instructional lessons and checkpoint; use the conceptual and diagnostic skills introduced earlier in APP1. Do not require subsequent APP course capabilities.
-- **Environment:** A current standards-capable browser with developer tools (Chromium or Firefox), a terminal, and a local static fixture directory served by a preinstalled unprivileged static-file server such as Python's standard-library `http.server` on 127.0.0.1. Record OS, browser, server-tool versions, chosen port and exact commands. A synthetic, sanitized trace may replace external-network observations; no paid service, account, public domain, administrator privileges, custom trust root, interception of others' traffic or live production system is required.
-- **Procedure:**
-  1. Draw the user device, access network, resolver, origin or content provider, browser and rendered page; mark each assumed interaction.
-  2. Use a browser's Network panel on an offline local static page to find document and supporting resource requests; identify which diagram edges were actually observed.
-  3. Annotate at least three plausible failure points and separate directly observed facts from conceptual inferences.
-- **Expected result:** A coherent annotated sequence with separate Internet/Web definitions and no claim that local browsing proves public DNS/TLS use.
-- **Verification:** Explain each arrow aloud and answer both checkpoint questions without collapsing network transport into HTTP.
-- **Evidence:** Labelled diagram, request list, assumption table and corrected version after review.
-- **Failure analysis:** Treating HTML as the network, a website as a physical server, or local `localhost` traffic as evidence of Internet routing.
-- **Acceptance:** Correct distinctions, at least three failure boundaries, and no unsupported network claims.
-
-**Module 2 — Devices, Access Networks and Connectivity: checkpoint** — Required assessment details
-
-- **Q1 (free):** A laptop is associated with Wi-Fi but cannot reach the default gateway. Does this prove a website is down?
-  - Expected answer and scoring: No. Association alone is not IP reachability. Test local address/configuration, gateway connectivity and routing before inferring anything about a remote website.
-- **Q2 (free):** Why might two household devices share one public IPv4 address?
-  - Expected answer and scoring: A gateway can translate private addresses/ports using NAT. That is not how IPv6 must work, and the shared public address is not the device's private address.
-
-**Module 2 — Inspect and classify local connectivity states: required lab** — Required assessment details
-
-- **Objective:** Separate link, address configuration, gateway and public-reachability concepts.
-- **Prerequisites:** Complete Module 2's instructional lessons and checkpoint; use the conceptual and diagnostic skills introduced earlier in APP1. Do not require subsequent APP course capabilities.
-- **Environment:** A current standards-capable browser with developer tools (Chromium or Firefox), a terminal, and a local static fixture directory served by a preinstalled unprivileged static-file server such as Python's standard-library `http.server` on 127.0.0.1. Record OS, browser, server-tool versions, chosen port and exact commands. A synthetic, sanitized trace may replace external-network observations; no paid service, account, public domain, administrator privileges, custom trust root, interception of others' traffic or live production system is required.
-- **Procedure:**
-  1. Record the active interface and assigned IPv4/IPv6 addresses using non-privileged OS tools; redact personal addresses before sharing.
-  2. Identify the current default route or explain what it would be on an offline fixture; draw the route from device to access router.
-  3. Use supplied synthetic outputs for link-down, missing address and unreachable gateway scenarios; classify each without contacting unfamiliar hosts.
-- **Expected result:** A layer-labelled table showing different diagnostics and realistic uncertainty.
-- **Verification:** For each scenario propose one safe next observation and explain why HTTP request inspection would be premature.
-- **Evidence:** Redacted configuration excerpt, topology sketch, classification table and limitations.
-- **Failure analysis:** Confusing Wi-Fi association with Internet availability or assuming NAT is universally required.
-- **Acceptance:** All three failure scenarios correctly classified without unsafe diagnostics.
-
-**Module 3 — Internet Protocol, Packets and Routing: checkpoint** — Required assessment details
-
-- **Q1 (free):** Why might a packet reach a destination through routers without carrying a URL?
-  - Expected answer and scoring: Routers forward mainly using network-layer addresses and routing state; the URL belongs to an application-level model, not each forwarded IP packet.
-- **Q2 (free):** A traceroute omits a hop. Must packets have failed to pass through that router?
-  - Expected answer and scoring: No. Intermediate devices can suppress, deprioritize or not respond to probe packets. Missing probe replies do not prove missing data-plane forwarding.
-
-**Module 3 — Explain a packet path using sanitized routes: required lab** — Required assessment details
-
-- **Objective:** Reconstruct forwarding decisions while distinguishing real observations from illustrative data.
-- **Prerequisites:** Complete Module 3's instructional lessons and checkpoint; use the conceptual and diagnostic skills introduced earlier in APP1. Do not require subsequent APP course capabilities.
-- **Environment:** A current standards-capable browser with developer tools (Chromium or Firefox), a terminal, and a local static fixture directory served by a preinstalled unprivileged static-file server such as Python's standard-library `http.server` on 127.0.0.1. Record OS, browser, server-tool versions, chosen port and exact commands. A synthetic, sanitized trace may replace external-network observations; no paid service, account, public domain, administrator privileges, custom trust root, interception of others' traffic or live production system is required.
-- **Procedure:**
-  1. Given a fictional source address, destination address and three sample routing-table entries, select the longest-prefix matching next hop.
-  2. Annotate a provided six-hop trace, explicitly marking unanswered probes as unknown rather than failed hops.
-  3. Change the sample destination/prefix and document how the expected forwarding decision changes.
-- **Expected result:** A reproducible forwarding table, packet sketch and bounded interpretation of probe evidence.
-- **Verification:** Check each longest-prefix choice and distinguish IP routing from DNS and application-layer messages.
-- **Evidence:** Route calculations, annotated trace and interpretation notes.
-- **Failure analysis:** Assuming a hop response is mandatory, or confusing an HTTP redirect with IP routing.
-- **Acceptance:** Correct forwarding decisions and no unsupported interpretation of missing probes.
-
-**Module 4 — Transport Connections and Delivery: checkpoint** — Required assessment details
-
-- **Q1 (free):** A local TCP connection to a closed port is refused. What does it tell you about HTTP?
-  - Expected answer and scoring: It demonstrates a transport endpoint failure, not an HTTP status. There may be no HTTP request or response at all.
-- **Q2 (free):** Does HTTP/3 run over TCP? What mechanism supplies its secure transport?
-  - Expected answer and scoring: HTTP/3 uses QUIC, typically over UDP, with transport security integrated using TLS 1.3; HTTP semantics remain related across versions.
-
-**Module 4 — Distinguish listener, refusal and timeout: required lab** — Required assessment details
-
-- **Objective:** Observe bounded local transport behavior without building a server application.
-- **Prerequisites:** Complete Module 4's instructional lessons and checkpoint; use the conceptual and diagnostic skills introduced earlier in APP1. Do not require subsequent APP course capabilities.
-- **Environment:** A current standards-capable browser with developer tools (Chromium or Firefox), a terminal, and a local static fixture directory served by a preinstalled unprivileged static-file server such as Python's standard-library `http.server` on 127.0.0.1. Record OS, browser, server-tool versions, chosen port and exact commands. A synthetic, sanitized trace may replace external-network observations; no paid service, account, public domain, administrator privileges, custom trust root, interception of others' traffic or live production system is required.
-- **Procedure:**
-  1. Start a preinstalled static HTTP server bound to 127.0.0.1 on an available unprivileged port; record its advertised address and port.
-  2. Connect with a browser or `curl`; stop the server and repeat to reproduce refusal or equivalent local error.
-  3. Use a supplied sanitized timeout trace to compare timeout with refusal; record that local tests do not prove QUIC support.
-- **Expected result:** A successful local request and a later connection failure clearly separated from any HTTP 404.
-- **Verification:** Check socket endpoint and failure-layer descriptions against command output; no privileged operations are used.
-- **Evidence:** Command log, success/error traces, comparison table and environment versions.
-- **Failure analysis:** Interpreting connection refusal as an HTTP response or assuming an unanswered probe proves an HTTP timeout.
-- **Acceptance:** Correct distinction between TCP endpoint behavior and application-level responses.
-
-**Module 5 — Domain Names and Registration: checkpoint** — Required assessment details
-
-- **Q1 (free):** If a person registers a domain name, have they automatically purchased a working website?
-  - Expected answer and scoring: No. Registration provides contractual control of the name subject to registrar/registry rules; DNS service, hosting, content and TLS arrangements are separate.
-- **Q2 (free):** Does a subdomain always require purchasing another domain?
-  - Expected answer and scoring: No. A registrant can typically configure labels under a domain they control, within DNS and provider policy; that is different from registering a separate second-level domain.
-
-**Module 5 — Model a domain's administrative and technical ownership: required lab** — Required assessment details
-
-- **Objective:** Explain domain-name roles using a fictional example without buying a domain.
-- **Prerequisites:** Complete Module 5's instructional lessons and checkpoint; use the conceptual and diagnostic skills introduced earlier in APP1. Do not require subsequent APP course capabilities.
-- **Environment:** A current standards-capable browser with developer tools (Chromium or Firefox), a terminal, and a local static fixture directory served by a preinstalled unprivileged static-file server such as Python's standard-library `http.server` on 127.0.0.1. Record OS, browser, server-tool versions, chosen port and exact commands. A synthetic, sanitized trace may replace external-network observations; no paid service, account, public domain, administrator privileges, custom trust root, interception of others' traffic or live production system is required.
-- **Procedure:**
-  1. For `docs.example.test` in a fictional zone, identify the registrant, registrar, registry, delegated zone operator, host and website operator as distinct roles.
-  2. Draw how `docs` is a subdomain label and what delegation would mean; use `.test` only for fictional documentation and not as a public production site.
-  3. Walk through a hypothetical renewal failure and explain which operational capabilities may be affected while distinguishing assumptions.
-- **Expected result:** An accurate hierarchy and responsibility table for the fictional registration lifecycle.
-- **Verification:** Reviewer can independently label the actors and explain why a registered name is not synonymous with a server.
-- **Evidence:** Administrative/technical diagram, owner-role table and lifecycle failure note.
-- **Failure analysis:** Treating registrar as hosting provider by definition, or claiming fictional DNS data was queried live.
-- **Acceptance:** Distinct naming, registration and hosting roles with a defensible failure explanation.
-
-**Module 6 — DNS Resolution and Caching: checkpoint** — Required assessment details
-
-- **Q1 (free):** A system resolves `localhost` to `127.0.0.1`. Does that demonstrate a wire-level DNS exchange?
-  - Expected answer and scoring: No. Name resolution may use local hosts data, a resolver cache or other sources. Only an actual trace of network DNS packets proves a wire-level query.
-- **Q2 (free):** Why can two clients receive different answers after a DNS record change?
-  - Expected answer and scoring: Different recursive caches, TTL expiry, policy, geography or configuration can result in different observed answers; propagation is not a single global switch.
-
-**Module 6 — Trace DNS records and controlled resolution failures: required lab** — Required assessment details
-
-- **Objective:** Reconstruct an observed-versus-simulated DNS resolution with caching and failure classifications.
-- **Prerequisites:** Complete Module 6's instructional lessons and checkpoint; use the conceptual and diagnostic skills introduced earlier in APP1. Do not require subsequent APP course capabilities.
-- **Environment:** A current standards-capable browser with developer tools (Chromium or Firefox), a terminal, and a local static fixture directory served by a preinstalled unprivileged static-file server such as Python's standard-library `http.server` on 127.0.0.1. Record OS, browser, server-tool versions, chosen port and exact commands. A synthetic, sanitized trace may replace external-network observations; no paid service, account, public domain, administrator privileges, custom trust root, interception of others' traffic or live production system is required.
-- **Procedure:**
-  1. Inspect local resolver configuration and resolve `localhost`; record why this does not imply a public DNS query.
-  2. Use this **synthetic trace**: resolver cache miss → root delegation → TLD delegation → authoritative A answer `192.0.2.42`, TTL 300 seconds; label each actor and expected cache effect.
-  3. Compare three supplied fault cases (NXDOMAIN, SERVFAIL, transport timeout); explain how each differs and what evidence is required before diagnosis.
-- **Expected result:** Resolution diagram with no fabricated packet capture and a correct TTL/failure matrix.
-- **Verification:** Check the RFC 5737 documentation address is treated as synthetic and local configuration is not mistaken for a network trace.
-- **Evidence:** Resolver output, simulated query sequence, cache timeline and failure table.
-- **Failure analysis:** Using `localhost` as proof of external DNS, confusing CNAME with IP records, or using private data in public evidence.
-- **Acceptance:** All three failure responses explained, caching interpretation correct and observations clearly labelled.
-
-**Module 7 — Web Hosting, Origins and Delivery Infrastructure: checkpoint** — Required assessment details
-
-- **Q1 (free):** Does pointing a domain's DNS record at an address mean the website contents are stored in DNS?
-  - Expected answer and scoring: No. DNS supplies naming information such as address records; the web content is retrieved from HTTP-serving systems or intermediaries.
-- **Q2 (free):** Why can a CDN return a valid page when the origin is temporarily unreachable?
-  - Expected answer and scoring: An eligible cached representation can be served under the cache policy and freshness/staleness constraints; it is not guaranteed for every resource or failure.
-
-**Module 7 — Compare origin, reverse proxy and cache paths: required lab** — Required assessment details
-
-- **Objective:** Use supplied delivery traces to identify where a response may originate.
-- **Prerequisites:** Complete Module 7's instructional lessons and checkpoint; use the conceptual and diagnostic skills introduced earlier in APP1. Do not require subsequent APP course capabilities.
-- **Environment:** A current standards-capable browser with developer tools (Chromium or Firefox), a terminal, and a local static fixture directory served by a preinstalled unprivileged static-file server such as Python's standard-library `http.server` on 127.0.0.1. Record OS, browser, server-tool versions, chosen port and exact commands. A synthetic, sanitized trace may replace external-network observations; no paid service, account, public domain, administrator privileges, custom trust root, interception of others' traffic or live production system is required.
-- **Procedure:**
-  1. Draw direct hosting, reverse-proxy and CDN-cached response paths for the same hypothetical site.
-  2. Use two sanitized HTTP exchanges with distinct cache headers to label an origin response versus a cache hit; state any ambiguity.
-  3. List what the learner would have to observe to prove the serving layer, and why DNS alone cannot establish it.
-- **Expected result:** A defensible traffic flow showing separate origin/edge responsibilities.
-- **Verification:** Identify all headers as evidence with limitations, not universal proof of internal topology.
-- **Evidence:** Three flow diagrams, trace annotations and claim-versus-evidence table.
-- **Failure analysis:** Assuming every `X-Cache` header is trustworthy or treating public IP and physical server as identical.
-- **Acceptance:** Correct layer boundaries and no unjustified topology claims.
-
-**Module 8 — URLs, Origins and Web Navigation Identities: checkpoint** — Required assessment details
-
-- **Q1 (free):** What is the difference between `https://site.test/a?q=1#part` and the request target sent over HTTP?
-  - Expected answer and scoring: The fragment `#part` is handled client-side and is not sent in an HTTP request target; path and query identify the requested resource representation context.
-- **Q2 (free):** Do `https://example.test` and `https://example.test:8443` have the same origin?
-  - Expected answer and scoring: No. Origin includes scheme, host and effective port. A different effective port changes origin.
-
-**Module 8 — Resolve and classify web addresses: required lab** — Required assessment details
-
-- **Objective:** Predict URL resolution and origin boundaries before inspecting network behavior.
-- **Prerequisites:** Complete Module 8's instructional lessons and checkpoint; use the conceptual and diagnostic skills introduced earlier in APP1. Do not require subsequent APP course capabilities.
-- **Environment:** A current standards-capable browser with developer tools (Chromium or Firefox), a terminal, and a local static fixture directory served by a preinstalled unprivileged static-file server such as Python's standard-library `http.server` on 127.0.0.1. Record OS, browser, server-tool versions, chosen port and exact commands. A synthetic, sanitized trace may replace external-network observations; no paid service, account, public domain, administrator privileges, custom trust root, interception of others' traffic or live production system is required.
-- **Procedure:**
-  1. Resolve a table of relative URLs against a fictional base including parent paths, queries and fragment-only links.
-  2. Group ten supplied URL examples by origin, explaining effective-port normalization and where differences exist.
-  3. Use browser inspection on a local static page to compare fragment-only navigation with a resource fetch; record exceptions or browser-specific behavior.
-- **Expected result:** Resolved URL table and accurate same-origin groups.
-- **Verification:** Check fragment handling and scheme/host/port comparisons; explain why a path alone does not change origin.
-- **Evidence:** Resolution table, origin equivalence groups and local navigation observations.
-- **Failure analysis:** Treating URL fragments as request headers or equating registrable domain with same origin.
-- **Acceptance:** All provided URLs correctly classified and no fragment transmitted in the claimed HTTP request.
-
-**Module 9 — HTTP Messages and Resource Semantics: checkpoint** — Required assessment details
-
-- **Q1 (free):** Does a 404 response mean the network connection failed?
-  - Expected answer and scoring: No. It is a valid HTTP response indicating the target resource was not found or not disclosed; the transport and HTTP communication were established sufficiently to receive it.
-- **Q2 (free):** Is POST always non-idempotent and PUT always safe?
-  - Expected answer and scoring: PUT is defined as idempotent but is not safe, while POST is neither safe nor guaranteed idempotent by method semantics. A server can implement additional application guarantees, which cannot be inferred from a method label alone.
-
-**Module 9 — Inspect and explain HTTP exchanges: required lab** — Required assessment details
-
-- **Objective:** Use browser and command-line network inspection to reason about real and intentionally failing HTTP requests.
-- **Prerequisites:** Complete Module 9's instructional lessons and checkpoint; use the conceptual and diagnostic skills introduced earlier in APP1. Do not require subsequent APP course capabilities.
-- **Environment:** A current standards-capable browser with developer tools (Chromium or Firefox), a terminal, and a local static fixture directory served by a preinstalled unprivileged static-file server such as Python's standard-library `http.server` on 127.0.0.1. Record OS, browser, server-tool versions, chosen port and exact commands. A synthetic, sanitized trace may replace external-network observations; no paid service, account, public domain, administrator privileges, custom trust root, interception of others' traffic or live production system is required.
-- **Procedure:**
-  1. Serve a small local HTML document and a missing path using a preinstalled static server; record request methods, target, status and key headers.
-  2. For a supplied sanitized POST/redirect trace, explain its semantics without implementing POST handling.
-  3. Reconstruct a request/response timeline that distinguishes protocol version, body content, headers and failure cases.
-- **Expected result:** Correctly classified local 200/404 and sanitized redirect cases without writing service code.
-- **Verification:** Compare reported status and headers to raw outputs; reject any inference that 404 or 500 is a DNS/transport failure.
-- **Evidence:** Redacted HTTP transcript, status classification table, sequence diagram and limitations.
-- **Failure analysis:** Treating a URL as an HTTP method or assuming a request body always exists.
-- **Acceptance:** Accurate interpretation of methods, status families and transport/application boundaries.
-
-**Module 10 — HTTP Caching, Redirects and Intermediaries: checkpoint** — Required assessment details
-
-- **Q1 (free):** What does `304 Not Modified` mean, and is it a normal replacement for an initial full response?
-  - Expected answer and scoring: It answers a conditional request indicating a stored representation remains valid under the supplied validator; clients generally reuse a cached body. It is not a replacement for sending initial content without a cached representation.
-- **Q2 (free):** Can a shared cache safely reuse every response carrying user-specific information?
-  - Expected answer and scoring: No. Shared caches must obey authorization and cache-control rules; private responses or sensitive data require appropriate restrictions. A header alone does not justify serving private data to another user.
-
-**Module 10 — Reason about freshness and validator timelines: required lab** — Required assessment details
-
-- **Objective:** Reconstruct cache decisions from a synthetic response log and verify browser cache inspection where available.
-- **Prerequisites:** Complete Module 10's instructional lessons and checkpoint; use the conceptual and diagnostic skills introduced earlier in APP1. Do not require subsequent APP course capabilities.
-- **Environment:** A current standards-capable browser with developer tools (Chromium or Firefox), a terminal, and a local static fixture directory served by a preinstalled unprivileged static-file server such as Python's standard-library `http.server` on 127.0.0.1. Record OS, browser, server-tool versions, chosen port and exact commands. A synthetic, sanitized trace may replace external-network observations; no paid service, account, public domain, administrator privileges, custom trust root, interception of others' traffic or live production system is required.
-- **Procedure:**
-  1. Given a synthetic GET → 200 (ETag, max-age=60) → conditional GET → 304 timeline, annotate when a cached representation is reused.
-  2. Classify supplied private, no-store and public responses for a private browser cache versus a shared proxy.
-  3. Inspect local browser caching behavior with DevTools cache toggles, noting that a simple static server may not demonstrate 304 without additional supplied fixtures.
-- **Expected result:** Correct freshness/validation decisions and explicit separation of private and shared cache rules.
-- **Verification:** Compare the written decisions against the supplied timestamps and headers; require explanation of 304 preconditions.
-- **Evidence:** Annotated cache timeline, privacy decision matrix and observed-versus-simulated flags.
-- **Failure analysis:** Inventing a 304 from a server that never emitted it or treating `no-store` as identical to `no-cache`.
-- **Acceptance:** Correct cache matrix, 304 reasoning and evidence classification.
-
-**Module 11 — HTTPS, TLS and Web Trust: checkpoint** — Required assessment details
-
-- **Q1 (free):** Does seeing a padlock guarantee the website is legitimate and its content safe?
-  - Expected answer and scoring: No. HTTPS protects a connection to a certified endpoint under its trust assumptions; it does not certify that all content or business behavior is benign.
-- **Q2 (free):** Why might a valid certificate for one hostname fail for another?
-  - Expected answer and scoring: Hostname validation compares the requested identity against the certificate's permitted names. A valid chain alone does not establish identity for a different host.
-
-**Module 11 — Evaluate synthetic TLS trust outcomes: required lab** — Required assessment details
-
-- **Objective:** Classify valid and invalid HTTPS trust outcomes without self-signed CA installation or insecure bypass flags.
-- **Prerequisites:** Complete Module 11's instructional lessons and checkpoint; use the conceptual and diagnostic skills introduced earlier in APP1. Do not require subsequent APP course capabilities.
-- **Environment:** A current standards-capable browser with developer tools (Chromium or Firefox), a terminal, and a local static fixture directory served by a preinstalled unprivileged static-file server such as Python's standard-library `http.server` on 127.0.0.1. Record OS, browser, server-tool versions, chosen port and exact commands. A synthetic, sanitized trace may replace external-network observations; no paid service, account, public domain, administrator privileges, custom trust root, interception of others' traffic or live production system is required.
-- **Procedure:**
-  1. Inspect the connection information of a known local or optional public HTTPS example only if allowed, then explicitly state which values were actually observable.
-  2. Use supplied synthetic certificate cases: trusted chain and matching hostname; trusted chain but mismatching name; unknown issuer; expired certificate.
-  3. For each case, determine expected browser warning/acceptance and explain what TLS cannot establish about content safety.
-- **Expected result:** A clear trust-decision table and accurate HTTPS boundary explanation.
-- **Verification:** Reject incorrect advice to click through certificate warnings for mandatory work; no custom CA or paid domain required.
-- **Evidence:** Synthetic certificate table, optional sanitized browser observations and limitations.
-- **Failure analysis:** Confusing encryption with authentication of a business, treating no warning as blanket safety, or bypassing certificate checks.
-- **Acceptance:** All trust cases classified and safe observation practices documented.
-
-**Module 12 — Browser Architecture and Engines: checkpoint** — Required assessment details
-
-- **Q1 (free):** Are the JavaScript engine and CSS rendering engine the same component?
-  - Expected answer and scoring: No. JavaScript engines execute ECMAScript, while rendering engines parse and lay out documents and styles; browser architectures integrate but distinguish these roles.
-- **Q2 (free):** Does every browser spawn exactly one renderer process for every tab?
-  - Expected answer and scoring: No. Process models depend on implementation, site isolation policy and resource constraints. A Chrome-specific diagram cannot be asserted as universal.
-
-**Module 12 — Compare two browser architecture implementations: required lab** — Required assessment details
-
-- **Objective:** Build an annotated model distinguishing standards-defined behavior from browser implementation choices.
-- **Prerequisites:** Complete Module 12's instructional lessons and checkpoint; use the conceptual and diagnostic skills introduced earlier in APP1. Do not require subsequent APP course capabilities.
-- **Environment:** A current standards-capable browser with developer tools (Chromium or Firefox), a terminal, and a local static fixture directory served by a preinstalled unprivileged static-file server such as Python's standard-library `http.server` on 127.0.0.1. Record OS, browser, server-tool versions, chosen port and exact commands. A synthetic, sanitized trace may replace external-network observations; no paid service, account, public domain, administrator privileges, custom trust root, interception of others' traffic or live production system is required.
-- **Procedure:**
-  1. Compare a Chrome/Chromium reference diagram with a Firefox or WebKit architecture summary from a publicly accessible source or a provided schematic.
-  2. Label browser, renderer, JavaScript engine and graphics/compositor roles; identify two implementation-specific choices.
-  3. Use an available browser's task manager or performance tools if present; otherwise document why such process information is inaccessible in the environment.
-- **Expected result:** An architecture map with correctly attributed engine components and clearly bounded claims.
-- **Verification:** Reviewer can identify which components are mandatory Web platform concepts versus Chrome/Firefox/WebKit implementation specifics.
-- **Evidence:** Comparative table, annotated diagram, optional process observations and caveats.
-- **Failure analysis:** Equating Blink with V8 or claiming every renderer pipeline uses the same internal process model.
-- **Acceptance:** Engine roles correctly separated, two implementation differences and no unsupported universality claims.
-
-**Module 13 — Navigation, Discovery and Resource Loading: checkpoint** — Required assessment details
-
-- **Q1 (free):** Does a browser normally wait for every image on a page before its first paint?
-  - Expected answer and scoring: No. Browsers can render incrementally while images and other noncritical resources arrive; required render-blocking resources and implementation choices influence timing.
-- **Q2 (free):** Why might a synchronous script in a document delay parsing?
-  - Expected answer and scoring: A classic synchronous script may inspect or alter the document while parsing, so the HTML parser can be blocked until it executes. This concept does not require writing the script in APP1.
-
-**Module 13 — Investigate a static document's resource waterfall: required lab** — Required assessment details
-
-- **Objective:** Trace discovery and load ordering using only supplied static HTML/CSS/image assets.
-- **Prerequisites:** Complete Module 13's instructional lessons and checkpoint; use the conceptual and diagnostic skills introduced earlier in APP1. Do not require subsequent APP course capabilities.
-- **Environment:** A current standards-capable browser with developer tools (Chromium or Firefox), a terminal, and a local static fixture directory served by a preinstalled unprivileged static-file server such as Python's standard-library `http.server` on 127.0.0.1. Record OS, browser, server-tool versions, chosen port and exact commands. A synthetic, sanitized trace may replace external-network observations; no paid service, account, public domain, administrator privileges, custom trust root, interception of others' traffic or live production system is required.
-- **Procedure:**
-  1. Create a local static page with an HTML document, stylesheet and an image (the image may be a tiny local SVG). Serve it with the standard static server.
-  2. Use browser Network and Performance tools to record document/style/image loading; repeat once with cache enabled and once disabled and document variance.
-  3. Change a stylesheet URL to a nonexistent resource, reload and explain the resulting 404 and visual differences without implementing JavaScript.
-- **Expected result:** A labelled resource dependency graph tied to recorded requests and visual behavior.
-- **Verification:** Network records include paths, statuses and evidence for the missing stylesheet; distinguish observation from generalized loading rules.
-- **Evidence:** HAR or screenshots with redacted data, resource graph, failed-style comparison and environment.
-- **Failure analysis:** Assuming requests are strictly sequential or treating DOMContentLoaded as equivalent to all content fully loaded.
-- **Acceptance:** Correct dependency graph and repeatable missing-resource diagnosis.
-
-**Module 14 — HTML and CSS Parsing: Document to Style Data: checkpoint** — Required assessment details
-
-- **Q1 (free):** Are DOM nodes identical to the painted pixels shown on screen?
-  - Expected answer and scoring: No. DOM nodes represent document structure; style and layout determine displayed boxes and painting. Some DOM elements contribute no painted boxes.
-- **Q2 (free):** Why might invalid CSS leave parts of the page still styled?
-  - Expected answer and scoring: CSS parsing and error recovery may ignore unsupported or invalid declarations while retaining valid rules; the actual observed result depends on selector/cascade context.
-
-**Module 14 — Reconstruct a document and computed-style change: required lab** — Required assessment details
-
-- **Objective:** Observe DOM structure and CSS effects in a minimal static page.
-- **Prerequisites:** Complete Module 14's instructional lessons and checkpoint; use the conceptual and diagnostic skills introduced earlier in APP1. Do not require subsequent APP course capabilities.
-- **Environment:** A current standards-capable browser with developer tools (Chromium or Firefox), a terminal, and a local static fixture directory served by a preinstalled unprivileged static-file server such as Python's standard-library `http.server` on 127.0.0.1. Record OS, browser, server-tool versions, chosen port and exact commands. A synthetic, sanitized trace may replace external-network observations; no paid service, account, public domain, administrator privileges, custom trust root, interception of others' traffic or live production system is required.
-- **Procedure:**
-  1. Write a small HTML page with nested headings, lists, links and a stylesheet containing two conflicting selector rules.
-  2. Draw the expected DOM outline, then compare it with the browser's Elements/Inspector view and computed styles.
-  3. Introduce a malformed declaration and explain precisely which style outcome changes; observe accessibility semantics where tools allow and disclose any lack of assistive-technology verification.
-- **Expected result:** Document tree sketch, computed-style reasoning and visible difference from an invalid declaration.
-- **Verification:** Reviewer checks selectors, computed values and DOM outline; requires no JavaScript authoring.
-- **Evidence:** Source fragments, DOM diagram, computed-style screenshots and observation notes.
-- **Failure analysis:** Confusing DOM with CSSOM, calling style rules HTML elements or asserting screen-reader behavior without testing.
-- **Acceptance:** Correct DOM/CSS boundaries and at least one traceable cascade/error example.
-
-**Module 15 — Layout, Paint, Rasterization and Compositing: checkpoint** — Required assessment details
-
-- **Q1 (free):** Does every DOM element necessarily correspond to a visible box?
-  - Expected answer and scoring: No. Some DOM elements have no visible box or are omitted from the render tree; layout and computed style determine painted output.
-- **Q2 (free):** If an image loads after initial paint without reserved dimensions, what work might repeat?
-  - Expected answer and scoring: The browser may need to recalculate affected layout, repaint and composite. The exact operations depend on the implementation and what changed; not every change forces every stage.
-
-**Module 15 — Explain a measured render and layout change: required lab** — Required assessment details
-
-- **Objective:** Tie an observed visual change to relevant rendering stages without claiming access to internal GPU implementation details.
-- **Prerequisites:** Complete Module 15's instructional lessons and checkpoint; use the conceptual and diagnostic skills introduced earlier in APP1. Do not require subsequent APP course capabilities.
-- **Environment:** A current standards-capable browser with developer tools (Chromium or Firefox), a terminal, and a local static fixture directory served by a preinstalled unprivileged static-file server such as Python's standard-library `http.server` on 127.0.0.1. Record OS, browser, server-tool versions, chosen port and exact commands. A synthetic, sanitized trace may replace external-network observations; no paid service, account, public domain, administrator privileges, custom trust root, interception of others' traffic or live production system is required.
-- **Procedure:**
-  1. Serve an HTML/CSS fixture with a large image whose dimensions are initially not reserved and record its effect on layout in a current browser.
-  2. Repeat after adding explicit intrinsic width and height attributes or an aspect-ratio constraint; compare visible movement, avoiding claims about exact metric improvements without measurements.
-  3. Use browser Performance/Rendering panels if available to identify paints or layout work; otherwise supply an annotated stage-by-stage explanation based on the observed page.
-- **Expected result:** Before/after layout evidence and a bounded explanation of style → layout → paint → composition.
-- **Verification:** Check that the learner avoids universal statements about layers or GPU processes and clearly separates observed traces from theory.
-- **Evidence:** Before/after screenshots or recordings, source difference, measurements if available and explanation.
-- **Failure analysis:** Treating DOM parsing as painting, assuming every frame repaints everything, or claiming improved performance without comparable conditions.
-- **Acceptance:** Correct pipeline and defensible observed-versus-inferred report.
-
-**Module 16 — Browser Security, State and Privacy Boundaries: checkpoint** — Required assessment details
-
-- **Q1 (free):** Is receiving an HTTP 200 from a cross-origin server proof that browser JavaScript can read its contents?
-  - Expected answer and scoring: No. Cross-origin network delivery and script-readable responses have different policies; CORS can govern read access when browser script is involved. APP1 studies the boundary conceptually.
-- **Q2 (free):** Does clearing the HTTP cache necessarily remove every cookie and local-storage record?
-  - Expected answer and scoring: No. Cache storage, cookies and web storage have distinct lifecycles; an explicit browser clearing action may target different kinds of site data.
-
-**Module 16 — Classify browser security and storage scenarios: required lab** — Required assessment details
-
-- **Objective:** Use sanitized browser observations to separate secure-transport, origin, cookie and cache rules.
-- **Prerequisites:** Complete Module 16's instructional lessons and checkpoint; use the conceptual and diagnostic skills introduced earlier in APP1. Do not require subsequent APP course capabilities.
-- **Environment:** A current standards-capable browser with developer tools (Chromium or Firefox), a terminal, and a local static fixture directory served by a preinstalled unprivileged static-file server such as Python's standard-library `http.server` on 127.0.0.1. Record OS, browser, server-tool versions, chosen port and exact commands. A synthetic, sanitized trace may replace external-network observations; no paid service, account, public domain, administrator privileges, custom trust root, interception of others' traffic or live production system is required.
-- **Procedure:**
-  1. Group supplied scenarios into origin-policy, credential/session, cache or TLS failures; explain why one failure type does not imply another.
-  2. Inspect the site-information or storage overview for a local static page without creating personal data or accepting risky permissions.
-  3. Use supplied synthetic CORS/mixed-content errors to propose safe diagnostic observations, explicitly deferring code-level repair to later courses.
-- **Expected result:** A threat-boundary matrix with correct browser behaviors and privacy-preserving evidence.
-- **Verification:** Check no security bypasses or live credentials are recommended and that network 200 vs script access is distinguished.
-- **Evidence:** Sanitized inspector notes, classification table, incident hypotheses and limitations.
-- **Failure analysis:** Treating CORS as an authentication system, sharing personal browser data or equating cache with local storage.
-- **Acceptance:** All boundary cases classified safely and correctly.
-
-**Module 17 — End-to-End Website Loading and Diagnostic Defense: checkpoint** — Required assessment details
-
-- **Q1 (free):** A page remains unstyled but the document returns 200. Name three different plausible causes and the first observations to distinguish them.
-  - Expected answer and scoring: Possible causes include missing stylesheet (404), incorrect stylesheet URL, invalid CSS/selector, wrong MIME or blocked resource; check Network request/status, Console and computed styles before concluding.
-- **Q2 (free):** How do you distinguish a DNS failure from TLS, HTTP 404 and CSS rendering failures in an incident report?
-  - Expected answer and scoring: DNS occurs before an origin connection; TLS affects authenticated transport; 404 is an HTTP response; CSS rendering occurs after document/resource handling. Include evidence at each boundary and do not infer unobserved packets.
-
-**Module 17 — Defend a complete web-page loading investigation: required lab** — Required assessment details
-
-- **Objective:** Diagnose a supplied, intentionally faulty static website using observable evidence from network access to rendered output.
-- **Prerequisites:** Complete Module 17's instructional lessons and checkpoint; use the conceptual and diagnostic skills introduced earlier in APP1. Do not require subsequent APP course capabilities.
-- **Environment:** A current standards-capable browser with developer tools (Chromium or Firefox), a terminal, and a local static fixture directory served by a preinstalled unprivileged static-file server such as Python's standard-library `http.server` on 127.0.0.1. Record OS, browser, server-tool versions, chosen port and exact commands. A synthetic, sanitized trace may replace external-network observations; no paid service, account, public domain, administrator privileges, custom trust root, interception of others' traffic or live production system is required.
-- **Procedure:**
-  1. Create or use a local static website fixture with `index.html`, `styles.css` and a local image; run it with a standard static server, not a learner-written backend.
-  2. Prepare at least four reproducible faults: missing stylesheet URL (HTTP 404), stopped listener (connection refusal), a fragment-only navigation that should not fetch a new document, and a CSS rule/layout issue; add DNS/TLS failures from explicitly labelled sanitized traces rather than falsely claiming local reproduction.
-  3. For the healthy and faulty cases collect request/response summaries, resource dependencies, DOM/CSS inspection, rendered screenshots, error classification, and a record of every tool/version used.
-  4. Produce a narrated start-to-finish web journey: device and route assumptions, name-resolution caveats, connection and HTTP phases, resource discovery, DOM/CSSOM, style, layout, paint and composition; distinguish omitted optional cases (CDN, QUIC, TLS, JavaScript).
-  5. Propose and apply safe static-site fixes for at least two issues, repeat observations and write a short engineering retrospective.
-- **Expected result:** A functioning static site and a layered incident report with at least four diagnosed failures, independently reproducible changes and no backend implementation requirement.
-- **Verification:** A reviewer can reproduce the local faults, distinguish simulated DNS/TLS observations, follow the healthy page request timeline, and verify two repaired cases and one negative path.
-- **Evidence:** Fixture source and run instructions, tool/version list, screenshots or sanitized traces, fault matrix, repair diffs, layered journey diagram, unresolved claims and technical retrospective.
-- **Failure analysis:** Inventing DNS/TLS packet observations from localhost, bypassing certificate validation, mistaking an HTTP error for failed connection, or treating paint as the same as DOM construction.
-- **Acceptance:** All four failures are correctly isolated, two repairs reproduced, required pipeline stages and uncertainty documented, and the learner defends the diagnosis without guessing.
-
-**Exit assessment expectation:**
-
-A reviewer must independently reproduce the mandatory local observations and verify the written explanations. Completion requires accurate distinctions among link, routing, DNS, transport, TLS, HTTP, browser loading, parsing and visual rendering. Positive and negative cases must be supported by actual observations or **explicitly marked synthetic evidence**, never by invented traces. Question scoring must reward mechanisms and uncertainty rather than isolated terminology.
-
-**Exit demonstration:**
-
-Given a previously unseen static website and a reproducible failure report, the learner explains the Internet-to-pixels journey and proposes the smallest safe next observation at each possible failure boundary, repairs applicable static-site faults, and defends the evidence without writing backend services or relying on a proprietary learning platform.
-
----
+All 14 course outcomes MUST be demonstrated against the public criteria
+through **four required summative assessments**. These replace the
+17 repeated module checkpoint/lab pairs. Formative sketches, small
+practice traces, simulator exercises, and lesson self-checks are not
+additional completion requirements.
+
+| Assessment | Outcomes covered | Principal evidence |
+| --- | --- | --- |
+| `APP1-AS1` — Network and DNS Investigation | APP1-O1, APP1-O2, APP1-O3, APP1-O4 | Qualified packet/route and connection traces, domain/DNS explanation |
+| `APP1-AS2` — Web Delivery Investigation | APP1-O5, APP1-O6, APP1-O7, APP1-O8 | Hosting/URL diagrams, HTTP/cache traces, synthetic TLS evaluation |
+| `APP1-AS3` — Browser Pipeline Investigation | APP1-O9, APP1-O10, APP1-O11, APP1-O12, APP1-O13 | Browser process model, waterfall, DOM/style/render observations, security classifications |
+| `APP1-AS4` — Website Diagnostic Defense | APP1-O14, APP1-O1, APP1-O2, APP1-O4, APP1-O7, APP1-O8, APP1-O10, APP1-O12, APP1-O13 | Reproducible static-site failure matrix, repairs, full browser journey, defense |
+
+One assessment may establish several outcomes, and the final
+investigation intentionally integrates outcomes where doing so
+is educationally necessary. A completed checklist, guessed
+layer diagnosis, copied answer, or invented network capture
+does not establish competence.
+
+### Shared environment and observation rules
+
+A current Chromium- or Firefox-family browser with developer
+tools, a terminal, and a local static fixture are sufficient.
+An example unprivileged fixture command is
+`python3 -m http.server 8000 --bind 127.0.0.1` from a
+disposable directory. A different installed static file server
+is acceptable. Do not ask the learner to implement a backend
+server or write JavaScript or TypeScript. Static HTML/CSS edits
+for observational purposes are allowed but not assessed as
+general frontend authoring capability.
+
+Use sanitized public examples, fictitious domains, supplied
+packet/route diagrams and DNS/TLS traces as appropriate.
+**Label synthetic evidence as synthetic.** A `127.0.0.1`
+request does not demonstrate public Internet routing, public
+DNS delegation, a real TLS handshake, or a CDN. A browser's
+cached response does not prove that an origin was contacted.
+Observation limits and missing evidence must be explicitly
+identified.
+
+Do not require paid hosting, domain registration, online
+certificate testing, login, custom root certificates, network
+interception, scanning unfamiliar hosts, administrator or
+privileged access, third-party traffic capture, or changing
+operating-system trust settings. Avoid logging secrets,
+tokens, cookies, private browsing history, and unrelated
+user data. Browser and OS versions and actual commands
+should be recorded when materially relevant.
+
+### Required assessments
+
+- **APP1-AS1** (required network and naming investigation)
+  - Outcomes: APP1-O1, APP1-O2, APP1-O3, APP1-O4
+  - Work: reconstruct a complete Web reachability path using
+    supplied, labeled local-link, IPv4/IPv6 prefix/route,
+    transport, and DNS scenario records. Identify the device,
+    interface, gateway, possible NAT, IP next hops, transport
+    endpoint and connection stage. Trace a domain from
+    registrant/registrar/registry and delegated nameservers
+    through stub/recursive/authoritative resolution, common
+    records, and positive/negative caching. Compare at least
+    four controlled observations representing a link/gateway
+    problem, routing failure, connection refusal or timeout,
+    and NXDOMAIN/SERVFAIL response. Explain differences
+    among TCP, UDP, and QUIC and the limits of traceroute
+    and local resolver inspection.
+  - Criteria: correct separation of Internet versus Web,
+    links versus packet routing, transport versus DNS;
+    sensible prefix/next-hop reasoning for IPv4 and IPv6;
+    correctly interpreted refused, reset and timeout
+    signals; accurate domain roles, record/caching behavior,
+    and distinct DNS failures. Every conclusion distinguishes
+    observed trace content from hypotheses; no simulated
+    scenario is claimed as live capture.
+  - Evidence: annotated network-layer diagrams, route and
+    endpoint tables, DNS delegation/resolution chain,
+    supplied or sanitized failure traces, concise
+    failure-classification rationale, and the provenance
+    and limitations of each observation.
+
+- **APP1-AS2** (required address, delivery, HTTP and TLS investigation)
+  - Outcomes: APP1-O5, APP1-O6, APP1-O7, APP1-O8
+  - Work: interpret a supplied multi-stage resource
+    delivery scenario involving domain resolution,
+    origin/hosting, reverse proxy or CDN, absolute
+    and relative URLs, and differing origins/sites.
+    Explain the request/response meaning of GET, HEAD,
+    POST and other common methods without implementing
+    mutating endpoints. Examine ordinary, redirect,
+    HTTP error, cache hit and conditional validation
+    cases, including ETag or Last-Modified and
+    `304 Not Modified`. Interpret an explicitly
+    synthetic HTTPS handshake and certificate
+    hostname/trust-path outcome; compare successful,
+    expired/unknown-issuer, and hostname-mismatch
+    cases without disabling validation. Explain
+    intermediary visibility, HTTP version framing
+    differences, and mixed-content limits.
+  - Criteria: correct URL decomposition, reference
+    resolution, scheme/host/port origin reasoning,
+    distinction between domain and hosting and
+    proxy/CDN roles; accurate method/status/header
+    and freshness/validation interpretation.
+    A 304 is not described as a complete new
+    response body, and no cache claim exceeds
+    observed evidence. TLS proves appropriate
+    connection properties, not that a site's content
+    is honest or safe.
+  - Evidence: annotated URL/origin table, delivery
+    topology and request timeline, HTTP message and
+    conditional-cache trace explanations, explicitly
+    synthetic TLS/hostname case analysis, and
+    short accounts of assumptions and uncertainty.
+
+- **APP1-AS3** (required browser navigation and rendering investigation)
+  - Outcomes: APP1-O9, APP1-O10, APP1-O11, APP1-O12, APP1-O13
+  - Work: inspect a supplied or locally served static
+    site with HTML, CSS, and at least one image.
+    Use browser tools to identify navigation and
+    resource requests, parser/render blocking,
+    resource failure, DOM versus source structure,
+    CSS parsing/cascade/computed-style effects,
+    layout/paint/composition boundaries, and
+    a controlled layout or style change. Distinguish
+    the roles of browser processes, rendering
+    engines and JavaScript engines (including
+    differences among named implementations).
+    Classify supplied same-origin/CORS, cookie
+    and storage, mixed-content, secure-context
+    and privacy scenarios without implementing
+    authentication or cross-origin bypasses.
+  - Criteria: accurate sequencing from document
+    navigation through resource loading and visible
+    output; credible browser architecture comparison
+    without assuming uniform internal processes;
+    correct distinctions among DOM, CSSOM, computed
+    style, rendered boxes, layout, paint and
+    compositing; justified effects of style/
+    viewport changes. Origin/CORS and storage
+    classifications must not confuse transport
+    failures or cache with application state.
+  - Evidence: annotated browser waterfall, resource
+    dependency graph, DOM/style inspection and
+    screenshots or synthetic equivalents,
+    before/after render observations, browser
+    architecture sketch, a security/state
+    classification matrix, tool versions and
+    clear limits on inferred behavior.
+
+- **APP1-AS4** (required end-to-end diagnostic investigation)
+  - Outcomes: APP1-O14, APP1-O1, APP1-O2, APP1-O4, APP1-O7, APP1-O8, APP1-O10, APP1-O12, APP1-O13
+  - Work: reproduce the healthy navigation and visible
+    rendering of a static site served locally with
+    `index.html`, `styles.css`, and a local image.
+    Construct **at least four distinct controlled
+    failure cases**: a stopped listener causing
+    connection refusal; a stylesheet or image URL
+    returning HTTP 404; a CSS/layout defect causing
+    an incorrect visual result; and a fourth
+    distinguishable case chosen from another local
+    resource failure or an explicitly synthetic
+    DNS/TLS scenario. Include a fragment-only
+    navigation as a **nonfailure control** and
+    explain why it normally does not initiate a
+    new document fetch. Diagnose each from
+    available network, DOM, style and rendered
+    observations. **Repair at least two local
+    faults**, show the changed fixture or command,
+    and repeat the observation to verify the
+    result. Defend the full path from local link
+    assumptions to bytes-on-the-wire, DNS
+    caveats, transport/TLS boundaries, HTTP,
+    incremental resource loading, HTML/CSS parsing,
+    style, layout, paint and compositing.
+  - Criteria: correct classification of all four
+    faults without treating the fragment control
+    as a failure; at least two repairs produce
+    demonstrably improved local observations;
+    each fault is assigned to the earliest
+    supported layer rather than explained by
+    guesswork. Local HTTP is not claimed as
+    HTTPS and synthetic DNS/TLS examples are
+    never presented as live captures. An
+    independently following reviewer can reproduce
+    the healthy path, local failures, and repairs
+    without a paid service or backend framework.
+    The defense describes uncertain or unobserved
+    steps honestly and proposes the next safe
+    observation when evidence is insufficient.
+  - Evidence: disposable static-site fixtures,
+    exact serve/inspect commands and tool versions,
+    healthy and faulty request summaries,
+    waterfall/DOM/CSS and visual observations,
+    a four-case failure matrix, two repair
+    diffs and re-tests, a layered
+    Internet-to-pixels diagram, labeled
+    synthetic-case sources, and a concise
+    technical defense and failure retrospective.
+
+### Optional formative practice
+
+Recommended self-checks and exercises that do
+**not** independently gate course completion:
+
+- Predict packet forwarding from unfamiliar
+  route tables and compare latency versus loss.
+- Distinguish connection refusal from a server
+  returning an HTTP error.
+- Label registrant, registrar, registry, DNS
+  operator and host in a domain scenario.
+- Resolve relative URLs and compare two origins.
+- Trace a cache timeline involving
+  `Cache-Control`, `ETag`, and `304`.
+- Inspect a supplied certificate error without
+  bypassing TLS validation.
+- Compare a browser network waterfall with
+  the DOM and computed styles.
+- Predict the effect of a CSS rule change
+  on layout versus paint.
+- Classify whether a blocked cross-origin
+  read is a CORS policy issue or a failed
+  network connection.
+- Explain why fragment navigation typically
+  does not fetch a new document.
+
+### Completion decision and migration
+
+Each assessment is complete only when its
+specified Work, Criteria and Evidence are
+demonstrated. Together the four required
+assessments cover all `APP1-O*` outcomes.
+Passing quizzes, inspecting a fixture without
+interpreting it, or submitting synthetic
+output as live capture is insufficient.
+
+This rewrite replaces the former 17 module
+checkpoint/lab pairs and mandatory-by-template
+final lab with evidence selected for the
+course's actual outcomes. It **retains**
+the original technical scope, safe local
+inspection, public DNS/TLS examples, and
+the full end-to-end diagnostic requirement
+(including four fault cases and two repairs).
+The course remains focused on foundations;
+it does not add frontend/backend programming
+as a prerequisite.
+
+The program catalog duration changes from
+`16–18 weeks` to `12–16 weeks` as a
+**provisional workload revision**, not a
+claim of improved efficacy. Learner evidence
+should inform a future estimate. Historical
+course completion records remain bound to
+the requirements in force when they were
+assessed; no automatic equivalence or
+reclassification is implied.
+
+This course remains `draft`. Structural
+validation cannot establish pedagogical
+effectiveness, independently reproduced
+investigations, learner testing or
+`verified` readiness. Consult
+[Evidence Rules](../../spec/evidence-rules.md)
+and [Status Labels](../../spec/status-labels.md).
