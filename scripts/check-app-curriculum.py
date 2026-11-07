@@ -1,35 +1,37 @@
 #!/usr/bin/env python3
-"""Validate the nine draft APP core courses and seven elective drafts."""
+"""Validate APP catalog identities, course classes, prerequisites and both format generations."""
 from pathlib import Path
 import re
 import sys
 
 from course_format_versions import is_outcome_course, validate_outcome_course
+from app_catalog import prerequisite_codes, read_app_catalog
 
 ROOT = Path(__file__).resolve().parents[1]
 APP = ROOT / "curriculum" / "APP"
-CORE_CODES = {f"APP{i}" for i in range(1, 10)}
-ELECTIVE_CODES = {f"APP{i}" for i in range(10, 17)}
-CODES = CORE_CODES | ELECTIVE_CODES
 REQUIRED = ["Overview", "Learning outcomes", "Modules", "Completion requirements"]
-ELECTIVES = [
-    "Advanced Frontend Performance", "Advanced Backend Architecture",
-    "Realtime Systems", "Mobile Application Engineering",
-    "API Gateways & Edge Delivery",
-    "Advanced TypeScript/Rust Application Development",
-    "Platform Engineering",
-]
 TICK = chr(96)
 
 def validate():
-    errors = []
-    files = sorted(APP.glob("APP[0-9]*.md"))
-    if {p.stem for p in files} != CODES:
-        errors.append("APP: expected APP1.md through APP16.md")
+    catalog_path = APP / "README.md"
+    entries, errors = read_app_catalog(catalog_path)
+    course_map = {entry.code: entry for entry in entries}
+    codes = set(course_map)
+    core_codes = {entry.code for entry in entries if entry.classification == "core"}
+    elective_codes = codes - core_codes
+    files = sorted(APP.glob("APP[0-9]*.md"), key=lambda p: int(p.stem[3:]))
+    actual_codes = {p.stem for p in files}
+    for code in sorted(codes - actual_codes):
+        errors.append(f"APP catalog: missing course file {code}.md")
+    for code in sorted(actual_codes - codes):
+        errors.append(f"APP catalog: unlisted course file {code}.md")
     dependencies = {}
     migrated_count = 0
     for file in files:
         code = file.stem
+        entry = course_map.get(code)
+        if entry is None:
+            continue
         data = file.read_text(encoding="utf-8")
         try:
             migrated = is_outcome_course(data)
@@ -40,38 +42,51 @@ def validate():
             errors.append(f"{code}: heading mismatch")
         if "**Program:** APP — Application Engineering" not in data:
             errors.append(f"{code}: incorrect program")
-        kind = "project" if code == "APP9" else "course"
-        if f"**Type:** {TICK}{kind}{TICK}" not in data:
-            errors.append(f"{code}: incorrect type")
-        if migrated:
-            if not re.search(r"^\*\*Status:\*\* `(?:draft|tested|verified)`$", data, re.M):
-                errors.append(f"{code}: invalid course readiness status")
-        elif f"**Status:** {TICK}draft{TICK}" not in data:
-            errors.append(f"{code}: expected draft status")
+        if f"**Type:** {TICK}{entry.kind}{TICK}" not in data:
+            errors.append(f"{code}: type differs from catalog")
+        status_match = re.search(r"^\*\*Status:\*\* `([^\n]+)`$", data, re.M)
+        if not status_match or status_match.group(1) != entry.status:
+            errors.append(f"{code}: readiness status differs from catalog")
+        if not migrated and entry.status != "draft":
+            errors.append(f"{code}: legacy course must remain draft")
         title_match = re.search(r"^# (APP\d+) — ([^\n]+)$", data, re.M)
         duration_match = re.search(r"^\*\*Duration:\*\* ([^\n]+)$", data, re.M)
         if not title_match or not duration_match:
             errors.append(f"{code}: title and duration required")
-        else:
-            catalog = (APP / "README.md").read_text(encoding="utf-8")
-            row = next((line for line in catalog.splitlines() if line.startswith(f"| [{code}]({code}.md) |")), "")
-            if not row or f"| {title_match.group(2)} | {duration_match.group(1)} |" not in row:
-                errors.append(f"{code}: title/duration differ from catalog")
-        if code in ELECTIVE_CODES and f"**Classification:** {TICK}elective{TICK}" not in data:
-            errors.append(f"{code}: expected elective classification")
-        if code in CORE_CODES and "**Classification:** `elective`" in data:
-            errors.append(f"{code}: core course cannot be an elective")
+        elif title_match.group(2) != entry.title or duration_match.group(1) != entry.duration:
+            errors.append(f"{code}: title/duration differ from catalog")
+        classification = re.search(r"^\*\*Classification:\*\* (.+)$", data, re.M)
+        metadata_class = (f"{TICK}{entry.classification}{TICK}")
+        if entry.classification == "elective" and (
+            not classification or classification.group(1) != metadata_class
+        ):
+            errors.append(f"{code}: elective course classification missing or invalid")
+        if classification and classification.group(1) != metadata_class:
+            errors.append(f"{code}: classification differs from catalog")
         if re.findall(r"^## (.+)$", data, re.M) != REQUIRED:
             errors.append(f"{code}: required sections must be ordered")
         if re.search(r"\b[BR][0-9]{1,3}\b|^## Course brief|^### Resource map", data, re.M):
             errors.append(f"{code}: private resource references or obsolete headings")
         match = re.search(r"^\*\*Prerequisites:\*\* (.+)$", data, re.M)
         source = match.group(1) if match else ""
-        deps = re.findall(r"\bAPP[0-9]+\b", source)
+        if not match:
+            errors.append(f"{code}: missing prerequisite metadata")
+        try:
+            deps = prerequisite_codes(source)
+            catalog_deps = prerequisite_codes(entry.prerequisites)
+        except ValueError as exc:
+            errors.append(f"{code}: {exc}")
+            deps, catalog_deps = [], []
         dependencies[code] = deps
-        if any(dep not in CODES or dep == code for dep in deps):
+        if set(deps) != set(catalog_deps):
+            errors.append(f"{code}: prerequisites differ from catalog")
+        if any(dep not in codes or dep == code for dep in deps):
             errors.append(f"{code}: invalid APP prerequisite")
-        if code == "APP1" and "SEF10" not in source:
+        if code in core_codes and any(dep in elective_codes for dep in deps):
+            errors.append(f"{code}: a core course cannot require an elective")
+        if code == "APP1" and (
+            "SEF10" not in source or "SEF10" not in entry.prerequisites
+        ):
             errors.append("APP1: expected SEF10 entry prerequisite")
         for href in re.findall(r"\]\(([^)]+\.md)\)", data):
             if "://" not in href and not (file.parent / href).resolve().is_file():
@@ -184,18 +199,7 @@ def validate():
         elif "**Exit demonstration:**" not in completion:
             errors.append(f"{code}: exit demonstration missing")
 
-    catalog_path = APP / "README.md"
     catalog = catalog_path.read_text(encoding="utf-8") if catalog_path.exists() else ""
-    for code in CODES:
-        if f"[{code}]({code}.md)" not in catalog:
-            errors.append(f"APP catalog: missing core course {code}")
-    for index, title in enumerate(ELECTIVES, 10):
-        code = f"APP{index}"
-        line = next((x for x in catalog.splitlines() if x.startswith("|") and title in x), "")
-        if f"[{code}]({code}.md)" not in line or "**Elective · draft**" not in line:
-            errors.append(f"APP catalog: missing linked draft elective {code}: {title}")
-    if catalog.count("**Elective · draft**") != len(ELECTIVES):
-        errors.append("APP catalog: exactly seven elective drafts expected")
     if "Electives provide optional specialization" not in catalog:
         errors.append("APP catalog: electives must not be graduation requirements")
 
@@ -208,16 +212,35 @@ def validate():
             return
         active.add(code)
         for dep in dependencies.get(code, []):
-            check(dep)
+            if dep in codes:
+                check(dep)
         active.remove(code)
         visited.add(code)
-    for code in sorted(CODES):
+    for code in codes:
         check(code)
+
+    # The capstone must actually cover the complete core, even when
+    # the catalog assigns newly added core courses nonconsecutive IDs.
+    def closure(start):
+        reached, pending = set(), list(dependencies.get(start, []))
+        while pending:
+            dep = pending.pop()
+            if dep not in reached and dep in codes:
+                reached.add(dep)
+                pending.extend(dependencies.get(dep, []))
+        return reached
+    if "APP9" in codes and "APP9" in dependencies:
+        missing_capabilities = core_codes - {"APP9"} - closure("APP9")
+        if missing_capabilities:
+            errors.append(
+                "APP9: graduation capstone is missing core prerequisites: "
+                + ", ".join(sorted(missing_capabilities))
+            )
     if errors:
         print("\n".join("ERROR: " + x for x in errors), file=sys.stderr)
         return 1
     modules = sum(len(re.findall(r"^### Module \d+ — ", file.read_text(encoding="utf-8"), re.M)) for file in files)
-    print(f"APP structural validation passed: {len(CORE_CODES)} core, {len(ELECTIVE_CODES)} electives, {modules} modules; {migrated_count} v0.2.0 courses, {len(files) - migrated_count} legacy; no fixed module cap")
+    print(f"APP structural validation passed: {len(core_codes)} core, {len(elective_codes)} electives, {modules} modules; {migrated_count} v0.2.0 courses, {len(files) - migrated_count} legacy; catalog-defined order, no fixed module cap")
     return 0
 
 if __name__ == "__main__":
