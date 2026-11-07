@@ -5,12 +5,16 @@ on:
     paths:
       - 'curriculum/SEF/**'
       - 'scripts/check-sef-curriculum.py'
+      - 'scripts/course_format_versions.py'
+      - 'scripts/check-outcome-curriculum.py'
       - '.github/workflows/sef-curriculum.yml'
   push:
     branches: [main]
     paths:
       - 'curriculum/SEF/**'
       - 'scripts/check-sef-curriculum.py'
+      - 'scripts/course_format_versions.py'
+      - 'scripts/check-outcome-curriculum.py'
 
 jobs:
   validate-sef:
