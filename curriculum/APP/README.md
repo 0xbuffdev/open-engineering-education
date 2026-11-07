@@ -4,7 +4,7 @@
 
 ## Overview
 
-Application Engineering is the professional software-development pathway after Software Engineering Foundations. Learners build, test, deploy and operate modern applications, beginning with internet foundations and progressing through frontend and backend engineering, databases, integrated architecture, quality, operations and production deployment. Work is cumulative: implementations developed in earlier courses become inputs to later practical exercises and labs.
+Application Engineering is the professional software-development pathway after Software Engineering Foundations. Learners build, test, deploy and operate modern applications, beginning with first-principles internet and browser foundations and progressing through frontend and backend engineering, databases, integrated architecture, quality, operations and production deployment. Work is cumulative: implementations developed in earlier courses become inputs to later practical exercises and labs.
 
 ## Prerequisites
 
@@ -37,7 +37,7 @@ Core and elective courses appear in the **same list**. Durations are draft workl
 
 | Course | Title | Duration | Prerequisites | Kind | Status |
 | --- | --- | --- | --- | --- | --- |
-| [APP1](APP1.md) | Web & Internet Foundations | 7 weeks | SEF10 | `course` | Core · draft |
+| [APP1](APP1.md) | Web & Internet Foundations | 16–18 weeks | SEF10 | `course` | Core · draft |
 | [APP2](APP2.md) | Frontend Engineering | 9 weeks | APP1 | `course` | Core · draft |
 | [APP3](APP3.md) | Backend Engineering & API Design | 9 weeks | APP1 | `course` | Core · draft |
 | [APP4](APP4.md) | Databases & Data Modeling | 8 weeks | APP3 | `course` | Core · draft |
@@ -70,6 +70,8 @@ APP1–APP8 → APP9
 ## Independent study
 
 Every authored APP course is currently `draft`. Course files define public outcomes, module structure, required practical work and completion requirements. Reading lists, affiliate purchases and commercial teaching content remain outside OEE. Learners can work through the core sequence independently; a commercial course or proprietary platform is not a graduation requirement.
+
+**APP1 scope note:** The current APP1 draft has been redesigned around how the Internet, HTTP, DNS, hosting and browsers work, including document parsing and page rendering. It does not require learner-written JavaScript or a backend service. Subsequent APP course splits, codes and prerequisites remain under architectural review in [Issue #30](https://github.com/0xbuffdev/open-engineering-education/issues/30); this revision does not adopt or renumber those courses.
 
 **Draft limitations:** The nine core and seven elective courses have expanded learning sequences and additional assessment/lab briefs. They still require educational review, independent lab reproduction, completed question banks, detailed tool-version checks, and learner feedback before any readiness promotion. The electives extend the public curriculum but do not alter the core progression, graduation or commercial content.
 
