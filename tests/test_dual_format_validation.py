@@ -8,6 +8,7 @@ from __future__ import annotations
 import importlib.util
 from pathlib import Path
 import shutil
+import re
 import sys
 import tempfile
 import unittest
@@ -95,7 +96,8 @@ class DualFormatValidationTests(unittest.TestCase):
         self.sef.ROOT = self.root
         self.sef.SEF = self.root / "curriculum" / "SEF"
         app1_source = (self.root / "curriculum" / "APP" / "APP1.md").read_text(encoding="utf-8")
-        match = __import__("re").search(r"^\*\*Duration:\*\* (.+)$", app1_source, __import__("re").M)
+        match = re.search(r"^\*\*Duration:\*\* (.+)$", app1_source, re.MULTILINE)
+        self.assertIsNotNone(match)
         self.app1_duration = match.group(1)
 
     def replace_course(self, code: str, content: str):
