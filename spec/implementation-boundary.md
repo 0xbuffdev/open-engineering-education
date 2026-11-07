@@ -24,7 +24,7 @@ A tool, course, or product MUST NOT silently change a normative requirement.
 
 The curriculum applies the specification to particular programs and courses.
 
-Curriculum authors are responsible for defining course outcomes, teaching sequences, assessments, labs, completion requirements, and the evidence learners are expected to produce.
+Curriculum authors are responsible for defining course outcomes, teaching sequences, required assessments, appropriate practical work, completion requirements, and the evidence learners are expected to produce.
 
 Curriculum files MAY provide more specific requirements than the general specification when those requirements are appropriate to the subject. They MUST NOT contradict the specification.
 
@@ -34,7 +34,7 @@ A course-specific requirement does not automatically become a new global require
 
 Templates, scripts, automated checks, assessment tools, and other supporting systems may help authors and learners apply OEE.
 
-Such tools SHOULD make required actions easier to understand, perform, and review. Where a tool automatically checks a requirement, its behavior SHOULD be documented well enough to interpret the result.
+Such tools SHOULD make required actions easier to understand, perform, and review. They MAY present different lessons, formative practice, and instructional workflows while preserving the same published outcome and evaluation requirements. Where a tool automatically checks a requirement, its behavior SHOULD be documented well enough to interpret the result.
 
 A supporting tool MUST NOT:
 
