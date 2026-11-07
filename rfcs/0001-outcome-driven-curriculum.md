@@ -7,13 +7,15 @@
 - **Related issue:** [APP curriculum redesign #30](https://github.com/0xbuffdev/open-engineering-education/issues/30) (related implementation dependency, not a substitute for this RFC)
 - **Affected specification version:** published draft `v0.1.0`; normative implementation delivered as draft `v0.2.0`
 
+**Implementation status (2026-11-07):** Accepted and implemented in the published `v0.2.0` draft specification through [PR #34](https://github.com/0xbuffdev/open-engineering-education/pull/34). SEF1, SEF10, and APP1 have been migrated as draft curriculum pilots; other courses and downstream implementations still require separate migration. The proposal-era problem statements and alternatives below are retained as historical context, not descriptions of the currently normative text.
+
 ## 1. Summary
 
 Make demonstrated learning outcomes, rather than a uniform activity template, the basis of OEE course design and completion. Retain rigorous public assessment criteria and reproducible evidence for substantial engineering work, while allowing each course to choose the most appropriate combination of teaching, practice, feedback, tests, investigations, labs, projects, and defenses.
 
 The curriculum will continue to be independently usable without any paid platform. OEE Workspace and 0xNAND will share a stable public educational contract rather than independently redefining course completion.
 
-This RFC is accepted as a design decision. Its requirements are **not yet normative**: the current published specification remains in force until separate implementation changes are reviewed and merged.
+This RFC is an accepted design decision implemented in the draft `v0.2.0` specification. Earlier published course revisions remain governed by their original course and specification requirements until explicitly migrated.
 
 ## 2. Problem
 
@@ -224,11 +226,11 @@ Track learner time and reviewer burden when pilot learners are available, rather
 
 ## 10. Decision
 
-- **Decision:** Accepted (decision record proposed following the merge of [PR #32](https://github.com/0xbuffdev/open-engineering-education/pull/32))
+- **Decision:** Accepted; recorded after [PR #32](https://github.com/0xbuffdev/open-engineering-education/pull/32) and implemented through [PR #34](https://github.com/0xbuffdev/open-engineering-education/pull/34)
 - **Decision date:** 2026-11-07
-- **Decision-maker:** 0xBUFF steward (subject to review and confirmation of this record)
+- **Decision-maker:** 0xBUFF steward
 - **Rationale:** Observable competence and published assessment criteria provide a stronger, less repetitive contract than mandated activity counts. The approach preserves serious engineering evidence, public independence, and multiple learning implementations, while allowing appropriate instructional and project assessment designs.
 - **Conditions:** Make no normative change until an implementation PR is reviewed and merged; preserve current completion contracts for existing courses until separately migrated; reconcile specification versioning and downstream compatibility; require outcome-to-assessment coverage and an explicit manual quality review beyond structural checks. Keep 0xNAND-only delivery features non-normative. Do not change existing course status promotion thresholds through this RFC.
 - **Implementation pull request:** [#34 — implement RFC 0001 normative specification](https://github.com/0xbuffdev/open-engineering-education/pull/34) (merged 2026-11-07)
 
-**Governance boundary:** Acceptance authorizes implementation work but does not change the published normative specification. This document records the accepted direction; adoption takes effect only through a separate merged implementation PR.
+**Governance boundary:** An accepted RFC does not itself change normative requirements; adoption took effect through the separate merged implementation [PR #34](https://github.com/0xbuffdev/open-engineering-education/pull/34). Subsequent normative changes still require the RFC process.

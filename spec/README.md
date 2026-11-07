@@ -44,7 +44,7 @@ A proposed normative change MUST follow the [RFC process](../rfcs/README.md), ap
 
 ## Revision note
 
-The `v0.2.0` draft (succeeding `v0.1.0`) adopts [RFC 0001](../rfcs/0001-outcome-driven-curriculum.md), replacing mandatory activity counts and final-lab placement with outcome-based evaluation. Earlier published course revisions must be interpreted under their original rules until they are explicitly migrated. A validator passing, or a course file existing, does not establish conformance to this revision. Existing APP/SEF scripts may still enforce the historical per-module test/lab structure; they validate legacy course contracts until replaced by outcome-coverage validators in a separate migration PR.
+The `v0.2.0` draft (succeeding `v0.1.0`) adopts [RFC 0001](../rfcs/0001-outcome-driven-curriculum.md), replacing mandatory activity counts and final-lab placement with outcome-based evaluation. Earlier published course revisions must be interpreted under their original rules until they are explicitly migrated. A validator passing, or a course file existing, does not establish conformance to this revision. The APP and SEF program validators now support both formats: legacy courses retain historical test/lab checks, while newly authored or migrated `v0.2.0` courses are routed to the outcome-coverage structural validator. This dual-format tooling does not assess pedagogical validity or imply that remaining legacy courses have migrated. See [Curriculum validation tools](../scripts/README.md).
 
 ## Current limitations
 
