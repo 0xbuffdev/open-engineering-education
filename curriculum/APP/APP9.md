@@ -2,7 +2,7 @@
 
 **Program:** APP — Application Engineering
 **Type:** `project`
-**Prerequisites:** [APP1](APP1.md), [APP2](APP2.md), [APP3](APP3.md), [APP4](APP4.md), [APP5](APP5.md), [APP6](APP6.md), [APP7](APP7.md), [APP8](APP8.md)
+**Prerequisites:** [APP1](APP1.md), [APP2](APP2.md), [APP3](APP3.md), [APP4](APP4.md), [APP5](APP5.md), [APP6](APP6.md), [APP7](APP7.md), [APP8](APP8.md), [APP17](APP17.md)
 **Duration:** 12–16 weeks
 **Status:** `draft`
 **Expected workload:** 10–15 focused hours/week

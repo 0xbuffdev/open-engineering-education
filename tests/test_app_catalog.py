@@ -86,6 +86,9 @@ class APPCatalogTests(unittest.TestCase):
         self.app.ROOT = self.root
         self.app.APP = self.root / "curriculum" / "APP"
         self.catalog = self.app.APP / "README.md"
+        entries, errors = read_app_catalog(self.catalog)
+        self.assertFalse(errors, errors)
+        self.future_code = f"APP{max(int(entry.code[3:]) for entry in entries) + 1}"
 
     def change_catalog(self, before: str, after: str):
         data = self.catalog.read_text(encoding="utf-8")
@@ -104,17 +107,24 @@ class APPCatalogTests(unittest.TestCase):
             status = self.app.validate()
         return status, error.getvalue()
 
-    def add_app17(self, link_capstone: bool):
-        row = "| [APP17](APP17.md) | HTML & CSS Engineering | 8 weeks | APP1 | \x60course\x60 | Core · draft |\n"
+    def add_future_core_course(self, link_capstone: bool):
+        """Introduce a fresh core ID without assuming any published ID is unused."""
+        code = self.future_code
+        title = "Hypothetical Core Test Course"
+        row = (
+            f"| [{code}]({code}.md) | {title} | 8 weeks | APP1 | "
+            "`course` | Core · draft |\n"
+        )
         cat = self.catalog.read_text(encoding="utf-8")
         cap_line = next(x for x in cat.splitlines() if x.startswith("| [APP9]("))
         self.assertIn(cap_line, cat)
         cat = cat.replace(cap_line, row + cap_line, 1)
         if link_capstone:
-            cat = cat.replace(
-                "| [APP9](APP9.md) | Application Engineering Capstone | 12–16 weeks | APP1–APP8 |",
-                "| [APP9](APP9.md) | Application Engineering Capstone | 12–16 weeks | APP1–APP8, APP17 |",
+            updated = cap_line.replace(
+                " | `project` |", f", {code} | `project` |", 1
             )
+            self.assertNotEqual(cap_line, updated)
+            cat = cat.replace(cap_line, updated, 1)
             app9 = self.app.APP / "APP9.md"
             data = app9.read_text(encoding="utf-8")
             old_meta = next(
@@ -122,12 +132,12 @@ class APPCatalogTests(unittest.TestCase):
                 if line.startswith("**Prerequisites:**")
             )
             data = data.replace(
-                old_meta, old_meta + ", [APP17](APP17.md)", 1
+                old_meta, old_meta + f", [{code}]({code}.md)", 1
             )
             app9.write_text(data, encoding="utf-8")
         self.catalog.write_text(cat, encoding="utf-8")
-        (self.app.APP / "APP17.md").write_text(
-            new_outcome_course("APP17", "HTML & CSS Engineering", "8 weeks"),
+        (self.app.APP / f"{code}.md").write_text(
+            new_outcome_course(code, title, "8 weeks"),
             encoding="utf-8",
         )
 
@@ -148,28 +158,28 @@ class APPCatalogTests(unittest.TestCase):
         status, errors = self.check()
         self.assertEqual(status, 0, errors)
 
-    def test_new_core_app17_can_follow_app1_without_renumbering(self):
-        self.add_app17(link_capstone=True)
+    def test_future_core_can_follow_existing_courses_without_renumbering(self):
+        self.add_future_core_course(link_capstone=True)
         entries, errors = read_app_catalog(self.catalog)
         self.assertFalse(errors, errors)
         self.assertEqual(
-            next(entry.classification for entry in entries if entry.code == "APP17"),
+            next(entry.classification for entry in entries if entry.code == self.future_code),
             "core",
         )
         status, errors = self.check()
         self.assertEqual(status, 0, errors)
 
-    def test_new_core_cannot_be_omitted_from_capstone_prerequisites(self):
-        self.add_app17(link_capstone=False)
+    def test_future_core_cannot_be_omitted_from_capstone_prerequisites(self):
+        self.add_future_core_course(link_capstone=False)
         status, errors = self.check()
         self.assertNotEqual(status, 0)
-        self.assertIn("APP17", errors)
+        self.assertIn(self.future_code, errors)
 
     def test_unknown_course_file_cannot_be_silently_skipped(self):
-        (self.app.APP / "APP17.md").write_text("Unlisted\n", encoding="utf-8")
+        (self.app.APP / f"{self.future_code}.md").write_text("Unlisted\n", encoding="utf-8")
         status, errors = self.check()
         self.assertNotEqual(status, 0)
-        self.assertIn("unlisted course file APP17.md", errors)
+        self.assertIn(f"unlisted course file {self.future_code}.md", errors)
 
     def test_missing_course_file_fails(self):
         (self.app.APP / "APP3.md").unlink()
@@ -192,10 +202,9 @@ class APPCatalogTests(unittest.TestCase):
         self.assertIn("classification differs from catalog", errors)
 
     def test_catalog_course_type_and_readiness_must_agree(self):
-        self.change_catalog(
-            "| [APP9](APP9.md) | Application Engineering Capstone | 12–16 weeks | APP1–APP8 | \x60project\x60 |",
-            "| [APP9](APP9.md) | Application Engineering Capstone | 12–16 weeks | APP1–APP8 | \x60course\x60 |",
-        )
+        content = self.catalog.read_text(encoding="utf-8")
+        row = next(line for line in content.splitlines() if line.startswith("| [APP9]("))
+        self.change_catalog(row, row.replace("`project`", "`course`", 1))
         status, errors = self.check()
         self.assertNotEqual(status, 0)
         self.assertIn("APP9 must be a core project", errors)
@@ -210,10 +219,11 @@ class APPCatalogTests(unittest.TestCase):
         self.assertIn("prerequisites differ from catalog", errors)
 
     def test_core_cannot_require_an_elective(self):
-        self.change_catalog(
-            "| [APP9](APP9.md) | Application Engineering Capstone | 12–16 weeks | APP1–APP8 |",
-            "| [APP9](APP9.md) | Application Engineering Capstone | 12–16 weeks | APP1–APP8, APP10 |",
-        )
+        content = self.catalog.read_text(encoding="utf-8")
+        row = next(line for line in content.splitlines() if line.startswith("| [APP9]("))
+        updated = row.replace(" | `project` |", ", APP10 | `project` |", 1)
+        self.assertNotEqual(row, updated)
+        self.change_catalog(row, updated)
         app9 = self.app.APP / "APP9.md"
         content = app9.read_text(encoding="utf-8")
         old = next(line for line in content.splitlines() if line.startswith("**Prerequisites:**"))
