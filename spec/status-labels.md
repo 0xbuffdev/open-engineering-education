@@ -10,7 +10,7 @@ The only course status labels defined by this specification are `draft`, `tested
 | --- | --- | --- |
 | `draft` | The course is written but does not yet meet the requirements for `tested`. | A course file that follows the required course format. |
 | `tested` | At least one learner has completed the course, and the course has been revised using recorded feedback. | Completion evidence, learner feedback, and a revision note linked to the course. |
-| `verified` | At least two learners have completed the course, the exit check and labs have been reproduced or reviewed, and a qualified reviewer has signed off. | Evidence supporting both completions, records of reproduction or review, and reviewer sign-off. |
+| `verified` | At least two learners have completed the course, the required summative evaluations and applicable engineering artifacts have been reproduced or reviewed, and a qualified reviewer has signed off. | Evidence supporting both completions, records of reproduction or review, and reviewer sign-off. |
 
 The detailed promotion requirements are defined in [Evidence Rules](evidence-rules.md).
 
