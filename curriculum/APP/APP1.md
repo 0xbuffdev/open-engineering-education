@@ -377,6 +377,7 @@ By the end of this course, the learner will be able to:
 5. **Communicating a repair recommendation without untested claims** — `lesson`
 6. **End-to-End Website Loading and Diagnostic Defense reasoning checkpoint** — `test`
 7. **Defend a complete web-page loading investigation** — `lab`
+
 ## Completion requirements
 
 - Complete the conceptual checkpoint and required lab for every module, with evidence that matches the published acceptance criteria. The final integration lab is required.
@@ -397,7 +398,6 @@ By the end of this course, the learner will be able to:
 Required artifact: **End-to-End Web Loading Investigation**. Reproduce the Module 17 lab in a local, unprivileged environment, show how a valid static website loads and renders, introduce and diagnose four controlled failures, repair at least two, defend the full browser loading model and document limits. Supplied DNS/TLS scenarios are explicitly simulated and cannot be represented as captured local network traffic.
 
 **Expanded module assessments and practical work:**
-
 
 **Module 1 — Understanding the Internet and the Web: checkpoint** — Required assessment details
 
