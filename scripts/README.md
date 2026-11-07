@@ -76,10 +76,12 @@ assessment IDs, or declare this optional metadata:
 The metadata prevents partially migrated courses from being silently
 classified as legacy, but is a **validator opt-in convention** rather than
 a new mandatory field in the public specification. An unmarked course
-that has begun defining stable outcome or assessment IDs is also routed
-to v0.2.0 checks; malformed new requirements cannot escape review by
-omitting the marker. An explicitly declared unknown version, or a
-legacy version declaration mixed with new IDs, fails closed.
+that has begun defining recognizable stable outcome or assessment IDs is
+also routed to v0.2.0 checks. Because detection uses the recognized ID
+pattern, a malformed, unmarked partial migration could still be mistaken
+for a legacy course; newly migrated files should therefore declare their
+specification version explicitly. An explicitly declared unknown version,
+or a legacy version declaration mixed with recognized new IDs, fails closed.
 
 ### Inline assessment example
 
@@ -128,16 +130,20 @@ practice, learner mastery, `tested` or `verified` status, or course
 conformance. Every course migration also requires a documented substantive
 review of assessment quality, evidence, and independence from paid tools.
 
-## Migration order
+## Migration status and next steps
 
-1. **Completed by validator routing:** retain historical checks for legacy
-   courses and dispatch migrated v0.2.0 courses to the new checker. The
-   mixed-format regression suite exercises APP and SEF together.
-2. Pilot SEF1, APP1, and a project course such as SEF10; maintain the
-   original program catalog and prerequisite invariants as each migrates.
-3. Review the outcome-to-assessment mapping and run manual pedagogical
-   assessment in addition to the structural tests.
-4. Migrate additional courses in reviewable batches without rewriting
-   historical learner evidence.
-5. Add a versioned export for OEE Workspace, 0xNAND, and other consumers
-   after the public evaluation contract has been proven.
+**Completed:** Legacy and `v0.2.0` structural checks coexist in the APP
+and SEF validators, with regression coverage for both. The three course
+pilots—SEF1, SEF10, and APP1—use the `v0.2.0` outcome-driven format and
+remain `draft`.
+
+**Outstanding:**
+
+1. Complete substantive outcome-to-assessment and evidence reviews of
+   migrated course definitions; automated success is not conformance.
+2. Migrate remaining SEF and APP courses in reviewable batches while
+   preserving catalog and prerequisite invariants, course revision identities,
+   and historical learner evidence.
+3. Prepare a versioned export and explicit compatibility contract for
+   OEE Workspace, 0xNAND, and other consumers after the public evaluation
+   contract is validated. Do not infer learner completion from activity counts.

@@ -56,9 +56,9 @@ SEF5 → SEF9
 SEF1–SEF9 → SEF10
 ```
 
-SEF8 may be taken alongside SEF4–SEF7. It begins with a self-paced mathematical literacy and pre-algebra bridge, so prior algebra is **not** an entry prerequisite; the ungraded diagnostic identifies where more practice is needed. Every learner must demonstrate basic numeracy/algebra readiness before advancing. Instructional lessons, assessments and practical labs are identified separately in each course.
+SEF8 may be taken alongside SEF4–SEF7. It begins with a self-paced mathematical literacy and pre-algebra bridge, so prior algebra is **not** an entry prerequisite; the ungraded diagnostic identifies where more practice is needed. Every learner must demonstrate basic numeracy/algebra readiness before advancing. Unmigrated courses retain their historical typed lesson, test, and lab entries; SEF1 and SEF10 already use the outcome-driven `v0.2.0` course format.
 
-**Draft duration estimates** reflect expanded topics and require calibration with learner evidence. Typed lesson entries must use the uniform format `1. **Title** — \`lesson\`` (or `\`test\`` / `\`lab\``). Do not add trailing inline explanations; required exercises and lab procedures belong in the course's **Completion requirements**.
+**Draft duration estimates** reflect expanded topics and require calibration with learner evidence. For **unmigrated legacy courses only**, keep the existing typed lesson-index format (`lesson`, `test`, or `lab`) and its historical completion requirements until each course is explicitly migrated. For courses using `v0.2.0`, lessons and practice are selected to develop observable outcomes; no universal per-module test/lab pair or final lab is required. Required summative evaluations, criteria, and evidence must be publicly available under **Completion requirements** or in an explicitly linked public assessment brief. See the [Course Format](../../spec/course-format.md) and [Curriculum Design Guide](../DESIGN-GUIDE.md).
 
 ---
 
