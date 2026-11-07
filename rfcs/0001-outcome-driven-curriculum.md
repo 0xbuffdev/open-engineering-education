@@ -228,6 +228,6 @@ Track learner time and reviewer burden when pilot learners are available, rather
 - **Decision-maker:** 0xBUFF steward (subject to review and confirmation of this record)
 - **Rationale:** Observable competence and published assessment criteria provide a stronger, less repetitive contract than mandated activity counts. The approach preserves serious engineering evidence, public independence, and multiple learning implementations, while allowing appropriate instructional and project assessment designs.
 - **Conditions:** Make no normative change until an implementation PR is reviewed and merged; preserve current completion contracts for existing courses until separately migrated; reconcile specification versioning and downstream compatibility; require outcome-to-assessment coverage and an explicit manual quality review beyond structural checks. Keep 0xNAND-only delivery features non-normative. Do not change existing course status promotion thresholds through this RFC.
-- **Implementation pull request:** pending (to be created after this decision record is confirmed)
+- **Implementation pull request:** [#34 — implement RFC 0001 normative specification](https://github.com/0xbuffdev/open-engineering-education/pull/34) (pending review and merge)
 
 **Governance boundary:** Acceptance authorizes implementation work but does not change the published normative specification. This document records the accepted direction; adoption takes effect only through a separate merged implementation PR.
