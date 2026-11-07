@@ -133,10 +133,21 @@ def validate():
                               "Failure analysis", "Acceptance"):
                     if f"- **{field}:**" not in lab:
                         errors.append(f"APP1 module {heading.group(1)}: missing lab {field.lower()}")
+            # APP1 now teaches the browser-loading journey without requiring
+            # a learner-written backend or JavaScript. These are smoke checks,
+            # not proof that the educational scope is complete or tested.
             for required in ("127.0.0.1", "DNS", "TLS", "304", "CORS",
-                             "idempotency", "shared", "framework", "no paid service"):
-                if required.lower() not in completion.lower():
-                    errors.append(f"APP1: missing HTTP safety or reproducibility term: {required}")
+                             "hosting", "browser", "layout", "paint",
+                             "compositing", "no paid service"):
+                if required.lower() not in data.lower():
+                    errors.append(f"APP1: missing web-foundations scope or safety term: {required}")
+            prohibited = (
+                "Build and defend an HTTP service without and with a framework",
+                "Build and test a small HTTP service",
+            )
+            for obsolete in prohibited:
+                if obsolete in data:
+                    errors.append(f"APP1: obsolete backend implementation requirement: {obsolete}")
         if code == "APP9":
             if "**Project defense:**" not in completion or "graduation requirement" not in completion:
                 errors.append("APP9: project defense or graduation requirement missing")
