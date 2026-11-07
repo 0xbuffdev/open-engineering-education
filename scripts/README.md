@@ -21,6 +21,31 @@ consistency, course prerequisites, and local links. A failed outcome check
 also fails the applicable APP or SEF validator. Neither type of successful
 structural check proves educational conformance or learner mastery.
 
+### APP catalog order and classification
+
+The `APP/README.md` course table is the **authoritative ordered program
+catalog**. `app_catalog.py` reads its explicit Core/Elective label, type,
+readiness status, title, duration, prerequisites, and row order. Course IDs
+are identifiers, **not sequence numbers**: a future APP17 core course may
+appear between APP1 and APP2 without repurposing historical identifiers.
+
+The APP validator compares every linked catalog row with exactly one
+course file and rejects missing, duplicate, extra, or malformed rows,
+missing files, contradictory metadata, prerequisite cycles, and new
+core prerequisites omitted from the APP9 graduation capstone.
+A core course cannot require an elective. Electives must retain
+`**Classification:** `elective`` in course metadata; the catalog
+explicitly classifies every course and a core course may optionally
+also declare `**Classification:** `core``.
+
+A catalog entry's displayed prerequisite codes must agree with
+the course's own prerequisite metadata, including expanded ranges
+such as `APP1–APP8`. Proposed new APP17–APP21 course identities in
+`APP/ARCHITECTURE.md` are **not** part of the active catalog yet.
+The current nine-core/seven-elective catalog remains authoritative
+until later course-migration PRs update it. This adapter changes no
+normative specification, course outcome, or existing learner record.
+
 ## Outcome-based v0.2.0 courses
 
 Validate a specific file, including a course still under development:
