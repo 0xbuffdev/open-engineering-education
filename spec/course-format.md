@@ -1,10 +1,21 @@
 # Course Format
 
-This document defines the required structure for an Open Engineering Education (OEE) course. A course identifies the capabilities learners must demonstrate and the requirements for assessing them. A product may provide more extensive teaching material, but independent learners MUST be able to understand the public curriculum's requirements without a commercial platform or paid book.
+This document defines the public educational contract for an Open Engineering Education
+(OEE) course. A course describes observable capabilities, a coherent learning sequence,
+and how completion is evaluated. Instructional delivery may differ among independent
+study, OEE Workspace, 0xNAND, and other implementations. Learners MUST be able to
+understand the public course requirements without purchasing materials or using a
+commercial platform.
+
+This revision implements [RFC 0001](../rfcs/0001-outcome-driven-curriculum.md).
+The outcome and assessment model below applies to courses authored or migrated against
+the revised specification; earlier published course revisions remain attributable to
+the specification version under which they were authored.
 
 ## 1. Metadata
 
-A course MUST begin with one level-one heading containing its title and, where assigned, its unique code. The following metadata MUST follow the heading:
+A course MUST begin with a level-one heading containing its title and, where assigned,
+its unique course code. Required metadata follows the heading:
 
 ```markdown
 # SEF1 — Demystifying the Computer System
@@ -12,122 +23,209 @@ A course MUST begin with one level-one heading containing its title and, where a
 **Program:** SEF — Software Engineering Foundations
 **Type:** `course`
 **Prerequisites:** none
-**Duration:** 4 weeks
+**Duration:** 5 weeks
 **Status:** `draft`
 ```
 
-The `Program` line MAY be omitted for a standalone course. The assigned code and program MUST agree with the curriculum catalog. The `Type` MUST be `course` or `project`. Prerequisites MUST identify stable course codes, with links to existing prerequisite files where applicable, or be stated as `none`. An unambiguous range MAY describe multiple prerequisites. Duration MUST be expressed in weeks and agree with the program catalog. New and unproven courses MUST begin in `draft` status; promotion follows [Status Labels](status-labels.md) and [Evidence Rules](evidence-rules.md). Optional workload estimates MAY be included.
+The `Program` line MAY be omitted for standalone courses. The assigned code,
+program, type, prerequisites, duration, and status MUST agree with the authoritative
+program catalog. `Type` MUST be `course` or `project`. Prerequisites MUST use
+stable course codes, with links where applicable, or `none`. An unambiguous range
+MAY express multiple prerequisite courses. Duration MUST be stated in weeks; it is
+an estimate, not proof of competence. Optional workload estimates MAY be included.
+New, unproven courses MUST begin as `draft`; promotion follows
+[Status Labels](status-labels.md).
 
-A repeated `Course brief` metadata block containing Introduction, History, Usage, Applications, Strengths, Limitations, and Key Concepts is not required. Pertinent background belongs in the Overview or the appropriate instructional lesson.
+History, introductions, applications, strengths, limitations, and other explanatory
+material belong in the relevant overview or instructional lesson, not in repetitive
+mandatory metadata blocks.
 
 ## 2. Required course sections
 
 Every course MUST contain these four top-level sections, in order:
 
-| Section | Required content |
+| Section | Purpose |
 | --- | --- |
-| **Overview** | Purpose, scope, practical relevance, and any additional entry-readiness explanation |
-| **Learning outcomes** | Observable capabilities that can be evaluated |
-| **Modules** | An ordered module sequence with module outcomes and typed lesson entries |
-| **Completion requirements** | Required exercises, tests, labs, deliverables, evaluations, evidence, explanations, and retrospective |
+| **Overview** | Purpose, scope, relevance, and entry-readiness information |
+| **Learning outcomes** | Observable course capabilities, with stable IDs |
+| **Modules** | Ordered instructional modules, their outcomes, and learning sequences |
+| **Completion requirements** | Required summative assessments, outcome coverage, success criteria, and evidence |
 
-These are the only mandatory top-level headings. Additional sections MAY be used where useful, but authors SHOULD NOT repeat the same information under multiple headings. Separate Course brief, Topics, Prerequisites, Course Structure, Lessons, Assessments, Labs, Required Exercises, Common Failure Modes, Evidence to Retain, and Technical Retrospective headings are not mandatory.
+Other headings MAY appear when useful. Authors SHOULD avoid duplicating assessment
+requirements across sections or separate files. A linked public assessment brief
+MAY carry the details for a substantial evaluation, but MUST be explicitly
+referenced from the course.
 
-**Simplifying headings MUST NOT remove the underlying educational requirements.** The course or its publicly linked briefs MUST still disclose all required practical work, success criteria, evidence, failure analysis, and completion conditions. A proprietary implementation MUST NOT be the sole source of these requirements.
+A proprietary service, paid book, or private grading system MUST NOT be the only
+place where learners can discover mandatory outcomes and acceptance criteria.
 
-## 3. Modules and lesson kinds
+## 3. Outcomes and stable identifiers
 
-Every module MUST have a sequential position and descriptive title, followed by exactly two core subsections:
+Every required course outcome MUST describe an observable capability that can be
+evaluated. Each outcome in a course authored or migrated against this specification
+MUST have a stable identifier, such as `APP1-O1`. Required summative assessments MUST
+have stable identifiers, such as `APP1-AS1`.
 
-- **Outcomes:** observable module-level capabilities.
-- **Lessons:** ordered and explicitly typed entries describing what is taught, tested, or practiced.
+Identifiers MUST be unique within their course and MUST remain stable through
+editorial revisions. If a requirement is materially replaced rather than clarified,
+the author SHOULD assign a new identifier and document the relationship to its
+predecessor. An identifier is not evidence that the outcome has been demonstrated.
 
-A `Module brief` with repeated Introduction, Overview, History, Applications, Strengths, Limitations, or Key Concepts fields is not required. Background that materially contributes to understanding SHOULD be presented in the relevant lesson. The first lesson of the first module SHOULD orient the learner to the course; there is no requirement to add an otherwise redundant introduction lesson.
+A module MUST identify its relevant outcomes, using course outcome IDs where
+appropriate or describing additional module-level learning objectives. The course
+MUST preserve traceability from required outcomes to the assessments that establish
+them. A single assessment MAY cover several outcomes; several assessments MAY
+contribute evidence to one outcome.
 
-A lesson entry MUST use one of the following kinds:
+Module and lesson identifiers MAY be introduced when useful. They are not globally
+required by this version of the specification. A machine-readable serialization,
+manifest, and API are likewise not prescribed.
 
-| Kind | Purpose |
-| --- | --- |
-| `lesson` | Teach concepts, mechanisms, decisions, or techniques |
-| `test` | Assess identified learning outcomes |
-| `lab` | Require practical work that yields inspectable evidence |
+## 4. Modules and learning activities
 
-For example:
+Modules MUST have a coherent order, descriptive titles, outcomes, and an ordered
+learning sequence. The recommended basic structure is:
 
 ```markdown
-### Module 1 — Inside the Machine
+### Module 1 — How Web Requests Work
 
 #### Outcomes
-
-- Explain and model binary states, bits, and bytes.
+- APP1-O1
 
 #### Lessons
-
-1. **Course orientation** — `lesson`
-2. **Bits and two-state systems** — `lesson`
-3. **Understanding bits and bytes** — `test`
-4. **Model a byte** — `lab`
+1. Client and server communication
+2. Addressing and name resolution
+3. Optional investigation: inspect a supplied browser trace
 ```
 
-This is a course navigation and assessment contract, not a mandate to publish a complete lecture script. A public course MUST nevertheless include or link to any instructions necessary for learners to complete its required activities.
+The `Lessons` heading MAY include conceptual instruction, demonstrations,
+examples, guided exercises, simulations, investigations, labs, formative checks,
+or project milestones. Activities MAY be labeled by kind for navigation, but
+OEE does not mandate a closed set of `lesson`, `test`, and `lab` kinds.
 
-## 4. Learning sequence and final lab
+A module MAY contain no test or no lab. No fixed activity count or
+`lesson → test → lab` ordering is required. Activities SHOULD be selected
+because they serve the module outcomes and prepare learners for the required
+summative evaluations, not to fill a template.
 
-Modules MUST follow a coherent learning sequence. Where instructional lessons, a conceptual test, and a micro-lab occur in the same module, the normal order SHOULD be `lesson` → `test` → `lab`, with the test preceding the practical work it prepares the learner to perform. Tests MUST NOT be added solely to satisfy a positional convention.
+Required activities MUST be distinguished from optional practice. A formative
+exercise or self-check MUST NOT silently become a course completion condition.
+Instructional activities are not necessarily separate assessed submissions.
 
-A module MAY omit tests or micro-labs when the outcomes and overall assessment design justify this. Each included assessment MUST have a clear purpose.
+## 5. Assessment design and outcome coverage
 
-Every course, including a project course, MUST culminate in a final integration `lab`: the final lesson entry of the final module MUST be of kind `lab` and demonstrate integration of the intended course outcomes. **The final module does not need to be a separate lab-only module.** A lab-only module MAY be retained when it makes educational sense.
+A **formative check** supplies feedback for learning; it does not independently
+establish completion unless the course explicitly designates the resulting
+performance as required assessment evidence.
 
-## 5. Assessment and exercise requirements
+A **summative assessment** evaluates specified outcomes against publicly
+understandable criteria. A **lab** is a practical activity format, not a
+mandatory assessment stage; a lab may be formative, summative, or both at
+different stages. Automated tests of software behavior are distinct from
+knowledge tests of the learner.
 
-Each required assessment MUST identify the outcomes evaluated, the work expected, and success criteria sufficient for a learner and reviewer to distinguish acceptable from unacceptable results. Required and optional exercises MUST be distinguished.
+Every course MUST identify sufficient required summative evaluation to support
+completion of all required course outcomes. Every required summative assessment MUST
+identify:
 
-Where typed questions are used, supported question types are:
+- A stable assessment ID.
+- The required course outcome IDs it evaluates.
+- The work or performance expected of the learner.
+- Published success or acceptance criteria.
+- The evidence a learner must provide or make reviewable.
+- Any relevant environment constraints, evaluation method, or safety boundaries.
 
-| Type | Intended use |
-| --- | --- |
-| `single` | Select one answer |
-| `multi` | Select multiple answers |
-| `free` | Provide a written explanation |
-| `math` | Express or compute a mathematical result |
-| `code` | Produce, complete, or analyze code |
+An author MUST evaluate whether an assessment actually demonstrates its claimed
+outcomes; linking IDs without a defensible evaluation is insufficient. Where
+multiple evaluations jointly establish one outcome, their combined required
+evidence MUST be explicit.
 
-Implementations MAY use additional presentation or evaluation mechanisms, but they MUST preserve the public assessment requirements. Assessment criteria MAY be placed near the typed `test` entry, under Completion requirements, or in a linked public assessment brief.
+Assessment requirements MAY appear within the module, under Completion requirements,
+or in a publicly accessible linked brief, with one clear authoritative definition.
+Implementations MAY provide additional practice, variants, feedback mechanisms,
+and evaluation tools, but MUST preserve the published OEE competency expectations
+when asserting completion against the same course revision.
 
-## 6. Lab requirements
+There is no universal requirement for one final `lab`, a single capstone exercise
+in every course, or an integrated demonstration at a fixed position. Authors SHOULD
+use integration tasks when the outcomes call for combined application; cumulative
+assessment evidence MAY be sufficient when it validly demonstrates all outcomes.
 
-Every required `lab` MUST provide, within the course or in a publicly accessible linked brief:
+## 6. Practical work and labs
 
-- Objective: the capability or behavior to investigate.
-- Prerequisites: relevant concepts, tools, and prior work.
-- Environment: relevant platform, dependencies, versions, and configuration when material.
-- Procedure: work the learner must perform.
-- Expected result: observable behavior or artifact.
-- Verification: how correctness will be determined.
-- Evidence: files, output, tests, measurements, and explanations to retain.
-- Failure analysis: expected difficulties and the learning they reveal.
+Practical activities SHOULD be used wherever they meaningfully develop or verify
+an engineering capability. Small exercises MAY be concise and self-checked.
 
-A concise lab MAY include these instructions directly under its lesson entry. A substantial lab MAY link to a separate public brief. No generic `requirements/` directory is required. Copying a result without producing or explaining it MUST NOT establish completion.
+A *required substantial lab* MUST disclose enough information, directly or in a
+publicly linked brief, to identify its objective, task or constraints, expected
+behavior or deliverable, verification and evaluation method, required evidence,
+and any safety boundaries. Prerequisites, environment requirements, procedures,
+failure analysis, and limitations MUST be supplied when materially necessary
+to complete, reproduce, or interpret the work. An author MUST NOT require
+unnecessary documentation solely to satisfy a uniform lab template.
 
-## 7. Completion, evidence, and reproducibility
+For executable assessed artifacts, reproducibility requirements in
+[Evidence Rules](evidence-rules.md) apply. Copying a result or presenting a
+green test alone MUST NOT establish capabilities that the evidence does not test.
 
-Completion requirements MUST be clear before the learner undertakes the final assessment. They MUST identify required conceptual checkpoints, exercises, evaluated work, the final integration lab, design explanations, reproducibility instructions where applicable, a meaningful technical retrospective, and the evidence required under [Evidence Rules](evidence-rules.md).
+## 7. Project courses and continuous work
 
-For executable artifacts, applicable build and verification instructions, environment assumptions, expected behavior, and known limitations MUST be documented sufficiently to reproduce and interpret the result. Learner artifacts belong in the learner's workspace or another appropriate record, not in the public course definition.
+A `project` course MUST specify the coherent project problem or permissible
+problem space, mandatory deliverables, evaluation criteria, applicable milestones,
+and a technical defense of the learner's own work. A project SHOULD progress
+cumulatively through scope, design, implementation, validation, and review,
+rather than requiring artificial independent module labs.
 
-A `project` course MUST additionally identify required deliverables, evaluation against criteria, and a project defense. Reading, attendance, elapsed time, or an unsupported claim of success cannot alone satisfy completion.
+Milestones MAY be formative reviews or summative evidence as explicitly stated.
+A defense MAY be live, recorded, written, or another reviewable format appropriate
+to the outcomes, but it MUST permit evaluation of the learner's understanding,
+decisions, results, and limitations.
 
-## 8. Consistency and independence
+Project courses are not required to end with a lesson typed `lab`.
+They remain subject to the same outcome coverage and evidence requirements as
+other courses, plus their published project deliverables and defense.
 
-Course codes, titles, prerequisites, program assignments, duration, type, and status MUST agree with the corresponding program catalog. Relative internal links MUST resolve.
+## 8. Completion and independence
 
-OEE MUST NOT depend on particular books, affiliate purchases, proprietary educational platforms, or commercial subscriptions for the public requirements. Implementations MAY offer guided instruction and feedback without changing the underlying requirements.
+The Completion requirements section MUST state the required summative assessments,
+how they establish every required outcome, and what evidence is needed for completion.
+It MUST distinguish mandatory work from optional practice and make expectations
+available before the learner undertakes assessed work.
 
-Passing a structural validation script does not establish course conformance or justify `tested` or `verified` status.
+A course is completed only when the required outcomes are demonstrated against the
+published criteria and the evidence requirements in
+[Evidence Rules](evidence-rules.md) are met. Attendance, elapsed time, passive
+content consumption, or unchecked activity markers cannot establish completion.
 
-## 9. Changes to the format
+Where an implementation uses an unseen variant or private item bank, it MUST
+evaluate equivalent outcomes and criteria. Public required work and evaluation
+standards MUST remain understandable and independently usable without a
+commercial account. OEE does not require public disclosure of every exact exam
+item, private grading rule, answer key, or reusable challenge seed.
 
-This initial v0.0.1 baseline is being established under the narrowly scoped [bootstrap procedure](../GOVERNANCE.md). Once the first stabilization pull request is merged, subsequent changes to normative requirements MUST follow the [RFC process](../rfcs/README.md), except for corrections with no change in normative meaning.
+## 9. Consistency, transition, and conformance
 
-Curriculum authors and implementations MUST NOT silently introduce conflicting requirements or represent unassessed material as conforming.
+Course IDs, program relationships, prerequisites, titles, durations, type, and
+status MUST agree with the relevant catalog. Internal links MUST resolve.
+
+This revision changes the authoring contract. Existing course revisions and
+historical learner evidence MUST remain identifiable by their original
+specification/course revision. New or migrated courses claiming conformance to
+the revised specification MUST meet its stable-ID, outcome-coverage, assessment,
+and evidence requirements. Legacy files MUST NOT be described as conforming to
+the revised requirements merely because they existed before migration.
+
+Course migration SHOULD retain useful learning activities while deciding which
+ones genuinely need summative evidence. Changes to competency expectations or
+evaluation criteria MUST be documented for downstream consumers and learners.
+
+Structural linting does not establish pedagogical validity, course status, or
+conformance. See [Conformance](conformance.md).
+
+## 10. Governance
+
+Changes to normative requirements MUST follow the
+[RFC process](../rfcs/README.md). This revision implements
+[accepted RFC 0001](../rfcs/0001-outcome-driven-curriculum.md).
+Individual curriculum authors and implementations MUST NOT silently alter these
+requirements.
