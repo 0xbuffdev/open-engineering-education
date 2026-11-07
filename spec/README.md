@@ -2,7 +2,7 @@
 
 This directory defines the requirements that govern Open Engineering Education (OEE). The documents apply to the public curriculum and to implementations that claim to follow the specification.
 
-**Specification status:** Draft, version `v0.1.0`.
+**Specification status:** Draft, version `v0.2.0`.
 
 ## Documents
 
@@ -44,7 +44,7 @@ A proposed normative change MUST follow the [RFC process](../rfcs/README.md), ap
 
 ## Revision note
 
-The `v0.1.0` draft adopts [RFC 0001](../rfcs/0001-outcome-driven-curriculum.md), replacing mandatory activity counts and final-lab placement with outcome-based evaluation. Earlier published course revisions must be interpreted under their original rules until they are explicitly migrated. A validator passing, or a course file existing, does not establish conformance to this revision. Existing APP/SEF scripts may still enforce the historical per-module test/lab structure; they validate legacy course contracts until replaced by outcome-coverage validators in a separate migration PR.
+The `v0.2.0` draft (succeeding `v0.1.0`) adopts [RFC 0001](../rfcs/0001-outcome-driven-curriculum.md), replacing mandatory activity counts and final-lab placement with outcome-based evaluation. Earlier published course revisions must be interpreted under their original rules until they are explicitly migrated. A validator passing, or a course file existing, does not establish conformance to this revision. Existing APP/SEF scripts may still enforce the historical per-module test/lab structure; they validate legacy course contracts until replaced by outcome-coverage validators in a separate migration PR.
 
 ## Current limitations
 

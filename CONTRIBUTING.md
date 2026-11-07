@@ -69,6 +69,8 @@ A pull request MUST link to the relevant RFC when it implements an accepted norm
 
 ## Quality expectations
 
+For editorial decisions on course boundaries, module cohesion, concise lesson titles, and workload, consult the [Curriculum Design Guide](curriculum/DESIGN-GUIDE.md). This guide is non-normative: it does not replace [Course Format](spec/course-format.md) or the required RFC process.
+
 Contributions MUST:
 
 - Be clear, accurate, and consistent with the applicable specification version.

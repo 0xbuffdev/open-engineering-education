@@ -1,6 +1,6 @@
 # Conformance
 
-**Specification status:** Draft, version `v0.1.0`.
+**Specification status:** Draft, version `v0.2.0`.
 
 This document establishes a provisional baseline for assessing whether a
 course, program, or implementation meets Open Engineering Education (OEE)
@@ -144,7 +144,7 @@ A `MUST` requirement cannot be waived through an exception.
 This is a breaking revision of the prior draft authoring contract.
 Legacy course revisions MAY remain published and evaluated against
 the historical specification that governed them. Such legacy content
-MUST NOT automatically claim conformance to `v0.1.0`. A new
+MUST NOT automatically claim conformance to `v0.2.0`. A new
 or migrated course MUST satisfy the revised ID, coverage, evidence,
 and evaluation requirements before claiming conformance.
 
