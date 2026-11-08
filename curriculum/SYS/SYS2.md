@@ -25,23 +25,10 @@ By the end of the course, you will be able to:
 - Build a multi-module systems utility and test its failure and cleanup paths.
 
 
-### Resource map
-
-**Required**
-
-- **B5** Ch. 3–7, 13–14, 20–22, 24–27, 37 and 44 (with §§6.3–6.4) · **B4** Ch. 2, 4–6 and 13–15 · **B2** Ch. 4–5 and §8.7 — local library.
-- **B15** Ch. 4, 9, 10 (§10.3), 12, 15 (§15.3) and 20 (§20.1) — ownership, errors, lifetimes, a CLI project, Drop, unsafe Rust.
-- **R36** Meet Safe and Unsafe; Obligatory Resource Management; Unwinding; Foreign Function Interface.
-
-**Optional**
-
-- **R42** Command-line apps in Rust.
-
 ### Modules
 
 #### Module 1 — Unix Processes & Resources
 
-**Reading:** **B5** Ch. 6 (Processes), Ch. 24 (Process Creation), Ch. 25 (Process Termination), Ch. 26 (Monitoring Child Processes), Ch. 27 (Program Execution). **B4** Ch. 4 (The Abstraction: The Process), Ch. 5 (Interlude: Process API), Ch. 6 (Mechanism: Limited Direct Execution). **B15** Ch. 4 §4.1 (What Is Ownership?), Ch. 15 §15.3 (Running Code on Cleanup with the Drop Trait).
 
 
 ### Module outcomes
@@ -62,7 +49,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 2 — Memory & System Calls
 
-**Reading:** **B5** Ch. 3 (System Programming Concepts), Ch. 4 (File I/O: The Universal I/O Model), Ch. 5 (File I/O: Further Details), Ch. 7 (Memory Allocation), §§6.3–6.4 (memory layout; virtual memory management). **B4** Ch. 13 (Address Spaces), Ch. 14 (Interlude: Memory API), Ch. 15 (Mechanism: Address Translation). **B2** §8.7 (A Storage Allocator).
 
 
 ### Module outcomes
@@ -83,7 +69,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 3 — C/Rust Safety Boundaries
 
-**Reading:** **B15** Ch. 4 (Understanding Ownership), Ch. 10 §10.3 (Validating References with Lifetimes), Ch. 20 §20.1 (Unsafe Rust). **R36** Meet Safe and Unsafe; Foreign Function Interface. **B2** Ch. 5 (Pointers and Arrays) as the C side of the comparison.
 
 
 ### Module outcomes
@@ -104,7 +89,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 4 — Signals & Robust Services
 
-**Reading:** **B5** Ch. 20 (Signals: Fundamental Concepts), Ch. 21 (Signals: Signal Handlers), Ch. 22 (Signals: Advanced Features), Ch. 25 (Process Termination), Ch. 37 (Daemons). **B15** Ch. 9 (Error Handling).
 
 
 ### Module outcomes
@@ -125,7 +109,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 5 — Rust Unix Service Utility
 
-**Reading:** **B5** Ch. 37 (Daemons), Ch. 44 (Pipes and FIFOs), Ch. 13–14 (File I/O Buffering; File Systems). **B15** Ch. 9 (Error Handling), Ch. 11 (Writing Automated Tests), Ch. 12 (An I/O Project: Building a Command Line Program). *Optional:* **R42** Command-line apps in Rust.
 
 
 1. **Build and validate the Rust Unix Service Utility**

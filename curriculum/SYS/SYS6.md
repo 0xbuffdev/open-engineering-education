@@ -26,18 +26,10 @@ By the end of the course, you will be able to:
 - State the guarantees a distributed service provides and the assumptions behind them.
 
 
-### Resource map
-
-**Required**
-
-- **B25** Ch. 1–2 and 5–10 · **B4** Ch. 47–49 · **B5** Ch. 43–44 and 56, 59–61 (selective) — carried from ZtP S11.
-- **R38** MIT 6.5840 lectures and labs · **R39** the Raft paper.
-
 ### Modules
 
 #### Module 1 — RPC & Failure Models
 
-**Reading:** **B4** Ch. 47 (Distributed Systems: communication layers, RPC). **B25** Ch. 9 (The Trouble with Distributed Systems). **R38** the introductory RPC and threads lectures.
 
 
 ### Module outcomes
@@ -58,7 +50,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 2 — Replication & Consistency
 
-**Reading:** **B25** Ch. 6 (Replication), Ch. 10 (Consistency and Consensus). **B4** Ch. 48 (Sun's Network File System), Ch. 49 (The Andrew File System).
 
 
 ### Module outcomes
@@ -79,7 +70,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 3 — Retries & Idempotency
 
-**Reading:** **B4** Ch. 47 (RPC semantics — at-least-once and at-most-once). **B25** Ch. 9. **R17** Idempotent requests and **R10** AIP-155 as practical idempotency patterns.
 
 
 ### Module outcomes
@@ -100,7 +90,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 4 — Partitions & Consensus
 
-**Reading:** **B25** Ch. 9–10. **R39** the Raft paper. **R38** the Raft lectures and lab.
 
 
 ### Module outcomes
@@ -121,7 +110,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 5 — Replicated Key-Value Service
 
-**Reading:** **R38** the Raft and fault-tolerant key/value service labs. **B25** Ch. 7 (Sharding) and Ch. 8 (Transactions) for context.
 
 
 1. **Build and fault-inject the Replicated Key-Value Service**
