@@ -1,19 +1,18 @@
-# SYS9 — Systems Engineering Capstone
+## SYS9 — Systems Engineering Capstone
 
-**Program:** SYS — Systems Engineering
-**Type:** `project`
-**Prerequisites:** Pending reconciliation of historical prerequisite notes
 **Duration:** 8–10 weeks
-**Status:** `draft`
 **Expected workload:** 10–15 focused hours/week
 
-> **Unmigrated historical course — not OEE v0.2.0-conforming.** This educational outline was transferred from [the content repository](https://github.com/0xbuffdev/content/blob/0e14d4ff5808a4ea972206ed015a3e4737b33ad7/docs/curriculum/SYS.md) before curriculum duplication is retired. The former `test` and `lab` labels are descriptions of historical activities, not automatic OEE completion requirements. Its outcome IDs, assessment IDs, criteria, and evidence still require v0.2.0 review. Reading and purchasing mappings remain in the content repository.
-
-## Overview
-
+### Overview
 The capstone is the final project course in Systems Engineering. You will design and implement a systems-oriented service or infrastructure component, subject it to realistic load and failure conditions, and use measurement to explain its behavior and trade-offs.
 
-## Learning outcomes
+### Prerequisites
+**SYS1–SYS8 — Systems Engineering**
+
+**Kind:** `project`
+
+### Learning outcomes
+By the end of the project, you will be able to:
 
 - Design a systems project from explicit functional and nonfunctional requirements.
 - Implement resource ownership, concurrency, networking, persistence, or distributed behavior appropriately.
@@ -22,78 +21,95 @@ The capstone is the final project course in Systems Engineering. You will design
 - Document guarantees, operational requirements, and failure modes.
 - Defend low-level and architectural trade-offs using observed behavior.
 
-## Modules
+### Resource map
 
-### Module 1 — System Requirements & Architecture
+**Required**
 
-#### Outcomes
+- Review the SYS1–SYS8 readings module by module and pick the chapters that match your capstone shape (storage: **B31**; network service: **B5** Ch. 56–63; concurrent runtime: **B30**; replicated service: **B25** and **R38**).
+- **R7** the C4 model for the architecture diagram.
+
+### Modules
+
+#### Module 1 — System Requirements & Architecture
+
+**Reading:** **B25** Ch. 1–2 (trade-offs; nonfunctional requirements). **B26** Ch. 3–4 (risk; SLOs). **B43** Ch. 4 (Design Tradeoffs). **R7** C4 diagrams.
+
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Requirements, guarantees, resource model, protocol, and architecture** in the context of the course.
 
-#### Lessons
+1. **Requirements, guarantees, resource model, protocol, and architecture**
+   - kind: `lesson`
+2. **Architecture checkpoint**
+   - kind: `test`
 
-1. **Requirements, guarantees, resource model, protocol, and architecture** — `lesson`
-2. **Architecture checkpoint** — `test`
-3. **Micro-lab: Define system invariants and draw the data/control flow.** — `lab`
+3. **Micro-lab: Define system invariants and draw the data/control flow.**
+   - kind: `lab`
+#### Module 2 — Core Implementation
 
-### Module 2 — Core Implementation
+**Reading:** Chapters matching the chosen shape: **B31** Ch. 3–7 (storage), **B5** Ch. 56–63 (network service), **B30** Ch. 1–5 (concurrent components), **B25** Ch. 6–10 (replicated services).
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Incremental implementation of the core systems component** in the context of the course.
 
-#### Lessons
+1. **Incremental implementation of the core systems component**
+   - kind: `lesson`
+2. **Implementation checkpoint**
+   - kind: `test`
 
-1. **Incremental implementation of the core systems component** — `lesson`
-2. **Implementation checkpoint** — `test`
-3. **Micro-lab: Implement and instrument one critical path before expanding the system.** — `lab`
+3. **Micro-lab: Implement and instrument one critical path before expanding the system.**
+   - kind: `lab`
+#### Module 3 — Concurrency, Failure & Recovery
 
-### Module 3 — Concurrency, Failure & Recovery
+**Reading:** **B30** Ch. 1–5. **B31** Ch. 5. **B25** Ch. 9–10. **B29** Ch. 4–5.
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Concurrency, resource failures, restart behavior, and recovery** in the context of the course.
 
-#### Lessons
+1. **Concurrency, resource failures, restart behavior, and recovery**
+   - kind: `lesson`
+2. **Failure analysis checkpoint**
+   - kind: `test`
 
-1. **Concurrency, resource failures, restart behavior, and recovery** — `lesson`
-2. **Failure analysis checkpoint** — `test`
-3. **Micro-lab: Inject one controlled failure and record the observed recovery path.** — `lab`
+3. **Micro-lab: Inject one controlled failure and record the observed recovery path.**
+   - kind: `lab`
+#### Module 4 — Performance & Operations
 
-### Module 4 — Performance & Operations
+**Reading:** **B32** Ch. 2, 12 and 13. **B26** Ch. 6, 17 and 21. **B27** Ch. 5–8.
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Benchmarking, observability, load testing, capacity, and operational readiness** in the context of the course.
 - Apply **Production readiness review** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Benchmarking, observability, load testing, capacity, and operational readiness**
+   - kind: `lesson`
+2. **Production readiness review**
+   - kind: `test`
 
-1. **Benchmarking, observability, load testing, capacity, and operational readiness** — `lesson`
-2. **Production readiness review** — `test`
-3. **Micro-lab: Establish a baseline benchmark and isolate one bottleneck.** — `lab`
+3. **Micro-lab: Establish a baseline benchmark and isolate one bottleneck.**
+   - kind: `lab`
+#### Module 5 — Final Project Lab
 
-### Module 5 — Final Project Lab
+**Reading:** **B26** Ch. 14–15 (incidents; postmortems) and **B43** Ch. 16–18 for the incident/failure report; **B32** Ch. 12 (Benchmarking) for the final measurements.
 
-#### Outcomes
 
-*Outcome review pending against this course's required capabilities.*
-
-#### Lessons
-
-1. **Build, stress, measure, fault-inject, document, and prepare the systems project for defense** — `lab`
-
-## Completion requirements
-
-**Pending outcome-based migration:** Preserve and review the historical tasks and project requirements below. Before adopting this course against v0.2.0, assign stable outcome and summative assessment IDs, define published work/criteria/evidence, verify full outcome coverage and safety constraints, and distinguish formative practice from required work.
+1. **Build, stress, measure, fault-inject, document, and prepare the systems project for defense**
+   - kind: `lab`
 
 ### Suitable capstone shapes
 

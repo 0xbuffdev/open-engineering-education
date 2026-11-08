@@ -1,19 +1,23 @@
-# SYS8 — Systems Design & Production Engineering
+## SYS8 — Systems Design & Production Engineering
 
-**Program:** SYS — Systems Engineering
-**Type:** `course`
-**Prerequisites:** SYS6 and SYS7 *(legacy mapping; reconcile before activation)*
 **Duration:** 5 weeks
-**Status:** `draft`
 **Expected workload:** 10–15 focused hours/week
+**Prerequisite:** SYS6 and SYS7
 
-> **Unmigrated historical course — not OEE v0.2.0-conforming.** This educational outline was transferred from [the content repository](https://github.com/0xbuffdev/content/blob/0e14d4ff5808a4ea972206ed015a3e4737b33ad7/docs/curriculum/SYS.md) before curriculum duplication is retired. The former `test` and `lab` labels are descriptions of historical activities, not automatic OEE completion requirements. Its outcome IDs, assessment IDs, criteria, and evidence still require v0.2.0 review. Reading and purchasing mappings remain in the content repository.
-
-## Overview
+### Overview
 
 Synthesize the program's systems knowledge into production engineering decisions involving service boundaries, reliability, capacity, operations, and failure handling.
 
-## Learning outcomes
+### Prerequisites
+
+**SYS6 — Distributed Systems**
+**SYS7 — Performance Engineering & Observability**
+
+**Kind:** `course`
+
+### Learning outcomes
+
+By the end of the course, you will be able to:
 
 - Translate system requirements into explicit performance, reliability, and operational targets.
 - Choose system boundaries and communication patterns appropriate to those requirements.
@@ -21,85 +25,109 @@ Synthesize the program's systems knowledge into production engineering decisions
 - Evaluate resource, complexity, and operational trade-offs with measured evidence.
 - Design and defend a production-oriented systems architecture.
 
-## Modules
 
-### Module 1 — Reliability & Failure Design
+### Resource map
 
-#### Outcomes
+**Required**
+
+- **B26** Ch. 3–4, 6, 10–15, 17, 21–22, 27 and 32.
+- **B29** Ch. 3–5, 7, 9–10 and 13–14.
+- **B43** Ch. 4–9, 14 and 16–18.
+- **B25** Ch. 1–2 (reliability, scalability, maintainability).
+
+### Modules
+
+#### Module 1 — Reliability & Failure Design
+
+**Reading:** **B26** Ch. 3 (Embracing Risk), Ch. 4 (Service Level Objectives), Ch. 22 (Addressing Cascading Failures). **B29** Ch. 3–5 (stability: antipatterns and patterns). **B25** Ch. 1–2.
+
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Reliability goals and failure modes** in the context of the course.
 - Apply **Resource limits and failure handling** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Reliability goals and failure modes**
+   - kind: `lesson`
+2. **Resource limits and failure handling**
+   - kind: `lesson`
+3. **Checkpoint: reliability reasoning**
+   - kind: `test`
 
-1. **Reliability goals and failure modes** — `lesson`
-2. **Resource limits and failure handling** — `lesson`
-3. **Checkpoint: reliability reasoning** — `test`
-4. **Micro-lab: Define one failure budget and test the system against it.** — `lab`
+4. **Micro-lab: Define one failure budget and test the system against it.**
+   - kind: `lab`
+#### Module 2 — Service Boundaries & Configuration
 
-### Module 2 — Service Boundaries & Configuration
+**Reading:** **B29** Ch. 7 (Foundations), Ch. 9 (Interconnect), Ch. 10 (Control Plane). **B43** Ch. 5 (Design for Least Privilege), Ch. 6 (Design for Understandability). **R16** the twelve factors.
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Service boundaries and dependency contracts** in the context of the course.
 - Apply **Configuration and safe operational defaults** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Service boundaries and dependency contracts**
+   - kind: `lesson`
+2. **Configuration and safe operational defaults**
+   - kind: `lesson`
+3. **Checkpoint: operational boundaries**
+   - kind: `test`
 
-1. **Service boundaries and dependency contracts** — `lesson`
-2. **Configuration and safe operational defaults** — `lesson`
-3. **Checkpoint: operational boundaries** — `test`
-4. **Micro-lab: Introduce configuration validation and failure-safe defaults.** — `lab`
+4. **Micro-lab: Introduce configuration validation and failure-safe defaults.**
+   - kind: `lab`
+#### Module 3 — Observability & Load Testing
 
-### Module 3 — Observability & Load Testing
+**Reading:** **B26** Ch. 6 (Monitoring Distributed Systems), Ch. 10 (Practical Alerting from Time-Series Data), Ch. 17 (Testing for Reliability). **B32** Ch. 12 (Benchmarking). **B27** Ch. 12–13 (SLOs; acting on SLO-based alerts).
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Operational metrics and logs** in the context of the course.
 - Apply **Load testing and capacity signals** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Operational metrics and logs**
+   - kind: `lesson`
+2. **Load testing and capacity signals**
+   - kind: `lesson`
+3. **Checkpoint: production evidence**
+   - kind: `test`
 
-1. **Operational metrics and logs** — `lesson`
-2. **Load testing and capacity signals** — `lesson`
-3. **Checkpoint: production evidence** — `test`
-4. **Micro-lab: Run a controlled load test and identify one resource limit.** — `lab`
+4. **Micro-lab: Run a controlled load test and identify one resource limit.**
+   - kind: `lab`
+#### Module 4 — Incidents & Readiness
 
-### Module 4 — Incidents & Readiness
+**Reading:** **B26** Ch. 11 (Being On-Call), Ch. 12 (Effective Troubleshooting), Ch. 13 (Emergency Response), Ch. 14 (Managing Incidents), Ch. 15 (Postmortem Culture). **B43** Ch. 16 (Disaster Planning), Ch. 17 (Crisis Management), Ch. 18 (Recovery and Aftermath).
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Incident analysis and recovery** in the context of the course.
 - Apply **Operational documentation and handoff** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Incident analysis and recovery**
+   - kind: `lesson`
+2. **Operational documentation and handoff**
+   - kind: `lesson`
+3. **Checkpoint: readiness review**
+   - kind: `test`
 
-1. **Incident analysis and recovery** — `lesson`
-2. **Operational documentation and handoff** — `lesson`
-3. **Checkpoint: readiness review** — `test`
-4. **Micro-lab: Write a runbook for one failure scenario and test the procedure.** — `lab`
+4. **Micro-lab: Write a runbook for one failure scenario and test the procedure.**
+   - kind: `lab`
+#### Module 5 — Production Readiness Review
 
-### Module 5 — Production Readiness Review
+**Reading:** **B26** Ch. 32 (The Evolving SRE Engagement Model — production readiness reviews), Ch. 27 (Reliable Product Launches at Scale). **B29** Ch. 13 (Design for Deployment), Ch. 14 (Handling Versions). **B43** Ch. 8 (Design for Resilience), Ch. 9 (Design for Recovery), Ch. 14 (Deploying Code).
 
-#### Outcomes
 
-*Outcome review pending against this course's required capabilities.*
-
-#### Lessons
-
-1. **Harden and review one systems service for another engineering team to operate** — `lab`
-
-## Completion requirements
-
-**Pending outcome-based migration:** Preserve and review the historical tasks and project requirements below. Before adopting this course against v0.2.0, assign stable outcome and summative assessment IDs, define published work/criteria/evidence, verify full outcome coverage and safety constraints, and distinguish formative practice from required work.
+1. **Harden and review one systems service for another engineering team to operate**
+   - kind: `lab`
 
 ### Topics
 
@@ -119,3 +147,6 @@ By the end of this module, the learner can:
 **Production Readiness Review**
 
 Harden one earlier service as if another engineering team were going to operate it.
+
+---
+

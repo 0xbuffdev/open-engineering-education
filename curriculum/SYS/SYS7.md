@@ -1,19 +1,23 @@
-# SYS7 — Performance Engineering & Observability
+## SYS7 — Performance Engineering & Observability
 
-**Program:** SYS — Systems Engineering
-**Type:** `course`
-**Prerequisites:** SYS3 and SYS4 *(legacy mapping; reconcile before activation)*
 **Duration:** 5 weeks
-**Status:** `draft`
 **Expected workload:** 10–15 focused hours/week
+**Prerequisite:** SYS3 and SYS4
 
-> **Unmigrated historical course — not OEE v0.2.0-conforming.** This educational outline was transferred from [the content repository](https://github.com/0xbuffdev/content/blob/0e14d4ff5808a4ea972206ed015a3e4737b33ad7/docs/curriculum/SYS.md) before curriculum duplication is retired. The former `test` and `lab` labels are descriptions of historical activities, not automatic OEE completion requirements. Its outcome IDs, assessment IDs, criteria, and evidence still require v0.2.0 review. Reading and purchasing mappings remain in the content repository.
-
-## Overview
+### Overview
 
 Develop a repeatable performance-engineering workflow using profiling, benchmarking, tracing, metrics, and controlled experiments. The goal is to replace intuition with evidence.
 
-## Learning outcomes
+### Prerequisites
+
+**SYS3 — Concurrency, Atomics & Memory Models**
+**SYS4 — Linux Networking & Services**
+
+**Kind:** `course`
+
+### Learning outcomes
+
+By the end of the course, you will be able to:
 
 - Design reproducible benchmarks and control common measurement errors.
 - Use profiling and tracing tools to locate expensive operations.
@@ -21,85 +25,108 @@ Develop a repeatable performance-engineering workflow using profiling, benchmark
 - Instrument a service with useful metrics and traces.
 - Produce a technical performance report that connects a change to a measured result.
 
-## Modules
 
-### Module 1 — Profiling & Measurement
+### Resource map
 
-#### Outcomes
+**Required**
+
+- **B32** Ch. 2 (Methodologies), 4 (Observability Tools), 5 (Applications), 6 (CPUs), 12 (Benchmarking) and 13 (perf) — added: ZtP S9 recommends “a systems-performance book”.
+- **B6** Ch. 7 and §8.3 · **B5** §10.7 and Ch. 12, 35, 36 · **R43** perf and tracing documentation — carried from ZtP S9.
+- **B27** Ch. 5–8 · **R25** The Tail at Scale · **R41** The USE Method and CPU Flame Graphs.
+
+### Modules
+
+#### Module 1 — Profiling & Measurement
+
+**Reading:** **B32** Ch. 5 (Applications), Ch. 6 (CPUs — profiling), Ch. 13 (perf). **R41** CPU Flame Graphs. **B6** Ch. 7 (Memory Performance Tools). **B5** §10.7 (Process Time), Ch. 36 (Process Resources). **R43** perf documentation.
+
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Profiling and benchmark design** in the context of the course.
 - Apply **Flame graphs and hotspot identification** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Profiling and benchmark design**
+   - kind: `lesson`
+2. **Flame graphs and hotspot identification**
+   - kind: `lesson`
+3. **Checkpoint: profiling interpretation**
+   - kind: `test`
 
-1. **Profiling and benchmark design** — `lesson`
-2. **Flame graphs and hotspot identification** — `lesson`
-3. **Checkpoint: profiling interpretation** — `test`
-4. **Micro-lab: Profile a real workload and identify its dominant cost.** — `lab`
+4. **Micro-lab: Profile a real workload and identify its dominant cost.**
+   - kind: `lab`
+#### Module 2 — Observability Signals
 
-### Module 2 — Observability Signals
+**Reading:** **B27** Ch. 5 (Structured Events Are the Building Blocks of Observability), Ch. 6 (Stitching Events into Traces), Ch. 7 (Instrumentation with OpenTelemetry), Ch. 8 (Analyzing Events to Achieve Observability). **B32** Ch. 4 (Observability Tools). **B5** Ch. 12 (System and Process Information).
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Tracing and metrics** in the context of the course.
 - Apply **Correlating logs, traces, and measurements** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Tracing and metrics**
+   - kind: `lesson`
+2. **Correlating logs, traces, and measurements**
+   - kind: `lesson`
+3. **Checkpoint: observability reasoning**
+   - kind: `test`
 
-1. **Tracing and metrics** — `lesson`
-2. **Correlating logs, traces, and measurements** — `lesson`
-3. **Checkpoint: observability reasoning** — `test`
-4. **Micro-lab: Connect one user-visible slowdown to a trace segment and metric change.** — `lab`
+4. **Micro-lab: Connect one user-visible slowdown to a trace segment and metric change.**
+   - kind: `lab`
+#### Module 3 — Latency, Throughput & Queues
 
-### Module 3 — Latency, Throughput & Queues
+**Reading:** **B32** Ch. 2 (Methodologies — latency, queueing, capacity planning). **R25** The Tail at Scale. **B26** Ch. 6 (Monitoring Distributed Systems — the four golden signals).
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Tail latency and throughput** in the context of the course.
 - Apply **Queueing effects and capacity reasoning** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Tail latency and throughput**
+   - kind: `lesson`
+2. **Queueing effects and capacity reasoning**
+   - kind: `lesson`
+3. **Checkpoint: performance trade-offs**
+   - kind: `test`
 
-1. **Tail latency and throughput** — `lesson`
-2. **Queueing effects and capacity reasoning** — `lesson`
-3. **Checkpoint: performance trade-offs** — `test`
-4. **Micro-lab: Measure how queue depth changes latency under load.** — `lab`
+4. **Micro-lab: Measure how queue depth changes latency under load.**
+   - kind: `lab`
+#### Module 4 — Performance Investigation Method
 
-### Module 4 — Performance Investigation Method
+**Reading:** **B32** Ch. 2 (Methodologies — USE method, workload characterization, drill-down analysis), Ch. 12 (Benchmarking). **R41** The USE Method. **B6** §8.3. **B5** Ch. 35 (Process Priorities and Scheduling).
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Hypothesis-driven performance work** in the context of the course.
 - Apply **Quantifying an improvement and checking regressions** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Hypothesis-driven performance work**
+   - kind: `lesson`
+2. **Quantifying an improvement and checking regressions**
+   - kind: `lesson`
+3. **Checkpoint: evidence quality**
+   - kind: `test`
 
-1. **Hypothesis-driven performance work** — `lesson`
-2. **Quantifying an improvement and checking regressions** — `lesson`
-3. **Checkpoint: evidence quality** — `test`
-4. **Micro-lab: Run a before/after experiment with controlled conditions.** — `lab`
+4. **Micro-lab: Run a before/after experiment with controlled conditions.**
+   - kind: `lab`
+#### Module 5 — Performance Investigation
 
-### Module 5 — Performance Investigation
+**Reading:** **B32** Ch. 16 (Case Study) and the chapter for the resource under investigation (Ch. 6 CPUs, 7 Memory, 8 File Systems, 9 Disks, 10 Network). **B6** Ch. 7.
 
-#### Outcomes
 
-*Outcome review pending against this course's required capabilities.*
-
-#### Lessons
-
-1. **Investigate, improve, and quantify a real systems bottleneck** — `lab`
-
-## Completion requirements
-
-**Pending outcome-based migration:** Preserve and review the historical tasks and project requirements below. Before adopting this course against v0.2.0, assign stable outcome and summative assessment IDs, define published work/criteria/evidence, verify full outcome coverage and safety constraints, and distinguish formative practice from required work.
+1. **Investigate, improve, and quantify a real systems bottleneck**
+   - kind: `lab`
 
 ### Topics
 
@@ -133,3 +160,6 @@ baseline
 **Performance Investigation**
 
 Take an earlier systems project, find a real bottleneck, prove it with measurements, improve it, and quantify the result.
+
+---
+

@@ -1,19 +1,26 @@
-# SEC4 — Network & Infrastructure Security
+## SEC4 — Network & Infrastructure Security
 
-**Program:** SEC — Security Engineering
-**Type:** `course`
-**Prerequisites:** SEC2 and SEF5 *(legacy mapping; reconcile before activation)*
 **Duration:** 5 weeks
-**Status:** `draft`
 **Expected workload:** 10–15 focused hours/week
+**Prerequisite:** SEC2 and SEF5
 
-> **Unmigrated historical course — not OEE v0.2.0-conforming.** This educational outline was transferred from [the content repository](https://github.com/0xbuffdev/content/blob/0e14d4ff5808a4ea972206ed015a3e4737b33ad7/docs/curriculum/SEC.md) before curriculum duplication is retired. The former `test` and `lab` labels are descriptions of historical activities, not automatic OEE completion requirements. Its outcome IDs, assessment IDs, criteria, and evidence still require v0.2.0 review. Reading and purchasing mappings remain in the content repository.
+**Recommended:** SYS4.
 
-## Overview
+### Overview
 
 Study service exposure, network segmentation, secure configuration, TLS, host hardening, secrets, and least privilege through controlled environments and authorized assessment.
 
-## Learning outcomes
+### Prerequisites
+
+**SEC2 — Web & Application Security**
+**SEF5 — Low-Level Programming with C & Linux**
+**Recommended:** SYS4.
+
+**Kind:** `course`
+
+### Learning outcomes
+
+By the end of the course, you will be able to:
 
 - Identify the attack surface of a networked service environment.
 - Analyze service exposure, segmentation, and secure configuration.
@@ -21,85 +28,108 @@ Study service exposure, network segmentation, secure configuration, TLS, host ha
 - Use controlled evidence to validate whether a security control is effective.
 - Produce a remediation-focused infrastructure security review.
 
-## Modules
 
-### Module 1 — Network Attack Surface
+### Resource map
 
-#### Outcomes
+**Required**
+
+- **B5** Ch. 37–39 and 56–63 — carried from ZtP D4.
+- **R85** TryHackMe / Hack The Box — carried from ZtP D4 (authorized labs only).
+- **B41** Ch. 10 and 21 · **B19** §8.6 and §8.9 · **R66** Nmap book · **R67** CIS Benchmarks · **R68** NIST SP 800-123 · **R70** NIST SP 800-52 Rev. 2 · **R69** NIST SP 800-92 — added.
+
+### Modules
+
+#### Module 1 — Network Attack Surface
+
+**Reading:** **B5** Ch. 56 (Sockets: Introduction), Ch. 58 (Fundamentals of TCP/IP Networks), Ch. 59 (Internet Domains), Ch. 61 (Advanced Topics). **R66** Ch. 1 (Getting Started), Ch. 3 (Host Discovery), Ch. 4–5 (Port Scanning), Ch. 7 (Service and Application Version Detection) — authorized targets only. **B41** Ch. 21 (Network Attack and Defence).
+
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Services, ports, and exposed interfaces** in the context of the course.
 - Apply **Service enumeration in authorized environments** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Services, ports, and exposed interfaces**
+   - kind: `lesson`
+2. **Service enumeration in authorized environments**
+   - kind: `lesson`
+3. **Checkpoint: network attack surface**
+   - kind: `test`
 
-1. **Services, ports, and exposed interfaces** — `lesson`
-2. **Service enumeration in authorized environments** — `lesson`
-3. **Checkpoint: network attack surface** — `test`
-4. **Micro-lab: Inventory the attack surface of the provided training environment.** — `lab`
+4. **Micro-lab: Inventory the attack surface of the provided training environment.**
+   - kind: `lab`
+#### Module 2 — Transport & Segmentation
 
-### Module 2 — Transport & Segmentation
+**Reading:** **B19** §8.6 (Securing TCP Connections: TLS), §8.9 (Operational Security: Firewalls and Intrusion Detection Systems). **B20** Ch. 4. **R70** NIST SP 800-52 Rev. 2. **B41** Ch. 10 (Boundaries). **R22** Mozilla Server-Side TLS.
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **TLS concepts and encrypted transport** in the context of the course.
 - Apply **Network segmentation and firewalling** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **TLS concepts and encrypted transport**
+   - kind: `lesson`
+2. **Network segmentation and firewalling**
+   - kind: `lesson`
+3. **Checkpoint: network controls**
+   - kind: `test`
 
-1. **TLS concepts and encrypted transport** — `lesson`
-2. **Network segmentation and firewalling** — `lesson`
-3. **Checkpoint: network controls** — `test`
-4. **Micro-lab: Model which traffic should be allowed between two isolated services.** — `lab`
+4. **Micro-lab: Model which traffic should be allowed between two isolated services.**
+   - kind: `lab`
+#### Module 3 — Service Hardening
 
-### Module 3 — Service Hardening
+**Reading:** **B5** Ch. 37 (Daemons), Ch. 38 (Writing Secure Privileged Programs), Ch. 39 (Capabilities). **R67** CIS Benchmarks for the host OS. **R68** NIST SP 800-123. **R14** Secrets Management cheat sheet.
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Secure service configuration** in the context of the course.
 - Apply **Least privilege and secrets** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Secure service configuration**
+   - kind: `lesson`
+2. **Least privilege and secrets**
+   - kind: `lesson`
+3. **Checkpoint: hardening**
+   - kind: `test`
 
-1. **Secure service configuration** — `lesson`
-2. **Least privilege and secrets** — `lesson`
-3. **Checkpoint: hardening** — `test`
-4. **Micro-lab: Remove unnecessary permissions from a controlled service deployment.** — `lab`
+4. **Micro-lab: Remove unnecessary permissions from a controlled service deployment.**
+   - kind: `lab`
+#### Module 4 — Logging & Verification
 
-### Module 4 — Logging & Verification
+**Reading:** **R69** NIST SP 800-92. **R14** Logging cheat sheet. **R31** A09 Security Logging and Alerting Failures. **R66** Ch. 9 (Nmap Scripting Engine) for repeatable verification.
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Security logging and verification** in the context of the course.
 - Apply **Retesting hardened infrastructure** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Security logging and verification**
+   - kind: `lesson`
+2. **Retesting hardened infrastructure**
+   - kind: `lesson`
+3. **Checkpoint: evidence of hardening**
+   - kind: `test`
 
-1. **Security logging and verification** — `lesson`
-2. **Retesting hardened infrastructure** — `lesson`
-3. **Checkpoint: evidence of hardening** — `test`
-4. **Micro-lab: Verify that one intended attack path is no longer available.** — `lab`
+4. **Micro-lab: Verify that one intended attack path is no longer available.**
+   - kind: `lab`
+#### Module 5 — Hardened Service Environment
 
-### Module 5 — Hardened Service Environment
+**Reading:** **R85** the matching lab environments. Apply Modules 1–4.
 
-#### Outcomes
 
-*Outcome review pending against this course's required capabilities.*
-
-#### Lessons
-
-1. **Deploy, assess, harden, and verify the Hardened Service Environment** — `lab`
-
-## Completion requirements
-
-**Pending outcome-based migration:** Preserve and review the historical tasks and project requirements below. Before adopting this course against v0.2.0, assign stable outcome and summative assessment IDs, define published work/criteria/evidence, verify full outcome coverage and safety constraints, and distinguish formative practice from required work.
+1. **Deploy, assess, harden, and verify the Hardened Service Environment**
+   - kind: `lab`
 
 ### Topics
 
@@ -127,3 +157,6 @@ By the end of this module, the learner can:
 **Hardened Service Environment**
 
 Deploy a small service stack, document its attack surface, harden it, and verify the controls.
+
+---
+

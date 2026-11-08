@@ -1,19 +1,22 @@
-# SEC5 — Applied Cryptography & Secure Protocols
+## SEC5 — Applied Cryptography & Secure Protocols
 
-**Program:** SEC — Security Engineering
-**Type:** `course`
-**Prerequisites:** SEC1 *(legacy mapping; reconcile before activation)*
 **Duration:** 5 weeks
-**Status:** `draft`
 **Expected workload:** 10–15 focused hours/week
+**Prerequisite:** SEC1
 
-> **Unmigrated historical course — not OEE v0.2.0-conforming.** This educational outline was transferred from [the content repository](https://github.com/0xbuffdev/content/blob/0e14d4ff5808a4ea972206ed015a3e4737b33ad7/docs/curriculum/SEC.md) before curriculum duplication is retired. The former `test` and `lab` labels are descriptions of historical activities, not automatic OEE completion requirements. Its outcome IDs, assessment IDs, criteria, and evidence still require v0.2.0 review. Reading and purchasing mappings remain in the content repository.
-
-## Overview
+### Overview
 
 Learn practical cryptography from security goals through symmetric encryption, AEAD, hashes, MACs, key exchange, signatures, and TLS. The course emphasizes correct library use and protocol design rather than implementing primitives yourself.
 
-## Learning outcomes
+### Prerequisites
+
+**SEC1 — Security Foundations & Threat Modeling**
+
+**Kind:** `course`
+
+### Learning outcomes
+
+By the end of the course, you will be able to:
 
 - Map security requirements to appropriate cryptographic primitives and protocols.
 - Explain randomness, key management, nonces, authentication, confidentiality, and integrity.
@@ -21,85 +24,108 @@ Learn practical cryptography from security goals through symmetric encryption, A
 - Analyze common protocol failures such as nonce reuse and unauthenticated encryption.
 - Document and test a small secure protocol component.
 
-## Modules
 
-### Module 1 — Security Goals & Randomness
+### Resource map
 
-#### Outcomes
+**Required**
+
+- **B42** Ch. 1–4, 6–8 and 10–13 — carried from ZtP D5.
+- **R76** libsodium documentation — ZtP D5: pair the book with vetted-library documentation and never invent primitives.
+- **R71** NIST SP 800-57 Part 1 Rev. 5 — added for key management.
+
+### Modules
+
+#### Module 1 — Security Goals & Randomness
+
+**Reading:** **B42** Ch. 1 (Encryption), Ch. 2 (Randomness), Ch. 3 (Cryptographic Security). **R76** Generating random data.
+
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Confidentiality, integrity, authenticity, and availability** in the context of the course.
 - Apply **Entropy and secure randomness** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Confidentiality, integrity, authenticity, and availability**
+   - kind: `lesson`
+2. **Entropy and secure randomness**
+   - kind: `lesson`
+3. **Checkpoint: cryptographic goals**
+   - kind: `test`
 
-1. **Confidentiality, integrity, authenticity, and availability** — `lesson`
-2. **Entropy and secure randomness** — `lesson`
-3. **Checkpoint: cryptographic goals** — `test`
-4. **Micro-lab: Identify where predictable randomness would break a protocol.** — `lab`
+4. **Micro-lab: Identify where predictable randomness would break a protocol.**
+   - kind: `lab`
+#### Module 2 — Symmetric Protection
 
-### Module 2 — Symmetric Protection
+**Reading:** **B42** Ch. 4 (Block Ciphers), Ch. 6 (Hash Functions), Ch. 7 (Keyed Hashing), Ch. 8 (Authenticated Encryption). **R76** Secret-key cryptography: authenticated encryption; AEAD constructions; message authentication; generic hashing.
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Symmetric encryption and AEAD** in the context of the course.
 - Apply **Hashes and MACs** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Symmetric encryption and AEAD**
+   - kind: `lesson`
+2. **Hashes and MACs**
+   - kind: `lesson`
+3. **Checkpoint: symmetric primitives**
+   - kind: `test`
 
-1. **Symmetric encryption and AEAD** — `lesson`
-2. **Hashes and MACs** — `lesson`
-3. **Checkpoint: symmetric primitives** — `test`
-4. **Micro-lab: Choose the primitive that matches a stated security goal.** — `lab`
+4. **Micro-lab: Choose the primitive that matches a stated security goal.**
+   - kind: `lab`
+#### Module 3 — Public-Key Cryptography
 
-### Module 3 — Public-Key Cryptography
+**Reading:** **B42** Ch. 10 (RSA), Ch. 11 (Diffie–Hellman), Ch. 12 (Elliptic Curves). **R76** Public-key cryptography: public-key signatures; key exchange; sealed boxes.
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Key exchange and public-key encryption** in the context of the course.
 - Apply **Digital signatures and trust** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Key exchange and public-key encryption**
+   - kind: `lesson`
+2. **Digital signatures and trust**
+   - kind: `lesson`
+3. **Checkpoint: asymmetric cryptography**
+   - kind: `test`
 
-1. **Key exchange and public-key encryption** — `lesson`
-2. **Digital signatures and trust** — `lesson`
-3. **Checkpoint: asymmetric cryptography** — `test`
-4. **Micro-lab: Trace a simplified key-exchange and signature verification flow.** — `lab`
+4. **Micro-lab: Trace a simplified key-exchange and signature verification flow.**
+   - kind: `lab`
+#### Module 4 — Protocol Design & Key Management
 
-### Module 4 — Protocol Design & Key Management
+**Reading:** **B42** Ch. 13 (TLS) and the nonce-reuse discussion in Ch. 8. **R71** NIST SP 800-57 Part 1 Rev. 5 (key lifecycle; key states and transitions). **R76** Key derivation.
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **TLS concepts and secure protocol composition** in the context of the course.
 - Apply **Nonce handling, key management, and failure behavior** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **TLS concepts and secure protocol composition**
+   - kind: `lesson`
+2. **Nonce handling, key management, and failure behavior**
+   - kind: `lesson`
+3. **Checkpoint: protocol correctness**
+   - kind: `test`
 
-1. **TLS concepts and secure protocol composition** — `lesson`
-2. **Nonce handling, key management, and failure behavior** — `lesson`
-3. **Checkpoint: protocol correctness** — `test`
-4. **Micro-lab: Inspect a protocol transcript and identify where nonce reuse or key misuse would matter.** — `lab`
+4. **Micro-lab: Inspect a protocol transcript and identify where nonce reuse or key misuse would matter.**
+   - kind: `lab`
+#### Module 5 — Secure Protocol Component
 
-### Module 5 — Secure Protocol Component
+**Reading:** **B42** Ch. 1–4, 6–8, 10–13 as the review list. **R76** the API pages for the primitives you choose. Never implement primitives yourself.
 
-#### Outcomes
 
-*Outcome review pending against this course's required capabilities.*
-
-#### Lessons
-
-1. **Build and evaluate a protocol component using established cryptographic libraries only** — `lab`
-
-## Completion requirements
-
-**Pending outcome-based migration:** Preserve and review the historical tasks and project requirements below. Before adopting this course against v0.2.0, assign stable outcome and summative assessment IDs, define published work/criteria/evidence, verify full outcome coverage and safety constraints, and distinguish formative practice from required work.
+1. **Build and evaluate a protocol component using established cryptographic libraries only**
+   - kind: `lab`
 
 ### Topics
 
@@ -138,3 +164,6 @@ Build a small protocol using established cryptographic libraries and document:
 - compatibility tests
 
 Never invent cryptographic primitives.
+
+---
+
