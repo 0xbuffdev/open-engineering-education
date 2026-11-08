@@ -29,20 +29,10 @@ By the end of the course, you will be able to:
 - Document a vulnerability and its mitigation within an isolated authorized lab.
 
 
-### Resource map
-
-**Required**
-
-- **B14** §3.7 and §3.10 (procedures; combining control and data — buffer overflow, GDB, countermeasures) and Ch. 7 (Linking) — added.
-- **B2** Ch. 5 and §8.7 · **B5** Ch. 6–7 and §38.9 · **B4** Ch. 13–23 — carried from ZtP D2.
-- **R64** pwn.college (isolated lab only) — carried from ZtP D2.
-- **R65** SoK: Eternal War in Memory · **B15** Ch. 4 and §20.1 · **R36** — added for the safer-design comparison.
-
 ### Modules
 
 #### Module 1 — Native Memory & Vulnerability Classes
 
-**Reading:** **B14** §3.7 (Procedures — the stack frame), §3.10 (Combining Control and Data in Machine-Level Programs — out-of-bounds references and buffer overflow). **B5** §38.9 (Beware of Buffer Overruns), §6.3 (Memory Layout of a Process), Ch. 7 (Memory Allocation). **B2** Ch. 5 (Pointers and Arrays), §8.7 (A Storage Allocator). **R65** the overview of memory-error classes.
 
 
 ### Module outcomes
@@ -63,7 +53,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 2 — Binary Analysis & Debugging
 
-**Reading:** **B14** §3.10.2 (Life in the Real World: Using the GDB Debugger), Ch. 7 (Linking — ELF object files). **R64** the reverse-engineering and memory-error modules (isolated lab only).
 
 
 ### Module outcomes
@@ -84,7 +73,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 3 — Platform Mitigations
 
-**Reading:** **B14** §3.10.4 (Thwarting Buffer Overflow Attacks — stack randomization, stack corruption detection, limiting executable code regions). **B4** Ch. 13–23 (address spaces through swapping policies — the virtual-memory background for ASLR and NX). **R65** the defenses sections.
 
 
 ### Module outcomes
@@ -105,7 +93,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 4 — Safer Native Design
 
-**Reading:** **B15** Ch. 4 (Understanding Ownership), Ch. 20 §20.1 (Unsafe Rust). **R36** Meet Safe and Unsafe. **B5** Ch. 38. **B2** Ch. 5.
 
 
 ### Module outcomes
@@ -126,7 +113,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 5 — Native Security Lab
 
-**Reading:** **R64** the sandboxed modules matching the chosen vulnerabilities. **B14** §3.10. **B15** Ch. 4 for the Rust rewrite.
 
 
 1. **Work only in the private sandbox: demonstrate, mitigate, and compare vulnerable native programs**

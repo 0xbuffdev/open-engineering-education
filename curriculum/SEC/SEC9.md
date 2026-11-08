@@ -22,18 +22,10 @@ By the end of the project, you will be able to:
 - Evaluate detection and incident-response readiness.
 - Communicate security findings to both technical and non-technical stakeholders.
 
-### Resource map
-
-**Required**
-
-- **R75** NIST SP 800-115 · **R82** PTES · **R83** CVSS v4.0.
-- **B40** Ch. 1–10 · **B43** Ch. 15–18 · **R29** WSTG · **R28** ASVS.
-
 ### Modules
 
 #### Module 1 — Scope & Threat Model
 
-**Reading:** **R75** NIST SP 800-115 (planning; rules of engagement). **R82** PTES pre-engagement interactions; threat modeling. **B40** Ch. 1–5.
 
 
 ### Module outcomes
@@ -51,7 +43,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 2 — Security Assessment
 
-**Reading:** **R75** testing techniques (target identification and analysis; vulnerability validation). **R29** WSTG. **R82** intelligence gathering; vulnerability analysis; exploitation (authorized targets only).
 
 
 ### Module outcomes
@@ -69,7 +60,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 3 — Findings, Detection & Incident Handling
 
-**Reading:** **R82** reporting. **R83** CVSS v4.0 (severity rationale). **B43** Ch. 15–18. **R80** ATT&CK for the detection and response review.
 
 
 ### Module outcomes
@@ -87,7 +77,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 4 — Remediation & Retest
 
-**Reading:** **B40** Ch. 7–10 (managing and validating threats). **R28** ASVS. **R14** the cheat sheet for each remediation.
 
 
 ### Module outcomes
@@ -106,7 +95,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 5 — Final Project Lab
 
-**Reading:** Apply all earlier readings. **R75** and **R82** for the report structure.
 
 
 1. **Perform the authorized assessment, implement or validate remediation, complete the retest, and prepare the final security report for defense**

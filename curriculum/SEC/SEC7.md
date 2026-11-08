@@ -27,18 +27,10 @@ By the end of the course, you will be able to:
 - Recommend and verify remediation following a controlled incident.
 
 
-### Resource map
-
-**Required**
-
-- **R73** NIST SP 800-61 Rev. 3 · **B43** Ch. 15–18 · **R69** NIST SP 800-92 · **R74** NIST SP 800-86.
-- **R80** MITRE ATT&CK · **R81** Sigma · **B26** Ch. 15 (Postmortem Culture).
-
 ### Modules
 
 #### Module 1 — Security Telemetry
 
-**Reading:** **R69** NIST SP 800-92 (log management). **B43** Ch. 15 (Investigating Systems). **R14** Logging cheat sheet. **R31** A09 Security Logging and Alerting Failures.
 
 
 ### Module outcomes
@@ -59,7 +51,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 2 — Detection & Triage
 
-**Reading:** **R80** ATT&CK tactics and techniques; data sources and detections. **R81** Sigma rule specification. **R73** the Detect and Respond functions.
 
 
 ### Module outcomes
@@ -80,7 +71,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 3 — Evidence & Root Cause
 
-**Reading:** **B43** Ch. 15 (Investigating Systems). **R74** NIST SP 800-86 (the forensic process: collection, examination, analysis, reporting; using data from data files and from operating systems). **B26** Ch. 12 (Effective Troubleshooting), Ch. 15 (Postmortem Culture).
 
 
 ### Module outcomes
@@ -104,7 +94,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 4 — Threat Hunting & Recovery
 
-**Reading:** **R80** ATT&CK (hypothesis-driven hunting). **B43** Ch. 17 (Crisis Management), Ch. 18 (Recovery and Aftermath). **R73** the Recover function.
 
 
 ### Module outcomes
@@ -125,7 +114,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 5 — Incident Investigation
 
-**Reading:** **B43** Ch. 15–18. **B26** Ch. 15. **R73** NIST SP 800-61 Rev. 3.
 
 
 1. **Investigate the controlled incident, produce evidence-backed findings, and verify remediation**

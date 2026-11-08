@@ -31,18 +31,10 @@ By the end of the course, you will be able to:
 - Produce a clear AI security assessment and demonstrate the retest results.
 
 
-### Resource map
-
-**Required**
-
-- **R60** LLM01, LLM02 and LLM05–LLM08, LLM10 — carried from ZtP D6 (record the edition/date at study time) · **R61** OWASP Top 10 for Agentic Applications.
-- **R62** NIST AI 100-2 E2025 · **R63** MITRE ATLAS · **R59** Greshake et al. · **B38** Ch. 5 and 10 · **R75** NIST SP 800-115.
-
 ### Modules
 
 #### Module 1 — AI Attack Surfaces
 
-**Reading:** **R60** LLM01 (Prompt Injection), LLM02 (Sensitive Information Disclosure), LLM07 (System Prompt Leakage), LLM08 (Vector and Embedding Weaknesses). **R59** indirect prompt injection. **B38** Ch. 5 (defensive prompt engineering), Ch. 6 §6.1 (RAG).
 
 
 ### Module outcomes
@@ -63,7 +55,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 2 — Tool & Agent Controls
 
-**Reading:** **R60** LLM05 (Improper Output Handling), LLM06 (Excessive Agency). **R61** agentic-application risks. **B38** Ch. 6 (agents: tools; failure modes).
 
 
 ### Module outcomes
@@ -84,7 +75,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 3 — Abuse Cases & Defensive Controls
 
-**Reading:** **R60** LLM03 (Supply Chain), LLM04 (Data and Model Poisoning), LLM10 (Unbounded Consumption). **R62** NIST AI 100-2 E2025 (attacks and mitigations). **B38** Ch. 10 (guardrails; monitoring).
 
 
 ### Module outcomes
@@ -105,7 +95,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 4 — Authorized Red Teaming & Retest
 
-**Reading:** **R63** MITRE ATLAS (tactics, techniques, case studies). **R62** NIST AI 100-2 E2025. **R75** NIST SP 800-115 for assessment methodology and reporting. **B38** Ch. 4 (regression evaluation).
 
 
 ### Module outcomes
@@ -126,7 +115,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 5 — AI Security Assessment
 
-**Reading:** Apply Modules 1–4. **R60** as the findings checklist; **R75** for scope and reporting.
 
 
 1. **Assess only a controlled AI system or local training application; produce findings, remediation, and retest evidence**

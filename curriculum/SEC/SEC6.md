@@ -27,19 +27,10 @@ By the end of the course, you will be able to:
 - Review a deployed environment and produce actionable security improvements.
 
 
-### Resource map
-
-**Required**
-
-- **B44** Ch. 1–4, 6–7 and 9–16 (2nd-edition numbering) · **B43** Ch. 5, 6 and 14 · **R72** NIST SP 800-190.
-- **R77** SLSA · **R78** OWASP Top 10 CI/CD Security Risks · **R79** AWS IAM documentation (or your cloud's equivalent) · **R14** Secrets Management cheat sheet.
-- **B5** Ch. 39 (Capabilities).
-
 ### Modules
 
 #### Module 1 — Isolation & Container Security
 
-**Reading:** **B44** Ch. 2 (Linux System Calls, Permissions and Capabilities), Ch. 3 (Control Groups), Ch. 4 (Container Isolation), Ch. 6 (Container Images), Ch. 10 (Strengthening Container Isolation). **R72** NIST SP 800-190 (image, registry, orchestrator, container and host-OS risks). **B5** Ch. 39.
 
 
 ### Module outcomes
@@ -60,7 +51,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 2 — Identity & Least Privilege
 
-**Reading:** **R79** Security best practices in IAM; Policy evaluation logic. **B43** Ch. 5 (Design for Least Privilege). **R31** A01 Broken Access Control.
 
 
 ### Module outcomes
@@ -81,7 +71,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 3 — Secrets & Supply Chain
 
-**Reading:** **B44** Ch. 14 (Passing Secrets to Containers), Ch. 7 (Supply Chain Security), Ch. 9 (Infrastructure as Code and GitOps). **R14** Secrets Management cheat sheet. **R77** SLSA requirements and provenance levels. **R78** OWASP Top 10 CI/CD Security Risks. **B43** Ch. 14 (Deploying Code). **R31** A03 Software Supply Chain Failures.
 
 
 ### Module outcomes
@@ -102,7 +91,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 4 — Cloud Attack Surfaces
 
-**Reading:** **B44** Ch. 11 (Breaking Container Isolation), Ch. 12 (Container Network Security), Ch. 13 (Securely Connecting Components). **R67** CIS Benchmarks (container, Kubernetes and cloud baselines). **R31** A02 Security Misconfiguration.
 
 
 ### Module outcomes
@@ -123,7 +111,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 5 — Secure Deployment Review
 
-**Reading:** **B44** Ch. 1 (Container Security Threats), Ch. 15 (Container Runtime Protection), Ch. 16 (Containers and the OWASP Top 10). **R72** and **R77** as the review checklists.
 
 
 1. **Review identities, secrets, images, network exposure, permissions, and CI/CD security**

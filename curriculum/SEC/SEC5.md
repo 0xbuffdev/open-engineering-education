@@ -25,19 +25,10 @@ By the end of the course, you will be able to:
 - Document and test a small secure protocol component.
 
 
-### Resource map
-
-**Required**
-
-- **B42** Ch. 1–4, 6–8 and 10–13 — carried from ZtP D5.
-- **R76** libsodium documentation — ZtP D5: pair the book with vetted-library documentation and never invent primitives.
-- **R71** NIST SP 800-57 Part 1 Rev. 5 — added for key management.
-
 ### Modules
 
 #### Module 1 — Security Goals & Randomness
 
-**Reading:** **B42** Ch. 1 (Encryption), Ch. 2 (Randomness), Ch. 3 (Cryptographic Security). **R76** Generating random data.
 
 
 ### Module outcomes
@@ -58,7 +49,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 2 — Symmetric Protection
 
-**Reading:** **B42** Ch. 4 (Block Ciphers), Ch. 6 (Hash Functions), Ch. 7 (Keyed Hashing), Ch. 8 (Authenticated Encryption). **R76** Secret-key cryptography: authenticated encryption; AEAD constructions; message authentication; generic hashing.
 
 
 ### Module outcomes
@@ -79,7 +69,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 3 — Public-Key Cryptography
 
-**Reading:** **B42** Ch. 10 (RSA), Ch. 11 (Diffie–Hellman), Ch. 12 (Elliptic Curves). **R76** Public-key cryptography: public-key signatures; key exchange; sealed boxes.
 
 
 ### Module outcomes
@@ -100,7 +89,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 4 — Protocol Design & Key Management
 
-**Reading:** **B42** Ch. 13 (TLS) and the nonce-reuse discussion in Ch. 8. **R71** NIST SP 800-57 Part 1 Rev. 5 (key lifecycle; key states and transitions). **R76** Key derivation.
 
 
 ### Module outcomes
@@ -121,7 +109,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 5 — Secure Protocol Component
 
-**Reading:** **B42** Ch. 1–4, 6–8, 10–13 as the review list. **R76** the API pages for the primitives you choose. Never implement primitives yourself.
 
 
 1. **Build and evaluate a protocol component using established cryptographic libraries only**
