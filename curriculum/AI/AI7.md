@@ -29,20 +29,10 @@ By the end of the course, you will be able to:
 - Investigate a production regression using traces and measurements.
 
 
-### Resource map
-
-**Required**
-
-- **B35** Ch. 7–10 (deployment and prediction service; data distribution shifts and monitoring; continual learning and test in production; infrastructure and tooling for MLOps) — carried from ZtP AI11 (Ch. 1–2, 6–11).
-- **B38** Ch. 9 (Inference Optimization) and Ch. 10 (AI Engineering Architecture and User Feedback) — added.
-- **R54** PagedAttention paper and vLLM documentation — ZtP AI9 (inference-engine docs).
-- **B3** §§8.2–8.3 and **B6** Ch. 2–3 and 5–7 for the hardware background (ZtP S13).
-
 ### Modules
 
 #### Module 1 — Model Serving
 
-**Reading:** **B35** Ch. 7 (Model Deployment and Prediction Service — batch vs. online prediction; cloud vs. edge). **B38** Ch. 10 (AI Engineering Architecture and User Feedback — context, guardrails, routing, caching).
 
 
 ### Module outcomes
@@ -63,7 +53,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 2 — Batching & Concurrency
 
-**Reading:** **B38** Ch. 9 (Inference Optimization — latency and throughput metrics; batching, including continuous batching). **R54** PagedAttention paper; vLLM documentation. **B35** Ch. 7 (batch vs. online prediction).
 
 
 ### Module outcomes
@@ -84,7 +73,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 3 — Model & Runtime Optimization
 
-**Reading:** **B38** Ch. 9 (model optimization: quantization, distillation, pruning; KV cache; prompt caching). **B35** Ch. 7 (model compression; ML on the cloud and on the edge). **B3** §§8.2–8.3; **B6** Ch. 2–3 (memory-hierarchy background for CPU/GPU trade-offs).
 
 
 ### Module outcomes
@@ -105,7 +93,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 4 — Deployment & Reliability
 
-**Reading:** **B35** Ch. 8 (Data Distribution Shifts and Monitoring), Ch. 9 (Continual Learning and Test in Production), Ch. 10 (Infrastructure and Tooling for MLOps). **B38** Ch. 10 (monitoring and observability). **B26** Ch. 8 (Release Engineering).
 
 
 ### Module outcomes
@@ -126,7 +113,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 5 — Production AI Service
 
-**Reading:** **B35** Ch. 7–10. **B38** Ch. 9–10. **B26** Ch. 8.
 
 
 1. **Package, deploy, observe, and recover the Production AI Service**

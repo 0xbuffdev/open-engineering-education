@@ -22,18 +22,10 @@ By the end of the project, you will be able to:
 - Identify and mitigate material safety, security, reliability, and misuse risks.
 - Explain limitations and defend system design decisions using evidence.
 
-### Resource map
-
-**Required**
-
-- Review the AI1–AI8 readings module by module.
-- **B38** Ch. 3–4 and 9–10 · **B35** Ch. 2 and 6–10 · **R55** · **R60**.
-
 ### Modules
 
 #### Module 1 — Problem Definition & Evaluation Design
 
-**Reading:** **B38** Ch. 3 (Evaluation Methodology), Ch. 4 (Evaluate AI Systems). **B35** Ch. 2 (Introduction to Machine Learning Systems Design — objectives and requirements). **R55** Core function MAP.
 
 
 ### Module outcomes
@@ -51,7 +43,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 2 — Model & System Implementation
 
-**Reading:** **B38** Ch. 5–6 and 10. **B35** Ch. 6–7.
 
 
 ### Module outcomes
@@ -69,7 +60,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 3 — Evaluation, Failure Analysis & Safety
 
-**Reading:** **B38** Ch. 4. **B35** Ch. 6. **R60** LLM01–LLM10 as the misuse-test checklist. **R55** Core function MEASURE.
 
 
 ### Module outcomes
@@ -88,7 +78,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 4 — Serving & Operations
 
-**Reading:** **B35** Ch. 7–10. **B38** Ch. 9–10. **B26** Ch. 8 (Release Engineering), Ch. 14–15 (incidents; postmortems).
 
 
 ### Module outcomes
@@ -106,7 +95,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 5 — Final Project Lab
 
-**Reading:** Apply all earlier readings. **R56** for the model/system card. **B26** Ch. 3–4 for the defense.
 
 
 1. **Build, evaluate, deploy, operate, document, and prepare the production AI system for defense**

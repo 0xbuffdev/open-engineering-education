@@ -25,23 +25,10 @@ By the end of the course, you will be able to:
 - Distinguish training loss from evaluation evidence of useful model behavior.
 
 
-### Resource map
-
-**Required**
-
-- **B37** Ch. 2–5 (text data; attention; GPT; pretraining) — the from-scratch LLM resource ZtP AI6 names without chapters.
-- **B36** Ch. 11 §§11.5–11.7 (multi-head attention; self-attention and positional encoding; the Transformer architecture).
-- **R49** The Illustrated Transformer · **R50** Attention Is All You Need — carried from ZtP AI6.
-
-**Optional**
-
-- **R51** Hugging Face LLM Course (tokenizers and the Transformers library).
-
 ### Modules
 
 #### Module 1 — Tokenization & Representations
 
-**Reading:** **B37** Ch. 2 (Working with Text Data — tokenization, byte pair encoding, sliding-window data sampling, token embeddings, positional encodings). **R50** §3.4 (Embeddings and Softmax), §3.5 (Positional Encoding).
 
 
 ### Module outcomes
@@ -62,7 +49,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 2 — Attention & Causal Masking
 
-**Reading:** **B37** Ch. 3 (Coding Attention Mechanisms — simple self-attention, trainable weights, causal attention, multi-head attention). **B36** §§11.5–11.6. **R50** §3.2 (Attention). **R49** the walkthrough.
 
 
 ### Module outcomes
@@ -83,7 +69,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 3 — Transformer Architecture
 
-**Reading:** **B37** Ch. 4 (Implementing a GPT Model from Scratch to Generate Text — layer normalization, GELU feed-forward network, shortcut connections, the transformer block, the GPT model). **B36** §11.7 (The Transformer Architecture). **R50** §3 (Model Architecture).
 
 
 ### Module outcomes
@@ -104,7 +89,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 4 — Language Model Training & Evaluation
 
-**Reading:** **B37** Ch. 5 (Pretraining on Unlabeled Data — evaluating generative models, training, decoding strategies, loading pretrained weights), Ch. 7 (Fine-Tuning to Follow Instructions) and App. D (training-loop improvements). **B38** Ch. 3 (Evaluation Methodology — language-modeling metrics).
 
 
 ### Module outcomes
@@ -125,7 +109,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 5 — Tiny Decoder-Only Transformer
 
-**Reading:** **B37** Ch. 4–5 and App. A (Introduction to PyTorch). **B36** §11.9 (Large-Scale Pretraining with Transformers).
 
 
 1. **Train, evaluate, and document the Tiny Decoder-Only Transformer**
