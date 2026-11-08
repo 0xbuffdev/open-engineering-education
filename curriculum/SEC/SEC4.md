@@ -29,19 +29,10 @@ By the end of the course, you will be able to:
 - Produce a remediation-focused infrastructure security review.
 
 
-### Resource map
-
-**Required**
-
-- **B5** Ch. 37–39 and 56–63 — carried from ZtP D4.
-- **R85** TryHackMe / Hack The Box — carried from ZtP D4 (authorized labs only).
-- **B41** Ch. 10 and 21 · **B19** §8.6 and §8.9 · **R66** Nmap book · **R67** CIS Benchmarks · **R68** NIST SP 800-123 · **R70** NIST SP 800-52 Rev. 2 · **R69** NIST SP 800-92 — added.
-
 ### Modules
 
 #### Module 1 — Network Attack Surface
 
-**Reading:** **B5** Ch. 56 (Sockets: Introduction), Ch. 58 (Fundamentals of TCP/IP Networks), Ch. 59 (Internet Domains), Ch. 61 (Advanced Topics). **R66** Ch. 1 (Getting Started), Ch. 3 (Host Discovery), Ch. 4–5 (Port Scanning), Ch. 7 (Service and Application Version Detection) — authorized targets only. **B41** Ch. 21 (Network Attack and Defence).
 
 
 ### Module outcomes
@@ -62,7 +53,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 2 — Transport & Segmentation
 
-**Reading:** **B19** §8.6 (Securing TCP Connections: TLS), §8.9 (Operational Security: Firewalls and Intrusion Detection Systems). **B20** Ch. 4. **R70** NIST SP 800-52 Rev. 2. **B41** Ch. 10 (Boundaries). **R22** Mozilla Server-Side TLS.
 
 
 ### Module outcomes
@@ -83,7 +73,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 3 — Service Hardening
 
-**Reading:** **B5** Ch. 37 (Daemons), Ch. 38 (Writing Secure Privileged Programs), Ch. 39 (Capabilities). **R67** CIS Benchmarks for the host OS. **R68** NIST SP 800-123. **R14** Secrets Management cheat sheet.
 
 
 ### Module outcomes
@@ -104,7 +93,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 4 — Logging & Verification
 
-**Reading:** **R69** NIST SP 800-92. **R14** Logging cheat sheet. **R31** A09 Security Logging and Alerting Failures. **R66** Ch. 9 (Nmap Scripting Engine) for repeatable verification.
 
 
 ### Module outcomes
@@ -125,7 +113,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 5 — Hardened Service Environment
 
-**Reading:** **R85** the matching lab environments. Apply Modules 1–4.
 
 
 1. **Deploy, assess, harden, and verify the Hardened Service Environment**

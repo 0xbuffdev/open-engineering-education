@@ -25,24 +25,10 @@ By the end of the course, you will be able to:
 - Communicate security risks in terms developers and system owners can act on.
 
 
-### Resource map
-
-**Required**
-
-- **B40** Ch. 1–5 and 7–10 (first edition) — carried from ZtP D1.
-- **B5** Ch. 8–9, 15, 17, 38 and 39 — carried from ZtP D1.
-- **R31** OWASP Top 10:2025 — carried from ZtP D1 (“use the current OWASP Top 10”).
-- **B41** Ch. 1–2 and 6 (What Is Security Engineering?; Who Is the Opponent?; Access Control) — added.
-
-**Optional**
-
-- **B40** Ch. 12 (Requirements Cookbook) · **R14** Threat Modeling cheat sheet.
-
 ### Modules
 
 #### Module 1 — Security Fundamentals
 
-**Reading:** **B40** Ch. 1 (Dive In and Threat Model!), Ch. 2 (Strategies for Threat Modeling). **B41** Ch. 1 (What Is Security Engineering?), Ch. 2 (Who Is the Opponent?). **R31** the introduction (what the risk categories are and how they were chosen).
 
 
 ### Module outcomes
@@ -63,7 +49,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 2 — Identity & Access
 
-**Reading:** **B5** Ch. 8 (Users and Groups), Ch. 9 (Process Credentials), Ch. 15 (File Attributes), Ch. 17 (Access Control Lists), Ch. 38 (Writing Secure Privileged Programs), Ch. 39 (Capabilities). **B41** Ch. 6 (Access Control). **R31** A01 Broken Access Control, A07 Authentication Failures.
 
 
 ### Module outcomes
@@ -84,7 +69,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 3 — Threat Modeling
 
-**Reading:** **B40** Ch. 3 (STRIDE), Ch. 4 (Attack Trees), Ch. 5 (Attack Libraries). *Optional:* **R14** Threat Modeling cheat sheet.
 
 
 ### Module outcomes
@@ -105,7 +89,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 4 — Verification & Risk Prioritization
 
-**Reading:** **B40** Ch. 7 (Processing and Managing Threats), Ch. 8 (Defensive Tactics and Technologies), Ch. 9 (Trade-Offs When Addressing Threats), Ch. 10 (Validating That Threats Are Addressed).
 
 
 ### Module outcomes
@@ -126,7 +109,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 5 — Threat Model & Security Test Plan
 
-**Reading:** **B40** Ch. 1–10 as the workflow; Ch. 12 (Requirements Cookbook). **R31** A06 Insecure Design. **R28** ASVS as a source of verifiable requirements.
 
 
 1. **Produce and validate the Threat Model & Security Test Plan**
