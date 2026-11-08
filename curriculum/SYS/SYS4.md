@@ -26,20 +26,10 @@ By the end of the course, you will be able to:
 - Build a safe multi-client network service with clean shutdown behavior.
 
 
-### Resource map
-
-**Required**
-
-- **B5** Ch. 20–22, 25, 37, 43–44, 56–61 and 63 · **B2** Ch. 8 · **B4** Ch. 33 — carried from ZtP S10 (signals Ch. 20–22 added for clean shutdown).
-- **B19** §3.5 (TCP) — added.
-- **R37** Tokio tutorial and **B15** Ch. 17 and 21 — added for the Rust service lab.
-- **B29** Ch. 5 (Stability Patterns) — timeouts, back pressure, load shedding.
-
 ### Modules
 
 #### Module 1 — Sockets & TCP
 
-**Reading:** **B5** Ch. 56 (Sockets: Introduction), Ch. 57 (Sockets: UNIX Domain), Ch. 58 (Sockets: Fundamentals of TCP/IP Networks), Ch. 59 (Sockets: Internet Domains). **B19** §3.5 (Connection-Oriented Transport: TCP).
 
 
 ### Module outcomes
@@ -60,7 +50,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 2 — Non-Blocking & Event-Driven I/O
 
-**Reading:** **B5** Ch. 63 (Alternative I/O Models), Ch. 60 (Sockets: Server Design). **B4** Ch. 33 (Event-based Concurrency). **R37** I/O; Async in depth; Select.
 
 
 ### Module outcomes
@@ -81,7 +70,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 3 — Backpressure & Reliability
 
-**Reading:** **B5** Ch. 61 (Sockets: Advanced Topics — partial reads and writes, `shutdown()`, socket options), Ch. 60. **B29** Ch. 5 (Stability Patterns: timeouts, back pressure, load shedding). **R37** Channels; Shared state.
 
 
 ### Module outcomes
@@ -102,7 +90,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 4 — Protocols & Shutdown
 
-**Reading:** **B5** §§59.2–59.3 (network byte order; data representation), Ch. 20–22 (Signals), Ch. 25 (Process Termination), Ch. 37 (Daemons). **R37** Framing; Graceful Shutdown. **B15** Ch. 21 §21.3 (Graceful Shutdown and Cleanup).
 
 
 ### Module outcomes
@@ -123,7 +110,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 5 — Multi-Client Rust Service
 
-**Reading:** **R37** the whole tutorial. **B15** Ch. 17 (Fundamentals of Asynchronous Programming), Ch. 21 (Final Project: Building a Multithreaded Web Server). **B5** Ch. 60 and 63.
 
 
 1. **Build, load-test, and document the Multi-Client Rust Service**

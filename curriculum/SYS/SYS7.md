@@ -26,19 +26,10 @@ By the end of the course, you will be able to:
 - Produce a technical performance report that connects a change to a measured result.
 
 
-### Resource map
-
-**Required**
-
-- **B32** Ch. 2 (Methodologies), 4 (Observability Tools), 5 (Applications), 6 (CPUs), 12 (Benchmarking) and 13 (perf) — added: ZtP S9 recommends “a systems-performance book”.
-- **B6** Ch. 7 and §8.3 · **B5** §10.7 and Ch. 12, 35, 36 · **R43** perf and tracing documentation — carried from ZtP S9.
-- **B27** Ch. 5–8 · **R25** The Tail at Scale · **R41** The USE Method and CPU Flame Graphs.
-
 ### Modules
 
 #### Module 1 — Profiling & Measurement
 
-**Reading:** **B32** Ch. 5 (Applications), Ch. 6 (CPUs — profiling), Ch. 13 (perf). **R41** CPU Flame Graphs. **B6** Ch. 7 (Memory Performance Tools). **B5** §10.7 (Process Time), Ch. 36 (Process Resources). **R43** perf documentation.
 
 
 ### Module outcomes
@@ -59,7 +50,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 2 — Observability Signals
 
-**Reading:** **B27** Ch. 5 (Structured Events Are the Building Blocks of Observability), Ch. 6 (Stitching Events into Traces), Ch. 7 (Instrumentation with OpenTelemetry), Ch. 8 (Analyzing Events to Achieve Observability). **B32** Ch. 4 (Observability Tools). **B5** Ch. 12 (System and Process Information).
 
 
 ### Module outcomes
@@ -80,7 +70,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 3 — Latency, Throughput & Queues
 
-**Reading:** **B32** Ch. 2 (Methodologies — latency, queueing, capacity planning). **R25** The Tail at Scale. **B26** Ch. 6 (Monitoring Distributed Systems — the four golden signals).
 
 
 ### Module outcomes
@@ -101,7 +90,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 4 — Performance Investigation Method
 
-**Reading:** **B32** Ch. 2 (Methodologies — USE method, workload characterization, drill-down analysis), Ch. 12 (Benchmarking). **R41** The USE Method. **B6** §8.3. **B5** Ch. 35 (Process Priorities and Scheduling).
 
 
 ### Module outcomes
@@ -122,7 +110,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 5 — Performance Investigation
 
-**Reading:** **B32** Ch. 16 (Case Study) and the chapter for the resource under investigation (Ch. 6 CPUs, 7 Memory, 8 File Systems, 9 Disks, 10 Network). **B6** Ch. 7.
 
 
 1. **Investigate, improve, and quantify a real systems bottleneck**

@@ -21,18 +21,10 @@ By the end of the project, you will be able to:
 - Document guarantees, operational requirements, and failure modes.
 - Defend low-level and architectural trade-offs using observed behavior.
 
-### Resource map
-
-**Required**
-
-- Review the SYS1–SYS8 readings module by module and pick the chapters that match your capstone shape (storage: **B31**; network service: **B5** Ch. 56–63; concurrent runtime: **B30**; replicated service: **B25** and **R38**).
-- **R7** the C4 model for the architecture diagram.
-
 ### Modules
 
 #### Module 1 — System Requirements & Architecture
 
-**Reading:** **B25** Ch. 1–2 (trade-offs; nonfunctional requirements). **B26** Ch. 3–4 (risk; SLOs). **B43** Ch. 4 (Design Tradeoffs). **R7** C4 diagrams.
 
 
 ### Module outcomes
@@ -50,7 +42,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 2 — Core Implementation
 
-**Reading:** Chapters matching the chosen shape: **B31** Ch. 3–7 (storage), **B5** Ch. 56–63 (network service), **B30** Ch. 1–5 (concurrent components), **B25** Ch. 6–10 (replicated services).
 
 
 ### Module outcomes
@@ -68,7 +59,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 3 — Concurrency, Failure & Recovery
 
-**Reading:** **B30** Ch. 1–5. **B31** Ch. 5. **B25** Ch. 9–10. **B29** Ch. 4–5.
 
 
 ### Module outcomes
@@ -86,7 +76,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 4 — Performance & Operations
 
-**Reading:** **B32** Ch. 2, 12 and 13. **B26** Ch. 6, 17 and 21. **B27** Ch. 5–8.
 
 
 ### Module outcomes
@@ -105,7 +94,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 5 — Final Project Lab
 
-**Reading:** **B26** Ch. 14–15 (incidents; postmortems) and **B43** Ch. 16–18 for the incident/failure report; **B32** Ch. 12 (Benchmarking) for the final measurements.
 
 
 1. **Build, stress, measure, fault-inject, document, and prepare the systems project for defense**
