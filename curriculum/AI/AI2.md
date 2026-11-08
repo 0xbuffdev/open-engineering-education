@@ -25,20 +25,10 @@ By the end of the course, you will be able to:
 - Interpret model performance through error analysis and calibration.
 
 
-### Resource map
-
-**Required**
-
-- **B34** Ch. 2–6 and 8 (statistical learning; linear regression; classification; resampling; regularization; tree-based methods) — ZtP AI3 names ISLR without chapters.
-- **B16** Ch. 7, 8 and 10 (continuous optimization; when models meet data; PCA) — Ch. 7 and 10 carried from ZtP AI2; Ch. 8 added.
-- **R47** scikit-learn User Guide: supervised learning, model selection and evaluation, preprocessing, pipelines, calibration — carried from ZtP AI3.
-- **B35** Ch. 5–6 (Feature Engineering; Model Development and Offline Evaluation) · **R56** Model Cards for Model Reporting.
-
 ### Modules
 
 #### Module 1 — Supervised Learning
 
-**Reading:** **B34** Ch. 2 (Statistical Learning), Ch. 3 (Linear Regression), Ch. 4 (Classification). **B16** Ch. 8 (When Models Meet Data), Ch. 9 (Linear Regression). **R47** supervised learning: linear models.
 
 
 ### Module outcomes
@@ -59,7 +49,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 2 — Trees, Ensembles & Features
 
-**Reading:** **B34** Ch. 8 (Tree-Based Methods). **B35** Ch. 5 (Feature Engineering). **B16** Ch. 10 (Dimensionality Reduction with PCA). **R47** decision trees; ensembles; preprocessing data.
 
 
 ### Module outcomes
@@ -80,7 +69,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 3 — Validation & Generalization
 
-**Reading:** **B34** Ch. 5 (Resampling Methods), Ch. 6 §6.2 (Shrinkage Methods — ridge and lasso), Ch. 2 §2.2 (Assessing Model Accuracy — the bias–variance trade-off). **B16** Ch. 7 (Continuous Optimization), Ch. 8 §§8.2–8.3 (empirical risk minimization; parameter estimation). **R47** cross-validation; metrics and scoring; tuning hyper-parameters.
 
 
 ### Module outcomes
@@ -101,7 +89,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 4 — Leakage, Calibration & Error Analysis
 
-**Reading:** **B35** Ch. 5 (Feature Engineering — data leakage), Ch. 6 (Model Development and Offline Evaluation — baselines, evaluation methods, slice-based evaluation). **R47** common pitfalls and recommended practices; probability calibration.
 
 
 ### Module outcomes
@@ -122,7 +109,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 5 — Evaluated ML Pipeline
 
-**Reading:** **R47** pipelines and composite estimators. **R56** Model Cards for Model Reporting. **B35** Ch. 6. **B34** Ch. 5.
 
 
 1. **Build, evaluate, and document the Evaluated ML Pipeline**

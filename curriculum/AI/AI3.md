@@ -25,24 +25,10 @@ By the end of the course, you will be able to:
 - Use ablations and held-out evaluation to support architectural decisions.
 
 
-### Resource map
-
-**Required**
-
-- **B36** Ch. 2, 5 and 7–12 (preliminaries; MLPs; CNNs; modern CNNs; RNNs; modern RNNs; attention; optimization) — added: ZtP AI4–AI5 name a PyTorch tutorial, a from-scratch NN resource and CS231n without chapters.
-- **B16** Ch. 5 §5.6 and Ch. 7 — carried from ZtP AI2.
-- **R45** PyTorch “Learn the Basics” · **R46** CS231n notes — carried from ZtP AI4–AI5.
-- **R48** “A Recipe for Training Neural Networks”.
-
-**Optional**
-
-- **B36** Ch. 13 (Computational Performance).
-
 ### Modules
 
 #### Module 1 — Tensors & Neural Networks
 
-**Reading:** **B36** Ch. 2 §2.1 (Data Manipulation — tensors), §2.5 (Automatic Differentiation), Ch. 5 §§5.1–5.2 (Multilayer Perceptrons). **R45** Tensors; Build the Neural Network.
 
 
 ### Module outcomes
@@ -63,7 +49,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 2 — Backpropagation & Optimization
 
-**Reading:** **B36** Ch. 5 §5.3 (Forward Propagation, Backward Propagation, and Computational Graphs), §5.4 (Numerical Stability and Initialization), Ch. 8 §8.5 (Batch Normalization), Ch. 12 (Optimization Algorithms). **B16** Ch. 5 §5.6 (Backpropagation and Automatic Differentiation), Ch. 7 (Continuous Optimization). **R45** Automatic Differentiation with torch.autograd; Optimizing Model Parameters.
 
 
 ### Module outcomes
@@ -84,7 +69,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 3 — Convolutional Representation
 
-**Reading:** **B36** Ch. 7 (Convolutional Neural Networks), Ch. 8 §§8.1–8.6 (AlexNet through ResNet). **R46** the convolutional-network and architecture notes.
 
 
 ### Module outcomes
@@ -105,7 +89,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 4 — Sequence Models & Attention
 
-**Reading:** **B36** Ch. 9 (Recurrent Neural Networks), Ch. 10 (Modern Recurrent Neural Networks), Ch. 11 §§11.1–11.4 (Queries, Keys, and Values; Attention Pooling by Similarity; Attention Scoring Functions; the Bahdanau Attention Mechanism).
 
 
 ### Module outcomes
@@ -126,7 +109,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 5 — Small Deep Learning System
 
-**Reading:** **B36** Ch. 6 (Builders' Guide). **R48** A Recipe for Training Neural Networks. **R45** Save and Load the Model. *Optional:* **B36** Ch. 13 (Computational Performance).
 
 
 1. **Build, train, evaluate, and document the Small Deep Learning System**

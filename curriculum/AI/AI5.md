@@ -25,19 +25,10 @@ By the end of the course, you will be able to:
 - Evaluate an AI workflow using reproducible cases rather than anecdotal prompts.
 
 
-### Resource map
-
-**Required**
-
-- **B38** Ch. 5 (Prompt Engineering) and Ch. 6 (RAG and Agents), with Ch. 2 (Sampling — structured outputs), Ch. 4 (Evaluate AI Systems) and Ch. 10 (architecture, guardrails, feedback).
-- **B39** Ch. 1, 6 and 8 (Boolean retrieval; scoring, term weighting and the vector space model; evaluation in information retrieval).
-- **R57** Building effective agents · **R58** the RAG paper · **R60** LLM01, LLM05, LLM06, LLM08.
-
 ### Modules
 
 #### Module 1 — Retrieval Foundations
 
-**Reading:** **B38** Ch. 6 §6.1 (RAG — architecture; retrieval algorithms; retrieval optimization: chunking, reranking, query rewriting). **B39** Ch. 1 (Boolean retrieval), Ch. 6 (Scoring, term weighting and the vector space model), Ch. 8 (Evaluation in information retrieval).
 
 
 ### Module outcomes
@@ -58,7 +49,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 2 — RAG Pipelines
 
-**Reading:** **B38** Ch. 6 §6.1 (RAG architecture; retrieval algorithms; RAG beyond text), Ch. 5 (Prompt Engineering — context and grounding). **R58** the RAG paper. **R60** LLM08 (Vector and Embedding Weaknesses).
 
 
 ### Module outcomes
@@ -79,7 +69,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 3 — Tool Use & Structured Outputs
 
-**Reading:** **B38** Ch. 6 (Agents: tools and planning), Ch. 2 (Sampling — structured outputs). **R57** Building effective agents. **R60** LLM05 (Improper Output Handling), LLM06 (Excessive Agency).
 
 
 ### Module outcomes
@@ -100,7 +89,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 4 — Agents, Memory & Injection
 
-**Reading:** **B38** Ch. 6 (agent failure modes and evaluation; memory), Ch. 5 (defensive prompt engineering — prompt attacks). **R60** LLM01 (Prompt Injection). **R59** indirect prompt injection.
 
 
 ### Module outcomes
@@ -121,7 +109,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 5 — Bounded RAG/Tool-Using Agent
 
-**Reading:** **B38** Ch. 6; Ch. 4 (Evaluate AI Systems — evaluation pipelines); Ch. 10 (guardrails; logging and monitoring; user feedback).
 
 
 1. **Build, evaluate, red-team, and document the Bounded RAG/Tool-Using Agent**

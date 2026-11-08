@@ -26,19 +26,10 @@ By the end of the course, you will be able to:
 - Explain how preprocessing choices can affect downstream model evaluation.
 
 
-### Resource map
-
-**Required**
-
-- **B33** Ch. 4–11, 13 and App. A (NumPy; pandas; loading data; cleaning; wrangling; plotting; aggregation; time series; worked examples; advanced NumPy) — ZtP AI1 names the book without chapters.
-- **B35** Ch. 3–5 (Data Engineering Fundamentals; Training Data; Feature Engineering) — ZtP AI11 marks these optional.
-- **R47** “Common pitfalls and recommended practices” (data leakage) · **R6** NumPy documentation.
-
 ### Modules
 
 #### Module 1 — NumPy & Array Thinking
 
-**Reading:** **B33** Ch. 4 (NumPy Basics: Arrays and Vectorized Computation) and App. A (Advanced NumPy). **R6** absolute basics; broadcasting.
 
 
 ### Module outcomes
@@ -59,7 +50,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 2 — DataFrames & Cleaning
 
-**Reading:** **B33** Ch. 5 (Getting Started with pandas), Ch. 6 (Data Loading, Storage, and File Formats), Ch. 7 (Data Cleaning and Preparation), Ch. 8 (Data Wrangling: Join, Combine, and Reshape).
 
 
 ### Module outcomes
@@ -80,7 +70,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 3 — Exploration & Visualization
 
-**Reading:** **B33** Ch. 9 (Plotting and Visualization), Ch. 10 (Data Aggregation and Group Operations). **B16** Ch. 6 §§6.4–6.5 (summary statistics; the Gaussian distribution).
 
 
 ### Module outcomes
@@ -101,7 +90,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 4 — Leakage, Splits & Reproducibility
 
-**Reading:** **B35** Ch. 4 (Training Data — sampling and data splits), Ch. 5 (Feature Engineering — data leakage). **R47** Common pitfalls and recommended practices.
 
 
 ### Module outcomes
@@ -122,7 +110,6 @@ By the end of this module, the learner can:
    - kind: `lab`
 #### Module 5 — Dataset Study
 
-**Reading:** **B33** Ch. 13 (Data Analysis Examples), Ch. 9–10. **B35** Ch. 3 (Data Engineering Fundamentals) for provenance and file formats.
 
 
 1. **Complete the Dataset Study with a data dictionary, analysis, visualizations, and quality report**
