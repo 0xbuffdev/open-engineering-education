@@ -1,19 +1,23 @@
-# AI1 — Data & Scientific Python
+## AI1 — Data & Scientific Python
 
-**Program:** AI — AI Engineering
-**Type:** `course`
-**Prerequisites:** SEF2 and SEF6 *(legacy mapping; reconcile before activation)*
 **Duration:** 5 weeks
-**Status:** `draft`
 **Expected workload:** 10–15 focused hours/week
+**Prerequisite:** SEF2 and SEF6
 
-> **Unmigrated historical course — not OEE v0.2.0-conforming.** This educational outline was transferred from [the content repository](https://github.com/0xbuffdev/content/blob/0e14d4ff5808a4ea972206ed015a3e4737b33ad7/docs/curriculum/AI.md) before curriculum duplication is retired. The former `test` and `lab` labels are descriptions of historical activities, not automatic OEE completion requirements. Its outcome IDs, assessment IDs, criteria, and evidence still require v0.2.0 review. Reading and purchasing mappings remain in the content repository.
-
-## Overview
+### Overview
 
 Develop the data-handling skills required for AI engineering using Python, NumPy, pandas, visualization, cleaning, and reproducible analysis. You will learn to treat data quality and provenance as engineering concerns.
 
-## Learning outcomes
+### Prerequisites
+
+**SEF2 — Programming & Computational Thinking**
+**SEF6 — Mathematics for Computing & AI**
+
+**Kind:** `course`
+
+### Learning outcomes
+
+By the end of the course, you will be able to:
 
 - Load, inspect, clean, transform, and analyze structured datasets with Python.
 - Use NumPy arrays and vectorized operations appropriately.
@@ -21,85 +25,108 @@ Develop the data-handling skills required for AI engineering using Python, NumPy
 - Produce reproducible analyses with clear data dictionaries and visualizations.
 - Explain how preprocessing choices can affect downstream model evaluation.
 
-## Modules
 
-### Module 1 — NumPy & Array Thinking
+### Resource map
 
-#### Outcomes
+**Required**
+
+- **B33** Ch. 4–11, 13 and App. A (NumPy; pandas; loading data; cleaning; wrangling; plotting; aggregation; time series; worked examples; advanced NumPy) — ZtP AI1 names the book without chapters.
+- **B35** Ch. 3–5 (Data Engineering Fundamentals; Training Data; Feature Engineering) — ZtP AI11 marks these optional.
+- **R47** “Common pitfalls and recommended practices” (data leakage) · **R6** NumPy documentation.
+
+### Modules
+
+#### Module 1 — NumPy & Array Thinking
+
+**Reading:** **B33** Ch. 4 (NumPy Basics: Arrays and Vectorized Computation) and App. A (Advanced NumPy). **R6** absolute basics; broadcasting.
+
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Arrays, shapes, and vectorized computation** in the context of the course.
 - Apply **Comparing vectorized operations with Python loops** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Arrays, shapes, and vectorized computation**
+   - kind: `lesson`
+2. **Comparing vectorized operations with Python loops**
+   - kind: `lesson`
+3. **Checkpoint: array reasoning**
+   - kind: `test`
 
-1. **Arrays, shapes, and vectorized computation** — `lesson`
-2. **Comparing vectorized operations with Python loops** — `lesson`
-3. **Checkpoint: array reasoning** — `test`
-4. **Micro-lab: Measure a loop and vectorized version of the same workload.** — `lab`
+4. **Micro-lab: Measure a loop and vectorized version of the same workload.**
+   - kind: `lab`
+#### Module 2 — DataFrames & Cleaning
 
-### Module 2 — DataFrames & Cleaning
+**Reading:** **B33** Ch. 5 (Getting Started with pandas), Ch. 6 (Data Loading, Storage, and File Formats), Ch. 7 (Data Cleaning and Preparation), Ch. 8 (Data Wrangling: Join, Combine, and Reshape).
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **pandas data structures and transformations** in the context of the course.
 - Apply **Missing data, types, and quality checks** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **pandas data structures and transformations**
+   - kind: `lesson`
+2. **Missing data, types, and quality checks**
+   - kind: `lesson`
+3. **Checkpoint: data cleaning**
+   - kind: `test`
 
-1. **pandas data structures and transformations** — `lesson`
-2. **Missing data, types, and quality checks** — `lesson`
-3. **Checkpoint: data cleaning** — `test`
-4. **Micro-lab: Clean a deliberately messy dataset and record each decision.** — `lab`
+4. **Micro-lab: Clean a deliberately messy dataset and record each decision.**
+   - kind: `lab`
+#### Module 3 — Exploration & Visualization
 
-### Module 3 — Exploration & Visualization
+**Reading:** **B33** Ch. 9 (Plotting and Visualization), Ch. 10 (Data Aggregation and Group Operations). **B16** Ch. 6 §§6.4–6.5 (summary statistics; the Gaussian distribution).
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Distributions and exploratory analysis** in the context of the course.
 - Apply **Meaningful visualization and interpretation** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Distributions and exploratory analysis**
+   - kind: `lesson`
+2. **Meaningful visualization and interpretation**
+   - kind: `lesson`
+3. **Checkpoint: exploratory reasoning**
+   - kind: `test`
 
-1. **Distributions and exploratory analysis** — `lesson`
-2. **Meaningful visualization and interpretation** — `lesson`
-3. **Checkpoint: exploratory reasoning** — `test`
-4. **Micro-lab: Create a visualization that answers a specific data question.** — `lab`
+4. **Micro-lab: Create a visualization that answers a specific data question.**
+   - kind: `lab`
+#### Module 4 — Leakage, Splits & Reproducibility
 
-### Module 4 — Leakage, Splits & Reproducibility
+**Reading:** **B35** Ch. 4 (Training Data — sampling and data splits), Ch. 5 (Feature Engineering — data leakage). **R47** Common pitfalls and recommended practices.
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Data leakage and train/validation/test splits** in the context of the course.
 - Apply **Reproducible analysis workflows** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Data leakage and train/validation/test splits**
+   - kind: `lesson`
+2. **Reproducible analysis workflows**
+   - kind: `lesson`
+3. **Checkpoint: evaluation hygiene**
+   - kind: `test`
 
-1. **Data leakage and train/validation/test splits** — `lesson`
-2. **Reproducible analysis workflows** — `lesson`
-3. **Checkpoint: evaluation hygiene** — `test`
-4. **Micro-lab: Re-run the analysis from a clean environment and compare outputs.** — `lab`
+4. **Micro-lab: Re-run the analysis from a clean environment and compare outputs.**
+   - kind: `lab`
+#### Module 5 — Dataset Study
 
-### Module 5 — Dataset Study
+**Reading:** **B33** Ch. 13 (Data Analysis Examples), Ch. 9–10. **B35** Ch. 3 (Data Engineering Fundamentals) for provenance and file formats.
 
-#### Outcomes
 
-*Outcome review pending against this course's required capabilities.*
-
-#### Lessons
-
-1. **Complete the Dataset Study with a data dictionary, analysis, visualizations, and quality report** — `lab`
-
-## Completion requirements
-
-**Pending outcome-based migration:** Preserve and review the historical tasks and project requirements below. Before adopting this course against v0.2.0, assign stable outcome and summative assessment IDs, define published work/criteria/evidence, verify full outcome coverage and safety constraints, and distinguish formative practice from required work.
+1. **Complete the Dataset Study with a data dictionary, analysis, visualizations, and quality report**
+   - kind: `lab`
 
 ### Topics
 
@@ -132,3 +159,6 @@ Deliver:
 - five meaningful visualizations
 - quality report
 - documented risks
+
+---
+

@@ -1,19 +1,22 @@
-# SYS2 — Systems Programming with C & Rust
+## SYS2 — Systems Programming with C & Rust
 
-**Program:** SYS — Systems Engineering
-**Type:** `course`
-**Prerequisites:** SYS1 *(legacy mapping; reconcile before activation)*
 **Duration:** 6 weeks
-**Status:** `draft`
 **Expected workload:** 10–15 focused hours/week
+**Prerequisite:** SYS1
 
-> **Unmigrated historical course — not OEE v0.2.0-conforming.** This educational outline was transferred from [the content repository](https://github.com/0xbuffdev/content/blob/0e14d4ff5808a4ea972206ed015a3e4737b33ad7/docs/curriculum/SYS.md) before curriculum duplication is retired. The former `test` and `lab` labels are descriptions of historical activities, not automatic OEE completion requirements. Its outcome IDs, assessment IDs, criteria, and evidence still require v0.2.0 review. Reading and purchasing mappings remain in the content repository.
-
-## Overview
+### Overview
 
 Work with Unix processes, memory allocation, files, system calls, and resource lifetimes in C and Rust. The course uses side-by-side implementations to make memory safety and ownership meaningful rather than abstract.
 
-## Learning outcomes
+### Prerequisites
+
+**SYS1 — Computer Architecture, Memory & Performance**
+
+**Kind:** `course`
+
+### Learning outcomes
+
+By the end of the course, you will be able to:
 
 - Use Unix system interfaces to interact with processes, files, and operating-system resources.
 - Reason about resource ownership and lifetime in systems programs.
@@ -21,85 +24,112 @@ Work with Unix processes, memory allocation, files, system calls, and resource l
 - Compare manual memory-management risks with Rust ownership and borrowing.
 - Build a multi-module systems utility and test its failure and cleanup paths.
 
-## Modules
 
-### Module 1 — Unix Processes & Resources
+### Resource map
 
-#### Outcomes
+**Required**
+
+- **B5** Ch. 3–7, 13–14, 20–22, 24–27, 37 and 44 (with §§6.3–6.4) · **B4** Ch. 2, 4–6 and 13–15 · **B2** Ch. 4–5 and §8.7 — local library.
+- **B15** Ch. 4, 9, 10 (§10.3), 12, 15 (§15.3) and 20 (§20.1) — ownership, errors, lifetimes, a CLI project, Drop, unsafe Rust.
+- **R36** Meet Safe and Unsafe; Obligatory Resource Management; Unwinding; Foreign Function Interface.
+
+**Optional**
+
+- **R42** Command-line apps in Rust.
+
+### Modules
+
+#### Module 1 — Unix Processes & Resources
+
+**Reading:** **B5** Ch. 6 (Processes), Ch. 24 (Process Creation), Ch. 25 (Process Termination), Ch. 26 (Monitoring Child Processes), Ch. 27 (Program Execution). **B4** Ch. 4 (The Abstraction: The Process), Ch. 5 (Interlude: Process API), Ch. 6 (Mechanism: Limited Direct Execution). **B15** Ch. 4 §4.1 (What Is Ownership?), Ch. 15 §15.3 (Running Code on Cleanup with the Drop Trait).
+
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Unix process model and process creation** in the context of the course.
 - Apply **Resource ownership and lifetime** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Unix process model and process creation**
+   - kind: `lesson`
+2. **Resource ownership and lifetime**
+   - kind: `lesson`
+3. **Checkpoint: process and resource reasoning**
+   - kind: `test`
 
-1. **Unix process model and process creation** — `lesson`
-2. **Resource ownership and lifetime** — `lesson`
-3. **Checkpoint: process and resource reasoning** — `test`
-4. **Micro-lab: Track which component owns each file descriptor or allocated resource.** — `lab`
+4. **Micro-lab: Track which component owns each file descriptor or allocated resource.**
+   - kind: `lab`
+#### Module 2 — Memory & System Calls
 
-### Module 2 — Memory & System Calls
+**Reading:** **B5** Ch. 3 (System Programming Concepts), Ch. 4 (File I/O: The Universal I/O Model), Ch. 5 (File I/O: Further Details), Ch. 7 (Memory Allocation), §§6.3–6.4 (memory layout; virtual memory management). **B4** Ch. 13 (Address Spaces), Ch. 14 (Interlude: Memory API), Ch. 15 (Mechanism: Address Translation). **B2** §8.7 (A Storage Allocator).
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Memory allocation and address spaces** in the context of the course.
 - Apply **Files, descriptors, and system calls** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Memory allocation and address spaces**
+   - kind: `lesson`
+2. **Files, descriptors, and system calls**
+   - kind: `lesson`
+3. **Checkpoint: system interfaces**
+   - kind: `test`
 
-1. **Memory allocation and address spaces** — `lesson`
-2. **Files, descriptors, and system calls** — `lesson`
-3. **Checkpoint: system interfaces** — `test`
-4. **Micro-lab: Observe a system call boundary and explain its inputs and outputs.** — `lab`
+4. **Micro-lab: Observe a system call boundary and explain its inputs and outputs.**
+   - kind: `lab`
+#### Module 3 — C/Rust Safety Boundaries
 
-### Module 3 — C/Rust Safety Boundaries
+**Reading:** **B15** Ch. 4 (Understanding Ownership), Ch. 10 §10.3 (Validating References with Lifetimes), Ch. 20 §20.1 (Unsafe Rust). **R36** Meet Safe and Unsafe; Foreign Function Interface. **B2** Ch. 5 (Pointers and Arrays) as the C side of the comparison.
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **C memory hazards and Rust ownership** in the context of the course.
 - Apply **Unsafe boundaries and FFI concepts** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **C memory hazards and Rust ownership**
+   - kind: `lesson`
+2. **Unsafe boundaries and FFI concepts**
+   - kind: `lesson`
+3. **Checkpoint: safety guarantees**
+   - kind: `test`
 
-1. **C memory hazards and Rust ownership** — `lesson`
-2. **Unsafe boundaries and FFI concepts** — `lesson`
-3. **Checkpoint: safety guarantees** — `test`
-4. **Micro-lab: Compare one resource-management implementation in C and Rust.** — `lab`
+4. **Micro-lab: Compare one resource-management implementation in C and Rust.**
+   - kind: `lab`
+#### Module 4 — Signals & Robust Services
 
-### Module 4 — Signals & Robust Services
+**Reading:** **B5** Ch. 20 (Signals: Fundamental Concepts), Ch. 21 (Signals: Signal Handlers), Ch. 22 (Signals: Advanced Features), Ch. 25 (Process Termination), Ch. 37 (Daemons). **B15** Ch. 9 (Error Handling).
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Signals and controlled shutdown** in the context of the course.
 - Apply **Error handling in systems programs** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Signals and controlled shutdown**
+   - kind: `lesson`
+2. **Error handling in systems programs**
+   - kind: `lesson`
+3. **Checkpoint: service correctness**
+   - kind: `test`
 
-1. **Signals and controlled shutdown** — `lesson`
-2. **Error handling in systems programs** — `lesson`
-3. **Checkpoint: service correctness** — `test`
-4. **Micro-lab: Add graceful signal handling and verify cleanup.** — `lab`
+4. **Micro-lab: Add graceful signal handling and verify cleanup.**
+   - kind: `lab`
+#### Module 5 — Rust Unix Service Utility
 
-### Module 5 — Rust Unix Service Utility
+**Reading:** **B5** Ch. 37 (Daemons), Ch. 44 (Pipes and FIFOs), Ch. 13–14 (File I/O Buffering; File Systems). **B15** Ch. 9 (Error Handling), Ch. 11 (Writing Automated Tests), Ch. 12 (An I/O Project: Building a Command Line Program). *Optional:* **R42** Command-line apps in Rust.
 
-#### Outcomes
 
-*Outcome review pending against this course's required capabilities.*
-
-#### Lessons
-
-1. **Build and validate the Rust Unix Service Utility** — `lab`
-
-## Completion requirements
-
-**Pending outcome-based migration:** Preserve and review the historical tasks and project requirements below. Before adopting this course against v0.2.0, assign stable outcome and summative assessment IDs, define published work/criteria/evidence, verify full outcome coverage and safety constraints, and distinguish formative practice from required work.
+1. **Build and validate the Rust Unix Service Utility**
+   - kind: `lab`
 
 ### Topics
 
@@ -127,3 +157,6 @@ By the end of this module, the learner can:
 **Rust Unix Service Utility**
 
 A multi-module command-line or daemon-style utility that interacts directly with Linux facilities.
+
+---
+

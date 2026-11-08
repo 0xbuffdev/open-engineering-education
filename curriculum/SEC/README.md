@@ -1,8 +1,7 @@
-# Program 5 — SEC: Security Engineering
+> Part of the [Zero to Software Engineer](../00-overview.md) curriculum · Program 5 of 5 · [Resource library](../resources/README.md) · [Shared standards](../shared/electives-assessment-graduation.md) · Previous: [AI](04-AI-ai-engineering.md)
 
-> [OEE curriculum](../README.md) · [Specification](../../spec/README.md) · [Historical source at 0e14d4ff5808](https://github.com/0xbuffdev/content/blob/0e14d4ff5808a4ea972206ed015a3e4737b33ad7/docs/curriculum/SEC.md)
-
-**Migration status:** The course documents below are preserved historical drafts and **not yet conforming to OEE v0.2.0**. Their old curriculum sequence and prerequisites must be reviewed; the source's books, chapters, and other resource assignments stay in the content repository.
+# PROGRAM 5 — SEC
+# Security Engineering
 
 ## Overview
 
@@ -31,26 +30,74 @@ By the end of this program, you will be able to:
 
 The learner must demonstrate the knowledge, practical skills, and engineering judgment described by the program outcomes and successfully complete the program capstone.
 
-## Courses
+---
 
-| Code | Course | Type | Duration |
-| --- | --- | --- | --- |
-| [SEC1](SEC1.md) | Security Foundations & Threat Modeling | `course` | 5 weeks |
-| [SEC2](SEC2.md) | Web & Application Security | `course` | 6 weeks |
-| [SEC3](SEC3.md) | Systems & Binary Security | `course` | 6 weeks |
-| [SEC4](SEC4.md) | Network & Infrastructure Security | `course` | 5 weeks |
-| [SEC5](SEC5.md) | Applied Cryptography & Secure Protocols | `course` | 5 weeks |
-| [SEC6](SEC6.md) | Cloud, Containers & Identity Security | `course` | 5 weeks |
-| [SEC7](SEC7.md) | Detection, Incident Response & Threat Hunting | `course` | 5 weeks |
-| [SEC8](SEC8.md) | AI Security & Authorized Red Teaming | `course` | 4 weeks |
-| [SEC9](SEC9.md) | Security Engineering Capstone | `project` | 8–10 weeks |
+---
 
-## Required next review
+## SEC resource index
 
-1. Reconcile original prerequisites against today's OEE SEF/APP course codes and the full program dependency graph.
-2. Review the learning outcomes and lesson progression under [Course Format](../../spec/course-format.md) and the one-primary-objective-per-lesson guidance in [Curriculum Design Guide](../DESIGN-GUIDE.md).
-3. Give the course observable, stable outcome IDs and required summative assessment IDs, with public work, success criteria, and proportionate evidence for **every** required outcome.
-4. Treat old module checkpoint and micro-lab placements as **historical proposals**, not mandatory `v0.2.0` completion gates.
-5. Specify safe, reproducible experimentation and a reviewable technical defense when substantial project outcomes require it.
-6. Preserve book/resource mappings **outside OEE**, keyed by OEE course codes in the content repository.
-7. Verify educational coverage manually. A structurally valid file or `draft` status does not constitute course or implementation conformance.
+*Generated from the master library: 49 resources are used in this program. "Also used in" shows reuse by other programs. Full details: [books](../resources/books.md) · [online](../resources/online.md) · [matrix](../resources/matrix.md) · [glossary](../resources/glossary.md).*
+
+> Access markers: 📚 local library · 🌐 free online/download · 🛒 obtain (borrow or buy) · 🔐 account, isolated lab or GPU needed.
+
+### Books
+
+| Code | Resource | Access | Courses in this program | Also used in |
+|---|---|---|---|---|
+| B2 | *The C Programming Language*, 2nd ed. — Kernighan & Ritchie | 📚 | SEC3 | SEF, SYS |
+| B4 | *Operating Systems: Three Easy Pieces* — Arpaci-Dusseau & Arpaci-Dusseau | 📚 | SEC3 | SEF, SYS |
+| B5 | *The Linux Programming Interface* — Michael Kerrisk | 📚 | SEC1, SEC2, SEC3, SEC4, SEC6 | SEF, APP, SYS |
+| B14 | *Computer Systems: A Programmer's Perspective*, 3rd ed. (CS:APP) — Bryant & O'Hallaron (Pearson, 2015) | 🛒 | SEC3 | SEF, SYS |
+| B15 | *The Rust Programming Language* (2024 edition) — Klabnik, Nichols & Krycho | 🌐 | SEC3 | SEF, SYS |
+| B19 | *Computer Networking: A Top-Down Approach*, 8th ed. — Kurose & Ross (Pearson, 2020); the 9th ed. (2026) moves Socket Programming to §2.6 | 🛒 | SEC4 | APP, SYS |
+| B20 | *High Performance Browser Networking* — Ilya Grigorik (O'Reilly, 2013) | 🌐 | SEC4 | APP |
+| B26 | *Site Reliability Engineering* — Beyer, Jones, Petoff & Murphy (O'Reilly, 2016) | 🌐 | SEC7 | APP, SYS, AI |
+| B38 | *AI Engineering* — Chip Huyen (O'Reilly, 2025) | 🛒 | SEC8 | AI |
+| B40 | *Threat Modeling: Designing for Security* — Adam Shostack (Wiley, 2014) | 🛒 | SEC1, SEC9 | — |
+| B41 | *Security Engineering*, 3rd ed. — Ross Anderson (Wiley, 2020) | 🛒 · 🌐 chapters online | SEC1, SEC4 | — |
+| B42 | *Serious Cryptography*, 2nd ed. — Jean-Philippe Aumasson (No Starch, 2024) | 🛒 | SEC5 | — |
+| B43 | *Building Secure and Reliable Systems* — Adkins et al. (O'Reilly / Google, 2020) | 🌐 | SEC6, SEC7, SEC9 | SYS |
+| B44 | *Container Security*, 2nd ed. — Liz Rice (O'Reilly); the 2020 first edition numbers chapters differently | 🛒 | SEC6 | — |
+
+### Online resources, standards and papers
+
+| Code | Resource | Access | Courses in this program | Also used in |
+|---|---|---|---|---|
+| R14 | OWASP Cheat Sheet Series (cheatsheetseries.owasp.org) | 🌐 | SEC1, SEC2, SEC4, SEC6, SEC7, SEC9 | APP |
+| R22 | Mozilla Server-Side TLS guidelines and Let's Encrypt documentation | 🌐 | SEC4 | APP |
+| R28 | OWASP Application Security Verification Standard (ASVS) 5.0 (owasp.org/www-project-application-security-verification-standard) | 🌐 | SEC1, SEC2, SEC9 | APP |
+| R29 | OWASP Web Security Testing Guide (WSTG) (owasp.org/www-project-web-security-testing-guide) | 🌐 | SEC2, SEC9 | — |
+| R30 | OWASP API Security Top 10 (2023) (owasp.org/API-Security) | 🌐 | SEC2 | APP |
+| R31 | OWASP Top 10:2025 (owasp.org/Top10/2025) | 🌐 | SEC1, SEC2, SEC4, SEC6, SEC7 | APP |
+| R32 | PortSwigger Web Security Academy (portswigger.net/web-security) | 🌐 · 🔐 account | SEC2 | — |
+| R36 | The Rustonomicon (doc.rust-lang.org/nomicon) | 🌐 | SEC3 | SYS |
+| R59 | “Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection” — Greshake et al. (2023) (arxiv.org/abs/2302.12173) | 🌐 | SEC8 | AI |
+| R60 | OWASP Top 10 for LLM Applications 2025 (genai.owasp.org/llm-top-10) | 🌐 | SEC8 | AI |
+| R61 | OWASP Top 10 for Agentic Applications (genai.owasp.org) | 🌐 | SEC8 | — |
+| R62 | NIST AI 100-2 E2025 — Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (csrc.nist.gov) | 🌐 | SEC8 | — |
+| R63 | MITRE ATLAS (atlas.mitre.org) | 🌐 | SEC8 | — |
+| R64 | pwn.college (pwn.college) | 🌐 · 🔐 isolated lab | SEC3 | — |
+| R65 | “SoK: Eternal War in Memory” — Szekeres et al. (IEEE S&P 2013) | 🌐 | SEC3 | — |
+| R66 | *Nmap Network Scanning* — Gordon “Fyodor” Lyon (nmap.org/book) | 🌐 | SEC4 | — |
+| R67 | CIS Benchmarks (cisecurity.org/cis-benchmarks) | 🌐 · 🔐 free account | SEC4, SEC6 | — |
+| R68 | NIST SP 800-123 — Guide to General Server Security (csrc.nist.gov) | 🌐 | SEC4 | — |
+| R69 | NIST SP 800-92 — Guide to Computer Security Log Management (csrc.nist.gov) | 🌐 | SEC4, SEC7 | — |
+| R70 | NIST SP 800-52 Rev. 2 — Guidelines for TLS Implementations (csrc.nist.gov) | 🌐 | SEC4 | — |
+| R71 | NIST SP 800-57 Part 1 Rev. 5 — Recommendation for Key Management (csrc.nist.gov) | 🌐 | SEC5 | — |
+| R72 | NIST SP 800-190 — Application Container Security Guide (csrc.nist.gov) | 🌐 | SEC6 | — |
+| R73 | NIST SP 800-61 Rev. 3 — Incident Response Recommendations and Considerations for Cybersecurity Risk Management (csrc.nist.gov) | 🌐 | SEC7 | — |
+| R74 | NIST SP 800-86 — Guide to Integrating Forensic Techniques into Incident Response (csrc.nist.gov) | 🌐 | SEC7 | — |
+| R75 | NIST SP 800-115 — Technical Guide to Information Security Testing and Assessment (csrc.nist.gov) | 🌐 | SEC8, SEC9 | — |
+| R76 | libsodium documentation (doc.libsodium.org) | 🌐 | SEC5 | — |
+| R77 | SLSA specification (slsa.dev) | 🌐 | SEC6 | — |
+| R78 | OWASP Top 10 CI/CD Security Risks (owasp.org/www-project-top-10-ci-cd-security-risks) | 🌐 | SEC6 | — |
+| R79 | AWS IAM documentation — security best practices and policy evaluation logic (docs.aws.amazon.com/IAM) | 🌐 · 🔐 account optional | SEC6 | — |
+| R80 | MITRE ATT&CK (attack.mitre.org) | 🌐 | SEC7, SEC9 | — |
+| R81 | Sigma detection-rule specification (sigmahq.io) | 🌐 | SEC7 | — |
+| R82 | PTES — Penetration Testing Execution Standard (pentest-standard.org) | 🌐 | SEC9 | — |
+| R83 | FIRST CVSS v4.0 specification (first.org/cvss) | 🌐 | SEC9 | — |
+| R84 | OWASP Juice Shop (owasp.org/www-project-juice-shop) | 🌐 · 🔐 isolated lab | SEC2 | — |
+| R85 | TryHackMe / Hack The Box (authorized labs) | 🌐 · 🔐 account | SEC4 | — |
+
+---
+

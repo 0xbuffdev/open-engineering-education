@@ -1,19 +1,18 @@
-# SEC9 — Security Engineering Capstone
+## SEC9 — Security Engineering Capstone
 
-**Program:** SEC — Security Engineering
-**Type:** `project`
-**Prerequisites:** Pending reconciliation of historical prerequisite notes
 **Duration:** 8–10 weeks
-**Status:** `draft`
 **Expected workload:** 10–15 focused hours/week
 
-> **Unmigrated historical course — not OEE v0.2.0-conforming.** This educational outline was transferred from [the content repository](https://github.com/0xbuffdev/content/blob/0e14d4ff5808a4ea972206ed015a3e4737b33ad7/docs/curriculum/SEC.md) before curriculum duplication is retired. The former `test` and `lab` labels are descriptions of historical activities, not automatic OEE completion requirements. Its outcome IDs, assessment IDs, criteria, and evidence still require v0.2.0 review. Reading and purchasing mappings remain in the content repository.
-
-## Overview
-
+### Overview
 The capstone is the final project course in Security Engineering. You will choose an authorized target, establish scope and rules of engagement, assess the system, implement or recommend defenses, and verify that the important findings have been addressed.
 
-## Learning outcomes
+### Prerequisites
+**SEC1–SEC8 — Security Engineering**
+
+**Kind:** `project`
+
+### Learning outcomes
+By the end of the project, you will be able to:
 
 - Establish clear legal and technical scope for a security assessment.
 - Analyze a system's architecture, trust boundaries, and attack surface.
@@ -23,78 +22,95 @@ The capstone is the final project course in Security Engineering. You will choos
 - Evaluate detection and incident-response readiness.
 - Communicate security findings to both technical and non-technical stakeholders.
 
-## Modules
+### Resource map
 
-### Module 1 — Scope & Threat Model
+**Required**
 
-#### Outcomes
+- **R75** NIST SP 800-115 · **R82** PTES · **R83** CVSS v4.0.
+- **B40** Ch. 1–10 · **B43** Ch. 15–18 · **R29** WSTG · **R28** ASVS.
+
+### Modules
+
+#### Module 1 — Scope & Threat Model
+
+**Reading:** **R75** NIST SP 800-115 (planning; rules of engagement). **R82** PTES pre-engagement interactions; threat modeling. **B40** Ch. 1–5.
+
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Rules of engagement, architecture, assets, trust boundaries, and threats** in the context of the course.
 
-#### Lessons
+1. **Rules of engagement, architecture, assets, trust boundaries, and threats**
+   - kind: `lesson`
+2. **Scope checkpoint**
+   - kind: `test`
 
-1. **Rules of engagement, architecture, assets, trust boundaries, and threats** — `lesson`
-2. **Scope checkpoint** — `test`
-3. **Micro-lab: Build a scoped threat model and identify the highest-risk attack paths.** — `lab`
+3. **Micro-lab: Build a scoped threat model and identify the highest-risk attack paths.**
+   - kind: `lab`
+#### Module 2 — Security Assessment
 
-### Module 2 — Security Assessment
+**Reading:** **R75** testing techniques (target identification and analysis; vulnerability validation). **R29** WSTG. **R82** intelligence gathering; vulnerability analysis; exploitation (authorized targets only).
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Attack-surface analysis and authorized testing methodology** in the context of the course.
 
-#### Lessons
+1. **Attack-surface analysis and authorized testing methodology**
+   - kind: `lesson`
+2. **Assessment checkpoint**
+   - kind: `test`
 
-1. **Attack-surface analysis and authorized testing methodology** — `lesson`
-2. **Assessment checkpoint** — `test`
-3. **Micro-lab: Validate one in-scope hypothesis against the approved target and record evidence.** — `lab`
+3. **Micro-lab: Validate one in-scope hypothesis against the approved target and record evidence.**
+   - kind: `lab`
+#### Module 3 — Findings, Detection & Incident Handling
 
-### Module 3 — Findings, Detection & Incident Handling
+**Reading:** **R82** reporting. **R83** CVSS v4.0 (severity rationale). **B43** Ch. 15–18. **R80** ATT&CK for the detection and response review.
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Evidence, severity, root cause, detection, response, and reporting** in the context of the course.
 
-#### Lessons
+1. **Evidence, severity, root cause, detection, response, and reporting**
+   - kind: `lesson`
+2. **Finding analysis checkpoint**
+   - kind: `test`
 
-1. **Evidence, severity, root cause, detection, response, and reporting** — `lesson`
-2. **Finding analysis checkpoint** — `test`
-3. **Micro-lab: Turn one finding into a developer-actionable remediation and regression test.** — `lab`
+3. **Micro-lab: Turn one finding into a developer-actionable remediation and regression test.**
+   - kind: `lab`
+#### Module 4 — Remediation & Retest
 
-### Module 4 — Remediation & Retest
+**Reading:** **B40** Ch. 7–10 (managing and validating threats). **R28** ASVS. **R14** the cheat sheet for each remediation.
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Secure design, remediation, validation, retesting, and risk communication** in the context of the course.
 - Apply **Remediation review** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Secure design, remediation, validation, retesting, and risk communication**
+   - kind: `lesson`
+2. **Remediation review**
+   - kind: `test`
 
-1. **Secure design, remediation, validation, retesting, and risk communication** — `lesson`
-2. **Remediation review** — `test`
-3. **Micro-lab: Retest a corrected control and compare evidence before and after remediation.** — `lab`
+3. **Micro-lab: Retest a corrected control and compare evidence before and after remediation.**
+   - kind: `lab`
+#### Module 5 — Final Project Lab
 
-### Module 5 — Final Project Lab
+**Reading:** Apply all earlier readings. **R75** and **R82** for the report structure.
 
-#### Outcomes
 
-*Outcome review pending against this course's required capabilities.*
-
-#### Lessons
-
-1. **Perform the authorized assessment, implement or validate remediation, complete the retest, and prepare the final security report for defense** — `lab`
-
-## Completion requirements
-
-**Pending outcome-based migration:** Preserve and review the historical tasks and project requirements below. Before adopting this course against v0.2.0, assign stable outcome and summative assessment IDs, define published work/criteria/evidence, verify full outcome coverage and safety constraints, and distinguish formative practice from required work.
+1. **Perform the authorized assessment, implement or validate remediation, complete the retest, and prepare the final security report for defense**
+   - kind: `lab`
 
 ### Required phases
 

@@ -1,19 +1,22 @@
-# AI5 — Retrieval, Agents & Applied Generative AI
+## AI5 — Retrieval, Agents & Applied Generative AI
 
-**Program:** AI — AI Engineering
-**Type:** `course`
-**Prerequisites:** AI4 *(legacy mapping; reconcile before activation)*
 **Duration:** 6 weeks
-**Status:** `draft`
 **Expected workload:** 10–15 focused hours/week
+**Prerequisite:** AI4
 
-> **Unmigrated historical course — not OEE v0.2.0-conforming.** This educational outline was transferred from [the content repository](https://github.com/0xbuffdev/content/blob/0e14d4ff5808a4ea972206ed015a3e4737b33ad7/docs/curriculum/AI.md) before curriculum duplication is retired. The former `test` and `lab` labels are descriptions of historical activities, not automatic OEE completion requirements. Its outcome IDs, assessment IDs, criteria, and evidence still require v0.2.0 review. Reading and purchasing mappings remain in the content repository.
-
-## Overview
+### Overview
 
 Move from model understanding to AI application engineering through retrieval, tool use, agent loops, permissions, prompt/tool boundaries, evaluation, and failure analysis.
 
-## Learning outcomes
+### Prerequisites
+
+**AI4 — Transformers & Large Language Models**
+
+**Kind:** `course`
+
+### Learning outcomes
+
+By the end of the course, you will be able to:
 
 - Design a retrieval pipeline and evaluate retrieval quality.
 - Build bounded tool-using or agentic workflows with explicit permissions.
@@ -21,85 +24,108 @@ Move from model understanding to AI application engineering through retrieval, t
 - Test retrieval failures, tool failures, and prompt-injection risks in a controlled environment.
 - Evaluate an AI workflow using reproducible cases rather than anecdotal prompts.
 
-## Modules
 
-### Module 1 — Retrieval Foundations
+### Resource map
 
-#### Outcomes
+**Required**
+
+- **B38** Ch. 5 (Prompt Engineering) and Ch. 6 (RAG and Agents), with Ch. 2 (Sampling — structured outputs), Ch. 4 (Evaluate AI Systems) and Ch. 10 (architecture, guardrails, feedback).
+- **B39** Ch. 1, 6 and 8 (Boolean retrieval; scoring, term weighting and the vector space model; evaluation in information retrieval).
+- **R57** Building effective agents · **R58** the RAG paper · **R60** LLM01, LLM05, LLM06, LLM08.
+
+### Modules
+
+#### Module 1 — Retrieval Foundations
+
+**Reading:** **B38** Ch. 6 §6.1 (RAG — architecture; retrieval algorithms; retrieval optimization: chunking, reranking, query rewriting). **B39** Ch. 1 (Boolean retrieval), Ch. 6 (Scoring, term weighting and the vector space model), Ch. 8 (Evaluation in information retrieval).
+
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Embeddings and retrieval** in the context of the course.
 - Apply **Chunking, ranking, and retrieval quality** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Embeddings and retrieval**
+   - kind: `lesson`
+2. **Chunking, ranking, and retrieval quality**
+   - kind: `lesson`
+3. **Checkpoint: retrieval design**
+   - kind: `test`
 
-1. **Embeddings and retrieval** — `lesson`
-2. **Chunking, ranking, and retrieval quality** — `lesson`
-3. **Checkpoint: retrieval design** — `test`
-4. **Micro-lab: Compare two chunking strategies on a small corpus.** — `lab`
+4. **Micro-lab: Compare two chunking strategies on a small corpus.**
+   - kind: `lab`
+#### Module 2 — RAG Pipelines
 
-### Module 2 — RAG Pipelines
+**Reading:** **B38** Ch. 6 §6.1 (RAG architecture; retrieval algorithms; RAG beyond text), Ch. 5 (Prompt Engineering — context and grounding). **R58** the RAG paper. **R60** LLM08 (Vector and Embedding Weaknesses).
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Retrieval-augmented generation** in the context of the course.
 - Apply **Grounding and citations** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Retrieval-augmented generation**
+   - kind: `lesson`
+2. **Grounding and citations**
+   - kind: `lesson`
+3. **Checkpoint: grounded generation**
+   - kind: `test`
 
-1. **Retrieval-augmented generation** — `lesson`
-2. **Grounding and citations** — `lesson`
-3. **Checkpoint: grounded generation** — `test`
-4. **Micro-lab: Build a retrieval step that returns evidence with each generated answer.** — `lab`
+4. **Micro-lab: Build a retrieval step that returns evidence with each generated answer.**
+   - kind: `lab`
+#### Module 3 — Tool Use & Structured Outputs
 
-### Module 3 — Tool Use & Structured Outputs
+**Reading:** **B38** Ch. 6 (Agents: tools and planning), Ch. 2 (Sampling — structured outputs). **R57** Building effective agents. **R60** LLM05 (Improper Output Handling), LLM06 (Excessive Agency).
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Tool calling and structured outputs** in the context of the course.
 - Apply **Permissions and bounded action spaces** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Tool calling and structured outputs**
+   - kind: `lesson`
+2. **Permissions and bounded action spaces**
+   - kind: `lesson`
+3. **Checkpoint: tool boundary design**
+   - kind: `test`
 
-1. **Tool calling and structured outputs** — `lesson`
-2. **Permissions and bounded action spaces** — `lesson`
-3. **Checkpoint: tool boundary design** — `test`
-4. **Micro-lab: Allowlist one tool and reject an unapproved call.** — `lab`
+4. **Micro-lab: Allowlist one tool and reject an unapproved call.**
+   - kind: `lab`
+#### Module 4 — Agents, Memory & Injection
 
-### Module 4 — Agents, Memory & Injection
+**Reading:** **B38** Ch. 6 (agent failure modes and evaluation; memory), Ch. 5 (defensive prompt engineering — prompt attacks). **R60** LLM01 (Prompt Injection). **R59** indirect prompt injection.
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Agent loops, state, and memory** in the context of the course.
 - Apply **Prompt injection and failure evaluation** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Agent loops, state, and memory**
+   - kind: `lesson`
+2. **Prompt injection and failure evaluation**
+   - kind: `lesson`
+3. **Checkpoint: agent failure modes**
+   - kind: `test`
 
-1. **Agent loops, state, and memory** — `lesson`
-2. **Prompt injection and failure evaluation** — `lesson`
-3. **Checkpoint: agent failure modes** — `test`
-4. **Micro-lab: Construct a benign injection test and verify the control blocks the unsafe path.** — `lab`
+4. **Micro-lab: Construct a benign injection test and verify the control blocks the unsafe path.**
+   - kind: `lab`
+#### Module 5 — Bounded RAG/Tool-Using Agent
 
-### Module 5 — Bounded RAG/Tool-Using Agent
+**Reading:** **B38** Ch. 6; Ch. 4 (Evaluate AI Systems — evaluation pipelines); Ch. 10 (guardrails; logging and monitoring; user feedback).
 
-#### Outcomes
 
-*Outcome review pending against this course's required capabilities.*
-
-#### Lessons
-
-1. **Build, evaluate, red-team, and document the Bounded RAG/Tool-Using Agent** — `lab`
-
-## Completion requirements
-
-**Pending outcome-based migration:** Preserve and review the historical tasks and project requirements below. Before adopting this course against v0.2.0, assign stable outcome and summative assessment IDs, define published work/criteria/evidence, verify full outcome coverage and safety constraints, and distinguish formative practice from required work.
+1. **Build, evaluate, red-team, and document the Bounded RAG/Tool-Using Agent**
+   - kind: `lab`
 
 ### Topics
 
@@ -137,3 +163,6 @@ The system must include:
 - failure tests
 - human stop/control
 - logs
+
+---
+

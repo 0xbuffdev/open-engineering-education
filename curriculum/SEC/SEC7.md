@@ -1,19 +1,23 @@
-# SEC7 — Detection, Incident Response & Threat Hunting
+## SEC7 — Detection, Incident Response & Threat Hunting
 
-**Program:** SEC — Security Engineering
-**Type:** `course`
-**Prerequisites:** SEC4 and SEC6 *(legacy mapping; reconcile before activation)*
 **Duration:** 5 weeks
-**Status:** `draft`
 **Expected workload:** 10–15 focused hours/week
+**Prerequisite:** SEC4 and SEC6
 
-> **Unmigrated historical course — not OEE v0.2.0-conforming.** This educational outline was transferred from [the content repository](https://github.com/0xbuffdev/content/blob/0e14d4ff5808a4ea972206ed015a3e4737b33ad7/docs/curriculum/SEC.md) before curriculum duplication is retired. The former `test` and `lab` labels are descriptions of historical activities, not automatic OEE completion requirements. Its outcome IDs, assessment IDs, criteria, and evidence still require v0.2.0 review. Reading and purchasing mappings remain in the content repository.
-
-## Overview
+### Overview
 
 Develop defensive security skills through logging, detection rules, incident triage, evidence handling, host forensics, root-cause analysis, threat hunting, and recovery exercises.
 
-## Learning outcomes
+### Prerequisites
+
+**SEC4 — Network & Infrastructure Security**
+**SEC6 — Cloud, Containers & Identity Security**
+
+**Kind:** `course`
+
+### Learning outcomes
+
+By the end of the course, you will be able to:
 
 - Design useful security telemetry and detection signals.
 - Investigate a controlled security incident from logs and system artifacts.
@@ -22,43 +26,64 @@ Develop defensive security skills through logging, detection rules, incident tri
 - Construct an incident timeline and identify root cause.
 - Recommend and verify remediation following a controlled incident.
 
-## Modules
 
-### Module 1 — Security Telemetry
+### Resource map
 
-#### Outcomes
+**Required**
+
+- **R73** NIST SP 800-61 Rev. 3 · **B43** Ch. 15–18 · **R69** NIST SP 800-92 · **R74** NIST SP 800-86.
+- **R80** MITRE ATT&CK · **R81** Sigma · **B26** Ch. 15 (Postmortem Culture).
+
+### Modules
+
+#### Module 1 — Security Telemetry
+
+**Reading:** **R69** NIST SP 800-92 (log management). **B43** Ch. 15 (Investigating Systems). **R14** Logging cheat sheet. **R31** A09 Security Logging and Alerting Failures.
+
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Logs, telemetry, and indicators** in the context of the course.
 - Apply **Building useful security evidence** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Logs, telemetry, and indicators**
+   - kind: `lesson`
+2. **Building useful security evidence**
+   - kind: `lesson`
+3. **Checkpoint: telemetry**
+   - kind: `test`
 
-1. **Logs, telemetry, and indicators** — `lesson`
-2. **Building useful security evidence** — `lesson`
-3. **Checkpoint: telemetry** — `test`
-4. **Micro-lab: Select the telemetry needed to answer a concrete incident question.** — `lab`
+4. **Micro-lab: Select the telemetry needed to answer a concrete incident question.**
+   - kind: `lab`
+#### Module 2 — Detection & Triage
 
-### Module 2 — Detection & Triage
+**Reading:** **R80** ATT&CK tactics and techniques; data sources and detections. **R81** Sigma rule specification. **R73** the Detect and Respond functions.
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Detection rules and alert quality** in the context of the course.
 - Apply **Incident triage and containment** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Detection rules and alert quality**
+   - kind: `lesson`
+2. **Incident triage and containment**
+   - kind: `lesson`
+3. **Checkpoint: incident triage**
+   - kind: `test`
 
-1. **Detection rules and alert quality** — `lesson`
-2. **Incident triage and containment** — `lesson`
-3. **Checkpoint: incident triage** — `test`
-4. **Micro-lab: Classify a controlled alert and choose the next evidence to collect.** — `lab`
+4. **Micro-lab: Classify a controlled alert and choose the next evidence to collect.**
+   - kind: `lab`
+#### Module 3 — Evidence & Root Cause
 
-### Module 3 — Evidence & Root Cause
+**Reading:** **B43** Ch. 15 (Investigating Systems). **R74** NIST SP 800-86 (the forensic process: collection, examination, analysis, reporting; using data from data files and from operating systems). **B26** Ch. 12 (Effective Troubleshooting), Ch. 15 (Postmortem Culture).
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -66,43 +91,45 @@ By the end of this module, the learner can:
 - Apply **Host acquisition and artifacts** in a problem, implementation, experiment, or design decision.
 - Apply **Root-cause analysis** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Evidence handling and timelines**
+   - kind: `lesson`
+2. **Host acquisition and artifacts** — order of volatility, integrity hashing, imaging a controlled lab system you own, and examining common host artifacts (authentication and system logs, shell history, process and network state, file timestamps)
+   - kind: `lesson`
+3. **Root-cause analysis**
+   - kind: `lesson`
+4. **Checkpoint: investigation reasoning**
+   - kind: `test`
 
-1. **Evidence handling and timelines** — `lesson`
-2. **Host acquisition and artifacts** — order of volatility, integrity hashing, imaging a controlled lab system you own, and examining common host artifacts (authentication and system logs, shell history, process and network state, file timestamps) — `lesson`
-3. **Root-cause analysis** — `lesson`
-4. **Checkpoint: investigation reasoning** — `test`
-5. **Micro-lab: Acquire host evidence from a controlled lab system, verify its integrity, and construct a timeline from the logs and artifacts.** — `lab`
+5. **Micro-lab: Acquire host evidence from a controlled lab system, verify its integrity, and construct a timeline from the logs and artifacts.**
+   - kind: `lab`
+#### Module 4 — Threat Hunting & Recovery
 
-### Module 4 — Threat Hunting & Recovery
+**Reading:** **R80** ATT&CK (hypothesis-driven hunting). **B43** Ch. 17 (Crisis Management), Ch. 18 (Recovery and Aftermath). **R73** the Recover function.
 
-#### Outcomes
+
+### Module outcomes
 
 By the end of this module, the learner can:
 
 - Explain **Threat hunting hypotheses** in the context of the course.
 - Apply **Recovery and post-incident review** in a problem, implementation, experiment, or design decision.
 
-#### Lessons
+1. **Threat hunting hypotheses**
+   - kind: `lesson`
+2. **Recovery and post-incident review**
+   - kind: `lesson`
+3. **Checkpoint: recovery decisions**
+   - kind: `test`
 
-1. **Threat hunting hypotheses** — `lesson`
-2. **Recovery and post-incident review** — `lesson`
-3. **Checkpoint: recovery decisions** — `test`
-4. **Micro-lab: Validate a hunting hypothesis and document the remediation follow-up.** — `lab`
+4. **Micro-lab: Validate a hunting hypothesis and document the remediation follow-up.**
+   - kind: `lab`
+#### Module 5 — Incident Investigation
 
-### Module 5 — Incident Investigation
+**Reading:** **B43** Ch. 15–18. **B26** Ch. 15. **R73** NIST SP 800-61 Rev. 3.
 
-#### Outcomes
 
-*Outcome review pending against this course's required capabilities.*
-
-#### Lessons
-
-1. **Investigate the controlled incident, produce evidence-backed findings, and verify remediation** — `lab`
-
-## Completion requirements
-
-**Pending outcome-based migration:** Preserve and review the historical tasks and project requirements below. Before adopting this course against v0.2.0, assign stable outcome and summative assessment IDs, define published work/criteria/evidence, verify full outcome coverage and safety constraints, and distinguish formative practice from required work.
+1. **Investigate the controlled incident, produce evidence-backed findings, and verify remediation**
+   - kind: `lab`
 
 ### Topics
 
@@ -133,3 +160,6 @@ By the end of this module, the learner can:
 **Incident Investigation**
 
 Investigate a controlled incident from logs and host artifacts, preserve and document the evidence, produce a timeline, identify the root cause, recommend fixes, and verify the fixes.
+
+---
+
