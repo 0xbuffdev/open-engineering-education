@@ -144,26 +144,35 @@ def read_brief(raw: str, owner: Path, root: Path) -> tuple[str | None, Path | No
         return None, candidate, "missing_input"
 
 
-def fields_in(text: str, base_line: int, source: Path) -> dict[str, tuple[str, str, int]]:
+def fields_in(text: str, base_line: int, source: Path,
+              format_path=display_path) -> dict[str, tuple[str, str, int]]:
     found = {}
     for number, row in enumerate(text.splitlines(), start=base_line):
         match = FIELD_RE.match(row)
         if match:
-            found[match.group(1).lower()] = (match.group(2).strip(), display_path(source), number)
+            found[match.group(1).lower()] = (match.group(2).strip(), format_path(source), number)
     return found
 
 
-def parse_structure(path: Path, text: str, root: Path) -> list[Finding]:
-    """Validate supported Markdown once; every outward view shares these findings."""
+def parse_structure(path: Path, text: str, root: Path, *,
+                    capture: dict | None = None, read_link=None,
+                    format_path=None) -> list[Finding]:
+    """Single structural interpretation for inspection and derived export.
+
+    Optional capture and read_link hooks are for Git-pinned Toolkit consumers;
+    the repository's existing maintenance callers retain worktree behavior.
+    """
     found: list[Finding] = []
-    label = display_path(path)
+    format_path = format_path or display_path
+    read_link = read_link or read_brief
+    label = format_path(path)
 
     def add(code: str, message: str, offset: int = 0,
             category: str = "structural_violation", source: Path | None = None,
             source_line: int | None = None) -> None:
         found.append(Finding(
             code, category, message,
-            display_path(source) if source else label,
+            format_path(source) if source else label,
             source_line if source_line is not None else line_at(text, offset),
         ))
 
@@ -182,6 +191,26 @@ def parse_structure(path: Path, text: str, root: Path) -> list[Finding]:
     if not kind_match:
         add("OEE003", "Type must be 'course' or 'project'")
     kind = kind_match.group(1) if kind_match else ""
+    if not re.search(r"(?m)^\*\*Status:\*\*\s*`?(draft|tested|verified)`?\s*$",
+                     metadata):
+        add("OEE036", "Status must be 'draft', 'tested', or 'verified'")
+    metadata_value = lambda key: (
+        match.group(1).strip()
+        if (match := re.search(rf"(?m)^\*\*{key}:\*\*\s*(.+)$", metadata))
+        else ""
+    )
+    if capture is not None:
+        capture.update({
+            "code": code,
+            "program": metadata_value("Program").split(" — ", 1)[0].strip(),
+            "type": kind,
+            "status": metadata_value("Status").strip("`"),
+            "prerequisitesText": metadata_value("Prerequisites"),
+            "outcomes": [],
+            "assessments": [],
+            "modules": [],
+            "coverage": {},
+        })
 
     headings = list(SECTION_RE.finditer(text))
     heading_names = [m.group(1).strip() for m in headings]
@@ -215,6 +244,12 @@ def parse_structure(path: Path, text: str, root: Path) -> list[Finding]:
                         add("OEE008", f"outcome {identifier} lacks an observable description",
                             cursor)
                     outcomes[identifier] = cursor
+                    if capture is not None:
+                        capture["outcomes"].append({
+                            "id": identifier,
+                            "description": desc.strip(),
+                            "location": {"path": label, "line": line_at(text, cursor)},
+                        })
             cursor += len(row)
     if not outcomes:
         add("OEE009", "no stable course outcome IDs defined",
@@ -251,7 +286,21 @@ def parse_structure(path: Path, text: str, root: Path) -> list[Finding]:
                         o_start + ref.start())
             l_start = chunk_start + lessons_heading.end()
             lessons = text[l_start:module_end]
-            numbers = [int(m.group(1)) for m in LESSON_RE.finditer(lessons)]
+            lesson_matches = list(LESSON_RE.finditer(lessons))
+            numbers = [int(m.group(1)) for m in lesson_matches]
+            if capture is not None:
+                capture["modules"].append({
+                    "number": int(module_number),
+                    "title": match.group(2).strip(),
+                    "outcomeIds": list(dict.fromkeys(ID_REF_RE.findall(o_text))),
+                    "lessons": [
+                        {
+                            "ordinal": int(item.group(1)),
+                            "title": re.sub(r"^\d+\.\s+", "", lessons[item.start():].splitlines()[0]).strip(),
+                        }
+                        for item in lesson_matches
+                    ],
+                })
             if not numbers:
                 add("OEE015", f"module {module_number}: ordered learning sequence is empty",
                     l_start)
@@ -290,15 +339,17 @@ def parse_structure(path: Path, text: str, root: Path) -> list[Finding]:
             if multiple:
                 add("OEE019", f"{ident}: multiple candidate assessment briefs require review",
                     header.start(), "parser_limitation")
-            inline = fields_in(body, line_at(text, header.end()), path)
+            inline = fields_in(body, line_at(text, header.end()), path,
+                               format_path=format_path)
             if link:
-                linked, linked_path, reason = read_brief(link, path, root)
+                linked, linked_path, reason = read_link(link, path, root)
                 if reason:
                     add("OEE020", f"{ident}: {reason} for assessment brief {link}",
                         header.start(), reason)
                 elif linked is not None and linked_path is not None:
                     linked_project_details.append(linked)
-                    brief_fields = fields_in(linked, 1, linked_path)
+                    brief_fields = fields_in(linked, 1, linked_path,
+                                             format_path=format_path)
                     if not brief_fields:
                         add("OEE021", f"{ident}: linked brief uses an unsupported field presentation",
                             header.start(), "parser_limitation")
@@ -324,12 +375,29 @@ def parse_structure(path: Path, text: str, root: Path) -> list[Finding]:
                 if not inline.get(key) or not inline[key][0]:
                     if key in inline and inline[key][1] != label:
                         # Empty fields in a linked brief belong to that source.
-                        field_path = root / inline[key][1] if path.is_relative_to(ROOT) else path.parent / inline[key][1]
-                        add("OEE023", f"{ident}: missing or empty {key} field",
-                            header.start(), source=field_path, source_line=inline[key][2])
+                        found.append(Finding(
+                            "OEE023", "structural_violation",
+                            f"{ident}: missing or empty {key} field",
+                            inline[key][1], inline[key][2],
+                        ))
                     else:
                         add("OEE023", f"{ident}: missing or empty {key} field", header.start())
             refs = ID_REF_RE.findall(inline.get("outcomes", ("", "", 0))[0])
+            if capture is not None:
+                assessment_location = (
+                    {"path": inline["work"][1], "line": inline["work"][2]}
+                    if link and inline.get("work") else
+                    {"path": label, "line": line_at(text, header.start())}
+                )
+                capture["assessments"].append({
+                    "id": ident,
+                    "required": True,
+                    "outcomeIds": list(dict.fromkeys(refs)),
+                    "work": inline.get("work", ("", "", 0))[0],
+                    "criteria": inline.get("criteria", ("", "", 0))[0],
+                    "evidence": inline.get("evidence", ("", "", 0))[0],
+                    "location": assessment_location,
+                })
             valid_refs = [ref for ref in refs if ref.startswith(code + "-")]
             if not valid_refs:
                 add("OEE024", f"{ident}: no valid course outcomes referenced",
@@ -343,6 +411,8 @@ def parse_structure(path: Path, text: str, root: Path) -> list[Finding]:
                         header.start())
                 else:
                     covered.add(ref)
+                    if capture is not None:
+                        capture["coverage"].setdefault(ref, []).append(ident)
         if not required_count and not alternate_assessments:
             add("OEE027", "no required summative assessments found", start)
         if not headers and not alternate_assessments:
