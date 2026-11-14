@@ -12,6 +12,8 @@ on:
       - 'scripts/check-sef-curriculum.py'
       - 'tests/test_outcome_curriculum.py'
       - 'tests/test_dual_format_validation.py'
+      - 'tests/test_toolkit_fixture_contract.py'
+      - 'tests/fixtures/ot_i02/**'
       - '.github/workflows/outcome-curriculum.yml'
   push:
     branches: [main]
@@ -25,6 +27,8 @@ on:
       - 'scripts/check-sef-curriculum.py'
       - 'tests/test_outcome_curriculum.py'
       - 'tests/test_dual_format_validation.py'
+      - 'tests/test_toolkit_fixture_contract.py'
+      - 'tests/fixtures/ot_i02/**'
       - '.github/workflows/outcome-curriculum.yml'
 
 jobs:
