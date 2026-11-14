@@ -1,7 +1,6 @@
-> Part of the [Zero to Software Engineer](../00-overview.md) curriculum · Program 3 of 5 · [Shared standards](../shared/electives-assessment-graduation.md) · Previous: [APP](02-APP-application-engineering.md) · Next: [AI](04-AI-ai-engineering.md)
+# Program 3 — SYS: Systems Engineering
 
-# PROGRAM 3 — SYS
-# Systems Engineering
+> [OEE curriculum](../README.md) · [Specification](../../spec/README.md) · Previous: [APP](../APP/README.md) · Next: [AI](../AI/README.md)
 
 ## Overview
 
@@ -30,7 +29,20 @@ By the end of this program, you will be able to:
 
 The learner must demonstrate the knowledge, practical skills, and engineering judgment described by the program outcomes and successfully complete the program capstone.
 
----
+## Courses
 
----
+The imported courses below are **legacy drafts**, not v0.2.0-conforming course definitions. Their existing activities and completion requirements are retained for migration review; published outcome IDs, summative evidence contracts and readiness assessments must be authored and reviewed separately before any v0.2.0 claim.
 
+| Course | Title | Duration | Prerequisites | Type |
+| --- | --- | --- | --- | --- |
+| [SYS1](SYS1.md) | Computer Architecture, Memory & Performance | 6 weeks | SEF6 | `course` |
+| [SYS2](SYS2.md) | Systems Programming with C & Rust | 6 weeks | SYS1 | `course` |
+| [SYS3](SYS3.md) | Concurrency, Atomics & Memory Models | 6 weeks | SYS2 | `course` |
+| [SYS4](SYS4.md) | Linux Networking & Services | 6 weeks | SYS2 and SYS3 | `course` |
+| [SYS5](SYS5.md) | Storage Engines & Data Systems | 6 weeks | SYS2 and SYS3 | `course` |
+| [SYS6](SYS6.md) | Distributed Systems | 7 weeks | SYS4 and SYS5 | `course` |
+| [SYS7](SYS7.md) | Performance Engineering & Observability | 5 weeks | SYS3 and SYS4 | `course` |
+| [SYS8](SYS8.md) | Systems Design & Production Engineering | 5 weeks | SYS6 and SYS7 | `course` |
+| [SYS9](SYS9.md) | Systems Engineering Capstone | 8–10 weeks | SYS1–SYS8 | `project` |
+
+This list describes the imported source material, not verified learner readiness or a new specification version.
