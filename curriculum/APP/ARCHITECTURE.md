@@ -1,6 +1,6 @@
 # Application Engineering — Migration Architecture Decision
 
-**Decision status:** Approved migration architecture **upon merge of this decision PR**. **Implementation status:** planned and incremental, tracked in [Issue #30](https://github.com/0xbuffdev/open-engineering-education/issues/30). **The current [APP catalog](README.md) and course files remain authoritative until separate curriculum PRs merge.**
+**Decision status:** Approved architecture, recorded in [PR #49](https://github.com/0xbuffdev/open-engineering-education/pull/49) and historical [issue #30](https://github.com/0xbuffdev/open-engineering-education/issues/30) (closed). **Implementation status:** incremental; APP1 and APP17 are current v0.2.0 drafts, and the remaining courses are tracked in the [open APP execution epic #55](https://github.com/0xbuffdev/open-engineering-education/issues/55). **The current [APP catalog](README.md) and course files remain authoritative until separate curriculum PRs merge.**
 
 The current authoritative program, course codes, prerequisites, and graduation
 requirements remain in [APP README](README.md) and its linked course files
@@ -474,7 +474,4 @@ individual course migration PRs merge.
   the OEE status requirements. Automated validation alone is not a
   conformance or educational-quality finding.
 
-The next implementation PR should introduce **APP17 — HTML & CSS
-Engineering** under this architecture, without editing APP1. Subsequent
-reviewable PRs introduce APP18 and APP19 before narrowing APP2 or
-adding the framework- and backend-specific courses.
+**APP17 — HTML & CSS Engineering** was introduced in [PR #50](https://github.com/0xbuffdev/open-engineering-education/pull/50) without editing APP1. The next core curriculum PR should introduce **APP18 — JavaScript Programming**, including foundational Node/npm tooling, followed by **APP19 — TypeScript Programming**. The [execution epic #55](https://github.com/0xbuffdev/open-engineering-education/issues/55) tracks remaining course-specific PRs, implementation ownership, prerequisites, and review closure. Only reviewed and merged course PRs change the active [APP catalog](README.md).
