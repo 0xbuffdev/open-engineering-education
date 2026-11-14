@@ -1,0 +1,47 @@
+name: Curriculum migration inventory
+
+on:
+  pull_request:
+    paths:
+      - 'curriculum/**'
+      - 'scripts/curriculum_inventory.py'
+      - 'scripts/check-outcome-curriculum.py'
+      - 'scripts/course_format_versions.py'
+      - 'tests/test_curriculum_inventory.py'
+      - '.github/workflows/curriculum-inventory.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'curriculum/**'
+      - 'scripts/curriculum_inventory.py'
+      - 'scripts/check-outcome-curriculum.py'
+      - 'scripts/course_format_versions.py'
+      - 'tests/test_curriculum_inventory.py'
+      - '.github/workflows/curriculum-inventory.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Test derived curriculum inventory
+        run: python3 -m unittest discover -s tests -p 'test_curriculum_inventory.py' -v
+      - name: Generate commit-pinned reports and annotate pending PRs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 scripts/curriculum_inventory.py \
+            --include-open-prs --output-dir "$RUNNER_TEMP/oee-inventory"
+          cat "$RUNNER_TEMP/oee-inventory/inventory.md" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: oee-curriculum-inventory
+          path: ${{ runner.temp }}/oee-inventory/
+          if-no-files-found: error

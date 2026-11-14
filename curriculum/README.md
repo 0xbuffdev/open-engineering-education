@@ -23,6 +23,8 @@ Each program has a defined course sequence and a culminating project or capstone
 
 The five programs cover complementary areas of engineering while maintaining distinct learning objectives and professional capabilities.
 
+For a commit-pinned, derived audit of migration readiness and assessment coverage, see the [curriculum inventory](INVENTORY.md). The report is generated from the courses and review PRs; it is not a second source of curriculum requirements.
+
 ## How to use the curriculum
 
 ### For learners
