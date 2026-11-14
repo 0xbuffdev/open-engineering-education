@@ -53,11 +53,19 @@ Validate a specific file, including a course still under development:
 python3 scripts/check-outcome-curriculum.py --course curriculum/APP/APP1.md
 ```
 
-Scan the curriculum, explicitly skipping legacy files:
+Inspect the entire active curriculum, **including unsupported legacy files**:
 
 ```sh
-python3 scripts/check-outcome-curriculum.py --all
+python3 scripts/check-outcome-curriculum.py --all --format json
 ```
+
+The full inspection returns `incomplete` (exit code `3`) until every
+active course uses v0.2.0; legacy drafts cannot silently count as a pass.
+Run `--course` on selected migrated courses to require structural success
+(exit code `0`). Structural violations exit `1`; an incomplete or
+unsupported course exits `3`. Machine-readable diagnostics have stable
+rule IDs and actual source path/line. The current JSON report is an
+**internal maintenance diagnostic**, not a published Toolkit export API.
 
 Run regression tests:
 
@@ -66,8 +74,9 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 ```
 
 All three validators use the same course-revision classification rules.
-The `--all` mode checks courses that either contain v0.2.0-style outcome or
-assessment IDs, or declare this optional metadata:
+The `--all` mode checks recognizable v0.2.0 courses and reports older
+active courses as unsupported/incomplete. Recognizable sources contain
+outcome/assessment IDs or declare the optional metadata:
 
 ```markdown
 **Specification:** `v0.2.0`
@@ -119,11 +128,17 @@ cover several outcomes. A course need not have per-module knowledge tests or
 labs when the evidence genuinely supports the required outcomes. Project
 courses must also define deliverables and a reviewable defense.
 
-**Scope limitation:** The validator currently handles this simple inline
-Markdown pattern. The specification also permits authoritative linked public
-assessment briefs and other formats. Such cases need a manual review or an
-extended parser. Rejection by this narrow parser does not necessarily imply
-a specification violation.
+**Parser coverage:** In addition to inline assessment fields, the checker
+resolves one explicit local public assessment-brief link on an assessment
+heading or a `Brief:` line, using safe repository-contained relative Markdown
+paths. It reads the required `Outcomes`, `Work`, `Criteria`, and
+`Evidence` fields from that brief. It rejects missing or escaping files
+without silently treating them as empty validated assessments. Unsupported
+remote links, multiple competing brief links, and unrecognized valid Markdown
+presentations are reported as `parser_limitation` / `incomplete`, not a
+definitive violation of OEE's authoring rules. The checker does **not** read
+a moving Git revision or provide immutable export snapshots; those belong to
+the separately reviewed Toolkit export implementation.
 
 The checker cannot establish pedagogical validity, reproducibility in
 practice, learner mastery, `tested` or `verified` status, or course

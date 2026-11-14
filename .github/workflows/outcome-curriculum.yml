@@ -11,6 +11,7 @@ on:
       - 'tests/test_app_catalog.py'
       - 'scripts/check-sef-curriculum.py'
       - 'tests/test_outcome_curriculum.py'
+      - 'tests/test_outcome_diagnostics.py'
       - 'tests/test_dual_format_validation.py'
       - 'tests/test_toolkit_fixture_contract.py'
       - 'tests/fixtures/ot_i02/**'
@@ -26,6 +27,7 @@ on:
       - 'tests/test_app_catalog.py'
       - 'scripts/check-sef-curriculum.py'
       - 'tests/test_outcome_curriculum.py'
+      - 'tests/test_outcome_diagnostics.py'
       - 'tests/test_dual_format_validation.py'
       - 'tests/test_toolkit_fixture_contract.py'
       - 'tests/fixtures/ot_i02/**'
@@ -38,5 +40,37 @@ jobs:
       - uses: actions/checkout@v4
       - name: Unit-test outcome and mixed-format validators
         run: python3 -m unittest discover -s tests -p 'test_*.py' -v
-      - name: Validate migrated v0.2.0 courses
-        run: python3 scripts/check-outcome-curriculum.py --all
+      - name: Validate current outcome-driven pilot courses
+        run: |
+          python3 scripts/check-outcome-curriculum.py \
+            --course curriculum/SEF/SEF1.md \
+            --course curriculum/SEF/SEF10.md \
+            --course curriculum/APP/APP1.md \
+            --course curriculum/APP/APP17.md
+      - name: Inspect full repository honestly including unsupported legacy
+        run: |
+          python3 - <<'PY'
+          import json
+          import subprocess
+          import sys
+
+          result = subprocess.run(
+              [sys.executable, "scripts/check-outcome-curriculum.py",
+               "--all", "--format", "json"],
+              capture_output=True, text=True, check=False,
+          )
+          if result.returncode not in (0, 3):
+              print(result.stderr or result.stdout, file=sys.stderr)
+              sys.exit(1)
+          report = json.loads(result.stdout)
+          expected = "passed" if result.returncode == 0 else "incomplete"
+          if report["structuralOutcome"] != expected or report["failedCourses"]:
+              print(report, file=sys.stderr)
+              sys.exit(1)
+          print(
+              f"Scan: {report['inspectedCourses']} courses, "
+              f"{report['passedCourses']} supported/passed, "
+              f"{report['incompleteCourses']} unsupported/incomplete. "
+              "No educational conformance claim."
+          )
+          PY

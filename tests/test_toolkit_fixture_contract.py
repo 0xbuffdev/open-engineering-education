@@ -97,12 +97,25 @@ class ToolkitFixtureContractTests(unittest.TestCase):
         self.assertTrue(any("requires public deliverables" in e for e in failures))
         self.assertTrue(any("requires a reviewable technical defense" in e for e in failures))
 
-    def test_linked_brief_is_known_parser_limitation_not_pass(self):
-        linked = fixture("linked_brief_v020.md")
-        self.assertTrue(is_outcome_course(linked))
-        self.assertTrue((FIXTURES / "linked_brief.md").is_file())
-        self.assertTrue(errors(linked), "inline-only parser cannot validate linked brief")
-        self.assertTrue(errors(linked.replace("](linked_brief.md)", "](missing_brief.md)")))
+    def test_supported_local_linked_brief_passes(self):
+        from pathlib import Path
+        linked = FIXTURES / "linked_brief_v020.md"
+        self.assertTrue(is_outcome_course(linked.read_text(encoding="utf-8")))
+        report = checker.inspect_course(linked)
+        self.assertEqual(report["structuralOutcome"], "passed", report["findings"])
+        self.assertEqual(report["findings"], [])
+
+    def test_missing_linked_brief_is_incomplete(self):
+        linked = FIXTURES / "linked_brief_v020.md"
+        missing = linked.read_text(encoding="utf-8").replace(
+            "](linked_brief.md)", "](missing_brief.md)"
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "FXT1.md"
+            path.write_text(missing, encoding="utf-8")
+            report = checker.inspect_course(path)
+        self.assertEqual(report["structuralOutcome"], "incomplete")
+        self.assertTrue(any(f["category"] == "missing_input" for f in report["findings"]))
 
     def test_legacy_cli_does_not_pass_direct_outcome_check(self):
         result = subprocess.run(
@@ -111,7 +124,8 @@ class ToolkitFixtureContractTests(unittest.TestCase):
             capture_output=True, text=True, check=False,
         )
         self.assertNotEqual(result.returncode, 0)
-        self.assertIn("no stable course outcome IDs defined", result.stderr)
+        self.assertEqual(result.returncode, 3)
+        self.assertIn("unsupported legacy/unknown course format", result.stderr)
 
 
 if __name__ == "__main__":

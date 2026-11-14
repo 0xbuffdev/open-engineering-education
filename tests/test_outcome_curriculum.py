@@ -63,7 +63,7 @@ class OutcomeCurriculumValidatorTests(unittest.TestCase):
     def test_valid_course_without_test_or_lab_passes(self):
         result = validate(COURSE)
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertIn("1 checked", result.stdout)
+        self.assertIn("1 inspected, 1 passed", result.stdout)
 
     def test_missing_course_outcome_id_fails(self):
         result = validate(COURSE.replace(
