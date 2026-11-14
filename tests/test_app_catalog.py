@@ -145,6 +145,33 @@ class APPCatalogTests(unittest.TestCase):
         status, errors = self.check()
         self.assertEqual(status, 0, errors)
 
+    def test_app17_is_core_immediately_after_app1_and_versioned(self):
+        entries, errors = read_app_catalog(self.catalog)
+        self.assertFalse(errors, errors)
+        self.assertEqual([entry.code for entry in entries[:2]], ["APP1", "APP17"])
+        app17 = next(entry for entry in entries if entry.code == "APP17")
+        self.assertEqual((app17.title, app17.kind, app17.classification, app17.status),
+                         ("HTML & CSS Engineering", "course", "core", "draft"))
+        self.assertEqual(prerequisite_codes(app17.prerequisites), ["APP1"])
+        source = (self.app.APP / "APP17.md").read_text(encoding="utf-8")
+        self.assertIn("**Specification:** `v0.2.0`", source)
+        self.assertIn("**Classification:** `core`", source)
+        capstone = next(entry for entry in entries if entry.code == "APP9")
+        self.assertIn("APP17", prerequisite_codes(capstone.prerequisites))
+        self.assertIn("[APP17](APP17.md)",
+                      (self.app.APP / "APP9.md").read_text(encoding="utf-8"))
+
+    def test_app17_cannot_be_silently_removed_from_capstone_closure(self):
+        catalog = self.catalog.read_text(encoding="utf-8")
+        self.assertIn("APP1–APP8, APP17", catalog)
+        self.catalog.write_text(catalog.replace("APP1–APP8, APP17", "APP1–APP8", 1),
+                                encoding="utf-8")
+        self.change_course("APP9", ", [APP17](APP17.md)", "")
+        status, errors = self.check()
+        self.assertNotEqual(status, 0)
+        self.assertIn("APP17", errors)
+        self.assertIn("graduation capstone is missing core prerequisites", errors)
+
     def test_catalog_is_explicitly_ordered_not_sorted_by_code(self):
         lines = self.catalog.read_text(encoding="utf-8").splitlines()
         a = next(i for i, line in enumerate(lines) if line.startswith("| [APP2]("))
