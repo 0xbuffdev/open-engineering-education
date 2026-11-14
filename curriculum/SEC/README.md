@@ -1,7 +1,6 @@
-> Part of the [Zero to Software Engineer](../00-overview.md) curriculum · Program 5 of 5 · [Shared standards](../shared/electives-assessment-graduation.md) · Previous: [AI](04-AI-ai-engineering.md)
+# Program 5 — SEC: Security Engineering
 
-# PROGRAM 5 — SEC
-# Security Engineering
+> [OEE curriculum](../README.md) · [Specification](../../spec/README.md) · Previous: [AI](../AI/README.md)
 
 ## Overview
 
@@ -30,7 +29,20 @@ By the end of this program, you will be able to:
 
 The learner must demonstrate the knowledge, practical skills, and engineering judgment described by the program outcomes and successfully complete the program capstone.
 
----
+## Courses
 
----
+The imported courses below are **legacy drafts**, not v0.2.0-conforming course definitions. Their existing activities and completion requirements are retained for migration review; published outcome IDs, summative evidence contracts and readiness assessments must be authored and reviewed separately before any v0.2.0 claim.
 
+| Course | Title | Duration | Prerequisites | Type |
+| --- | --- | --- | --- | --- |
+| [SEC1](SEC1.md) | Security Foundations & Threat Modeling | 5 weeks | Program 1 — SEF | `course` |
+| [SEC2](SEC2.md) | Web & Application Security | 6 weeks | SEC1, APP1 and APP3 | `course` |
+| [SEC3](SEC3.md) | Systems & Binary Security | 6 weeks | SEC1 and SEF6 | `course` |
+| [SEC4](SEC4.md) | Network & Infrastructure Security | 5 weeks | SEC2 and SEF7 | `course` |
+| [SEC5](SEC5.md) | Applied Cryptography & Secure Protocols | 5 weeks | SEC1 | `course` |
+| [SEC6](SEC6.md) | Cloud, Containers & Identity Security | 5 weeks | SEC2, SEC4 and APP7 | `course` |
+| [SEC7](SEC7.md) | Detection, Incident Response & Threat Hunting | 5 weeks | SEC4 and SEC6 | `course` |
+| [SEC8](SEC8.md) | AI Security & Authorized Red Teaming | 4 weeks | SEC1, SEC2, SEC7, and AI5 | `course` |
+| [SEC9](SEC9.md) | Security Engineering Capstone | 8–10 weeks | SEC1–SEC8 | `project` |
+
+This list describes the imported source material, not verified learner readiness or a new specification version.
