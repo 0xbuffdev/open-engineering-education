@@ -1,0 +1,71 @@
+name: Draft OEE Toolkit pinned export contract
+
+on:
+  pull_request:
+    paths:
+      - 'tooling/**'
+      - 'scripts/check-outcome-curriculum.py'
+      - 'tests/test_toolkit_pinned_export.py'
+      - '.github/workflows/toolkit-pinned-export.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'tooling/**'
+      - 'scripts/check-outcome-curriculum.py'
+      - 'tests/test_toolkit_pinned_export.py'
+      - '.github/workflows/toolkit-pinned-export.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validation:
+    name: Strict source and export integration
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Full regression suite
+        run: python3 -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Verify all migrated v0.2.0 pilot exports against this exact commit
+        run: |
+          REVISION="$(git rev-parse HEAD)"
+          for COURSE in SEF1 SEF10 APP1 APP17; do
+            python3 -m tooling.oee_toolkit check \
+              --repo . --revision "$REVISION" --course "$COURSE"
+            python3 -m tooling.oee_toolkit export \
+              --repo . --revision "$REVISION" --course "$COURSE" \
+              --output "$RUNNER_TEMP/$COURSE.json"
+            python3 -m json.tool "$RUNNER_TEMP/$COURSE.json" > /dev/null
+          done
+      - name: Verify unsupported active courses do not produce a green scan
+        run: |
+          python3 - <<'PY'
+          import json
+          import subprocess
+
+          revision = subprocess.check_output(
+              ["git", "rev-parse", "HEAD"], text=True
+          ).strip()
+          result = subprocess.run(
+              ["python3", "-m", "tooling.oee_toolkit", "check",
+               "--repo", ".", "--revision", revision, "--all", "--json"],
+              capture_output=True, text=True, check=False,
+          )
+          payload = json.loads(result.stdout)
+          assert payload["structuralOutcome"] == "incomplete", payload
+          assert result.returncode == 3, result.stderr
+          assert payload["checksSkipped"], payload
+          print("Active legacy files are explicitly incomplete, never passed.")
+          PY
+
+  portability:
+    name: Offline Git/CLI smoke (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Exercise synthetic local Git fixtures
+        run: python -m unittest discover -s tests -p 'test_toolkit_pinned_export.py' -v
