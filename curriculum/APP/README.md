@@ -57,7 +57,7 @@ Core and elective courses appear in the **same list**. Durations are draft workl
 
 **Current totals:** 10 core courses (9 taught courses and one project capstone), plus 7 optional elective courses, all currently `draft`. Course definitions are public curriculum specifications, **not** finished teaching materials or readiness claims. APP9 remains the core capstone: APP10–APP16 are not required for graduation.
 
-**Approved migration architecture, introduced incrementally:** The [APP Architecture Decision](ARCHITECTURE.md) defines the target boundaries and stable-ID migration; the [APP migration execution epic #55](https://github.com/0xbuffdev/open-engineering-education/issues/55) tracks remaining owners, implementation PRs, and dependencies. APP17 is now the first new core course, independently defined against OEE `v0.2.0`. APP18, APP19, APP20 and APP21 and existing course-boundary revisions remain **planned**, not yet active. This course table and its linked definitions remain authoritative for what is currently required.
+**Approved migration architecture, introduced incrementally:** The [APP Architecture Decision](ARCHITECTURE.md) defines the target boundaries and stable-ID migration. APP17 is now the first new core course, independently defined against OEE `v0.2.0`. APP18, APP19, APP20 and APP21 and existing course-boundary revisions remain **planned**, not yet active. This course table and its linked definitions remain authoritative for what is currently required.
 
 ```text
 SEF10 → APP1

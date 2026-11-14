@@ -30,6 +30,21 @@ Identify the affected files, sections, requirements, and terminology. When wordi
 
 Separate mandatory requirements from recommendations and examples.
 
+### Architecture decisions (when applicable)
+
+Record each architectural choice, rationale, alternatives and
+consequences **in this RFC**. Do not reference private or external planning
+repositories as an authority or a prerequisite for understanding the RFC.
+If a prior decision matters, state its relevant reasoning and consequences
+here; only cite authoritative public OEE sources when needed.
+
+### Implementable technical specification (when applicable)
+
+Include the proposed input/output contracts, source-of-truth boundaries,
+version/revision identity, explicit errors, security limitations and
+acceptance examples **in this RFC**. Link supporting design notes only
+as background, not as hidden additional requirements.
+
 ## 4. Alternatives considered
 
 | Alternative | Advantages | Disadvantages | Reason for acceptance or rejection |
@@ -94,6 +109,15 @@ Describe how reviewers can evaluate whether the change solves the stated problem
 Include applicable examples, acceptance criteria, checks, experiments, or review steps.
 
 Do not claim that a requirement has been validated when the proposed validation has not yet been performed.
+
+### Implementation tickets and dependencies (when applicable)
+
+Record planned implementation slices, stable ticket IDs, blocking
+dependencies, ownership/approval gates and completion criteria **in this
+RFC**. Public OEE issues and PRs may track execution, but must not
+silently replace the approved RFC contract. An external planning repository
+must not be necessary to interpret these tickets. A draft or merged proposal
+does not itself complete an implementation ticket.
 
 ## 9. Open questions
 
