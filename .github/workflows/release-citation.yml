@@ -1,0 +1,59 @@
+name: Release citation consistency
+
+on:
+  pull_request:
+    paths:
+      - 'CITATION.cff'
+      - 'scripts/check-release-citation.py'
+      - 'tests/test_release_citation.py'
+      - '.github/workflows/release-citation.yml'
+      - 'releases/ERRATA.md'
+  push:
+    branches: [main]
+    paths:
+      - 'CITATION.cff'
+      - 'scripts/check-release-citation.py'
+      - 'tests/test_release_citation.py'
+      - '.github/workflows/release-citation.yml'
+      - 'releases/ERRATA.md'
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Existing release tag to check, e.g. v0.3.0"
+        required: true
+        type: string
+      published_at:
+        description: "Announced UTC release date (YYYY-MM-DD)"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    if: github.event_name == 'pull_request' || github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test release metadata validation
+        run: python3 -m unittest discover -s tests -p 'test_release_citation.py' -v
+
+  release-tag:
+    if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    env:
+      RELEASE_TAG: ${{ github.event.release.tag_name || inputs.release_tag }}
+      PUBLISHED_AT: ${{ github.event.release.published_at || inputs.published_at }}
+    steps:
+      - name: Check out the exact release tag (not main)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name || inputs.release_tag }}
+          persist-credentials: false
+      - name: Validate tag CFF against release version and UTC publication date
+        run: |
+          python3 scripts/check-release-citation.py \
+            --tag "$RELEASE_TAG" --published-at "$PUBLISHED_AT"
