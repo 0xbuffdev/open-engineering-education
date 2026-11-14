@@ -1,4 +1,4 @@
-## AI7 — Production AI Systems & MLOps
+# AI7 — Production AI Systems & MLOps
 
 **Duration:** 6 weeks
 **Expected workload:** 10–15 focused hours/week
@@ -6,19 +6,19 @@
 
 **Recommended:** SYS7 and SYS8.
 
-### Overview
+## Overview
 
 Learn the engineering work required after model development: serving, batching, caching, concurrency, versioning, monitoring, rollout, rollback, incident handling, and cost control.
 
-### Prerequisites
+## Prerequisites
 
-**AI5 — Retrieval, Agents & Applied Generative AI**
-**AI6 — Training, Fine-Tuning & Evaluation**
+**AI5 — Retrieval, Agents & Applied Generative AI** (prerequisite)
+**AI6 — Training, Fine-Tuning & Evaluation** (prerequisite)
 **Recommended:** SYS7 and SYS8.
 
 **Kind:** `course`
 
-### Learning outcomes
+## Learning outcomes
 
 By the end of the course, you will be able to:
 
@@ -28,14 +28,11 @@ By the end of the course, you will be able to:
 - Implement monitoring, alerts, rollout controls, and rollback procedures.
 - Investigate a production regression using traces and measurements.
 
+## Modules
 
-### Modules
+### Module 1 — Model Serving
 
-#### Module 1 — Model Serving
-
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -51,11 +48,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Wrap a model in a small service and measure request behavior.**
    - kind: `lab`
-#### Module 2 — Batching & Concurrency
 
+### Module 2 — Batching & Concurrency
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -71,11 +67,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Compare throughput and tail latency across batch settings.**
    - kind: `lab`
-#### Module 3 — Model & Runtime Optimization
 
+### Module 3 — Model & Runtime Optimization
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -91,11 +86,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Measure one optimization and state its cost trade-off.**
    - kind: `lab`
-#### Module 4 — Deployment & Reliability
 
+### Module 4 — Deployment & Reliability
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -111,14 +105,13 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Simulate a bad model release and recover to a known-good version.**
    - kind: `lab`
-#### Module 5 — Production AI Service
 
-
+### Module 5 — Production AI Service
 
 1. **Package, deploy, observe, and recover the Production AI Service**
    - kind: `lab`
 
-### Topics
+## Topics
 
 - model serving
 - batching
@@ -134,7 +127,7 @@ By the end of this module, the learner can:
 - cost controls
 - incident handling
 
-### Labs
+## Labs
 
 - serving benchmark
 - batching comparison
@@ -142,9 +135,9 @@ By the end of this module, the learner can:
 - latency regression
 - rollback drill
 
-### Substantial course lab
+## Substantial course lab
 
-**Production AI Service**
+### Production AI Service
 
 Package an earlier model or AI system with:
 
@@ -159,4 +152,3 @@ Package an earlier model or AI system with:
 - rollback procedure
 
 ---
-

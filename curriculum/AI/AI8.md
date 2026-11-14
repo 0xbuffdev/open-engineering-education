@@ -1,20 +1,20 @@
-## AI8 — Responsible AI, Safety & Governance
+# AI8 — Responsible AI, Safety & Governance
 
 **Duration:** 3 weeks
 **Expected workload:** 10–15 focused hours/week
 **Prerequisite:** AI5
 
-### Overview
+## Overview
 
 Study system risks, misuse, privacy, authorization, evaluation failures, human oversight, incident handling, and residual risk. The course treats safety and governance as engineering requirements that must be testable and owned.
 
-### Prerequisites
+## Prerequisites
 
-**AI5 — Retrieval, Agents & Applied Generative AI**
+**AI5 — Retrieval, Agents & Applied Generative AI** (prerequisite)
 
 **Kind:** `course`
 
-### Learning outcomes
+## Learning outcomes
 
 By the end of the course, you will be able to:
 
@@ -24,14 +24,11 @@ By the end of the course, you will be able to:
 - Design an incident path and define appropriate human oversight.
 - Assess residual risk after mitigation and identify the responsible risk owner.
 
+## Modules
 
-### Modules
+### Module 1 — AI Risk & System Boundaries
 
-#### Module 1 — AI Risk & System Boundaries
-
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -47,11 +44,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Map one AI system boundary and identify who owns each risk.**
    - kind: `lab`
-#### Module 2 — Evaluation Failures & Safety Controls
 
+### Module 2 — Evaluation Failures & Safety Controls
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -67,11 +63,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Turn one identified risk into a measurable evaluation and control.**
    - kind: `lab`
-#### Module 3 — Governance & Incident Readiness
 
+### Module 3 — Governance & Incident Readiness
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -87,14 +82,13 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Write an incident path for a concrete AI failure.**
    - kind: `lab`
-#### Module 4 — AI Safety Review
 
-
+### Module 4 — AI Safety Review
 
 1. **Complete the AI Safety Review with risk, evaluation, and mitigation evidence**
    - kind: `lab`
 
-### Topics
+## Topics
 
 - system risks
 - evaluation failures
@@ -106,9 +100,9 @@ By the end of this module, the learner can:
 - human oversight
 - residual risk
 
-### Substantial course lab
+## Substantial course lab
 
-**AI Safety Review**
+### AI Safety Review
 
 Produce:
 
@@ -120,4 +114,3 @@ Produce:
 - mitigation and retest
 
 ---
-

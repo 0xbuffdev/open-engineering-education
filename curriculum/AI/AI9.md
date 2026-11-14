@@ -1,17 +1,20 @@
-## AI9 — AI Engineering Capstone
+# AI9 — AI Engineering Capstone
 
 **Duration:** 8–10 weeks
 **Expected workload:** 10–15 focused hours/week
 
-### Overview
+## Overview
+
 The capstone is the final project course in AI Engineering. You will combine data, model selection or training, evaluation, serving, monitoring, and responsible-AI practices into an AI system that can be meaningfully assessed in a realistic workflow.
 
-### Prerequisites
-**AI1–AI8 — AI Engineering**
+## Prerequisites
+
+**AI1–AI8 — AI Engineering** (prerequisite)
 
 **Kind:** `project`
 
-### Learning outcomes
+## Learning outcomes
+
 By the end of the project, you will be able to:
 
 - Define an AI problem, evaluation target, data policy, and measurable success criteria.
@@ -22,13 +25,11 @@ By the end of the project, you will be able to:
 - Identify and mitigate material safety, security, reliability, and misuse risks.
 - Explain limitations and defend system design decisions using evidence.
 
-### Modules
+## Modules
 
-#### Module 1 — Problem Definition & Evaluation Design
+### Module 1 — Problem Definition & Evaluation Design
 
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -41,11 +42,10 @@ By the end of this module, the learner can:
 
 3. **Micro-lab: Write an evaluation specification and construct a small representative test set.**
    - kind: `lab`
-#### Module 2 — Model & System Implementation
 
+### Module 2 — Model & System Implementation
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -58,11 +58,10 @@ By the end of this module, the learner can:
 
 3. **Micro-lab: Build one end-to-end inference path and log its key measurements.**
    - kind: `lab`
-#### Module 3 — Evaluation, Failure Analysis & Safety
 
+### Module 3 — Evaluation, Failure Analysis & Safety
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -76,11 +75,10 @@ By the end of this module, the learner can:
 
 3. **Micro-lab: Create a small adversarial or edge-case evaluation set and analyze failures.**
    - kind: `lab`
-#### Module 4 — Serving & Operations
 
+### Module 4 — Serving & Operations
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -93,14 +91,13 @@ By the end of this module, the learner can:
 
 3. **Micro-lab: Introduce a deliberately bad release and demonstrate detection and rollback.**
    - kind: `lab`
-#### Module 5 — Final Project Lab
 
-
+### Module 5 — Final Project Lab
 
 1. **Build, evaluate, deploy, operate, document, and prepare the production AI system for defense**
    - kind: `lab`
 
-### Suitable capstone shapes
+## Suitable capstone shapes
 
 - evaluated RAG platform
 - production AI assistant
@@ -109,7 +106,7 @@ By the end of this module, the learner can:
 - model-serving platform
 - AI workflow/orchestration system
 
-### Required qualities
+## Required qualities
 
 - problem definition
 - dataset/data policy

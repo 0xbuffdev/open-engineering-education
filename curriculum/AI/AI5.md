@@ -1,20 +1,20 @@
-## AI5 — Retrieval, Agents & Applied Generative AI
+# AI5 — Retrieval, Agents & Applied Generative AI
 
 **Duration:** 6 weeks
 **Expected workload:** 10–15 focused hours/week
 **Prerequisite:** AI4
 
-### Overview
+## Overview
 
 Move from model understanding to AI application engineering through retrieval, tool use, agent loops, permissions, prompt/tool boundaries, evaluation, and failure analysis.
 
-### Prerequisites
+## Prerequisites
 
-**AI4 — Transformers & Large Language Models**
+**AI4 — Transformers & Large Language Models** (prerequisite)
 
 **Kind:** `course`
 
-### Learning outcomes
+## Learning outcomes
 
 By the end of the course, you will be able to:
 
@@ -24,14 +24,11 @@ By the end of the course, you will be able to:
 - Test retrieval failures, tool failures, and prompt-injection risks in a controlled environment.
 - Evaluate an AI workflow using reproducible cases rather than anecdotal prompts.
 
+## Modules
 
-### Modules
+### Module 1 — Retrieval Foundations
 
-#### Module 1 — Retrieval Foundations
-
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -47,11 +44,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Compare two chunking strategies on a small corpus.**
    - kind: `lab`
-#### Module 2 — RAG Pipelines
 
+### Module 2 — RAG Pipelines
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -67,11 +63,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Build a retrieval step that returns evidence with each generated answer.**
    - kind: `lab`
-#### Module 3 — Tool Use & Structured Outputs
 
+### Module 3 — Tool Use & Structured Outputs
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -87,11 +82,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Allowlist one tool and reject an unapproved call.**
    - kind: `lab`
-#### Module 4 — Agents, Memory & Injection
 
+### Module 4 — Agents, Memory & Injection
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -107,14 +101,13 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Construct a benign injection test and verify the control blocks the unsafe path.**
    - kind: `lab`
-#### Module 5 — Bounded RAG/Tool-Using Agent
 
-
+### Module 5 — Bounded RAG/Tool-Using Agent
 
 1. **Build, evaluate, red-team, and document the Bounded RAG/Tool-Using Agent**
    - kind: `lab`
 
-### Topics
+## Topics
 
 - embeddings
 - retrieval
@@ -129,7 +122,7 @@ By the end of this module, the learner can:
 - prompt injection
 - evaluation
 
-### Labs
+## Labs
 
 - retrieval experiment
 - retrieval failure analysis
@@ -137,9 +130,9 @@ By the end of this module, the learner can:
 - prompt-injection test
 - citation evaluation
 
-### Substantial course lab
+## Substantial course lab
 
-**Bounded RAG/Tool-Using Agent**
+### Bounded RAG/Tool-Using Agent
 
 The system must include:
 
@@ -152,4 +145,3 @@ The system must include:
 - logs
 
 ---
-

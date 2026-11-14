@@ -1,20 +1,20 @@
-## AI3 — Deep Learning & Representation Learning
+# AI3 — Deep Learning & Representation Learning
 
 **Duration:** 6 weeks
 **Expected workload:** 10–15 focused hours/week
 **Prerequisite:** AI2
 
-### Overview
+## Overview
 
 Move from classical ML to neural networks through tensors, architectures, optimization, backpropagation, and representation learning. The course combines from-scratch reasoning with practical PyTorch development.
 
-### Prerequisites
+## Prerequisites
 
-**AI2 — Machine Learning Foundations**
+**AI2 — Machine Learning Foundations** (prerequisite)
 
 **Kind:** `course`
 
-### Learning outcomes
+## Learning outcomes
 
 By the end of the course, you will be able to:
 
@@ -24,14 +24,11 @@ By the end of the course, you will be able to:
 - Diagnose common optimization and generalization failures.
 - Use ablations and held-out evaluation to support architectural decisions.
 
+## Modules
 
-### Modules
+### Module 1 — Tensors & Neural Networks
 
-#### Module 1 — Tensors & Neural Networks
-
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -47,11 +44,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Trace a small network by hand and verify tensor shapes.**
    - kind: `lab`
-#### Module 2 — Backpropagation & Optimization
 
+### Module 2 — Backpropagation & Optimization
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -67,11 +63,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Compare an analytic gradient with a finite-difference estimate.**
    - kind: `lab`
-#### Module 3 — Convolutional Representation
 
+### Module 3 — Convolutional Representation
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -87,11 +82,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Change one convolutional design choice and measure the effect.**
    - kind: `lab`
-#### Module 4 — Sequence Models & Attention
 
+### Module 4 — Sequence Models & Attention
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -107,14 +101,13 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Trace attention inputs and outputs at a small sequence length.**
    - kind: `lab`
-#### Module 5 — Small Deep Learning System
 
-
+### Module 5 — Small Deep Learning System
 
 1. **Build, train, evaluate, and document the Small Deep Learning System**
    - kind: `lab`
 
-### Topics
+## Topics
 
 - tensors
 - neural networks
@@ -127,7 +120,7 @@ By the end of this module, the learner can:
 - sequence models
 - attention as a transition toward transformers
 
-### Labs
+## Labs
 
 - implement a tiny neural network without autograd
 - derive gradients
@@ -135,11 +128,10 @@ By the end of this module, the learner can:
 - CNN experiment
 - sequence-model experiment
 
-### Substantial course lab
+## Substantial course lab
 
-**Small Deep Learning System**
+### Small Deep Learning System
 
 Use PyTorch to build, train, evaluate, and document a model with controlled experiments.
 
 ---
-

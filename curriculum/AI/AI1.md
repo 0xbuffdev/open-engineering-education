@@ -1,21 +1,21 @@
-## AI1 — Data & Scientific Python
+# AI1 — Data & Scientific Python
 
 **Duration:** 5 weeks
 **Expected workload:** 10–15 focused hours/week
-**Prerequisite:** SEF2 and SEF6
+**Prerequisite:** SEF2 and SEF8
 
-### Overview
+## Overview
 
 Develop the data-handling skills required for AI engineering using Python, NumPy, pandas, visualization, cleaning, and reproducible analysis. You will learn to treat data quality and provenance as engineering concerns.
 
-### Prerequisites
+## Prerequisites
 
-**SEF2 — Programming & Computational Thinking**
-**SEF6 — Mathematics for Computing & AI**
+**SEF2 — Programming & Computational Thinking** (prerequisite)
+**SEF8 — Mathematics for Computing & AI** (prerequisite)
 
 **Kind:** `course`
 
-### Learning outcomes
+## Learning outcomes
 
 By the end of the course, you will be able to:
 
@@ -25,14 +25,11 @@ By the end of the course, you will be able to:
 - Produce reproducible analyses with clear data dictionaries and visualizations.
 - Explain how preprocessing choices can affect downstream model evaluation.
 
+## Modules
 
-### Modules
+### Module 1 — NumPy & Array Thinking
 
-#### Module 1 — NumPy & Array Thinking
-
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -48,11 +45,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Measure a loop and vectorized version of the same workload.**
    - kind: `lab`
-#### Module 2 — DataFrames & Cleaning
 
+### Module 2 — DataFrames & Cleaning
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -68,11 +64,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Clean a deliberately messy dataset and record each decision.**
    - kind: `lab`
-#### Module 3 — Exploration & Visualization
 
+### Module 3 — Exploration & Visualization
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -88,11 +83,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Create a visualization that answers a specific data question.**
    - kind: `lab`
-#### Module 4 — Leakage, Splits & Reproducibility
 
+### Module 4 — Leakage, Splits & Reproducibility
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -108,14 +102,13 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Re-run the analysis from a clean environment and compare outputs.**
    - kind: `lab`
-#### Module 5 — Dataset Study
 
-
+### Module 5 — Dataset Study
 
 1. **Complete the Dataset Study with a data dictionary, analysis, visualizations, and quality report**
    - kind: `lab`
 
-### Topics
+## Topics
 
 - NumPy
 - pandas
@@ -128,16 +121,16 @@ By the end of this module, the learner can:
 - train/validation/test splits
 - reproducibility
 
-### Labs
+## Labs
 
 - clean a messy dataset
 - compare vectorized operations with loops
 - detect data-quality problems
 - build a reproducible analysis
 
-### Substantial course lab
+## Substantial course lab
 
-**Dataset Study**
+### Dataset Study
 
 Deliver:
 
@@ -148,4 +141,3 @@ Deliver:
 - documented risks
 
 ---
-

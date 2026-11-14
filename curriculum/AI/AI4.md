@@ -1,20 +1,20 @@
-## AI4 — Transformers & Large Language Models
+# AI4 — Transformers & Large Language Models
 
 **Duration:** 7 weeks
 **Expected workload:** 10–15 focused hours/week
 **Prerequisite:** AI3
 
-### Overview
+## Overview
 
 Study the architecture and behavior of transformer-based language models, including tokenization, embeddings, attention, causal masking, positional information, and decoder-only training.
 
-### Prerequisites
+## Prerequisites
 
-**AI3 — Deep Learning & Representation Learning**
+**AI3 — Deep Learning & Representation Learning** (prerequisite)
 
 **Kind:** `course`
 
-### Learning outcomes
+## Learning outcomes
 
 By the end of the course, you will be able to:
 
@@ -24,14 +24,11 @@ By the end of the course, you will be able to:
 - Implement or inspect a minimal decoder-only transformer with understanding of its components.
 - Distinguish training loss from evaluation evidence of useful model behavior.
 
+## Modules
 
-### Modules
+### Module 1 — Tokenization & Representations
 
-#### Module 1 — Tokenization & Representations
-
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -47,11 +44,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Inspect token sequences and reason about representation shapes.**
    - kind: `lab`
-#### Module 2 — Attention & Causal Masking
 
+### Module 2 — Attention & Causal Masking
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -67,11 +63,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Calculate attention shapes for a tiny sequence and apply a causal mask.**
    - kind: `lab`
-#### Module 3 — Transformer Architecture
 
+### Module 3 — Transformer Architecture
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -87,11 +82,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Trace a token through a simplified decoder block.**
    - kind: `lab`
-#### Module 4 — Language Model Training & Evaluation
 
+### Module 4 — Language Model Training & Evaluation
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -107,14 +101,13 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Define a simple evaluation split and explain what it can and cannot show.**
    - kind: `lab`
-#### Module 5 — Tiny Decoder-Only Transformer
 
-
+### Module 5 — Tiny Decoder-Only Transformer
 
 1. **Train, evaluate, and document the Tiny Decoder-Only Transformer**
    - kind: `lab`
 
-### Topics
+## Topics
 
 - tokenization
 - embeddings
@@ -127,7 +120,7 @@ By the end of this module, the learner can:
 - evaluation
 - fine-tuning concepts
 
-### Labs
+## Labs
 
 - calculate attention shapes by hand
 - implement scaled dot-product attention
@@ -135,9 +128,9 @@ By the end of this module, the learner can:
 - inspect training loss
 - evaluate generated outputs
 
-### Substantial course lab
+## Substantial course lab
 
-**Tiny Decoder-Only Transformer**
+### Tiny Decoder-Only Transformer
 
 Train a small model on a licensed dataset and provide:
 
@@ -148,4 +141,3 @@ Train a small model on a licensed dataset and provide:
 - error analysis
 
 ---
-

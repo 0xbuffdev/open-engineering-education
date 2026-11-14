@@ -1,20 +1,20 @@
-## AI2 — Machine Learning Foundations
+# AI2 — Machine Learning Foundations
 
 **Duration:** 6 weeks
 **Expected workload:** 10–15 focused hours/week
 **Prerequisite:** AI1
 
-### Overview
+## Overview
 
 Study supervised learning, regression, classification, feature engineering, regularization, validation, metrics, calibration, and common failure modes using reproducible experiments.
 
-### Prerequisites
+## Prerequisites
 
-**AI1 — Data & Scientific Python**
+**AI1 — Data & Scientific Python** (prerequisite)
 
 **Kind:** `course`
 
-### Learning outcomes
+## Learning outcomes
 
 By the end of the course, you will be able to:
 
@@ -24,14 +24,11 @@ By the end of the course, you will be able to:
 - Detect leakage and poor validation practices.
 - Interpret model performance through error analysis and calibration.
 
+## Modules
 
-### Modules
+### Module 1 — Supervised Learning
 
-#### Module 1 — Supervised Learning
-
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -47,11 +44,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Train a simple baseline and inspect its errors.**
    - kind: `lab`
-#### Module 2 — Trees, Ensembles & Features
 
+### Module 2 — Trees, Ensembles & Features
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -67,11 +63,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Compare a baseline with one justified feature change.**
    - kind: `lab`
-#### Module 3 — Validation & Generalization
 
+### Module 3 — Validation & Generalization
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -87,11 +82,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Plot training and validation behavior and diagnose overfitting.**
    - kind: `lab`
-#### Module 4 — Leakage, Calibration & Error Analysis
 
+### Module 4 — Leakage, Calibration & Error Analysis
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -107,14 +101,13 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Find a plausible leakage path and design a test for it.**
    - kind: `lab`
-#### Module 5 — Evaluated ML Pipeline
 
-
+### Module 5 — Evaluated ML Pipeline
 
 1. **Build, evaluate, and document the Evaluated ML Pipeline**
    - kind: `lab`
 
-### Topics
+## Topics
 
 - supervised learning
 - regression
@@ -130,7 +123,7 @@ By the end of this module, the learner can:
 - leakage
 - error analysis
 
-### Labs
+## Labs
 
 - baseline versus model
 - cross-validation experiment
@@ -138,9 +131,9 @@ By the end of this module, the learner can:
 - leakage investigation
 - calibration comparison
 
-### Substantial course lab
+## Substantial course lab
 
-**Evaluated ML Pipeline**
+### Evaluated ML Pipeline
 
 A complete reproducible ML workflow with:
 
@@ -152,4 +145,3 @@ A complete reproducible ML workflow with:
 - model card
 
 ---
-
