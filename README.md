@@ -94,6 +94,7 @@ The [OEE Workspace repository](https://github.com/0xbuffdev/oee-workspace) provi
 | Path | Purpose |
 | --- | --- |
 | `spec/` | Normative documents that define OEE |
+| [`docs/adr/`](docs/adr/README.md) | Proposed, non-normative engineering decisions; normative changes still require an RFC |
 | `curriculum/` | Programs and course definitions |
 | `scripts/` | Repository checks for the specification and curriculum |
 | `GOVERNANCE.md` | Stewardship, contribution policy, conduct, and decision-making |
