@@ -1,24 +1,24 @@
-## SEC3 — Systems & Binary Security
+# SEC3 — Systems & Binary Security
 
 **Duration:** 6 weeks
 **Expected workload:** 10–15 focused hours/week
-**Prerequisite:** SEC1 and SEF5
+**Prerequisite:** SEC1 and SEF6
 
 **Recommended:** SYS1 and SYS2.
 
-### Overview
+## Overview
 
 Study memory corruption, native binaries, debugging, and common exploitation mitigations in deliberately vulnerable local environments. The focus is on understanding how bugs arise and how engineering choices prevent them.
 
-### Prerequisites
+## Prerequisites
 
-**SEC1 — Security Foundations & Threat Modeling**
-**SEF5 — Low-Level Programming with C & Linux**
+**SEC1 — Security Foundations & Threat Modeling** (prerequisite)
+**SEF6 — C Programming & Machine Memory** (prerequisite)
 **Recommended:** SYS1 and SYS2.
 
 **Kind:** `course`
 
-### Learning outcomes
+## Learning outcomes
 
 By the end of the course, you will be able to:
 
@@ -28,14 +28,11 @@ By the end of the course, you will be able to:
 - Connect unsafe C patterns to safer systems-design choices.
 - Document a vulnerability and its mitigation within an isolated authorized lab.
 
+## Modules
 
-### Modules
+### Module 1 — Native Memory & Vulnerability Classes
 
-#### Module 1 — Native Memory & Vulnerability Classes
-
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -51,11 +48,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Identify the unsafe operation in a deliberately vulnerable local program.**
    - kind: `lab`
-#### Module 2 — Binary Analysis & Debugging
 
+### Module 2 — Binary Analysis & Debugging
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -71,11 +67,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Inspect a training binary and identify the relevant memory boundary.**
    - kind: `lab`
-#### Module 3 — Platform Mitigations
 
+### Module 3 — Platform Mitigations
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -91,11 +86,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Observe how a mitigation changes the behavior of a controlled local program.**
    - kind: `lab`
-#### Module 4 — Safer Native Design
 
+### Module 4 — Safer Native Design
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -111,14 +105,13 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Rewrite one vulnerable component in safe Rust and state the guarantee gained.**
    - kind: `lab`
-#### Module 5 — Native Security Lab
 
-
+### Module 5 — Native Security Lab
 
 1. **Work only in the private sandbox: demonstrate, mitigate, and compare vulnerable native programs**
    - kind: `lab`
 
-### Topics
+## Topics
 
 - memory corruption
 - stack/heap behavior
@@ -131,18 +124,17 @@ By the end of this module, the learner can:
 - secure coding
 - Rust memory-safety boundaries
 
-### Labs
+## Labs
 
 - debugger exercises
 - binary inspection
 - sandboxed vulnerable programs
 - mitigation experiments
 
-### Substantial course lab
+## Substantial course lab
 
-**Native Security Lab**
+### Native Security Lab
 
 Create intentionally vulnerable C programs in a private sandbox, demonstrate the bug, explain the exploit condition at a high level, implement a mitigation, and compare with safer Rust designs.
 
 ---
-

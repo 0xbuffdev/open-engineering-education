@@ -1,21 +1,21 @@
-## SEC7 — Detection, Incident Response & Threat Hunting
+# SEC7 — Detection, Incident Response & Threat Hunting
 
 **Duration:** 5 weeks
 **Expected workload:** 10–15 focused hours/week
 **Prerequisite:** SEC4 and SEC6
 
-### Overview
+## Overview
 
 Develop defensive security skills through logging, detection rules, incident triage, evidence handling, host forensics, root-cause analysis, threat hunting, and recovery exercises.
 
-### Prerequisites
+## Prerequisites
 
-**SEC4 — Network & Infrastructure Security**
-**SEC6 — Cloud, Containers & Identity Security**
+**SEC4 — Network & Infrastructure Security** (prerequisite)
+**SEC6 — Cloud, Containers & Identity Security** (prerequisite)
 
 **Kind:** `course`
 
-### Learning outcomes
+## Learning outcomes
 
 By the end of the course, you will be able to:
 
@@ -26,14 +26,11 @@ By the end of the course, you will be able to:
 - Construct an incident timeline and identify root cause.
 - Recommend and verify remediation following a controlled incident.
 
+## Modules
 
-### Modules
+### Module 1 — Security Telemetry
 
-#### Module 1 — Security Telemetry
-
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -49,11 +46,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Select the telemetry needed to answer a concrete incident question.**
    - kind: `lab`
-#### Module 2 — Detection & Triage
 
+### Module 2 — Detection & Triage
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -69,11 +65,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Classify a controlled alert and choose the next evidence to collect.**
    - kind: `lab`
-#### Module 3 — Evidence & Root Cause
 
+### Module 3 — Evidence & Root Cause
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -92,11 +87,10 @@ By the end of this module, the learner can:
 
 5. **Micro-lab: Acquire host evidence from a controlled lab system, verify its integrity, and construct a timeline from the logs and artifacts.**
    - kind: `lab`
-#### Module 4 — Threat Hunting & Recovery
 
+### Module 4 — Threat Hunting & Recovery
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -112,14 +106,13 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Validate a hunting hypothesis and document the remediation follow-up.**
    - kind: `lab`
-#### Module 5 — Incident Investigation
 
-
+### Module 5 — Incident Investigation
 
 1. **Investigate the controlled incident, produce evidence-backed findings, and verify remediation**
    - kind: `lab`
 
-### Topics
+## Topics
 
 - security logging
 - telemetry
@@ -134,7 +127,7 @@ By the end of this module, the learner can:
 - recovery
 - post-incident review
 
-### Labs
+## Labs
 
 - generate known test activity
 - detect it from logs
@@ -143,11 +136,10 @@ By the end of this module, the learner can:
 - build a simple detection rule
 - conduct a tabletop exercise
 
-### Substantial course lab
+## Substantial course lab
 
-**Incident Investigation**
+### Incident Investigation
 
 Investigate a controlled incident from logs and host artifacts, preserve and document the evidence, produce a timeline, identify the root cause, recommend fixes, and verify the fixes.
 
 ---
-

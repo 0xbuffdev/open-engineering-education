@@ -1,22 +1,22 @@
-## SEC2 — Web & Application Security
+# SEC2 — Web & Application Security
 
 **Duration:** 6 weeks
 **Expected workload:** 10–15 focused hours/week
 **Prerequisite:** SEC1, APP1 and APP3
 
-### Overview
+## Overview
 
 Examine the security properties of HTTP applications, sessions, authentication, authorization, validation, and APIs. Learners use deliberately vulnerable environments to understand failures, implement fixes, and add regression tests.
 
-### Prerequisites
+## Prerequisites
 
-**SEC1 — Security Foundations & Threat Modeling**
-**APP1 — Web & Internet Foundations**
-**APP3 — Backend Engineering & API Design**
+**SEC1 — Security Foundations & Threat Modeling** (prerequisite)
+**APP1 — Web & Internet Foundations** (prerequisite)
+**APP3 — Backend Engineering & API Design** (prerequisite)
 
 **Kind:** `course`
 
-### Learning outcomes
+## Learning outcomes
 
 By the end of the course, you will be able to:
 
@@ -26,14 +26,11 @@ By the end of the course, you will be able to:
 - Verify security fixes with regression tests.
 - Explain why client-side validation cannot enforce authorization or trust boundaries.
 
+## Modules
 
-### Modules
+### Module 1 — Web Trust & Identity
 
-#### Module 1 — Web Trust & Identity
-
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -49,11 +46,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Trace an authorization decision and identify where enforcement belongs.**
    - kind: `lab`
-#### Module 2 — Input & Injection Attacks
 
+### Module 2 — Input & Injection Attacks
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -69,11 +65,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Use a controlled lab input to demonstrate why output encoding matters.**
    - kind: `lab`
-#### Module 3 — Server-Side Application Risks
 
+### Module 3 — Server-Side Application Risks
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -89,11 +84,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Write a regression test for an authorization boundary.**
    - kind: `lab`
-#### Module 4 — Secure Repair & Regression
 
+### Module 4 — Secure Repair & Regression
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -109,14 +103,13 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Verify that a repaired vulnerability remains fixed after refactoring.**
    - kind: `lab`
-#### Module 5 — Secure Web Application
 
-
+### Module 5 — Secure Web Application
 
 1. **Demonstrate selected flaws in a local application, repair them, and add regression tests**
    - kind: `lab`
 
-### Topics
+## Topics
 
 - HTTP
 - sessions
@@ -132,15 +125,14 @@ By the end of this module, the learner can:
 - access-control failures
 - secure API design
 
-### Labs
+## Labs
 
 Use PortSwigger/OWASP-style labs and a local vulnerable application.
 
-### Substantial course lab
+## Substantial course lab
 
-**Secure Web Application**
+### Secure Web Application
 
 Start with a deliberately vulnerable local application, demonstrate selected vulnerabilities, fix them, and add regression tests.
 
 ---
-

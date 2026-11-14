@@ -1,20 +1,20 @@
-## SEC1 — Security Foundations & Threat Modeling
+# SEC1 — Security Foundations & Threat Modeling
 
 **Duration:** 5 weeks
 **Expected workload:** 10–15 focused hours/week
 **Prerequisite:** Program 1 — SEF
 
-### Overview
+## Overview
 
 Establish the methods and rules used throughout the Security Engineering program. You will learn threat modeling, abuse cases, security requirements, and authorized-testing boundaries using real software systems as the subject of analysis.
 
-### Prerequisites
+## Prerequisites
 
-**SEF — Software Engineering Foundations**
+### SEF — Software Engineering Foundations
 
 **Kind:** `course`
 
-### Learning outcomes
+## Learning outcomes
 
 By the end of the course, you will be able to:
 
@@ -24,14 +24,11 @@ By the end of the course, you will be able to:
 - Define clear rules of engagement for authorized security work.
 - Communicate security risks in terms developers and system owners can act on.
 
+## Modules
 
-### Modules
+### Module 1 — Security Fundamentals
 
-#### Module 1 — Security Fundamentals
-
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -47,11 +44,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Draw trust boundaries for a small application.**
    - kind: `lab`
-#### Module 2 — Identity & Access
 
+### Module 2 — Identity & Access
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -67,11 +63,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Identify one authorization requirement that must be enforced server-side.**
    - kind: `lab`
-#### Module 3 — Threat Modeling
 
+### Module 3 — Threat Modeling
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -87,11 +82,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Turn an abuse case into a concrete security requirement.**
    - kind: `lab`
-#### Module 4 — Verification & Risk Prioritization
 
+### Module 4 — Verification & Risk Prioritization
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -107,14 +101,13 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Convert the highest-risk threats into verification tests.**
    - kind: `lab`
-#### Module 5 — Threat Model & Security Test Plan
 
-
+### Module 5 — Threat Model & Security Test Plan
 
 1. **Produce and validate the Threat Model & Security Test Plan**
    - kind: `lab`
 
-### Topics
+## Topics
 
 - security principles
 - assets
@@ -128,18 +121,17 @@ By the end of this module, the learner can:
 - security requirements
 - OWASP concepts
 
-### Labs
+## Labs
 
 - model an existing application
 - identify trust boundaries
 - write abuse cases
 - translate threats into tests
 
-### Substantial course lab
+## Substantial course lab
 
-**Threat Model & Security Test Plan**
+### Threat Model & Security Test Plan
 
 Take a real project and create a security model whose highest-risk threats become testable requirements.
 
 ---
-

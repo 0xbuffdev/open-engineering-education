@@ -1,4 +1,4 @@
-## SEC8 — AI Security & Authorized Red Teaming
+# SEC8 — AI Security & Authorized Red Teaming
 
 **Duration:** 4 weeks
 **Expected workload:** 10–15 focused hours/week
@@ -6,21 +6,21 @@
 
 **Recommended:** AI4, or equivalent knowledge.
 
-### Overview
+## Overview
 
 Apply security engineering to retrieval systems, tool-using agents, and model-powered applications. Learners examine permissions, prompt injection, data isolation, dangerous outputs, rate limits, escalation, and layered defenses within explicitly authorized environments.
 
-### Prerequisites
+## Prerequisites
 
-**SEC1 — Security Foundations & Threat Modeling**
-**SEC2 — Web & Application Security**
-**SEC7 — Detection, Incident Response & Threat Hunting**
-**AI5 — Retrieval, Agents & Applied Generative AI**
+**SEC1 — Security Foundations & Threat Modeling** (prerequisite)
+**SEC2 — Web & Application Security** (prerequisite)
+**SEC7 — Detection, Incident Response & Threat Hunting** (prerequisite)
+**AI5 — Retrieval, Agents & Applied Generative AI** (prerequisite)
 **Recommended:** AI4, or equivalent knowledge.
 
 **Kind:** `course`
 
-### Learning outcomes
+## Learning outcomes
 
 By the end of the course, you will be able to:
 
@@ -30,14 +30,11 @@ By the end of the course, you will be able to:
 - Translate findings into layered mitigations and regression tests.
 - Produce a clear AI security assessment and demonstrate the retest results.
 
+## Modules
 
-### Modules
+### Module 1 — AI Attack Surfaces
 
-#### Module 1 — AI Attack Surfaces
-
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -53,11 +50,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Create a benign retrieval-isolation test and observe the boundary.**
    - kind: `lab`
-#### Module 2 — Tool & Agent Controls
 
+### Module 2 — Tool & Agent Controls
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -73,11 +69,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Attempt an unauthorized tool path and verify the permission control blocks it.**
    - kind: `lab`
-#### Module 3 — Abuse Cases & Defensive Controls
 
+### Module 3 — Abuse Cases & Defensive Controls
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -93,11 +88,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Turn an abuse case into prevention, detection, and recovery controls.**
    - kind: `lab`
-#### Module 4 — Authorized Red Teaming & Retest
 
+### Module 4 — Authorized Red Teaming & Retest
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -113,14 +107,13 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Retest a repaired control using the same bounded attack case.**
    - kind: `lab`
-#### Module 5 — AI Security Assessment
 
-
+### Module 5 — AI Security Assessment
 
 1. **Assess only a controlled AI system or local training application; produce findings, remediation, and retest evidence**
    - kind: `lab`
 
-### Topics
+## Topics
 
 - prompt injection
 - retrieval isolation
@@ -133,11 +126,10 @@ By the end of this module, the learner can:
 - red-team methodology
 - remediation
 
-### Substantial course lab
+## Substantial course lab
 
-**AI Security Assessment**
+### AI Security Assessment
 
 Assess a controlled AI system or local training application, produce findings, implement defenses, and retest.
 
 ---
-

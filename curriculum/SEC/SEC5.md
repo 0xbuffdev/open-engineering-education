@@ -1,20 +1,20 @@
-## SEC5 — Applied Cryptography & Secure Protocols
+# SEC5 — Applied Cryptography & Secure Protocols
 
 **Duration:** 5 weeks
 **Expected workload:** 10–15 focused hours/week
 **Prerequisite:** SEC1
 
-### Overview
+## Overview
 
 Learn practical cryptography from security goals through symmetric encryption, AEAD, hashes, MACs, key exchange, signatures, and TLS. The course emphasizes correct library use and protocol design rather than implementing primitives yourself.
 
-### Prerequisites
+## Prerequisites
 
-**SEC1 — Security Foundations & Threat Modeling**
+**SEC1 — Security Foundations & Threat Modeling** (prerequisite)
 
 **Kind:** `course`
 
-### Learning outcomes
+## Learning outcomes
 
 By the end of the course, you will be able to:
 
@@ -24,14 +24,11 @@ By the end of the course, you will be able to:
 - Analyze common protocol failures such as nonce reuse and unauthenticated encryption.
 - Document and test a small secure protocol component.
 
+## Modules
 
-### Modules
+### Module 1 — Security Goals & Randomness
 
-#### Module 1 — Security Goals & Randomness
-
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -47,11 +44,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Identify where predictable randomness would break a protocol.**
    - kind: `lab`
-#### Module 2 — Symmetric Protection
 
+### Module 2 — Symmetric Protection
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -67,11 +63,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Choose the primitive that matches a stated security goal.**
    - kind: `lab`
-#### Module 3 — Public-Key Cryptography
 
+### Module 3 — Public-Key Cryptography
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -87,11 +82,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Trace a simplified key-exchange and signature verification flow.**
    - kind: `lab`
-#### Module 4 — Protocol Design & Key Management
 
+### Module 4 — Protocol Design & Key Management
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -107,14 +101,13 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Inspect a protocol transcript and identify where nonce reuse or key misuse would matter.**
    - kind: `lab`
-#### Module 5 — Secure Protocol Component
 
-
+### Module 5 — Secure Protocol Component
 
 1. **Build and evaluate a protocol component using established cryptographic libraries only**
    - kind: `lab`
 
-### Topics
+## Topics
 
 - security goals
 - entropy
@@ -130,16 +123,16 @@ By the end of this module, the learner can:
 - key management
 - nonce handling
 
-### Labs
+## Labs
 
 - authenticated-encryption experiment
 - nonce-reuse demonstration
 - signature verification
 - protocol transcript analysis
 
-### Substantial course lab
+## Substantial course lab
 
-**Secure Protocol Component**
+### Secure Protocol Component
 
 Build a small protocol using established cryptographic libraries and document:
 
@@ -153,4 +146,3 @@ Build a small protocol using established cryptographic libraries and document:
 Never invent cryptographic primitives.
 
 ---
-

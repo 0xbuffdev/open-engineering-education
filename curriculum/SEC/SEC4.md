@@ -1,24 +1,24 @@
-## SEC4 — Network & Infrastructure Security
+# SEC4 — Network & Infrastructure Security
 
 **Duration:** 5 weeks
 **Expected workload:** 10–15 focused hours/week
-**Prerequisite:** SEC2 and SEF5
+**Prerequisite:** SEC2 and SEF7
 
 **Recommended:** SYS4.
 
-### Overview
+## Overview
 
 Study service exposure, network segmentation, secure configuration, TLS, host hardening, secrets, and least privilege through controlled environments and authorized assessment.
 
-### Prerequisites
+## Prerequisites
 
-**SEC2 — Web & Application Security**
-**SEF5 — Low-Level Programming with C & Linux**
+**SEC2 — Web & Application Security** (prerequisite)
+**SEF7 — Unix System Interfaces** (prerequisite)
 **Recommended:** SYS4.
 
 **Kind:** `course`
 
-### Learning outcomes
+## Learning outcomes
 
 By the end of the course, you will be able to:
 
@@ -28,14 +28,11 @@ By the end of the course, you will be able to:
 - Use controlled evidence to validate whether a security control is effective.
 - Produce a remediation-focused infrastructure security review.
 
+## Modules
 
-### Modules
+### Module 1 — Network Attack Surface
 
-#### Module 1 — Network Attack Surface
-
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -51,11 +48,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Inventory the attack surface of the provided training environment.**
    - kind: `lab`
-#### Module 2 — Transport & Segmentation
 
+### Module 2 — Transport & Segmentation
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -71,11 +67,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Model which traffic should be allowed between two isolated services.**
    - kind: `lab`
-#### Module 3 — Service Hardening
 
+### Module 3 — Service Hardening
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -91,11 +86,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Remove unnecessary permissions from a controlled service deployment.**
    - kind: `lab`
-#### Module 4 — Logging & Verification
 
+### Module 4 — Logging & Verification
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -111,14 +105,13 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Verify that one intended attack path is no longer available.**
    - kind: `lab`
-#### Module 5 — Hardened Service Environment
 
-
+### Module 5 — Hardened Service Environment
 
 1. **Deploy, assess, harden, and verify the Hardened Service Environment**
    - kind: `lab`
 
-### Topics
+## Topics
 
 - network attack surface
 - service enumeration
@@ -131,7 +124,7 @@ By the end of this module, the learner can:
 - logging
 - least privilege
 
-### Labs
+## Labs
 
 - inspect a local service
 - harden a Linux host
@@ -139,11 +132,10 @@ By the end of this module, the learner can:
 - test segmentation
 - review service exposure
 
-### Substantial course lab
+## Substantial course lab
 
-**Hardened Service Environment**
+### Hardened Service Environment
 
 Deploy a small service stack, document its attack surface, harden it, and verify the controls.
 
 ---
-

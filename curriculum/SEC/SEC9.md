@@ -1,17 +1,20 @@
-## SEC9 — Security Engineering Capstone
+# SEC9 — Security Engineering Capstone
 
 **Duration:** 8–10 weeks
 **Expected workload:** 10–15 focused hours/week
 
-### Overview
+## Overview
+
 The capstone is the final project course in Security Engineering. You will choose an authorized target, establish scope and rules of engagement, assess the system, implement or recommend defenses, and verify that the important findings have been addressed.
 
-### Prerequisites
-**SEC1–SEC8 — Security Engineering**
+## Prerequisites
+
+**SEC1–SEC8 — Security Engineering** (prerequisite)
 
 **Kind:** `project`
 
-### Learning outcomes
+## Learning outcomes
+
 By the end of the project, you will be able to:
 
 - Establish clear legal and technical scope for a security assessment.
@@ -22,13 +25,11 @@ By the end of the project, you will be able to:
 - Evaluate detection and incident-response readiness.
 - Communicate security findings to both technical and non-technical stakeholders.
 
-### Modules
+## Modules
 
-#### Module 1 — Scope & Threat Model
+### Module 1 — Scope & Threat Model
 
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -41,11 +42,10 @@ By the end of this module, the learner can:
 
 3. **Micro-lab: Build a scoped threat model and identify the highest-risk attack paths.**
    - kind: `lab`
-#### Module 2 — Security Assessment
 
+### Module 2 — Security Assessment
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -58,11 +58,10 @@ By the end of this module, the learner can:
 
 3. **Micro-lab: Validate one in-scope hypothesis against the approved target and record evidence.**
    - kind: `lab`
-#### Module 3 — Findings, Detection & Incident Handling
 
+### Module 3 — Findings, Detection & Incident Handling
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -75,11 +74,10 @@ By the end of this module, the learner can:
 
 3. **Micro-lab: Turn one finding into a developer-actionable remediation and regression test.**
    - kind: `lab`
-#### Module 4 — Remediation & Retest
 
+### Module 4 — Remediation & Retest
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -93,14 +91,13 @@ By the end of this module, the learner can:
 
 3. **Micro-lab: Retest a corrected control and compare evidence before and after remediation.**
    - kind: `lab`
-#### Module 5 — Final Project Lab
 
-
+### Module 5 — Final Project Lab
 
 1. **Perform the authorized assessment, implement or validate remediation, complete the retest, and prepare the final security report for defense**
    - kind: `lab`
 
-### Required phases
+## Required phases
 
 1. **Scope and rules of engagement**
 2. **Architecture review**
@@ -112,7 +109,7 @@ By the end of this module, the learner can:
 8. **Retest**
 9. **Final security report**
 
-### Required deliverables
+## Required deliverables
 
 - scope document
 - architecture diagram

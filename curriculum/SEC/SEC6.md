@@ -1,22 +1,22 @@
-## SEC6 — Cloud, Containers & Identity Security
+# SEC6 — Cloud, Containers & Identity Security
 
 **Duration:** 5 weeks
 **Expected workload:** 10–15 focused hours/week
 **Prerequisite:** SEC2, SEC4 and APP7
 
-### Overview
+## Overview
 
 Apply security engineering to modern deployment environments: containers, CI/CD, identities, permissions, cloud resources, secrets, and software supply chains.
 
-### Prerequisites
+## Prerequisites
 
-**SEC2 — Web & Application Security**
-**SEC4 — Network & Infrastructure Security**
-**APP7 — Deployment, Cloud & DevOps**
+**SEC2 — Web & Application Security** (prerequisite)
+**SEC4 — Network & Infrastructure Security** (prerequisite)
+**APP7 — Deployment, Cloud & DevOps** (prerequisite)
 
 **Kind:** `course`
 
-### Learning outcomes
+## Learning outcomes
 
 By the end of the course, you will be able to:
 
@@ -26,14 +26,11 @@ By the end of the course, you will be able to:
 - Identify common software-supply-chain and secret-exposure risks.
 - Review a deployed environment and produce actionable security improvements.
 
+## Modules
 
-### Modules
+### Module 1 — Isolation & Container Security
 
-#### Module 1 — Isolation & Container Security
-
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -49,11 +46,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Inspect an image and identify unnecessary privileges or components.**
    - kind: `lab`
-#### Module 2 — Identity & Least Privilege
 
+### Module 2 — Identity & Least Privilege
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -69,11 +65,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Reduce a service identity to the permissions it actually needs.**
    - kind: `lab`
-#### Module 3 — Secrets & Supply Chain
 
+### Module 3 — Secrets & Supply Chain
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -89,11 +84,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Identify one credential or dependency risk in a sample pipeline.**
    - kind: `lab`
-#### Module 4 — Cloud Attack Surfaces
 
+### Module 4 — Cloud Attack Surfaces
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -109,14 +103,13 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Review an exposed deployment and verify each remediation.**
    - kind: `lab`
-#### Module 5 — Secure Deployment Review
 
-
+### Module 5 — Secure Deployment Review
 
 1. **Review identities, secrets, images, network exposure, permissions, and CI/CD security**
    - kind: `lab`
 
-### Topics
+## Topics
 
 - Linux/container isolation
 - container images
@@ -129,7 +122,7 @@ By the end of this module, the learner can:
 - cloud attack surfaces
 - configuration management
 
-### Labs
+## Labs
 
 - inspect container permissions
 - harden a container
@@ -137,11 +130,10 @@ By the end of this module, the learner can:
 - detect leaked secrets
 - secure a CI pipeline
 
-### Substantial course lab
+## Substantial course lab
 
-**Secure Deployment Review**
+### Secure Deployment Review
 
 Deploy a small application and produce a security review covering identities, secrets, images, network exposure, permissions, and CI/CD.
 
 ---
-
