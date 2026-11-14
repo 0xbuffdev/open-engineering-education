@@ -12,6 +12,8 @@ OEE emphasizes underlying mechanisms, practical engineering work, reproducible r
 
 **Project status:** `v0.2.0` — draft. The specification is evolving and is not a finalized standard. Course status labels describe the evidence available for each course.
 
+**Release metadata erratum:** The published `v0.2.0` tag contains stale `CITATION.cff` version/date values. Cite version `0.2.0` (2026-11-07); see the [public citation erratum](releases/ERRATA.md). The historical tag is unchanged.
+
 - **Steward:** [0xBUFF](https://github.com/0xbuffdev)
 - **Author:** Christopher S. Aondona
 - **Licensing:** [CC BY 4.0](LICENSE) for specification and curriculum text; [MIT](LICENSE-MIT) for code and scripts.
