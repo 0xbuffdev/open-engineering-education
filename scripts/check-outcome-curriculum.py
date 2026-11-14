@@ -1,32 +1,22 @@
 #!/usr/bin/env python3
-"""Structural checks for OEE v0.2.0 outcome-driven course definitions.
+"""Structural inspection for outcome-driven OEE v0.2.0 courses.
 
-This validator checks documented IDs, references, and assessment fields.
-It does NOT establish whether a task truly measures an outcome, whether
-evidence is sufficient, or whether a course is conforming/tested/verified.
+This is a repository maintenance checker, not an official Toolkit release.
+Its parser is the single source of structural findings for the text CLI,
+JSON diagnostics, and existing program/inventory validation callers.
 
-Usage:
-    python3 scripts/check-outcome-curriculum.py --all
-    python3 scripts/check-outcome-curriculum.py --course curriculum/SEF/SEF1.md
-    python3 scripts/check-outcome-curriculum.py --course FILE --course FILE
-
-The --all mode only validates explicitly v0.2.0-marked courses and
-courses containing v0.2.0-style outcome/assessment IDs. It reports legacy
-courses as skipped. This keeps historical definitions unchanged while
-courses are migrated in separate pull requests.
-
-For an explicit version marker, use this OPTIONAL course metadata line:
-    **Specification:** `v0.2.0`
-
-Do not use --all's legacy skip as proof of new-format conformance.
+No legacy course-format reader is provided. Structural success does not
+establish pedagogy, graded learner achievement, or course conformance.
 """
 
 from __future__ import annotations
 
 import argparse
+import json
 from pathlib import Path
 import re
 import sys
+from urllib.parse import unquote, urlsplit
 
 from course_format_versions import is_outcome_course
 
@@ -40,195 +30,443 @@ REQUIRED_SECTIONS = (
 SECTION_RE = re.compile(r"^## ([^\n]+)$", re.MULTILINE)
 COURSE_RE = re.compile(r"^# ([A-Z]{2,6}[1-9]\d*) — (.+)$", re.MULTILINE)
 MODULE_RE = re.compile(r"^### Module (\d+) — (.+)$", re.MULTILINE)
-OUTCOME_RE = re.compile(r"^\s*-\s+\*\*([A-Z]{2,6}[1-9]\d*-O[1-9]\d*):\*\*\s*(.*?)\s*$")
-ASSESSMENT_RE = re.compile(r"^\s*-\s+\*\*([A-Z]{2,6}[1-9]\d*-AS[1-9]\d*)\*\*(.*)$")
+OUTCOME_RE = re.compile(r"^[ \t]*-[ \t]+\*\*([A-Z]{2,6}[1-9]\d*-O[1-9]\d*):\*\*[ \t]*(.*?)\s*$")
+ASSESSMENT_RE = re.compile(r"^[ \t]*-[ \t]+\*\*([A-Z]{2,6}[1-9]\d*-AS[1-9]\d*)\*\*(.*)$", re.MULTILINE)
 FIELD_RE = re.compile(
-    r"^\s*-\s+(?:\*\*)?(Outcomes|Work|Criteria|Evidence):(?:\*\*)?\s*(.*?)\s*$",
+    r"^[ \t]*-[ \t]+(?:\*\*)?(Outcomes|Work|Criteria|Evidence):(?:\*\*)?[ \t]*(.*?)\s*$",
     re.IGNORECASE,
 )
-def block_after_heading(text: str, heading: str) -> str:
+LINK_RE = re.compile(r"\[[^\]\n]+\]\(([^)\n]+)\)")
+ID_REF_RE = re.compile(r"\b[A-Z]{2,6}[1-9]\d*-O[1-9]\d*\b")
+LESSON_RE = re.compile(r"^(\d+)\.[ \t]+\S", re.MULTILINE)
+
+
+def line_at(text: str, offset: int) -> int:
+    """Return an actual one-based source line, not a guessed module index."""
+    return text.count("\n", 0, offset) + 1
+
+
+def display_path(path: Path) -> str:
+    """Avoid machine-dependent absolute paths in JSON inspection output."""
+    try:
+        return path.resolve().relative_to(ROOT.resolve()).as_posix()
+    except ValueError:
+        return path.name
+
+
+class Finding:
+    """Immutable-in-practice diagnostic; safe for existing direct module loaders."""
+
+    __slots__ = ("code", "category", "message", "path", "line", "severity")
+
+    def __init__(self, code: str, category: str, message: str,
+                 path: str, line: int, severity: str = "error") -> None:
+        self.code = code
+        self.category = category
+        self.message = message
+        self.path = path
+        self.line = line
+        self.severity = severity
+
+    def to_dict(self) -> dict:
+        return {
+            "code": self.code,
+            "category": self.category,
+            "severity": self.severity,
+            "message": self.message,
+            "location": {"path": self.path, "line": self.line},
+        }
+
+
+def outcome_of(findings: list[Finding]) -> str:
+    if any(f.category in ("structural_violation", "unsafe_reference", "invalid_reference", "tool_error")
+           for f in findings):
+        return "failed"
+    if any(f.category in ("unsupported_format", "missing_input", "parser_limitation")
+           for f in findings):
+        return "incomplete"
+    return "passed"
+
+
+def section_range(text: str, heading: str) -> tuple[int, int] | None:
     sections = list(SECTION_RE.finditer(text))
-    for index, match in enumerate(sections):
+    for i, match in enumerate(sections):
         if match.group(1).strip() == heading:
-            stop = sections[index + 1].start() if index + 1 < len(sections) else len(text)
-            return text[match.end():stop]
-    return ""
+            return match.end(), (sections[i + 1].start() if i + 1 < len(sections) else len(text))
+    return None
+
+
+def block_after_heading(text: str, heading: str) -> str:
+    """Shared selector retained for the inventory's derived coverage report."""
+    section = section_range(text, heading)
+    return text[section[0]:section[1]] if section else ""
+
+
+def brief_reference(title: str, body: str) -> tuple[str | None, bool]:
+    """Identify the supported explicit local assessment-brief link presentation.
+
+    A link on the assessment heading or a line named 'Brief' is recognized.
+    We do not infer assessment authority from unrelated resource links.
+    """
+    items = LINK_RE.findall(title)
+    for line in body.splitlines():
+        if re.match(r"^[ \t]*-[ \t]+(?:\*\*)?(?:Assessment[ \t]+)?Brief(?:\*\*)?:", line, re.I):
+            items.extend(LINK_RE.findall(line))
+    return (items[0] if len(items) == 1 else None), len(items) > 1
+
+
+def read_brief(raw: str, owner: Path, root: Path) -> tuple[str | None, Path | None, str | None]:
+    """Resolve relative public Markdown inside the authorized source tree.
+
+    An external URL is an unsupported parser input, not an OEE violation.
+    Symlink escapes and absolute filesystem paths are unsafe references.
+    """
+    if raw.startswith(("/", "\\")) or "\\" in raw:
+        return None, None, "unsafe_reference"
+    parts = urlsplit(raw)
+    if parts.scheme or parts.netloc:
+        return None, None, "parser_limitation"
+    if parts.query:
+        return None, None, "parser_limitation"
+    relative = unquote(parts.path)
+    if not relative or not relative.endswith(".md") or "\x00" in relative:
+        return None, None, "parser_limitation"
+    if relative.startswith("/") or "\\" in relative:
+        return None, None, "unsafe_reference"
+    candidate = (owner.parent / relative).resolve()
+    if not candidate.is_relative_to(root.resolve()):
+        return None, candidate, "unsafe_reference"
+    if not candidate.is_file():
+        return None, candidate, "missing_input"
+    try:
+        return candidate.read_text(encoding="utf-8"), candidate, None
+    except (OSError, UnicodeError):
+        return None, candidate, "missing_input"
+
+
+def fields_in(text: str, base_line: int, source: Path) -> dict[str, tuple[str, str, int]]:
+    found = {}
+    for number, row in enumerate(text.splitlines(), start=base_line):
+        match = FIELD_RE.match(row)
+        if match:
+            found[match.group(1).lower()] = (match.group(2).strip(), display_path(source), number)
+    return found
+
+
+def parse_structure(path: Path, text: str, root: Path) -> list[Finding]:
+    """Validate supported Markdown once; every outward view shares these findings."""
+    found: list[Finding] = []
+    label = display_path(path)
+
+    def add(code: str, message: str, offset: int = 0,
+            category: str = "structural_violation", source: Path | None = None,
+            source_line: int | None = None) -> None:
+        found.append(Finding(
+            code, category, message,
+            display_path(source) if source else label,
+            source_line if source_line is not None else line_at(text, offset),
+        ))
+
+    title = COURSE_RE.match(text)
+    if title is None:
+        add("OEE001", "expected a first-line course heading, e.g. '# APP1 — Course title'")
+        return found
+    code = title.group(1)
+    first_section = SECTION_RE.search(text)
+    metadata = text[:first_section.start()] if first_section else text
+    for key in ("Type", "Prerequisites", "Duration", "Status"):
+        if not re.search(rf"^\*\*{key}:\*\*\s*\S", metadata, re.MULTILINE):
+            add("OEE002", f"missing {key} metadata")
+    kind_match = re.search(r"^\*\*Type:\*\*\s*`?(course|project)`?\s*$",
+                           metadata, re.MULTILINE)
+    if not kind_match:
+        add("OEE003", "Type must be 'course' or 'project'")
+    kind = kind_match.group(1) if kind_match else ""
+
+    headings = list(SECTION_RE.finditer(text))
+    heading_names = [m.group(1).strip() for m in headings]
+    indices = [heading_names.index(h) for h in REQUIRED_SECTIONS if h in heading_names]
+    if len(indices) != len(REQUIRED_SECTIONS) or indices != sorted(indices):
+        add("OEE004", "four required top-level sections are missing or out of order",
+            first_section.start() if first_section else 0)
+    for heading in REQUIRED_SECTIONS:
+        if heading_names.count(heading) > 1:
+            add("OEE004", f"duplicate required top-level section {heading}")
+
+    learning = section_range(text, "Learning outcomes")
+    outcomes: dict[str, int] = {}
+    if learning:
+        start, end = learning
+        cursor = start
+        for row in text[start:end].splitlines(keepends=True):
+            if re.match(r"^[ \t]*-[ \t]+", row):
+                match = OUTCOME_RE.match(row.rstrip("\r\n"))
+                if not match:
+                    add("OEE005", "every course outcome bullet must have a stable 'CODE-O#' ID",
+                        cursor)
+                else:
+                    identifier, desc = match.groups()
+                    if not identifier.startswith(code + "-"):
+                        add("OEE006", f"outcome ID {identifier} does not match course {code}",
+                            cursor)
+                    if identifier in outcomes:
+                        add("OEE007", f"duplicate outcome ID {identifier}", cursor)
+                    if not desc.strip():
+                        add("OEE008", f"outcome {identifier} lacks an observable description",
+                            cursor)
+                    outcomes[identifier] = cursor
+            cursor += len(row)
+    if not outcomes:
+        add("OEE009", "no stable course outcome IDs defined",
+            learning[0] if learning else 0)
+
+    modules = section_range(text, "Modules")
+    if modules:
+        start, end = modules
+        matches = list(MODULE_RE.finditer(text, start, end))
+        if not matches:
+            add("OEE010", "at least one numbered module is required", start)
+        if [int(m.group(1)) for m in matches] != list(range(1, len(matches) + 1)):
+            add("OEE011", "module numbering must begin at 1 and be sequential", start)
+        for i, match in enumerate(matches):
+            module_end = matches[i + 1].start() if i + 1 < len(matches) else end
+            chunk_start = match.end()
+            chunk = text[chunk_start:module_end]
+            outcomes_heading = re.search(r"(?m)^#### Outcomes[ \t]*$", chunk)
+            lessons_heading = re.search(r"(?m)^#### Lessons[ \t]*$", chunk)
+            module_number = match.group(1)
+            if not outcomes_heading or not lessons_heading or outcomes_heading.start() >= lessons_heading.start():
+                add("OEE012", f"module {module_number}: requires Outcomes followed by Lessons",
+                    match.start())
+                continue
+            o_start = chunk_start + outcomes_heading.end()
+            o_end = chunk_start + lessons_heading.start()
+            o_text = text[o_start:o_end]
+            if not re.search(r"(?m)^[ \t]*-[ \t]+\S", o_text):
+                add("OEE013", f"module {module_number}: outcomes are empty", o_start)
+            for ref in ID_REF_RE.finditer(o_text):
+                ident = ref.group()
+                if ident not in outcomes:
+                    add("OEE014", f"module {module_number}: unknown course outcome {ident}",
+                        o_start + ref.start())
+            l_start = chunk_start + lessons_heading.end()
+            lessons = text[l_start:module_end]
+            numbers = [int(m.group(1)) for m in LESSON_RE.finditer(lessons)]
+            if not numbers:
+                add("OEE015", f"module {module_number}: ordered learning sequence is empty",
+                    l_start)
+            elif numbers != list(range(1, len(numbers) + 1)):
+                add("OEE016", f"module {module_number}: lesson numbering is not sequential",
+                    l_start)
+
+    completion = section_range(text, "Completion requirements")
+    covered: set[str] = set()
+    required_count = 0
+    linked_project_details: list[str] = []
+    if completion:
+        start, end = completion
+        headers = list(ASSESSMENT_RE.finditer(text, start, end))
+        # Other valid v0.2.0 Markdown representations may have their
+        # authoritative assessment requirements in modules or linked briefs.
+        # Report a parser limitation rather than a fabricated violation.
+        alternate_assessments = not headers and bool(re.search(
+            rf"\b{re.escape(code)}-AS[1-9]\d*\b", text
+        ))
+        if alternate_assessments:
+            add("OEE035", "assessment uses an unsupported Markdown presentation",
+                start, "parser_limitation")
+        seen_assessments = set()
+        for i, header in enumerate(headers):
+            ident, label_text = header.groups()
+            block_end = headers[i + 1].start() if i + 1 < len(headers) else end
+            body = text[header.end():block_end]
+            if not ident.startswith(code + "-"):
+                add("OEE017", f"assessment ID {ident} does not match course {code}",
+                    header.start())
+            if ident in seen_assessments:
+                add("OEE018", f"duplicate assessment ID {ident}", header.start())
+            seen_assessments.add(ident)
+            link, multiple = brief_reference(label_text, body)
+            if multiple:
+                add("OEE019", f"{ident}: multiple candidate assessment briefs require review",
+                    header.start(), "parser_limitation")
+            inline = fields_in(body, line_at(text, header.end()), path)
+            if link:
+                linked, linked_path, reason = read_brief(link, path, root)
+                if reason:
+                    add("OEE020", f"{ident}: {reason} for assessment brief {link}",
+                        header.start(), reason)
+                elif linked is not None and linked_path is not None:
+                    linked_project_details.append(linked)
+                    brief_fields = fields_in(linked, 1, linked_path)
+                    if not brief_fields:
+                        add("OEE021", f"{ident}: linked brief uses an unsupported field presentation",
+                            header.start(), "parser_limitation")
+                    else:
+                        for key, value in brief_fields.items():
+                            if key in inline and inline[key][0] != value[0]:
+                                add("OEE022", f"{ident}: conflicting inline and linked {key} fields",
+                                    header.start(), "invalid_reference")
+                            else:
+                                inline.setdefault(key, value)
+            optional = bool(re.search(r"\boptional\b", label_text, re.I))
+            if optional:
+                continue
+            required_count += 1
+            # An unsupported/missing brief means its assessment coverage is unknown,
+            # not proof of a false structural requirement or a successful export.
+            if link and any(f.code in ("OEE020", "OEE021", "OEE022")
+                            and f.message.startswith(ident + ":") for f in found):
+                continue
+            if multiple:
+                continue
+            for key in ("outcomes", "work", "criteria", "evidence"):
+                if not inline.get(key) or not inline[key][0]:
+                    if key in inline and inline[key][1] != label:
+                        # Empty fields in a linked brief belong to that source.
+                        field_path = root / inline[key][1] if path.is_relative_to(ROOT) else path.parent / inline[key][1]
+                        add("OEE023", f"{ident}: missing or empty {key} field",
+                            header.start(), source=field_path, source_line=inline[key][2])
+                    else:
+                        add("OEE023", f"{ident}: missing or empty {key} field", header.start())
+            refs = ID_REF_RE.findall(inline.get("outcomes", ("", "", 0))[0])
+            valid_refs = [ref for ref in refs if ref.startswith(code + "-")]
+            if not valid_refs:
+                add("OEE024", f"{ident}: no valid course outcomes referenced",
+                    header.start())
+            for ref in refs:
+                if not ref.startswith(code + "-"):
+                    add("OEE025", f"{ident}: foreign outcome reference {ref}",
+                        header.start())
+                elif ref not in outcomes:
+                    add("OEE026", f"{ident}: unknown course outcome {ref}",
+                        header.start())
+                else:
+                    covered.add(ref)
+        if not required_count and not alternate_assessments:
+            add("OEE027", "no required summative assessments found", start)
+        if not headers and not alternate_assessments:
+            add("OEE028", "assessment definitions must use stable 'CODE-AS#' IDs", start)
+        for ident in sorted(set(outcomes) - covered):
+            # Incomplete brief inspection must not assert an outcome is definitely
+            # unassessed; only produce an incomplete outcome for that course.
+            ambiguous = any(f.category in ("missing_input", "parser_limitation")
+                            for f in found)
+            if not ambiguous:
+                add("OEE029", f"required course outcome {ident} has no required summative assessment",
+                    outcomes[ident])
+        if kind == "project":
+            # Authoritative linked assessment briefs may provide project details.
+            project_details = (text[start:end] + "\n" +
+                               "\n".join(linked_project_details)).lower()
+            if "deliverable" not in project_details:
+                add("OEE030", "project course requires public deliverables", start)
+            if "defense" not in project_details:
+                add("OEE031", "project course requires a reviewable technical defense", start)
+    return found
+
+
+def inspect_course(path: Path, root: Path | None = None) -> dict:
+    """Inspect exactly one source file and expose stable source-located findings."""
+    path = path.resolve()
+    root = (root or ROOT if path.is_relative_to(ROOT) else path.parent).resolve()
+    label = display_path(path)
+    findings: list[Finding] = []
+    checked = []
+    skipped = []
+    if not path.is_file():
+        findings.append(Finding("OEE032", "missing_input", "course source file does not exist",
+                                label, 1))
+    else:
+        try:
+            data = path.read_text(encoding="utf-8")
+        except (OSError, UnicodeError) as exc:
+            findings.append(Finding("OEE033", "missing_input",
+                                    f"course source cannot be read: {type(exc).__name__}", label, 1))
+        else:
+            try:
+                supported = is_outcome_course(data)
+            except ValueError as exc:
+                findings.append(Finding("OEE034", "unsupported_format", str(exc), label, 1))
+                supported = False
+            if supported:
+                checked.append("v0.2.0-structure")
+                findings.extend(parse_structure(path, data, root))
+            else:
+                skipped.append({"check": "v0.2.0-structure", "reason": "unsupported_format"})
+                if not findings:
+                    findings.append(Finding("OEE034", "unsupported_format",
+                                            "unsupported legacy/unknown course format (requires OEE v0.2.0)",
+                                            label, 1))
+    return {
+        "toolVersion": "maintenance-ot-i03",
+        "source": {"path": label},
+        "scope": "course",
+        "checksPerformed": checked,
+        "checksSkipped": skipped,
+        "findings": [f.to_dict() for f in findings],
+        "structuralOutcome": outcome_of(findings),
+        "manualReviewRequired": True,
+    }
 
 
 def validate_course(path: Path) -> list[str]:
-    """Return inspectable structural errors; empty does not certify pedagogy."""
-    errors: list[str] = []
-    text = path.read_text(encoding="utf-8")
-    title = COURSE_RE.search(text)
-    if not title or title.start() != 0:
-        return ["expected a first-line course heading, e.g. '# APP1 — Course title'"]
+    """Single-parser compatibility for existing source-repo maintenance callers.
 
-    code = title.group(1)
-    metadata = text[:text.find("\n## ")] if "\n## " in text else text
-    for field in ("Type", "Prerequisites", "Duration", "Status"):
-        if not re.search(rf"^\*\*{field}:\*\*\s*\S", metadata, re.MULTILINE):
-            errors.append(f"missing {field} metadata")
-    kind_match = re.search(r"^\*\*Type:\*\*\s*`?(course|project)`?\s*$", metadata, re.MULTILINE)
-    if not kind_match:
-        errors.append("Type must be 'course' or 'project'")
-    kind = kind_match.group(1) if kind_match else ""
-
-    found_headings = [m.group(1).strip() for m in SECTION_RE.finditer(text)]
-    indices = [found_headings.index(h) for h in REQUIRED_SECTIONS if h in found_headings]
-    if len(indices) != len(REQUIRED_SECTIONS) or indices != sorted(indices):
-        errors.append("four required top-level sections are missing or out of order")
-
-    learning = block_after_heading(text, "Learning outcomes")
-    defined_outcomes: set[str] = set()
-    for line in learning.splitlines():
-        if not re.match(r"^\s*-\s+", line):
-            continue
-        match = OUTCOME_RE.match(line)
-        if not match:
-            errors.append("every course outcome bullet must have a stable 'CODE-O#' ID")
-            continue
-        identifier, description = match.groups()
-        if not identifier.startswith(code + "-"):
-            errors.append(f"outcome ID {identifier} does not match course {code}")
-        if identifier in defined_outcomes:
-            errors.append(f"duplicate outcome ID {identifier}")
-        if not description.strip():
-            errors.append(f"outcome {identifier} lacks an observable description")
-        defined_outcomes.add(identifier)
-    if not defined_outcomes:
-        errors.append("no stable course outcome IDs defined")
-
-    modules = block_after_heading(text, "Modules")
-    matches = list(MODULE_RE.finditer(modules))
-    if not matches:
-        errors.append("at least one numbered module is required")
-    if [int(m.group(1)) for m in matches] != list(range(1, len(matches) + 1)):
-        errors.append("module numbering must begin at 1 and be sequential")
-    for i, match in enumerate(matches):
-        stop = matches[i + 1].start() if i + 1 < len(matches) else len(modules)
-        module = modules[match.end():stop]
-        number = match.group(1)
-        outcomes_pos = module.find("#### Outcomes")
-        lessons_pos = module.find("#### Lessons")
-        if outcomes_pos < 0 or lessons_pos < 0 or outcomes_pos >= lessons_pos:
-            errors.append(f"module {number}: requires Outcomes followed by Lessons")
-            continue
-        outcome_block = module[outcomes_pos + len("#### Outcomes"):lessons_pos]
-        lesson_block = module[lessons_pos + len("#### Lessons"):]
-        if not re.search(r"^\s*-\s+\S", outcome_block, re.MULTILINE):
-            errors.append(f"module {number}: outcomes are empty")
-        for ref in re.findall(rf"\b{re.escape(code)}-O[1-9]\d*\b", outcome_block):
-            if ref not in defined_outcomes:
-                errors.append(f"module {number}: unknown course outcome {ref}")
-        lesson_numbers = [int(n) for n in re.findall(r"^(\d+)\.\s+\S", lesson_block, re.MULTILINE)]
-        if not lesson_numbers:
-            errors.append(f"module {number}: ordered learning sequence is empty")
-        elif lesson_numbers != list(range(1, len(lesson_numbers) + 1)):
-            errors.append(f"module {number}: lesson numbering is not sequential")
-
-    completion = block_after_heading(text, "Completion requirements")
-    headers = list(re.finditer(
-        r"^\s*-\s+\*\*([A-Z]{2,6}[1-9]\d*-AS[1-9]\d*)\*\*(.*)$",
-        completion, re.MULTILINE,
-    ))
-    covered: set[str] = set()
-    seen_assessments: set[str] = set()
-    required_count = 0
-    for i, header in enumerate(headers):
-        identifier, title_text = header.groups()
-        stop = headers[i + 1].start() if i + 1 < len(headers) else len(completion)
-        block = completion[header.end():stop]
-        if not identifier.startswith(code + "-"):
-            errors.append(f"assessment ID {identifier} does not match course {code}")
-        if identifier in seen_assessments:
-            errors.append(f"duplicate assessment ID {identifier}")
-        seen_assessments.add(identifier)
-        fields = {}
-        for line in block.splitlines():
-            field = FIELD_RE.match(line)
-            if field:
-                fields[field.group(1).lower()] = field.group(2).strip()
-        optional = bool(re.search(r"\boptional\b", title_text, re.IGNORECASE))
-        if optional:
-            continue
-        required_count += 1
-        for field_name in ("outcomes", "work", "criteria", "evidence"):
-            if not fields.get(field_name):
-                errors.append(f"{identifier}: missing or empty {field_name} field")
-        refs = re.findall(rf"\b{re.escape(code)}-O[1-9]\d*\b", fields.get("outcomes", ""))
-        if not refs:
-            errors.append(f"{identifier}: no valid course outcomes referenced")
-        for ref in refs:
-            if ref not in defined_outcomes:
-                errors.append(f"{identifier}: unknown course outcome {ref}")
-            else:
-                covered.add(ref)
-        # Cross-course outcome references in the same field are invalid.
-        for ref in re.findall(r"\b[A-Z]{2,6}[1-9]\d*-O[1-9]\d*\b", fields.get("outcomes", "")):
-            if not ref.startswith(code + "-"):
-                errors.append(f"{identifier}: foreign outcome reference {ref}")
-
-    if not required_count:
-        errors.append("no required summative assessments found")
-    if len(headers) == 0:
-        errors.append("assessment definitions must use stable 'CODE-AS#' IDs")
-    for outcome in sorted(defined_outcomes - covered):
-        errors.append(f"required course outcome {outcome} has no required summative assessment")
-
-    if kind == "project":
-        if "deliverable" not in completion.lower():
-            errors.append("project course requires public deliverables")
-        if "defense" not in completion.lower():
-            errors.append("project course requires a reviewable technical defense")
-
-    return errors
+    Does not provide a legacy format reader or a public Toolkit API.
+    """
+    path = path.resolve()
+    if not path.is_file():
+        return ["course source file does not exist"]
+    result = parse_structure(path, path.read_text(encoding="utf-8"),
+                             ROOT if path.is_relative_to(ROOT) else path.parent)
+    return [finding.message for finding in result]
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument("--all", action="store_true", help="check migrated or explicitly version-marked course files")
-    group.add_argument("--course", action="append", type=Path, help="check a specific file; repeat for multiple files")
+    group.add_argument("--all", action="store_true",
+                       help="inspect all active courses; unsupported formats yield incomplete")
+    group.add_argument("--course", action="append", type=Path,
+                       help="inspect one course file; repeat to inspect several")
+    parser.add_argument("--format", choices=("text", "json"), default="text",
+                        help="human or machine-readable inspection results")
     args = parser.parse_args()
-
-    if args.all:
-        files = sorted(
-            path for path in (ROOT / "curriculum").rglob("*.md")
-            if re.fullmatch(r"[A-Z]{2,6}[1-9]\d*\.md", path.name)
-        )
+    files = (sorted(path for path in (ROOT / "curriculum").rglob("*.md")
+                    if re.fullmatch(r"[A-Z]{2,6}[1-9]\d*\.md", path.name))
+             if args.all else [path.resolve() for path in args.course])
+    reports = [inspect_course(path) for path in files]
+    findings = [f for report in reports for f in report["findings"]]
+    outcomes = [report["structuralOutcome"] for report in reports]
+    result = ("failed" if "failed" in outcomes else
+              "incomplete" if "incomplete" in outcomes else "passed")
+    summary = {
+        "formatVersion": 1,
+        "toolVersion": "maintenance-ot-i03",
+        "ruleSetVersion": "maintenance-ot-i03-1",
+        "scope": "repository" if args.all else "course",
+        "structuralOutcome": result,
+        "manualReviewRequired": True,
+        "inspectedCourses": len(files),
+        "passedCourses": outcomes.count("passed"),
+        "failedCourses": outcomes.count("failed"),
+        "incompleteCourses": outcomes.count("incomplete"),
+        "findings": findings,
+        "courses": reports,
+    }
+    if args.format == "json":
+        print(json.dumps(summary, ensure_ascii=False, sort_keys=True, separators=(",", ":")))
     else:
-        files = [path.resolve() for path in args.course]
-
-    checked = skipped = 0
-    errors = []
-    for path in files:
-        if not path.is_file():
-            errors.append(f"{path}: file does not exist")
-            continue
-        content = path.read_text(encoding="utf-8")
-        try:
-            migrated = is_outcome_course(content)
-        except ValueError as exc:
-            errors.append(f"{path}: {exc}")
-            continue
-        if args.all and not migrated:
-            skipped += 1
-            continue
-        checked += 1
-        for failure in validate_course(path):
-            try:
-                label = str(path.relative_to(ROOT))
-            except ValueError:
-                label = str(path)
-            errors.append(f"{label}: {failure}")
-
-    for error in errors:
-        print(f"ERROR: {error}", file=sys.stderr)
-    print(
-        f"OEE v0.2.0 structural check: {checked} checked, {skipped} legacy skipped, "
-        f"{len(errors)} errors; substantive pedagogical review still required."
-    )
-    return 1 if errors else 0
+        for finding in findings:
+            where = finding["location"]
+            print(f"ERROR: {where['path']}:{where['line']}: "
+                  f"[{finding['code']}/{finding['category']}] {finding['message']}",
+                  file=sys.stderr)
+        print(f"OEE v0.2.0 structural check: {len(files)} inspected, "
+              f"{outcomes.count('passed')} passed, {outcomes.count('incomplete')} incomplete, "
+              f"{outcomes.count('failed')} failed; manual pedagogical review required.")
+    return {"passed": 0, "failed": 1, "incomplete": 3}[result]
 
 
 if __name__ == "__main__":
