@@ -1,21 +1,21 @@
-## SYS8 — Systems Design & Production Engineering
+# SYS8 — Systems Design & Production Engineering
 
 **Duration:** 5 weeks
 **Expected workload:** 10–15 focused hours/week
 **Prerequisite:** SYS6 and SYS7
 
-### Overview
+## Overview
 
 Synthesize the program's systems knowledge into production engineering decisions involving service boundaries, reliability, capacity, operations, and failure handling.
 
-### Prerequisites
+## Prerequisites
 
-**SYS6 — Distributed Systems**
-**SYS7 — Performance Engineering & Observability**
+**SYS6 — Distributed Systems** (prerequisite)
+**SYS7 — Performance Engineering & Observability** (prerequisite)
 
 **Kind:** `course`
 
-### Learning outcomes
+## Learning outcomes
 
 By the end of the course, you will be able to:
 
@@ -25,14 +25,11 @@ By the end of the course, you will be able to:
 - Evaluate resource, complexity, and operational trade-offs with measured evidence.
 - Design and defend a production-oriented systems architecture.
 
+## Modules
 
-### Modules
+### Module 1 — Reliability & Failure Design
 
-#### Module 1 — Reliability & Failure Design
-
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -48,11 +45,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Define one failure budget and test the system against it.**
    - kind: `lab`
-#### Module 2 — Service Boundaries & Configuration
 
+### Module 2 — Service Boundaries & Configuration
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -68,11 +64,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Introduce configuration validation and failure-safe defaults.**
    - kind: `lab`
-#### Module 3 — Observability & Load Testing
 
+### Module 3 — Observability & Load Testing
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -88,11 +83,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Run a controlled load test and identify one resource limit.**
    - kind: `lab`
-#### Module 4 — Incidents & Readiness
 
+### Module 4 — Incidents & Readiness
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -108,14 +102,13 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Write a runbook for one failure scenario and test the procedure.**
    - kind: `lab`
-#### Module 5 — Production Readiness Review
 
-
+### Module 5 — Production Readiness Review
 
 1. **Harden and review one systems service for another engineering team to operate**
    - kind: `lab`
 
-### Topics
+## Topics
 
 - reliability
 - service boundaries
@@ -128,11 +121,10 @@ By the end of this module, the learner can:
 - incident analysis
 - operational documentation
 
-### Substantial course lab
+## Substantial course lab
 
-**Production Readiness Review**
+### Production Readiness Review
 
 Harden one earlier service as if another engineering team were going to operate it.
 
 ---
-

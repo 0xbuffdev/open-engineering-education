@@ -1,20 +1,20 @@
-## SYS3 — Concurrency, Atomics & Memory Models
+# SYS3 — Concurrency, Atomics & Memory Models
 
 **Duration:** 6 weeks
 **Expected workload:** 10–15 focused hours/week
 **Prerequisite:** SYS2
 
-### Overview
+## Overview
 
 Study threads, locks, atomics, channels, races, deadlocks, memory ordering, cache coherence, false sharing, and introductory NUMA behavior through controlled experiments.
 
-### Prerequisites
+## Prerequisites
 
-**SYS2 — Systems Programming with C & Rust**
+**SYS2 — Systems Programming with C & Rust** (prerequisite)
 
 **Kind:** `course`
 
-### Learning outcomes
+## Learning outcomes
 
 By the end of the course, you will be able to:
 
@@ -24,14 +24,11 @@ By the end of the course, you will be able to:
 - Measure lock contention, false sharing, and other concurrency costs.
 - Build and verify a concurrent component with explicit correctness reasoning.
 
+## Modules
 
-### Modules
+### Module 1 — Threads & Shared State
 
-#### Module 1 — Threads & Shared State
-
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -47,11 +44,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Create a small race condition and make the failure reproducible.**
    - kind: `lab`
-#### Module 2 — Atomics & Memory Ordering
 
+### Module 2 — Atomics & Memory Ordering
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -67,11 +63,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Justify the ordering needed for a small concurrent handoff.**
    - kind: `lab`
-#### Module 3 — Channels & Concurrent Structures
 
+### Module 3 — Channels & Concurrent Structures
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -87,11 +82,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Implement a bounded queue and define its correctness properties.**
    - kind: `lab`
-#### Module 4 — Contention & Hardware Effects
 
+### Module 4 — Contention & Hardware Effects
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -107,14 +101,13 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Compare adjacent and padded counters across thread counts.**
    - kind: `lab`
-#### Module 5 — Concurrent Runtime Component
 
-
+### Module 5 — Concurrent Runtime Component
 
 1. **Build, benchmark, and defend the Concurrent Runtime Component**
    - kind: `lab`
 
-### Topics
+## Topics
 
 - threads
 - locks
@@ -130,7 +123,7 @@ By the end of this module, the learner can:
 - false sharing
 - basic NUMA concepts
 
-### Labs
+## Labs
 
 - bounded queue
 - thread pool
@@ -139,11 +132,10 @@ By the end of this module, the learner can:
 - lock-contention experiment
 - false-sharing benchmark
 
-### Substantial course lab
+## Substantial course lab
 
-**Concurrent Runtime Component**
+### Concurrent Runtime Component
 
 Build a concurrent subsystem with benchmarks and a written correctness argument.
 
 ---
-

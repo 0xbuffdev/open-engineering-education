@@ -1,21 +1,21 @@
-## SYS7 — Performance Engineering & Observability
+# SYS7 — Performance Engineering & Observability
 
 **Duration:** 5 weeks
 **Expected workload:** 10–15 focused hours/week
 **Prerequisite:** SYS3 and SYS4
 
-### Overview
+## Overview
 
 Develop a repeatable performance-engineering workflow using profiling, benchmarking, tracing, metrics, and controlled experiments. The goal is to replace intuition with evidence.
 
-### Prerequisites
+## Prerequisites
 
-**SYS3 — Concurrency, Atomics & Memory Models**
-**SYS4 — Linux Networking & Services**
+**SYS3 — Concurrency, Atomics & Memory Models** (prerequisite)
+**SYS4 — Linux Networking & Services** (prerequisite)
 
 **Kind:** `course`
 
-### Learning outcomes
+## Learning outcomes
 
 By the end of the course, you will be able to:
 
@@ -25,14 +25,11 @@ By the end of the course, you will be able to:
 - Instrument a service with useful metrics and traces.
 - Produce a technical performance report that connects a change to a measured result.
 
+## Modules
 
-### Modules
+### Module 1 — Profiling & Measurement
 
-#### Module 1 — Profiling & Measurement
-
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -48,11 +45,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Profile a real workload and identify its dominant cost.**
    - kind: `lab`
-#### Module 2 — Observability Signals
 
+### Module 2 — Observability Signals
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -68,11 +64,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Connect one user-visible slowdown to a trace segment and metric change.**
    - kind: `lab`
-#### Module 3 — Latency, Throughput & Queues
 
+### Module 3 — Latency, Throughput & Queues
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -88,11 +83,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Measure how queue depth changes latency under load.**
    - kind: `lab`
-#### Module 4 — Performance Investigation Method
 
+### Module 4 — Performance Investigation Method
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -108,14 +102,13 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Run a before/after experiment with controlled conditions.**
    - kind: `lab`
-#### Module 5 — Performance Investigation
 
-
+### Module 5 — Performance Investigation
 
 1. **Investigate, improve, and quantify a real systems bottleneck**
    - kind: `lab`
 
-### Topics
+## Topics
 
 - profiling
 - benchmarking
@@ -129,7 +122,7 @@ By the end of this module, the learner can:
 - performance hypotheses
 - capacity reasoning
 
-### Labs
+## Labs
 
 Every lab follows:
 
@@ -142,11 +135,10 @@ baseline
 → explanation
 ```
 
-### Substantial course lab
+## Substantial course lab
 
-**Performance Investigation**
+### Performance Investigation
 
 Take an earlier systems project, find a real bottleneck, prove it with measurements, improve it, and quantify the result.
 
 ---
-

@@ -1,21 +1,21 @@
-## SYS6 — Distributed Systems
+# SYS6 — Distributed Systems
 
 **Duration:** 7 weeks
 **Expected workload:** 10–15 focused hours/week
 **Prerequisite:** SYS4 and SYS5
 
-### Overview
+## Overview
 
 Study RPC, replication, fault models, consistency, leader-based coordination, durable logs, recovery, and consensus through staged implementation and fault-injection exercises.
 
-### Prerequisites
+## Prerequisites
 
-**SYS4 — Linux Networking & Services**
-**SYS5 — Storage Engines & Data Systems**
+**SYS4 — Linux Networking & Services** (prerequisite)
+**SYS5 — Storage Engines & Data Systems** (prerequisite)
 
 **Kind:** `course`
 
-### Learning outcomes
+## Learning outcomes
 
 By the end of the course, you will be able to:
 
@@ -25,14 +25,11 @@ By the end of the course, you will be able to:
 - Use fault injection to investigate partitions, dropped replies, duplication, and restarts.
 - State the guarantees a distributed service provides and the assumptions behind them.
 
+## Modules
 
-### Modules
+### Module 1 — RPC & Failure Models
 
-#### Module 1 — RPC & Failure Models
-
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -48,11 +45,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Inject dropped requests and distinguish timeout from successful completion.**
    - kind: `lab`
-#### Module 2 — Replication & Consistency
 
+### Module 2 — Replication & Consistency
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -68,11 +64,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Trace a write through replicas and identify possible divergence.**
    - kind: `lab`
-#### Module 3 — Retries & Idempotency
 
+### Module 3 — Retries & Idempotency
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -88,11 +83,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Make a retried client request safe against duplicate application.**
    - kind: `lab`
-#### Module 4 — Partitions & Consensus
 
+### Module 4 — Partitions & Consensus
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -108,14 +102,13 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Run a controlled failure scenario and explain the resulting client guarantee.**
    - kind: `lab`
-#### Module 5 — Replicated Key-Value Service
 
-
+### Module 5 — Replicated Key-Value Service
 
 1. **Build and fault-inject the Replicated Key-Value Service**
    - kind: `lab`
 
-### Topics
+## Topics
 
 - RPC
 - replication
@@ -129,7 +122,7 @@ By the end of this module, the learner can:
 - consensus fundamentals
 - fault injection
 
-### Labs
+## Labs
 
 - RPC service
 - duplicate-request experiment
@@ -137,11 +130,10 @@ By the end of this module, the learner can:
 - dropped-message experiment
 - restart/recovery experiment
 
-### Substantial course lab
+## Substantial course lab
 
-**Replicated Key-Value Service**
+### Replicated Key-Value Service
 
 Build a small replicated service and test it under controlled failures.
 
 ---
-

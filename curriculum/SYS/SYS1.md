@@ -1,20 +1,20 @@
-## SYS1 — Computer Architecture, Memory & Performance
+# SYS1 — Computer Architecture, Memory & Performance
 
 **Duration:** 6 weeks
 **Expected workload:** 10–15 focused hours/week
-**Prerequisite:** SEF5
+**Prerequisite:** SEF6
 
-### Overview
+## Overview
 
 Build the mental model needed to explain why software behaves differently at the machine level. You will study instruction execution, registers, branches, caches, locality, translation, and performance measurement through experiments and low-level inspection.
 
-### Prerequisites
+## Prerequisites
 
-**SEF5 — Low-Level Programming with C & Linux**
+**SEF6 — C Programming & Machine Memory** (prerequisite)
 
 **Kind:** `course`
 
-### Learning outcomes
+## Learning outcomes
 
 By the end of the course, you will be able to:
 
@@ -24,14 +24,11 @@ By the end of the course, you will be able to:
 - Design experiments that distinguish competing explanations for performance behavior.
 - Use benchmarks and measurements to support conclusions about system performance.
 
+## Modules
 
-### Modules
+### Module 1 — CPU & Instruction Execution
 
-#### Module 1 — CPU & Instruction Execution
-
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -47,11 +44,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Trace a short sequence of instructions and identify register changes.**
    - kind: `lab`
-#### Module 2 — Assembly & Program Behavior
 
+### Module 2 — Assembly & Program Behavior
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -67,11 +63,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Compare optimized and unoptimized assembly for a small function.**
    - kind: `lab`
-#### Module 3 — Memory Hierarchy & Locality
 
+### Module 3 — Memory Hierarchy & Locality
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -87,11 +82,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Compare sequential and strided memory access on the same data.**
    - kind: `lab`
-#### Module 4 — Performance Measurement
 
+### Module 4 — Performance Measurement
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -107,14 +101,13 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Form a performance hypothesis and design an experiment that can falsify it.**
    - kind: `lab`
-#### Module 5 — Configurable Cache & Locality Simulator
 
-
+### Module 5 — Configurable Cache & Locality Simulator
 
 1. **Build, run, and explain the Configurable Cache & Locality Simulator**
    - kind: `lab`
 
-### Topics
+## Topics
 
 - digital logic foundations
 - CPU organization
@@ -128,7 +121,7 @@ By the end of this module, the learner can:
 - TLBs
 - performance measurement
 
-### Labs
+## Labs
 
 - inspect generated assembly
 - trace instructions
@@ -136,11 +129,10 @@ By the end of this module, the learner can:
 - compare sequential and strided memory access
 - benchmark tiled versus naïve matrix multiplication
 
-### Substantial course lab
+## Substantial course lab
 
-**Configurable Cache & Locality Simulator**
+### Configurable Cache & Locality Simulator
 
 The learner predicts performance, runs experiments, and explains why measured behavior differs from naïve Big-O reasoning.
 
 ---
-

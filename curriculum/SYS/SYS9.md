@@ -1,17 +1,20 @@
-## SYS9 — Systems Engineering Capstone
+# SYS9 — Systems Engineering Capstone
 
 **Duration:** 8–10 weeks
 **Expected workload:** 10–15 focused hours/week
 
-### Overview
+## Overview
+
 The capstone is the final project course in Systems Engineering. You will design and implement a systems-oriented service or infrastructure component, subject it to realistic load and failure conditions, and use measurement to explain its behavior and trade-offs.
 
-### Prerequisites
-**SYS1–SYS8 — Systems Engineering**
+## Prerequisites
+
+**SYS1–SYS8 — Systems Engineering** (prerequisite)
 
 **Kind:** `project`
 
-### Learning outcomes
+## Learning outcomes
+
 By the end of the project, you will be able to:
 
 - Design a systems project from explicit functional and nonfunctional requirements.
@@ -21,13 +24,11 @@ By the end of the project, you will be able to:
 - Document guarantees, operational requirements, and failure modes.
 - Defend low-level and architectural trade-offs using observed behavior.
 
-### Modules
+## Modules
 
-#### Module 1 — System Requirements & Architecture
+### Module 1 — System Requirements & Architecture
 
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -40,11 +41,10 @@ By the end of this module, the learner can:
 
 3. **Micro-lab: Define system invariants and draw the data/control flow.**
    - kind: `lab`
-#### Module 2 — Core Implementation
 
+### Module 2 — Core Implementation
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -57,11 +57,10 @@ By the end of this module, the learner can:
 
 3. **Micro-lab: Implement and instrument one critical path before expanding the system.**
    - kind: `lab`
-#### Module 3 — Concurrency, Failure & Recovery
 
+### Module 3 — Concurrency, Failure & Recovery
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -74,11 +73,10 @@ By the end of this module, the learner can:
 
 3. **Micro-lab: Inject one controlled failure and record the observed recovery path.**
    - kind: `lab`
-#### Module 4 — Performance & Operations
 
+### Module 4 — Performance & Operations
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -92,14 +90,13 @@ By the end of this module, the learner can:
 
 3. **Micro-lab: Establish a baseline benchmark and isolate one bottleneck.**
    - kind: `lab`
-#### Module 5 — Final Project Lab
 
-
+### Module 5 — Final Project Lab
 
 1. **Build, stress, measure, fault-inject, document, and prepare the systems project for defense**
    - kind: `lab`
 
-### Suitable capstone shapes
+## Suitable capstone shapes
 
 - replicated storage service
 - durable message/stream service
@@ -107,7 +104,7 @@ By the end of this module, the learner can:
 - local distributed database
 - systems-oriented developer infrastructure
 
-### Required qualities
+## Required qualities
 
 - architecture/design document
 - Rust implementation
@@ -124,7 +121,7 @@ By the end of this module, the learner can:
 - incident/failure report
 - retrospective
 
-### Project defense
+## Project defense
 
 The final defense must include a **live failure demonstration** and explanation of the system's guarantees.
 

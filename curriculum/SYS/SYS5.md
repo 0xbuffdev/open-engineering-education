@@ -1,21 +1,21 @@
-## SYS5 — Storage Engines & Data Systems
+# SYS5 — Storage Engines & Data Systems
 
 **Duration:** 6 weeks
 **Expected workload:** 10–15 focused hours/week
 **Prerequisite:** SYS2 and SYS3
 
-### Overview
+## Overview
 
 Study persistence, serialization, write-ahead logging, indexing, checksums, storage layout, compaction, and crash recovery. The emphasis is on understanding storage behavior by implementing core mechanisms.
 
-### Prerequisites
+## Prerequisites
 
-**SYS2 — Systems Programming with C & Rust**
-**SYS3 — Concurrency, Atomics & Memory Models**
+**SYS2 — Systems Programming with C & Rust** (prerequisite)
+**SYS3 — Concurrency, Atomics & Memory Models** (prerequisite)
 
 **Kind:** `course`
 
-### Learning outcomes
+## Learning outcomes
 
 By the end of the course, you will be able to:
 
@@ -25,14 +25,11 @@ By the end of the course, you will be able to:
 - Use checksums and integrity checks to detect corruption.
 - Test crash-recovery behavior and prove which writes survive controlled failures.
 
+## Modules
 
-### Modules
+### Module 1 — Persistence & On-Disk Structure
 
-#### Module 1 — Persistence & On-Disk Structure
-
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -48,11 +45,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Design a small on-disk record format and verify corruption detection.**
    - kind: `lab`
-#### Module 2 — Write-Ahead Logging & Durability
 
+### Module 2 — Write-Ahead Logging & Durability
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -68,11 +64,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Inject a crash after controlled write stages and inspect recovery behavior.**
    - kind: `lab`
-#### Module 3 — Ordered Storage Structures
 
+### Module 3 — Ordered Storage Structures
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -88,11 +83,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Compare lookup/write behavior of tree-like and log-structured designs.**
    - kind: `lab`
-#### Module 4 — Compaction & Recovery
 
+### Module 4 — Compaction & Recovery
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -108,14 +102,13 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Verify which operations survive restart under a defined workload.**
    - kind: `lab`
-#### Module 5 — Rust LSM Key-Value Store
 
-
+### Module 5 — Rust LSM Key-Value Store
 
 1. **Build, crash-test, benchmark, and document the Rust LSM Key-Value Store**
    - kind: `lab`
 
-### Topics
+## Topics
 
 - persistence
 - serialization
@@ -129,7 +122,7 @@ By the end of this module, the learner can:
 - crash recovery
 - durability guarantees
 
-### Labs
+## Labs
 
 - page-format experiment
 - WAL writer
@@ -137,9 +130,9 @@ By the end of this module, the learner can:
 - crash-recovery test
 - B-tree/LSM comparison
 
-### Substantial course lab
+## Substantial course lab
 
-**Rust LSM Key-Value Store**
+### Rust LSM Key-Value Store
 
 Required:
 
@@ -151,4 +144,3 @@ Required:
 - benchmark workload
 
 ---
-

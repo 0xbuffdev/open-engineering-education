@@ -1,21 +1,21 @@
-## SYS4 — Linux Networking & Services
+# SYS4 — Linux Networking & Services
 
 **Duration:** 6 weeks
 **Expected workload:** 10–15 focused hours/week
 **Prerequisite:** SYS2 and SYS3
 
-### Overview
+## Overview
 
 Move from local systems programming to networked services. You will work with sockets, TCP/IP, event-driven I/O, connection lifecycle, protocol design, and service behavior under real network conditions.
 
-### Prerequisites
+## Prerequisites
 
-**SYS2 — Systems Programming with C & Rust**
-**SYS3 — Concurrency, Atomics & Memory Models**
+**SYS2 — Systems Programming with C & Rust** (prerequisite)
+**SYS3 — Concurrency, Atomics & Memory Models** (prerequisite)
 
 **Kind:** `course`
 
-### Learning outcomes
+## Learning outcomes
 
 By the end of the course, you will be able to:
 
@@ -25,14 +25,11 @@ By the end of the course, you will be able to:
 - Diagnose common network-service failures using logs, traces, and controlled tests.
 - Build a safe multi-client network service with clean shutdown behavior.
 
+## Modules
 
-### Modules
+### Module 1 — Sockets & TCP
 
-#### Module 1 — Sockets & TCP
-
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -48,11 +45,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Build a minimal TCP client and server and trace the lifecycle.**
    - kind: `lab`
-#### Module 2 — Non-Blocking & Event-Driven I/O
 
+### Module 2 — Non-Blocking & Event-Driven I/O
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -68,11 +64,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Convert a blocking server into an event-driven design.**
    - kind: `lab`
-#### Module 3 — Backpressure & Reliability
 
+### Module 3 — Backpressure & Reliability
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -88,11 +83,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Simulate slow or partial clients and verify the server remains bounded.**
    - kind: `lab`
-#### Module 4 — Protocols & Shutdown
 
+### Module 4 — Protocols & Shutdown
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -108,14 +102,13 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Design a small protocol and verify clean shutdown for active clients.**
    - kind: `lab`
-#### Module 5 — Multi-Client Rust Service
 
-
+### Module 5 — Multi-Client Rust Service
 
 1. **Build, load-test, and document the Multi-Client Rust Service**
    - kind: `lab`
 
-### Topics
+## Topics
 
 - sockets
 - TCP/IP
@@ -128,7 +121,7 @@ By the end of this module, the learner can:
 - graceful shutdown
 - protocol design
 
-### Labs
+## Labs
 
 - TCP echo server
 - packet and socket inspection
@@ -136,9 +129,9 @@ By the end of this module, the learner can:
 - timeout handling
 - concurrent client benchmark
 
-### Substantial course lab
+## Substantial course lab
 
-**Multi-Client Rust Service**
+### Multi-Client Rust Service
 
 A protocol-driven network service with:
 
@@ -151,4 +144,3 @@ A protocol-driven network service with:
 - load tests
 
 ---
-

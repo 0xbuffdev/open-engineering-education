@@ -1,20 +1,20 @@
-## SYS2 — Systems Programming with C & Rust
+# SYS2 — Systems Programming with C & Rust
 
 **Duration:** 6 weeks
 **Expected workload:** 10–15 focused hours/week
 **Prerequisite:** SYS1
 
-### Overview
+## Overview
 
 Work with Unix processes, memory allocation, files, system calls, and resource lifetimes in C and Rust. The course uses side-by-side implementations to make memory safety and ownership meaningful rather than abstract.
 
-### Prerequisites
+## Prerequisites
 
-**SYS1 — Computer Architecture, Memory & Performance**
+**SYS1 — Computer Architecture, Memory & Performance** (prerequisite)
 
 **Kind:** `course`
 
-### Learning outcomes
+## Learning outcomes
 
 By the end of the course, you will be able to:
 
@@ -24,14 +24,11 @@ By the end of the course, you will be able to:
 - Compare manual memory-management risks with Rust ownership and borrowing.
 - Build a multi-module systems utility and test its failure and cleanup paths.
 
+## Modules
 
-### Modules
+### Module 1 — Unix Processes & Resources
 
-#### Module 1 — Unix Processes & Resources
-
-
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -47,11 +44,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Track which component owns each file descriptor or allocated resource.**
    - kind: `lab`
-#### Module 2 — Memory & System Calls
 
+### Module 2 — Memory & System Calls
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -67,11 +63,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Observe a system call boundary and explain its inputs and outputs.**
    - kind: `lab`
-#### Module 3 — C/Rust Safety Boundaries
 
+### Module 3 — C/Rust Safety Boundaries
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -87,11 +82,10 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Compare one resource-management implementation in C and Rust.**
    - kind: `lab`
-#### Module 4 — Signals & Robust Services
 
+### Module 4 — Signals & Robust Services
 
-
-### Module outcomes
+#### Module outcomes
 
 By the end of this module, the learner can:
 
@@ -107,14 +101,13 @@ By the end of this module, the learner can:
 
 4. **Micro-lab: Add graceful signal handling and verify cleanup.**
    - kind: `lab`
-#### Module 5 — Rust Unix Service Utility
 
-
+### Module 5 — Rust Unix Service Utility
 
 1. **Build and validate the Rust Unix Service Utility**
    - kind: `lab`
 
-### Topics
+## Topics
 
 - Unix process model
 - memory allocation
@@ -127,7 +120,7 @@ By the end of this module, the learner can:
 - error handling
 - FFI concepts
 
-### Labs
+## Labs
 
 - file-descriptor monitor
 - process launcher
@@ -135,11 +128,10 @@ By the end of this module, the learner can:
 - C-to-Rust comparison
 - resource cleanup tests
 
-### Substantial course lab
+## Substantial course lab
 
-**Rust Unix Service Utility**
+### Rust Unix Service Utility
 
 A multi-module command-line or daemon-style utility that interacts directly with Linux facilities.
 
 ---
-
