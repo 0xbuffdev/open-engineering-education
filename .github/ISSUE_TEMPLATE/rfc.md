@@ -1,39 +1,33 @@
 ---
-name: RFC
-about: A proposal that changes the standard, the course format, or the free/paid line
-title: "RFC: "
+name: RFC discussion
+about: Discuss a proposed change to OEE's public requirements, governance, or implementation boundaries
+title: "RFC discussion: "
 labels: rfc
 assignees: ""
 ---
 
-<!-- Copy rfcs/TEMPLATE.md and fill it in. RFCs are for changes to spec/, the
-     required course structure, or the free/paid line. Routine fixes do not need
-     one: open a pull request directly (see CONTRIBUTING.md). -->
+## Problem and affected requirements
 
-**Problem**:
+<!-- Describe the limitation, evidence, affected people, and the current public specification sections. -->
 
-<!-- What is wrong or missing, and who is affected. State the problem before the solution. -->
+## Proposed direction
 
-**Proposal**:
+<!-- Summarize the change and its likely consequences. -->
 
-<!-- What should change, concretely: which files, which sections, the actual proposed wording. -->
+## Alternatives
 
-**Alternatives considered**:
+<!-- Include at least one credible alternative and explain the trade-offs. -->
 
-| Alternative | Why it was not chosen |
-| --- | --- |
-| | |
+## Impact and open questions
 
-<!-- At least one real alternative, something you seriously considered. -->
+<!-- Describe effects on existing courses, evidence, conformance, licensing, or governance as applicable. -->
 
-**Impact on conformance**:
+## Formal proposal
 
-<!-- What this does to existing courses and status labels. See spec/conformance.md. -->
-
-**Impact on the free/paid line**:
-
-<!-- Does anything move between free and paid? Say exactly what and why, or say no. -->
-
-**Open questions**:
-
-<!-- What still needs an answer before this can be decided. -->
+For a change to normative requirements, use the public
+[RFC guide](https://github.com/0xbuffdev/open-engineering-education/blob/main/rfcs/README.md) and
+[RFC template](https://github.com/0xbuffdev/open-engineering-education/blob/main/rfcs/TEMPLATE.md).
+The RFC itself belongs in `rfcs/` through a reviewed pull request.
+This issue is a discussion aid, **not** a second RFC or an authority
+for implementation. Ordinary corrections that preserve normative
+meaning can use a regular pull request.

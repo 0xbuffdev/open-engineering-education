@@ -1,33 +1,37 @@
 ---
-name: Status-label change
-about: Request to promote or lower a course's draft / tested / verified label
-title: "status: "
+name: Course readiness change
+about: Request a review of a published draft, tested, or verified course status
+title: "course status: "
 labels: status-label
 assignees: ""
 ---
 
-**Course**:
+## Course
 
-<!-- Course code and file, e.g. SEF0: curriculum/SEF/SEF0-course-slug.md -->
+<!-- Example: SEF1, curriculum/SEF/SEF1.md. -->
 
-**Current label**:
+## Current and requested status
 
-<!-- draft / tested / verified -->
+<!-- Use the defined labels: draft, tested, or verified. -->
 
-**Requested label**:
+## Supporting evidence
 
-<!-- The label you are asking for -->
+<!-- Link the public or appropriately reviewable course and assessment records.
+     Follow spec/status-labels.md for thresholds and review requirements.
+     Do not post private learner records, credentials, or secrets. -->
 
-**Evidence links**:
+## Feedback and revision record
 
-<!-- Commits, repos, or artifacts satisfying spec/evidence-rules.md for this promotion.
-     draft -> tested: one learner's completed work plus a revision note.
-     tested -> verified: multiple learners, reproduced exit check, reviewer sign-off. -->
+<!-- Explain feedback reviewed and revisions made where promotion requires them. -->
 
-**Revision note**:
+## Reason for correction or downgrade (if applicable)
 
-<!-- What changed in the course because of this evidence (required for draft -> tested). -->
+<!-- Explain any missing, invalid, or no-longer-available evidence. -->
 
-**Why the current label is wrong**:
+## Applicable requirements
 
-<!-- Required when you are asking for a label to come DOWN. Include the defect or broken evidence. -->
+See [Status Labels](https://github.com/0xbuffdev/open-engineering-education/blob/main/spec/status-labels.md)
+for the authoritative promotion thresholds, reviewer obligations,
+and reassessment rules. See
+[Evidence Rules](https://github.com/0xbuffdev/open-engineering-education/blob/main/spec/evidence-rules.md)
+for evidence integrity and privacy requirements.

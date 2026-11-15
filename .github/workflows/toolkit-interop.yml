@@ -1,4 +1,4 @@
-name: OT-I06 pinned OEE export and Workspace consumer contract
+name: OEE export and Workspace interoperability
 
 on:
   pull_request:

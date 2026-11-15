@@ -1,27 +1,25 @@
-# Frozen structural validation fixtures (OT-I02)
+# Structural validation fixtures
 
-These **synthetic** files are regression fixtures stored and versioned in Git.
-They are not canonical OEE curriculum, do not enter the program catalogs,
-and must not be represented as learner-tested or verified courses.
-Their checked-in Git revision pins their contents for reproducible tests.
+These **synthetic** Markdown files exercise the outcome-driven structural
+checker and the repository-local Toolkit. They are test fixtures, **not**
+canonical curriculum or evidence that a course has been taught or verified.
+The historical `ot_i02` directory name is retained because test paths
+reference it; it does not imply an open implementation ticket.
 
-| Fixture | Expected behavior in the current maintenance checker |
+| Fixture | Expected behavior |
 | --- | --- |
-| `valid_v020_course.md` | v0.2.0 structural pass, but **not** pedagogical conformance |
-| `legacy_v010_course.md` | Classified as older unsupported format; direct outcome-only check fails |
-| `linked_brief_v020.md` and `linked_brief.md` | Valid *candidate* linked-brief expression; current inline-only parser **cannot validate it** and must never report a structural pass without verifying the brief |
+| `valid_v020_course.md` | Passes supported `v0.2.0` structural checks, not educational conformance |
+| `legacy_v010_course.md` | Is rejected as unsupported by the outcome-only checker |
+| `linked_brief_v020.md` and `linked_brief.md` | Pass when the local linked brief resolves and supplies the required assessment fields |
 
-`test_toolkit_fixture_contract.py` exercises these files and additional
-in-memory negative mutations (unsupported/contradictory version marker,
-duplicate IDs, missing required coverage, invalid assessment fields,
-project defense and missing linked brief). It does not create a second
-course schema or implement old-format compatibility.
+The [fixture regression tests](../../test_toolkit_fixture_contract.py)
+cover valid and unsupported source formats, conflicting version markers,
+duplicate IDs, missing outcome coverage, incomplete assessment fields,
+project-defense requirements, and linked-brief resolution.
 
-The current `scripts/check-outcome-curriculum.py` is a **migration-era,
-inline-only** checker; a failure for linked syntax may reflect
-`parser_limitation`, not a normative requirement violation. The public
-Toolkit must support that brief *or* return an explicit incomplete/limitation
-diagnostic (OT-I03), never a false conformance claim.
-
-**Scope boundary:** No fixtures here assert that current legacy SEF/APP
-validators become Toolkit APIs. The new Toolkit is strict v0.2.0-only.
+The shared [outcome checker](../../../scripts/check-outcome-curriculum.py)
+accepts supported repository-local assessment briefs and reports missing
+or unsupported inputs as incomplete, rather than treating them as passed.
+The [Toolkit](../../../tooling/README.md) additionally checks content
+at an immutable Git commit; neither check certifies educational quality
+or provides backward compatibility with legacy course formats.
