@@ -5,29 +5,37 @@
 **Prerequisites:** [SEF2](SEF2.md)
 **Duration:** 8 weeks
 **Status:** `draft`
-**Expected workload:** 10–15 focused hours/week
+**Specification:** `v0.2.0`
+**Expected workload:** 10–15 focused hours/week (provisional; calibrate with learner evidence)
 
 > [Software Engineering Foundations](README.md) · [OEE curriculum](../README.md) · [Course format](../../spec/course-format.md)
 
 ## Overview
 
-This course develops fluency with the Linux command line: managing files, composing commands with redirection and pipes, understanding how the shell expands what is typed, controlling permissions and processes, configuring the environment, searching and transforming text, and automating work with shell scripts. SEF2 introduced the terminal; this course teaches the shell as a programming and investigation environment that every later program assumes.
+Develop the ability to explain and safely automate work in a Linux shell. Starting from the basic terminal skills introduced by SEF2, investigate files, links, expansion, redirection, pipelines, permissions, processes, and the shell's inherited environment. Then use Bash scripts to search and transform local data, handle failures, and deliver a small tested command-line toolkit.
 
-- [**SEF2 — Programming & Computational Thinking**](SEF2.md)
+Bash 5.x and common Linux command-line tools are the reference environment. Use a Linux workstation or an already available free Linux virtual machine, container, or equivalent local environment with a nonprivileged shell. Record the actual Bash, operating-system, and utility versions. Bash arrays, `[[ ... ]]`, `pipefail`, and NUL-delimited `read` options are **Bash features**, not claims about generic POSIX `sh`. Where GNU and POSIX utilities differ, document the dependency or use a supported equivalent.
+
+All assessed work uses synthetic data, explicitly owned temporary directories, and only processes started by the learner for the exercise. No root privileges, `sudo`, system-wide package changes, real scheduled jobs, external network access, personal-file manipulation, or paid service are required. Package-management and network tools can be studied using local documentation and available loopback diagnostics; their presence is not a hidden installation gate.
+
+The 11-module learning sequence is preserved as a guide, not a quota of per-module tests or labs. Six required assessments integrate connected capabilities and can reuse already verified scripts, fixtures, and explanations. **Published outcomes, assessment criteria, and evidence determine course completion**, not attendance or the number of activities performed.
+
+The 8-week duration is a planning estimate. The course remains `draft` until the applicable learner and reviewer evidence justifies a readiness promotion.
 
 ## Learning outcomes
 
-By the end of the course, the learner will be able to:
-
-- Manage files, directories, and links from the command line.
-- Compose commands with redirection, pipes, and filters, and explain what the shell does before a command runs.
-- Read and change file permissions and explain how users, groups, and processes interact.
-- Inspect and control running processes, and explain the environment a process inherits.
-- Search for files and transform text with standard tools and regular expressions.
-- Edit files with a terminal editor and install software with a package manager.
-- Write, debug, and structure shell scripts that handle arguments, input, errors, and control flow.
-- Build a tested, documented command-line toolkit that automates a real task.
-- Build defensive shell automation with safe quoting, controlled temporary files and explicit exit/error behavior.
+- **SEF3-O1:** Safely inspect, create, reorganize, and remove files and directories within an explicitly owned working tree; predict and explain hard-link and symbolic-link behavior.
+- **SEF3-O2:** Predict and verify Bash argument vectors resulting from quoting, parameter substitution, pathname matching, and other shell expansions, including spaces, newlines, and unmatched patterns.
+- **SEF3-O3:** Identify shell built-ins and external commands, consult their documentation, and explain stdin, stdout, stderr, redirection, pipelines, and exit-status behavior.
+- **SEF3-O4:** Diagnose file and directory permission failures and control only explicitly owned child processes using observable process, job, and signal evidence.
+- **SEF3-O5:** Use a terminal editor and user-controlled configuration, and diagnose differences in command lookup, environment variables, shell startup, and installed local tools without changing system configuration.
+- **SEF3-O6:** Search, filter, and summarize locally generated files and logs using regular expressions and text-processing tools, checking deterministic results against independent reference counts.
+- **SEF3-O7:** Write and explain Bash scripts using documented arguments, functions, branching, loops, arrays where appropriate, input validation, and explicit success or failure behavior.
+- **SEF3-O8:** Diagnose an unfamiliar shell or automation failure with a minimal reproduction, recorded observations, a causal hypothesis, a bounded repair, and a regression test.
+- **SEF3-O9:** Handle arbitrary fixture pathnames and temporary working directories without uncontrolled word splitting, unintended symlink traversal, or changes outside an owned data boundary.
+- **SEF3-O10:** Detect and report pipeline and subprocess failures, use narrowly scoped cleanup traps, and explain which interruptions and durability outcomes cannot be guaranteed.
+- **SEF3-O11:** Reproduce and explain a noninteractive or restricted-environment failure, distinguishing Bash-specific features from POSIX-sh behavior and documenting platform, locale, path, and tool assumptions.
+- **SEF3-O12:** Deliver, verify, and defend a small offline shell toolkit that safely coordinates multiple scripts, preserves unrelated files, handles required error cases, and reproduces its claims from clean fixtures.
 
 ## Modules
 
@@ -35,487 +43,245 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Create, copy, move, rename, and remove files and directories, and predict the result before running the command.
-- Use wildcards to select groups of files and explain the difference between hard links and symbolic links.
+- SEF3-O1
+- SEF3-O2
 
 #### Lessons
 
-1. **Course introduction: Linux & the Command Line** — `lesson`
+1. Course introduction: Linux & the Command Line
+2. The filesystem tree
+3. Copying, moving, and removing
+4. Wildcards
+5. Hard links and symbolic links
 
-   Servers, containers, cloud platforms, and developer machines run Linux, and the command line is how people operate them. This course makes the shell a tool the learner controls, not a place to paste commands.
-2. **The filesystem tree** — `lesson`
-3. **Copying, moving, and removing** — `lesson`
-4. **Wildcards** — `lesson`
-5. **Hard links and symbolic links** — `lesson`
-6. **Files and directories** — `test`
-7. **Reorganize a directory tree** — `lab`
+*Optional practice:* Predict the tree before moving and renaming mock files; experiment with links and a hidden filename inside the owned fixture directory only.
 
 ### Module 2 — Commands & Redirection
 
 #### Outcomes
 
-- Identify what kind of command is being run and find its documentation.
-- Redirect standard input, standard output, and standard error, and connect commands with pipelines.
+- SEF3-O3
+- SEF3-O10
 
 #### Lessons
 
-1. **Kinds of commands** — `lesson`
-2. **Getting help** — `lesson`
-3. **Aliases** — `lesson`
-4. **Standard input, output, and error** — `lesson`
-5. **Pipelines and filters** — `lesson`
-6. **Commands and redirection** — `test`
-7. **Build a pipeline** — `lab`
+1. Kinds of commands
+2. Getting help
+3. Aliases
+4. Standard input, output, and error
+5. Pipelines and filters
+
+*Optional practice:* Identify built-ins and external commands with the shell's documentation tools; compare stdout, stderr, and status for a harmless failing helper.
 
 ### Module 3 — Expansion & the Keyboard
 
 #### Outcomes
 
-- Explain the order in which the shell performs expansions and the effect of each kind of quoting.
-- Use command-line editing and history to work faster and to repeat commands accurately.
+- SEF3-O2
+- SEF3-O8
 
 #### Lessons
 
-1. **Pathname, tilde, arithmetic, and brace expansion** — `lesson`
-2. **Parameter and command substitution** — `lesson`
-3. **Quoting** — `lesson`
-4. **Command-line editing and history** — `lesson`
-5. **Expansion and quoting** — `test`
-6. **Predict and verify expansions** — `lab`
+1. Pathname, tilde, arithmetic, and brace expansion
+2. Parameter and command substitution
+3. Quoting
+4. Command-line editing and history
+
+*Optional practice:* Use a safe argument-display function rather than `eval` to compare quoted and unquoted expansions, including an empty value and an unmatched glob.
 
 ### Module 4 — Permissions & Processes
 
 #### Outcomes
 
-- Read and change file modes and ownership, and explain how a permission denial arises.
-- List, control, and end processes, and explain signals and job control at the command line.
+- SEF3-O4
 
 #### Lessons
 
-1. **Users and groups** — `lesson`
-2. **File modes** — `lesson`
-3. **Changing modes, owners, and the default mask** — `lesson`
-4. **Processes and the process table** — `lesson`
-5. **Signals, job control, and foreground and background work** — `lesson`
-6. **Permissions and processes** — `test`
-7. **Diagnose two failures** — `lab`
+1. Users and groups
+2. File modes
+3. Changing modes, owners, and the default mask
+4. Processes and the process table
+5. Signals, job control, and foreground and background work
+
+*Optional practice:* Investigate directory search bits and file modes on disposable files; start, inspect, and wait for one clearly owned short-lived child.
 
 ### Module 5 — Environment, Editing & System Tasks
 
 #### Outcomes
 
-- Explain environment variables, `PATH`, and shell startup files, and configure a shell environment.
-- Edit files with vi(m), install and remove software with a package manager, and use basic networking tools to inspect connectivity.
+- SEF3-O5
+- SEF3-O11
 
 #### Lessons
 
-1. **Environment variables and `PATH`** — `lesson`
-2. **Shell startup files** — `lesson`
-3. **Editing files with vi(m)** — `lesson`
-4. **Package management** — `lesson`
-5. **Networking tools** — `lesson`
-6. **Environment and tools** — `test`
-7. **Configure an environment** — `lab`
+1. Environment variables and `PATH`
+2. Shell startup files
+3. Editing files with vi(m)
+4. Package management
+5. Networking tools
+
+*Optional practice:* Edit a local configuration example in a terminal editor; compare a normal shell with a restricted environment using explicit command paths.
 
 ### Module 6 — Searching & Text Processing
 
 #### Outcomes
 
-- Find files by name, type, time, and size, and act on the results safely.
-- Write regular expressions and use standard tools to extract, sort, compare, and transform text.
+- SEF3-O6
+- SEF3-O3
 
 #### Lessons
 
-1. **Finding files** — `lesson`
-2. **Archiving and compression** — `lesson`
-3. **Regular expressions** — `lesson`
-4. **Searching text** — `lesson`
-5. **Sorting, cutting, and comparing** — `lesson`
-6. **Stream editing** — `lesson`
-7. **Search and text processing** — `test`
-8. **Extract a report from logs** — `lab`
+1. Finding files
+2. Archiving and compression
+3. Regular expressions
+4. Searching text
+5. Sorting, cutting, and comparing
+6. Stream editing
+
+*Optional practice:* Build a reference count by hand, then search and sort synthetic log records; test empty input and malformed lines.
 
 ### Module 7 — Shell Scripts: Foundations
 
 #### Outcomes
 
-- Write an executable script and explain how the shell finds and runs it.
-- Use conditions and input to make a script behave differently, and design a script top-down from functions.
+- SEF3-O7
 
 #### Lessons
 
-1. **A script is a file of commands** — `lesson`
-2. **Variables and constants in scripts** — `lesson`
-3. **Shell functions and top-down design** — `lesson`
-4. **Testing conditions with `if`** — `lesson`
-5. **Reading input** — `lesson`
-6. **Script foundations** — `test`
-7. **Write a first script** — `lab`
+1. A script is a file of commands
+2. Variables and constants in scripts
+3. Shell functions and top-down design
+4. Testing conditions with `if`
+5. Reading input
+
+*Optional practice:* Write a small script with help, functions, argument validation, and meaningful nonzero errors for rejected inputs.
 
 ### Module 8 — Shell Scripts: Control Flow & Robustness
 
 #### Outcomes
 
-- Use loops, `case`, positional parameters, strings, arithmetic, and arrays in scripts.
-- Find and fix script defects with tracing and defensive checks.
+- SEF3-O7
+- SEF3-O8
 
 #### Lessons
 
-1. **Loops with `while`, `until`, and `for`** — `lesson`
-2. **Branching with `case`** — `lesson`
-3. **Positional parameters and options** — `lesson`
-4. **Strings and numbers** — `lesson`
-5. **Arrays** — `lesson`
-6. **Troubleshooting scripts** — `lesson`
-7. **Script control flow** — `test`
-8. **Repair a broken script** — `lab`
+1. Loops with `while`, `until`, and `for`
+2. Branching with `case`
+3. Positional parameters and options
+4. Strings and numbers
+5. Arrays
+6. Troubleshooting scripts
+
+*Optional practice:* Seed a quoting or argument-handling defect in a copy, capture the bad output, correct it, and retain a regression test.
 
 ### Module 9 — Shell Safety & Process Boundaries
 
 #### Outcomes
 
-- Handle interrupts and unsafe pathnames predictably in scripts.
-- Diagnose an unexpected result using observable evidence.
+- SEF3-O9
+- SEF3-O10
 
 #### Lessons
 
-1. **Pipeline exit status and command failures** — `lesson`
-2. **Signals and trap cleanup** — `lesson`
-3. **Safe temporary files** — `lesson`
-4. **Pathnames with whitespace and newlines** — `lesson`
-5. **Subshell scope and environment** — `lesson`
-6. **When shell is the wrong tool** — `lesson`
-7. **Shell Safety & Process Boundaries reasoning** — `test`
-8. **Build a safe batch processor** — `lab`
+1. Pipeline exit status and command failures
+2. Signals and trap cleanup
+3. Safe temporary files
+4. Pathnames with whitespace and newlines
+5. Subshell scope and environment
+6. When shell is the wrong tool
+
+*Optional practice:* Use a disposable directory containing filenames with whitespace and newlines; compare NUL-delimited iteration with the unsafe line-splitting example without deleting real files.
 
 ### Module 10 — Automation Diagnostics & Portability
 
 #### Outcomes
 
-- Diagnose a scheduled script failure from environment and process evidence.
-- Diagnose an unexpected result using observable evidence.
+- SEF3-O5
+- SEF3-O8
+- SEF3-O11
 
 #### Lessons
 
-1. **System logs and process inspection** — `lesson`
-2. **Scheduled jobs and PATH assumptions** — `lesson`
-3. **Process and socket diagnostics** — `lesson`
-4. **POSIX versus Bash portability** — `lesson`
-5. **Structured command-line status reporting** — `lesson`
-6. **Automation Diagnostics & Portability reasoning** — `test`
-7. **Repair a restricted-environment task** — `lab`
+1. System logs and process inspection
+2. Scheduled jobs and PATH assumptions
+3. Process and socket diagnostics
+4. POSIX versus Bash portability
+5. Structured command-line status reporting
+
+*Optional practice:* Compare a clean environment with the interactive one, then simulate the actual PATH and working-directory assumptions of a scheduled task.
 
 ### Module 11 — Shell Toolkit
 
 #### Outcomes
 
-- Complete and explain the **Shell Toolkit** integration lab, demonstrating the relevant course outcomes and retained evidence.
+- SEF3-O6
+- SEF3-O7
+- SEF3-O8
+- SEF3-O9
+- SEF3-O10
+- SEF3-O11
+- SEF3-O12
 
 #### Lessons
 
-1. **Shell Toolkit reliability and portability** — `test`
-2. **Build, test, and document the Shell Toolkit** — `lab`
+1. Toolkit contract and bounded fixture layout
+2. Report pipeline and staging design
+3. Failure-path test harness
+4. Clean-start documentation and engineering defense
 
-   **Final integration lab — required work**
-
-   **Shell Toolkit**
-
-   Build a small set of related shell scripts that automate a real task, such as organizing downloads, backing up a directory with rotation, or summarizing logs. The toolkit must include:
-
-   - Argument and option handling with a usage message
-   - Input validation and clear error messages with correct exit status
-   - At least one pipeline and one regular expression
-   - A test script that exercises success and failure paths
-   - A README with installation and usage examples
-   - Unprivileged, bounded filesystem operations with safe cleanup
-   - Reproducible checks for unusual filenames, pipeline failures and restricted environments
+*Optional practice:* Sketch a two-script log-reporting toolkit and plan its clean-checkout reproduction, failure cases, safety boundary, and technical defense.
 
 ## Completion requirements
 
-- Complete the required course exercises, checkpoints and evaluated labs below.
-- Complete the final integrated `lab` in the last module and meet its observable exit criteria.
-- Retain reproducible artifacts, verification results, design explanations, and a technical retrospective as required by the [OEE Evidence Rules](../../spec/evidence-rules.md).
+### Assessment environment and safety
 
-Complete these required exercises:
+Complete the six required assessments with a documented nonprivileged Bash 5.x (or compatible Bash) environment and generated, non-sensitive fixtures. Specify the shell, operating-system/tool versions, locale when output ordering matters, exact commands, expected results, and actual results. Run all mutating tests inside a verified learner-owned fixture root, never through a broad cleanup command pointed at a home directory or unknown path. Do not use `sudo`, install packages system-wide, alter real startup files or crontabs, fetch remote data, or signal unrelated processes.
 
-**Practical practice:**
+Some exercises use unusual pathnames, symlinks, redirection, signals, and injected failures. For each, establish the expected boundaries **before** executing commands; demonstrate that unrelated sentinel data remains unchanged. Where a platform lacks an optional diagnostic utility, document the limitation and use a reproducible equivalent, not an undisclosed dependency. A separate network namespace or administrative capabilities are not needed.
 
-- Restructure a directory tree using only commands.
-- Answer a data question with a pipeline.
-- Predict shell expansions, then verify them.
-- Diagnose a permission failure and a runaway process.
-- Extract a report from log files.
-- Write and debug a script that takes options and handles errors.
+For each assessment, provide inspectable scripts or command transcripts, the input and expected-output fixtures, the actual outputs and exit statuses, and a concise explanation tying observations to the claimed outcomes. A reviewer may choose equivalent unfamiliar fixture values under the published criteria to check independent understanding. Code and output must be reproducible without paid tools or a proprietary grader. Safety-critical failures cannot be excused by extra optional practice or a passing unrelated check.
 
-**Required module checkpoints and practical lab contracts:**
+### Required summative assessments
 
-All eleven modules require two explained conceptual checkpoints and one practical lab. Questions can be replaced by equivalent unfamiliar examples assessing the same outcomes. Learners must predict shell behavior, observe results and explain discrepancies; copying displayed answers without evidence is insufficient.
+- **SEF3-AS1** (required files, links, expansion, and stream investigation)
+  - Outcomes: SEF3-O1, SEF3-O2, SEF3-O3
+  - Work: Create an isolated fixture tree with ordinary names, a hidden file, a name containing spaces, a literal wildcard character, and a name containing a newline. Predict and then demonstrate bounded copy, move, rename, and targeted removal; compare hard-link and symbolic-link behavior before and after removing an original filename. For a supplied set of Bash tokens using variables, pathname patterns, brace expansion, and quoted positional parameters, record the predicted number and values of arguments and compare with a harmless argument-display function. Explain one command's origin or builtin status and route a small helper's stdout and stderr to separate captures.
+  - Criteria: Every mutation stays inside the owned fixture tree; the before/after tree and file-content changes match documented predictions or a corrected explanation; hard links and symlinks are distinguished by inode identity versus target pathname. Quotes preserve intended argument boundaries, including spaces and newlines; wildcard and unmatched-pattern behavior is explained with the actual shell settings. Stream captures, documentation lookup, and any nonzero statuses are interpreted correctly. A quoted pathname alone is not mistaken for proof that a deletion target is safe.
+  - Evidence: Fixture creation notes, predicted and actual inventories, link metadata observations, argument-vector comparison table, shell configuration, command origin/help observation, separate stream outputs, and a short explanation of any corrected prediction.
 
-**Shared lab environment:**
+- **SEF3-AS2** (required reproducible log and pipeline analysis)
+  - Outcomes: SEF3-O3, SEF3-O6, SEF3-O10
+  - Work: Produce a local log fixture with a documented delimiter, record types such as `INFO`, `WARN`, and `ERROR`, and an independently computed count-by-type reference. Create a Bash pipeline using suitable regular expressions, filters, sorting, and counting commands to generate a deterministically ordered summary. Decide and document how a malformed record and a no-match case behave. Inject a failure into a middle pipeline stage; compare the default Bash exit status with `pipefail` enabled, and demonstrate an error path that cannot silently publish a plausible but incomplete report.
+  - Criteria: Counts and ordering match the independent fixture oracle with the declared locale and regex dialect; empty input, malformed records, and missing matches follow the published output/error policy. Redirection and pipeline behavior are explained accurately; a failed upstream stage is detectable rather than reported as a successful report. The script never overwrites unrelated data or hides the original nonzero status with a trailing successful command.
+  - Evidence: Synthetic log fixtures, manual reference counts, documented parsing policy, pipeline/script source, expected/actual reports, stdout/stderr and exit-code comparison for normal and injected-error cases, and a short account of the repaired failure.
+  - Review variation: A reviewer may alter a severity count or insert a malformed record, then ask for a predicted summary or error before execution.
 
-Use a nonprivileged disposable Linux environment (VM, container or user-owned test directory), Bash 5.x or a documented compatible version and commonly available GNU/POSIX command-line tools. Record actual Bash and utility versions. Run against generated fixtures only; never modify real home files, system configuration or unrelated processes. No sudo, system-wide package installation, external network, real cron modifications or root access is required. Bash arrays, double-bracket tests, pipefail and read with NUL delimiter must not be misrepresented as POSIX-sh portable.
+- **SEF3-AS3** (required permissions, child process, and environment diagnosis)
+  - Outcomes: SEF3-O4, SEF3-O5, SEF3-O11
+  - Work: On disposable files and directories, predict and reproduce a permissions failure involving a file mode or a missing directory search permission; inspect user/group identity and explain the failure without requiring ownership changes or privileged operations. Start a bounded background helper, record and verify its child PID, send it a graceful signal, and collect its wait result. Edit a local test configuration with a terminal editor, then run a command-lookup helper in both the ordinary shell and a deliberately restricted environment with an explicit `PATH` and working directory. Inspect a locally available package-manager help page and network diagnostic help or loopback state without changing installed software or contacting an outside network.
+  - Criteria: Diagnosis separates file permission from directory traversal and recognizes the role of process identity; the original mode and fixture behavior can be restored. Only the verified owned child process is signaled and reaped. The restricted-environment failure is reproduced and repaired through explicit paths or documented dependencies, not by modifying real login profiles. Editing and local tool inspection are reproducible, with unavailable optional utilities disclosed rather than silently made prerequisites.
+  - Evidence: Before/after mode and identity records, attempted access and repair, verified PID and wait observations, edited disposable configuration, environment/`PATH` comparison and diagnostic output, and a brief account of tool and platform limits.
 
-**Shared evaluation requirements:**
+- **SEF3-AS4** (required robust Bash command and defect repair)
+  - Outcomes: SEF3-O2, SEF3-O7, SEF3-O8
+  - Work: Build a small command-line script that accepts a source pathname and a documented `--mode` or equivalent option, then chooses between two read-only transformations of fixture data. Separate parsing, validation, transformation, and reporting into functions. Use `case`, a loop, and a Bash array where it improves argument handling. Deliberately reproduce at least three distinct bugs affecting a quoted pathname, an unset or missing argument, and a swallowed command failure. Trace and repair the defects in isolated script revisions without using `eval` or an assumption that `set -e` alone prevents errors.
+  - Criteria: Help and option validation are predictable; required arguments produce correct output for ordinary names, spaces, and empty inputs, while invalid arguments fail with useful stderr and a nonzero status. Quoting, array boundaries, conditional flow, and interpreter requirements are explained accurately. Each seeded defect has a minimal failing case, causal diagnosis, bounded correction, and passing regression check; no corrected script silently accepts the original failure.
+  - Evidence: Published CLI contract, original and repaired Bash source, fixture input/expected output, command and status transcripts, trace excerpts that exclude secrets, and regression test results identifying each repair.
 
-- Use controlled, user-owned fixture directories for filesystem changes and only explicitly owned child PIDs for process-control exercises.
-- Record source revision, exact commands, Bash/tool versions, fixtures, predicted versus observed results, relevant exit statuses and an investigated error with repair.
-- Demonstrate normal, boundary and failure cases required for each lab; unsafe broad cleanup, unintended user-file changes or unsupported portability claims block completion.
-- Keep optional networking and package management inspection unprivileged. No learner is required to install software system-wide or alter their login environment.
+- **SEF3-AS5** (required safe batch paths and bounded cleanup)
+  - Outcomes: SEF3-O8, SEF3-O9, SEF3-O10
+  - Work: Build a batch summarizer for an owned input tree containing names with spaces, tabs, wildcard characters, and newlines. Enumerate arbitrary fixture names without line-splitting, using a suitable NUL-delimited technique such as `find -print0` with Bash `read -r -d ''`. Reject or explicitly handle symbolic links and unsafe output locations; stage all temporary output in a unique `mktemp` directory underneath a verified owned fixture root. Install narrowly scoped trap cleanup for that staging directory. Inject an ordinary processing error and a catchable interrupt into a script process that the learner started; compare success, failure, repeated-run and cleanup behavior without affecting a separately recorded sentinel file.
+  - Criteria: Every fixture pathname remains a distinct argument; no processing or cleanup escapes the owned boundary, follows an uncontrolled symlink, or damages unrelated sentinel data. Partial results are not represented as success; failure statuses remain visible and owned staging is cleaned up when the supported traps execute. A repeated run produces the expected result without stale state. The learner explains that traps cannot handle `SIGKILL` and does not claim complete cleanup or crash durability after every termination.
+  - Evidence: Synthetic tree and sentinel checks, source and justified path policies, NUL-safe filename observations, expected/actual success and fault outputs, exit statuses, verified post-run staging inventories, and one reproducible diagnosis and fix.
 
-**Module 1 — Files & Directories: checkpoint** — Required assessment details
+- **SEF3-AS6** (required offline shell toolkit and restricted-environment defense)
+  - Outcomes: SEF3-O5, SEF3-O6, SEF3-O7, SEF3-O8, SEF3-O9, SEF3-O10, SEF3-O11, SEF3-O12
+  - Work: Deliver two related Bash scripts as an offline toolkit for producing a summary of mock logs and staging a report: one parses and counts the supplied log records, and the other coordinates safe output preparation and a documented publish or dry-run action. Define input roots, output roots, allowed mutations, log format, option syntax, shell requirements, output schema, success and error codes, and cleanup behavior. Reuse validated components from earlier assessments rather than invent unrelated projects. Test a clean fixture run, a second run, no-match and malformed records, odd filenames, invalid options, upstream pipeline failure, and a deliberately restricted `env -i` / changed-working-directory invocation. Record one real or deliberately introduced defect and its regression repair; explain Bash versus POSIX-sh and relevant GNU-tool assumptions in a reviewable technical defense.
+  - Criteria: Both scripts run independently from documented clean-start commands with no privilege, paid resource, or network dependency. Reports match independently checked reference counts; help, input validation, dry-run, safe staging, declared mutations, and nonzero failures behave as specified. Neither an invalid request nor an injected interruption deletes unrelated inputs or silently replaces a valid report with partial output. The restricted-environment run uses explicit, documented dependencies and distinguishes environment defects from data defects. The learner can explain command expansion, functions/control flow, failure propagation, portability limits, and one concrete design trade-off using the submitted evidence, not merely a passing test claim.
+  - Evidence: Source or portable archive for both scripts and test harness, README with fixtures and reproducible commands, input/output and status contract, independent count oracle, normal/negative/repeated-run logs, before/after sentinel and report-byte checks, environment/locale/version matrix, repaired-defect record, and a concise written, recorded, live, or otherwise accessible technical defense.
 
-- **Q1 (free):** What happens to a hard link and a symbolic link after the original filename is removed?
-  - Expected answer and scoring: The hard link remains a name for the same inode on that filesystem; a symlink holding the removed pathname becomes dangling unless another object exists at its target path.
-- **Q2 (free):** Does quoting a pathname make a recursive remove command safe?
-  - Expected answer and scoring: No. Quoting prevents splitting and globbing but does not establish that the path is the intended disposable directory. Check the owned fixture root and delete only explicitly controlled files.
+### Completion decision
 
-**Module 1 — Reorganize a directory tree: required lab** — Required assessment details
+A learner completes SEF3 when **all six required summative assessments** meet their published criteria and collectively demonstrate SEF3-O1 through SEF3-O12. Assessed source and fixture work may be reused and expanded across the six assessments; learners are not required to write six unrelated utilities or duplicate a quiz and lab in every module. Optional practice and course lessons support learning but are not unannounced completion gates.
 
-- **Objective:** Demonstrate the module outcomes and explain normal and failure conditions in a safely bounded Linux shell task.
-- **Prerequisites:** Complete module lessons and explain the associated checkpoint questions; reuse earlier validated artifacts only when their assumptions hold.
-- **Environment:** Use a nonprivileged disposable Linux environment (VM, container or user-owned test directory), Bash 5.x or a documented compatible version and commonly available GNU/POSIX command-line tools. Record actual Bash and utility versions. Run against generated fixtures only; never modify real home files, system configuration or unrelated processes. No sudo, system-wide package installation, external network, real cron modifications or root access is required. Bash arrays, double-bracket tests, pipefail and read with NUL delimiter must not be misrepresented as POSIX-sh portable.
-- **Procedure:**
-  1. Create an isolated directory with inbox, work and archive areas, and files including one with spaces.
-  2. Predict the tree after copy, move, rename and targeted removal, then execute each operation against the fixture only.
-  3. Create hard and symbolic links, remove their original named target, and compare the remaining link behavior.
-  4. Test missing source, hidden file and space-containing path; record clear errors and verify unrelated files were not changed.
-- **Expected result:** The recorded tree and file content match predictions; link outcomes distinguish inode identity from target path.
-- **Verification:** Compare sorted inventories, metadata and file contents before and after each action.
-- **Evidence:** Versioned scripts or command transcript, generated fixtures, expected/actual output and exit status, environmental assumptions and reproducible negative-path tests.
-- **Failure analysis:** Explain accidental glob expansion, a wrong working directory or an incorrect link prediction.
-- **Acceptance:** All documented operations succeed or fail as specified, the learner explains the shell mechanics, and the commands can be reproduced safely from fresh fixtures. Required safety or correctness failures block completion.
-
-**Module 2 — Commands & Redirection: checkpoint** — Required assessment details
-
-- **Q1 (free):** Where do standard output and standard error go when redirected separately? How does redirection order affect descriptor duplication?
-  - Expected answer and scoring: stdout and stderr are independent streams. In Bash, redirecting stderr to the current stdout before redirecting stdout to a file does not subsequently move stderr into that file; redirections are evaluated in order.
-- **Q2 (free):** What status does Bash normally report for a pipeline whose middle stage fails and last stage succeeds? What does pipefail change?
-  - Expected answer and scoring: Default status is the final command status. With Bash pipefail enabled, the rightmost nonzero command status is returned, or zero if all stages succeed.
-
-**Module 2 — Build a pipeline: required lab** — Required assessment details
-
-- **Objective:** Demonstrate the module outcomes and explain normal and failure conditions in a safely bounded Linux shell task.
-- **Prerequisites:** Complete module lessons and explain the associated checkpoint questions; reuse earlier validated artifacts only when their assumptions hold.
-- **Environment:** Use a nonprivileged disposable Linux environment (VM, container or user-owned test directory), Bash 5.x or a documented compatible version and commonly available GNU/POSIX command-line tools. Record actual Bash and utility versions. Run against generated fixtures only; never modify real home files, system configuration or unrelated processes. No sudo, system-wide package installation, external network, real cron modifications or root access is required. Bash arrays, double-bracket tests, pipefail and read with NUL delimiter must not be misrepresented as POSIX-sh portable.
-- **Procedure:**
-  1. Create a small line-based fixture with a known number of warning and error records.
-  2. Use grep, sort and wc in a pipeline to compute a summary and predict the manual count.
-  3. Run a harmless helper emitting separate stdout and stderr, then change redirection order to inspect where bytes go.
-  4. Inject one failing middle stage, compare default and pipefail statuses, and keep all output under the fixture directory.
-- **Expected result:** The report matches manual counts and each stream and failure status follows the stated Bash semantics.
-- **Verification:** Compare expected counts, captured streams and the exact pipeline exit statuses.
-- **Evidence:** Versioned scripts or command transcript, generated fixtures, expected/actual output and exit status, environmental assumptions and reproducible negative-path tests.
-- **Failure analysis:** Explain redirected stderr appearing in the terminal or an upstream error masked by the final command.
-- **Acceptance:** All documented operations succeed or fail as specified, the learner explains the shell mechanics, and the commands can be reproduced safely from fresh fixtures. Required safety or correctness failures block completion.
-
-**Module 3 — Expansion & the Keyboard: checkpoint** — Required assessment details
-
-- **Q1 (free):** How does quoted parameter expansion differ from unquoted expansion for a variable containing two words?
-  - Expected answer and scoring: Unquoted expansion can undergo word splitting and pathname expansion, while a double-quoted expansion preserves the value as one argument. Exact results depend on Bash settings and IFS.
-- **Q2 (free):** What do the Bash expansions quoted at-sign positional parameters and quoted asterisk positional parameters preserve?
-  - Expected answer and scoring: Quoted at-sign preserves each argument as a distinct word, including spaces. Quoted asterisk joins positional parameters into one word using the first IFS character.
-
-**Module 3 — Predict and verify expansions: required lab** — Required assessment details
-
-- **Objective:** Demonstrate the module outcomes and explain normal and failure conditions in a safely bounded Linux shell task.
-- **Prerequisites:** Complete module lessons and explain the associated checkpoint questions; reuse earlier validated artifacts only when their assumptions hold.
-- **Environment:** Use a nonprivileged disposable Linux environment (VM, container or user-owned test directory), Bash 5.x or a documented compatible version and commonly available GNU/POSIX command-line tools. Record actual Bash and utility versions. Run against generated fixtures only; never modify real home files, system configuration or unrelated processes. No sudo, system-wide package installation, external network, real cron modifications or root access is required. Bash arrays, double-bracket tests, pipefail and read with NUL delimiter must not be misrepresented as POSIX-sh portable.
-- **Procedure:**
-  1. Create filename fixtures with spaces, wildcard characters and an ordinary .txt suffix in a disposable directory.
-  2. Predict ten harmless Bash command argument vectors involving tilde, braces, variables, globs, arithmetic and positional parameters.
-  3. Use a display-arguments function with printf to record argument count and exact values, rather than echo or eval.
-  4. Test an empty variable, an unmatched pattern and a quoted literal wildcard; retain one corrected wrong prediction.
-- **Expected result:** All ten predictions match the observed argument count and values under documented Bash and glob settings.
-- **Verification:** Compare expected versus observed argument tables and Bash configuration.
-- **Evidence:** Versioned scripts or command transcript, generated fixtures, expected/actual output and exit status, environmental assumptions and reproducible negative-path tests.
-- **Failure analysis:** Explain a mistaken split, glob interpretation, collapsed argument boundary or reliance on eval.
-- **Acceptance:** All documented operations succeed or fail as specified, the learner explains the shell mechanics, and the commands can be reproduced safely from fresh fixtures. Required safety or correctness failures block completion.
-
-**Module 4 — Permissions & Processes: checkpoint** — Required assessment details
-
-- **Q1 (free):** A file is group-readable but cannot be opened. What additional permissions might matter?
-  - Expected answer and scoring: Directory search permission on every ancestor is needed, and ACL/MAC or other policy can restrict access. Unprivileged testing may differ from running as root.
-- **Q2 (free):** Why should learners only signal a child PID they have just launched and verified?
-  - Expected answer and scoring: PIDs can be reused or refer to unrelated processes. Send graceful termination to the controlled fixture and wait for that child instead of targeting arbitrary system processes.
-
-**Module 4 — Diagnose two failures: required lab** — Required assessment details
-
-- **Objective:** Demonstrate the module outcomes and explain normal and failure conditions in a safely bounded Linux shell task.
-- **Prerequisites:** Complete module lessons and explain the associated checkpoint questions; reuse earlier validated artifacts only when their assumptions hold.
-- **Environment:** Use a nonprivileged disposable Linux environment (VM, container or user-owned test directory), Bash 5.x or a documented compatible version and commonly available GNU/POSIX command-line tools. Record actual Bash and utility versions. Run against generated fixtures only; never modify real home files, system configuration or unrelated processes. No sudo, system-wide package installation, external network, real cron modifications or root access is required. Bash arrays, double-bracket tests, pipefail and read with NUL delimiter must not be misrepresented as POSIX-sh portable.
-- **Procedure:**
-  1. Create permission fixtures inside an unprivileged temporary directory; record modes, ownership and expected access.
-  2. Reproduce a denial by restricting a fixture directory or file, then diagnose using mode and directory permissions and repair the fixture.
-  3. Launch one bounded background sleep/test fixture, capture its PID and verify that it is the owned process.
-  4. Send it SIGTERM, wait for completion and record status; never modify unrelated accounts or processes.
-- **Expected result:** The access error is explained and repaired, and the owned background process is terminated and reaped.
-- **Verification:** Record before/after modes, access attempts, PID ownership and wait result.
-- **Evidence:** Versioned scripts or command transcript, generated fixtures, expected/actual output and exit status, environmental assumptions and reproducible negative-path tests.
-- **Failure analysis:** Explain a missing directory-search bit, privilege assumptions or an unverified process identifier.
-- **Acceptance:** All documented operations succeed or fail as specified, the learner explains the shell mechanics, and the commands can be reproduced safely from fresh fixtures. Required safety or correctness failures block completion.
-
-**Module 5 — Environment, Editing & System Tasks: checkpoint** — Required assessment details
-
-- **Q1 (free):** Why might a command work in an interactive shell yet fail in a scheduled or noninteractive environment?
-  - Expected answer and scoring: Different PATH, startup files, current directory, exported variables and permissions may apply. The command must be resolved and environment assumptions stated.
-- **Q2 (free):** Do shell startup files and exported variables retroactively change already running processes?
-  - Expected answer and scoring: No. Exported values are inherited by new child processes where passed; startup files are interpreted by shells that read them, not retroactively by existing processes.
-
-**Module 5 — Configure an environment: required lab** — Required assessment details
-
-- **Objective:** Demonstrate the module outcomes and explain normal and failure conditions in a safely bounded Linux shell task.
-- **Prerequisites:** Complete module lessons and explain the associated checkpoint questions; reuse earlier validated artifacts only when their assumptions hold.
-- **Environment:** Use a nonprivileged disposable Linux environment (VM, container or user-owned test directory), Bash 5.x or a documented compatible version and commonly available GNU/POSIX command-line tools. Record actual Bash and utility versions. Run against generated fixtures only; never modify real home files, system configuration or unrelated processes. No sudo, system-wide package installation, external network, real cron modifications or root access is required. Bash arrays, double-bracket tests, pipefail and read with NUL delimiter must not be misrepresented as POSIX-sh portable.
-- **Procedure:**
-  1. Record Bash version, PATH, present working directory and selected environment variables in a disposable workspace.
-  2. Edit a text configuration file using a terminal editor, verify its contents and avoid changing the real home startup files.
-  3. Write a command-lookup script, then run it normally and in a restricted environment using env -i and an explicitly provided minimal PATH.
-  4. Inspect package manager help and available loopback networking tools without installing software or requiring privileged access.
-- **Expected result:** The script detects missing commands in a restricted environment and succeeds with documented paths; no system settings change.
-- **Verification:** Compare interpreter and PATH reports and capture error statuses from both environments.
-- **Evidence:** Versioned scripts or command transcript, generated fixtures, expected/actual output and exit status, environmental assumptions and reproducible negative-path tests.
-- **Failure analysis:** Explain assuming interactive aliases, shell startup behavior or installed packages are present.
-- **Acceptance:** All documented operations succeed or fail as specified, the learner explains the shell mechanics, and the commands can be reproduced safely from fresh fixtures. Required safety or correctness failures block completion.
-
-**Module 6 — Searching & Text Processing: checkpoint** — Required assessment details
-
-- **Q1 (free):** How does extended regular expression mode differ from default basic grep syntax for grouping and alternation?
-  - Expected answer and scoring: Extended syntax enables unescaped grouping and alternation such as the WARN-or-ERROR pattern. State the selected regex dialect and locale.
-- **Q2 (free):** Why is a newline-separated list of filenames unsafe for arbitrary Unix pathnames?
-  - Expected answer and scoring: Newlines can occur in filenames. Use NUL-delimited find output with a compatible reader or use find -exec with correct argument passing.
-
-**Module 6 — Extract a report from logs: required lab** — Required assessment details
-
-- **Objective:** Demonstrate the module outcomes and explain normal and failure conditions in a safely bounded Linux shell task.
-- **Prerequisites:** Complete module lessons and explain the associated checkpoint questions; reuse earlier validated artifacts only when their assumptions hold.
-- **Environment:** Use a nonprivileged disposable Linux environment (VM, container or user-owned test directory), Bash 5.x or a documented compatible version and commonly available GNU/POSIX command-line tools. Record actual Bash and utility versions. Run against generated fixtures only; never modify real home files, system configuration or unrelated processes. No sudo, system-wide package installation, external network, real cron modifications or root access is required. Bash arrays, double-bracket tests, pipefail and read with NUL delimiter must not be misrepresented as POSIX-sh portable.
-- **Procedure:**
-  1. Create local INFO, WARN and ERROR log fixtures with independently counted totals and a documented delimiter.
-  2. Use grep -E, cut, sort and uniq or a comparable documented pipeline to summarize severity by category.
-  3. Alter a fixture with a missing field and define whether to reject it or record it in an error summary.
-  4. Test empty files, no matches and filenames containing whitespace/newlines without splitting paths by lines.
-- **Expected result:** Sorted severity counts equal the manual reference table, and malformed input follows the declared policy.
-- **Verification:** Compare fixture-by-fixture expected counts and observed output with a stable locale.
-- **Evidence:** Versioned scripts or command transcript, generated fixtures, expected/actual output and exit status, environmental assumptions and reproducible negative-path tests.
-- **Failure analysis:** Explain regex dialect confusion, wrong field selection or unsafe pathname splitting.
-- **Acceptance:** All documented operations succeed or fail as specified, the learner explains the shell mechanics, and the commands can be reproduced safely from fresh fixtures. Required safety or correctness failures block completion.
-
-**Module 7 — Shell Scripts: Foundations: checkpoint** — Required assessment details
-
-- **Q1 (free):** Why can referencing a missing first positional parameter fail under Bash nounset, and how is that avoided?
-  - Expected answer and scoring: With nounset, expansion of an unset positional parameter can fail before testing. Validate the argument count first or use an intentional default expression.
-- **Q2 (free):** How does explicitly running a script with bash differ from direct execution as an executable file?
-  - Expected answer and scoring: An explicit bash invocation reads the script as an argument; direct execution depends on execute permissions and an interpreter declaration or equivalent system mechanism.
-
-**Module 7 — Write a first script: required lab** — Required assessment details
-
-- **Objective:** Demonstrate the module outcomes and explain normal and failure conditions in a safely bounded Linux shell task.
-- **Prerequisites:** Complete module lessons and explain the associated checkpoint questions; reuse earlier validated artifacts only when their assumptions hold.
-- **Environment:** Use a nonprivileged disposable Linux environment (VM, container or user-owned test directory), Bash 5.x or a documented compatible version and commonly available GNU/POSIX command-line tools. Record actual Bash and utility versions. Run against generated fixtures only; never modify real home files, system configuration or unrelated processes. No sudo, system-wide package installation, external network, real cron modifications or root access is required. Bash arrays, double-bracket tests, pipefail and read with NUL delimiter must not be misrepresented as POSIX-sh portable.
-- **Procedure:**
-  1. Write a Bash line-count script in a disposable directory with a usage message and one required file argument.
-  2. Validate argument count and file readability before invoking a counting command and use quoted paths.
-  3. Test valid, empty, missing and space-containing input names; capture stdout, stderr and exit codes.
-  4. Remove one quote or validation check in a copy, reproduce the issue and repair it.
-- **Expected result:** Correct counts on valid input, clear nonzero errors on invalid input and no unintended file changes.
-- **Verification:** Compare outputs with independent line counts and rerun all fixtures after repair.
-- **Evidence:** Versioned scripts or command transcript, generated fixtures, expected/actual output and exit status, environmental assumptions and reproducible negative-path tests.
-- **Failure analysis:** Explain an unset parameter, invalid file handling or a usage message that incorrectly exits successfully.
-- **Acceptance:** All documented operations succeed or fail as specified, the learner explains the shell mechanics, and the commands can be reproduced safely from fresh fixtures. Required safety or correctness failures block completion.
-
-**Module 8 — Shell Scripts: Control Flow & Robustness: checkpoint** — Required assessment details
-
-- **Q1 (free):** What is the difference between correctly quoted Bash array element expansion and unquoted expansion?
-  - Expected answer and scoring: Quoted array-at expansion preserves elements and spaces; unquoted forms can undergo splitting and pathname expansion and lose argument boundaries. Bash arrays are not a POSIX sh requirement.
-- **Q2 (free):** What is the limitation of reading file lines with a for-loop over command substitution?
-  - Expected answer and scoring: Shell splitting and pathname expansion may destroy original lines; use a line-oriented while-read loop with IFS and -r for text, while acknowledging it cannot represent arbitrary binary NUL input.
-
-**Module 8 — Repair a broken script: required lab** — Required assessment details
-
-- **Objective:** Demonstrate the module outcomes and explain normal and failure conditions in a safely bounded Linux shell task.
-- **Prerequisites:** Complete module lessons and explain the associated checkpoint questions; reuse earlier validated artifacts only when their assumptions hold.
-- **Environment:** Use a nonprivileged disposable Linux environment (VM, container or user-owned test directory), Bash 5.x or a documented compatible version and commonly available GNU/POSIX command-line tools. Record actual Bash and utility versions. Run against generated fixtures only; never modify real home files, system configuration or unrelated processes. No sudo, system-wide package installation, external network, real cron modifications or root access is required. Bash arrays, double-bracket tests, pipefail and read with NUL delimiter must not be misrepresented as POSIX-sh portable.
-- **Procedure:**
-  1. Use a deliberately broken Bash fixture script with five defects: quoting, array expansion, argument validation, loop boundary and masked command failure.
-  2. Run it only on temporary fixtures with spaces and wildcard characters, collecting differences from expected results.
-  3. Use Bash tracing without secrets and repair each defect in a separate logical step.
-  4. Exercise case-based options and test valid, empty, missing and malformed input; document Bash-only behavior.
-- **Expected result:** All five defect categories are corrected and failure statuses are neither lost nor mislabeled.
-- **Verification:** Keep before/after outputs, exit statuses and fixture inventory for every seeded defect.
-- **Evidence:** Versioned scripts or command transcript, generated fixtures, expected/actual output and exit status, environmental assumptions and reproducible negative-path tests.
-- **Failure analysis:** Explain why set -e alone is not sufficient and why unquoted arrays corrupt filename boundaries.
-- **Acceptance:** All documented operations succeed or fail as specified, the learner explains the shell mechanics, and the commands can be reproduced safely from fresh fixtures. Required safety or correctness failures block completion.
-
-**Module 9 — Shell Safety & Process Boundaries: checkpoint** — Required assessment details
-
-- **Q1 (free):** How should Bash consume filenames that may include spaces, tabs or newlines?
-  - Expected answer and scoring: Use NUL-delimited paths, such as GNU find -print0 with a Bash read loop using -d for the NUL separator, or an appropriate find -exec operation. State platform dependencies.
-- **Q2 (free):** What cleanup scope should an EXIT trap have, and does it run after SIGKILL?
-  - Expected answer and scoring: Remove only a validated, unique temporary directory owned by the script; broad globs and a shared TMPDIR are unsafe. SIGKILL cannot be trapped, so cleanup is best-effort.
-
-**Module 9 — Build a safe batch processor: required lab** — Required assessment details
-
-- **Objective:** Demonstrate the module outcomes and explain normal and failure conditions in a safely bounded Linux shell task.
-- **Prerequisites:** Complete module lessons and explain the associated checkpoint questions; reuse earlier validated artifacts only when their assumptions hold.
-- **Environment:** Use a nonprivileged disposable Linux environment (VM, container or user-owned test directory), Bash 5.x or a documented compatible version and commonly available GNU/POSIX command-line tools. Record actual Bash and utility versions. Run against generated fixtures only; never modify real home files, system configuration or unrelated processes. No sudo, system-wide package installation, external network, real cron modifications or root access is required. Bash arrays, double-bracket tests, pipefail and read with NUL delimiter must not be misrepresented as POSIX-sh portable.
-- **Procedure:**
-  1. Create an isolated input tree with spaces, tabs, wildcard symbols and a newline in filenames plus an unrelated sentinel.
-  2. Iterate paths with NUL-safe processing and copy or summarize files into a tracked mktemp-created output staging directory.
-  3. Use guarded trap cleanup for only that temporary directory; document known signal limitations.
-  4. Inject a normal processing failure and an interrupt to the owned script fixture, check status/cleanup and verify a second run is safe.
-- **Expected result:** All filenames are handled as distinct paths; source and unrelated files remain intact; normal failure cleanup is bounded.
-- **Verification:** Compare before/after inventories and checksums, success/failure statuses and temporary-directory state.
-- **Evidence:** Versioned scripts or command transcript, generated fixtures, expected/actual output and exit status, environmental assumptions and reproducible negative-path tests.
-- **Failure analysis:** Explain unsafe splitting, a broad cleanup glob or assuming a trap handles uncatchable termination.
-- **Acceptance:** All documented operations succeed or fail as specified, the learner explains the shell mechanics, and the commands can be reproduced safely from fresh fixtures. Required safety or correctness failures block completion.
-
-**Module 10 — Automation Diagnostics & Portability: checkpoint** — Required assessment details
-
-- **Q1 (free):** A script runs interactively but fails in a task runner. Which environment differences should be investigated?
-  - Expected answer and scoring: Check PATH, cwd, interpreter, argument quoting, exported variables, permissions and startup-file assumptions in the actual execution environment.
-- **Q2 (free):** Can a Bash script with arrays and double-bracket tests be assumed to run under every system bin/sh?
-  - Expected answer and scoring: No. Declare Bash explicitly and test supported behavior; Bash arrays and double brackets are not mandatory POSIX sh features.
-
-**Module 10 — Repair a restricted-environment task: required lab** — Required assessment details
-
-- **Objective:** Demonstrate the module outcomes and explain normal and failure conditions in a safely bounded Linux shell task.
-- **Prerequisites:** Complete module lessons and explain the associated checkpoint questions; reuse earlier validated artifacts only when their assumptions hold.
-- **Environment:** Use a nonprivileged disposable Linux environment (VM, container or user-owned test directory), Bash 5.x or a documented compatible version and commonly available GNU/POSIX command-line tools. Record actual Bash and utility versions. Run against generated fixtures only; never modify real home files, system configuration or unrelated processes. No sudo, system-wide package installation, external network, real cron modifications or root access is required. Bash arrays, double-bracket tests, pipefail and read with NUL delimiter must not be misrepresented as POSIX-sh portable.
-- **Procedure:**
-  1. Create a local report script with documented input/output directories and required commands.
-  2. Use env -i in a test harness to simulate restricted scheduling; do not install a real cron task or change system crontab.
-  3. Seed a bad working-directory assumption and short PATH lookup failure, record each with sanitized logs.
-  4. Repair using explicit paths and documented shell requirements, and compare interactive versus restricted outputs.
-- **Expected result:** The failure reproduces under the harness and the corrected script behaves consistently under documented conditions.
-- **Verification:** Compare exact output files, exit codes, interpreter/PATH logs and clean-start instructions.
-- **Evidence:** Versioned scripts or command transcript, generated fixtures, expected/actual output and exit status, environmental assumptions and reproducible negative-path tests.
-- **Failure analysis:** Explain reliance on aliases, implicit current directory or Bash syntax invoked through sh.
-- **Acceptance:** All documented operations succeed or fail as specified, the learner explains the shell mechanics, and the commands can be reproduced safely from fresh fixtures. Required safety or correctness failures block completion.
-
-**Module 11 — Shell Toolkit: checkpoint** — Required assessment details
-
-- **Q1 (free):** Which checks should a backup script perform before accepting a user-provided directory and cleanup destination?
-  - Expected answer and scoring: Validate type, allowed workspace boundary, symlinks, destination overlap, and safe scope. Quoting alone cannot prevent a correctly quoted but unintended destructive target.
-- **Q2 (free):** Why must a shell toolkit be tested with failures, unusual filenames and repeated invocation?
-  - Expected answer and scoring: Happy-path output does not prove correct exit codes, pathname preservation, bounded cleanup or idempotence. Independent fixtures and expected results are necessary.
-
-**Module 11 — Build, test, and document the Shell Toolkit: required lab** — Required assessment details
-
-- **Objective:** Demonstrate the module outcomes and explain normal and failure conditions in a safely bounded Linux shell task.
-- **Prerequisites:** Complete module lessons and explain the associated checkpoint questions; reuse earlier validated artifacts only when their assumptions hold.
-- **Environment:** Use a nonprivileged disposable Linux environment (VM, container or user-owned test directory), Bash 5.x or a documented compatible version and commonly available GNU/POSIX command-line tools. Record actual Bash and utility versions. Run against generated fixtures only; never modify real home files, system configuration or unrelated processes. No sudo, system-wide package installation, external network, real cron modifications or root access is required. Bash arrays, double-bracket tests, pipefail and read with NUL delimiter must not be misrepresented as POSIX-sh portable.
-- **Procedure:**
-  1. Create a small toolkit for summarizing mock logs and staging reports, defining accepted inputs, outputs, file boundaries and Bash assumptions.
-  2. Implement at least two related scripts, one using a regex and pipeline and one preparing results in a unique temporary staging directory.
-  3. Provide usage/help, input validation, safe quoting, a dry-run where data is replaced, and explicit failure statuses.
-  4. Write a self-contained shell test harness covering valid/empty input, filename spaces/newlines, pipeline failure, repeated runs and an injected interrupt.
-  5. Record actual environment, exact commands, outputs and one reviewed defect; verify from a fresh disposable checkout.
-- **Expected result:** The toolkit generates the independently counted report, rejects invalid input and modifies only its declared fixture output.
-- **Verification:** Compare counts, output files, exit status, sentinel integrity and cleanup across repeated runs.
-- **Evidence:** Versioned scripts or command transcript, generated fixtures, expected/actual output and exit status, environmental assumptions and reproducible negative-path tests.
-- **Failure analysis:** Explain masked pipeline failure, unsafe cleanup, non-portable syntax or an undocumented environment dependency.
-- **Acceptance:** All documented operations succeed or fail as specified, the learner explains the shell mechanics, and the commands can be reproduced safely from fresh fixtures. Required safety or correctness failures block completion.
-
-**Exit demonstration:**
-
-Given an unfamiliar task, the learner can solve it at the command line, turn the solution into a script that handles bad input, and explain what the shell does with each part of the command line.
+A reviewer records each assessment decision with the required inspectable evidence and may request bounded clarification on unfamiliar, but equivalent, inputs under the published criteria. Safety-critical mistakes, hidden dependencies, and non-reproducible output must be corrected before a passing decision. Learner work stays under learner control; sharing raw private machine state, production credentials, or sensitive data is never required. The course itself remains `draft`; an automated structural pass does not satisfy the learner-feedback and reviewer thresholds in [Status Labels](../../spec/status-labels.md).
