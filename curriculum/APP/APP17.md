@@ -9,7 +9,7 @@
 **Specification:** `v0.2.0`
 **Expected workload:** 9–12 focused hours/week (planning estimate; subject to learner calibration)
 
-> [Application Engineering](README.md) · [OEE curriculum](../README.md) · [Course format](../../spec/course-format.md) · [Migration decision](ARCHITECTURE.md)
+> [Application Engineering](README.md) · [OEE curriculum](../README.md) · [Course format](../../spec/course-format.md)
 
 ## Overview
 
@@ -23,9 +23,11 @@ and defending a complete, maintainable **static** information interface.
 APP1 already introduced how the network and browser turn resources into
 visible pixels. This course develops the complementary authoring capability:
 how to express semantic content in HTML and engineer its presentation in CSS.
-It does **not** teach JavaScript language programming (APP18), TypeScript
-(APP19), DOM application logic (the revised APP2), React (APP20), or backend
-services (APP21/APP3). It is not a second Internet/protocol course.
+It does **not** teach JavaScript or TypeScript programming, interactive
+browser application logic, React application engineering, or backend
+services. Those capabilities belong to separate courses or planned
+course revisions; they are not prerequisites for APP17. It is not
+a second Internet/protocol course.
 
 Learners need only a plain text editor, a current standards-capable browser
 with developer tools, a terminal and local file/static-serving capabilities.

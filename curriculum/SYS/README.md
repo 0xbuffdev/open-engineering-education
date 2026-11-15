@@ -31,7 +31,7 @@ The learner must demonstrate the knowledge, practical skills, and engineering ju
 
 ## Courses
 
-The imported courses below are **legacy drafts**, not v0.2.0-conforming course definitions. Their existing activities and completion requirements are retained for migration review; published outcome IDs, summative evidence contracts and readiness assessments must be authored and reviewed separately before any v0.2.0 claim.
+The nine published course files are **legacy drafts**. They preserve their original learning activities and completion requirements but have not been migrated or assessed against the `v0.2.0` outcome-driven contract. They are course outlines for study and review, not claims of learner-tested readiness or `v0.2.0` conformance. See the [curriculum inventory](../INVENTORY.md) for a reproducible structural audit.
 
 | Course | Title | Duration | Prerequisites | Type |
 | --- | --- | --- | --- | --- |
@@ -45,4 +45,4 @@ The imported courses below are **legacy drafts**, not v0.2.0-conforming course d
 | [SYS8](SYS8.md) | Systems Design & Production Engineering | 5 weeks | SYS6 and SYS7 | `course` |
 | [SYS9](SYS9.md) | Systems Engineering Capstone | 8–10 weeks | SYS1–SYS8 | `project` |
 
-This list describes the imported source material, not verified learner readiness or a new specification version.
+The course files remain the authoritative source for each course's published work and prerequisites. Use [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) or another learner-controlled environment for practical work and evidence. The [OEE specification](../../spec/README.md) governs newly authored or explicitly migrated course revisions.
