@@ -1,12 +1,11 @@
 # Toolkit licensing and provenance boundaries
 
-This document records the **file-level scope adopted through
-[RFC 0002](../rfcs/0002-toolkit-stewardship-and-licensing.md)**. The
-decision is effective only when the steward-approved RFC decision PR is
-merged; until then the repository's existing notices and the actual
-licenses of individual contributions remain authoritative. This is a
-license-scope clarification for new work, **not a retroactive transfer
-of copyright or a relicensing of existing contributions**.
+This document records the **file-level licensing scope** adopted through
+[accepted RFC 0002](../rfcs/0002-toolkit-stewardship-and-licensing.md).
+The decision was adopted on November 15, 2026. The repository's existing
+notices and the applicable licenses of individual contributions remain
+authoritative. This clarification does **not** retroactively transfer
+copyright or relicense existing contributions.
 
 ## MIT: Toolkit implementation and software interfaces
 
@@ -86,7 +85,7 @@ change normative course requirements**. The source-repository CLI is
 currently independently runnable under `python3 -m tooling.oee_toolkit`
 with Python 3.11+ and local Git. Public package names, independent
 distribution, a stabilized library API, release versions and notice
-bundling require **OT-I05** readiness review before any official
+bundling require a separate release-readiness review before any official
 release is advertised.
 
 Additional code and educational content contributed later remain

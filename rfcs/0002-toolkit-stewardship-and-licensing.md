@@ -18,11 +18,12 @@ The public specification and course Markdown remain authoritative.
 The Toolkit is an *optional implementation*, not a new mandatory authoring
 format, learner grading service, conformance certification, or paid dependency.
 
-**Acceptance is conditional on the OEE steward approving and merging the
-public decision-record PR.** This accepted architecture authorizes the
-optional Toolkit source and its clearly scoped licenses; it does **not**
-publish or stabilize an official release, override contributor rights,
-or claim normative OEE conformance. See [Section 10](#10-decision).
+**Decision status:** Accepted on 2026-11-15 through the steward-reviewed
+and merged [PR #63](https://github.com/0xbuffdev/open-engineering-education/pull/63).
+This decision authorizes the optional Toolkit source and its scoped
+licensing boundaries; it does **not** publish or stabilize an official
+release, override contributor rights, or claim normative OEE conformance.
+See [Section 10](#10-decision).
 
 ## 2. Problem
 
@@ -153,7 +154,7 @@ that a distributable Toolkit or official release has shipped. Publication
 of official release and support claims remains conditional on a
 separately reviewed release-readiness decision.
 
-### Consolidated architecture decisions (accepted subject to steward merge)
+### Consolidated architecture decisions
 
 The following architectural decisions, their rationale, trade-offs,
 and implementation consequences are adopted by the public steward-reviewed
@@ -407,12 +408,12 @@ The public source implementation was reviewed and merged through
 [PR #62](https://github.com/0xbuffdev/open-engineering-education/pull/62)
 (pinned golden exports and independent consumer checks).
 
-A merged implementation alone does **not** constitute the steward's
-governance decision or approve official distribution. This RFC's
-acceptance requires the public decision in
-[issue #57](https://github.com/0xbuffdev/open-engineering-education/issues/57)
-and the steward's review and merge of
-[PR #63](https://github.com/0xbuffdev/open-engineering-education/pull/63).
+The implementation PRs were merged before governance acceptance. The
+steward subsequently adopted the architecture and licensing boundaries
+through [PR #63](https://github.com/0xbuffdev/open-engineering-education/pull/63),
+following the public discussion in
+[issue #57](https://github.com/0xbuffdev/open-engineering-education/issues/57).
+That decision does **not** approve official distribution.
 Official packaging, supported interfaces, copyright/attribution notices,
 and a fresh-checkout portability review require a **separate public
 release-readiness decision**. Workspace's reviewed source-pinned resource
@@ -434,11 +435,11 @@ No APP, SEF, SYS, AI or SEC course redesign is authorized by this RFC.
 
 ## 8. Validation plan
 
-The steward must approve this public decision PR before the RFC's
-`accepted` status takes effect on main. Approval records the first-party
-source home and [file-level license boundaries](../tooling/LICENSING.md)
-without changing normative educational requirements or waiving any
-third-party rights.
+The steward accepted the RFC in
+[PR #63](https://github.com/0xbuffdev/open-engineering-education/pull/63).
+That adoption records the first-party source home and
+[file-level license boundaries](../tooling/LICENSING.md) without changing
+normative educational requirements or waiving third-party rights.
 
 The already-merged implementation provides public evidence:
 
@@ -489,12 +490,11 @@ schema-v2 map adoption remains an independent downstream dependency.
 - **Decision:** Accept first-party OEE Toolkit architecture, source home,
   and file-scoped licensing as specified in this RFC and
   [Toolkit licensing](../tooling/LICENSING.md).
-- **Decision date:** 2026-11-15, effective **only upon the OEE steward's
-  approval and merge of the public decision-record PR**.
-- **Decision-maker:** The existing OEE steward, 0xBUFF, exercised by
+- **Decision date:** 2026-11-15; adopted through merged public
+  [PR #63](https://github.com/0xbuffdev/open-engineering-education/pull/63).
+- **Decision-maker:** The existing OEE steward, 0xBUFF, represented by
   Christopher S. Aondona under [Governance](../GOVERNANCE.md).
-  The PR's steward approval/merge is the required public attestation;
-  **the drafting commit alone is not the steward's decision**.
+  The merged decision PR records public approval.
 - **Rationale:** Maintain one independent public source of truth, an
   optional reproducible implementation with a single parser, explicit
   source provenance, vendor-neutral access and correct separation
@@ -515,9 +515,5 @@ schema-v2 map adoption remains an independent downstream dependency.
   portability. No course conformance, learner evaluation, status
   promotion, automatic Workspace map migration, or backwards
   compatibility is authorized.
-- **Public decision PR:** [#63](https://github.com/0xbuffdev/open-engineering-education/pull/63).
-  The steward's explicit review and merge of this PR is the effective
-  adoption act; this draft branch is not, by itself, a final decision.
-- **Public issue:** [#57](https://github.com/0xbuffdev/open-engineering-education/issues/57).
-  Close only **after** the accepted RFC record and steward decision are
-  merged; never close based solely on the draft PR.
+- **Public decision PR:** [#63](https://github.com/0xbuffdev/open-engineering-education/pull/63), merged 2026-11-15.
+- **Public discussion:** [issue #57](https://github.com/0xbuffdev/open-engineering-education/issues/57).
