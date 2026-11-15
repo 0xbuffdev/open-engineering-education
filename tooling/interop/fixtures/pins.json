@@ -1,0 +1,18 @@
+{
+  "exportVersion": 1,
+  "source": {
+    "repository": "0xbuffdev/open-engineering-education",
+    "revision": "d0f3a7b7d8b466b419415bd437a2483cd1df1b3a",
+    "specification": "v0.2.0"
+  },
+  "courses": [
+    "SEF1",
+    "SEF10",
+    "APP1",
+    "APP17"
+  ],
+  "workspaceConsumer": {
+    "repository": "0xbuffdev/oee-workspace",
+    "revision": "960b25d7511c417fd8a4c0db59b510e1133207f3"
+  }
+}
