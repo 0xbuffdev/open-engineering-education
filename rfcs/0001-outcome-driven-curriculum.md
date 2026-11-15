@@ -4,7 +4,6 @@
 - **Author:** 0xBUFF (proposal for steward review)
 - **Created:** 2026-11-07
 - **Last updated:** 2026-11-07
-- **Related issue:** [APP curriculum redesign #30](https://github.com/0xbuffdev/open-engineering-education/issues/30) (related implementation dependency, not a substitute for this RFC)
 - **Affected specification version:** published draft `v0.1.0`; normative implementation delivered as draft `v0.2.0`
 
 **Implementation status (2026-11-07):** Accepted and implemented in the published `v0.2.0` draft specification through [PR #34](https://github.com/0xbuffdev/open-engineering-education/pull/34). SEF1, SEF10, and APP1 have been migrated as draft curriculum pilots; other courses and downstream implementations still require separate migration. The proposal-era problem statements and alternatives below are retained as historical context, not descriptions of the currently normative text.
@@ -19,11 +18,11 @@ This RFC is an accepted design decision implemented in the draft `v0.2.0` specif
 
 ## 2. Problem
 
-### Current requirements that create rigidity
+### Requirements at the time of the proposal
 
-1. [Course Format §4](../spec/course-format.md) currently requires the final lesson entry of **every** course, including project courses, to be a `lab`, whether or not that is the most suitable integrated demonstration.
-2. Course Format §3 places `lesson`, `test`, and `lab` in a single lesson-kind list. Section 4 recommends the sequence `lesson → test → lab` when all three appear. Even though a module may omit a test or lab, the representation encourages near-identical assessment patterns.
-3. [Evidence Rules §2](../spec/evidence-rules.md) defaults to requiring conceptual checkpoints, exercises, a final lab, documented tests, design explanations, a retrospective, and evidence, even when those requirements overlap or do not fit the assessed outcome.
+1. The course-format rules in force at proposal time required the final lesson entry of **every** course, including project courses, to be a `lab`, whether or not that was the most suitable integrated demonstration.
+2. The previous course format placed `lesson`, `test`, and `lab` in a single lesson-kind list and recommended `lesson → test → lab` when all three appeared. Although a module could omit a test or lab, the representation encouraged near-identical assessment patterns.
+3. The previous evidence rules defaulted to conceptual checkpoints, exercises, a final lab, documented tests, design explanations, a retrospective, and evidence, even when those requirements overlapped or did not fit the assessed outcome.
 4. Project courses additionally require deliverables, evaluation, and defense. Their tests and labs can duplicate work that is already part of one cumulative project.
 5. Lesson navigation entries and assessment requirements are entangled, which makes it harder for independent and commercial implementations to give different forms of instruction while evaluating the same capability.
 
@@ -36,7 +35,7 @@ This RFC is an accepted design decision implemented in the draft `v0.2.0` specif
 
 These are counts of typed navigation entries, not an assertion that every activity is pedagogically redundant. The proposal aims to eliminate unjustified *requirements*, not useful practical work.
 
-[APP1 draft PR #31](https://github.com/0xbuffdev/open-engineering-education/pull/31) is an important dependency: it proposes 17 tests and 17 labs, and must be reassessed against any adopted model before merging.
+At the time of this proposal, [APP1 PR #31](https://github.com/0xbuffdev/open-engineering-education/pull/31) proposed 17 tests and 17 labs. That earlier draft informed the transition discussion; the PR has since merged. These historical counts are not a description of the current outcome-driven APP1 contract.
 
 ## 3. Proposed change
 

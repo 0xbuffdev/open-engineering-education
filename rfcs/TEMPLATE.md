@@ -110,14 +110,15 @@ Include applicable examples, acceptance criteria, checks, experiments, or review
 
 Do not claim that a requirement has been validated when the proposed validation has not yet been performed.
 
-### Implementation tickets and dependencies (when applicable)
+### Delivery and verification (when applicable)
 
-Record planned implementation slices, stable ticket IDs, blocking
-dependencies, ownership/approval gates and completion criteria **in this
-RFC**. Public OEE issues and PRs may track execution, but must not
-silently replace the approved RFC contract. An external planning repository
-must not be necessary to interpret these tickets. A draft or merged proposal
-does not itself complete an implementation ticket.
+Explain which public documents, interfaces, and examples must change for
+the proposal to take effect. State the conditions for a successful
+implementation and any dependency affecting the technical decision.
+
+Keep day-to-day assignments, progress reports, and changing release
+schedules in public project discussions. Do not make the proposed
+technical contract depend on private plans or external tracking records.
 
 ## 9. Open questions
 

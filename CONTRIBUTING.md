@@ -11,7 +11,7 @@ By contributing, you agree to follow this repository's governance, licensing, si
 3. Read the [governance policy](GOVERNANCE.md).
 4. Search existing issues and [Requests for Comments](rfcs/README.md) to check whether the proposed change has already been discussed.
 
-For a small correction, open a pull request. For a normative change, follow the RFC process first, except for the one-time initial course-format stabilization described in [Governance](GOVERNANCE.md).
+For a small correction that preserves normative meaning, open a pull request. For a change to a binding requirement, follow the [RFC process](rfcs/README.md) before implementation.
 
 ## Developer Certificate of Origin
 
@@ -41,7 +41,7 @@ Contributors retain their copyright. Contributions are submitted under the appli
 
 | Contribution                | Area                               | Expectations                                                        |
 | --------------------------- | ---------------------------------- | ------------------------------------------------------------------- |
-| Specification clarification | `spec/`                            | RFC required after bootstrap.                                       |
+| Specification clarification | `spec/`                            | Follow the RFC process if normative meaning changes.                |
 | Documentation corrections   | Markdown files                     | Preserve meaning, consistency, and correct attribution.             |
 | Course improvements         | `curriculum/`                      | Follow the current course format and assessment requirements.       |
 | OEE repository checks       | `scripts/check-links`, `.github/`  | Keep repository validation working.                                 |
@@ -53,7 +53,7 @@ Small spelling, grammar, formatting, and broken-link fixes generally do not requ
 
 ## Changes that require an RFC
 
-Except for the one-time initial course-format stabilization described in [Governance](GOVERNANCE.md), submit an RFC before proposing changes that affect:
+Submit an RFC before proposing changes that affect:
 
 - The principles or normative requirements in `spec/`.
 - Required course structure, assessment rules, or completion requirements.
@@ -63,9 +63,9 @@ Except for the one-time initial course-format stabilization described in [Govern
 - The scope of the public specification or its relationship with implementations.
 - Repository-wide structural decisions.
 
-The RFC guide explains the proposal and decision process.
+The [RFC guide](rfcs/README.md) explains the proposal and decision process.
 
-A pull request MUST link to the relevant RFC when it implements an accepted normative change. The one-time initial course-format stabilization MUST instead record the reasons for the exception directly in its pull request.
+A pull request MUST link to the relevant RFC when it implements an accepted normative change.
 
 ## Quality expectations
 
@@ -82,6 +82,20 @@ Contributions MUST:
 - Avoid committing credentials, private learner information, or unrelated generated data.
 
 Changes to scripts or executable code SHOULD include tests or clear verification instructions appropriate to the change.
+
+### Documentation and source-of-truth conventions
+
+Write for someone discovering OEE for the first time:
+
+- Put the purpose and current status near the beginning of the page.
+- Use clear, active language and meaningful headings; prefer specific claims over promotional language.
+- Keep each binding educational rule in its authoritative `spec/` document. Link to it instead of maintaining a second formulation.
+- Keep each program's course order in its program catalog, and course-specific outcomes and assessment requirements in the course definition.
+- Use RFCs for rationale and recorded decisions, not as a replacement for the adopted specification or a running implementation checklist.
+- Make public documents understandable without private architecture records, planning specifications, internal tickets, or another repository's unpublished context.
+- Label historical proposals, pending work, current implementation behavior, and official releases distinctly. Do not imply that a merged implementation is an educational validation or a released product.
+
+These are editorial conventions; they do not introduce new educational requirements. The [curriculum design guide](curriculum/DESIGN-GUIDE.md) covers course-specific writing choices.
 
 ## Local validation
 

@@ -20,15 +20,15 @@ Examples include spelling corrections, broken-link fixes, formatting improvement
 
 Routine changes may proceed through a pull request. The pull request and its review history form the decision record.
 
-### One-time initial format stabilization
+### Historical exception: initial format stabilization (expired)
 
-Because the draft v0.0.1 OEE curriculum had no established canonical course definitions, the steward MAY establish the initial usable course-format baseline through **one direct, publicly reviewed specification pull request** without a separate RFC. This narrow exception covers the course-format rules and directly related conformance and governance documentation only. The pull request MUST record its rationale, compatibility effects, public review, and final decision.
+When OEE started with the draft `v0.0.1` curriculum and no established canonical course definitions, governance allowed **one direct, publicly reviewed specification pull request** to establish the initial course-format baseline without a separate RFC. The exception was limited to course-format rules and directly related conformance and governance documentation. The change still required a recorded rationale, compatibility analysis, public review, and final decision; it did not waive DCO sign-offs, licensing, evidence requirements, or other substantive obligations.
 
-**The exception expires upon merge of the first course-format stabilization pull request.** All subsequent normative changes MUST use the established RFC process. This exception does not waive DCO sign-offs, licensing, assessment evidence, public review, or other substantive requirements.
+**This one-time exception has expired.** It is retained here only to explain the historical approval path. All current and future normative changes follow the established [RFC process](rfcs/README.md).
 
 ### Normative changes
 
-Apart from the one-time initial course-format stabilization above, changes to `spec/`, required course structure, assessment requirements, status-label definitions, conformance criteria, or other binding requirements MUST follow the [RFC process](rfcs/README.md).
+Changes to `spec/`, required course structure, assessment requirements, status-label definitions, conformance criteria, or other binding requirements MUST follow the [RFC process](rfcs/README.md).
 
 An accepted RFC does not itself update the specification. The resulting change must be implemented in a pull request, reviewed, and merged.
 
@@ -40,7 +40,7 @@ Reviewers must be able to inspect the basis for the status change. A product rel
 
 ### Governance and licensing changes
 
-Changes to governance, contributor obligations, licensing policy, or the scope of the public specification MUST follow the RFC process, except for the strictly scoped clarification accompanying the initial course-format stabilization.
+Changes to governance, contributor obligations, licensing policy, or the scope of the public specification MUST follow the RFC process.
 
 Legal or licensing changes must identify the affected files and explain the implications for existing contributions and downstream users.
 
