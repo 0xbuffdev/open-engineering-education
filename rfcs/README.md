@@ -1,83 +1,55 @@
 # Requests for Comments (RFCs)
 
-An RFC is the formal proposal process for changes that affect the normative requirements or governance of Open Engineering Education (OEE).
+RFCs document proposed changes to the requirements, governance, or public scope of Open Engineering Education (OEE). They explain the problem, relevant alternatives, the proposed decision, and its consequences.
 
-The process gives contributors a place to explain a problem, evaluate alternatives, identify consequences, and record a decision before implementing a significant change.
+**A proposal is not a requirement.** The current educational requirements live in [`spec/`](../spec/README.md). An accepted RFC records a decision; normative changes take effect only when the corresponding specification update is reviewed and merged.
 
-## One-time initial course-format stabilization
+## When to write an RFC
 
-OEE v0.0.1 began with a draft specification but no populated canonical curriculum. The first usable course-format baseline can therefore be established by the steward through a **focused public pull request**, without an additional RFC.
+An RFC is required for a change that affects:
 
-**This exception applies only to the initial format-stabilization pull request** and changes directly necessary to align its course-format requirements, conformance checks, and related governance documentation. The pull request MUST explain the reasons for the change, affected requirements, compatibility considerations, and review decision. The exception expires when that pull request is merged. It does not waive contributor sign-off, licensing obligations, public review, learning-evidence requirements, or course status checks, and it does not authorize unrelated changes to principles, commercial boundaries, or status evidence.
-
-Until the first format-stabilization pull request is merged, the published draft specification remains authoritative. All subsequent normative changes MUST follow the RFC process. The prior [RFC proposal PR #6](https://github.com/0xbuffdev/open-engineering-education/pull/6) was closed as superseded without being accepted or merged; its discussion remains accessible.
-
-## When an RFC is required
-
-After this one-time initial course-format stabilization, an RFC MUST be proposed for changes that affect:
-
-- The principles or normative documents in `spec/`.
-- Required course metadata, structure, assessment, or completion requirements.
-- The meaning or evidence requirements of status labels.
-- Conformance criteria or public conformance claims.
+- Normative principles or other binding requirements in `spec/`.
+- Required course metadata, assessment, structure, or completion conditions.
+- The meaning or evidence requirements of course status labels.
+- Conformance criteria or claims.
 - Licensing, contributor obligations, or governance policy.
-- The boundary between the specification, curriculum, and implementations.
-- Repository-wide structure where the change affects the standard's scope.
-- Any existing requirement whose modification could affect whether courses or implementations satisfy the specification.
+- The boundary between OEE's specification, curriculum, and implementations.
+- Repository-wide structural decisions that change the standard's scope.
 
-Routine corrections that do not change normative meaning may proceed directly through a pull request.
+Routine corrections that preserve normative meaning can proceed directly through a pull request. If the distinction is unclear, raise the question in a public issue before changing a requirement.
 
-If it is unclear whether a change is normative, open an issue to establish the appropriate process before implementation.
+The one-time exception for initial course-format stabilization has **expired**. Its original scope remains recorded in [Governance](../GOVERNANCE.md); it is not an exception available to new proposals.
 
-## RFC lifecycle
+## Write a self-contained proposal
 
-An RFC uses one of four states:
+Start from the [RFC template](TEMPLATE.md). A reader should be able to understand the proposal and its trade-offs without consulting internal architecture decisions, private planning documents, or implementation tickets.
 
-| State | Meaning |
+A substantive proposal must cover the problem, affected people or systems, the recommended change, a credible alternative, impacts on courses and implementations, relevant conformance or evidence implications, migration considerations, and unresolved questions.
+
+Include proposed wording when the wording is material to the decision. Refer to public specification documents for existing requirements, but explain the **new** decision fully in the RFC. Keep changing task ownership, progress updates, and release scheduling in public issue or pull-request discussions, not in the adopted technical contract.
+
+## Decision lifecycle
+
+| Status | Meaning |
 | --- | --- |
-| `draft` | The proposal is being prepared or discussed and has not been accepted. |
-| `accepted` | The proposal has been approved for implementation, subject to its recorded conditions. |
-| `rejected` | The proposal has been declined, with the decision recorded. |
-| `withdrawn` | The author has withdrawn the proposal before implementation. |
+| `draft` | Open for preparation or discussion; not approved |
+| `accepted` | Approved for implementation under the recorded conditions |
+| `rejected` | Declined, with a recorded reason |
+| `withdrawn` | Withdrawn by the proposer |
 
-A status is not a measure of technical quality. It records the proposal's current decision state.
+The process follows [Governance](../GOVERNANCE.md):
 
-## Process
+1. Describe the problem and draft an RFC using the template.
+2. Discuss the proposal publicly and revise it in response to substantive feedback.
+3. Record the steward's acceptance, rejection, or request for revision.
+4. For an accepted change, submit a separate implementation PR updating the affected authoritative documents and validation.
+5. Record the implementation outcome or any unresolved work without rewriting the historical rationale.
 
-1. **Identify the problem.** Open an issue or begin an RFC proposal explaining the affected requirement and the reason for change.
-2. **Write the proposal.** Use [`TEMPLATE.md`](TEMPLATE.md) to describe the proposed change, alternatives, impacts, and unanswered questions.
-3. **Discuss the proposal.** Address technical objections and revise the proposal as needed. Discussion must distinguish established facts from assumptions.
-4. **Record the decision.** The steward accepts, rejects, or returns the proposal for revision under the current governance policy.
-5. **Implement accepted changes.** Open a pull request that links to the RFC and updates all affected normative text, references, and tests.
-6. **Record completion.** Update the RFC with the merged change or the reason implementation did not proceed.
+The decision record should identify the decision-maker, date, reasons, significant alternatives or objections, conditions, and adopted implementation when applicable. Discussion alone is not approval.
 
-An accepted RFC authorizes implementation; it does not itself change the published specification. The specification changes when the corresponding pull request is reviewed and merged.
+## RFC index
 
-## What a proposal must contain
-
-An RFC MUST identify:
-
-- The problem and the people or systems affected.
-- The proposed change in concrete terms.
-- At least one meaningful alternative considered.
-- The effect on existing courses and implementations.
-- Any effect on status labels, evidence requirements, or conformance.
-- Any transition steps needed to adopt the change.
-- Unresolved questions that affect the decision.
-
-The proposal SHOULD include the exact proposed wording when the wording itself is the change.
-
-## Decision records
-
-A decision MUST be recorded in the RFC or linked decision discussion.
-
-For an acceptance, the record SHOULD state any conditions and required migration steps. For a rejection, it SHOULD explain the material reasons. A proposal returned for revision remains a draft until a decision is recorded.
-
-## Index
-
-Add a row for each substantive RFC so contributors can find previous decisions.
-
-| RFC | Title | Status | Decision |
-| --- | --- | --- | --- |
-| [0001](0001-outcome-driven-curriculum.md) | Outcome-Driven Curriculum and Proportionate Assessment | `accepted` | Implemented in [PR #34](https://github.com/0xbuffdev/open-engineering-education/pull/34) |
-| [0002](0002-toolkit-stewardship-and-licensing.md) | Public OEE Toolkit Stewardship, Scope and Licensing | `accepted` | Steward-reviewed source, interfaces and file-level license boundaries; implementation PRs #59–#62; [issue #57](https://github.com/0xbuffdev/open-engineering-education/issues/57) (official release still gated on OT-I05) |
+| RFC | Decision | Implementation |
+| --- | --- | --- |
+| [0001 — Outcome-driven curriculum and proportionate assessment](0001-outcome-driven-curriculum.md) | Accepted, 2026-11-07 | [Normative specification update, PR #34](https://github.com/0xbuffdev/open-engineering-education/pull/34) |
+| [0002 — Public Toolkit stewardship, scope, and licensing](0002-toolkit-stewardship-and-licensing.md) | Accepted, 2026-11-15 | [Steward decision, PR #63](https://github.com/0xbuffdev/open-engineering-education/pull/63); official package release remains separately gated |

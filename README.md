@@ -1,143 +1,84 @@
-
 <!-- markdownlint-disable MD041 -->
 <img width="1800" height="287" alt="open-engineering-education-banner" src="https://github.com/user-attachments/assets/a6b8c842-9a5e-47e4-ae1a-6d3fabaf1c52" />
 
 # Open Engineering Education (OEE)
 
-**An open specification for engineering education built around demonstrable capability.**
+**An open specification and curriculum for engineering education grounded in demonstrable capability.**
 
-Open Engineering Education (OEE) defines how engineering courses are structured, how learning is demonstrated, and how claims about course readiness are supported by evidence. It combines a public specification with a curriculum designed to follow that specification.
+Open Engineering Education defines what learners should be able to do, how courses make those expectations public, and what evidence supports a claim of achievement. The specification and curriculum are free to read, teach, and implement independently.
 
-OEE emphasizes underlying mechanisms, practical engineering work, reproducible results, and transparent claims about what learners can demonstrate.
+**Current release:** `v0.2.0` (draft). OEE is evolving; its publication is not a claim that every course has been tested or verified.
 
-**Project status:** `v0.2.0` — draft. The specification is evolving and is not a finalized standard. Course status labels describe the evidence available for each course.
+## Get started
 
-**Release metadata erratum:** The published `v0.2.0` tag contains stale `CITATION.cff` version/date values. Cite version `0.2.0` (2026-11-07); see the [public citation erratum](releases/ERRATA.md). The historical tag is unchanged.
+| Your goal | Start here |
+| --- | --- |
+| Understand the educational requirements | [Specification](spec/README.md) |
+| Explore engineering programs and courses | [Curriculum](curriculum/README.md) |
+| Understand assessment and evidence | [Evidence Rules](spec/evidence-rules.md) |
+| Build a learner workspace | [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) |
+| Propose a correction or change | [Contributing](CONTRIBUTING.md) |
 
-- **Steward:** [0xBUFF](https://github.com/0xbuffdev)
-- **Author:** Christopher S. Aondona
-- **Licensing:** [CC BY 4.0](LICENSE) for specification and curriculum text; [MIT](LICENSE-MIT) for code and scripts.
+## The specification
 
-## What OEE defines
+OEE publishes a common contract for course structure, demonstrated learning, course status, and conformance. These requirements are owned by the specification, not by a course template, a validation script, or a particular teaching platform.
 
-OEE establishes:
+| Document | What it establishes |
+| --- | --- |
+| [Principles](spec/principles.md) | The values behind course and assessment decisions |
+| [Course Format](spec/course-format.md) | Required course structure and assessment definitions |
+| [Evidence Rules](spec/evidence-rules.md) | How learning and engineering work are demonstrated |
+| [Status Labels](spec/status-labels.md) | What `draft`, `tested`, and `verified` mean |
+| [Conformance](spec/conformance.md) | How claims about following OEE are evaluated |
 
-- **Principles:** the expectations that govern the specification and its curriculum.
-- **Course format:** the required structure and metadata for course definitions.
-- **Evidence rules:** what counts as demonstrated learning and completed engineering work.
-- **Status labels:** the evidence required to describe a course as `draft`, `tested`, or `verified`.
-- **Conformance:** the requirements for evaluating whether a course, program, or implementation follows the specification.
-- **Governance:** how the specification evolves and how significant changes are proposed and reviewed.
+Course definitions apply these requirements to specific topics. Automated checks can identify structural problems, but do not establish assessment quality or educational conformance by themselves.
 
-Start with the [specification overview](spec/README.md).
+## Explore the curriculum
 
-## The five programs
-
-The OEE curriculum is organized into five engineering programs:
+The curriculum is organized into five programs. Each program's README is the entry point for its published course catalog.
 
 | Code | Program |
 | --- | --- |
-| `SEF` | Software Engineering Foundations |
-| `APP` | Application Engineering |
-| `SYS` | Systems Engineering |
-| `AI` | AI Engineering |
-| `SEC` | Security Engineering |
+| [SEF](curriculum/SEF/README.md) | Software Engineering Foundations |
+| [APP](curriculum/APP/README.md) | Application Engineering |
+| [SYS](curriculum/SYS/README.md) | Systems Engineering |
+| [AI](curriculum/AI/README.md) | AI Engineering |
+| [SEC](curriculum/SEC/README.md) | Security Engineering |
 
-The [curriculum directory](curriculum/) contains the program definitions and their course structures.
+A course may combine explanations, exercises, investigations, labs, and project work. **Completion depends on the required outcomes, public assessment criteria, and supporting evidence**, not on consuming a fixed number of lessons or repeating a universal test-and-lab sequence.
 
-## Core principles
+Learner implementations, notes, and evidence belong in a learner-controlled workspace rather than in this specification repository.
 
-### 1. Evidence over completion
+## Independent by design
 
-A course is complete when its required outcomes are demonstrated and its required work is supported by appropriate evidence. Time spent, material consumed, and unchecked claims are not substitutes for demonstrated capability.
+[0xBUFF](https://github.com/0xbuffdev) stewards OEE. [0xNAND](https://nand.0xbuff.com) is an optional paid learning implementation; it is not required to use the public specification or curriculum. The free [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) helps learners organize their own work.
 
-### 2. Mechanism before tooling
+An implementation may offer additional teaching or feedback without changing the public completion requirements. Use of an OEE-related product does not, by itself, establish conformance.
 
-Learners should understand the underlying mechanisms before relying on abstractions, frameworks, or managed services. Engineering decisions must be explainable rather than based solely on familiarity with an interface.
-
-### 3. Honest claims
-
-Course status, assessment results, benchmarks, and project outcomes must state what the evidence supports and what it does not establish. No course should be described as tested or verified without meeting the corresponding requirements.
-
-### 4. Open by default
-
-The public specification and curriculum are published under their declared licenses. Optional commercial products may provide additional services, but they do not change the requirements of the public specification.
-
-Read the full [principles](spec/principles.md).
-
-## OEE, 0xBUFF, and 0xNAND
-
-**0xBUFF** stewards OEE and oversees the development of its public specification.
-
-**[0xNAND](https://nand.0xbuff.com)** is the paid reference implementation developed under 0xBUFF. It may implement OEE concepts and provide additional tooling or services, but using 0xNAND is not required to study, teach, or implement OEE.
-
-The public specification remains distinct from any individual implementation. Product features, commercial arrangements, and implementation choices do not change the specification unless the relevant change is formally adopted through the OEE governance process.
-
-An implementation's relationship to OEE does not, by itself, establish that it conforms to the specification.
-
-## Learning and evidence
-
-OEE distinguishes between completing activities and demonstrating engineering capability.
-
-Courses must evaluate required learning outcomes against public success criteria with suitable evidence. They may use conceptual checkpoints, implementation exercises, investigations, practical labs, or project work when those methods serve the outcomes. No universal per-module test/lab pair or final lab is required. Project-based courses also require published deliverables, evaluation, and a suitable technical defense.
-
-Evidence should make it possible for a reviewer to understand what was done, how the result was produced, whether it can be reproduced, and what limitations remain.
-
-Read [Evidence Rules](spec/evidence-rules.md) and [Status Labels](spec/status-labels.md).
-
-## Learner workspaces
-
-Learner work belongs in a workspace controlled by the learner, not in the OEE specification repository.
-
-The [OEE Workspace repository](https://github.com/0xbuffdev/oee-workspace) provides the reusable structure, templates, and generation scripts for practical learning and evidence. Use it as the starting point for a personal or group workspace, where you keep your actual implementations, labs, exercises, notes, projects, progress records, and supporting evidence.
-
-## Repository structure
+## Repository guide
 
 | Path | Purpose |
 | --- | --- |
-| `spec/` | Normative documents that define OEE |
-| `curriculum/` | Programs and course definitions |
-| `scripts/` | Repository checks for the specification and curriculum |
-| `GOVERNANCE.md` | Stewardship, contribution policy, conduct, and decision-making |
-| `rfcs/` | Proposals for significant changes to the specification |
-| `.github/` | Repository automation and contribution templates |
+| [`spec/`](spec/README.md) | Authoritative educational requirements |
+| [`curriculum/`](curriculum/README.md) | Program catalogs and course definitions |
+| [`rfcs/`](rfcs/README.md) | Proposals and decisions explaining significant changes |
+| [`tooling/`](tooling/README.md) | Optional, repository-local checking and derived exports |
+| [`scripts/`](scripts/README.md) | Maintenance checks and validation utilities |
+| [`GOVERNANCE.md`](GOVERNANCE.md) | Stewardship and decision-making |
+| [`CONTRIBUTING.md`](CONTRIBUTING.md) | Contribution and review instructions |
 
-The specification defines the common requirements. Curriculum files apply those requirements to particular programs and courses. Workspace templates, generation scripts, and implementations may support the process, but must not silently redefine the specification.
+Changes to binding requirements follow [OEE governance](GOVERNANCE.md) and the [RFC process](rfcs/README.md). Accepted RFCs record decisions; the current requirements are published in `spec/`.
 
-## Contributing
+## Status and limitations
 
-Contributions should improve clarity, correctness, reproducibility, or consistency with the specification.
+The `v0.2.0` draft introduces outcome-driven course requirements, but some older course definitions have not yet been migrated. Their presence in the catalog must not be mistaken for conformance with the new format. The [curriculum inventory](curriculum/INVENTORY.md) makes migration status inspectable.
 
-Before submitting a change:
+The historical `v0.2.0` release tag also contains incorrect citation metadata; see the [citation erratum](releases/ERRATA.md) for accurate version and date information. The tag itself is unchanged.
 
-1. Read the [principles](spec/principles.md).
-2. Review the [contribution guidelines](CONTRIBUTING.md).
-3. Search existing issues and [RFCs](rfcs/README.md).
-4. Follow the repository's sign-off, review, and validation requirements.
+OEE does not independently certify learners, accredit programs, guarantee employment outcomes, or establish that published courses have been tested or verified without the required review evidence.
 
-Changes to normative requirements should be proposed through the RFC process rather than introduced indirectly through a course or implementation.
+## Contribute and reuse
 
-## Licensing
+Contributions are welcome when they improve educational clarity, technical accuracy, assessment quality, or reproducibility. Read [Contributing](CONTRIBUTING.md), the [Code of Conduct](CODE_OF_CONDUCT.md), and the [DCO policy](DCO.md) before opening a pull request.
 
-Specification and curriculum text are licensed under [Creative Commons Attribution 4.0 International](LICENSE). Code and scripts covered by the repository's software license are licensed under the [MIT License](LICENSE-MIT).
-
-Contributors must have the rights needed to submit their work under the applicable license. See the repository's contribution and attribution documents for additional details.
-
-## Current limitations
-
-OEE is a draft specification. The `v0.2.0` course contract replaces the `v0.1.0` baseline and is being rolled out progressively; earlier course revisions may still follow the previous test/lab pattern and must not be treated as conforming to the updated requirements until reviewed and migrated. Its requirements may change through the documented governance process.
-
-A published course, program, or implementation must not be described as `verified`, conforming, accredited, or certified unless the applicable criteria and documented review support that claim. OEE does not, by itself, guarantee employment outcomes, professional accreditation, or mastery of every subject associated with a course.
-
-## Optional mentorship
-
-0xBUFF offers optional paid mentorship for learners who want personalized
-guidance, technical feedback, project reviews, and accountability while
-working through engineering material.
-
-Mentorship is a separate service. It is not required to access or use the
-public OEE specification and curriculum, and it does not affect course
-status or conformance requirements.
-
-See [0xBUFF Mentorship](https://0xbuff.com/mentorship) for plans, pricing,
-eligibility, and application details.
+The specification and curriculum use [CC BY 4.0](LICENSE); covered source code uses the [MIT license](LICENSE-MIT). Consult the [licensing notice](NOTICE), [Toolkit licensing boundaries](tooling/LICENSING.md), and [trademark notice](TRADEMARKS.md) for scope and attribution details.
