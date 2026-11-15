@@ -1,11 +1,15 @@
-# Draft OEE Toolkit — Immutable, Offline Curriculum Views
+# OEE Toolkit — Immutable, Offline Curriculum Views
 
-**Status:** implementation proposal for OT-I04; **not an official release**.
-[RFC 0002](../rfcs/0002-toolkit-stewardship-and-licensing.md) is
-still draft and public [issue #57](https://github.com/0xbuffdev/open-engineering-education/issues/57)
-requires the steward's explicit governance and license-scope decision.
-This code is independently reviewable, but **must not be advertised as
-official or merged as an approved tool** before its governance gate is met.
+**Status:** public repository-source implementation, **not an official
+Toolkit package or released/stabilized library API**. The governed source
+home and file-level licensing boundaries are recorded by
+[RFC 0002](../rfcs/0002-toolkit-stewardship-and-licensing.md) and
+[Toolkit licensing](LICENSING.md). The accepted RFC record becomes
+effective only through the OEE steward's explicit public approval and
+merge of its decision PR, tracked in
+[issue #57](https://github.com/0xbuffdev/open-engineering-education/issues/57).
+**OT-I05 independent release/readiness review remains required**
+regardless of governance acceptance or past implementation merges.
 
 This implementation reads outcome-driven **OEE v0.2.0 only** from local
 Git objects at one **full, immutable 40-character commit SHA**. It never
@@ -38,9 +42,11 @@ python3 -m tooling.oee_toolkit export \
 Use --output - to write derived JSON to stdout. A file export is written
 atomically only **after** the entire selected course passes structural
 checks; a missing/unsupported source leaves an existing destination
-untouched. The proposed Python invocation is currently located under
-tooling/; the final installed command and packaging need a separate
-public review and must not be assumed from this draft.
+untouched. The implemented repository-local Python command is
+`python3 -m tooling.oee_toolkit`; no separately installed
+`oee_toolkit` package, stabilized importable API or Toolkit semantic
+version is approved yet. OT-I05 will decide the public distribution,
+API support and release mechanism.
 
 **Exit codes:** 0 structurally passed; 1 structural violation or unsafe
 reference; 2 invalid CLI arguments; 3 missing/incomplete/unsupported
@@ -86,9 +92,9 @@ or establish that legacy prerequisites conform to v0.2.0.
 
 This draft implements course check and course export, with a read-only
 repository inspection. Full program-catalog export, a distributable CLI
-package, public release numbering and independent governance approval are
-**not yet included or claimed**. The README explicitly documents this
-scope so a partial implementation is not presented as a complete release.
+package and public release numbering are **not implemented or claimed**.
+Governance approval is recorded in RFC 0002 when the steward merges
+the decision PR; it does not itself complete these missing release tasks.
 
 Tests build isolated synthetic local Git repositories and exercise:
 immutable revisions across dirty worktrees/moved HEAD, byte-identical
@@ -103,8 +109,11 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 -m unittest discover -s tests -p 'test_toolkit_pinned_export.py' -v
 ~~~
 
-**Licensing proposed, not adopted:** MIT for new Toolkit software,
-software schema and test code, preserving CC BY 4.0 for normative OEE
-specification/course text. A steward's recorded file-level approval and
-notice review remain prerequisites to official publication. No existing
-contributor's license is retroactively altered by this PR.
+**License boundaries:** Original Toolkit implementation, software
+interface schemas and tests are MIT; normative OEE curriculum and actual
+course-derived golden exports remain CC BY 4.0. See
+[Toolkit licensing](LICENSING.md) and the repository
+[NOTICE](../NOTICE). The steward's approval of RFC 0002 authorizes
+these boundaries; **OT-I05 must still review distribution notices
+before an official release**. This does not retroactively change any
+contributor's license or rights.

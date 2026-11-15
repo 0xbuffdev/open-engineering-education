@@ -1,15 +1,15 @@
 # RFC 0002: Public OEE Toolkit Stewardship, Scope and Licensing
 
-- **Status:** `draft`
+- **Status:** `accepted`
 - **Author:** Public Toolkit proposal; contributor attribution through the reviewed PR and DCO
 - **Created:** 2026-11-14
-- **Last updated:** 2026-11-14
-- **Related issue:** [OT-I01 — Public Toolkit decision](https://github.com/0xbuffdev/open-engineering-education/issues/57)
+- **Last updated:** 2026-11-15
+- **Related issue:** [Public Toolkit decision #57](https://github.com/0xbuffdev/open-engineering-education/issues/57)
 - **Affected specification version:** OEE v0.2.0 draft; **no course-format change proposed**
 
 ## 1. Summary
 
-Propose an optional first-party **OEE Toolkit**, maintained publicly under
+Approve an optional first-party **OEE Toolkit**, maintained publicly under
 [OEE governance](../GOVERNANCE.md), with implementation at `tooling/` in
 this repository. It would validate and optionally export the existing
 normative OEE v0.2.0 Markdown curriculum with exact source provenance.
@@ -18,16 +18,21 @@ The public specification and course Markdown remain authoritative.
 The Toolkit is an *optional implementation*, not a new mandatory authoring
 format, learner grading service, conformance certification, or paid dependency.
 
-**This RFC is a draft.** An open or merged draft proposal is not a steward
-decision, code license approval, or official Toolkit release.
+**Acceptance is conditional on the OEE steward approving and merging the
+public decision-record PR.** This accepted architecture authorizes the
+optional Toolkit source and its clearly scoped licenses; it does **not**
+publish or stabilize an official release, override contributor rights,
+or claim normative OEE conformance. See [Section 10](#10-decision).
 
 ## 2. Problem
 
 The existing [OEE scripts](../scripts/README.md) provide version
 classification, structural checks and catalog validation. They are useful
-maintenance/migration utilities, but they do not yet supply an approved,
-independent first-party Toolkit with a stable pinned-revision consumer
-interface, source-located diagnostics and deterministic export.
+maintenance/migration utilities, and, before the implementation changes
+reviewed in PRs #59–#62, did not provide an independent Toolkit with pinned-revision
+source resolution, source-located diagnostics and deterministic export.
+The source implementation is now merged, but release readiness and
+stabilized packaging remain separate approvals.
 
 Without a reviewed public implementation contract, Workspace and independent
 adopters risk separately interpreting course Markdown, checking moving HEAD,
@@ -40,11 +45,11 @@ must be specified and reviewed here in the public OEE RFC. No separate
 planning document can appoint a maintainer, determine software licensing,
 or impose additional requirements on the standard.
 
-This proposal requires public RFC review because it may affect the boundary
+This decision requires public RFC review because it affects the boundary
 between the OEE standard and implementations, source layout, licensing scope
 and OEE governance.
 
-## 3. Proposed change
+## 3. Approved design and implementation scope
 
 ### Stewardship, source home and authority
 
@@ -53,8 +58,9 @@ and OEE governance.
    recorded in the public OEE repository.
 2. Prefer `tooling/` for the new public implementation, offline CLI,
    library interface, tests, software schemas and package-specific docs.
-   Preserve the distinction between normative `spec/`, editable source
-   `curriculum/`, maintenance scripts `scripts/` and derived Toolkit export.
+   Preserve the distinction between normative educational requirements,
+   editable course Markdown, repository maintenance scripts, and derived
+   Toolkit exports.
 3. Reuse/refactor the proven v0.2.0 structural checker and its tests so the
    Toolkit has **one production parser and rule interpretation**.
    Existing legacy program validators may temporarily serve curriculum
@@ -66,23 +72,28 @@ and OEE governance.
 
 ### License and contribution scope
 
-Propose applying the repository's current [MIT License](../LICENSE-MIT)
-to **new Toolkit implementation code, tests, scripts and machine-readable
-software schemas**, with clear file/package licensing notices.
+Adopt the repository's existing [MIT License](../LICENSE-MIT)
+for **original Toolkit implementation code, software tests, maintenance
+scripts and machine-readable software-interface schemas**, with explicit
+file-level boundaries in [Toolkit licensing](../tooling/LICENSING.md).
 [CC BY 4.0](../LICENSE) remains the license for normative specification
 and educational curriculum text. Maintain the existing
 [Developer Certificate of Origin](../DCO.md).
 
-This must be a **reviewed, explicit file-scope decision**. A proposal
+This is a **file-scope decision** with its exact implementation boundaries
+recorded in [Toolkit licensing](../tooling/LICENSING.md). Generated golden
+exports reproducing real OEE course outcomes, assessment criteria and
+lesson text remain **CC BY 4.0 educational derivatives**, even though the
+exporter and JSON Schema software interface are MIT. This decision
 does not silently relicense existing contributions or educational
-material; bundled third-party code requires compatible licenses and
+material; bundled third-party code requires rights verification and
 preserved attribution. Toolkit examples that reproduce significant OEE
 educational text must carry its applicable notices. OEE/0xBUFF marks
 remain governed by their existing attribution and trademark policies.
 
 ### Implementation boundary and input contract
 
-The proposed first Toolkit supports **only OEE v0.2.0 outcome-driven
+The first Toolkit implementation supports **only OEE v0.2.0 outcome-driven
 course inputs**, and would:
 
 - Resolve course Markdown, catalogs and authorized linked public assessment
@@ -109,8 +120,7 @@ course inputs**, and would:
 - Never execute student submissions, collect evidence remotely, issue a
   learner grade, promote status to `tested` or `verified`, or assert formal
   course/program/implementation conformance. Those need separate human
-  review under [Evidence Rules](../spec/evidence-rules.md) and
-  [Conformance](../spec/conformance.md).
+  review under the published OEE evidence and conformance requirements.
 
 The implementation must publish its concrete schema, CLI, diagnostics and
 negative fixtures in this public repository. This RFC and the published OEE
@@ -130,7 +140,7 @@ Workspace owns learner-authored projects, evidence and private records;
 the Toolkit never edits them or silently maps completions across course
 revisions.
 
-### Proposed wording following acceptance
+### Approved architectural wording (not a release claim)
 
 > OEE Toolkit is an optional first-party open-source implementation for
 > checking supported OEE course structure and producing reproducible
@@ -138,15 +148,18 @@ revisions.
 > authoritative. A structural Toolkit result is not an assessment, course
 > status promotion, accreditation or independent conformance certification.
 
-This wording is **not yet adopted** and must not be used as an official
-release claim until governance and separate release review approve it.
+The wording is the accepted **architectural description**, not a statement
+that a distributable Toolkit or official release has shipped. Publication
+of official release and support claims remains conditional on a
+separately reviewed release-readiness decision.
 
-### Consolidated architecture decisions (proposed)
+### Consolidated architecture decisions (accepted subject to steward merge)
 
 The following architectural decisions, their rationale, trade-offs,
-and implementation consequences are proposed **in this RFC**.
-On acceptance, the reviewed RFC is the public decision record; no separate
-architecture document is needed to interpret these choices.
+and implementation consequences are adopted by the public steward-reviewed
+decision recorded below. The reviewed RFC is the public decision record;
+the complete source and licensing decision is stated here without relying
+on separate planning documents.
 
 | Decision | Rationale | Consequence and trade-off |
 | --- | --- | --- |
@@ -159,13 +172,13 @@ architecture document is needed to interpret these choices.
 | A7 — Structural evidence is not educational conformance | Preserve integrity of `draft`/`tested`/`verified` and reviewer judgment | Checks always disclose manual review requirements |
 | A8 — Separate code and educational licensing notices | Preserve MIT software openness without silently changing CC BY text rights | Requires file-level license review before an official release |
 
-### Implementable specification (proposed)
+### Technical contract
 
-This section defines the proposed **implementable technical contract**
-directly in the public RFC. After acceptance, implementation PRs and tests
-must follow the approved text here and the published normative `spec/`.
-No separate proposal, design document, or unreviewed implementation detail
-may add binding requirements.
+The supported technical contract is defined directly in this public RFC.
+Implementations and tests follow the requirements stated here while
+preserving the independent authority of OEE's published normative
+educational requirements. No unreviewed implementation detail or
+private planning text may add binding educational requirements.
 
 #### Input and structural interpretation
 
@@ -293,14 +306,26 @@ LF and stable array order where semantically meaningful. Exclude current
 timestamps, machine-specific absolute paths, locale and implicit network
 lookups. An optional generated index/manifest remains a derived artifact.
 
-Proposed initial commands (final names adopted through implementation
-review, not implied by this draft RFC):
+**Actual source-checkout CLI, now implemented** (run from the OEE
+repository root; Python 3.11+ and local Git required):
 
 ~~~text
-python3 -m oee_toolkit check  --repo PATH --revision SHA --course SEF1
-python3 -m oee_toolkit export --repo PATH --revision SHA --course SEF1 --output FILE
-python3 -m oee_toolkit check  --repo PATH --revision SHA --all
+python3 -m tooling.oee_toolkit check  --repo PATH --revision SHA --course SEF1
+python3 -m tooling.oee_toolkit export --repo PATH --revision SHA --course SEF1 --output FILE
+python3 -m tooling.oee_toolkit check  --repo PATH --revision SHA --all
 ~~~
+
+This command surface is reviewed as the **source-repository implementation**
+of the architectural contract, not a released installed command.
+The internal importable `tooling.oee_toolkit` code provides a public
+inspection/export implementation, but **no separately installed
+`oee_toolkit` distribution, semantic Toolkit version, stable
+third-party library API or promised compatibility window** has been
+approved. `toolVersion: 0.0.0-dev` remains an implementation identifier;
+A separate public release-readiness review must choose packaging,
+API support, release numbering and distribution after independent smoke
+tests. These are explicit release
+boundaries, not a backwards-compatibility obligation.
 
 | Exit | Meaning |
 | --- | --- |
@@ -321,7 +346,7 @@ a changed required assessment.
 
 ## 4. Alternatives considered
 
-| Alternative | Benefit | Risk | Proposed decision |
+| Alternative | Benefit | Risk | Decision |
 | --- | --- | --- | --- |
 | Continue standalone `scripts/` only | Minimal new code | Separate consumers interpret source inconsistently; no stable export | Reject as long-term interface |
 | First-party `tooling/` inside public OEE | Transparent stewardship and shared tests | Explicit separation of spec and implementation needed | Preferred |
@@ -350,15 +375,18 @@ requires separately reviewed source PRs and regression tests.
 ### Evidence, statuses and conformance
 
 No changes. Automated structural checks cannot claim learner mastery,
-status promotions or full conformance. The RFC does not modify
-[Course Format](../spec/course-format.md) or
-[Status Labels](../spec/status-labels.md).
+status promotions or full conformance. The RFC does not change any normative course-format requirement or
+course-status definition.
 
 ### Licensing and governance
 
-New MIT code scope and official Toolkit stewardship require explicit
-steward approval and contribution/license review. Existing CC BY
-educational text, trademark rights and DCO obligations stay unchanged.
+The reviewed steward decision permits the first-party `tooling/`
+implementation and clarifies the MIT code/CC BY educational derivative
+boundaries in [Toolkit licensing](../tooling/LICENSING.md). Authentic DCO,
+contributor rights, existing CC BY educational content and trademark
+rights stay unchanged. A further notice/distribution audit is required
+in a separately approved release-readiness review before any officially
+supported package is released.
 
 ## 6. Compatibility and transition
 
@@ -367,29 +395,29 @@ Historical tags/commits remain immutable citation records, not runtime
 input obligations. There is no legacy reader, converter, dual-mode API or
 automatic transfer of historic completion evidence.
 
-### Implementation tickets and dependencies (proposed)
+### Implementation evidence and remaining gate
 
-This is the RFC's proposed **implementation work breakdown, dependencies
-and acceptance gates**. Public OEE issues and PRs record execution and
-review, without replacing this RFC's approved requirements. A ticket is
-completed **only after its required implementation PR merges with acceptance
-evidence**, not because this RFC was merged.
+The public source implementation was reviewed and merged through
+[PR #59](https://github.com/0xbuffdev/open-engineering-education/pull/59)
+(strict current-format fixtures),
+[PR #60](https://github.com/0xbuffdev/open-engineering-education/pull/60)
+(source-located diagnostics and safe linked briefs),
+[PR #61](https://github.com/0xbuffdev/open-engineering-education/pull/61)
+(offline source-pinned CLI and deterministic exports), and
+[PR #62](https://github.com/0xbuffdev/open-engineering-education/pull/62)
+(pinned golden exports and independent consumer checks).
 
-| Ticket | Priority | Blocked by | Deliverable and acceptance gate |
-| --- | --- | --- | --- |
-| **OT-I01** | P0 | None | Public Toolkit steward/home/license decision in [issue #57](https://github.com/0xbuffdev/open-engineering-education/issues/57); explicit accepted RFC record before claiming official status |
-| **OT-I02** | P0 | None | Pin valid/invalid v0.2.0 fixtures, rejected legacy/mixed formats, linked-brief limitation; regression tests without compatibility parser |
-| **OT-I03** | P1 | OT-I02 | Source-located rule IDs and diagnostics; explicit incomplete/parser-limitation behavior, linked briefs, prerequisite/project defense cases |
-| **OT-I04** | P1 | OT-I01 accepted, OT-I03 | Single-parser offline CLI and deterministic export format 1 with Git commit blob resolution, schema, and negative source-identity cases |
-| **OT-I06** | P1 | OT-I04, Workspace WS-I03 / WS-I01 | Pinned golden SEF1/SEF10/APP1 export fixtures and public Workspace consumption/drift tests; wrong-revision rejection |
-| **OT-I05** | P2 | OT-I01–OT-I04, OT-I06 | Independent portability, license/notice, coverage and release-readiness review; no implicit publication |
-
-**Order:** OT-I01 and OT-I02 may progress independently. OT-I03 then
-OT-I04 then OT-I06 feed Workspace pinned-source interoperability. OT-I05
-is a later release decision. Implementation PRs should link this RFC
-and the relevant ticket ID, identify their exact source revisions, and
-record test results, reviewer findings and legitimate DCO sign-off.
-Do not undertake unrelated curriculum rewriting as a side effect.
+A merged implementation alone does **not** constitute the steward's
+governance decision or approve official distribution. This RFC's
+acceptance requires the public decision in
+[issue #57](https://github.com/0xbuffdev/open-engineering-education/issues/57)
+and the steward's review and merge of
+[PR #63](https://github.com/0xbuffdev/open-engineering-education/pull/63).
+Official packaging, supported interfaces, copyright/attribution notices,
+and a fresh-checkout portability review require a **separate public
+release-readiness decision**. Workspace's reviewed source-pinned resource
+mappings are independently maintained and must not be assumed approved
+by the OEE source implementation.
 
 No APP, SEF, SYS, AI or SEC course redesign is authorized by this RFC.
 
@@ -406,37 +434,90 @@ No APP, SEF, SYS, AI or SEC course redesign is authorized by this RFC.
 
 ## 8. Validation plan
 
-Before acceptance, publicly verify that the steward approves the Toolkit
-home and precise MIT-covered paths, no unreviewed third-party rights are
-altered, and the proposal changes **no normative educational requirement**.
-Record the accepted decision and conditions in this RFC and
-[issue #57](https://github.com/0xbuffdev/open-engineering-education/issues/57).
+The steward must approve this public decision PR before the RFC's
+`accepted` status takes effect on main. Approval records the first-party
+source home and [file-level license boundaries](../tooling/LICENSING.md)
+without changing normative educational requirements or waiving any
+third-party rights.
 
-Separate implementation PRs must prove pinned immutable Git resolution;
-valid and rejected v0.2.0/legacy fixtures; linked-brief error behavior;
-stable source-located findings; byte-identical offline exports; independent
-Workspace consumer validation; and no spurious education conformance claim.
+The already-merged implementation provides public evidence:
 
-**Those checks have not been completed by submitting this proposal.**
+- [PR #59](https://github.com/0xbuffdev/open-engineering-education/pull/59):
+  strict v0.2.0 fixtures, legacy and mixed-format rejection.
+- [PR #60](https://github.com/0xbuffdev/open-engineering-education/pull/60):
+  source-located diagnostics, linked briefs and incomplete findings.
+- [PR #61](https://github.com/0xbuffdev/open-engineering-education/pull/61):
+  offline SHA-pinned reader, single-parser CLI, export v1 JSON Schema,
+  negative tests and Windows/macOS/Linux integration checks.
+- [PR #62](https://github.com/0xbuffdev/open-engineering-education/pull/62):
+  byte-identical pinned SEF1/SEF10/APP1/APP17 golden exports,
+  wrong-SHA rejection, independent Workspace consumer contract and
+  advisory source-drift reporting.
 
-## 9. Open questions
+**Implementation checks are not official release checks.** A separate
+public release-readiness review must verify legal notices and a fresh
+independent installation/use flow,
+supported public interfaces and status-disclosure wording. Workspace
+schema-v2 map adoption remains an independent downstream dependency.
 
-1. Does the steward affirm `tooling/` in OEE rather than a separate public
-   repository for the first release?
-2. Which bundled machine-readable schemas, explanatory examples and
-   generated artifacts carry MIT versus CC BY notice text?
-3. What is the first publicly supported Toolkit package/release version
-   and distribution mechanism, if any, after implementation?
-4. Which current `scripts/` become internal/shared v0.2.0 modules, and
-   which remain temporary migration-only utilities?
+## 9. Resolved decisions and later release questions
+
+1. **Public source home:** `tooling/` in this OEE repository, under the
+   existing OEE steward. A separate Toolkit repository is **not**
+   required for the first source implementation.
+2. **File-level licenses:** MIT for original Toolkit software, interface
+   schemas, tests and software-oriented docs; CC BY 4.0 for normative
+   OEE educational text and the derived course-content golden exports.
+   See [Toolkit licensing](../tooling/LICENSING.md). Existing rights and
+   third-party attribution are preserved.
+3. **Distribution and versioning:** This decision approves the existing
+   `python3 -m tooling.oee_toolkit` **repository-local CLI** but **no
+   official package, support policy, public semver or installed module
+   name**. Independent package/release/API approval is deferred to
+   a separate public release-readiness decision; internal
+   `toolVersion: 0.0.0-dev` is not a release.
+4. **Maintenance scripts:** `scripts/check-outcome-curriculum.py` is the
+   shared v0.2.0 source parser called by the Toolkit; other historic
+   program validation scripts remain repository maintenance/migration
+   tooling, **not a Toolkit legacy API or supported old-format mode**.
+5. **External integration:** Workspace's schema-v2 resources and reviewed
+   source mapping remain separate work and cannot be assumed accepted
+   merely because an interop consumer test passes.
 
 ## 10. Decision
 
-- **Decision:** Pending public review
-- **Decision date:** pending
-- **Decision-maker:** OEE steward
-- **Rationale:** pending
-- **Conditions:** clarify file license scope, source home and supported
-  public API before implementation/release
-- **Implementation pull request:** pending separately; this RFC proposal
-  is **not** a Toolkit implementation
+- **Decision:** Accept first-party OEE Toolkit architecture, source home,
+  and file-scoped licensing as specified in this RFC and
+  [Toolkit licensing](../tooling/LICENSING.md).
+- **Decision date:** 2026-11-15, effective **only upon the OEE steward's
+  approval and merge of the public decision-record PR**.
+- **Decision-maker:** The existing OEE steward, 0xBUFF, exercised by
+  Christopher S. Aondona under [Governance](../GOVERNANCE.md).
+  The PR's steward approval/merge is the required public attestation;
+  **the drafting commit alone is not the steward's decision**.
+- **Rationale:** Maintain one independent public source of truth, an
+  optional reproducible implementation with a single parser, explicit
+  source provenance, vendor-neutral access and correct separation
+  between software and educational-content licenses.
+- **Alternatives rejected:** Private service, second normative JSON
+  authoring format, historical course compatibility, independent Toolkit
+  repository before it is needed, and automatic release/conformance claims.
+- **Affected normative requirements:** None. Published course requirements,
+  curriculum text, grading, evidence and course status definitions do not change.
+- **Implementation evidence:** Merged public PRs
+  [#59](https://github.com/0xbuffdev/open-engineering-education/pull/59),
+  [#60](https://github.com/0xbuffdev/open-engineering-education/pull/60),
+  [#61](https://github.com/0xbuffdev/open-engineering-education/pull/61),
+  and [#62](https://github.com/0xbuffdev/open-engineering-education/pull/62).
+- **Conditions:** No official supported Toolkit package or API release
+  until a separate, publicly reviewed decision validates packaging,
+  notices, version boundaries, CLI/library documentation and fresh-checkout
+  portability. No course conformance, learner evaluation, status
+  promotion, automatic Workspace map migration, or backwards
+  compatibility is authorized.
+- **Public decision PR:** [#63](https://github.com/0xbuffdev/open-engineering-education/pull/63).
+  The steward's explicit review and merge of this PR is the effective
+  adoption act; this draft branch is not, by itself, a final decision.
+- **Public issue:** [#57](https://github.com/0xbuffdev/open-engineering-education/issues/57).
+  Close only **after** the accepted RFC record and steward decision are
+  merged; never close based solely on the draft PR.
