@@ -89,7 +89,12 @@ class SEF6MigrationTests(unittest.TestCase):
             self.assertIn(term.lower(), course.lower())
         catalog = CATALOG.read_text(encoding="utf-8")
         self.assertIn("[SEF6](SEF6.md)", catalog)
-        self.assertIn("SEF1, SEF2, SEF3, SEF4, SEF5, SEF6 and SEF10 use", catalog)
+        maturity = re.search(
+            r"(?m)^SEF1,.* use the outcome-driven `v0\.2\.0` course format\.",
+            catalog,
+        )
+        self.assertIsNotNone(maturity)
+        self.assertIn("SEF6", maturity.group(0))
 
 
 if __name__ == "__main__":
