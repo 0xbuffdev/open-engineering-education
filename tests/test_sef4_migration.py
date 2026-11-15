@@ -87,7 +87,12 @@ class SEF4MigrationTests(unittest.TestCase):
         self.assertNotIn("Final integration lab — required", text)
         catalog = CATALOG.read_text(encoding="utf-8")
         self.assertIn("[SEF4](SEF4.md)", catalog)
-        self.assertIn("SEF1, SEF2, SEF3, SEF4 and SEF10 use", catalog)
+        maturity = re.search(
+            r"(?m)^SEF1,.* use the outcome-driven `v0\.2\.0` course format\.",
+            catalog,
+        )
+        self.assertIsNotNone(maturity)
+        self.assertIn("SEF4", maturity.group(0))
 
 
 if __name__ == "__main__":

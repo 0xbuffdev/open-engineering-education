@@ -5,30 +5,35 @@
 **Prerequisites:** [SEF2](SEF2.md)
 **Duration:** 8 weeks
 **Status:** `draft`
-**Expected workload:** 10–15 focused hours/week
+**Specification:** `v0.2.0`
+**Expected workload:** 10–15 focused hours/week (provisional; calibrate with learner evidence)
 
 > [Software Engineering Foundations](README.md) · [OEE curriculum](../README.md) · [Course format](../../spec/course-format.md)
 
 ## Overview
 
-This course develops practical software engineering discipline using the programs already built in SEF2. Learners make reversible Git changes, design trustworthy tests, debug actual failures, refactor with behavioral guarantees, run reproducible CI gates, review changes and prepare an independently reproducible CLI release.
+Develop the engineering practices needed to improve software safely after it works for the first time. Start with the program and tests built in SEF2, or a comparable small learner-owned command-line application. Learn to isolate changes in Git, diagnose failures with evidence, design meaningful tests, refactor without breaking a public contract, review code, build repeatable quality checks, and hand off a maintainable application for independent reproduction.
 
-- [**SEF2 — Programming & Computational Thinking**](SEF2.md)
+The reference environment is Python 3.11 or later, the Python standard library, and a local Git installation. The course can be completed offline with disposable repositories, `unittest` or equivalent independently runnable tests, a local quality-gate script, and a reviewable version-controlled CI configuration. Optional `pytest`, hosted Git platforms, remote pull requests, formatting tools, or type checkers may be used when available but are **not** required for completion. Any additional development dependency used in submitted work must be recorded with a reproducible installation procedure; a standard-library-only route requires none.
 
-[SEF3 — Linux & the Command Line](SEF3.md) and [SEF4 — Data Structures & Algorithms](SEF4.md) are complementary preparation but are not required for version control, testing, debugging, refactoring, or code review.
+A local branch, reviewable diff and written review can demonstrate the relevant collaboration outcomes without contacting an external service. For CI, the required behavior is a reproducible quality-gate contract and a documented least-privilege workflow; learners may demonstrate failed and passing gates locally and have an independent reviewer inspect their CI configuration without publishing secrets or running an online pipeline. Actual hosted job logs are welcome as additional evidence, not a hidden gate.
+
+The original seven-module instructional sequence is preserved. Six summative assessments evaluate connected skills; verified code, fixtures and review material may be reused rather than recreated for each module. A fixed quiz/lab pair, hosted CI service, or final lab beyond the published assessments is not required. All examples, test repositories, credentials, logs, and input records must be synthetic or owned by the learner. The course remains `draft`, with the 8-week workload estimate subject to learner validation.
 
 ## Learning outcomes
 
-By the end of the course, the learner will be able to:
-
-- Use Git branches, commits, merges, and pull-request workflows.
-- Design meaningful tests for software behavior.
-- Debug failures using evidence rather than guesswork.
-- Refactor code without changing its intended behavior.
-- Organize a growing codebase into maintainable components.
-- Review code and explain engineering improvements.
-- Automate basic testing and quality checks with CI.
-- Develop reproducible test and CI workflows, review code changes, diagnose failures, and refactor a documented software project without altering behavior.
+- **SEF5-O1:** Use Git staging, commits, branches, merges, and diffs to isolate intended changes and preserve an inspectable project history.
+- **SEF5-O2:** Resolve merge conflicts, undo faulty changes without destroying unrelated work, and explain the safety difference between reverting published history and rewriting it.
+- **SEF5-O3:** Design meaningful unit, integration, and command-line tests that exercise required behavior, failure contracts, and state changes using independent expected results.
+- **SEF5-O4:** Diagnose a real or deliberately introduced defect through a reproducible failure, hypothesis-driven investigation, corrective change, and durable regression test.
+- **SEF5-O5:** Refactor code into coherent components with explicit public interfaces while verifying that existing behavior, failure messages, exit statuses, and persistence contracts remain stable.
+- **SEF5-O6:** Write maintainable code, safe diagnostic logs, and useful technical documentation without disclosing secrets or sensitive input data.
+- **SEF5-O7:** Make tests deterministic and isolated by controlling state, clock, randomness, filesystem paths, and ordering; distinguish flaky tests from genuine product defects.
+- **SEF5-O8:** Build repeatable local quality gates and a reviewable CI workflow that reject failures and reproduce successfully from a documented clean checkout.
+- **SEF5-O9:** Identify and reduce risks from workflow permissions, untrusted input, dependency installation, secrets, and unreviewed automation, including safe offline equivalents.
+- **SEF5-O10:** Conduct a focused code review, document material findings and their responses, and provide an independently reproducible engineering handoff.
+- **SEF5-O11:** Prepare and verify a versioned, tested, maintainable command-line application that preserves a public behavioral contract across normal and failure paths.
+- **SEF5-O12:** Defend engineering trade-offs, limits of automated checks, and a concrete failure-and-repair history using inspectable source and observed evidence.
 
 ## Modules
 
@@ -36,354 +41,199 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Record, inspect, and navigate project history with Git.
-- Create, merge, and resolve conflicts between branches, and collaborate through a remote.
-
-- Recover a Git mistake without destroying unrelated work or rewriting shared history.
+- SEF5-O1
+- SEF5-O2
+- SEF5-O10
 
 #### Lessons
 
-1. **Course introduction: Software Engineering Practice** — `lesson`
+1. Course introduction: Software Engineering Practice
+2. Repositories and commits
+3. History and diffs
+4. Branches
+5. Merging
+6. Merge conflicts
+7. Remotes and pull requests
+8. Staged versus working-tree changes
+9. Reverting published changes versus rewriting history
+10. Generated files, ignore rules and secret hygiene
 
-   Writing code is a small part of software engineering. This course teaches the practices that keep software working as it grows and as more people work on it.
-2. **Repositories and commits** — `lesson`
-3. **History and diffs** — `lesson`
-4. **Branches** — `lesson`
-5. **Merging** — `lesson`
-6. **Merge conflicts** — `lesson`
-7. **Remotes and pull requests** — `lesson`
-8. **Staged versus working-tree changes** — `lesson`
-9. **Reverting published changes versus rewriting history** — `lesson`
-10. **Generated files, ignore rules and secret hygiene** — `lesson`
-11. **Git workflows** — `test`
-12. **Resolve a conflict** — `lab`
+*Optional practice:* Use a throwaway local Git repository to compare staged, unstaged, ignored, and committed changes; practice a conflict resolution and a non-destructive revert without a remote account.
 
 ### Module 2 — Testing & Debugging
 
 #### Outcomes
 
-- Write unit tests and choose test cases that expose failures.
-- Diagnose a failing program from evidence rather than guesses.
-
-- Seed failures to establish which test layer detects which risk.
+- SEF5-O3
+- SEF5-O4
 
 #### Lessons
 
-1. **Assertions** — `lesson`
-2. **Unit tests with pytest** — `lesson`
-3. **Choosing test cases** — `lesson`
-4. **Reproducing failures** — `lesson`
-5. **Debugging by evidence** — `lesson`
-6. **Unit and integration testing responsibilities** — `lesson`
-7. **Parameterized cases, fixtures and isolation** — `lesson`
-8. **Regression cases for previously observed defects** — `lesson`
-9. **Testing and debugging** — `test`
-10. **Diagnose a broken program** — `lab`
+1. Assertions
+2. Unit tests with Python unittest and optional pytest
+3. Choosing test cases
+4. Reproducing failures
+5. Debugging by evidence
+6. Unit and integration testing responsibilities
+7. Parameterized cases, fixtures and isolation
+8. Regression cases for previously observed defects
+
+*Optional practice:* Create a small failure fixture for a function and a CLI entry point, then compare the evidence each test layer can observe.
 
 ### Module 3 — Maintainable Software
 
 #### Outcomes
 
-- Recognize code smells and improve code with behavior-preserving refactorings.
-- Use logging, style guides, and code review to keep software maintainable, and read unfamiliar code.
-
-- Show a tested, reversible refactor with clear module contracts.
+- SEF5-O5
+- SEF5-O6
+- SEF5-O10
 
 #### Lessons
 
-1. **Code smells** — `lesson`
-2. **Refactoring** — `lesson`
-3. **Style guides** — `lesson`
-4. **Logging** — `lesson`
-5. **Code review** — `lesson`
-6. **Reading unfamiliar code** — `lesson`
-7. **Module boundaries and dependency direction** — `lesson`
-8. **Behavior-preserving refactoring strategies** — `lesson`
-9. **User-facing documentation and review evidence** — `lesson`
-10. **Maintainability** — `test`
-11. **Review a pull request** — `lab`
+1. Code smells
+2. Refactoring
+3. Style guides
+4. Logging
+5. Code review
+6. Reading unfamiliar code
+7. Module boundaries and dependency direction
+8. Behavior-preserving refactoring strategies
+9. User-facing documentation and review evidence
+
+*Optional practice:* Inspect a small change for coupling, logging, interface drift, and unnecessary churn; write a review comment describing an actionable correction.
 
 ### Module 4 — Testing Strategy & Reliability
 
 #### Outcomes
 
-- Design stable tests that expose meaningful behavioral defects.
-- Demonstrate reasoning with both ordinary and deliberately failing inputs.
+- SEF5-O3
+- SEF5-O7
+- SEF5-O4
 
 #### Lessons
 
-1. **Equivalence classes and boundary values** — `lesson`
-2. **State-based testing and invariants** — `lesson`
-3. **Unit, integration and end-to-end test selection** — `lesson`
-4. **Property-based testing principles** — `lesson`
-5. **Flaky tests, time and randomness** — `lesson`
-6. **Testing negative paths and side effects** — `lesson`
-7. **Testing Strategy & Reliability reasoning and diagnosis** — `test`
-8. **Repair a flaky CLI test suite** — `lab`
+1. Equivalence classes and boundary values
+2. State-based testing and invariants
+3. Unit, integration and end-to-end test selection
+4. Property-based testing principles
+5. Flaky tests, time and randomness
+6. Testing negative paths and side effects
+
+*Optional practice:* Compare a clock-dependent test and a test using an injected fixed clock, then isolate temporary directories and seed any generated data.
 
 ### Module 5 — Continuous Integration & Build Reproducibility
 
 #### Outcomes
 
-- Create quality gates that fail safely and reproduce locally.
-- Demonstrate reasoning with both ordinary and deliberately failing inputs.
+- SEF5-O8
+- SEF5-O9
 
 #### Lessons
 
-1. **Dependency lockfiles and isolated environments** — `lesson`
-2. **Formatter, linter and static type checks** — `lesson`
-3. **CI workflows, stages and failure gates** — `lesson`
-4. **Secrets, permissions and untrusted CI input** — `lesson`
-5. **Clean-checkout builds and release artifacts** — `lesson`
-6. **Continuous Integration & Build Reproducibility reasoning and diagnosis** — `test`
-7. **Build a red-green CI workflow** — `lab`
+1. Dependency lockfiles and isolated environments
+2. Formatter, linter and static type checks
+3. CI workflows, stages and failure gates
+4. Secrets, permissions and untrusted CI input
+5. Clean-checkout builds and release artifacts
+
+*Optional practice:* Create a local `quality` command that runs tests and a deterministic syntax or formatting check; inspect a minimal, read-only CI workflow without giving it real credentials.
 
 ### Module 6 — Code Maintenance, Documentation & Handoff
 
 #### Outcomes
 
-- Produce a small reviewable change another engineer can reproduce and maintain.
-- Demonstrate reasoning with both ordinary and deliberately failing inputs.
+- SEF5-O5
+- SEF5-O6
+- SEF5-O10
+- SEF5-O12
 
 #### Lessons
 
-1. **Contracts, coupling and interface stability** — `lesson`
-2. **Logging, error context and sensitive data** — `lesson`
-3. **Small reversible changes and meaningful commit history** — `lesson`
-4. **Peer review and actionable feedback** — `lesson`
-5. **README setup and contributor guidance** — `lesson`
-6. **Dependency upgrades and technical-debt decisions** — `lesson`
-7. **Code Maintenance, Documentation & Handoff reasoning and diagnosis** — `test`
-8. **Refactor a shared feature and prepare a review** — `lab`
+1. Contracts, coupling and interface stability
+2. Logging, error context and sensitive data
+3. Small reversible changes and meaningful commit history
+4. Peer review and actionable feedback
+5. README setup and contributor guidance
+6. Dependency upgrades and technical-debt decisions
+
+*Optional practice:* Ask a reviewer to follow a README in a disposable checkout; improve one missing instruction and explain a bounded change's risk.
 
 ### Module 7 — Tested CLI Application
 
 #### Outcomes
 
-- Complete and explain the **Tested CLI Application** integration lab, demonstrating the relevant course outcomes and retained evidence.
+- SEF5-O3
+- SEF5-O4
+- SEF5-O5
+- SEF5-O6
+- SEF5-O7
+- SEF5-O8
+- SEF5-O9
+- SEF5-O10
+- SEF5-O11
+- SEF5-O12
 
 #### Lessons
 
-1. **Tested CLI application** — `lab`
+1. CLI behavior and versioned project contract
+2. Unit, integration and subprocess-based tests
+3. Logging, configuration and safe persistence
+4. Reproducible local quality checks and CI workflow
+5. Reviewable changes and clean-start handoff
 
-   **Final integration lab — required work**
-
-   **Tested CLI Application**
-
-   Convert the SEF2 application into a maintainable software project with:
-
-   - Meaningful Git history
-   - Automated tests
-   - Linting/formatting
-   - Structured logging
-   - Error handling
-   - Refactored modules
-   - CI test execution
-   - Documentation
-   - Independent clean-checkout reproduction
-   - Negative-path and integration tests
-   - Review findings and a documented response
+*Optional practice:* Draft a release checklist covering CLI operations, failure and persistence cases, logging, test isolation, quality gates, and reviewer evidence.
 
 ## Completion requirements
 
-- Complete the required course exercises, checkpoints and evaluated labs below.
-- Complete the final integrated `lab` in the last module and meet its observable exit criteria.
-- Retain reproducible artifacts, verification results, design explanations, and a technical retrospective as required by the [OEE Evidence Rules](../../spec/evidence-rules.md).
+### Environment, assessment decisions, and independent review
 
-Complete these required exercises:
+Use a disposable local repository and Python 3.11+; record Git, interpreter, test-runner, and optional tool versions. Provide exact commands to recreate test input, run checks, and reproduce a failure and its correction. Prefer `python -m unittest discover -s tests -v` for the dependency-free route; `pytest` or other tools are permitted when their versions, dependencies, and offline accessibility are documented. No real remote repository, credential, paid service, production file, or destructive action against unrelated work is required.
 
-**Practical practice:**
+Each required assessment must have a reviewable source revision or portable artifacts, explicit expected behavior, observed outcomes and exit statuses, normal, boundary and negative-case evidence, a reasoned correction where an error is found, and a documented reviewer decision. When using a simulated pull request, include a diff, rationale, tests, and response to substantive feedback. A self-review using a separate role or structured checklist can provide preparation but does not substitute for the **independent reproduction** required for a final handoff.
 
-- Resolve a controlled merge conflict.
-- Debug a deliberately broken application.
-- Turn untested code into tested code.
-- Refactor duplicated code without changing behavior.
-- Review another learner's pull request.
+All correctness, security, reproducibility and relevant review requirements stated below are mandatory. A green badge, a screenshot, a passing mock that bypasses behavior, or a cosmetic refactor is insufficient on its own. A reviewer may vary inputs or ask for a technical explanation within the published criteria. Previous assessed work may be revised and reused if the required evidence remains inspectable.
 
-**Required assessment and laboratory contract:**
+### Required summative assessments
 
-All seven checkpoints and labs are required. Each checkpoint has two written reasoning questions and expected-answer criteria. Accept equivalent unfamiliar questions only when they assess the same course outcome and retain the same objective criteria. A response passes when it correctly explains the mechanism, distinguishes relevant trade-offs and addresses the failure or safety constraint; naming a command or tool alone is insufficient. Incorrect or incomplete checkpoints must be remediated and reassessed.
+- **SEF5-AS1** (required version control and reversible collaboration)
+  - Outcomes: SEF5-O1, SEF5-O2, SEF5-O10
+  - Work: In a disposable Git repository with a small Python CLI, create a baseline commit, two branches with conflicting functional edits, and an integration branch. Record the conflict, resolve it to a written behavioral contract, run the relevant tests and commit the resolution. Stage a generated report unintentionally alongside an unrelated working-tree edit, then unstage only the report and preserve the edit. Create and revert a separate defective change, explaining when `git revert`, selective staging and merge are safer than hard reset or force-pushing shared history. Write a simulated pull-request summary for the merged change, including diff, tests and potential risk.
+  - Criteria: The intended features survive the conflict resolution; tests pass on the reconciled behavior; the generated report is not committed and unrelated edits are not discarded. The repository history, working tree and index demonstrate the claimed operations. The revert adds a reversible history entry rather than destroying unrelated work. The learner explains how local branch simulation relates to a hosted pull request without claiming that an online review occurred.
+  - Evidence: Disposable repository or exportable Git history, conflict/status and diff snapshots, exact commands, pre- and post-merge tests, revert result, recorded staging corrections and a focused review summary.
+  - Review variation: Provide an unfamiliar second conflict or staging state and ask for the safe sequence before executing it.
 
-**Shared laboratory environment:**
+- **SEF5-AS2** (required failure reproduction and meaningful test design)
+  - Outcomes: SEF5-O3, SEF5-O4, SEF5-O12
+  - Work: Start from a small task-manager or import-capable CLI. Deliberately introduce a duplicate-identifier or malformed-record bug and demonstrate the original failure with an inspectable fixture. State competing hypotheses and collect evidence to identify the actual cause. Add both a direct unit test for the relevant behavior and an integration/subprocess test that exercises the real CLI entry point, including its exit status and persisted data. Correct the defect, then test normal input, missing or empty data, malformed content, duplicate identifiers and a persistence failure without relying only on mocked return values.
+  - Criteria: The original tests or reproducer fail before correction and pass afterward with the same fixture. Unit and CLI-level tests exercise different observable boundaries and detect the originally seeded defect; errors are predictable and do not silently overwrite an existing valid state. The diagnosis distinguishes an actual code fault from a mock that bypasses the critical logic. Regression evidence demonstrates why the fix, rather than an exception-swallowing workaround, explains the behavior.
+  - Evidence: Original and repaired source revisions, written input/output and storage contract, fixtures and exact commands, before/after test results, hypotheses and observations, CLI output/exit status, and retained persisted-data checks.
 
-Use a disposable local Git repository and a Python 3.11+ environment with the Python test framework used in SEF5 (for example pytest). Record the exact Python, Git and test-tool versions; pin project development dependencies. Run `python -m pytest -q` or an explicitly documented equivalent, and use simulated branch/CI exercises without credentials, live secrets or destructive actions on real repositories.
+- **SEF5-AS3** (required behavior-preserving refactoring and code review)
+  - Outcomes: SEF5-O5, SEF5-O6, SEF5-O10, SEF5-O12
+  - Work: Select a duplicated or overly coupled feature from the SEF2-derived CLI, record its public command, output, persistence and error contract, and create characterization tests. Refactor parsing, domain operations and persistence into clear modules without changing the documented behavior; identify any intentionally corrected defect separately. Produce a compact reviewable patch, a rationale for dependency direction, and a simulated or actual code review containing at least one substantive finding. Address that finding in a follow-up change and update a README with setup, test commands, usage, and an example failure. Audit diagnostic logs so they expose useful context but no credentials or sensitive input.
+  - Criteria: Existing public behavior, exit statuses, expected error text and data format match the before-state contract except for explicitly documented bug fixes; tests cover both normal and invalid paths. The diff remains focused, module interfaces are understandable and logging is safe. The review finding is actionable, has a documented resolution or defensible rejection, and is verified by rerunning the relevant tests. A reviewer can understand the change without an undocumented tool or hidden service.
+  - Evidence: Before/after diff and characterization cases, module interface notes, CLI and persistence regression tests, written review and response, updated README, logging sample with synthetic data, and a short trade-off explanation.
 
-**Shared evaluation rules:**
+- **SEF5-AS4** (required deterministic and isolated test suite)
+  - Outcomes: SEF5-O3, SEF5-O4, SEF5-O7
+  - Work: Prepare a small CLI test suite with two deliberately flaky mechanisms, such as a test depending on wall-clock time and a test assuming filesystem enumeration order. Demonstrate their failure or contract instability under controlled variation; explain why each is test nondeterminism rather than proof that the product fails. Replace ambient time with a controlled clock and define output order where the behavioral contract requires it; isolate mutable fixtures in a disposable temporary directory. Add separate equivalence-class, boundary, invalid-input and state-invariant cases for the CLI. Repeat the complete revised suite at least 20 times under the documented conditions, retaining results, and seed a genuine application bug to show the suite still rejects incorrect behavior.
+  - Criteria: The submitted fixtures reproduce or deterministically expose both instability mechanisms; revised tests no longer depend on the uncontrolled clock or incidental enumeration order. All 20 repeated runs pass after correction, but the learner explicitly disclaims that this proves absence of all flakiness. A seeded behavioral defect still fails a meaningful assertion, not merely a timing assertion. Tests run without altering unrelated state or leaking fixtures between runs.
+  - Evidence: Pre-repair fixture/observations, corrected tests and clock/order contract, isolated paths and input tables, 20-run test log or machine-readable tally, a rejected genuine defect, and an explanation of remaining reliability limits.
 
-- Checkpoint acceptance: answer both questions in each module with an accurate explanation of the expected result, including consequences of incorrect choices.
-- Lab acceptance: demonstrate the listed behavior in a reproducible environment, run normal/negative/boundary checks, explain a seeded or observed failure and supply the required evidence.
-- Required evidence: a Git commit or equivalent artifact version, exact commands, test output, input fixtures and independent reproduction where specified. Describe assumptions, known limitations and any unresolved problems.
-- Reviewers must verify evidence rather than award completion for screenshots, green badges or unchanged template code alone.
+- **SEF5-AS5** (required reproducible quality gates and CI security)
+  - Outcomes: SEF5-O8, SEF5-O9, SEF5-O12
+  - Work: Define a version-controlled `quality` command that runs the project's tests plus a deterministic source-format, syntax or static check and exits nonzero if either fails. Document Python/tool requirements; use only standard-library checks or include reproducible dependency pins. Provide a reviewable CI workflow that invokes the same checks on a fresh source checkout with read-only/minimal permissions and no injected real secrets. Deliberately introduce one assertion failure and one source/static-check violation, record separate red results of the local quality gate, correct both, and record the final green run. Explain how a hosted CI job would receive untrusted pull-request content safely and why no secret or write token should be available to the untrusted test process.
+  - Criteria: Both seeded faults independently fail the local quality command with nonzero status and no skipped later checks; a clean revision completes all documented checks. The workflow and local command express equivalent tests and validation, with clear version/dependency and environment assumptions. No live token or production credential is necessary; read-only workflow permissions and safe event/trust boundaries are documented. The learner does not claim hosted CI ran unless independently verifiable logs were actually produced.
+  - Evidence: Quality script, workflow definition, clean-start instructions, tool versions or lockfile when applicable, two isolated failing revisions/logs, corrected green logs, static inspection of permissions and untrusted-code flow, and remaining CI limitations.
 
-**Module 1 — Version Control & Collaboration: checkpoint** — Required assessment details
+- **SEF5-AS6** (required maintainable CLI handoff and engineering defense)
+  - Outcomes: SEF5-O1, SEF5-O3, SEF5-O4, SEF5-O5, SEF5-O6, SEF5-O7, SEF5-O8, SEF5-O9, SEF5-O10, SEF5-O11, SEF5-O12
+  - Work: Produce a versioned, maintainable Python CLI application from the SEF2 task manager or comparable learner-authored command, with at least three public operations, explicit validation, predictable error and exit behavior, controlled JSON or equivalent persistence, clear component boundaries, and safe diagnostic logging. Reuse verified Git, defect-repair, refactoring, test and quality-gate work from SEF5-AS1–AS5. Provide a test suite spanning unit behavior and subprocess-based CLI interactions with normal, boundary, invalid and simulated storage-failure cases; include the equivalent quality/CI configuration. Ask an independent reviewer to follow the README in a fresh disposable checkout or portable project extraction, run tests, exercise the CLI, inspect one review finding and record corrections and limitations. Demonstrate an unfamiliar error case and defend a specific engineering trade-off.
+  - Criteria: Documented commands and storage work consistently across separate processes; expected errors are distinguishable from successful no-ops, invalid data does not silently destroy valid state, and test coverage catches at least one deliberately demonstrated defect. The fresh reviewer setup reproduces the relevant results without hidden services, private data, network, or paid dependencies. Changes have focused history, valid documented interfaces, appropriate logging, reproducible quality checks and an inspectable review-and-response record. The technical defense ties actual behaviors, design boundaries, remaining risks and CI security assumptions to evidence rather than claiming that a green suite proves release quality.
+  - Evidence: Versioned repository or portable source, clean-start README, fixture and error contract, unit/integration/subprocess outputs, documented test/quality run results, representative Git change history, red/green defect example, code review and response record, independent reproduction notes, and a concise written, recorded or otherwise accessible defense.
 
-- **Q1 (free):** A developer has a local unstaged edit in `config.py`, an accidentally staged generated report, and wants to commit only a tested function change. Explain a safe staging and verification sequence.
-  - Expected answer and scoring: Use a selective staging operation such as `git add -p` or explicit paths, unstage the generated report with `git restore --staged <path>` if already staged, inspect both `git diff` and `git diff --cached`, and ensure only the intended change is committed. Avoid discarding the unrelated edit. Answer must distinguish working tree, index, and commit history.
-- **Q2 (free):** A defective commit has already been pushed to a shared branch. Compare `git revert` with `git reset --hard` followed by a force push.
-  - Expected answer and scoring: `git revert` normally appends an inverse change without rewriting published history and is suitable for collaborative recovery. `reset --hard` discards local state and a forced push rewrites shared history and can remove colleagues' commits. Explain how `--force-with-lease` limits, but does not eliminate, rewrite risks.
+### Completion decision
 
-**Module 1 — Resolve a conflict: required lab** — Required assessment details
+All **six required assessments** must satisfy their published criteria and collectively demonstrate SEF5-O1 through SEF5-O12. Earlier assessed branches, tests, refactors, diagnostics, workflow configuration and documentation may be reused in the integrated handoff; no duplicate final project or extra quiz/lab quota is imposed. Guided learning activities and optional tests are formative, not hidden completion conditions.
 
-- **Objective:** Use reversible Git operations to isolate intended changes and resolve a real merge conflict while preserving unrelated work.
-- **Prerequisites:** Complete this module's lessons and checkpoint; use only a disposable repository or test environment.
-- **Environment:** Use a disposable local Git repository and a Python 3.11+ environment with the Python test framework used in SEF5 (for example pytest). Record the exact Python, Git and test-tool versions; pin project development dependencies. Run `python -m pytest -q` or an explicitly documented equivalent, and use simulated branch/CI exercises without credentials, live secrets or destructive actions on real repositories.
-- **Procedure:**
-  1. Initialize a disposable local repository containing a small Python CLI; make a baseline commit and create two feature branches from it.
-  2. On both branches, edit the same function with incompatible behavior; merge into an integration branch and record the conflict markers and Git status.
-  3. Resolve the conflict according to a written expected behavior, run tests, inspect staged changes, and commit the resolution.
-  4. Independently stage an unwanted generated artifact in the disposable repository, then unstage it without destroying an unrelated working-tree edit.
-  5. Create a separate published-style commit locally, revert it with a new commit, and explain why rewriting shared history was unnecessary.
-- **Expected result:** Merge conflict is resolved into the specified behavior; tests pass; unwanted generated output is absent from the commit; the revert preserves the original commit in visible history.
-- **Verification:** Inspect `git log --graph --oneline --all`, `git status`, `git diff --cached` and the CLI tests; compare final behavior with the written acceptance criteria.
-- **Evidence:** Include the source revision, scripts, fixtures, test outputs, failed and corrected behavior, reviewer notes where applicable and a technical retrospective.
-- **Failure analysis:** Explain a conflict resolved by silently dropping one required change, accidental staging, or use of a destructive command in the wrong repository.
-- **Acceptance:** All required behaviors and safety constraints are met; invalid cases are verified; an independent reviewer can reproduce the relevant evidence, or completion remains pending.
-
-**Module 2 — Testing & Debugging: checkpoint** — Required assessment details
-
-- **Q1 (free):** A function rejects empty input but a mock-based unit test passes because the mock never calls the real validator. Which tests best reveal the defect?
-  - Expected answer and scoring: Add a focused unit test on the actual validator and an integration test through the real public call boundary using an empty input. Mock only external dependencies where needed; a passing mock-only test cannot prove real validation.
-- **Q2 (free):** A bug occurs only with duplicate identifiers in a CSV file. Explain the steps to turn the incident into a durable regression test.
-  - Expected answer and scoring: Capture a minimal deterministic fixture containing duplicates, state expected behavior explicitly, reproduce the failure before fixing it, inspect the root cause, implement a minimal repair, then rerun both regression and relevant existing tests. Document why the earlier suite missed it.
-
-**Module 2 — Diagnose a broken program: required lab** — Required assessment details
-
-- **Objective:** Reproduce a parsing/validation defect and explain its cause using tests and observable program behavior.
-- **Prerequisites:** Complete this module's lessons and checkpoint; use only a disposable repository or test environment.
-- **Environment:** Use a disposable local Git repository and a Python 3.11+ environment with the Python test framework used in SEF5 (for example pytest). Record the exact Python, Git and test-tool versions; pin project development dependencies. Run `python -m pytest -q` or an explicitly documented equivalent, and use simulated branch/CI exercises without credentials, live secrets or destructive actions on real repositories.
-- **Procedure:**
-  1. Start from the SEF2 CLI or a provided minimal task manager with a CSV/JSON import operation.
-  2. Seed a duplicate-identifier or malformed-input defect; record the exact input, command and actual output before changing code.
-  3. Write one direct unit test for the implicated function and an integration test covering the CLI entry point.
-  4. Repair the behavior, verify invalid and boundary inputs including empty files and malformed records, and assert no unintended output file mutation.
-  5. Record an alternative hypothesis you ruled out and the evidence that distinguished the actual cause.
-- **Expected result:** The original fixture fails reliably before repair; a valid fixture still works afterward; invalid inputs receive a predictable message and exit status without corrupting persisted data.
-- **Verification:** Run test cases in a clean environment and show red/green output from the same fixture and entry point; use failure logs that omit sensitive data.
-- **Evidence:** Include the source revision, scripts, fixtures, test outputs, failed and corrected behavior, reviewer notes where applicable and a technical retrospective.
-- **Failure analysis:** Distinguish a test configured to exercise a mock from one that actually checks the failing boundary, or a patch that hides errors without fixing state.
-- **Acceptance:** All required behaviors and safety constraints are met; invalid cases are verified; an independent reviewer can reproduce the relevant evidence, or completion remains pending.
-
-**Module 3 — Maintainable Software: checkpoint** — Required assessment details
-
-- **Q1 (free):** What makes a refactor behavior-preserving if you move a function from a CLI handler into a domain module?
-  - Expected answer and scoring: For the documented public interface, equivalent valid, boundary and error inputs must preserve observable results and side effects. Internal structure may change; tests should cover behavior, not private implementation shapes.
-- **Q2 (free):** A log statement includes a user-provided token alongside an error. Explain the maintainability and security problem and a better replacement.
-  - Expected answer and scoring: Logs should preserve useful error context and correlation while redacting secrets and avoiding sensitive payloads. Use a stable error code or safe identifier and test that the token never appears in captured output.
-
-**Module 3 — Review a pull request: required lab** — Required assessment details
-
-- **Objective:** Improve code structure and reviewability while verifying unchanged public behavior.
-- **Prerequisites:** Complete this module's lessons and checkpoint; use only a disposable repository or test environment.
-- **Environment:** Use a disposable local Git repository and a Python 3.11+ environment with the Python test framework used in SEF5 (for example pytest). Record the exact Python, Git and test-tool versions; pin project development dependencies. Run `python -m pytest -q` or an explicitly documented equivalent, and use simulated branch/CI exercises without credentials, live secrets or destructive actions on real repositories.
-- **Procedure:**
-  1. Select a small duplicated feature in the SEF2 application and document its input/output contract, including failure cases.
-  2. Create a before-state characterization suite and record one bug or design risk identified during code review.
-  3. Refactor the feature into a named module with a narrow interface while preserving CLI arguments, outputs and exit behavior.
-  4. Prepare a simulated PR with a concise summary, tests, risks, and an inspectable diff; perform a separate checklist review or exchange feedback with another learner.
-  5. Address at least one substantive review finding in a follow-up commit and confirm that tests still pass.
-- **Expected result:** External behavior is unchanged apart from any explicitly documented bug fix; duplicate logic is reduced, interfaces are clearer, and review findings have recorded responses.
-- **Verification:** Compare before/after contract fixtures and diff scope, rerun tests, and confirm the PR summary lists the changed behavior, risks and verification.
-- **Evidence:** Include the source revision, scripts, fixtures, test outputs, failed and corrected behavior, reviewer notes where applicable and a technical retrospective.
-- **Failure analysis:** Document an accidentally changed error contract, unrelated edits mixed into a refactor, or a test suite that only asserts implementation details.
-- **Acceptance:** All required behaviors and safety constraints are met; invalid cases are verified; an independent reviewer can reproduce the relevant evidence, or completion remains pending.
-
-**Module 4 — Testing Strategy & Reliability: checkpoint** — Required assessment details
-
-- **Q1 (free):** A test depends on the current wall clock and occasionally fails across time zones. How should it be rewritten?
-  - Expected answer and scoring: Make time an injected or otherwise controllable dependency, set an explicit test clock and timezone where relevant, and assert business behavior for fixed time values; repeating an unreliable test without isolation does not fix the cause.
-- **Q2 (free):** A function maps each record to a normalized identifier. Name three distinct useful classes of test inputs and what each demonstrates.
-  - Expected answer and scoring: Normal records establish valid behavior; boundaries such as empty/maximum-length strings test limits; invalid or adversarial values such as missing fields, invalid Unicode handling, duplicates, or forbidden characters test rejection/recovery according to the specified contract. Explain any state-dependent invariant.
-
-**Module 4 — Repair a flaky CLI test suite: required lab** — Required assessment details
-
-- **Objective:** Eliminate nondeterministic fixtures and add tests that detect real application invariants.
-- **Prerequisites:** Complete this module's lessons and checkpoint; use only a disposable repository or test environment.
-- **Environment:** Use a disposable local Git repository and a Python 3.11+ environment with the Python test framework used in SEF5 (for example pytest). Record the exact Python, Git and test-tool versions; pin project development dependencies. Run `python -m pytest -q` or an explicitly documented equivalent, and use simulated branch/CI exercises without credentials, live secrets or destructive actions on real repositories.
-- **Procedure:**
-  1. Prepare a small CLI test suite with two intentionally seeded causes of nondeterminism, such as reliance on wall-clock time and directory enumeration order.
-  2. Run the suite repeatedly with the same source revision and capture both failure patterns; distinguish nondeterministic failure from a product defect.
-  3. Replace ambient time with an injected fixed clock and explicitly sort or otherwise define ordering where the product contract requires it.
-  4. Add parametrized normal, empty, invalid and duplicate input cases plus one state invariant, using isolated temporary directories.
-  5. Run a documented repeated test sequence (at least 20 runs), retain results, and state what repeated passes cannot prove.
-- **Expected result:** Both seeded flakiness mechanisms are eliminated for the tested conditions; the suite catches the seeded application defect; clean repeated runs are stable.
-- **Verification:** Provide the red/green run logs, isolated fixture setup, and an explanation showing why the fixed tests test observable behavior rather than arbitrary order.
-- **Evidence:** Include the source revision, scripts, fixtures, test outputs, failed and corrected behavior, reviewer notes where applicable and a technical retrospective.
-- **Failure analysis:** Describe how merely increasing timeouts, relying on collection order, or sharing mutable fixtures across tests can hide instability.
-- **Acceptance:** All required behaviors and safety constraints are met; invalid cases are verified; an independent reviewer can reproduce the relevant evidence, or completion remains pending.
-
-**Module 5 — Continuous Integration & Build Reproducibility: checkpoint** — Required assessment details
-
-- **Q1 (free):** Why should a CI job execute the same test and lint commands developers can run locally? What differences can still remain?
-  - Expected answer and scoring: Shared commands and pinned dependencies reduce drift and speed diagnosis. Differences remain in OS/architecture, environment variables, permissions and network state, so the job should record material assumptions and use safe default permissions.
-- **Q2 (free):** A workflow can access a repository write token and executes code from an untrusted pull request. What principle is violated and how can the risk be reduced?
-  - Expected answer and scoring: Least privilege and trust separation: untrusted code should not receive write credentials/secrets. Use read-only tokens and restricted workflows, avoid unsafe evaluation of attacker-controlled input and isolate privileged release steps. Do not demonstrate with actual secrets.
-
-**Module 5 — Build a red-green CI workflow: required lab** — Required assessment details
-
-- **Objective:** Establish a quality gate whose failures reproduce locally and which does not expose secrets to untrusted code.
-- **Prerequisites:** Complete this module's lessons and checkpoint; use only a disposable repository or test environment.
-- **Environment:** Use a disposable local Git repository and a Python 3.11+ environment with the Python test framework used in SEF5 (for example pytest). Record the exact Python, Git and test-tool versions; pin project development dependencies. Run `python -m pytest -q` or an explicitly documented equivalent, and use simulated branch/CI exercises without credentials, live secrets or destructive actions on real repositories.
-- **Procedure:**
-  1. Document Python and test/lint tool versions in a project configuration or locked dev dependency set.
-  2. Configure a local `quality` command or script that runs tests and one deterministic formatting/static check, then connect the same commands to a CI workflow.
-  3. Seed an assertion failure; confirm both the local quality command and CI return nonzero and block a simulated merge.
-  4. Repair the assertion failure, then seed a formatting/static-check violation and repeat the rejection; finally demonstrate a green run.
-  5. Use a harmless placeholder string rather than any credential and show a documented least-privilege job configuration.
-- **Expected result:** Two distinct seeded defects produce red results locally and in CI; the corrected revision is green; setup from a clean checkout uses documented versions.
-- **Verification:** Compare version output, commands, exit statuses and workflow logs; demonstrate that quality gates do not silently skip failed steps.
-- **Evidence:** Include the source revision, scripts, fixtures, test outputs, failed and corrected behavior, reviewer notes where applicable and a technical retrospective.
-- **Failure analysis:** Explain command chaining that masks a failed test, stale dependency installs, or overprivileged workflow credentials.
-- **Acceptance:** All required behaviors and safety constraints are met; invalid cases are verified; an independent reviewer can reproduce the relevant evidence, or completion remains pending.
-
-**Module 6 — Code Maintenance, Documentation & Handoff: checkpoint** — Required assessment details
-
-- **Q1 (free):** What information does another engineer need to reproduce and review a bug fix from a clean checkout?
-  - Expected answer and scoring: Repository revision, supported environment/dependencies, build/run/test commands, input fixture, expected versus observed behavior, scope and known limitations; links to tests and review evidence should be sufficient without private context.
-- **Q2 (free):** A proposed refactor includes formatting every file, dependency upgrades and a behavior fix. What reviewability problem does this create?
-  - Expected answer and scoring: It broadens scope and obscures causal changes, making regression and rollback harder. Prefer separate focused changes with tests and clear explanations of any unavoidable coupling.
-
-**Module 6 — Refactor a shared feature and prepare a review: required lab** — Required assessment details
-
-- **Objective:** Deliver a focused maintainability improvement and demonstrate reliable independent handoff.
-- **Prerequisites:** Complete this module's lessons and checkpoint; use only a disposable repository or test environment.
-- **Environment:** Use a disposable local Git repository and a Python 3.11+ environment with the Python test framework used in SEF5 (for example pytest). Record the exact Python, Git and test-tool versions; pin project development dependencies. Run `python -m pytest -q` or an explicitly documented equivalent, and use simulated branch/CI exercises without credentials, live secrets or destructive actions on real repositories.
-- **Procedure:**
-  1. Choose one small subsystem of the SEF2 CLI and document its existing public contract and technical-debt risk.
-  2. Make a focused refactor, preserve API behavior and verify normal/invalid paths through regression tests.
-  3. Update README setup, an example command, a documented failure case and a note explaining module boundaries.
-  4. Present the diff and change summary to an independent reviewer or structured checklist and incorporate at least one review comment.
-  5. Have the reviewer follow the documented setup in a clean temporary checkout and record any missing instruction.
-- **Expected result:** A reviewer can install dependencies, run the feature and checks, and understand the design without undocumented commands; before/after behavior matches the contract.
-- **Verification:** Retain a reviewer reproduction log and compare public-API fixtures before/after; include feedback and its resolution.
-- **Evidence:** Include the source revision, scripts, fixtures, test outputs, failed and corrected behavior, reviewer notes where applicable and a technical retrospective.
-- **Failure analysis:** Describe missing environment assumptions, logging secrets, tangential changes or a documented command that does not work.
-- **Acceptance:** All required behaviors and safety constraints are met; invalid cases are verified; an independent reviewer can reproduce the relevant evidence, or completion remains pending.
-
-**Module 7 — Tested CLI Application: checkpoint** — Required assessment details
-
-- **Q1 (free):** Why do green unit tests not alone establish that a CLI release is ready?
-  - Expected answer and scoring: A meaningful release also needs an integration/entry-point test, documented installation and dependency versions, invalid-input behavior, static checks, reviewable history and independently reproducible evidence. Unit tests exercise only their tested boundaries.
-- **Q2 (free):** How do you verify a refactor and new CI pipeline have not changed expected CLI behavior?
-  - Expected answer and scoring: Capture expected outputs, exit statuses and side effects for normal, boundary and failing inputs before the refactor; rerun the same tests after and require CI to use those real checks with documented environment.
-
-**Module 7 — Tested CLI application: required lab** — Required assessment details
-
-- **Objective:** Turn the SEF2 application into a reproducible, maintained project with meaningful tests, CI, review and observable failure behavior.
-- **Prerequisites:** Complete this module's lessons and checkpoint; use only a disposable repository or test environment.
-- **Environment:** Use a disposable local Git repository and a Python 3.11+ environment with the Python test framework used in SEF5 (for example pytest). Record the exact Python, Git and test-tool versions; pin project development dependencies. Run `python -m pytest -q` or an explicitly documented equivalent, and use simulated branch/CI exercises without credentials, live secrets or destructive actions on real repositories.
-- **Procedure:**
-  1. Select the existing SEF2 CLI application or a comparable independently written command-line tool, and define at least three user-facing operations and their expected behaviors.
-  2. Separate command-line parsing, domain behavior and persistence into bounded components; preserve the required CLI contract and document any intentional fixes.
-  3. Create a runnable test suite spanning component logic and CLI entry-point behavior, with at least one normal, boundary, invalid and persistence-failure case.
-  4. Provide a pinned or constrained reproducible development environment, lint/format check, safe structured logging, a clean README and a version-controlled CI job or equivalent reproducible runner.
-  5. Demonstrate a deliberate failing test and its verified fix, one review and response cycle, and a documented failure from the project retrospective.
-  6. Have an independent reviewer follow the clean-checkout instructions, run tests, exercise the CLI and inspect evidence for each required course outcome.
-- **Expected result:** A clean checkout produces the documented CLI behavior and passing tests; required quality checks reject a seeded defect; no private credential or hidden setup is necessary.
-- **Verification:** Publish an outcomes-to-evidence matrix with command/expected result/observed result; record the exact revision, tool versions, test logs, sample operations and reviewer notes.
-- **Evidence:** Include the source revision, scripts, fixtures, test outputs, failed and corrected behavior, reviewer notes where applicable and a technical retrospective.
-- **Failure analysis:** Explain a real behavior regression or failure, why its first tests missed it and how the new checks prevent a repeat.
-- **Acceptance:** All required behaviors and safety constraints are met; invalid cases are verified; an independent reviewer can reproduce the relevant evidence, or completion remains pending.
-
-**Exit demonstration:**
-
-The learner must diagnose a failing test or bug from evidence rather than by guesswork.
+An independent reviewer must record the course assessment decisions and sufficient reproducible evidence for each outcome. Substantial correctness, security, trust-boundary, and reproducibility failures must be corrected before a passing decision; an unsupported CI badge, unverifiable review claim, or unexplained mock pass cannot substitute for demonstrated behavior. The course itself remains `draft`; passing structural validation does not establish `tested` or `verified` course readiness under [Status Labels](../../spec/status-labels.md).
