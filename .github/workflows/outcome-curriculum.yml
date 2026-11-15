@@ -40,13 +40,31 @@ jobs:
       - uses: actions/checkout@v4
       - name: Unit-test outcome and mixed-format validators
         run: python3 -m unittest discover -s tests -p 'test_*.py' -v
-      - name: Validate current outcome-driven pilot courses
+      - name: Validate all published outcome-driven courses
         run: |
-          python3 scripts/check-outcome-curriculum.py \
-            --course curriculum/SEF/SEF1.md \
-            --course curriculum/SEF/SEF10.md \
-            --course curriculum/APP/APP1.md \
-            --course curriculum/APP/APP17.md
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess
+          import sys
+
+          sys.path.insert(0, "scripts")
+          from course_format_versions import is_outcome_course
+
+          courses = []
+          for path in sorted(Path("curriculum").glob("*/*.md")):
+              if path.name == "README.md" or path.name == "ARCHITECTURE.md":
+                  continue
+              text = path.read_text(encoding="utf-8")
+              if is_outcome_course(text):
+                  courses.append(path)
+          if not courses:
+              raise SystemExit("No outcome-driven courses found")
+          args = [sys.executable, "scripts/check-outcome-curriculum.py"]
+          for course in courses:
+              args.extend(("--course", str(course)))
+          print("Validating", len(courses), "outcome-driven courses", flush=True)
+          subprocess.run(args, check=True)
+          PY
       - name: Inspect full repository honestly including unsupported legacy
         run: |
           python3 - <<'PY'
