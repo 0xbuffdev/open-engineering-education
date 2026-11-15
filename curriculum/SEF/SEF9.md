@@ -5,29 +5,39 @@
 **Prerequisites:** [SEF5](SEF5.md)
 **Duration:** 6 weeks
 **Status:** `draft`
-**Expected workload:** 10–15 focused hours/week
+**Specification:** `v0.2.0`
+**Expected workload:** 10–15 focused hours/week (provisional; calibrate with learner evidence)
 
 > [Software Engineering Foundations](README.md) · [OEE curriculum](../README.md) · [Course format](../../spec/course-format.md)
 
 ## Overview
 
-This course teaches how professional teams turn needs into delivered software. Learners write user stories with acceptance criteria, plan and track work with issues and project boards, record design decisions, review code to a published standard, and use AI coding assistants deliberately: giving them context, constraining what they may do, and verifying everything they produce. AI assistants are used here as a graded engineering practice, with the learner remaining responsible for understanding and defending every change.
+Learn how engineering teams turn requests into reviewable changes and evidence-backed delivery. Write user stories and measurable acceptance criteria; plan work with explicit dependencies; preserve design choices in decision records; review focused patches; and use coding assistants as **constrained sources of proposals**, not authorities for implementation, test results or acceptance. Demonstrate that you can explain, repair and extend accepted code independently.
 
-- [**SEF5 — Software Engineering Practice**](SEF5.md)
-- [SEF4 — Data Structures & Algorithms](SEF4.md) is recommended preparation.
+**SEF5 is the only formal prerequisite.** [SEF4](SEF4.md) is recommended preparation, not an entry requirement. The reference project is the SEF5 tested command-line task manager or a comparable learner-owned Python 3.11+ program. A CSV-export improvement for synthetic task data provides a common example across modules, but an equivalent fully reproducible local feature can satisfy the same published criteria.
+
+All required tasks can be completed offline using a disposable local Git repository, Python's standard library and versioned Markdown or JSON issue/board/PR artifacts. Hosted trackers and live assistants are optional. For AI-related work, use either an accessible assistant **or an authentic instructor-supplied recorded assistant proposal**; mark recorded and interactive usage accurately, including actual tools and models if known. Do not invent transcripts, prompts, tool calls, tests or live reviews. The learner must inspect, test and repair the suggested change independently. A peer or designated independent reviewer must reproduce the final feature and offer substantive feedback, even when collaboration artifacts are stored locally.
+
+The eight original modules remain the instructional sequence. Seven summative assessments evaluate the connected workflow; earlier verified decisions, tests, reviews and source may be reused in the integrated feature. No universal quiz/lab pair, paid AI product, mandatory network access, broad repository authority or duplicate final project is required. The six-week workload estimate is provisional, and the course remains `draft` pending real learner and reviewer evidence.
 
 ## Learning outcomes
 
-By the end of the course, the learner will be able to:
-
-- Turn a need into user stories with testable acceptance criteria and a clear definition of done.
-- Plan and track a feature using issues, labels, milestones, dependencies, and a project board.
-- Record a design decision so that a later reader can see the context, the options, the outcome, and how it was confirmed.
-- Review a change against a published standard and write a change description that supports review.
-- Work with an AI coding assistant using explicit context, a written plan, and limited permissions.
-- Verify AI-generated work with tests, careful diff review, and checks for known failure modes.
-- Document where an assistant was used and what the learner changed or rejected, and defend the final code without the assistant.
-- Independently verify AI-assisted work, reject instructions from untrusted context and protect sensitive project data.
+- **SEF9-O1:** Translate a stakeholder need into clear user stories that identify users, capabilities, value, assumptions, and bounded delivery scope without prematurely prescribing an implementation.
+- **SEF9-O2:** Publish observable acceptance scenarios, failure cases, requirement-to-test links, and a definition of done that distinguishes business behavior from engineering process.
+- **SEF9-O3:** Decompose a feature into traceable issues, dependencies, owners, labels, milestone and review artifacts in a locally reproducible or hosted tracking system.
+- **SEF9-O4:** Maintain honest work-item states, resolve blocked tasks and scope changes, and distinguish board status from acceptance and independently verified completion.
+- **SEF9-O5:** Write and maintain engineering decision records with context, alternatives, drivers, consequences, evidence, status and explicit supersession links.
+- **SEF9-O6:** Review a focused change against a published standard, reproduce a substantive defect, and provide specific, respectful, actionable comments supported by evidence.
+- **SEF9-O7:** Prepare a reviewable change description and respond to reviewer findings with bounded revisions, regression tests, and an inspectable resolution record.
+- **SEF9-O8:** Describe AI coding-assistant context, model/tool limitations, permissible actions, and an explore-plan-implement-verify workflow governed by explicit human authorization.
+- **SEF9-O9:** Use or critically evaluate an authentic, attributable AI coding proposal under a written plan, identifying the context provided and actions actually permitted or performed.
+- **SEF9-O10:** Verify assistant-suggested code independently against written tests, diff review and failure scenarios, correcting substantive errors rather than accepting claimed success.
+- **SEF9-O11:** Identify privacy, copyright/licensing, disclosure and provenance risks in assistant-supported work and accurately state unknowns without fabricating permission or attribution.
+- **SEF9-O12:** Distinguish authorized task instructions from untrusted repository content and reject prompt-injection attempts, impersonated authority and unsupported tool directives.
+- **SEF9-O13:** Enforce limited file, dependency, command, credential and network permissions; verify that untrusted suggestions do not disable checks or expand scope.
+- **SEF9-O14:** Implement a bounded, tested CLI feature with correct normal/negative behavior, preserved existing data, and traceability from request through implementation and verification.
+- **SEF9-O15:** Explain, modify, and test a reviewer-chosen implementation detail without using the assistant, demonstrating personal ownership of final engineering decisions.
+- **SEF9-O16:** Deliver an independently reproducible, reviewed feature and technical defense with reliable artifact history, truthful AI-use evidence, and resolved acceptance criteria.
 
 ## Modules
 
@@ -35,382 +45,198 @@ By the end of the course, the learner will be able to:
 
 #### Outcomes
 
-- Write a user story from a persona, a need, and a purpose, without describing the implementation.
-- Write acceptance criteria that can be checked, and state a definition of done.
+- SEF9-O1
+- SEF9-O2
 
 #### Lessons
 
-1. **Course introduction: Professional Workflow & AI-Assisted Engineering** — `lesson`
+1. Course introduction: Professional Workflow & AI-Assisted Engineering
+2. Users and personas
+3. Writing user stories
+4. Acceptance criteria and definition of done
+5. Epics, stories, and tasks
+6. Sizing work
 
-   Professional software is built by teams who agree on needs, track work, record decisions, review each other's changes, and increasingly use AI assistants. This course teaches those habits and the discipline needed to use assistants without surrendering understanding.
-2. **Users and personas** — `lesson`
-3. **Writing user stories** — `lesson`
-4. **Acceptance criteria and definition of done** — `lesson`
-5. **Epics, stories, and tasks** — `lesson`
-6. **Sizing work** — `lesson`
-7. **Stories and criteria** — `test`
-8. **Turn a request into stories** — `lab`
+*Optional practice:* Rewrite an ambiguous CSV-export request as two outcome-oriented stories and draft acceptance examples involving empty and malformed inputs.
 
 ### Module 2 — Planning & Tracking Work
 
 #### Outcomes
 
-- Break a feature into issues and sub-issues, with dependencies and labels.
-- Organize issues on a project board and link pull requests to the issues they close.
+- SEF9-O3
+- SEF9-O4
 
 #### Lessons
 
-1. **Repositories, README, and contribution guidelines** — `lesson`
-2. **Issues and issue templates** — `lesson`
-3. **Sub-issues, dependencies, and labels** — `lesson`
-4. **Milestones and project boards** — `lesson`
-5. **Linking pull requests to issues** — `lesson`
-6. **Planning and tracking** — `test`
-7. **Set up tracking for a feature** — `lab`
+1. Repositories, README, and contribution guidelines
+2. Issues and issue templates
+3. Sub-issues, dependencies, and labels
+4. Milestones and project boards
+5. Linking pull requests to issues
+
+*Optional practice:* Move locally versioned issue cards across realistic states and explain why a blocked item cannot be closed solely by changing its column.
 
 ### Module 3 — Recording Decisions
 
 #### Outcomes
 
-- Write a decision record with context, options, outcome, consequences, and a way to confirm it.
-- Keep decision records in the repository with a status and links to superseding records.
+- SEF9-O5
 
 #### Lessons
 
-1. **What counts as a decision worth recording** — `lesson`
-2. **Context and problem statement** — `lesson`
-3. **Options and drivers** — `lesson`
-4. **Outcome, consequences, and confirmation** — `lesson`
-5. **Status and superseding decisions** — `lesson`
-6. **Decision records** — `test`
-7. **Write three decision records** — `lab`
+1. What counts as a decision worth recording
+2. Context and problem statement
+3. Options and drivers
+4. Outcome, consequences, and confirmation
+5. Status and superseding decisions
+
+*Optional practice:* Write a small serializer choice record with alternatives, and an explicit follow-up record when evidence invalidates its original assumptions.
 
 ### Module 4 — Code Review as Practice
 
 #### Outcomes
 
-- Review a change for design, correctness, tests, and clarity, and write feedback that is specific and actionable.
-- Write a small, well-described change and respond to review comments.
+- SEF9-O6
+- SEF9-O7
 
 #### Lessons
 
-1. **The standard of a review** — `lesson`
-2. **What reviewers look for** — `lesson`
-3. **Writing small changes with good descriptions** — `lesson`
-4. **Giving feedback** — `lesson`
-5. **Responding to feedback** — `lesson`
-6. **Review practice** — `test`
-7. **Review and revise a pull request** — `lab`
+1. The standard of a review
+2. What reviewers look for
+3. Writing small changes with good descriptions
+4. Giving feedback
+5. Responding to feedback
+
+*Optional practice:* Review a deliberately flawed CSV diff and compare an evidence-backed code review with a vague approval.
 
 ### Module 5 — Working with AI Assistants
 
 #### Outcomes
 
-- Explain how an AI coding assistant works at the level of context, tools, and an action loop.
-- Give an assistant the context, constraints, and a written plan it needs to complete a small change.
+- SEF9-O8
+- SEF9-O9
 
 #### Lessons
 
-1. **How a coding assistant works** — `lesson`
-2. **Giving context and instructions** — `lesson`
-3. **Explore, plan, code, verify** — `lesson`
-4. **Managing context** — `lesson`
-5. **Permissions and what the assistant may do** — `lesson`
-6. **Working with assistants** — `test`
-7. **Complete a change under a written plan** — `lab`
+1. How a coding assistant works
+2. Giving context and instructions
+3. Explore, plan, code, verify
+4. Managing context
+5. Permissions and what the assistant may do
+
+*Optional practice:* Map assistant inputs to approved paths and permitted tool actions; inspect an authentic recorded proposal without claiming live interaction.
 
 ### Module 6 — Verifying & Governing AI-Generated Work
 
 #### Outcomes
 
-- Verify generated code with tests written first, a critical reading of the diff, and checks for known failure modes.
-- Explain the privacy, licensing, and disclosure obligations that apply to AI-assisted work.
+- SEF9-O10
+- SEF9-O11
 
 #### Lessons
 
-1. **Tests as the contract** — `lesson`
-2. **Reading a generated diff critically** — `lesson`
-3. **Common failure modes** — `lesson`
-4. **Secrets and data exposure** — `lesson`
-5. **Licensing, ownership, and disclosure** — `lesson`
-6. **Staying able to explain your own code** — `lesson`
-7. **Verification and governance** — `test`
-8. **Find defects in a generated change** — `lab`
+1. Tests as the contract
+2. Reading a generated diff critically
+3. Common failure modes
+4. Secrets and data exposure
+5. Licensing, ownership, and disclosure
+6. Staying able to explain your own code
+
+*Optional practice:* Write independent tests for malformed CSV quoting, swallowed I/O errors, and unexpected output overwrite, then inspect a corrected diff.
 
 ### Module 7 — Trust Boundaries in AI-Assisted Work
 
 #### Outcomes
 
-- Evaluate tool-assisted edits using requirements, code review and trusted tests rather than assistant confidence.
-- Diagnose or prevent one material error.
+- SEF9-O12
+- SEF9-O13
 
 #### Lessons
 
-1. **Assistant-generated output as a proposal** — `lesson`
-2. **Untrusted repository instructions and prompt injection** — `lesson`
-3. **Least-privilege tool permissions** — `lesson`
-4. **Secret and data disclosure hazards** — `lesson`
-5. **Reproduction and independent diff review** — `lesson`
-6. **Documenting model limitations and human responsibility** — `lesson`
-7. **Trust Boundaries in AI-Assisted Work reasoning** — `test`
-8. **Audit an untrusted coding suggestion** — `lab`
+1. Assistant-generated output as a proposal
+2. Untrusted repository instructions and prompt injection
+3. Least-privilege tool permissions
+4. Secret and data disclosure hazards
+5. Reproduction and independent diff review
+6. Documenting model limitations and human responsibility
+
+*Optional practice:* Classify a malicious instruction in a synthetic README as untrusted data and reject a dependency or disabled-test change outside the plan.
 
 ### Module 8 — Feature Delivery Workflow
 
 #### Outcomes
 
-- Complete and explain the **Feature Delivery Workflow** integration lab, demonstrating the relevant course outcomes and retained evidence.
+- SEF9-O14
+- SEF9-O15
+- SEF9-O16
 
 #### Lessons
 
-1. **Feature delivery and independent ownership** — `test`
-2. **Plan, build, review, and defend a feature delivered through the full workflow** — `lab`
+1. Feature request, stories and acceptance matrix
+2. Traceable issues, decisions and review record
+3. Scoped assistant proposal with truthful attribution
+4. Tests-first implementation and failure recovery
+5. Safe AI trust boundaries, provenance and documentation
+6. Independent clean-checkout reproduction and unassisted technical defense
 
-   **Final integration lab — required work**
-
-   **Feature Delivery Workflow**
-
-   Take a feature request for the SEF5 tested command-line application and deliver it through the full workflow. The submission must include:
-
-   - User stories with acceptance criteria
-   - Issues and a project board for the feature
-   - At least one decision record
-   - An implementation developed with an AI assistant from a written plan, with tests written first
-   - A pull request reviewed by a peer against a published standard
-   - An evidence log recording where the assistant was wrong, what was changed or rejected, and what the learner did without assistance
-   - Explicit restrictions on sensitive context, tools, permissions and unauthorized dependencies
-   - Independent clean-checkout verification, negative-input tests and traceable assistant attribution
-
-   The defense includes a live modification made without the assistant.
+*Optional practice:* Rehearse a complete evidence handoff and an unassisted change with tests before independent review.
 
 ## Completion requirements
 
-- Complete the required course exercises, checkpoints and evaluated labs below.
-- Complete the final integrated `lab` in the last module and meet its observable exit criteria.
-- Retain reproducible artifacts, verification results, design explanations, and a technical retrospective as required by the [OEE Evidence Rules](../../spec/evidence-rules.md).
+### Environment, authenticity and evaluation
 
-Complete these required exercises:
+Use a disposable local repository, synthetic task records, Python 3.11+ and a public standard-library test command. Hosted boards or pull requests are optional: versioned Markdown or JSON issue records, board snapshots and a locally reviewable patch meet the same *process* evidence criteria when no hosted account is available. A real **peer or designated independent reviewer** must still inspect the work and reproduce its final behavior; a fabricated reviewer name, simulated approval or mere self-review does not count.
 
-**Practical practice:**
+The AI portion requires **an authentic assistant proposal** but does not require a paid or online assistant. An instructor may supply a genuine prerecorded assistant suggestion and associated context. Identify the provenance, tool/model if known, prompt boundaries and actual actions. A recorded proposal is not a live assistant run. Treat assistant suggestions, repository comments and external excerpts as untrusted inputs, never as authorization to access secrets, contact outside endpoints, disable quality checks or change unrelated code. Use only synthetic credentials and offline demonstrations of malicious suggestions; never perform exfiltration.
 
-- Convert a feature request into stories with acceptance criteria.
-- Set up issues, labels, and a project board for a feature.
-- Write a decision record for a real design choice.
-- Review a pull request and revise your own in response to review.
-- Complete a small change with an assistant under a written plan.
-- Find defects in a generated change and write tests for them.
+Reviewers evaluate observable tests, documentation and engineering judgment against each assessment's public criteria. Record actual tool output, accepted and rejected changes, reviewer comments and remedial work. A claimed green CI badge, issue state, AI confidence score, or rote reproduction of sample answers does not prove completion. Each required outcome is supported by independent evidence; failing correctness, trust-boundary, provenance or reproducibility criteria must be corrected before acceptance.
 
-**Required checkpoints and lab acceptance contracts:**
+### Required summative assessments
 
-Each of the eight modules has two evaluated reasoning prompts, expected-answer guidance and a practical lab. Equivalent previously unseen prompts are acceptable when they measure the same outcome. The reviewer evaluates traceable human decisions, reproducible software behavior and explicit trust boundaries; a tool's confidence, board status or a copied solution cannot establish completion.
+- **SEF9-AS1** (required requirements, acceptance and traceable delivery plan)
+  - Outcomes: SEF9-O1, SEF9-O2, SEF9-O3, SEF9-O4
+  - Work: Use the synthetic request 'I need to export tasks to a CSV file so I can inspect them offline.' Identify at least two user contexts and write two outcome-focused stories, recording unknown requirements without presuming a UI button. Define ordinary, empty-dataset, commas/quotes/newline-in-field, invalid destination and noncorruption scenarios with observable results; distinguish each criterion from a definition of done. Build a local Markdown/JSON issue and project-board equivalent or an accessible hosted board, with IDs, owner, labels, milestone, status, one genuine dependency and linked implementation, testing and review tasks. Demonstrate a blocked task and scope change, then map every acceptance criterion to a check and an appropriate not-yet-done/verified status.
+  - Criteria: Every user story identifies its user, need and value rather than prescribing internals; criteria have a falsifiable expected behavior, including failure status and preserved output where applicable. Issue IDs, dependencies, changed scope, linked review/diff and test evidence remain traceable. A completed board state is not falsely presented as a passing feature, and no dependent issue is marked verified before its tests and review are complete. A reviewer can challenge an ambiguous criterion and the learner revises it with measurable language.
+  - Evidence: Original request, personas and assumptions, stories and acceptance matrix, initial/final locally versioned board, dependency and status records, planned tests and definition of done, reviewed clarification and its correction.
 
-**Shared practical environment:**
+- **SEF9-AS2** (required decision records, alternatives and supersession)
+  - Outcomes: SEF9-O2, SEF9-O5, SEF9-O16
+  - Work: Write three focused engineering decision records in the same synthetic feature project: serializer choice (for example Python csv versus manual string joining), behavior on invalid output destinations, and a later revision that supersedes one accepted assumption. Each record names status, context, alternatives, drivers, choice, consequences, linked requirement/issue, verification plan and observed evidence. Preserve history and link the superseded and superseding records in both directions or through unambiguous identifiers. Have an independent reviewer reconstruct the rationale and suggest one missing counterexample or risk, then revise the explanatory record without silently erasing prior decisions.
+  - Criteria: All three records can be understood without private chat history; at least one genuine supersession chain exposes old/new statuses and the reason for change. Rejected options and material trade-offs are explicit, not post-hoc fabricated consensus, and each decision identifies a falsifiable behavior check. Reviewer observations and responses are documented, and a changed decision does not silently rewrite an earlier approval. Requirement and test evidence remain linked to the decisions that affect them.
+  - Evidence: Three versioned ADR-style records and statuses, alternative/risk tables, reciprocal supersession links, cited story and issue IDs, objective comparison fixture, independent review observations and response.
 
-Use the existing SEF5-tested command-line application or a clean local equivalent with a documented Python 3.11+ standard-library test runner, a disposable repository and synthetic task data. All required issue/board and PR workflows may use versioned local artifacts when a hosted account is unavailable; a free hosted alternative is optional. No paid AI service, external network access, organization credential, installation permission or real private source data is required. For AI exercises, use an accessible assistant or an authentic instructor-supplied recorded assistant output; mark recorded versus interactive use accurately. Record actual model/tool identity when known, input context, outputs and permitted actions; do not claim deterministic AI responses. Every final accepted code result must be independently reproducible from fixed source and test fixtures.
+- **SEF9-AS3** (required focused peer code review and regression repair)
+  - Outcomes: SEF9-O2, SEF9-O6, SEF9-O7, SEF9-O10
+  - Work: Inspect a prepared small CSV-export patch with a realistic quoting, newlines, exit-status or partial-output flaw. Read the requirement and diff independently, reproduce the fault on a synthetic fixture, and write a structured review against a published correctness, safety, test, maintainability and scope checklist. Provide at least three evidence-backed actionable comments, including a concrete failing case. Prepare a bounded correction and regression test, produce a reviewable patch or PR-equivalent diff, and obtain a separate peer/designated-reviewer response. Resolve or justify rejection of substantive comments and rerun the relevant tests.
+  - Criteria: The initial test exposes an actual defect and fails before the repair; the corrected implementation passes without hiding failures or changing unrelated behavior. Comments describe location, observable risk and an actionable change rather than vague disapproval. Changed files and commit/diff scope are transparent, reviewer feedback and replies are attributable, and claims of a hosted pull request or live review are made only if those events really occurred.
+  - Evidence: Review standard/checklist, input patch and source revision, independent fixture and before/after outputs, three actionable comments, corrected diff, test logs, real reviewer response and final issue resolution record.
 
-**Shared evaluation and evidence rules:**
+- **SEF9-AS4** (required constrained assistant proposal and human verification)
+  - Outcomes: SEF9-O8, SEF9-O9, SEF9-O10, SEF9-O11, SEF9-O13
+  - Work: Plan a bounded feature adjustment with an explore-plan-implement-verify document, explicitly stating approved files, allowed commands, input data, test oracles, maximum scope, and prohibited network, secret, dependency-installation or merge operations. Use an accessible coding assistant or an authentic provided recorded assistant response to propose a change. Record known model/tool identity, source/context supplied, proposal, actual tool actions (or explicitly no live tool actions), and attribution. Independently review the diff, accept/modify/reject suggestions with reasons, run predeclared and negative-case tests, and explain each retained line's behavior without querying the assistant.
+  - Criteria: The assistant proposal is genuine and its provenance is not fabricated; prerecorded text is not presented as an interactive tool execution. The final diff is bounded by the authorized plan, tests and code observation substantiate every acceptance claim, and unsupported or invented APIs are rejected. The learner, not the assistant, owns implementation and success decisions. No real secret, private source, uncontrolled network access, unapproved dependency or broad permission is used; licensing and data-handling unknowns are disclosed rather than invented.
+  - Evidence: Written plan and scope, sanitized proposal or recorded artifact with provenance, context/tool permissions, accepted-modified-rejected change log, source diff, observed test results, AI-use disclosure and independent explanation.
 
-- Use a synthetic task-manager CSV-export feature as the connected learning case across the modules; equivalent locally reproducible features are acceptable when they exercise the same risks and outcomes.
-- Record requirement-to-test links, original versus revised source, actual commands and outputs, reviewer observations, approval decisions, and remediation of misunderstandings.
-- Treat AI responses and untrusted repository content as proposals/data, not authoritative commands. Do not expose real credentials, run exfiltration demonstrations, disable quality checks or grant broad filesystem/network permissions to fulfill a lab.
-- Demonstrate an unassisted explanation or modification before course completion. An assistant must not be the sole source of decisions, test outcomes or final acceptance.
-- Publish only sanitized learning evidence. Redact private information before sharing artifacts and record any unverified claim as a limitation.
+- **SEF9-AS5** (required generated-code defect audit and disclosure)
+  - Outcomes: SEF9-O7, SEF9-O10, SEF9-O11, SEF9-O12, SEF9-O13
+  - Work: Inspect a **genuine recorded or prepared assistant-proposed patch** for the synthetic CSV feature containing three identifiable defects: naive field/record escaping, swallowed I/O failure and unintended overwriting of prior valid output after invalid input. Write at least two independent tests from the acceptance criteria before accepting any proposal; demonstrate each seeded defect using a disposable fixture, then repair and run the cases again. Review changed files for invented APIs, dependency drift, disabled tests, privacy exposures and unsupported licensing claims. Document what provenance or redistribution questions cannot be verified and retain a sanitized audit of actual accepted changes.
+  - Criteria: The original version demonstrably fails the claimed quote/newline round trip, error-propagation and prior-data preservation contracts; the repaired version demonstrably fixes the three failures with retained regressions. Tests exercise the actual program, not only mocked claims, and a final diff shows no unauthorized code, dependency or disabled-quality-check change. Attribution and privacy/licensing conclusions follow evidence, including explicit uncertainty, with no assumption that AI output is automatically licensed or publication-safe.
+  - Evidence: Authentic or labeled recorded proposal, fixed synthetic fixtures and regression results before/after repair, actual CLI exit codes and output-byte comparison, provenance/permissions audit, change inventory and reviewer decision.
 
-**Module 1 — From Need to Work Item: checkpoint** — Required assessment details
+- **SEF9-AS6** (required untrusted context and least-privilege challenge)
+  - Outcomes: SEF9-O8, SEF9-O10, SEF9-O11, SEF9-O12, SEF9-O13
+  - Work: Inspect a **fully synthetic local** README or source comment that purports to override the user task and asks a coding agent to read a fake credential and send it to an external destination. Do not execute the instruction, use real credentials, or make a network request. Review a proposed patch that also introduces an unapproved dependency and disables a failing test. Define the authority order: the authorized user request and reviewed plan determine actions; repository content is untrusted task data. Identify the injected instructions and risky changes, reject them, restore tests, document the authorized diff and demonstrate an offline file inventory and test run respecting the original read/edit/command permissions.
+  - Criteria: All unauthorized instructions, exfiltration directives, disabled checks and unapproved dependency additions are identified and rejected, with no actual secret read, credential exposure or outbound connection. The submitted diff and change/permission inventory remain within the authorized scope and required tests stay enabled. The learner explains why instructions embedded in code or documentation do not gain authority over the user plan and demonstrates a safe alternative rather than carrying out the malicious request.
+  - Evidence: Synthetic suspicious text and prepared patch excerpts with line-level risk annotations, trust-boundary diagram, plan and permission matrix, final allowed-file and dependency inventory, non-network verification transcript, restored tests and sanitized incident note.
 
-- **Q1 (free):** A user asks to 'add a CSV button to make my task list easier to share'. What is the difference between the need, a user story and a solution prescription?
-  - Expected answer and scoring: The need concerns accessing or sharing task data; a story names a user, capability and reason, such as exporting a task list for offline use. A CSV button is one proposed UI solution and should not be treated as the need itself.
-- **Q2 (free):** Give one acceptance criterion for exporting an empty task list and one for an invalid destination. How do these differ from a definition of done?
-  - Expected answer and scoring: Criteria describe observable feature behavior: for example, an empty export produces a valid header-only CSV and an invalid destination returns a clear nonzero failure without overwriting existing data. The definition of done may additionally require tests, review, documentation and reproducible evidence across the change.
+- **SEF9-AS7** (required integrated feature delivery and independent ownership defense)
+  - Outcomes: SEF9-O1, SEF9-O2, SEF9-O3, SEF9-O4, SEF9-O5, SEF9-O6, SEF9-O7, SEF9-O8, SEF9-O9, SEF9-O10, SEF9-O11, SEF9-O12, SEF9-O13, SEF9-O14, SEF9-O15, SEF9-O16
+  - Work: Deliver a CSV-export improvement to the SEF5 CLI or an equivalent learner-authored feature using linked stories, acceptance scenarios, issue/board progress, at least one verified decision record, tests written before accepting an authentic AI proposal, scoped permissions and accurate assistant attribution. Submit a focused locally reviewable PR-equivalent diff or real PR, obtain independent peer/designated-reviewer feedback, fix material findings and rerun tests from a clean disposable checkout. Cover header-only empty export, commas/quotes/newlines, invalid output paths and preservation of existing valid output, plus at least one deliberately seeded assistant or human defect and its repair. Provide an outcome-to-evidence matrix, README and retrospective. Finally, explain the code without the assistant and complete a small **reviewer-chosen modification without assistant help**, rerunning the appropriate tests and recording the result in a live, recorded, written or equivalent accessible review setting.
+  - Criteria: All published user behaviors and failure contracts work from independent clean-start instructions, and tests fail for the original defect and pass after correction without hidden services or privileged actions. Each issue, decision, assistant suggestion, code revision, review comment and test result has honest provenance and a traceable role in acceptance. The unassisted modification is genuinely completed by the learner with demonstrable behavior and test evidence, not synthesized by an assistant; the reviewer can ask an unfamiliar boundary question and receive a justified answer. Unresolved correctness, authorization, provenance or privacy problems block completion.
+  - Evidence: Versioned local repo or portable source, stories and checks, board and decision history, tests-first records, approved AI plan and attributable proposal, final focused diff, peer feedback and response, clean-checkout normal/negative outputs and unchanged-file checks, outcome map, independently observed unassisted change and test, and accessible technical defense.
 
-**Module 1 — Turn a request into stories: required lab** — Required assessment details
+### Completion decision
 
-- **Objective:** Convert a vague need into independently testable, outcome-focused stories rather than a list of preferred implementation details.
-- **Prerequisites:** Complete the corresponding module lessons and conceptual checkpoint; use only approved, previously verified project artifacts as inputs.
-- **Environment:** Use the existing SEF5-tested command-line application or a clean local equivalent with a documented Python 3.11+ standard-library test runner, a disposable repository and synthetic task data. All required issue/board and PR workflows may use versioned local artifacts when a hosted account is unavailable; a free hosted alternative is optional. No paid AI service, external network access, organization credential, installation permission or real private source data is required. For AI exercises, use an accessible assistant or an authentic instructor-supplied recorded assistant output; mark recorded versus interactive use accurately. Record actual model/tool identity when known, input context, outputs and permitted actions; do not claim deterministic AI responses. Every final accepted code result must be independently reproducible from fixed source and test fixtures.
-- **Procedure:**
-  1. Use this fixed simulated request for an existing SEF5-tested task CLI: 'I need to export tasks to a CSV file so I can inspect them offline.' Work only with synthetic local task records.
-  2. Identify at least two user personas/contexts, write two outcome-focused stories and record assumptions or questions not answered by the request.
-  3. Specify acceptance scenarios covering ordinary tasks, empty data, commas/quotes/newlines in fields and an invalid output path. Include preconditions, action and observable outcome for each.
-  4. Distinguish a feature epic, user stories and implementation tasks. Select one independently deliverable story and explain why it is first.
-  5. Create a traceability table mapping each accepted criterion to a manual or automated check; have a reviewer point out one ambiguous criterion and refine it.
-- **Expected result:** Stories describe user value without prescribing internals; criteria cover valid and failure behaviors with tests that can clearly pass or fail.
-- **Verification:** A reviewer receives the same request, identifies the scenarios and can distinguish which outputs and errors satisfy each criterion without guessing unspecified requirements.
-- **Evidence:** Request, personas, stories, assumptions, criteria-to-checks matrix, refined ambiguous criterion and reviewer note.
-- **Failure analysis:** Explain a criterion that merely says 'works', an implementation detail mistaken for user value or an omitted failure scenario.
-- **Acceptance:** All specified deliverables and normal/negative cases are verified, decisions and assistant contributions are accurately attributed, and an independent reviewer can reproduce the relevant evidence. An unapproved tool action, unresolved acceptance failure or inability to explain the work blocks completion.
+All **seven required assessments** must pass their published criteria, collectively demonstrating SEF9-O1 through SEF9-O16. A learner may reuse previously verified stories, issues, decisions, source, review evidence and assistant audits inside the integrated delivery, without adding hidden per-module test or lab quotas. Optional practice is formative. The unassisted modification and independent clean-checkout review are mandatory capabilities, but may be observed in accessible equivalent formats.
 
-**Module 2 — Planning & Tracking Work: checkpoint** — Required assessment details
-
-- **Q1 (free):** A story requires implementing CSV serialization and adding tests before merging. How would you express the work-item dependency and acceptance link?
-  - Expected answer and scoring: Create a story with a user-level acceptance contract and associated implementation/test tasks. Identify the dependent work explicitly and link each task/PR to the relevant acceptance criterion; avoid declaring the story complete when code exists but tests or review are unfinished.
-- **Q2 (free):** What changes between a board column labelled 'Done' and a verified feature?
-  - Expected answer and scoring: A board state is coordination metadata, not evidence of correctness. Done must be justified by defined acceptance checks, a reviewed change, and retained test or reproduction evidence, not just moving a card.
-
-**Module 2 — Set up tracking for a feature: required lab** — Required assessment details
-
-- **Objective:** Plan a bounded feature through linked, traceable work items and a reviewable workflow.
-- **Prerequisites:** Complete the corresponding module lessons and conceptual checkpoint; use only approved, previously verified project artifacts as inputs.
-- **Environment:** Use the existing SEF5-tested command-line application or a clean local equivalent with a documented Python 3.11+ standard-library test runner, a disposable repository and synthetic task data. All required issue/board and PR workflows may use versioned local artifacts when a hosted account is unavailable; a free hosted alternative is optional. No paid AI service, external network access, organization credential, installation permission or real private source data is required. For AI exercises, use an accessible assistant or an authentic instructor-supplied recorded assistant output; mark recorded versus interactive use accurately. Record actual model/tool identity when known, input context, outputs and permitted actions; do not claim deterministic AI responses. Every final accepted code result must be independently reproducible from fixed source and test fixtures.
-- **Procedure:**
-  1. Create an issue tracker in a local Markdown/JSON fixture or a free accessible hosted project board, with equivalent fields for ID, description, owner, label, milestone, status and dependencies.
-  2. Import the two Module 1 stories and break the first one into an implementation task, a test task and a documentation/review task. Express at least one real dependency.
-  3. Create board columns such as Backlog, Ready, In progress, In review and Done; show initial and updated item positions.
-  4. Link a simulated or real pull-request record to its issue and describe how the reviewed commit satisfies the story acceptance criteria.
-  5. Test a blocked task and a request for scope expansion; explain how dependency state and a changed requirement are recorded without silently closing incomplete work.
-- **Expected result:** Every story links to acceptance evidence, each task has a traceable ID and state, and a blocked work item cannot be mistaken for verified completion.
-- **Verification:** Review the issue/board artifacts and links from story to task to change/test; compare before and after status of the blocked item.
-- **Evidence:** Versioned issue records, local board snapshot or export, dependency map, status transitions, simulated PR reference and scope-decision note.
-- **Failure analysis:** Explain orphaned tasks, treating board status as proof, failing to record a dependency or silently increasing scope.
-- **Acceptance:** All specified deliverables and normal/negative cases are verified, decisions and assistant contributions are accurately attributed, and an independent reviewer can reproduce the relevant evidence. An unapproved tool action, unresolved acceptance failure or inability to explain the work blocks completion.
-
-**Module 3 — Recording Decisions: checkpoint** — Required assessment details
-
-- **Q1 (free):** A team chooses the Python csv module over manually concatenating strings for task export. What should an engineering decision record capture beyond the chosen option?
-  - Expected answer and scoring: State the context and requirements, viable alternatives, decision drivers, the selected option, expected consequences, verification method, status, date and links to affected work. The reason should address quoting, embedded newlines and maintenance, not only assert that a library is better.
-- **Q2 (free):** What should happen to an accepted record when new evidence leads to a different decision?
-  - Expected answer and scoring: Retain the historical record with a superseded status and a link to the newer record; the successor explains the new evidence and implications. Do not silently rewrite the earlier rationale as if the original decision never occurred.
-
-**Module 3 — Write three decision records: required lab** — Required assessment details
-
-- **Objective:** Document decisions with alternatives, tradeoffs, validation, status changes and supersession traceability.
-- **Prerequisites:** Complete the corresponding module lessons and conceptual checkpoint; use only approved, previously verified project artifacts as inputs.
-- **Environment:** Use the existing SEF5-tested command-line application or a clean local equivalent with a documented Python 3.11+ standard-library test runner, a disposable repository and synthetic task data. All required issue/board and PR workflows may use versioned local artifacts when a hosted account is unavailable; a free hosted alternative is optional. No paid AI service, external network access, organization credential, installation permission or real private source data is required. For AI exercises, use an accessible assistant or an authentic instructor-supplied recorded assistant output; mark recorded versus interactive use accurately. Record actual model/tool identity when known, input context, outputs and permitted actions; do not claim deterministic AI responses. Every final accepted code result must be independently reproducible from fixed source and test fixtures.
-- **Procedure:**
-  1. Write three small decision records for the same synthetic task-export project: data format/serializer, output-failure behavior and a later change of one design assumption.
-  2. Include status, context, options, drivers, selected approach, consequences, evidence and affected issue IDs in each.
-  3. Explicitly supersede one earlier decision and provide reciprocal links or identifiers that let readers follow the change of direction.
-  4. Design a small, falsifiable check for each decision, including one failure-case check where a rejected alternative could have violated a requirement.
-  5. Ask an independent reviewer to reconstruct why the choice was made and whether the evidence supports it; revise unclear language without erasing history.
-- **Expected result:** Three individually understandable records exist; one has a valid successor chain, and their consequences can be checked against specified behavior.
-- **Verification:** Inspect statuses and links, reproduce at least one stated comparison and confirm no record relies on knowledge held only in chat.
-- **Evidence:** Three dated/status-bearing records, options matrix, verification fixtures, links to work items, reviewer feedback and corrected rationale.
-- **Failure analysis:** Explain decisions without alternatives, a claimed benefit without tests or changing a decision without recording supersession.
-- **Acceptance:** All specified deliverables and normal/negative cases are verified, decisions and assistant contributions are accurately attributed, and an independent reviewer can reproduce the relevant evidence. An unapproved tool action, unresolved acceptance failure or inability to explain the work blocks completion.
-
-**Module 4 — Code Review as Practice: checkpoint** — Required assessment details
-
-- **Q1 (free):** A pull request changes CSV export, refactors unrelated storage classes and upgrades dependencies. What should a reviewer ask and why?
-  - Expected answer and scoring: Ask to separate unrelated refactoring and dependency upgrades unless the coupling is justified, then assess the feature against its acceptance contract. A focused diff is easier to verify, review and revert.
-- **Q2 (free):** A reviewer writes 'this is bad' on a faulty escaping routine. Rewrite the feedback so it is actionable.
-  - Expected answer and scoring: Name the failing behavior and a minimal fixture, e.g., a task title containing a comma or quote produces an invalid CSV column count; propose a test and use a standards-compliant CSV serializer. Feedback should identify impact and verification, not attack the author.
-
-**Module 4 — Review and revise a pull request: required lab** — Required assessment details
-
-- **Objective:** Evaluate a bounded change objectively, give specific review feedback and demonstrate a corrected revision.
-- **Prerequisites:** Complete the corresponding module lessons and conceptual checkpoint; use only approved, previously verified project artifacts as inputs.
-- **Environment:** Use the existing SEF5-tested command-line application or a clean local equivalent with a documented Python 3.11+ standard-library test runner, a disposable repository and synthetic task data. All required issue/board and PR workflows may use versioned local artifacts when a hosted account is unavailable; a free hosted alternative is optional. No paid AI service, external network access, organization credential, installation permission or real private source data is required. For AI exercises, use an accessible assistant or an authentic instructor-supplied recorded assistant output; mark recorded versus interactive use accurately. Record actual model/tool identity when known, input context, outputs and permitted actions; do not claim deterministic AI responses. Every final accepted code result must be independently reproducible from fixed source and test fixtures.
-- **Procedure:**
-  1. Use a deliberately prepared small patch to the task CLI's export logic containing a realistic CSV-quoting or exit-status defect. All data is synthetic.
-  2. Read the issue, acceptance criteria and diff independently. Reproduce the defect with a minimal fixture and record the command/output mismatch.
-  3. Write a structured review covering correctness, security/data handling, tests, maintainability and scope; include at least three specific comments with evidence.
-  4. Prepare a focused repair in a separate branch or proposed patch. Add or update a regression test and document the changed behavior.
-  5. Exchange feedback with a peer or designated independent reviewer, record resolution of substantive comments, and show the final reviewed diff with passing tests.
-- **Expected result:** Review evidence identifies the seeded defect and the revised patch passes its regression test without unrelated changes.
-- **Verification:** Compare original failing fixture with revised results, inspect actionable comments and reviewer sign-off or independent review notes.
-- **Evidence:** Initial and corrected diffs, issue and PR-style summary, review comments, fixture outputs, test logs and response history.
-- **Failure analysis:** Explain superficial approval, a personal/nonactionable comment, a repair that hides the defect or unreviewed scope expansion.
-- **Acceptance:** All specified deliverables and normal/negative cases are verified, decisions and assistant contributions are accurately attributed, and an independent reviewer can reproduce the relevant evidence. An unapproved tool action, unresolved acceptance failure or inability to explain the work blocks completion.
-
-**Module 5 — Working with AI Assistants: checkpoint** — Required assessment details
-
-- **Q1 (free):** Does an AI coding assistant necessarily see every repository file or have permission to execute commands? What determines its working context?
-  - Expected answer and scoring: No. Visibility and tool access depend on supplied context, product capabilities, environment and granted permissions. Distinguish text the learner provides from files a connected tool can read; inspect permissions rather than presuming access.
-- **Q2 (free):** An assistant says it finished and all tests pass, but no test output is provided. Is that sufficient to merge?
-  - Expected answer and scoring: No. Treat the message as a proposal. Inspect the actual diff, reproduce documented tests in the learner's environment, compare against acceptance criteria and withhold approval until evidence exists.
-
-**Module 5 — Complete a change under a written plan: required lab** — Required assessment details
-
-- **Objective:** Use a coding assistant under an explicit plan and limited permissions while retaining responsibility for each change and its verification.
-- **Prerequisites:** Complete the corresponding module lessons and conceptual checkpoint; use only approved, previously verified project artifacts as inputs.
-- **Environment:** Use the existing SEF5-tested command-line application or a clean local equivalent with a documented Python 3.11+ standard-library test runner, a disposable repository and synthetic task data. All required issue/board and PR workflows may use versioned local artifacts when a hosted account is unavailable; a free hosted alternative is optional. No paid AI service, external network access, organization credential, installation permission or real private source data is required. For AI exercises, use an accessible assistant or an authentic instructor-supplied recorded assistant output; mark recorded versus interactive use accurately. Record actual model/tool identity when known, input context, outputs and permitted actions; do not claim deterministic AI responses. Every final accepted code result must be independently reproducible from fixed source and test fixtures.
-- **Procedure:**
-  1. Choose one small, non-sensitive feature change to the synthetic task CLI, such as validating or formatting its CSV export. Define a written requirement, non-goals, acceptance tests and maximum edit scope.
-  2. Write an explore-plan-implement-verify plan, including which paths may be read or changed and which commands may run. Do not authorize secrets access, network calls, dependency installation or merging.
-  3. Use an accessible coding assistant or an instructor-provided authentic recorded assistant response to propose the change. Record the selected model/tool if known, relevant synthetic context, prompt/response and any tool actions. Do not fabricate the assistant transcript or imply that a prerecorded proposal was an interactive session.
-  4. Review and edit the proposal manually, rejecting anything outside the allowed scope. Record each accepted, modified or rejected suggestion and a reason.
-  5. Run the predeclared tests locally with the exact source revision, add a negative-case test, and explain the final implementation to another person without querying the assistant.
-- **Expected result:** The final change meets a concrete acceptance contract and stays within scope; the evidence distinguishes the assistant's suggestions from the learner's verified implementation.
-- **Verification:** Compare plan, assistant proposal, final diff and test outputs; check no unapproved file, command, credential or network operation was required.
-- **Evidence:** Written plan and permission boundary, sanitized authentic assistant artifact, accepted/rejected decision log, source diff, test results and independent explanation.
-- **Failure analysis:** Explain hallucinated APIs, misunderstood constraints, undocumented assistant actions or treating claimed success as observed verification.
-- **Acceptance:** All specified deliverables and normal/negative cases are verified, decisions and assistant contributions are accurately attributed, and an independent reviewer can reproduce the relevant evidence. An unapproved tool action, unresolved acceptance failure or inability to explain the work blocks completion.
-
-**Module 6 — Verifying & Governing AI-Generated Work: checkpoint** — Required assessment details
-
-- **Q1 (free):** An assistant proposes replacing Python csv.writer with naive string joining and claims that passing one simple test proves the export is correct. What independent test exposes the mistake?
-  - Expected answer and scoring: Write a fixture with commas, quotes and embedded newlines in task fields, then parse the output with Python's csv reader and assert correct field round-trip. A single simple line does not cover CSV record-encoding requirements.
-- **Q2 (free):** Can a learner assume every AI-generated snippet is license-free, safe to publish and free of private data?
-  - Expected answer and scoring: No. Assess provenance and applicable project/license policy, review for copied or sensitive material, and disclose relevant AI assistance according to the applicable rules. Avoid making unsupported blanket legal claims about authorship or permissions.
-
-**Module 6 — Find defects in a generated change: required lab** — Required assessment details
-
-- **Objective:** Identify, reproduce and repair seeded defects in an assistant-proposed patch using independent tests, code review and privacy/licensing judgment.
-- **Prerequisites:** Complete the corresponding module lessons and conceptual checkpoint; use only approved, previously verified project artifacts as inputs.
-- **Environment:** Use the existing SEF5-tested command-line application or a clean local equivalent with a documented Python 3.11+ standard-library test runner, a disposable repository and synthetic task data. All required issue/board and PR workflows may use versioned local artifacts when a hosted account is unavailable; a free hosted alternative is optional. No paid AI service, external network access, organization credential, installation permission or real private source data is required. For AI exercises, use an accessible assistant or an authentic instructor-supplied recorded assistant output; mark recorded versus interactive use accurately. Record actual model/tool identity when known, input context, outputs and permitted actions; do not claim deterministic AI responses. Every final accepted code result must be independently reproducible from fixed source and test fixtures.
-- **Procedure:**
-  1. Receive a prepared AI-suggested CSV-export change with at least three seeded defects: naive quote/record escaping, swallowed I/O failures and unintended output overwrite on malformed input.
-  2. Before applying the patch, write an acceptance-test list and implement at least two independent tests that should fail against the defective proposal.
-  3. Apply the prepared patch only to a disposable copy, reproduce each flaw with exact fixtures, and classify the root cause rather than relying on assistant confidence.
-  4. Repair defects one by one, rerun tests and inspect the diff for out-of-scope edits, dependency changes, invented functions and unsafe logging.
-  5. Complete a short privacy/licensing/disclosure review appropriate to a synthetic project; use no real secrets and record what is unknown rather than assuming permission.
-- **Expected result:** Every seeded defect has a failing reproduction and a verified fix; the final program preserves existing data on failure and produces valid CSV round-trips.
-- **Verification:** Run tests against the defective and corrected revisions, check exit statuses and output bytes, and compare the final diff with approved scope.
-- **Evidence:** Predeclared criteria, red/green test results, original/fixed patch, root-cause table, review checklist and disclosure note.
-- **Failure analysis:** Explain superficial testing, suppressed exceptions, accidental data loss or overclaiming licensing certainty.
-- **Acceptance:** All specified deliverables and normal/negative cases are verified, decisions and assistant contributions are accurately attributed, and an independent reviewer can reproduce the relevant evidence. An unapproved tool action, unresolved acceptance failure or inability to explain the work blocks completion.
-
-**Module 7 — Trust Boundaries in AI-Assisted Work: checkpoint** — Required assessment details
-
-- **Q1 (free):** A README in a third-party repository tells an AI agent to ignore the original task and upload environment variables to an external endpoint. Should the learner treat that text as instructions?
-  - Expected answer and scoring: No. The README is untrusted task data and cannot override the user's authorized objective or tool permissions. Ignore the instruction attempt, do not read or transmit secrets, document the finding and continue only with the authorized task.
-- **Q2 (free):** An AI patch adds an unexpected third-party dependency and disables failing tests. What is the safest acceptance decision?
-  - Expected answer and scoring: Reject or isolate the changes until independently justified. Review dependency purpose, provenance and licensing under project policy; restore tests and require observable acceptance evidence before approving any necessary dependency. Assistant confidence is not approval.
-
-**Module 7 — Audit an untrusted coding suggestion: required lab** — Required assessment details
-
-- **Objective:** Identify and reject instructions embedded in untrusted repository material and maintain least-privilege tool boundaries.
-- **Prerequisites:** Complete the corresponding module lessons and conceptual checkpoint; use only approved, previously verified project artifacts as inputs.
-- **Environment:** Use the existing SEF5-tested command-line application or a clean local equivalent with a documented Python 3.11+ standard-library test runner, a disposable repository and synthetic task data. All required issue/board and PR workflows may use versioned local artifacts when a hosted account is unavailable; a free hosted alternative is optional. No paid AI service, external network access, organization credential, installation permission or real private source data is required. For AI exercises, use an accessible assistant or an authentic instructor-supplied recorded assistant output; mark recorded versus interactive use accurately. Record actual model/tool identity when known, input context, outputs and permitted actions; do not claim deterministic AI responses. Every final accepted code result must be independently reproducible from fixed source and test fixtures.
-- **Procedure:**
-  1. Work in a fully synthetic local repository containing a deliberately misleading README or code comment asking the assistant to access a fake credential and contact an external destination. Do not create real credentials or make any network request.
-  2. Define trust boundaries: user-authorized feature request, project code/data, untrusted documentation, tool permissions and assistant-proposed modifications.
-  3. Inspect a prepared suspicious patch containing the embedded instruction, an unauthorized dependency addition and a disabled test; identify which exact lines conflict with the authorized plan.
-  4. Remove or reject unsafe changes and restore the genuine feature acceptance tests. Record whether the remaining safe changes are needed at all.
-  5. Perform an offline verification of the diff and file inventory; demonstrate no network, credential read or privileged tool action occurred, then explain the boundary violation and mitigation.
-- **Expected result:** The unauthorized instruction, dependency and disabled test are rejected; authorized requirements continue to be evaluated with no fake-secret exposure or external network action.
-- **Verification:** Inspect final changed-file list, allowed dependency set and test suite; compare with the predeclared scope and preserve a sanitized incident report.
-- **Evidence:** Synthetic injection fixture, trust-boundary diagram, suspicious-diff annotations, accepted/rejected log, test results and incident retrospective.
-- **Failure analysis:** Explain treating source comments as higher-authority commands, unnecessarily broad tool permissions, fabricated evidence or accepting a deceptive patch.
-- **Acceptance:** All specified deliverables and normal/negative cases are verified, decisions and assistant contributions are accurately attributed, and an independent reviewer can reproduce the relevant evidence. An unapproved tool action, unresolved acceptance failure or inability to explain the work blocks completion.
-
-**Module 8 — Feature Delivery Workflow: checkpoint** — Required assessment details
-
-- **Q1 (free):** A feature board says Done and the assistant claims it passed tests, but a reviewer finds a failing CSV quote round-trip. Has the feature met its definition of done?
-  - Expected answer and scoring: No. The failing acceptance criterion takes priority over board status or assistant claims. Correct the defect, rerun the relevant tests, update review and evidence, and only then mark the work accepted.
-- **Q2 (free):** The learner cannot explain a line generated by an assistant during an unassisted defense. What should the reviewer conclude?
-  - Expected answer and scoring: Understanding has not yet been demonstrated. Require the learner to reason through, test and explain the code or revise it to something they can defend, then reassess. A working artifact alone does not satisfy this course's independent-ownership outcome.
-
-**Module 8 — Feature Delivery Workflow: required lab** — Required assessment details
-
-- **Objective:** Deliver and independently defend a small feature from user need to reviewed implementation using documented, bounded AI assistance.
-- **Prerequisites:** Complete the corresponding module lessons and conceptual checkpoint; use only approved, previously verified project artifacts as inputs.
-- **Environment:** Use the existing SEF5-tested command-line application or a clean local equivalent with a documented Python 3.11+ standard-library test runner, a disposable repository and synthetic task data. All required issue/board and PR workflows may use versioned local artifacts when a hosted account is unavailable; a free hosted alternative is optional. No paid AI service, external network access, organization credential, installation permission or real private source data is required. For AI exercises, use an accessible assistant or an authentic instructor-supplied recorded assistant output; mark recorded versus interactive use accurately. Record actual model/tool identity when known, input context, outputs and permitted actions; do not claim deterministic AI responses. Every final accepted code result must be independently reproducible from fixed source and test fixtures.
-- **Procedure:**
-  1. Select a bounded CSV-export improvement to the existing SEF5-tested CLI. Use synthetic tasks and retain explicit story acceptance criteria including empty data, escaping, invalid destination and noncorruption of existing output.
-  2. Create linked story and task records, dependencies and an inspectable project board (local versioned equivalent or hosted board). Write at least one decision record with alternatives and verification.
-  3. Write acceptance/regression tests before adopting an assistant proposal. Create a written plan with allowed paths and explicit restrictions on tools, data and network access.
-  4. Use an actual, attributable assistant proposal (from an accessible tool or authentic provided recorded response), log relevant context and suggested changes, then inspect and constrain the final implementation.
-  5. Prepare a focused pull request or local PR-equivalent diff, obtain independent peer/designated-reviewer comments and resolve substantive findings with evidence.
-  6. Run clean-checkout tests and a synthetic negative case, verify there are no unapproved dependencies, secret exposures or disabled checks, and record the before/after results.
-  7. Perform an unassisted defense explaining acceptance scenarios, architecture, code paths, tests, rejected assistant advice and relevant licensing/privacy constraints. Complete a small reviewer-chosen modification without assistant help and test it.
-  8. Deliver an outcomes-to-evidence matrix, clear operating instructions and a retrospective identifying at least one actual incorrect suggestion or mistaken assumption and its corrected result.
-- **Expected result:** The feature meets all declared user-visible criteria; tracked decisions and review are traceable; the learner independently reproduces, explains and changes the resulting code.
-- **Verification:** A reviewer uses the documented clean-checkout instructions to run normal and failure cases, inspect the accepted diff and assistant attribution, and observe the unassisted modification and retest.
-- **Evidence:** Stories, tracker/board, ADR, written plan, synthetic assistant artifact, accepted/rejected log, code, tests, review notes, defense record and retrospective.
-- **Failure analysis:** Explain a missed requirement, invented assistant success claim, unauthorized change, swallowed error or inability to defend an implementation decision.
-- **Acceptance:** All specified deliverables and normal/negative cases are verified, decisions and assistant contributions are accurately attributed, and an independent reviewer can reproduce the relevant evidence. An unapproved tool action, unresolved acceptance failure or inability to explain the work blocks completion.
-
-**Exit demonstration:**
-
-The learner can take a need through stories, tracked work, recorded decisions, and a reviewed change, use an assistant without surrendering understanding, and explain and modify every line delivered.
+The reviewer records acceptance decisions, unresolved limitations and authentic supporting artifacts. No paid AI account, live external service, real private data, privileged action, or fabricated interaction is required. The course stays `draft`; successful structural checks do not establish `tested` or `verified` readiness under [Status Labels](../../spec/status-labels.md).

@@ -90,12 +90,8 @@ class SEF5MigrationTests(unittest.TestCase):
         self.assertIn("independent reproduction", text.lower())
         catalog = CATALOG.read_text(encoding="utf-8")
         self.assertIn("[SEF5](SEF5.md)", catalog)
-        maturity = re.search(
-            r"(?m)^SEF1,.* use the outcome-driven `v0\.2\.0` course format\.",
-            catalog,
-        )
-        self.assertIsNotNone(maturity)
-        self.assertIn("SEF5", maturity.group(0))
+        self.assertIn("All ten SEF courses (SEF1–SEF10)", catalog)
+        self.assertIn("no historical-format SEF course definitions remain", catalog)
 
 
 if __name__ == "__main__":
