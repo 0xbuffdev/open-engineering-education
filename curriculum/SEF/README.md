@@ -60,7 +60,7 @@ SEF1–SEF9 → SEF10
 
 SEF8 may be taken alongside SEF4–SEF7. It begins with a self-paced mathematical literacy and pre-algebra bridge, so prior algebra is **not** an entry prerequisite; an ungraded diagnostic identifies where additional practice is needed. Basic numeracy and algebra readiness are still needed before progressing.
 
-SEF1, SEF2 and SEF10 use the outcome-driven `v0.2.0` course format. The other seven courses retain their historical assessment structure pending individual migration reviews. All ten are `draft`; duration estimates, technical coverage, practical-work reproducibility, assessment quality, and learner feedback still need validation. See the [curriculum inventory](../INVENTORY.md) for the generated migration report.
+SEF1, SEF2, SEF3 and SEF10 use the outcome-driven `v0.2.0` course format. The other six courses retain their historical assessment structure pending individual migration reviews. All ten are `draft`; duration estimates, technical coverage, practical-work reproducibility, assessment quality, and learner feedback still need validation. See the [curriculum inventory](../INVENTORY.md) for the generated migration report.
 
 ## Independent study
 

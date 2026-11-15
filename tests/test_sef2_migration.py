@@ -38,7 +38,11 @@ class SEF2MigrationTests(unittest.TestCase):
             check=False,
         )
         self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
-        self.assertIn("3 v0.2.0, 7 legacy", result.stdout)
+        migrated = sum(
+            "**Specification:** `v0.2.0`" in course.read_text(encoding="utf-8")
+            for course in (ROOT / "curriculum" / "SEF").glob("SEF[0-9]*.md")
+        )
+        self.assertIn(f"{migrated} v0.2.0, {10 - migrated} legacy", result.stdout)
 
     def test_stable_outcome_ids_are_covered_by_five_required_assessments(self):
         text = COURSE.read_text(encoding="utf-8")
@@ -74,7 +78,12 @@ class SEF2MigrationTests(unittest.TestCase):
         self.assertNotIn("Final integration lab — required", text)
         catalog = CATALOG.read_text(encoding="utf-8")
         self.assertIn("[SEF2](SEF2.md)", catalog)
-        self.assertIn("SEF1, SEF2 and SEF10 use", catalog)
+        maturity = re.search(
+            r"(?m)^SEF1,.* use the outcome-driven `v0\.2\.0` course format\.",
+            catalog,
+        )
+        self.assertIsNotNone(maturity)
+        self.assertIn("SEF2", maturity.group(0))
 
 
 if __name__ == "__main__":
