@@ -1,10 +1,10 @@
-# OT-I06 — Pinned Golden Exports and Workspace Consumer Contract
+# Pinned curriculum exports and Workspace interoperability
 
-**Status:** Draft interoperability PR. The [Toolkit RFC 0002](../../rfcs/0002-toolkit-stewardship-and-licensing.md)
-remains a draft pending the steward decision in
-[issue #57](https://github.com/0xbuffdev/open-engineering-education/issues/57).
-Passing these checks does **not** publish an official Toolkit, certify
-course conformance or promote a course's readiness status.
+These checks verify reproducible Toolkit exports and an independently pinned
+OEE Workspace consumer. The Toolkit architecture was accepted in
+[RFC 0002](../../rfcs/0002-toolkit-stewardship-and-licensing.md).
+Passing the checks does **not** publish an official Toolkit package,
+establish educational conformance, or promote a course's readiness status.
 
 ## Immutable source and generated fixtures
 
@@ -17,8 +17,9 @@ The golden snapshots are **derived exports, not alternative editable
 curriculum or normative specification**. They contain excerpts of OEE
 educational requirements, which retain the applicable **CC BY 4.0**
 educational attribution/licensing. Toolkit implementation and test code
-is subject to the separately reviewed software licensing decision.
-No contributed educational text is silently relicensed by this PR.
+is subject to the file-level licensing scope in
+[Toolkit licensing](../LICENSING.md). The checks do not relicense
+contributed educational text.
 
 From an offline OEE checkout containing that historical commit:
 
@@ -43,7 +44,7 @@ assessments are pedagogically equivalent after a criteria change.
 
 ## Independent Workspace consumer
 
-The [OT-I06 workflow](../../.github/workflows/toolkit-interop.yml)
+The [interoperability workflow](../../.github/workflows/toolkit-interop.yml)
 checks out the **public Workspace consumer at the exact commit
 declared in the fixture manifest**, not moving Workspace main.
 It runs `scripts/verify-oee-export.py` from that Workspace source
@@ -58,11 +59,10 @@ against real committed OEE golden exports and requires:
 - No private service, paid resource, network lookup or competing OEE
   Markdown interpretation in Workspace.
 
-**Dependency:** Workspace's old v1 SEF1 map remains **unreviewed for the
-new course revision**. WS-I03 (v2 schema), WS-I01 (pinned map validation)
-and WS-I02 (reviewed v2 SEF1 map) have not been completed. These
-golden/consumer tests are a valuable independent integration seam, but
-cannot establish release-ready v2 Workspace mapping by themselves.
+**Scope limitation:** These tests verify the declared export and consumer
+contract, not the educational accuracy or approval of Workspace resource
+maps. Schema changes, source mappings, and other Workspace-specific
+requirements must be reviewed independently in the Workspace repository.
 
 ## Advisory source drift report
 
@@ -101,18 +101,14 @@ independent Workspace consumer and a separate advisory current-HEAD
 comparison. Current HEAD is supplied as an explicit full SHA, not
 silently substituted for the manifest's revision.
 
-## Review order
+## Updating consumer pins
 
-Review [Workspace consumer PR #5](https://github.com/0xbuffdev/oee-workspace/pull/5)
-before finalizing the OEE interoperation PR. If that PR merges at a
-different commit SHA, update **both** the manifest and the CI checkout
-to the new reviewed commit and re-run the contract tests. The current
-consumer checkout is deliberately pinned to the reviewable PR commit,
-not a floating branch.
+The fixture manifest records an exact Workspace consumer commit, not a
+floating branch. When the consumer changes, review the new revision,
+update the manifest pin, and rerun the contract tests. The CI checkout
+resolves its consumer revision from the same manifest.
 
-The Workspace schema-v2 and pinned map-validator dependencies still
-need separate source reviews. Merging an export-fixture PR does not
-automatically complete those tickets.
-
-**No curriculum rewrites, backward compatibility, compulsory private
-integration, verified learner claims or formal conformance claims.**
+An interoperability pass does not automatically approve changes to
+curriculum, resource mappings or learner evidence. This integration
+does not add backward compatibility, require a private service, or
+establish a formal OEE conformance claim.

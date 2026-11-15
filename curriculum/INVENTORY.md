@@ -33,8 +33,8 @@ The token is optional for public GitHub repositories, but recommended to avoid a
 - An absent program course table is a catalog gap even if the repository-wide overview declares expected courses. A source course without a catalog row remains **unlisted**, not automatically adopted.
 - `editorial_review` and `learner_validation` remain `not_established`. The published `draft`/`tested`/`verified` status is copied from source, never promoted by this report.
 
-## Boundaries
+## Scope and authority
 
-This is the implementation of [OE-I01](https://github.com/0xbuffdev/context/blob/main/repos/open-engineering-education/tickets.md), not the proposed official Toolkit. It reuses the current `course_format_versions.py` classifier and `check-outcome-curriculum.py` validator without creating a second normative parser, exporter, legacy dispatch, grading engine or learner-progress store.
+This inventory is a repository-maintenance report, not a Toolkit course export or an assessment of educational quality. It uses the existing `course_format_versions.py` classifier and `check-outcome-curriculum.py` structural validator to report the state of published course files. It does not define curriculum requirements, grade learner work, or establish course readiness or conformance.
 
-The generated artifacts are deliberately **not** checked in as editable snapshots. Re-run the workflow against the desired commit to regenerate them, and review the source changes and open PRs before closing the ticket. Curriculum changes, evidence decisions and course promotions still follow public OEE governance.
+Generated reports are not checked in as an independently maintained curriculum registry. Regenerate the report for the desired source commit and inspect the underlying course definitions and review evidence before making curriculum or status decisions. Those decisions remain subject to [OEE governance](../GOVERNANCE.md).

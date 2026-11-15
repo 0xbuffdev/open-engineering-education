@@ -1,15 +1,11 @@
-# OEE Toolkit — Immutable, Offline Curriculum Views
+# OEE Toolkit — Immutable, offline curriculum views
 
-**Status:** public repository-source implementation, **not an official
-Toolkit package or released/stabilized library API**. The governed source
-home and file-level licensing boundaries are recorded by
-[RFC 0002](../rfcs/0002-toolkit-stewardship-and-licensing.md) and
-[Toolkit licensing](LICENSING.md). The accepted RFC record becomes
-effective only through the OEE steward's explicit public approval and
-merge of its decision PR, tracked in
-[issue #57](https://github.com/0xbuffdev/open-engineering-education/issues/57).
-**OT-I05 independent release/readiness review remains required**
-regardless of governance acceptance or past implementation merges.
+The Toolkit is a public, repository-local implementation approved under
+[RFC 0002](../rfcs/0002-toolkit-stewardship-and-licensing.md).
+It checks supported course structure and produces deterministic exports.
+It is **not** an officially released package or a stabilized public library
+API. Distribution and support claims require separate release-readiness
+review. See [Toolkit licensing](LICENSING.md) for file-level license scope.
 
 This implementation reads outcome-driven **OEE v0.2.0 only** from local
 Git objects at one **full, immutable 40-character commit SHA**. It never
@@ -45,8 +41,8 @@ checks; a missing/unsupported source leaves an existing destination
 untouched. The implemented repository-local Python command is
 `python3 -m tooling.oee_toolkit`; no separately installed
 `oee_toolkit` package, stabilized importable API or Toolkit semantic
-version is approved yet. OT-I05 will decide the public distribution,
-API support and release mechanism.
+version is approved yet. Public distribution, API support and release
+mechanisms require a separate review.
 
 **Exit codes:** 0 structurally passed; 1 structural violation or unsafe
 reference; 2 invalid CLI arguments; 3 missing/incomplete/unsupported
@@ -93,8 +89,8 @@ or establish that legacy prerequisites conform to v0.2.0.
 This draft implements course check and course export, with a read-only
 repository inspection. Full program-catalog export, a distributable CLI
 package and public release numbering are **not implemented or claimed**.
-Governance approval is recorded in RFC 0002 when the steward merges
-the decision PR; it does not itself complete these missing release tasks.
+RFC 0002 has been accepted, but its approval does not complete the
+remaining release-readiness work.
 
 Tests build isolated synthetic local Git repositories and exercise:
 immutable revisions across dirty worktrees/moved HEAD, byte-identical
@@ -113,7 +109,7 @@ python3 -m unittest discover -s tests -p 'test_toolkit_pinned_export.py' -v
 interface schemas and tests are MIT; normative OEE curriculum and actual
 course-derived golden exports remain CC BY 4.0. See
 [Toolkit licensing](LICENSING.md) and the repository
-[NOTICE](../NOTICE). The steward's approval of RFC 0002 authorizes
-these boundaries; **OT-I05 must still review distribution notices
-before an official release**. This does not retroactively change any
-contributor's license or rights.
+[NOTICE](../NOTICE). RFC 0002 records these boundaries. A separate
+release-readiness review must verify distribution notices before an
+official release. This does not retroactively change any contributor's
+license or rights.
