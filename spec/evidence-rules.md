@@ -1,10 +1,10 @@
 # Evidence Rules
 
 This document defines the evidence needed to support OEE learning outcomes,
-course completion, course-readiness labels, and truthful engineering claims.
-It implements [RFC 0001](../rfcs/0001-outcome-driven-curriculum.md).
-Evidence demonstrates capability; completing a prescribed list of activities
-does not, by itself, demonstrate capability.
+course completion, and truthful engineering claims. Evidence demonstrates
+capability; completing a prescribed list of activities does not, by itself,
+demonstrate capability. Course-readiness promotion thresholds are defined in
+[Status Labels](status-labels.md).
 
 ## 1. Required outcomes and assessment evidence
 
@@ -43,12 +43,10 @@ A learner completes a course only when:
 A course MAY require multiple evaluations for an outcome when justified,
 provided the combined evidence requirements are explicit and published.
 
-No fixed number of knowledge tests, module labs, exercises, or concluding
-integration labs is mandatory across all OEE courses. An author SHOULD
-avoid duplicated summative work where existing evidence adequately measures
-the same capability. An integrated demonstration SHOULD be required when
-the outcomes depend on integration; otherwise sufficient cumulative evidence
-MAY establish completion.
+The [Course Format](course-format.md) governs whether activities and
+integrated demonstrations are required. An author SHOULD avoid duplicated
+summative work where existing evidence adequately measures the same
+capability.
 
 Optional practice, formative feedback, self-checks, reading, attendance, and
 time spent are not mandatory completion requirements unless the course has
@@ -166,19 +164,14 @@ intended reviewer.
 ## 6. Evidence and course status
 
 Course-readiness labels describe the evidence for the educational
-course definition, not an individual learner's completion.
+course definition, not an individual learner's completion. The
+authoritative promotion thresholds, records, reviewer requirements,
+and reassessment rules are defined in [Status Labels](status-labels.md).
 
-| Promotion | Minimum evidence |
-| --- | --- |
-| `draft` to `tested` | At least one learner completes the course; completion evidence is recorded; feedback is reviewed; and a revision note explains what changed as a result. |
-| `tested` to `verified` | At least two learners complete the course; the required summative evaluations and applicable engineering artifacts are reviewed or reproduced; and a qualified reviewer records sign-off. |
-
-A status change MUST have an inspectable supporting record. If the
-evidence becomes unavailable, materially incorrect, or insufficient,
-the status MUST be reassessed and lowered when no longer justified.
-The learner-count thresholds and reviewer requirement are unchanged
-by [RFC 0001](../rfcs/0001-outcome-driven-curriculum.md).
-See [Status Labels](status-labels.md).
+The assessment evidence supporting a promotion remains subject to the
+integrity, reproducibility, revision, and privacy requirements in this
+document. A learner's completion record alone does not establish that
+the course qualifies for a higher readiness label.
 
 ## 7. Assessment integrity and implementation independence
 

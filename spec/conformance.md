@@ -4,8 +4,8 @@
 
 This document establishes a provisional baseline for assessing whether a
 course, program, or implementation meets Open Engineering Education (OEE)
-requirements. This revision implements
-[accepted RFC 0001](../rfcs/0001-outcome-driven-curriculum.md).
+requirements. It describes the review criteria for the published `v0.2.0`
+draft, not the history of how those requirements were adopted.
 
 An assessment MUST state its specification version and scope.
 Conformance to a draft version MUST be described as such; a limited
@@ -37,38 +37,39 @@ implementation MUST NOT be described as conforming by implication.
 
 ## 3. Course-level requirements
 
-A course may be assessed as conforming to this version only when:
+A course may be assessed as conforming to this version only when the
+reviewer checks the applicable published requirements, including:
 
-1. Metadata, title, program assignment, type, status, prerequisite
-   references, and duration are consistent and valid.
-2. The four required course sections (Overview, Learning outcomes,
-   Modules, Completion requirements) exist and provide their required
-   substantive information.
-3. Required outcomes are observable, evaluable, and assigned stable,
-   unique IDs for the course revision under assessment.
-4. Every required summative assessment has a stable unique ID and
-   identifies the outcomes evaluated, required work, published success
-   criteria, and required evidence.
-5. Every required outcome is covered by sufficient summative evaluation.
-   The reviewer examines substantive validity of the assessment, not
-   just the presence of matching identifiers.
-6. Modules have coherent sequencing, stated outcomes, and an ordered
-   learning sequence; no fixed per-module tests or labs are required.
-7. Mandatory evaluation is distinguishable from optional formative
-   practice and does not impose unjustified duplicate work.
-8. Applicable practical tasks and executable artifacts meet the
-   proportional reproducibility, verification, and evidence requirements
-   of [Evidence Rules](evidence-rules.md).
-9. A `project` course defines required deliverables, published evaluation
-   criteria, and a suitable reviewable technical defense.
-10. Status labels and published claims are supported according to
-    [Status Labels](status-labels.md); internal links and references resolve;
-    no course requirement contradicts the applicable specification.
+1. Metadata and catalog consistency under [Course Format](course-format.md)
+   (§§1 and 9).
+2. All required course sections and their substantive contents under
+   Course Format (§2).
+3. Observable outcomes, stable identifiers, and required outcome
+   traceability under Course Format (§3).
+4. Identified summative assessments, published work and success criteria,
+   and required evidence under Course Format (§5).
+5. Substantive outcome coverage: the reviewer evaluates whether the
+   required assessments can actually demonstrate every claimed outcome,
+   not just whether IDs match (Course Format §5 and
+   [Evidence Rules](evidence-rules.md) §1).
+6. Coherent modules and learning sequences, with appropriate activity
+   choices and distinctions between required and optional work
+   (Course Format §4).
+7. Proportionate, non-duplicative evaluation and evidence requirements
+   (Course Format §§5–8 and Evidence Rules §§2–3).
+8. Applicable practical-work, verification, reproduction, and
+   evidence obligations (Course Format §6 and Evidence Rules §3).
+9. Project deliverables, evaluation criteria, and a reviewable defense
+   when assessing a `project` course (Course Format §7).
+10. Evidence-supported course status, accurate published claims,
+    valid internal links, and consistency with the applicable
+    specification ([Status Labels](status-labels.md), Course Format §9,
+    and [Implementation Boundary](implementation-boundary.md)).
 
-A concluding `lab`, a knowledge test in each module, or a prescribed
-order of learning activity types is not a conformance requirement.
-Integration SHOULD be assessed when the required course outcomes
-depend on combining capabilities.
+This checklist guides conformance review; it does not add a second
+set of authoring or assessment requirements. The linked normative
+documents remain authoritative. Integration SHOULD be assessed when
+required outcomes depend on combining capabilities.
 
 A structural validator MAY help verify IDs, sections, links, and
 references, but it cannot establish whether an assessment actually
