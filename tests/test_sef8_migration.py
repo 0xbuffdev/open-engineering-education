@@ -97,10 +97,8 @@ class SEF8MigrationTests(unittest.TestCase):
         self.assertIn("independent reviewer", text.lower())
         catalog = CATALOG.read_text(encoding="utf-8")
         self.assertIn("[SEF8](SEF8.md)", catalog)
-        self.assertIn(
-            "SEF1, SEF2, SEF3, SEF4, SEF5, SEF6, SEF7, SEF8 and SEF10 use",
-            catalog,
-        )
+        self.assertIn("All ten SEF courses (SEF1–SEF10)", catalog)
+        self.assertIn("SEF8", catalog)
 
 
 if __name__ == "__main__":
