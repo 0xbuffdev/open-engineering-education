@@ -7,10 +7,9 @@ study, OEE Workspace, 0xNAND, and other implementations. Learners MUST be able t
 understand the public course requirements without purchasing materials or using a
 commercial platform.
 
-This revision implements [RFC 0001](../rfcs/0001-outcome-driven-curriculum.md).
-The outcome and assessment model below applies to courses authored or migrated against
-the revised specification; earlier published course revisions remain attributable to
-the specification version under which they were authored.
+The requirements below apply to courses authored or migrated under the `v0.2.0`
+draft specification. Earlier published course revisions retain the requirements
+of their original specification and course versions.
 
 ## 1. Metadata
 
@@ -225,7 +224,5 @@ conformance. See [Conformance](conformance.md).
 ## 10. Governance
 
 Changes to normative requirements MUST follow the
-[RFC process](../rfcs/README.md). This revision implements
-[accepted RFC 0001](../rfcs/0001-outcome-driven-curriculum.md).
-Individual curriculum authors and implementations MUST NOT silently alter these
-requirements.
+[RFC process](../rfcs/README.md). Individual curriculum authors and
+implementations MUST NOT silently alter these requirements.
