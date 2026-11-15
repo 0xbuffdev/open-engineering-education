@@ -56,14 +56,14 @@ SEF5 → SEF9
 SEF1–SEF9 → SEF10
 ```
 
-SEF8 may be taken alongside SEF4–SEF7. It begins with a self-paced mathematical literacy and pre-algebra bridge, so prior algebra is **not** an entry prerequisite; the ungraded diagnostic identifies where more practice is needed. Every learner must demonstrate basic numeracy/algebra readiness before advancing. Unmigrated courses retain their historical typed lesson, test, and lab entries; SEF1 and SEF10 already use the outcome-driven `v0.2.0` course format.
+## Study notes and course maturity
 
-**Draft duration estimates** reflect expanded topics and require calibration with learner evidence. For **unmigrated legacy courses only**, keep the existing typed lesson-index format (`lesson`, `test`, or `lab`) and its historical completion requirements until each course is explicitly migrated. For courses using `v0.2.0`, lessons and practice are selected to develop observable outcomes; no universal per-module test/lab pair or final lab is required. Required summative evaluations, criteria, and evidence must be publicly available under **Completion requirements** or in an explicitly linked public assessment brief. See the [Course Format](../../spec/course-format.md) and [Curriculum Design Guide](../DESIGN-GUIDE.md).
+SEF8 may be taken alongside SEF4–SEF7. It begins with a self-paced mathematical literacy and pre-algebra bridge, so prior algebra is **not** an entry prerequisite; an ungraded diagnostic identifies where additional practice is needed. Basic numeracy and algebra readiness are still needed before progressing.
 
----
+SEF1 and SEF10 use the outcome-driven `v0.2.0` course format. The other eight courses retain their historical assessment structure pending individual migration reviews. All ten are `draft`; duration estimates, technical coverage, practical-work reproducibility, assessment quality, and learner feedback still need validation. See the [curriculum inventory](../INVENTORY.md) for the generated migration report.
 
 ## Independent study
 
-OEE curriculum requirements are public and free to use. [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) helps learners organize practical work and evidence. Books, free online materials, chapter references and optional purchase links are curated outside the OEE specification; using 0xNAND or purchasing a resource is not required to follow the curriculum.
+All required course information is publicly available. Use [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) or another learner-controlled environment to record practical work and evidence. Optional books and commercial instruction are not prerequisites for access to OEE.
 
-All ten courses remain `draft`. This curriculum underwent an initial technical-depth expansion, but it still needs independent subject-matter review, hands-on lab reproduction, assessment question/rubric authoring, realistic pacing checks and learner evidence. The published [Course Format](../../spec/course-format.md) governs the structure. The number of modules and lessons varies with the subject rather than an arbitrary cap.
+For the binding authoring contract, consult [Course Format](../../spec/course-format.md). For course-planning advice, use the non-normative [Curriculum Design Guide](../DESIGN-GUIDE.md).

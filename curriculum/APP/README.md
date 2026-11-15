@@ -33,7 +33,7 @@ Electives provide optional specialization and are **not** prerequisites for the 
 
 ## Courses
 
-Core and elective courses appear in the **same list**. Durations are draft workload estimates based on the expanded scope and must be calibrated through teaching and learner evidence. Catalogue statuses combine a course's required/optional classification with its OEE readiness status: `Core · draft` or `Elective · draft`. The underlying OEE readiness status is independently `draft`, `tested` or `verified`; `elective` is a classification, **not** a fourth readiness status. Elective course files explicitly declare the `Classification` metadata field with the value `elective`.
+The table below is the **current** APP catalog, not its migration target. Core courses are required; electives are optional specializations. The `Core · draft` and `Elective · draft` entries show both course classification and educational readiness: `elective` is **not** an additional readiness label. Durations are provisional and require calibration with learner evidence.
 
 | Course | Title | Duration | Prerequisites | Kind | Status |
 | --- | --- | --- | --- | --- | --- |
@@ -55,9 +55,9 @@ Core and elective courses appear in the **same list**. Durations are draft workl
 | [APP15](APP15.md) | Advanced TypeScript/Rust Application Development | 10 weeks | APP2, APP3, APP6 | `course` | **Elective · draft** |
 | [APP16](APP16.md) | Platform Engineering | 8 weeks | APP6, APP7 | `course` | **Elective · draft** |
 
-**Current totals:** 10 core courses (9 taught courses and one project capstone), plus 7 optional elective courses, all currently `draft`. Course definitions are public curriculum specifications, **not** finished teaching materials or readiness claims. APP9 remains the core capstone: APP10–APP16 are not required for graduation.
+**Current totals:** 10 core courses (including APP9's project capstone) and 7 optional electives, all `draft`. The electives APP10–APP16 are not required for graduation.
 
-**Approved migration architecture, introduced incrementally:** The [APP Architecture Decision](ARCHITECTURE.md) defines the target boundaries and stable-ID migration. APP17 is now the first new core course, independently defined against OEE `v0.2.0`. APP18, APP19, APP20 and APP21 and existing course-boundary revisions remain **planned**, not yet active. This course table and its linked definitions remain authoritative for what is currently required.
+**Roadmap, not active prerequisites:** The approved [APP migration architecture](ARCHITECTURE.md) describes a future 14-course core, including APP18–APP21 and revised boundaries for existing courses. Only APP17 from that expansion is currently published. The proposed courses, target prerequisites, and revised graduation pathway are **not active** until the corresponding course files and this catalog are updated through reviewed changes.
 
 ```text
 SEF10 → APP1
@@ -74,8 +74,8 @@ APP1–APP8 + APP17 → APP9
 
 Every authored APP course is currently `draft`. Course files define public outcomes, module structure, required practical work and completion requirements. Reading lists, affiliate purchases and commercial teaching content remain outside OEE. Learners can work through the core sequence independently; a commercial course or proprietary platform is not a graduation requirement.
 
-**APP1 scope note:** The APP1 course uses the OEE `v0.2.0` outcome-driven format. Its fifteen modules preserve first-principles Internet-to-browser coverage while four public assessments evaluate evidence across connected capabilities rather than enforcing a quiz/lab pair for each module. No learner-written JavaScript or backend service is required. The 12–16-week estimate is provisional and subject to learner evidence. The architecture decision has been adopted in [Issue #30](https://github.com/0xbuffdev/open-engineering-education/issues/30), but APP1 is unchanged; the remaining APP course splits and prerequisite transitions occur only through separately merged migration PRs.
+## Course maturity and scope
 
-**Draft limitations:** APP1 and APP17 follow the outcome-driven `v0.2.0` draft specification; the remaining APP courses retain their historical checkpoint/lab formats until explicitly migrated. All courses remain subject to educational review, applicable reproducibility checks, validation of required assessment evidence, realistic workload calibration, and learner feedback before any readiness promotion. Electives extend the public curriculum but do not alter the core progression or graduation requirements.
+APP1 and APP17 use the outcome-driven `v0.2.0` draft format. The other 15 published APP courses retain their earlier format until individually reviewed and migrated. No course is yet `tested` or `verified`; educational quality, assessments, reproducibility, workload, and learner feedback require further evaluation. The [curriculum inventory](../INVENTORY.md) reports format and structural status without implying conformance.
 
-**Depth policy:** No course or module has a universal lesson or module count. Size and sequencing follow distinct mechanisms, prerequisite relationships, coherent capabilities, appropriate practice, and evidence needs. Under OEE `v0.2.0`, a fixed per-module test/lab pattern and a mandatory final lab are not conformance requirements. An integrated evaluation is appropriate when the actual outcomes require one, as in APP1's Internet-to-pixels investigation. See the [Curriculum Design Guide](../DESIGN-GUIDE.md).
+APP1 covers first-principles Internet and browser mechanisms, not JavaScript application or backend implementation. APP17 provides the complementary HTML/CSS authoring capability. Course-specific outcomes and assessment expectations belong in their linked course definitions; the [Curriculum Design Guide](../DESIGN-GUIDE.md) provides non-normative guidance on lesson depth, scope, and sequencing.

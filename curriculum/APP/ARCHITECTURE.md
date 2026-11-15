@@ -1,10 +1,16 @@
 # Application Engineering — Migration Architecture Decision
 
-**Decision status:** Approved migration architecture **upon merge of this decision PR**. **Implementation status:** planned and incremental, tracked in [Issue #30](https://github.com/0xbuffdev/open-engineering-education/issues/30). **The current [APP catalog](README.md) and course files remain authoritative until separate curriculum PRs merge.**
+**Decision record:** Approved migration target; **partially implemented**.
+APP17 is published. APP18–APP21, course-boundary revisions, and target
+prerequisite changes are not yet part of the active catalog.
 
-The current authoritative program, course codes, prerequisites, and graduation
-requirements remain in [APP README](README.md) and its linked course files
-until separately reviewed migration pull requests change them. This document records the **temporary program migration decision**; it is not another normative OEE specification, authoring format, or course-completion contract. Once implementation is complete, reconcile the decision into the canonical APP catalog and retain only the historical rationale needed for traceability.
+**Current authority:** [APP program catalog](README.md) and its linked
+course definitions. This document records the rationale and proposed
+target progression, **not** another normative OEE specification, live
+course catalog, authoring format, or completion contract. Its decisions
+take effect for learners only through separately reviewed changes to
+the published catalog and course files. Historical discussion is available
+in [issue #30](https://github.com/0xbuffdev/open-engineering-education/issues/30).
 
 The objective is a curriculum that starts at first principles, teaches
 individual engineering capabilities deeply, and remains navigable for
@@ -474,7 +480,9 @@ individual course migration PRs merge.
   the OEE status requirements. Automated validation alone is not a
   conformance or educational-quality finding.
 
-The next implementation PR should introduce **APP17 — HTML & CSS
-Engineering** under this architecture, without editing APP1. Subsequent
-reviewable PRs introduce APP18 and APP19 before narrowing APP2 or
-adding the framework- and backend-specific courses.
+**Implementation snapshot:** APP17 — HTML & CSS Engineering — has been
+introduced as a published core course. The remaining architecture is
+still a target: APP18–APP21 and existing-course revisions require
+separate reviewed curriculum changes. Readers should use the
+[current APP catalog](README.md), rather than this historical decision,
+to determine actual prerequisites or graduation requirements.
