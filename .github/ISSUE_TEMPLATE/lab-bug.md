@@ -1,31 +1,31 @@
 ---
-name: Lab bug
-about: Lab instructions or exercises that do not work as written
-title: "lab: "
+name: Lab or exercise problem
+about: Report instructions, expected behavior, or required practical work that cannot be reproduced
+title: "exercise: "
 labels: lab-test-case
 assignees: ""
 ---
 
-**Course**:
+## Course and activity
 
-<!-- Course code and file, e.g. SEF1: curriculum/SEF/SEF1-course-slug.md -->
+<!-- Example: SEF1, curriculum/SEF/SEF1.md, Module 2; identify the exact assessment or exercise. -->
 
-**Lab or exercise**:
+## What you attempted
 
-<!-- Which lab/exercise, by module and number -->
+<!-- Include the relevant instructions, commands, and setup. Do not include credentials or private learner records. -->
 
-**Environment**:
+## Expected result
 
-<!-- OS, hardware if relevant, language/tool versions, anything a reproduction needs -->
+<!-- Explain what the published instructions led you to expect. -->
 
-**Expected**:
+## Observed result
 
-<!-- What the instructions say should happen -->
+<!-- Explain what happened. Include a minimal error message or sanitized output. -->
 
-**Actual**:
+## Environment
 
-<!-- What happened, including the exact command and output -->
+<!-- Include relevant operating system, tools, versions, and environment assumptions. -->
 
-**Suggested fix**:
+## Suggested correction (optional)
 
-<!-- Optional: corrected instruction, missing step, or an additional test case -->
+<!-- Describe a reproducible correction or the information missing from the public instructions. -->

@@ -1,4 +1,4 @@
-name: Draft OEE Toolkit pinned export contract
+name: OEE Toolkit source-pinned export checks
 
 on:
   pull_request:

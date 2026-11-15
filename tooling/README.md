@@ -35,7 +35,7 @@ python3 -m tooling.oee_toolkit export \
   --output sef1.json
 ~~~
 
-Use --output - to write derived JSON to stdout. A file export is written
+Use `--output -` to write derived JSON to stdout. A file export is written
 atomically only **after** the entire selected course passes structural
 checks; a missing/unsupported source leaves an existing destination
 untouched. The implemented repository-local Python command is
@@ -48,7 +48,7 @@ mechanisms require a separate review.
 reference; 2 invalid CLI arguments; 3 missing/incomplete/unsupported
 input; 4 unexpected local Git or tool failure.
 
-A repository-wide --all inspection is **incomplete** while any active
+A repository-wide `--all` inspection is **incomplete** while any active
 course remains in an older or unrecognized format, even if all migrated
 v0.2.0 courses pass. There is no old-format compatibility reader,
 converter or transparent schema negotiation.

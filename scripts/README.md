@@ -26,8 +26,8 @@ structural check proves educational conformance or learner mastery.
 The `APP/README.md` course table is the **authoritative ordered program
 catalog**. `app_catalog.py` reads its explicit Core/Elective label, type,
 readiness status, title, duration, prerequisites, and row order. Course IDs
-are identifiers, **not sequence numbers**: a future APP17 core course may
-appear between APP1 and APP2 without repurposing historical identifiers.
+are identifiers, **not sequence numbers**: APP17 already appears between
+APP1 and APP2 in the published catalog without changing existing IDs.
 
 The APP validator compares every linked catalog row with exactly one
 course file and rejects missing, duplicate, extra, or malformed rows,
@@ -39,11 +39,12 @@ course may optionally declare the `core` classification as well.
 
 A catalog entry's displayed prerequisite codes must agree with
 the course's own prerequisite metadata, including expanded ranges
-such as `APP1–APP8`. Proposed new APP17–APP21 course identities in
-`APP/ARCHITECTURE.md` are **not** part of the active catalog yet.
-The current nine-core/seven-elective catalog remains authoritative
-until later course-migration PRs update it. This adapter changes no
-normative specification, course outcome, or existing learner record.
+such as `APP1–APP8`. APP17 is published as a core course; APP18–APP21
+remain planned in the [APP migration decision](../curriculum/APP/ARCHITECTURE.md).
+The [current APP catalog](../curriculum/APP/README.md) contains
+**10 core courses and 7 electives** and is authoritative until reviewed
+course-migration PRs change it. The validator does not change course
+requirements or historical learner records.
 
 ## Outcome-based v0.2.0 courses
 
@@ -136,29 +137,52 @@ paths. It reads the required `Outcomes`, `Work`, `Criteria`, and
 without silently treating them as empty validated assessments. Unsupported
 remote links, multiple competing brief links, and unrecognized valid Markdown
 presentations are reported as `parser_limitation` / `incomplete`, not a
-definitive violation of OEE's authoring rules. The checker does **not** read
-a moving Git revision or provide immutable export snapshots; those belong to
-the separately reviewed Toolkit export implementation.
+definitive violation of OEE's authoring rules. This maintenance checker reads supplied working files, not a pinned Git
+source revision. The separate, repository-local
+[OEE Toolkit](../tooling/README.md) provides source-pinned, immutable
+course checks and exports; its package and public API are not released
+or stabilized.
 
 The checker cannot establish pedagogical validity, reproducibility in
 practice, learner mastery, `tested` or `verified` status, or course
 conformance. Every course migration also requires a documented substantive
 review of assessment quality, evidence, and independence from paid tools.
 
-## Migration status and next steps
+## Current coverage and limitations
 
-**Completed:** Legacy and `v0.2.0` structural checks coexist in the APP
-and SEF validators, with regression coverage for both. The three course
-pilots—SEF1, SEF10, and APP1—use the `v0.2.0` outcome-driven format and
-remain `draft`.
+The APP and SEF validators support the legacy checks needed by existing
+courses and the `v0.2.0` structural checks for migrated courses. **SEF1,
+SEF10, APP1, and APP17** use the outcome-driven format; all four remain
+`draft`. Other active course files must not be treated as conforming to
+`v0.2.0` merely because a legacy check passed.
 
-**Outstanding:**
+The repository-local [Toolkit](../tooling/README.md) implements pinned
+course checks and derived exports. Its
+[interoperability tests](../tooling/interop/README.md) check a pinned
+Workspace consumer, but they do not make Workspace resource mappings
+current, release a supported Toolkit package, or validate educational
+quality. A stabilized package/API and official release require separate
+readiness review.
 
-1. Complete substantive outcome-to-assessment and evidence reviews of
-   migrated course definitions; automated success is not conformance.
-2. Migrate remaining SEF and APP courses in reviewable batches while
-   preserving catalog and prerequisite invariants, course revision identities,
-   and historical learner evidence.
-3. Prepare a versioned export and explicit compatibility contract for
-   OEE Workspace, 0xNAND, and other consumers after the public evaluation
-   contract is validated. Do not infer learner completion from activity counts.
+Migration of the remaining course definitions requires public outcome
+and assessment criteria, substantive quality review, careful catalog
+and prerequisite updates, and explicit treatment of changed course
+revisions. Automated success is never proof of learner mastery.
+
+## Public documentation checks
+
+Run from the repository root:
+
+```sh
+python3 scripts/check-links
+python3 scripts/check-public-docs.py
+python3 -m unittest discover -s tests -p 'test_public_docs.py' -v
+npx --yes markdownlint-cli2@0.24.0
+```
+
+The link checker validates local paths and anchors without network
+access. The public-document check rejects links to 0xBUFF's internal
+planning repositories in the main entry points, specifications, RFCs,
+program catalogs, issue templates, and tooling guides. It does not
+verify external links, assess educational claims, or replace editorial
+review.

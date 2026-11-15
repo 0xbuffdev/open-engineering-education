@@ -1,0 +1,20 @@
+name: Public documentation boundaries
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  public-docs:
+    name: Internal planning links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reject non-public planning links from public documentation
+        run: python3 scripts/check-public-docs.py
+      - name: Run documentation checker regression tests
+        run: python3 -m unittest discover -s tests -p 'test_public_docs.py' -v
