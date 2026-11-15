@@ -93,7 +93,12 @@ class SEF3MigrationTests(unittest.TestCase):
         self.assertIn("No root privileges", text)
         catalog = CATALOG.read_text(encoding="utf-8")
         self.assertIn("[SEF3](SEF3.md)", catalog)
-        self.assertIn("SEF1, SEF2, SEF3 and SEF10 use", catalog)
+        maturity = re.search(
+            r"(?m)^SEF1,.* use the outcome-driven `v0\.2\.0` course format\.",
+            catalog,
+        )
+        self.assertIsNotNone(maturity)
+        self.assertIn("SEF3", maturity.group(0))
 
 
 if __name__ == "__main__":
