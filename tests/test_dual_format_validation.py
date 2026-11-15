@@ -1,6 +1,6 @@
-"""Integration regression tests for mixed legacy and v0.2.0 curricula.
+"""Integration tests for legacy APP and strictly v0.2.0 SEF course contracts.
 
-Tests use copied curriculum directories. No existing course is rewritten.
+Tests use copied curriculum directories. No published course is rewritten.
 """
 
 from __future__ import annotations
@@ -83,7 +83,7 @@ class DualFormatValidationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.app = load_validator("app_legacy_validation_test", "check-app-curriculum.py")
-        cls.sef = load_validator("sef_legacy_validation_test", "check-sef-curriculum.py")
+        cls.sef = load_validator("sef_strict_validation_test", "check-sef-curriculum.py")
 
     def setUp(self):
         self.directory = tempfile.TemporaryDirectory()
@@ -105,7 +105,7 @@ class DualFormatValidationTests(unittest.TestCase):
         path = self.root / "curriculum" / area / f"{code}.md"
         path.write_text(content, encoding="utf-8")
 
-    def test_untouched_legacy_catalogs_still_pass(self):
+    def test_untouched_catalogs_follow_their_current_contracts(self):
         self.assertEqual(self.app.validate(), 0)
         self.assertEqual(self.sef.validate(), 0)
 
@@ -200,6 +200,88 @@ class DualFormatValidationTests(unittest.TestCase):
             is_outcome_course(course)
         self.replace_course("APP1", course)
         self.assertNotEqual(self.app.validate(), 0)
+
+    def test_explicit_legacy_sef_is_rejected_without_old_reader(self):
+        old_style = """# SEF1 — Demystifying the Computer System
+
+**Program:** SEF — Software Engineering Foundations
+**Type:** `course`
+**Prerequisites:** none
+**Duration:** 5 weeks
+**Status:** `draft`
+**Specification:** `v0.1.0`
+
+## Overview
+
+Legacy course input must be rejected by active SEF tooling.
+
+## Learning outcomes
+
+- Explain a simple circuit and its simulated behavior.
+
+## Modules
+
+### Module 1 — Introductory Circuit
+
+#### Outcomes
+
+- Explain a basic gate.
+
+#### Lessons
+
+1. **Course introduction: Demystifying the Computer System** — `lesson`
+2. **Quiz** — `test`
+3. **Final integration lab — required** — `lab`
+
+## Completion requirements
+
+Complete the required exercises, checkpoints and lab.
+"""
+        self.replace_course("SEF1", old_style)
+        self.assertNotEqual(self.sef.validate(), 0)
+        self.assertTrue(any("explicitly declare v0.2.0" in e
+                            for e in self.sef.ERRORS))
+
+    def test_unmarked_outcome_style_sef_fails_closed(self):
+        path = self.root / "curriculum" / "SEF" / "SEF8.md"
+        source = path.read_text(encoding="utf-8")
+        self.assertIn("**Specification:** `v0.2.0`", source)
+        self.replace_course(
+            "SEF8", source.replace("**Specification:** `v0.2.0`\n", "")
+        )
+        self.assertNotEqual(self.sef.validate(), 0)
+        self.assertTrue(any("SEF8: active course must explicitly declare" in e
+                            for e in self.sef.ERRORS))
+
+    def test_sef_catalog_prerequisites_agree_with_course_metadata(self):
+        path = self.root / "curriculum" / "SEF" / "SEF7.md"
+        source = path.read_text(encoding="utf-8")
+        expected = "**Prerequisites:** [SEF3](SEF3.md), [SEF6](SEF6.md)"
+        self.assertIn(expected, source)
+        self.replace_course("SEF7", source.replace(
+            expected, "**Prerequisites:** [SEF2](SEF2.md), [SEF6](SEF6.md)"
+        ))
+        self.assertNotEqual(self.sef.validate(), 0)
+        self.assertTrue(any("SEF7: prerequisites differ from catalog" in e
+                            for e in self.sef.ERRORS))
+
+    def test_sef10_linked_range_expands_to_nine_prerequisites(self):
+        self.assertEqual(self.sef.validate(), 0)
+        self.assertEqual(
+            self.sef.DEPS["SEF10"], [f"SEF{i}" for i in range(1, 10)]
+        )
+
+    def test_sef10_cannot_silently_skip_middle_prerequisites(self):
+        path = self.root / "curriculum" / "SEF" / "SEF10.md"
+        source = path.read_text(encoding="utf-8")
+        actual = "**Prerequisites:** [SEF1](SEF1.md)–[SEF9](SEF9.md)"
+        self.assertIn(actual, source)
+        self.replace_course("SEF10", source.replace(
+            actual, "**Prerequisites:** [SEF1](SEF1.md), [SEF9](SEF9.md)"
+        ))
+        self.assertNotEqual(self.sef.validate(), 0)
+        self.assertTrue(any("SEF10: prerequisites differ from catalog" in e
+                            for e in self.sef.ERRORS))
 
     def test_legacy_course_without_final_lab_still_fails(self):
         path = self.root / "curriculum" / "APP" / "APP2.md"

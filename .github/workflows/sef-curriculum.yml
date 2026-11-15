@@ -1,4 +1,4 @@
-name: SEF curriculum import integrity
+name: SEF v0.2.0 curriculum integrity
 
 on:
   pull_request:
@@ -21,5 +21,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Check SEF import integrity
+      - name: Validate current SEF course contracts
         run: python3 scripts/check-sef-curriculum.py
