@@ -80,4 +80,4 @@ Add a row for each substantive RFC so contributors can find previous decisions.
 | RFC | Title | Status | Decision |
 | --- | --- | --- | --- |
 | [0001](0001-outcome-driven-curriculum.md) | Outcome-Driven Curriculum and Proportionate Assessment | `accepted` | Implemented in [PR #34](https://github.com/0xbuffdev/open-engineering-education/pull/34) |
-| [0002](0002-toolkit-stewardship-and-licensing.md) | Public OEE Toolkit Stewardship, Scope and Licensing | `draft` | Pending public review in [issue #57](https://github.com/0xbuffdev/open-engineering-education/issues/57) |
+| [0002](0002-toolkit-stewardship-and-licensing.md) | Public OEE Toolkit Stewardship, Scope and Licensing | `accepted` | Steward-reviewed source, interfaces and file-level license boundaries; implementation PRs #59–#62; [issue #57](https://github.com/0xbuffdev/open-engineering-education/issues/57) (official release still gated on OT-I05) |
