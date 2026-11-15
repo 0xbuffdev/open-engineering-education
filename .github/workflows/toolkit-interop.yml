@@ -1,0 +1,115 @@
+name: OT-I06 pinned OEE export and Workspace consumer contract
+
+on:
+  pull_request:
+    paths:
+      - 'tooling/interop/**'
+      - 'tooling/oee_toolkit/**'
+      - 'scripts/check-outcome-curriculum.py'
+      - 'tests/test_toolkit_interop.py'
+      - '.github/workflows/toolkit-interop.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'tooling/interop/**'
+      - 'tooling/oee_toolkit/**'
+      - 'scripts/check-outcome-curriculum.py'
+      - 'tests/test_toolkit_interop.py'
+      - '.github/workflows/toolkit-interop.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  pinned-contract:
+    name: Immutable golden and independent Workspace consumer
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out complete public OEE Git history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Run all OEE structural and synthetic pinned-source tests
+        run: python3 -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Print initial source-derived golden candidates for review
+        run: |
+          if [ ! -f tooling/interop/golden/SEF1.json ]; then
+            python3 tooling/interop/verify_golden.py --repo . --emit
+          fi
+      - name: Compare every committed golden file to the exact source Git commit
+        run: python3 tooling/interop/verify_golden.py --repo .
+      - name: Resolve the Workspace consumer pin from the fixture manifest
+        id: interop_pins
+        run: |
+          WORKSPACE_SHA="$(python3 -c "import json;print(json.load(open('tooling/interop/fixtures/pins.json'))['workspaceConsumer']['revision'])")"
+          echo "workspace_sha=$WORKSPACE_SHA" >> "$GITHUB_OUTPUT"
+      - name: Check out the independently pinned public Workspace consumer
+        uses: actions/checkout@v4
+        with:
+          repository: 0xbuffdev/oee-workspace
+          ref: ${{ steps.interop_pins.outputs.workspace_sha }}
+          path: _workspace
+          persist-credentials: false
+      - name: Exercise the Workspace consumer against committed OEE exports
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          import subprocess
+          import sys
+
+          pins = json.loads(Path("tooling/interop/fixtures/pins.json").read_text())
+          target = pins["source"]["revision"]
+          for code in pins["courses"]:
+              export = Path("tooling/interop/golden") / (code + ".json")
+              command = [
+                  sys.executable, "_workspace/scripts/verify-oee-export.py",
+                  "--export", str(export), "--revision", target, "--json"
+              ]
+              valid = subprocess.run(command, capture_output=True,
+                                     text=True, check=False)
+              assert valid.returncode == 0, (code, valid.stdout, valid.stderr)
+              payload = json.loads(valid.stdout)
+              assert payload["manualReviewRequired"] and payload["course"] == code
+              wrong = command.copy()
+              wrong[wrong.index("--revision") + 1] = "f" * 40
+              negative = subprocess.run(wrong, capture_output=True,
+                                        text=True, check=False)
+              assert negative.returncode == 1, (code, negative.stdout)
+              assert json.loads(negative.stdout)["finding"]["code"] == "WSX005"
+              print(f"{code}: independent consumer accepts exact SHA, rejects wrong SHA")
+          old_map = Path("_workspace/resources/mappings/SEF/SEF1.json")
+          result = subprocess.run([
+              sys.executable, "_workspace/scripts/verify-oee-export.py",
+              "--export", "tooling/interop/golden/SEF1.json",
+              "--revision", target, "--map", str(old_map), "--json",
+          ], capture_output=True, text=True, check=False)
+          assert result.returncode == 3, result.stdout
+          assert json.loads(result.stdout)["finding"]["code"] == "WSX012"
+          print("Historic Workspace v1 map rejected; no converter or false review.")
+          PY
+      - name: Advisory changed-HEAD drift (never alters a Workspace map)
+        run: |
+          REVISION="$(git rev-parse HEAD)"
+          BASE="$(python3 -c "import json;print(json.load(open('tooling/interop/fixtures/pins.json'))['source']['revision'])")"
+          python3 tooling/interop/drift.py \
+            --repo . \
+            --base-export tooling/interop/golden/SEF1.json \
+            --base-revision "$BASE" \
+            --target-revision "$REVISION" \
+            --workspace-map _workspace/resources/mappings/SEF/SEF1.json \
+            > "$RUNNER_TEMP/oee-source-drift.json"
+          python3 -m json.tool "$RUNNER_TEMP/oee-source-drift.json"
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          report = json.loads(
+              (Path(os.environ["RUNNER_TEMP"]) / "oee-source-drift.json")
+              .read_text(encoding="utf-8")
+          )
+          assert report["mapping"]["status"] == "unsupported_map_schema"
+          assert report["manualReviewRequired"]
+          print("Drift advisory recorded; historic map was not reinterpreted.")
+          PY
