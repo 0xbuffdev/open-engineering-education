@@ -167,7 +167,7 @@ The 10–14-week duration is a **provisional planning range**, not a readiness p
 4. **Recursive cost equations** — Translate a shrinking problem into an elementary recurrence with a base case.
 5. **Recurrence solutions** — Reason with substitution, expansion or a recursion tree on simple examples.
 6. **Cost models and assumptions** — Distinguish worst-case, expected and amortized interpretations; do not infer a proof from a timing graph.
-7. **Algorithm handoff** — Explain what mathematical reasoning SEF4 adds when analyzing searching, sorting and trees.
+7. **Algorithm handoff** — Explain how [SEF4](SEF4.md) will apply demonstrated quantified reasoning, induction, finite graphs and recurrence bounds to running programs, loop invariants, algorithmic cost models and independently checked implementations; this is preparation, not a new SEF11 assessment.
 
 *Optional practice:* Expand `T(n)=T(n/2)+1` for powers of two; justify a logarithmic bound and verify several small instances independently.
 

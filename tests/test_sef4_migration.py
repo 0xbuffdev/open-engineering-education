@@ -58,13 +58,13 @@ class SEF4MigrationTests(unittest.TestCase):
             covered.update(re.findall(r"SEF4-O\d+", reference.group(1)))
         self.assertEqual(covered, outcomes)
 
-    def test_all_eight_modules_reference_stable_outcomes(self):
+    def test_all_nine_modules_reference_stable_outcomes(self):
         course = COURSE.read_text(encoding="utf-8")
         modules = course.split("\n## Modules\n", 1)[1].split(
             "\n## Completion requirements\n", 1
         )[0]
         matches = list(re.finditer(r"(?m)^### Module (\d+) — ", modules))
-        self.assertEqual([int(m.group(1)) for m in matches], list(range(1, 9)))
+        self.assertEqual([int(m.group(1)) for m in matches], list(range(1, 10)))
         for i, module in enumerate(matches):
             next_start = matches[i + 1].start() if i + 1 < len(matches) else len(modules)
             block = modules[module.start():next_start]
@@ -79,7 +79,7 @@ class SEF4MigrationTests(unittest.TestCase):
     def test_status_and_program_authority_preserved(self):
         text = COURSE.read_text(encoding="utf-8")
         self.assertIn("**Prerequisites:** [SEF11](SEF11.md)", text)
-        self.assertIn("**Duration:** 10 weeks", text)
+        self.assertIn("**Duration:** 12–14 weeks", text)
         self.assertIn("**Status:** `draft`", text)
         self.assertIn("**Specification:** `v0.2.0`", text)
         self.assertNotIn("— `test`", text)
@@ -87,6 +87,7 @@ class SEF4MigrationTests(unittest.TestCase):
         self.assertNotIn("Final integration lab — required", text)
         catalog = CATALOG.read_text(encoding="utf-8")
         self.assertIn("[SEF4](SEF4.md)", catalog)
+        self.assertIn("| 12–14 weeks | SEF11 |", catalog)
         self.assertIn("All eleven SEF course files use", catalog)
         self.assertIn("no historical-format SEF course definitions remain", catalog)
 
