@@ -1,6 +1,6 @@
 # RFC 0003: SEF Academic Progression and Mathematical Readiness
 
-- **Status:** `draft`
+- **Status:** `accepted`
 - **Author:** 0xBUFF (proposal for steward review)
 - **Created:** 2026-11-16
 - **Last updated:** 2026-11-16
@@ -198,9 +198,9 @@ These questions do not alter the central proposed prerequisite and competency-ow
 
 ## 10. Decision
 
-- **Decision:** Pending — draft for steward review
-- **Decision date:** pending
+- **Decision:** Accepted — steward-approved architecture; implementation subject to review
+- **Decision date:** 2026-11-16
 - **Decision-maker:** 0xBUFF steward
-- **Rationale:** pending
-- **Conditions:** RFC acceptance and an implementation PR are required before any live curriculum changes
-- **Implementation pull request:** pending
+- **Rationale:** The steward approved the RFC and its SEF11-first mathematical prerequisite architecture after review and merger of [proposal PR #80](https://github.com/0xbuffdev/open-engineering-education/pull/80). Explicit proof readiness before SEF4 and bounded numerical mathematics in SEF8 correct material learning dependencies without renumbering public course IDs.
+- **Conditions:** Implement the curriculum and catalog together with automated and substantive review; preserve historical outcome/assessment evidence by revision; keep all courses `draft` without learner validation; defer any SEF7-to-SYS transfer until SYS adopts the receiving competency; preserve free independent study.
+- **Implementation pull request:** [#83 — SEF11 mathematical progression and SEF8 curriculum migration](https://github.com/0xbuffdev/open-engineering-education/pull/83) (under review; not merged)

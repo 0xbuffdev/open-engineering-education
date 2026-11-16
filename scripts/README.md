@@ -3,12 +3,10 @@
 OEE currently has two course-format generations. The scripts serve different
 purposes, and **none** replaces a substantive conformance review.
 
-## Legacy courses
+## Program validators
 
-- `python3 scripts/check-sef-curriculum.py` validates the published SEF
-  courses against their legacy structure and assessment briefs.
-- `python3 scripts/check-app-curriculum.py` validates the published APP
-  courses against their legacy structure and assessment briefs.
+- `python3 scripts/check-sef-curriculum.py` validates **all eleven** published SEF v0.2.0 courses, catalog-defined prerequisite-valid study order, new SEF11 mathematical prerequisites and capstone closure. SEF course IDs are stable identities, not numeric study order.
+- `python3 scripts/check-app-curriculum.py` validates the published APP catalog, including both migrated and still-legacy course contracts.
 
 Both program validators now classify courses using the shared
 `course_format_versions.py` helper. **Untouched legacy courses** retain
@@ -150,11 +148,9 @@ review of assessment quality, evidence, and independence from paid tools.
 
 ## Current coverage and limitations
 
-The APP and SEF validators support the legacy checks needed by existing
-courses and the `v0.2.0` structural checks for migrated courses. **SEF1,
-SEF10, APP1, and APP17** use the outcome-driven format; all four remain
-`draft`. Other active course files must not be treated as conforming to
-`v0.2.0` merely because a legacy check passed.
+**All eleven SEF courses** use the outcome-driven v0.2.0 draft format and remain `draft`; neither a structural check nor the mathematics migration establishes learner-tested readiness. SEF11 appears before SEF4/SEF8 in the authoritative catalog, and SEF10 requires all other ten SEF courses. The [mathematics migration map](../curriculum/SEF/MATH-MIGRATION.md) preserves historical outcome and assessment identities.
+
+APP1 and APP17 also use v0.2.0, while other APP courses may retain legacy format until migrated. Neither a legacy checker pass nor successful v0.2.0 structural validation alone establishes educational conformance.
 
 The repository-local [Toolkit](../tooling/README.md) implements pinned
 course checks and derived exports. Its

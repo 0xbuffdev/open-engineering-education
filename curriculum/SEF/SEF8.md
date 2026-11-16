@@ -1,32 +1,29 @@
-# SEF8 — Mathematics for Computing & AI
+# SEF8 — Mathematics for Numerical Computing & AI
 
 **Program:** SEF — Software Engineering Foundations
 **Type:** `course`
-**Prerequisites:** [SEF2](SEF2.md)
-**Duration:** 11–12 weeks
+**Prerequisites:** [SEF11](SEF11.md)
+**Duration:** 12–14 weeks
 **Status:** `draft`
 **Specification:** `v0.2.0`
 **Expected workload:** 10–15 focused hours/week (provisional; calibrate with learner evidence)
 
-> [Software Engineering Foundations](README.md) · [OEE curriculum](../README.md) · [Course format](../../spec/course-format.md)
+> [Software Engineering Foundations](README.md) · [Course format](../../spec/course-format.md) · [Mathematics migration](MATH-MIGRATION.md)
 
 ## Overview
 
-Build mathematical confidence from arithmetic and pre-algebra through logic, proofs, linear algebra, probability, statistics, calculus and numerical optimization. Learn to make a mathematical claim, solve examples by hand, verify computation in Python, and explain the assumptions and limits that make an answer meaningful. This course supplies mathematical foundations for algorithms and introductory AI, rather than demanding advanced mathematics before entry.
+Study algebraic functions, exponentials, logarithms and limits, then linear algebra, probability and statistics, derivatives, elementary integration, floating-point behavior, numerical methods and introductory optimization. Develop independently checkable mathematical arguments before comparing them with Python calculations, and distinguish exact results, numerical estimates and uncertain statistical claims.
 
-**There is no prerequisite algebra, calculus, probability or formal mathematics course.** SEF2 provides the only formal course prerequisite. SEF3–SEF7 may be taken concurrently; they are not entry gates. Module 1 offers an **ungraded entry diagnostic** in arithmetic, fractions, signed values, equations and function tables. It identifies individual support needs and must not be used to exclude learners or impose a fixed attempt count. The essential numeracy and pre-algebra capabilities remain required outcomes: learners can demonstrate them after practice and reassessment with unfamiliar examples before progressing into material that relies on those skills. Faster learners may show equivalent mastery without repeating every preparatory exercise.
+**SEF11 is now the prerequisite**, supplying the original arithmetic/pre-algebra, logic, counting, proof, recurrence and graph reasoning from the prior SEF8 contract. No separate entrance diagnostic is required here; mathematics support is available through formative review without an additional admission gate. SEF4 may proceed in parallel with SEF8 after SEF11, but both retain their own completion requirements.
 
-Use Python 3.11 or later and its standard library, including `fractions`, `math`, `statistics`, `itertools`, `random` and `unittest`, plus paper or accessible digital mathematical work. Required assessments run offline without NumPy, external scientific libraries, paid books, network access or a proprietary grader. Optional packages may provide *additional* comparisons, not replace hand-worked answers or become hidden requirements. Record interpreter version, exact commands, calculation assumptions, random seeds, precision and numerical tolerances.
+Use Python 3.11+ and its standard library (`fractions`, `math`, `statistics`, `itertools`, `random`, `unittest`) alongside reviewable paper or accessible digital derivations. Paid books, proprietary assessment, NumPy, network services and other scientific packages are **not** required. Document calculation domains, platforms, actual commands, seeds, numeric tolerances and independent expected values.
 
-The ten original module subjects remain the instructional sequence. Eight summative assessments integrate related mathematical abilities and may reuse verified functions and evidence in a final notebook or small library. Optional practice supports preparation; there is no compulsory checkpoint-and-lab quota for every module and no duplicate final project. Duration is an initial estimate. The course remains `draft` pending independent learner and reviewer evidence.
+The 12–14-week duration is provisional pending learner calibration. Four substantively unchanged assessments retain their original IDs; changed ones have new IDs. Historical results are not silently rewritten. See [MATH-MIGRATION.md](MATH-MIGRATION.md). Required assessments are outcome-based, not a quiz/lab quota per module.
 
 ## Learning outcomes
 
-- **SEF8-O1:** Calculate and interpret signed and whole numbers, fractions, decimals, percentages, proportions, rates, units, powers, and numerical estimates with correct order of operations.
-- **SEF8-O2:** Translate elementary notation into equations, inequalities, input-output functions and coordinate tables; solve and check results independently.
+- **SEF8-O19:** Analyze algebraic, polynomial, rational, exponential and logarithmic functions, their domains, composition, introductory limits and continuity required for calculus.
 - **SEF8-O3:** Use exact and approximate computation in Python to verify mathematical work, distinguish rounding from conceptual errors, and report invalid inputs transparently.
-- **SEF8-O4:** Form and negate propositions with quantifiers, operate on finite sets and functions, and correctly count arrangements and selections.
-- **SEF8-O5:** Construct elementary direct or inductive arguments and counterexamples, apply graph-degree and relation properties, and distinguish a universal proof from finite enumeration.
 - **SEF8-O6:** Compute vector sums, norms, dot products and compatible matrix products with correct dimensions and geometrical interpretation.
 - **SEF8-O7:** Analyze small linear systems, basis, rank, singularity, null spaces and simple transformations, distinguishing unique, inconsistent and underdetermined cases.
 - **SEF8-O8:** Calculate unconditional, conditional and Bayesian probabilities under stated assumptions, handling zero-probability conditioning and dependence explicitly.
@@ -34,65 +31,36 @@ The ten original module subjects remain the instructional sequence. Eight summat
 - **SEF8-O10:** Interpret sampling bias, variability, standard errors, approximate confidence intervals and p-values without unsupported certainty or causal claims.
 - **SEF8-O11:** Differentiate elementary functions, compute partial derivatives and gradients, and explain the chain rule and geometric meaning of a gradient.
 - **SEF8-O12:** Approximate derivatives and gradients numerically while examining step size, truncation, floating-point rounding and justified error tolerances.
-- **SEF8-O13:** Compare algorithmic growth and simple recurrence bounds analytically, explaining why finite measurement alone does not prove an asymptotic class.
 - **SEF8-O14:** Model finite probability or statistical experiments with transparent estimands, assumptions and reproducible random seeds, and interpret their uncertainty.
 - **SEF8-O15:** Analyze simple floating-point representation and cancellation failures, including the limits of exact equality and finite precision.
 - **SEF8-O16:** Implement and analyze bounded gradient descent with explicit step sizes, stopping rules, invalid-input handling, and convergence/divergence examples.
 - **SEF8-O17:** Build a reproducible standard-library numerical notebook or small library with hand-derived reference results, deterministic tests and appropriate error contracts.
 - **SEF8-O18:** Defend mathematical assumptions, computational limits and a diagnosed failure using transparent evidence, independent reproduction and accessible reasoning.
+- **SEF8-O20:** Interpret accumulation, Riemann sums and elementary antiderivatives and definite integrals, connecting continuous probability densities to integration under stated assumptions.
 
 ## Modules
 
-### Module 1 — Mathematical Literacy & Pre-Algebra
+### Module 1 — Algebra, Functions and Limits
 
 #### Outcomes
 
-- SEF8-O1
-- SEF8-O2
+- SEF8-O19
 - SEF8-O3
 
 #### Lessons
 
-1. Course introduction: Mathematics for Computing & AI
-2. Ungraded entry diagnostic (identify individual bridge practice)
-3. What mathematics describes: quantities, patterns and relationships
-4. Counting, whole numbers, place value and number lines
-5. Addition, subtraction, multiplication and division
-6. Order of operations, grouping and estimation
-7. Negative numbers and absolute value
-8. Fractions and their operations
-9. Decimals, percentages and conversions
-10. Ratios, proportions, rates and measurement units
-11. Powers, roots and scientific notation
-12. Symbols, variables and arithmetic expressions
-13. Solving simple linear equations and checking answers
-14. Inequalities and coordinate pairs
-15. Functions, input-output tables and basic graphs
+1. **Function domains** — Evaluate domain, range, polynomial and rational functions, including excluded denominator values
+2. **Algebraic manipulation** — Factor elementary polynomials and solve equations with substitution checks
+3. **Coordinates and slopes** — Interpret elementary function graphs, secants and rates of change
+4. **Exponential functions** — Apply exponent laws and explain exponential growth with stated domains
+5. **Logarithms** — Use the inverse relation with exponentials, logarithm laws and positive arguments
+6. **Function composition** — Compute composed functions and explain undefined intermediate expressions
+7. **Limits and continuity** — Distinguish a limiting value from a finite sample or function value at a point
+8. **Exact and approximate checking** — Verify independently derived examples with rational arithmetic and justified rounding
 
-*Optional practice:* Attempt an ungraded entry check, then use number-line, fraction, ratio, function-table and equation examples to identify topics needing more practice.
+*Optional practice:* Predict a domain error and explain why a numerical table is not a proof of a limit.
 
-### Module 2 — Logic, Sets & Discrete Reasoning
-
-#### Outcomes
-
-- SEF8-O4
-- SEF8-O5
-
-#### Lessons
-
-1. Propositional logic
-2. Quantifiers
-3. Sets
-4. Functions
-5. Counting rules
-6. Permutations and combinations
-7. Proof by contradiction and induction
-8. Relations, equivalence and orderings
-9. Graphs as mathematical objects
-
-*Optional practice:* Compare a finite truth table and combinatorial enumeration with a general logical or counting argument.
-
-### Module 3 — Vectors & Matrices
+### Module 2 — Vectors & Matrices
 
 #### Outcomes
 
@@ -113,6 +81,23 @@ The ten original module subjects remain the instructional sequence. Eight summat
 10. Solutions of linear systems and singular cases
 
 *Optional practice:* Draw vectors and a matrix transformation, then test dimensions and a singular example with small exact numbers.
+
+### Module 3 — Linear Algebra for Computation
+
+#### Outcomes
+
+- SEF8-O6
+- SEF8-O7
+
+#### Lessons
+
+1. Vector spaces and linear independence
+2. Basis, rank and null space
+3. Matrix transformations and compositions
+4. Eigenvectors and eigenvalues as introductory concepts
+5. Numerical linear-system accuracy
+
+*Optional practice:* Investigate null vectors of a rank-deficient matrix and compare exact rational calculations with rounded floats.
 
 ### Module 4 — Probability & Statistics
 
@@ -137,64 +122,7 @@ The ten original module subjects remain the instructional sequence. Eight summat
 
 *Optional practice:* Count a conditional-probability table by hand and compare its ratios with a seeded synthetic simulation.
 
-### Module 5 — Derivatives, Gradients & Complexity
-
-#### Outcomes
-
-- SEF8-O11
-- SEF8-O12
-- SEF8-O13
-
-#### Lessons
-
-1. Derivatives
-2. Numerical derivatives
-3. Partial derivatives
-4. Gradients
-5. Growth of functions
-6. Algorithm complexity
-7. Chain rule and gradient interpretation
-8. Finite-difference approximation error
-9. Growth rates and numerical stability
-
-*Optional practice:* Calculate a derivative by hand before testing forward and central finite differences over several step sizes.
-
-### Module 6 — Proofs, Relations & Graph Mathematics
-
-#### Outcomes
-
-- SEF8-O4
-- SEF8-O5
-- SEF8-O13
-
-#### Lessons
-
-1. Direct proof and induction
-2. Contradiction and counterexample
-3. Equivalence relations and partitions
-4. Graph degree, paths and connectivity
-5. Recurrences and combinatorial reasoning
-
-*Optional practice:* Check an induction step and a handshaking-lemma example, then find a counterexample to a plausible false graph claim.
-
-### Module 7 — Linear Algebra for Computation
-
-#### Outcomes
-
-- SEF8-O6
-- SEF8-O7
-
-#### Lessons
-
-1. Vector spaces and linear independence
-2. Basis, rank and null space
-3. Matrix transformations and compositions
-4. Eigenvectors and eigenvalues as introductory concepts
-5. Numerical linear-system accuracy
-
-*Optional practice:* Investigate null vectors of a rank-deficient matrix and compare exact rational calculations with rounded floats.
-
-### Module 8 — Statistical Inference & Experimental Reasoning
+### Module 5 — Statistical Inference & Experimental Reasoning
 
 #### Outcomes
 
@@ -213,7 +141,32 @@ The ten original module subjects remain the instructional sequence. Eight summat
 
 *Optional practice:* Repeat a seeded Bernoulli experiment under a second seed and explain why observed coverage fluctuates.
 
-### Module 9 — Numerical Methods & Optimization Foundations
+### Module 6 — Differentiation, Integration and Numerical Gradients
+
+#### Outcomes
+
+- SEF8-O19
+- SEF8-O20
+- SEF8-O11
+- SEF8-O12
+- SEF8-O15
+- SEF8-O3
+
+#### Lessons
+
+1. **Rates and derivatives** — Connect secant slopes, tangent slopes and the limit definition of derivative
+2. **Derivative rules** — Differentiate polynomials and simple exponentials and justify a chain-rule computation
+3. **Partial derivatives** — Compute a function's partial derivatives with other variables held fixed
+4. **Gradients** — Derive and interpret the gradient of a two-variable function
+5. **Accumulation and Riemann sums** — Interpret definite integrals as limits of sums, including signed accumulation
+6. **Antiderivatives and the fundamental theorem** — Evaluate an elementary definite integral and check by differentiation
+7. **Continuous probability** — Explain why interval probability is an integral of a nonnegative density
+8. **Finite differences** — Compare forward and central derivative approximations with analytic results
+9. **Truncation and rounding** — Diagnose invalid step sizes, finite precision and cancellation
+
+*Optional practice:* By hand compute f'(2)=7 for f(x)=x²+3x and integral 0 to 1 of 2x = 1; compare with numerical estimates.
+
+### Module 7 — Numerical Methods & Optimization Foundations
 
 #### Outcomes
 
@@ -232,50 +185,44 @@ The ten original module subjects remain the instructional sequence. Eight summat
 
 *Optional practice:* Trace gradient descent updates by hand and compare a stable step size with a deliberately unstable one.
 
-### Module 10 — Numerical Computing Notebook
+### Module 8 — Numerical Computing Notebook
 
 #### Outcomes
 
+- SEF8-O19
 - SEF8-O3
+- SEF8-O6
+- SEF8-O7
+- SEF8-O8
+- SEF8-O9
+- SEF8-O10
+- SEF8-O11
+- SEF8-O12
 - SEF8-O14
 - SEF8-O15
+- SEF8-O16
 - SEF8-O17
 - SEF8-O18
+- SEF8-O20
 
 #### Lessons
 
 1. Notebook or small-library structure and independent mathematical oracles
 2. Exact rational arithmetic and elementary function-table checks
-3. Discrete reasoning and linear-algebra exercises
+3. Algebraic functions, calculus and linear-algebra exercises
 4. Bayesian probability, simulated sampling and labeled uncertainty
-5. Differentiation, numerical error and bounded optimization
+5. Differentiation, integration, numerical error and bounded optimization
 6. Clean-start documentation, tests and independent mathematical defense
 
 *Optional practice:* Outline a lightweight Python numerical notebook with reference cases, explicit tolerances and a reproducible test harness.
 
 ## Completion requirements
 
-### Bridge, environment and evidence
+### Assessment environment and review
 
-The introductory numeracy diagnostic is **ungraded**: it identifies useful preparation and cannot be used as an entry barrier or a fixed-attempt summative requirement. SEF8-AS1 assesses *demonstrated* arithmetic and pre-algebra readiness after instruction or equivalent prior mastery, with no fixed number of attempts. Learners can revise work and be reassessed with equivalent unfamiliar examples before taking on later dependent mathematics. Do not confuse readiness for advanced modules with prerequisites for enrolling in the course.
-
-All required work uses Python 3.11+, its standard library and reviewable handwritten, typed, spoken or otherwise accessible reasoning. Record source revision, exact commands, interpreter version, random seeds, rounding or numerical tolerances, and expected versus observed results. Use independent mathematical calculations to check code; one function calling itself is not an independent test oracle. Scientific packages such as NumPy are optional second opinions, not hidden prerequisites.
-
-The reviewer records the result for each required assessment, which outcomes were directly evidenced and any remediation. Exact rational identities should be checked exactly where feasible; approximate numerical claims require justified tolerances and explicit assumptions. Sampling frequencies are observations, not proofs of a population probability, and an interval method must be named and qualified. A clean test report, correct guessed number or worked example memorized from this public course is insufficient without reasoning on equivalent unfamiliar values.
+Each assessed executable artifact must be reproducible from a clean environment with Python's standard library, documented commands, independent references, actual observed results and meaningful error/failure behavior. For conceptual work, an inspectable derivation or explanation can establish the outcome. A green test, exact floating-point coincidence or simulation alone does not establish mathematical understanding, a general theorem or statistical certainty. Learners may reuse earlier verified components; optional practice is not a new mandatory submission. Unmet required criteria must be corrected and reassessed.
 
 ### Required summative assessments
-
-- **SEF8-AS1** (required arithmetic, pre-algebra and the mathematical bridge)
-  - Outcomes: SEF8-O1, SEF8-O2, SEF8-O3, SEF8-O18
-  - Work: Begin with an ungraded starting-point diagnostic and identify any learning gaps; its result is neither an admission score nor a completion attempt. After suitable practice, demonstrate signed arithmetic, fraction addition, decimal/percentage conversion, ratio with units, powers, order of operations, a simple equation and inequality, and an input-output function table using unfamiliar but equivalent numbers. Show reasoning by hand or accessible digital work, check an equation by substitution and estimate whether answers are reasonable. Verify selected results with Python using fractions.Fraction for exact rational values. Include a wrong result and reasoned correction, a zero-denominator case and a function-table input outside a memorized example.
-  - Criteria: All essential number-sense, signs, fractions/percentages, ratios/rates and units, powers, equations, inequalities and function-table skills are correctly demonstrated and explained. Exact rational work agrees with independently calculated values; invalid division is not silently accepted and rounding is not mistaken for an arithmetic identity. A learner needing more practice may reassess each missing essential category with new inputs and no fixed penalty or attempt limit. The ungraded diagnostic is **not** counted as a required summative test or a prerequisite to enrolling.
-  - Evidence: Optional diagnostic and individualized practice notes (without grades), independent calculations and checks, unfamiliar readiness examples with reviewer decisions, Python source and outputs, invalid case and corrected misconception, and interpreter/version information.
-
-- **SEF8-AS2** (required logic, counting, proofs and graph identities)
-  - Outcomes: SEF8-O4, SEF8-O5, SEF8-O13, SEF8-O18
-  - Work: Construct a truth table for implication and its equivalent negation/disjunction form; negate a quantified universal claim correctly. Calculate set union/intersection/difference and count ordered versus unordered selections, comparing hand-derived values against itertools enumeration for small fixtures including zero and overlarge selections. Give a complete induction proof that the sum of the first n positive odd integers equals n squared. Prove the handshaking identity for finite undirected simple graphs and verify it on a small graph enumeration. Supply a counterexample to one plausible false general claim and explain what finite computation does **not** prove.
-  - Criteria: Logical rows, quantified negations, set memberships and counts agree with independent derivations, including a five-choose-two count of 10 versus 20 ordered pairs. The induction argument includes base case, hypothesis and valid induction step; the graph argument counts incidences under declared assumptions. A counterexample actually refutes the stated false claim. The learner separates an analytic proof or recurrence bound from finite examples, discusses the hypothesis and validity of any growth assertion, and handles invalid counting input visibly.
-  - Evidence: Truth tables, formal or accessible proof steps, hand-worked set/count fixtures, Python enumerations and graph-degree checks, boundary/invalid tests, a false claim and counterexample, and revised reasoning after a diagnosed error.
 
 - **SEF8-AS3** (required vectors, matrices and linear systems)
   - Outcomes: SEF8-O6, SEF8-O7, SEF8-O3, SEF8-O18
@@ -289,17 +236,17 @@ The reviewer records the result for each required assessment, which outcomes wer
   - Criteria: The analytic posterior is 4/13 and its denominator is justified by the relevant conditional event; the descriptive calculations produce mean 4, population variance 8/3, and sample variance 4. Probability inputs lie in valid bounds and impossible conditioning is rejected or labeled undefined. Sampling output is reproducible under the recorded seed, but exact frequencies are not incorrectly required to equal the mathematical probability. The learner distinguishes independence from conditional probability and random sampling variability from an algorithmic error.
   - Evidence: By-hand probability table and statistics calculations, implementation with input validation, deterministic seed/trial counts and observed contingency table, standard-library reference comparisons, invalid/empty cases and a reasoned simulation discrepancy.
 
-- **SEF8-AS5** (required calculus, numerical differentiation and growth)
-  - Outcomes: SEF8-O11, SEF8-O12, SEF8-O13, SEF8-O15, SEF8-O3
-  - Work: Differentiate f(x)=x squared + 3x, evaluate f'(2), and compute the gradient of g(x,y)=x squared + 3xy at (1,2). Explain a suitable chain-rule example and the interpretation of an instantaneous rate of change. Implement forward and central finite differences and compare their errors across several positive step sizes with h=0 rejected. Discuss floating-point cancellation at very small h and justify numeric tolerances against analytic derivative values. Compare n log n and n squared for growing positive n and show an elementary recurrence argument with assumptions, without using timing as proof of an asymptotic class.
-  - Criteria: The analytic results f'(2)=7 and gradient (8,3) are correctly derived. Finite differences approach the correct result for suitable scales, but no monotonic-improvement claim is made as h tends to zero in finite precision. Undefined steps and non-finite inputs are handled, exact/approximate reasoning is distinguished, and the chain-rule computation is correct. Growth claims use explicit asymptotic reasoning or a valid bound, not merely a plot or measured values. An intentionally incorrect derivative or numerical approximation is diagnosed and corrected.
-  - Evidence: Analytic working, Python finite-difference source, h versus absolute-error table, tolerance and invalid-input tests, chain-rule and recurrence reasoning, corrected error trace and complexity explanation.
-
 - **SEF8-AS6** (required sampling uncertainty and responsible statistical inference)
   - Outcomes: SEF8-O9, SEF8-O10, SEF8-O14, SEF8-O18
   - Work: For 60 successes in 100 independent Bernoulli trials, compute the sample proportion, plug-in standard error and explicitly labeled approximate 95% normal interval. State the independence, sample-size and approximation assumptions; identify when the method fails for extreme proportions or very small samples. Simulate repeated samples under a fixed seed for a known probability, recording estimated interval coverage across at least 1,000 replicates and discussing Monte Carlo variability. Deliberately bias a second sample, describe how that changes inference, and explain a p-value without equating it to the probability the null hypothesis is true. Distinguish observed association from an established causal effect.
   - Criteria: The sample proportion is 0.6; standard error is sqrt(0.6*0.4/100), approximately 0.049, and the labeled normal 95% interval is approximately [0.504,0.696]. Calculations use the declared approximate method and appropriately reject or qualify pathological/invalid cases. Coverage is reported as an empirical estimate without imposing a fabricated exact frequency; seeds, replicate count and biased selection mechanism remain inspectable. A confidence interval, p-value, bias and causal claim are interpreted according to their actual assumptions and limits.
   - Evidence: Hand calculations and formula, labeled interval code, declared random process and seed, repeated-run coverage output, bias comparison, invalid input cases, and a short explanation addressing uncertainty, p-values and causality.
+
+- **SEF8-AS9** (required algebra, limits, differentiation and integration)
+  - Outcomes: SEF8-O19, SEF8-O20, SEF8-O11, SEF8-O12, SEF8-O3, SEF8-O18
+  - Work: Solve an unfamiliar rational-function domain problem with excluded inputs and an exponential/logarithm identity with valid positive arguments. Give an algebraic limit argument and explain why finite numerical samples cannot prove the limit. Derive f'(2)=7 for f(x)=x²+3x and the gradient (8,3) of g(x,y)=x²+3xy at (1,2); give a distinct valid chain-rule example. Explain a finite Riemann sum and derive the definite integral of 2x from 0 to 1 (value 1) by an antiderivative. Explain interval probability for a nonnegative probability density. Implement forward and central finite-difference estimates, analyze their errors across positive step sizes, and detect invalid or non-finite inputs and cancellation.
+  - Criteria: Domains, logarithm assumptions, algebraic limit arguments and derivative/gradient/integral derivations are correct. Finite evidence is not mistaken for analytic proof. Density values are not presented as interval probabilities, error tolerances and approximation limits are justified, and a deliberate calculation or code defect is diagnosed and repaired.
+  - Evidence: Independent algebra, limit, derivative and integral working, Riemann-sum reasoning and density explanation, Python source with step-size/error table, invalid-input cases, checkable expected values and failure/repair record.
 
 - **SEF8-AS7** (required floating-point behavior and bounded gradient descent)
   - Outcomes: SEF8-O11, SEF8-O12, SEF8-O15, SEF8-O16, SEF8-O18
@@ -307,14 +254,14 @@ The reviewer records the result for each required assessment, which outcomes wer
   - Criteria: At rate 0.25 the first updates are x1=1.5 and x2=2.25; for the stated function/runs, rate 1.0 oscillates 0↔6 and 1.1 diverges from the minimizer. The test records both a finite iteration budget and a justified convergence criterion; absence of convergence is reported as a bounded result, not success. Numerical errors, truncation and rounding are distinguished, no unqualified exact float equality is required, and invalid rates/inputs fail predictably. The learner explains the mathematical recurrence behind the observed stability or divergence.
   - Evidence: Analytic update derivation, Python optimizer and finite-difference source, multi-rate iteration logs with stop reasons, expected/actual tests including failures and edge cases, controlled precision/tolerance notes, and a corrected defect.
 
-- **SEF8-AS8** (required integrated mathematical computing notebook and defense)
-  - Outcomes: SEF8-O1, SEF8-O2, SEF8-O3, SEF8-O4, SEF8-O5, SEF8-O6, SEF8-O7, SEF8-O8, SEF8-O9, SEF8-O10, SEF8-O11, SEF8-O12, SEF8-O13, SEF8-O14, SEF8-O15, SEF8-O16, SEF8-O17, SEF8-O18
-  - Work: Assemble previously assessed work into a documented offline Python notebook, script package or small library using standard-library fractions, itertools, math, statistics, random and unittest as appropriate. Include an exact fraction and simple equation/function table, truth/count or graph proof/counterexample, vector/matrix and singular-system check, conditional probability/statistical summary, uncertainty-aware seeded simulation, analytic/numerical derivative, and finite gradient-descent experiment. Reuse inspected source and results from earlier assessments rather than reimplementing every function. For each core operation, provide a hand-derived or otherwise independent normal-case oracle, a boundary/invalid case and explicit numeric precision or probability assumptions. Document one discovered flaw and its repair; have an independent reviewer follow a clean checkout and reproduce an unfamiliar normal and failing case, then defend a nontrivial design choice.
-  - Criteria: The documented test command succeeds from a fresh environment with no paid or external service; every claimed capability is supported by inspectable artifacts and realistic independent reference values. Exact computations and approximate measurements are not conflated, and invalid assumptions or singular/undefined cases are not turned into plausible-looking numbers. All declared random work is repeatable by seed and includes evidence limits; mathematical statements are defended with reasoning rather than green tests alone. Any uncorrected foundational error or hidden dependency prevents passing. Independent reviewer observations and responses are documented.
-  - Evidence: Portable source and clean-start README, exact interpreter/test commands, reused artifact-to-outcome matrix, hand-derived oracle table, normal and failing fixture results, uncertainty/precision settings, review notes and response, a diagnosed-and-fixed defect, and an accessible technical defense.
+- **SEF8-AS10** (required integrated numerical computing and defense)
+  - Outcomes: SEF8-O3, SEF8-O6, SEF8-O7, SEF8-O8, SEF8-O9, SEF8-O10, SEF8-O11, SEF8-O12, SEF8-O14, SEF8-O15, SEF8-O16, SEF8-O17, SEF8-O18, SEF8-O19, SEF8-O20
+  - Work: Assemble assessed numerical work into an offline Python notebook or portable small library using the standard library. Include independent expected results for a function/domain, derivative and integral, vector/matrix product, singular linear system, conditional probability, descriptive and inferential statistics with a seeded experiment, finite-precision counterexample and bounded gradient descent. Reuse earlier artifacts instead of making unrelated projects. Document clean-run commands, reproducible fixtures, exact and approximate assumptions, and obtain independent reproduction of an unfamiliar normal and failing case. Diagnose a fault and defend the algorithm and limitations.
+  - Criteria: Every outcome has actual inspectable evidence rather than merely a declared ID. Mathematical working and tests agree on independent references; singular, invalid, non-finite or nonconvergent cases are not misrepresented as successes. Statistical simulations are reproducible without claiming exact frequencies or causation, and numerical tolerances are explained. No hidden paid tool, package or service is needed, and independent reproduction and defense establish personal understanding.
+  - Evidence: Versioned portable source and README, exact clean-start commands and tool versions, mathematical oracle and test matrix, numeric tolerances and seeds, worked derivations, negative fixtures, reviewer observations, a fault correction and technical defense.
 
-### Completion decision
+### Completion decision and historical transition
 
-All **eight required summative assessments** must meet their published criteria, collectively demonstrating SEF8-O1 through SEF8-O18. Lessons and optional practice support learning but do not add compulsory tests or labs. The ungraded entry diagnostic remains separate from the required pre-algebra mastery demonstration, and essential gaps may be remediated and reassessed without a fixed attempt cap. The final notebook may reuse prior verified calculations, functions and tests.
+All six required assessments (`SEF8-AS3`, `SEF8-AS4`, `SEF8-AS6`, `SEF8-AS7`, `SEF8-AS9`, `SEF8-AS10`) must pass; together they evaluate the fifteen current outcomes. The integrated notebook may reuse inspected work and does not demand a duplicate project.
 
-Reviewers preserve inspectable decisions and evidence tied to actual outcomes; serious mathematical, assumption, reproducibility or interpretation errors must be corrected. An explanation or technical defense may be submitted in accessible written, recorded, live or equivalent form using the same public criteria. The course itself remains `draft` pending the independent learner and reviewer evidence thresholds in [Status Labels](../../spec/status-labels.md).
+Former `SEF8-O1`, `O2`, `O4`, `O5`, `O13` and `SEF8-AS1`, `AS2`, `AS5`, `AS8` are retired **prospectively** and remain valid identifiers for historical revisions. Original mathematics is assigned to SEF11; stable remaining outcomes and unchanged assessments retain their identity. New `SEF8-O19`, `SEF8-O20`, `SEF8-AS9` and `SEF8-AS10` cover genuinely changed mathematical and integration requirements. Prior learner evidence must remain pinned to its original revision; explicit evaluation, not string matching, is required before recognizing equivalence. This course remains `draft` pending [readiness evidence](../../spec/status-labels.md).

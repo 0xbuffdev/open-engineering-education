@@ -2,7 +2,7 @@
 
 **Program:** SEF — Software Engineering Foundations
 **Type:** `course`
-**Prerequisites:** [SEF2](SEF2.md)
+**Prerequisites:** [SEF11](SEF11.md)
 **Duration:** 10 weeks
 **Status:** `draft`
 **Specification:** `v0.2.0`
@@ -17,6 +17,8 @@ Learn to select, implement, test, and explain core data structures and algorithm
 Python 3.11 or later and its standard library are the reference environment. All required work can be completed offline in a learner-controlled, nonprivileged environment without purchased material, private grading software or network access. Learners may use `unittest`, `collections`, `random`, `timeit`, and other standard-library tools for fixtures, oracles, and measurements. Built-in `sorted` and `heapq` may be used as *independent references* but cannot replace an algorithm that the assessment explicitly asks the learner to implement. Record the actual interpreter version, platform, test commands, deterministic seeds, and performance-measurement limitations.
 
 The eight original module topics remain the learning sequence. Seven required summative assessments cover the independently important capabilities and may **reuse the same tested implementations** as a small portfolio and integrated tool. No universal module quiz/lab pair or extra final lab is required. An explicit, separately reviewable assessment decision—rather than a lesson count or passing screenshot—establishes each required outcome.
+
+Foundational discrete mathematics is assessed in [SEF11](SEF11.md) before this course: logic, sets, functions, counting, elementary proofs and induction, graph mathematics, asymptotic notation and recurrences. SEF4 applies and deepens those capabilities through implemented algorithms; it does not silently assume simultaneous mathematical study is equivalent to demonstrated readiness. Python programming competence from SEF2 is inherited through SEF11.
 
 The 10-week duration and expected workload are estimates pending learner calibration. This course remains `draft` until the evidence for a higher course-readiness label is reviewed.
 

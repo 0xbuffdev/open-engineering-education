@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Validate the active SEF program using only the OEE v0.2.0 course contract.
 
-All ten SEF courses have been migrated. This validator rejects absent, old,
+All eleven SEF courses use v0.2.0. This validator rejects absent, old,
 unknown and partially migrated formats instead of interpreting historical
 quiz/lab authoring conventions. Educational readiness is evaluated separately.
 """
@@ -15,8 +15,8 @@ from course_format_versions import is_outcome_course, validate_outcome_course
 
 ROOT = Path(__file__).resolve().parents[1]
 SEF = ROOT / "curriculum" / "SEF"
-ORDERED = [f"SEF{i}" for i in range(1, 11)]
-EXPECTED = set(ORDERED)
+ORDERED = []  # read from the authoritative program catalog, never numeric IDs
+EXPECTED = {f"SEF{i}" for i in range(1, 12)}
 SECTIONS = ["Overview", "Learning outcomes", "Modules", "Completion requirements"]
 ERRORS = []
 DEPS = {}
@@ -33,13 +33,16 @@ def check_links(path: Path, content: str) -> None:
 
 
 def prerequisites(value: str, *, owner: str) -> list[str]:
-    """Normalize the public catalog's and course metadata's SEF references.
+    """Parse comma-separated codes and inclusive ranges, with optional links.
 
-    Expand an inclusive range *before* checking the dependency graph: linked
-    SEF10's '[SEF1](...)–[SEF9](...)' means nine prerequisites, not two.
+    A capstone can require '[SEF1](SEF1.md)–[SEF9](SEF9.md), [SEF11](SEF11.md)'.
+    Course codes are stable identifiers rather than ordering directives.
     """
     raw = value.strip()
     if raw in ("none", "—"):
+        return []
+    if not raw:
+        ERRORS.append(f"{owner}: missing prerequisite")
         return []
 
     def unmark(match: re.Match) -> str:
@@ -48,22 +51,24 @@ def prerequisites(value: str, *, owner: str) -> list[str]:
             ERRORS.append(f"{owner}: prerequisite link/label mismatch: {match.group(0)}")
         return name
 
-    normalized = re.sub(r"\[([A-Z]+\d+)\]\(([^)]+)\)", unmark, raw)
-    range_match = re.fullmatch(r"SEF(\d+)–SEF(\d+)", normalized)
-    if range_match:
-        start, stop = map(int, range_match.groups())
-        if start > stop or stop > 10 or start < 1:
-            ERRORS.append(f"{owner}: invalid prerequisite range: {raw}")
-            return []
-        return [f"SEF{i}" for i in range(start, stop + 1)]
-    if not re.fullmatch(r"SEF\d+(?:,\s*SEF\d+)*", normalized):
-        ERRORS.append(f"{owner}: invalid prerequisite syntax: {raw}")
-        return []
-    dependencies = re.findall(r"SEF\d+", normalized)
+    normalized = re.sub(r"\[(SEF\d+)\]\(([^)]+)\)", unmark, raw)
+    dependencies = []
+    for item in normalized.split(","):
+        token = item.strip()
+        range_match = re.fullmatch(r"SEF(\d+)\s*[–—-]\s*SEF(\d+)", token)
+        if range_match:
+            start, end = map(int, range_match.groups())
+            if start < 1 or end > 11 or end < start:
+                ERRORS.append(f"{owner}: invalid prerequisite range: {token}")
+                continue
+            dependencies.extend(f"SEF{i}" for i in range(start, end + 1))
+        elif re.fullmatch(r"SEF[1-9]\d*", token):
+            dependencies.append(token)
+        else:
+            ERRORS.append(f"{owner}: invalid prerequisite syntax: {token}")
     if len(dependencies) != len(set(dependencies)):
         ERRORS.append(f"{owner}: duplicate prerequisites: {raw}")
     return dependencies
-
 
 def catalog_entries(catalog: str) -> dict[str, dict[str, str]]:
     """Read the SEF catalog table without creating a second curriculum registry."""
@@ -84,8 +89,11 @@ def catalog_entries(catalog: str) -> dict[str, dict[str, str]]:
         rows[code] = dict(title=cells[1], duration=cells[2],
                           prerequisites=cells[3], kind=cells[4])
         order.append(code)
-    if order != ORDERED:
-        ERRORS.append(f"SEF catalog: expected order {ORDERED}; got {order}")
+    if set(order) != EXPECTED or len(order) != len(EXPECTED):
+        ERRORS.append(f"SEF catalog: expected exactly eleven adopted courses, got {order}")
+    if order and order[-1] != "SEF10":
+        ERRORS.append("SEF catalog: SEF10 project must be last")
+    ORDERED[:] = order
     return rows
 
 
@@ -93,8 +101,8 @@ def validate() -> int:
     ERRORS.clear()
     DEPS.clear()
     courses = sorted(SEF.glob("SEF[0-9]*.md"))
-    if {path.stem for path in courses} != EXPECTED or len(courses) != len(ORDERED):
-        ERRORS.append("Expected SEF1.md through SEF10.md, exactly")
+    if {path.stem for path in courses} != EXPECTED or len(courses) != len(EXPECTED):
+        ERRORS.append("Expected exactly SEF1.md through SEF11.md, including capstone SEF10")
 
     catalog_path = SEF / "README.md"
     catalog = catalog_path.read_text(encoding="utf-8")
@@ -173,6 +181,24 @@ def validate() -> int:
 
         ERRORS.extend(f"{code}: {issue}" for issue in validate_outcome_course(path))
         check_links(path, content)
+
+    # Ordered catalog must be a valid topological ordering. Numbered IDs
+    # are stable public identities, not course sequence numbers.
+    position = {code: index for index, code in enumerate(ORDERED)}
+    for code, dependencies in DEPS.items():
+        for dependency in dependencies:
+            if dependency in position and code in position and position[dependency] >= position[code]:
+                ERRORS.append(f"SEF catalog: prerequisite {dependency} must precede {code}")
+
+    for code, required in {
+        "SEF11": {"SEF2"},
+        "SEF4": {"SEF11"},
+        "SEF8": {"SEF11"},
+        "SEF10": EXPECTED - {"SEF10"},
+    }.items():
+        missing = required - set(DEPS.get(code, []))
+        if missing:
+            ERRORS.append(f"{code}: missing required immediate prerequisites {sorted(missing)}")
 
     visiting = set()
     visited = set()

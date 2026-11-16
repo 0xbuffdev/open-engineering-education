@@ -33,7 +33,7 @@ class SEF4MigrationTests(unittest.TestCase):
             "**Specification:** `v0.2.0`" in course.read_text(encoding="utf-8")
             for course in COURSE.parent.glob("SEF[0-9]*.md")
         )
-        self.assertIn(f"{migrated} v0.2.0, {10 - migrated} legacy", result.stdout)
+        self.assertIn(f"{migrated} v0.2.0, {11 - migrated} legacy", result.stdout)
 
     def test_all_fourteen_outcomes_have_required_assessments(self):
         course = COURSE.read_text(encoding="utf-8")
@@ -78,7 +78,7 @@ class SEF4MigrationTests(unittest.TestCase):
 
     def test_status_and_program_authority_preserved(self):
         text = COURSE.read_text(encoding="utf-8")
-        self.assertIn("**Prerequisites:** [SEF2](SEF2.md)", text)
+        self.assertIn("**Prerequisites:** [SEF11](SEF11.md)", text)
         self.assertIn("**Duration:** 10 weeks", text)
         self.assertIn("**Status:** `draft`", text)
         self.assertIn("**Specification:** `v0.2.0`", text)
@@ -87,7 +87,7 @@ class SEF4MigrationTests(unittest.TestCase):
         self.assertNotIn("Final integration lab — required", text)
         catalog = CATALOG.read_text(encoding="utf-8")
         self.assertIn("[SEF4](SEF4.md)", catalog)
-        self.assertIn("All ten SEF courses (SEF1–SEF10)", catalog)
+        self.assertIn("All eleven SEF course files use", catalog)
         self.assertIn("no historical-format SEF course definitions remain", catalog)
 
 

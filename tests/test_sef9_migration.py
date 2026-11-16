@@ -30,18 +30,18 @@ class SEF9MigrationTests(unittest.TestCase):
             cwd=ROOT, capture_output=True, text=True, check=False,
         )
         self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
-        self.assertIn("10 v0.2.0, 0 legacy", result.stdout)
+        self.assertIn("11 v0.2.0, 0 legacy", result.stdout)
 
-    def test_all_ten_program_courses_are_current_draft_format(self):
+    def test_all_eleven_program_courses_are_current_draft_format(self):
         paths = sorted(SEF_DIR.glob("SEF[0-9]*.md"))
-        self.assertEqual(len(paths), 10)
+        self.assertEqual(len(paths), 11)
         for path in paths:
             with self.subTest(course=path.name):
                 source = path.read_text(encoding="utf-8")
                 self.assertIn("**Specification:** `v0.2.0`", source)
                 self.assertIn("**Status:** `draft`", source)
         catalog = CATALOG.read_text(encoding="utf-8")
-        self.assertIn("All ten SEF courses (SEF1–SEF10)", catalog)
+        self.assertIn("All eleven SEF course files use", catalog)
         self.assertIn("no historical-format SEF course definitions remain", catalog)
 
     def test_sixteen_outcomes_mapped_to_seven_required_assessments(self):
