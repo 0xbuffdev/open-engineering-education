@@ -3,7 +3,7 @@
 **Program:** SEF — Software Engineering Foundations
 **Type:** `course`
 **Prerequisites:** [SEF1](SEF1.md)
-**Duration:** 8 weeks
+**Duration:** 10–12 weeks
 **Status:** `draft`
 **Specification:** `v0.2.0`
 **Expected workload:** 10–15 focused hours/week (provisional; calibrate with learner evidence)
@@ -12,13 +12,13 @@
 
 ## Overview
 
-Learn to build and reason about small programs from their behavior rather than memorize Python syntax. Start with the difference between source code, the Python interpreter and execution state. Prepare a terminal-based local workspace, then learn values, conditions, loops, functions, collections, files, errors, and debugging. Investigate mutation and file-integrity failures before combining these capabilities in a persistent command-line task manager.
+Learn to build and reason about small programs from their behavior rather than memorize Python syntax. Start with the difference between source code, the Python interpreter and execution state. Prepare a terminal-based local workspace, then learn values, conditions, loops, functions, collections, files, errors, and debugging. Introduce user-defined classes, instance state, encapsulation and composition before explaining type annotations, their optional static interpretation, and the difference between a declared type and runtime input validation. Investigate mutation and file-integrity failures before combining these capabilities in a persistent command-line task manager.
 
 Python 3.11 or later and its standard library are the reference teaching environment. Use Windows, macOS or Linux, a text editor, and an ordinary terminal; `python`, `python3` or `py` may be the working interpreter command. An alternative equivalent free local Python environment is acceptable if the submitted work remains reproducible. All required work is possible offline with no paid account, service, third-party package, administrator privileges, or real personal data.
 
-This is a `course` in programming foundations, not the larger professional software-engineering capstone. Its five summative evaluations progressively combine skills and may reuse a learner's earlier artifacts. The lesson sequence and optional practice provide preparation; **the required outcomes, assessments and evidence below determine completion**. A fixed number of quizzes, per-module labs or mandatory final lab is not imposed.
+This is a `course` in programming foundations, not the larger professional software-engineering capstone. Its six summative evaluations progressively combine skills and may reuse a learner's earlier artifacts, including the same persistent task-manager project for the final abstraction-and-typing investigation. The lesson sequence and optional practice provide preparation; **the required outcomes, assessments and evidence below determine completion**. A fixed number of quizzes, per-module labs or mandatory final lab is not imposed.
 
-The duration is an initial workload estimate, not a learner-readiness or mastery claim. All work should use disposable project directories and fabricated input records.
+The 10–12-week duration is a revised provisional estimate reflecting two new foundational modules and reviewable abstraction/typing work, not measured learner time or a readiness claim. All work should use disposable project directories and fabricated input records.
 
 ## Learning outcomes
 
@@ -32,6 +32,8 @@ The duration is an initial workload estimate, not a learner-readiness or mastery
 - **SEF2-O8:** Diagnose erroneous program behavior using a minimal reproduction, state observations, a causal hypothesis, a correction, and a regression test.
 - **SEF2-O9:** Design file updates so invalid input or failed processing does not silently destroy a previously valid output, and explain the limits of replacement-based writes.
 - **SEF2-O10:** Implement, test, and explain a persistent command-line application from a public behavioral contract, including predictable errors and cross-process behavior.
+- **SEF2-O11:** Design and verify a small Python class with a constructor, instance attributes, methods and explicit state invariants, and use object composition where it improves domain responsibility without obscuring aliasing or mutation.
+- **SEF2-O12:** Annotate Python function, parameter, return and collection types, including an optional value; distinguish annotations and optional static analysis from actual runtime enforcement, validation and exception behavior.
 
 ## Modules
 
@@ -100,8 +102,11 @@ The duration is an initial workload estimate, not a learner-readiness or mastery
 1. Boolean expressions
 2. If statements
 3. While loops
-4. For loops
-5. Loop patterns
+4. For loops and ranges
+5. Loop patterns, termination and edge cases
+6. Iterables and iterators — Explain `iter()`, `next()`, exhaustion, and why a for-loop advances an iterator without assuming every iterable is a list.
+7. Iteration helpers — Use `enumerate()` and `zip()`, including unequal lengths and their stopping behavior.
+8. Comprehensions — Express a small transformation clearly and explain when an explicit loop is easier to read or debug.
 
 *Optional practice:* Predict loop termination and boundary behavior, including empty input and a zero-iteration case.
 
@@ -119,8 +124,10 @@ The duration is an initial workload estimate, not a learner-readiness or mastery
 4. Return values
 5. Interfaces and decomposition
 6. Modules and imports
+7. Calls and defaults — Distinguish positional/keyword arguments, valid function defaults and the hazard of a shared mutable default.
+8. Modules versus scripts — Explain importing without accidental execution and use a `__main__` entry point appropriately.
 
-*Optional practice:* Refactor a short script into independently testable functions; compare its outputs before and after the refactor.
+*Optional practice:* Refactor a short script into independently testable functions; compare its outputs before and after the refactor. Test an example where a mutable default unexpectedly retains data between calls.
 
 ### Module 6 — Strings & Collections
 
@@ -137,8 +144,10 @@ The duration is an initial workload estimate, not a learner-readiness or mastery
 4. Tuples
 5. Sets
 6. Choosing a collection
+7. Slices, membership and iteration — Explain sequence slicing, dictionary membership, insertion-order guarantees and why modifying a collection during iteration needs care.
+8. Equality and hashing — Explain why mutable lists cannot be dictionary keys while immutable hashable tuples may be valid keys, without assuming every tuple is hashable.
 
-*Optional practice:* Try word counting with lists, dictionaries, tuples, and sets; compare what each structure makes easy or difficult.
+*Optional practice:* Try word counting with lists, dictionaries, tuples, and sets; compare what each structure makes easy or difficult. Predict whether a sequence copy preserves nested aliases.
 
 ### Module 7 — Files & Data
 
@@ -180,8 +189,8 @@ The duration is an initial workload estimate, not a learner-readiness or mastery
 
 #### Lessons
 
-1. Names, objects and identity
-2. Mutable aliases and copies
+1. Names, objects, identity and equality
+2. Mutable aliases and shallow copies
 3. Nested collection behavior
 4. Parameters, side effects and returns
 5. Preconditions and assertions
@@ -206,7 +215,53 @@ The duration is an initial workload estimate, not a learner-readiness or mastery
 
 *Optional practice:* Practice rejecting duplicate IDs, malformed records, and failed writes without damaging an existing output file.
 
-### Module 11 — Command-Line Task Manager
+### Module 11 — Classes, Instances and Domain Abstractions
+
+#### Outcomes
+
+- SEF2-O4
+- SEF2-O6
+- SEF2-O11
+
+#### Lessons
+
+1. **Why create a class** — Compare plain functions and dictionaries with a small domain object whose data and operations belong together; avoid classes when they add no useful invariant.
+2. **Defining a class and instances** — Explain a class definition, calling a class, the role of `__init__`, the meaning of `self`, and where individual instance state lives.
+3. **Attributes, methods and object identity** — Predict attribute reads/writes, method calls, mutation through an alias and equality versus identity.
+4. **Class versus instance attributes** — Diagnose shared mutable class attributes and build safely independent instance records.
+5. **Initialization and invariants** — Establish nonempty identifiers, a Boolean completion field and valid transitions, rejecting invalid construction and updates.
+6. **Encapsulation in Python** — Explain a public interface, underscore conventions, properties when justified and the fact that Python naming conventions are not enforceable security boundaries.
+7. **Composition before inheritance** — Create one collection object containing task objects; compare delegation and responsibility with an unnecessary inheritance hierarchy.
+8. **Representing and serializing state** — Translate domain objects into plain JSON-compatible values at an explicit boundary; distinguish object identity from persisted identifiers.
+9. **Standard-library alternatives** — Compare a hand-written constructor with `dataclasses.dataclass` and recognize mutable-default hazards; do not mistake generated code for an absence of state contracts.
+10. **Tests of an abstraction** — Verify constructor rejection, independent instances, invalid transitions, alias effects and compositional behavior on previously unseen cases.
+
+*Optional practice:* Build a small `Task` and `TaskCollection` pair, predict behavior when two names reference the same task, and demonstrate why a global mutable task list weakens isolation. It is acceptable to retain a function-based CLI and use objects only where they reduce complexity.
+
+### Module 12 — Type Annotations, Contracts and Runtime Behavior
+
+#### Outcomes
+
+- SEF2-O4
+- SEF2-O8
+- SEF2-O11
+- SEF2-O12
+
+#### Lessons
+
+1. **Why type annotations exist** — Distinguish documentation and optional static checking from executable validation or automatic conversion.
+2. **Basic parameter and result types** — Annotate `int`, `str`, `bool`, and `None` in function interfaces; distinguish a return value from an exception.
+3. **Typed collections and classes** — Express `list[Task]`, `dict[str, Task]`, `tuple[str, int]` and nested data shapes appropriate to Python 3.11+.
+4. **Optional values and unions** — Use `Task | None` only when absence is meaningful, handle both branches and explain why `None` does not mean an empty task.
+5. **Annotations at runtime** — Inspect annotations with standard-library facilities and demonstrate a wrong-typed argument still reaches an annotated function unless code explicitly validates it.
+6. **Static versus dynamic verification** — Explain the limits of optional external type checkers and why an untyped dependency, `Any`, casts and false assumptions can bypass static guarantees.
+7. **Contracts and exception boundaries** — Validate untrusted CLI/JSON input and object invariants at runtime even if parameters are annotated.
+8. **Typing and tests together** — Use independently checked normal, invalid and optional-value cases; demonstrate how annotations, tests and human review reveal different defects.
+9. **Keeping annotations proportionate** — Preserve simple, readable interfaces without requiring advanced generics, protocols, metaclasses or any particular third-party analysis tool.
+
+*Optional practice:* Annotate a function that finds a task and returns `Task | None`, then pass a wrong runtime type to prove the annotation does not validate input automatically. Compare the corrected explicit validation against a call that fails unexpectedly.
+
+### Module 13 — Command-Line Task Manager
 
 #### Outcomes
 
@@ -216,14 +271,19 @@ The duration is an initial workload estimate, not a learner-readiness or mastery
 - SEF2-O8
 - SEF2-O9
 - SEF2-O10
+- SEF2-O11
+- SEF2-O12
 
 #### Lessons
 
-1. Command-line arguments
-2. Tests as checks
-3. Logging and messages
+1. **Command-line interface and arguments** — Define add/list/update/delete behavior and distinguish command parsing from domain operations.
+2. **Tests as independent checks** — Use `unittest`, subprocess execution and expected persistent-state values, not just a green report.
+3. **Logging and messages** — Produce controlled failures and user-facing output with useful exit status.
+4. **Object boundaries** — Represent task records with coherent domain methods when appropriate, preserving a simple, usable CLI.
+5. **Typed interfaces and runtime validation** — Annotate a public domain API while rejecting malformed persisted values and invalid commands explicitly.
+6. **End-to-end reasoning** — Trace an unfamiliar lifecycle over two processes and defend storage, ownership, error and abstraction decisions.
 
-*Optional practice:* Run a CLI through two independent processes, inspect persisted state, and explain one deliberate error path.
+*Optional practice:* Run a CLI through two independent processes, inspect persisted state, and explain one deliberate error path. Compare the same task manager with and without a coherent object boundary; avoid a class hierarchy that adds no value.
 
 ## Completion requirements
 
@@ -272,8 +332,29 @@ For reproducible code, supply a source repository revision or portable directory
   - Evidence: Versioned or portable source, README with interpreter and cross-process usage, JSON schema and sample data, clean-start/test commands, unit and subprocess-based integration results, positive and negative CLI transcripts, before/after storage checks, a documented corrected defect, and a concise written or recorded technical defense.
   - Review cases: A reviewer may choose an unfamiliar combination of add/update/delete operations, then ask the learner to predict output and persisted state before running them.
 
+- **SEF2-AS6** (required object abstractions and typing investigation)
+  - Outcomes: SEF2-O4, SEF2-O6, SEF2-O8, SEF2-O10, SEF2-O11, SEF2-O12
+  - Work: Extend or refactor the existing SEF2-AS5 task manager's domain layer, rather than build a second application. Define a small `Task` class with a constructor, independently owned instance attributes and methods that preserve a nonempty ID/title and Boolean completion state; define a composed task collection or repository object that works with multiple `Task` instances without an unnecessary inheritance hierarchy. Keep CLI and serialization responsibilities at explicit boundaries. Annotate a few actual public interfaces, including a typed collection and a lookup that returns `Task | None`. Write a runnable demonstration that passing a string to an `int`-annotated function does not inherently enforce or coerce the type. Add explicit runtime validation at relevant untrusted-input and state-transition boundaries. Independently test two separate instances, one shared alias, an invalid constructor, an invalid update, a missing lookup, a persisted round trip and an unfamiliar reviewer-supplied valid/invalid record. Explain which existing function-only design would remain preferable and why.
+  - Criteria: A real instance is created with `__init__` and `self`; instance state is distinct unless explicitly shared, and class attributes do not silently leak mutable task state. Each public method has an explicit coherent responsibility and the composition boundary is meaningful rather than decorative. Invariants are maintained or invalid inputs rejected with visible behavior; no unexplained mutation of unrelated tasks occurs. Annotations accurately describe ordinary valid use, including missing results; the learner correctly distinguishes optional static-analysis feedback from runtime checking, demonstrates that annotations alone do not validate values and enforces needed runtime checks. Existing `add`, `list`, `update` and `delete` behavior and persistence from AS5 remain correct; an unfamiliar review case is reasoned about before execution. No proprietary or third-party type checker is required, and introducing abstraction must not make the program less understandable.
+  - Evidence: Revised portable task-manager source, concise explanation or diagram of object identities and composition, annotated domain interfaces, tests of normal and failing cases with observed outputs, a demonstration of annotation-versus-runtime behavior, before/after CLI and persisted-data regression results, a documented corrected class/typing defect or reviewer challenge, and a technical defense of when a class is useful.
+
 ### Completion decision
 
-All **five required assessments** must pass their published criteria, together demonstrating SEF2-O1 through SEF2-O10. The task manager may reuse the validated file-writing design from SEF2-AS4; the learner is not required to build unrelated extra applications, repeat a lab in every module, or take a separate final examination. Optional lesson exercises, guided examples, additional quizzes and practice tasks are formative and **do not** add hidden completion conditions.
+All **six required assessments** must pass their published criteria, together demonstrating SEF2-O1 through SEF2-O12. The task manager may reuse the validated file-writing design from SEF2-AS4; the object/typing investigation SEF2-AS6 may refactor or extend **that same task manager**. The learner is not required to build unrelated extra applications, repeat a lab in every module, install a third-party type checker, or take a separate final examination. Optional lesson exercises, guided examples, additional quizzes and practice tasks are formative and **do not** add hidden completion conditions.
 
 The reviewer records the assessment decisions and supporting evidence. Substantial discrepancies must be corrected or explicitly bounded when they do not violate a stated acceptance criterion. A technical defense can be written, recorded, live or another reviewable accessible format that evaluates the same published outcomes. No learner is automatically `tested` or `verified` because this course file has passed a structural check; the published course itself remains `draft` pending the learner and reviewer evidence required by [Status Labels](../../spec/status-labels.md).
+
+### Revision history and evidence compatibility
+
+**Historical contract:** [SEF2 at OEE commit `fd772ce7d120300fc2b6ef89121b52345525cd56`](https://github.com/0xbuffdev/open-engineering-education/blob/fd772ce7d120300fc2b6ef89121b52345525cd56/curriculum/SEF/SEF2.md), before this focused academic revision. The historical reference is immutable and must not be inferred from the latest `main` branch.
+
+| Historical requirement | Current requirement | Evidence interpretation |
+| --- | --- | --- |
+| `SEF2-O1`–`O10` | Same IDs and same outcome statements | Previous assessed competence is not relabeled or silently extended |
+| `SEF2-AS1`–`AS5` | Same IDs, work, criteria, evidence and review cases | Existing records remain tied to the earlier revision and can support corresponding unchanged capabilities |
+| No independently stated class/composition outcome | New `SEF2-O11` evaluated with `SEF2-AS6` | Requires inspectable object-design and state-invariant evidence |
+| No independently stated typing/runtime-boundary outcome | New `SEF2-O12` evaluated with `SEF2-AS6` | Requires accurate annotation, explicit runtime checks and evidence-based reasoning |
+
+This revision retains **SEF2-O1–O10** with exactly their original meaning and keeps the **Work, Criteria, and Evidence of SEF2-AS1–AS5** unchanged. Newly required `SEF2-O11` (classes, object invariants, composition) and `SEF2-O12` (type annotations versus runtime behavior) are evaluated by new `SEF2-AS6`, whose implementation reuses the assessed task manager. The two new modules and their additional formative lessons are not separate mandatory assignments. The nominal duration changes from 8 to 10–12 weeks provisionally.
+
+Historical completions and submitted evidence remain associated with their original course revision. A learner who completed the previous ten-outcome SEF2 contract is not automatically marked as having demonstrated the two new outcomes; an evidence-based reviewer may recognize an already established capability or require the new unfamiliar cases. No prior course completion is deleted or automatically revoked by this revision, and no source modification changes the course's `draft` readiness label. See the [accepted SEF architecture decision](../../rfcs/0003-sef-academic-progression.md) and [Status Labels](../../spec/status-labels.md).

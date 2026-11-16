@@ -12,6 +12,8 @@
 
 ## Overview
 
+SEF2 provides the foundational Python vocabulary for this engineering-practice course: function and module boundaries, small user-defined classes, meaningful composition, basic type annotations and explicit runtime validation. SEF5 extends that prior knowledge into maintainable software design, collaborative review, testing and release discipline; it does not silently treat a type hint as proof of safety or require a third-party type checker.
+
 Develop the engineering practices needed to improve software safely after it works for the first time. Start with the program and tests built in SEF2, or a comparable small learner-owned command-line application. Learn to isolate changes in Git, diagnose failures with evidence, design meaningful tests, refactor without breaking a public contract, review code, build repeatable quality checks, and hand off a maintainable application for independent reproduction.
 
 The reference environment is Python 3.11 or later, the Python standard library, and a local Git installation. The course can be completed offline with disposable repositories, `unittest` or equivalent independently runnable tests, a local quality-gate script, and a reviewable version-controlled CI configuration. Optional `pytest`, hosted Git platforms, remote pull requests, formatting tools, or type checkers may be used when available but are **not** required for completion. Any additional development dependency used in submitted work must be recorded with a reproducible installation procedure; a standard-library-only route requires none.
