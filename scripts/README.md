@@ -43,8 +43,10 @@ APP21 provides Node.js backend runtime foundations after APP18,
 APP2 follows APP17 + APP19 as framework-neutral browser engineering,
 APP20 follows APP2 as React Application Engineering, APP3
 follows APP19 + APP21 + APP4 for typed framework API engineering,
-and APP5 combines APP20 + APP3 for full-stack integration (with
-APP4 included transitively through APP3).
+APP5 combines APP20 + APP3 for full-stack integration (with
+APP4 included transitively through APP3), and APP6 follows APP5
+for risk-based quality, CI, supply-chain evidence, observability,
+performance and incident-driven improvement.
 Unmigrated course scope/dependency changes remain in the
 [APP migration decision](../curriculum/APP/ARCHITECTURE.md).
 The [current APP catalog](../curriculum/APP/README.md) contains
