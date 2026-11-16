@@ -37,10 +37,10 @@ course may optionally declare the `core` classification as well.
 
 A catalog entry's displayed prerequisite codes must agree with
 the course's own prerequisite metadata, including expanded ranges
-such as `APP1–APP8`. APP17 and APP18 are published core courses;
-APP19–APP21 remain planned in the [APP migration decision](../curriculum/APP/ARCHITECTURE.md).
+such as `APP1–APP8`. APP17–APP19 are published core courses;
+APP20–APP21 remain planned in the [APP migration decision](../curriculum/APP/ARCHITECTURE.md).
 The [current APP catalog](../curriculum/APP/README.md) contains
-**11 core courses and 7 electives** and is authoritative until reviewed
+**12 core courses and 7 electives** and is authoritative until reviewed
 course-migration PRs change it. The validator does not change course
 requirements or historical learner records.
 
