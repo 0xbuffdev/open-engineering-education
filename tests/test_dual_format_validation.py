@@ -135,7 +135,7 @@ class DualFormatValidationTests(unittest.TestCase):
     def test_migrated_sef10_uses_project_evidence_and_defense(self):
         course = example_course(
             "SEF10", "Software Engineering Foundations Capstone",
-            "SEF — Software Engineering Foundations", "8–10 weeks",
+            "SEF — Software Engineering Foundations", "10–14 weeks",
             "SEF1–SEF9, SEF11", project=True,
         )
         self.replace_course("SEF10", course)

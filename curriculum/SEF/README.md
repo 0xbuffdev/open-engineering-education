@@ -22,11 +22,11 @@ By the end of the program, the learner can:
 - Explain and safely apply C11 object representation, integer conversions, pointers, allocation and lifetime contracts, undefined-behavior boundaries, build diagnostics, bounded text/binary input, and owned dynamic arrays, linked lists and hash maps.
 - Use the Linux shell and foundational Unix process, file-descriptor, signal, filesystem-identity, directory, pipe and bounded loopback-network interfaces, distinguishing C11/POSIX/library boundaries, resource ownership, and verified failure handling.
 - Interpret functions, vectors, matrices, probability, statistics, derivatives, integrals and elementary numerical optimization with justified assumptions and uncertainty.
-- Deliver, verify, explain and defend a bounded complete software project, including an independently executed or diagnosed change.
+- Deliver, verify, explain and defend a bounded complete software project, including an independently executed or diagnosed change, verified prerequisite-evidence closure, relevant interdisciplinary transfer and an ethical, accessible, privacy- and licensing-aware professional release decision.
 
 ## Program completion standard
 
-Complete and demonstrate the required outcomes for **all eleven courses**, including discrete mathematics (SEF11) and revised numerical mathematics (SEF8), then successfully defend the **same** learner-owned project in SEF10. Completing the arithmetic diagnostic, attending classes, or reporting elapsed hours does not establish mastery. The [course files](README.md#courses) define the current required summative evidence; completed work remains pinned to the course revision under which it was evaluated.
+Complete and demonstrate the required outcomes for **all eleven courses**, including discrete mathematics (SEF11) and numerical mathematics (SEF8). Before starting SEF10, verify actual prior completion evidence or separately approved assessed equivalence for **each of SEF1–SEF9 and SEF11**; a missing or uncertain course cannot be waived by a capstone portfolio. Then build and defend the **same learner-owned developer utility** through its eight instructional modules and six existing M1–M6 milestones. The final [SEF10 graduation-evidence matrix](SEF10.md#prerequisite-closure-is-different-from-capstone-integration) differentiates genuine prior mastery, relevant direct demonstration, conceptual transfer and justified non-applicability rather than forcing C, Unix sockets, calculus, a simulator or APP/SYS specialization into an unrelated CLI. Explicitly assess ethics, licensing, privacy, accessibility and truthful release decisions in the same artifact. The [course files](README.md#courses) govern required summative evidence; completed work remains pinned to the revision under which it was assessed. Completing a diagnostic, attending classes or reporting elapsed hours does not establish mastery.
 
 ---
 
@@ -46,7 +46,7 @@ This table is the **authoritative prerequisite-valid study order**, not numerica
 | [SEF6](SEF6.md) | C Programming & Machine Memory | 14–18 weeks | SEF3, SEF4, SEF5 | `course` |
 | [SEF7](SEF7.md) | Unix System Interfaces | 12–16 weeks | SEF3, SEF6 | `course` |
 | [SEF9](SEF9.md) | Professional Workflow & AI-Assisted Engineering | 10–12 weeks | SEF5 | `course` |
-| [SEF10](SEF10.md) | Software Engineering Foundations Capstone | 8–10 weeks | SEF1–SEF9, SEF11 | `project` |
+| [SEF10](SEF10.md) | Software Engineering Foundations Capstone | 10–14 weeks | SEF1–SEF9, SEF11 | `project` |
 
 ```text
 SEF1 → SEF2
@@ -64,7 +64,7 @@ SEF3 and SEF5 can begin after SEF2 while SEF11's required mathematical preparati
 
 **All eleven SEF course files use the OEE `v0.2.0` outcome-driven draft format and remain `draft`.** (no historical-format SEF course definitions remain). A clean structural migration does not show verified learner outcomes or educational effectiveness. The estimated durations, including SEF11's bridge and SEF8's revised numerical work, remain provisional until actual learner and reviewer feedback justifies them. See [curriculum inventory](../INVENTORY.md) for reproducible structural observations.
 
-The accepted [RFC 0003](../../rfcs/0003-sef-academic-progression.md) introduced SEF11 and moved discrete mathematical readiness out of the previous SEF8. The [historical evidence map](MATH-MIGRATION.md) records the old/current outcome and assessment identities; neither learners nor implementations may silently convert old completion records into completion of a new course. Other SEF academic hardening work proceeds in separate reviewable course revisions under the accepted RFC. Focused SEF2, SEF3 and SEF5 revisions establish Python abstractions/typing, shell portability/environment reasoning, and demonstrable software design/quality/review. SEF4 clarifies proof-and-oracle transfer, and SEF6 expands safety and library instruction without modifying their original outcome or assessment contracts. Where new competencies were genuinely added in earlier courses, those requirements received distinct IDs.
+SEF10 completes the [accepted RFC 0003](../../rfcs/0003-sef-academic-progression.md) course-level hardening with a publicly assessed ten-prerequisite evidence audit and professional integration/release defense on one project, retaining original capstone outcome and assessment IDs while assigning new IDs to genuinely additional requirements. RFC 0003 also introduced SEF11 and moved discrete mathematical readiness out of the previous SEF8. The [historical evidence map](MATH-MIGRATION.md) records the old/current outcome and assessment identities; neither learners nor implementations may silently convert old completion records into completion of a new course. Other SEF academic hardening work proceeds in separate reviewable course revisions under the accepted RFC. Focused SEF2, SEF3 and SEF5 revisions establish Python abstractions/typing, shell portability/environment reasoning, and demonstrable software design/quality/review. SEF4 clarifies proof-and-oracle transfer, and SEF6 expands safety and library instruction without modifying their original outcome or assessment contracts. Where new competencies were genuinely added in earlier courses, those requirements received distinct IDs.
 
 ## Independent study
 
