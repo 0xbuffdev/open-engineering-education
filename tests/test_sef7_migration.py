@@ -60,13 +60,13 @@ class SEF7MigrationTests(unittest.TestCase):
             covered.update(refs)
         self.assertEqual(covered, defined)
 
-    def test_eight_modules_have_stable_outcomes_and_ordered_lessons(self):
+    def test_eleven_modules_have_stable_outcomes_and_ordered_lessons(self):
         text = COURSE.read_text(encoding="utf-8")
         modules = text.split("\n## Modules\n", 1)[1].split(
             "\n## Completion requirements\n", 1
         )[0]
         headings = list(re.finditer(r"(?m)^### Module (\d+) — ", modules))
-        self.assertEqual([int(m.group(1)) for m in headings], list(range(1, 9)))
+        self.assertEqual([int(m.group(1)) for m in headings], list(range(1, 12)))
         for index, heading in enumerate(headings):
             stop = headings[index + 1].start() if index + 1 < len(headings) else len(modules)
             body = modules[heading.start():stop]
@@ -83,7 +83,7 @@ class SEF7MigrationTests(unittest.TestCase):
         self.assertIn(
             "**Prerequisites:** [SEF3](SEF3.md), [SEF6](SEF6.md)", course
         )
-        self.assertIn("**Duration:** 7 weeks", course)
+        self.assertIn("**Duration:** 12–16 weeks", course)
         self.assertIn("**Status:** `draft`", course)
         self.assertIn("**Specification:** `v0.2.0`", course)
         self.assertNotIn("— `test`", course)
@@ -94,6 +94,8 @@ class SEF7MigrationTests(unittest.TestCase):
             self.assertIn(term.lower(), course.lower())
         catalog = CATALOG.read_text(encoding="utf-8")
         self.assertIn("[SEF7](SEF7.md)", catalog)
+        self.assertIn("| 12–16 weeks | SEF3, SEF6 |", catalog)
+        self.assertIn("[SEF7–SYS competency destination map](UNIX-SYS-BOUNDARY.md)", catalog)
         self.assertIn("All eleven SEF course files use", catalog)
         self.assertIn("no historical-format SEF course definitions remain", catalog)
 
