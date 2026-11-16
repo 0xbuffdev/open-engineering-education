@@ -44,18 +44,18 @@ class SEF9MigrationTests(unittest.TestCase):
         self.assertIn("All eleven SEF course files use", catalog)
         self.assertIn("no historical-format SEF course definitions remain", catalog)
 
-    def test_sixteen_outcomes_mapped_to_seven_required_assessments(self):
+    def test_twenty_outcomes_mapped_to_eight_required_assessments(self):
         course = COURSE.read_text(encoding="utf-8")
         learning = course.split("\n## Learning outcomes\n", 1)[1].split(
             "\n## Modules\n", 1
         )[0]
         defined = set(re.findall(r"(?m)^- \*\*(SEF9-O\d+):\*\*", learning))
-        self.assertEqual(defined, {f"SEF9-O{i}" for i in range(1, 17)})
+        self.assertEqual(defined, {f"SEF9-O{i}" for i in range(1, 21)})
         completion = course.split("\n## Completion requirements\n", 1)[1]
         blocks = re.split(
             r"(?=^- \*\*SEF9-AS\d+\*\* \(required )", completion, flags=re.M
         )[1:]
-        self.assertEqual(len(blocks), 7)
+        self.assertEqual(len(blocks), 8)
         covered = set()
         for index, block in enumerate(blocks, start=1):
             self.assertTrue(block.startswith(f"- **SEF9-AS{index}**"))
@@ -69,13 +69,13 @@ class SEF9MigrationTests(unittest.TestCase):
             covered.update(refs)
         self.assertEqual(covered, defined)
 
-    def test_eight_modules_retain_teaching_with_outcome_references(self):
+    def test_twelve_modules_retain_teaching_with_outcome_references(self):
         source = COURSE.read_text(encoding="utf-8")
         content = source.split("\n## Modules\n", 1)[1].split(
             "\n## Completion requirements\n", 1
         )[0]
         modules = list(re.finditer(r"(?m)^### Module (\d+) — ", content))
-        self.assertEqual([int(m.group(1)) for m in modules], list(range(1, 9)))
+        self.assertEqual([int(m.group(1)) for m in modules], list(range(1, 13)))
         for index, module in enumerate(modules):
             stop = modules[index + 1].start() if index + 1 < len(modules) else len(content)
             block = content[module.start():stop]
@@ -90,7 +90,9 @@ class SEF9MigrationTests(unittest.TestCase):
     def test_prerequisite_and_human_ai_trust_requirements_remain(self):
         text = COURSE.read_text(encoding="utf-8")
         self.assertIn("**Prerequisites:** [SEF5](SEF5.md)", text)
-        self.assertIn("**Duration:** 6 weeks", text)
+        self.assertIn("**Duration:** 10–12 weeks", text)
+        self.assertIn("[SEF9-AS8]", text.replace("**SEF9-AS8**", "[SEF9-AS8]"))
+        self.assertIn("fully synthetic", text.lower())
         self.assertIn("**Status:** `draft`", text)
         self.assertIn("**Specification:** `v0.2.0`", text)
         self.assertNotIn("— `test`", text)

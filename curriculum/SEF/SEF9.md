@@ -3,7 +3,7 @@
 **Program:** SEF — Software Engineering Foundations
 **Type:** `course`
 **Prerequisites:** [SEF5](SEF5.md)
-**Duration:** 6 weeks
+**Duration:** 10–12 weeks
 **Status:** `draft`
 **Specification:** `v0.2.0`
 **Expected workload:** 10–15 focused hours/week (provisional; calibrate with learner evidence)
@@ -12,13 +12,19 @@
 
 ## Overview
 
-Learn how engineering teams turn requests into reviewable changes and evidence-backed delivery. Write user stories and measurable acceptance criteria; plan work with explicit dependencies; preserve design choices in decision records; review focused patches; and use coding assistants as **constrained sources of proposals**, not authorities for implementation, test results or acceptance. Demonstrate that you can explain, repair and extend accepted code independently.
+Learn how engineering teams turn requests into reviewable changes and evidence-backed delivery **with or without AI tools**. Write user stories and measurable acceptance criteria; evaluate ethical obligations and harm; manage dependencies; preserve decisions; handle software licensing and confidential data responsibly; communicate risk and change accessibly; and review focused patches. Use coding assistants as **constrained sources of proposals**, not authorities for implementation, tests or acceptance. Demonstrate professional judgment and ownership independently of any assistant.
 
 **SEF5 is the only formal prerequisite.** SEF5 already establishes concrete module boundaries, dependency direction, interface contracts, quality evidence and accessible code review. SEF9 builds on that verified foundation to teach requirements, issue/decision tracking, change governance, responsible AI assistance and release communication, rather than silently treating software-design principles as unassessed new SEF9 entry requirements. [SEF4](SEF4.md) is recommended preparation, not an entry requirement. The reference project is the SEF5 tested command-line task manager or a comparable learner-owned Python 3.11+ program. A CSV-export improvement for synthetic task data provides a common example across modules, but an equivalent fully reproducible local feature can satisfy the same published criteria.
 
 All required tasks can be completed offline using a disposable local Git repository, Python's standard library and versioned Markdown or JSON issue/board/PR artifacts. Hosted trackers and live assistants are optional. For AI-related work, use either an accessible assistant **or an authentic instructor-supplied recorded assistant proposal**; mark recorded and interactive usage accurately, including actual tools and models if known. Do not invent transcripts, prompts, tool calls, tests or live reviews. The learner must inspect, test and repair the suggested change independently. A peer or designated independent reviewer must reproduce the final feature and offer substantive feedback, even when collaboration artifacts are stored locally.
 
-The eight original modules remain the instructional sequence. Seven summative assessments evaluate the connected workflow; earlier verified decisions, tests, reviews and source may be reused in the integrated feature. No universal quiz/lab pair, paid AI product, mandatory network access, broad repository authority or duplicate final project is required. The six-week workload estimate is provisional, and the course remains `draft` pending real learner and reviewer evidence.
+The original eight instructional topics are retained and ordered alongside **four distinct non-AI professional-practice modules**: ethical judgment, licensing and provenance, privacy/data stewardship, and accessible stakeholder communication. Twelve modules now teach 20 outcomes through **eight summative assessments**. The first seven assessments retain their original published Work, Criteria and Evidence unchanged; the eighth checks genuinely new professional obligations using the **same CSV feature and public synthetic case**. This does not create another capstone, a per-module quiz/lab quota, a paid account or a requirement to publish personal data.
+
+The provisional allocation increases from six to **10–12 weeks** at 10–15 focused hours/week (roughly 100–180 hours, before remediation). This estimate recognizes the added professional practice and real independent review; it is not observed learner-time calibration. Course status remains `draft`.
+
+**Public authored learning fixtures:** [SEF9 reproducible case pack](../../examples/sef9/README.md) provides a synthetic stakeholder brief, an actual ChatGPT-authored candidate proposal explicitly labeled with its limited provenance, an intentionally flawed runnable CSV exporter with independently failing tests, a trust-boundary injection document and a non-AI professional dilemma. They are examples, **not a completed learner submission or a replacement for independent real reviewer feedback**. Instructors may replace them with independently documented equivalent genuine fixtures; a purported transcript of a separate AI session must never be invented. The example tests are intentionally failing until the learner fixes the supplied implementation; they are separate from repository CI.
+
+Optional professional reference material includes the [ACM Code of Ethics](https://www.acm.org/code-of-ethics), [SPDX handling of license identifiers and expressions](https://spdx.dev/learn/handling-license-info/), [NIST Privacy Framework](https://www.nist.gov/privacy-framework), and [W3C WCAG2ICT accessibility guidance for non-web software and documents](https://www.w3.org/TR/wcag2ict-22/). Such standards provide reasoning tools, **not** a claim that a license is legally cleared, a jurisdiction's privacy law is satisfied or a product has passed an accessibility certification.
 
 ## Learning outcomes
 
@@ -38,6 +44,10 @@ The eight original modules remain the instructional sequence. Seven summative as
 - **SEF9-O14:** Implement a bounded, tested CLI feature with correct normal/negative behavior, preserved existing data, and traceability from request through implementation and verification.
 - **SEF9-O15:** Explain, modify, and test a reviewer-chosen implementation detail without using the assistant, demonstrating personal ownership of final engineering decisions.
 - **SEF9-O16:** Deliver an independently reproducible, reviewed feature and technical defense with reliable artifact history, truthful AI-use evidence, and resolved acceptance criteria.
+- **SEF9-O17:** Recognize ethical and professional obligations independent of AI use, evaluate foreseeable harm, fairness, competence, honesty and conflicting stakeholder instructions, and document an evidence-based risk decision, escalation and mitigation without fabricating approval.
+- **SEF9-O18:** Evaluate software and content provenance and licensing in a proposed change, distinguish copyright from permission, identify actual license evidence and attribution/notice obligations, and withhold or replace material whose redistribution rights or compatibility cannot be established.
+- **SEF9-O19:** Apply privacy and confidentiality principles to a software feature through a bounded data inventory and lifecycle, data minimization, retention/deletion controls, safe logs, least exposure and a documented response to a proposed unauthorized disclosure.
+- **SEF9-O20:** Prepare and evaluate inclusive, accessible engineering communication and CLI/review artifacts with navigable text, meaningful error/status descriptions, non-color-only information, respectful actionable feedback and a candid stakeholder handoff that conveys risks and limitations.
 
 ## Modules
 
@@ -57,9 +67,34 @@ The eight original modules remain the instructional sequence. Seven summative as
 5. Epics, stories, and tasks
 6. Sizing work
 
+7. **Professional readiness** — Identify stakeholders and potentially harmed users, not just expected export functionality; begin a traceable risk list before implementation.
+
 *Optional practice:* Rewrite an ambiguous CSV-export request as two outcome-oriented stories and draft acceptance examples involving empty and malformed inputs.
 
-### Module 2 — Planning & Tracking Work
+### Module 2 — Professional Ethics, Duty of Care and Honest Escalation
+
+#### Outcomes
+
+- SEF9-O1
+- SEF9-O2
+- SEF9-O4
+- SEF9-O17
+
+#### Lessons
+
+1. **Professional responsibility without AI** — Explain that avoiding harm, competent work, honesty, confidentiality and fair treatment apply equally to hand-written and assistant-proposed changes.
+2. **Stakeholders and foreseeable harm** — Identify affected users and potential failures of a CSV export, including lost output, misleading success, data exposure and inaccessible error reporting.
+3. **Ethical decision method** — Separate observations, uncertainty, competing goals, affected people, duty of care, alternatives, severity and proportional risk treatment; avoid a checklist with no decision.
+4. **Responsibility and competence** — Do not claim tests ran, reviews passed or legal compliance exists without evidence; ask for assistance when work exceeds actual expertise.
+5. **Pressure to ship and dissent** — Respond to pressure to skip a failing regression with a factual risk note, proposed hold/mitigation and an appropriate escalation route without invented sign-off.
+6. **Fairness and inclusive impacts** — Consider who cannot use visual-only review material, whose needs were not represented, and whether accessibility or language limits disadvantage affected users.
+7. **Incident awareness and remediation** — Distinguish an observed privacy/security problem from a theoretical concern, record timing and containment options, and follow actual organizational reporting policy.
+8. **Professional review and conflicts** — Make criticism evidence-based and respectful; disclose a conflict of interest or unknown requirement rather than hiding an uncomfortable trade-off.
+9. **Decision record and follow-through** — Trace the chosen mitigation to an owner, deadline or next check, and clearly describe what remains blocked and why.
+
+*Optional practice:* Use the synthetic stakeholder request to write a factual release-blocking note and a viable alternative that does not ignore the failed output-preservation test.
+
+### Module 3 — Planning & Tracking Work
 
 #### Outcomes
 
@@ -74,9 +109,11 @@ The eight original modules remain the instructional sequence. Seven summative as
 4. Milestones and project boards
 5. Linking pull requests to issues
 
+6. **Risk ownership and escalation** — Track a blocked privacy or licensing decision with a responsible owner and stop treating a status column as professional approval.
+
 *Optional practice:* Move locally versioned issue cards across realistic states and explain why a blocked item cannot be closed solely by changing its column.
 
-### Module 3 — Recording Decisions
+### Module 4 — Recording Decisions
 
 #### Outcomes
 
@@ -90,9 +127,78 @@ The eight original modules remain the instructional sequence. Seven summative as
 4. Outcome, consequences, and confirmation
 5. Status and superseding decisions
 
+6. **Decision provenance and rationale** — Connect professional/privacy/license decisions to real evidence and keep rejected alternatives discoverable.
+
 *Optional practice:* Write a small serializer choice record with alternatives, and an explicit follow-up record when evidence invalidates its original assumptions.
 
-### Module 4 — Code Review as Practice
+### Module 5 — Software Licensing, Copyright and Provenance
+
+#### Outcomes
+
+- SEF9-O5
+- SEF9-O11
+- SEF9-O18
+
+#### Lessons
+
+1. **Copyright is distinct from license** — Explain why publicly accessible code is not automatically available for copying or redistribution and why a missing license is not permission.
+2. **SPDX identifiers and expressions** — Read SPDX-License-Identifier fields and simple AND/OR/WITH expressions, distinguishing a machine-readable label from evidence that licensing actually applies.
+3. **Sources and dependency inventory** — Record source URL or repository revision, file origin, version, copyright notice, retrieved license text and the actual use/distribution action.
+4. **License obligations** — Identify possible attribution, notice, source-disclosure, modification and distribution conditions; state uncertainty rather than inventing legal clearance.
+5. **Compatibility and distribution boundary** — Distinguish internal study, linking, copying and redistribution; compare possible conflicts while referring real legal interpretation to qualified review.
+6. **Unknown or conflicting rights** — Quarantine an unlicensed snippet or dependency and replace it with a documented independent implementation or obtain authorization rather than assuming AI output is free to use.
+7. **Generated and human-authored work** — Track provenance of suggested snippets and any original code regardless of whether an assistant, a colleague or a web page supplied them.
+8. **License risk in a change diff** — Inspect import/dependency additions and copied content; require justified approved changes rather than hidden package additions.
+9. **Release evidence** — Write a factual license/attribution note and explicit unresolved-risk status without falsely declaring a project legally compliant.
+
+*Optional practice:* Review the synthetic third-party package manifest with missing license data and decide what evidence is needed before incorporating or distributing it.
+
+### Module 6 — Privacy, Confidentiality and Data Stewardship
+
+#### Outcomes
+
+- SEF9-O2
+- SEF9-O11
+- SEF9-O19
+
+#### Lessons
+
+1. **Data inventory and purpose** — Map fields collected, read, exported, logged, retained and shared; state whether any field might identify a person even without a direct name.
+2. **Minimization and purpose limitation** — Export only user-requested fields, avoid collecting hidden metadata and justify why an apparently convenient extra field is not needed.
+3. **Authorized access and confidentiality** — Distinguish permission to read a local task from permission to publish it in a ticket, chat, screenshot or external model context.
+4. **Consent, policy and law boundaries** — Identify actual contractual/legal obligations as jurisdiction- and organization-dependent; do not invent compliance or universal consent rules.
+5. **Safe fixtures and sanitized reports** — Use wholly synthetic records and redact identifiers in test logs, errors and review artifacts; check whether a value can be re-identified.
+6. **Retention and deletion** — Design limited storage and output file lifecycles, avoid stale temp-file residue and document deletion/cleanup for failed exports.
+7. **Error and observability hygiene** — Report useful failures without dumping full records, access tokens, filesystem secrets or unexpected personal data into logs.
+8. **Incident and escalation decision** — When a request would disclose protected information, refuse or hold the unsafe action, document facts and notify the appropriate authorized owner.
+9. **Privacy test and threat model** — Write a basic data-flow table and test that malformed input, an invalid destination or a failed operation does not reveal or corrupt unrelated records.
+
+*Optional practice:* Trace a fully synthetic CSV field from local task input to export and review log; identify what must not leave the user's machine.
+
+### Module 7 — Accessible Communication and Inclusive Engineering Handoffs
+
+#### Outcomes
+
+- SEF9-O6
+- SEF9-O7
+- SEF9-O16
+- SEF9-O20
+
+#### Lessons
+
+1. **Audience and communication purpose** — Differentiate an end-user release note, maintainer review request, stakeholder status update and an incident/escalation record.
+2. **Semantic and navigable documents** — Use concise descriptive headings, list structure, meaningful links, ordered steps, file locations and plain-language explanations in Markdown or text.
+3. **Avoid color-only or visual-only meaning** — Spell out severity, statuses and pass/fail results without relying on colors, screenshots or diagrams; add text-equivalent descriptions where diagrams help.
+4. **CLI help and error clarity** — Supply textual command usage, deterministic exit codes, understandable error messages and an honest description of output formats.
+5. **Keyboard and assistive technology awareness** — Explain that CLI/text-first artifacts may be more accessible but are not automatically WCAG-compliant; consider keyboard navigation, screen-reader usability and reader-tested evidence.
+6. **Respectful and actionable feedback** — Write review findings with observed problem, reproduction, risk, expected behavior and an attainable improvement, avoiding dismissive personal comments.
+7. **Accessible review equivalence** — Offer a structured plain-text evidence path rather than a mandatory hosted UI, visual PR screenshot or color-coded project board.
+8. **Risk communication and release notes** — State implemented behavior, breaking changes, known issues, privacy/licensing limitations and required next actions without unverified claims.
+9. **Independent readability check** — Have a reviewer reconstruct a decision and execute a CLI reproduction using only accessible text, then revise confusing headings or omissions.
+
+*Optional practice:* Produce a one-page semantic Markdown release and review note for the same CSV feature, including a blocked privacy or licensing risk and actionable next steps.
+
+### Module 8 — Code Review as Practice
 
 #### Outcomes
 
@@ -107,9 +213,11 @@ The eight original modules remain the instructional sequence. Seven summative as
 4. Giving feedback
 5. Responding to feedback
 
+6. **Communication and accessibility review** — Check whether a reviewer can reproduce the defect using text-only, descriptive steps rather than a color-coded screenshot.
+
 *Optional practice:* Review a deliberately flawed CSV diff and compare an evidence-backed code review with a vague approval.
 
-### Module 5 — Working with AI Assistants
+### Module 9 — Working with AI Assistants
 
 #### Outcomes
 
@@ -124,9 +232,11 @@ The eight original modules remain the instructional sequence. Seven summative as
 4. Managing context
 5. Permissions and what the assistant may do
 
+6. **AI-free professional obligations** — State which review, licensing, privacy and reporting decisions remain the human engineer's responsibility with no assistant present.
+
 *Optional practice:* Map assistant inputs to approved paths and permitted tool actions; inspect an authentic recorded proposal without claiming live interaction.
 
-### Module 6 — Verifying & Governing AI-Generated Work
+### Module 10 — Verifying & Governing AI-Generated Work
 
 #### Outcomes
 
@@ -142,9 +252,11 @@ The eight original modules remain the instructional sequence. Seven summative as
 5. Licensing, ownership, and disclosure
 6. Staying able to explain your own code
 
+7. **Reuse the public flawed proposal** — Start from the provided intentionally failing CSV case, document provenance, then independently derive what repair and tests are required.
+
 *Optional practice:* Write independent tests for malformed CSV quoting, swallowed I/O errors, and unexpected output overwrite, then inspect a corrected diff.
 
-### Module 7 — Trust Boundaries in AI-Assisted Work
+### Module 11 — Trust Boundaries in AI-Assisted Work
 
 #### Outcomes
 
@@ -160,9 +272,11 @@ The eight original modules remain the instructional sequence. Seven summative as
 5. Reproduction and independent diff review
 6. Documenting model limitations and human responsibility
 
+7. **Untrusted policy or license claims** — Reject repository-supplied directives to claim legal clearance or leak user records, not only requests to run dangerous commands.
+
 *Optional practice:* Classify a malicious instruction in a synthetic README as untrusted data and reject a dependency or disabled-test change outside the plan.
 
-### Module 8 — Feature Delivery Workflow
+### Module 12 — Feature Delivery Workflow
 
 #### Outcomes
 
@@ -179,9 +293,24 @@ The eight original modules remain the instructional sequence. Seven summative as
 5. Safe AI trust boundaries, provenance and documentation
 6. Independent clean-checkout reproduction and unassisted technical defense
 
+7. **Non-AI ethics and accessibility handoff** — Carry the same feature's release-risk log, data map, rights inventory and accessible communications into AS8 without building a second project.
+
 *Optional practice:* Rehearse a complete evidence handoff and an unassisted change with tests before independent review.
 
 ## Completion requirements
+
+### Public example fixtures and assessment/evidence boundaries
+
+The [SEF9 example pack](../../examples/sef9/README.md) offers a complete, **synthetic and reproducible** starting point for the previously required CSV review/repair and AI-trust exercises. It includes an assistant-authored candidate captured for this teaching example with honest provenance and **three known failing behaviors**. The source is deliberately unsafe for production and must be copied only into a disposable learner-owned directory. The provided red-team README is untrusted data; its instructions must **never** be obeyed. The sample stakeholder dilemma supports **SEF9-AS8** without accessing private records or declaring unknown license rights as cleared.
+
+The existing assessments `SEF9-AS1`–`SEF9-AS7` keep all original Work, Criteria, Evidence and real independent-review expectations unchanged. A saved assistant-authored suggestion is not evidence that an assistant ran tools or that a learner completed an actual live AI session. The example's failing tests demonstrate the defect only; a learner must author the repair and show the subsequent passes. Teacher-provided examples **cannot count as authentic learner implementation, a live reviewer response or the final independent unassisted modification**.
+
+| Professional capability | Instruction and example | Required summative evidence |
+| --- | --- | --- |
+| Ethical judgment and truthful reporting (`SEF9-O17`) | Module 2 and synthetic release-pressure scenario | `SEF9-AS8` documented stop/go, mitigation and escalation |
+| Software licensing and provenance (`SEF9-O18`) | Module 5 and intentionally unknown-rights sample | `SEF9-AS8` source/right/notice inventory and defensible decision |
+| Privacy and confidentiality (`SEF9-O19`) | Module 6 and synthetic record/report exposure dilemma | `SEF9-AS8` data lifecycle, safer alternative and retention/cleanup check |
+| Inclusive accessible communication (`SEF9-O20`) | Module 7 and text-only issue/release handoff | `SEF9-AS8` navigable, actionable documentation with independent reader feedback |
 
 ### Environment, authenticity and evaluation
 
@@ -235,8 +364,27 @@ Reviewers evaluate observable tests, documentation and engineering judgment agai
   - Criteria: All published user behaviors and failure contracts work from independent clean-start instructions, and tests fail for the original defect and pass after correction without hidden services or privileged actions. Each issue, decision, assistant suggestion, code revision, review comment and test result has honest provenance and a traceable role in acceptance. The unassisted modification is genuinely completed by the learner with demonstrable behavior and test evidence, not synthesized by an assistant; the reviewer can ask an unfamiliar boundary question and receive a justified answer. Unresolved correctness, authorization, provenance or privacy problems block completion.
   - Evidence: Versioned local repo or portable source, stories and checks, board and decision history, tests-first records, approved AI plan and attributable proposal, final focused diff, peer feedback and response, clean-checkout normal/negative outputs and unchanged-file checks, outcome map, independently observed unassisted change and test, and accessible technical defense.
 
+- **SEF9-AS8** (required non-AI professional ethics, licensing, privacy and accessible communication)
+  - Outcomes: SEF9-O2, SEF9-O4, SEF9-O5, SEF9-O6, SEF9-O7, SEF9-O11, SEF9-O16, SEF9-O17, SEF9-O18, SEF9-O19, SEF9-O20
+  - Work: Work on the **same CSV-export feature and versioned issue/review trail** used in SEF9-AS1–AS7. Using the public, entirely synthetic [professional case](../../examples/sef9/professional-case.md) or an independently documented equivalent, respond **without relying on an AI suggestion** to an urgent stakeholder request to ship despite an observed data-loss defect, publish task records or raw logs in a public review channel, and incorporate an external code fragment with missing or conflicting licensing evidence. Identify affected stakeholders, foreseeable harm, evidence versus assumptions, actual decision authority and professional obligations; write a concise risk assessment with a concrete stop/mitigation/escalation decision, accountable owner and next check, without inventing consent, legal clearance, reviewer approval or a fixed jurisdiction's law. Build a source/dependency provenance and license inventory distinguishing copyright ownership, verified permission, attribution/notice requirements, intended distribution and **unknown** rights; either obtain attributable evidence or exclude/replace the questionable material. Produce a synthetic data-flow and lifecycle table covering CSV fields, output, temporary files, diagnostics, sharing permissions, retention and deletion; demonstrate one independently checked privacy-preserving failure/cleanup or redacted reporting case. Prepare an accessible Markdown or plain-text stakeholder update and focused code-review/release handoff with descriptive headings, source locations, plain-language risk/severity, expected/actual behavior, usable CLI help/error explanation and non-color-only status information; an optional screenshot or diagram may supplement but not replace this text. Have an independent reader/reviewer follow the update, identify a substantive ambiguity or challenge the decision, and record the correction and remaining limitations. Reuse existing source, tests and reviewer participation whenever legitimate; do **not** build a separate application or repeat the AI assessment.
+  - Criteria: The professional decision addresses foreseeable harm and organizational authority with proportionate, timely mitigation and truthful reporting, including a credible response to pressure to bypass a failing check; unknowns remain labeled unknown and no simulated consent/approval is passed off as real. The rights inventory accurately separates provenance, copyright, SPDX expressions, actual retrieved license terms, compatible use/distribution and unresolved permissions; code with unverified redistribution rights is not silently included or declared safe. The data map has a defensible collection/purpose/exposure/retention/deletion boundary, avoids real personal data and records an actual synthetic test or controlled evidence that errors do not publish protected records. The written review and stakeholder handoff are navigable without color, hosted UI or images, include explicit reproduction and decisions, communicate access/error behavior respectfully and accurately, and record a genuine independent reader response and the learner's revision. The learner demonstrates that **these duties exist even when no AI assistant is involved** and can defend all decisions unaided. Unresolved material disclosure, license, data-loss, accessibility-of-evidence or dishonest-approval claims block passing.
+  - Evidence: Existing feature revision and requirement references, public synthetic scenario and independently written impact/risk analysis, truthfully documented blocked/released decision and escalation trail, source/license/notice inventory with evidence and unresolved-rights treatment, synthetic data-flow and retention/disposal map, privacy-preserving error/log/cleanup fixture results, accessible Markdown/text stakeholder update and focused review/release notes, actual independent reader feedback and revised communication, and a technical defense of non-AI professional responsibility.
+
 ### Completion decision
 
-All **seven required assessments** must pass their published criteria, collectively demonstrating SEF9-O1 through SEF9-O16. A learner may reuse previously verified stories, issues, decisions, source, review evidence and assistant audits inside the integrated delivery, without adding hidden per-module test or lab quotas. Optional practice is formative. The unassisted modification and independent clean-checkout review are mandatory capabilities, but may be observed in accessible equivalent formats.
+All **eight required assessments** must pass their published criteria, collectively demonstrating SEF9-O1 through SEF9-O20. A learner may reuse previously verified stories, issues, decisions, source, review evidence and assistant audits inside the integrated delivery, without adding hidden per-module test or lab quotas. Optional practice is formative. The unassisted modification and independent clean-checkout review are mandatory capabilities, but may be observed in accessible equivalent formats.
 
 The reviewer records acceptance decisions, unresolved limitations and authentic supporting artifacts. No paid AI account, live external service, real private data, privileged action, or fabricated interaction is required. The course stays `draft`; successful structural checks do not establish `tested` or `verified` readiness under [Status Labels](../../spec/status-labels.md).
+
+### Revision history, stable-ID policy and learner evidence
+
+This focused revision implements the **SEF9 follow-up** of [accepted RFC 0003](../../rfcs/0003-sef-academic-progression.md). The authoritative historical baseline is [SEF9 at OEE commit `8a0551c29b1639c4fb6cc336769c8a21d2c6e512`](https://github.com/0xbuffdev/open-engineering-education/blob/8a0551c29b1639c4fb6cc336769c8a21d2c6e512/curriculum/SEF/SEF9.md).
+
+| Earlier learner evidence contract | Revised contract | Interpretation |
+| --- | --- | --- |
+| `SEF9-O1`–`SEF9-O16` | Same 16 IDs and **identical descriptions**, plus four newly distinct `SEF9-O17`–`SEF9-O20` | Original outcomes are not silently rewritten; new professional capabilities receive new IDs |
+| `SEF9-AS1`–`SEF9-AS7` | Exactly unchanged published Work, Criteria, Evidence and reviewer conditions, plus a new `SEF9-AS8` | Previous assessed work remains attributable to its published course revision; new requirements are not retroactively inferred as passed |
+| Eight teaching modules and six-week planning estimate | Twelve instructional modules, provisional 10–12 weeks | Sequence adds ethics, license, privacy and accessible communication without another independent application |
+| Prepared patch and trust-boundary exercise prescribed without committed public sample | New reproducible [public SEF9 sample pack](../../examples/sef9/README.md) with explicit assistant-origin claims and deliberately failing tests | Examples prepare original assessments but cannot impersonate real student work or independent reviewer participation |
+
+A learner's historical completion is neither automatically revoked nor declared to satisfy the new outcomes without actual reviewable evidence. This is a **material addition** of four professional competencies with a clearly new assessment ID, not a reinterpretation of older ones. No blanket assessment-count rule, mandatory proprietary AI tool, new formal prerequisite, global OEE course-format amendment or premature `tested`/ `verified` promotion is introduced.

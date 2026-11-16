@@ -20,7 +20,7 @@ technical defense. The final module is not where the project begins.
 
 The capstone integrates software construction, algorithms, data
 structures, systems knowledge, version control, tests, debugging,
-measurement, and mathematical reasoning acquired across SEF. It does
+measurement, and mathematical reasoning acquired across SEF. It also relies on [SEF9](SEF9.md) professional responsibility for honest risk communication, software rights, privacy, accessible review and truthful AI-use disclosures; these obligations apply whether or not the capstone uses an assistant. The capstone does
 not force arbitrary features merely to showcase every earlier topic.
 
 There is no prescribed implementation language, repository hosting
