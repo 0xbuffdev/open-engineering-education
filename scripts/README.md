@@ -38,8 +38,9 @@ course may optionally declare the `core` classification as well.
 A catalog entry's displayed prerequisite codes must agree with
 the course's own prerequisite metadata, including expanded ranges
 such as `APP1–APP8`. APP17–APP19 are published new core courses;
-APP4 is migrated as an independent SEF10-entry database foundation,
-and APP21 provides Node.js backend runtime foundations after APP18.
+APP4 provides an independent SEF10-entry database foundation,
+APP21 provides Node.js backend runtime foundations after APP18,
+and APP2 follows APP17 + APP19 as framework-neutral browser engineering.
 APP20 remains planned in the [APP migration decision](../curriculum/APP/ARCHITECTURE.md).
 The [current APP catalog](../curriculum/APP/README.md) contains
 **13 core courses and 7 electives** and is authoritative until reviewed
