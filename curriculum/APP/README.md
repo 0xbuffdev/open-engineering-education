@@ -42,7 +42,7 @@ The table below is the **current** APP catalog, not its migration target. Core c
 | [APP18](APP18.md) | JavaScript Programming | 12–16 weeks | SEF10 | `course` | Core · draft |
 | [APP19](APP19.md) | TypeScript Programming | 10–14 weeks | APP18 | `course` | Core · draft |
 | [APP4](APP4.md) | Databases & Data Modeling | 12–16 weeks | SEF10 | `course` | Core · draft |
-| [APP2](APP2.md) | Frontend Engineering | 9 weeks | APP1 | `course` | Core · draft |
+| [APP2](APP2.md) | Browser & Frontend Engineering | 12–16 weeks | APP17, APP19 | `course` | Core · draft |
 | [APP21](APP21.md) | Node.js & Backend Foundations | 12–16 weeks | APP18 | `course` | Core · draft |
 | [APP3](APP3.md) | Backend Engineering & API Design | 9 weeks | APP1 | `course` | Core · draft |
 | [APP5](APP5.md) | Full-Stack Architecture | 8 weeks | APP2, APP3, APP4 | `course` | Core · draft |
@@ -60,11 +60,12 @@ The table below is the **current** APP catalog, not its migration target. Core c
 
 **Current totals:** 13 core courses (including APP9's project capstone) and 7 optional electives, all `draft`. The electives APP10–APP16 are not required for graduation.
 
-**Roadmap, not active prerequisites:** The approved [APP migration architecture](ARCHITECTURE.md) describes the target 14-course core, including the new APP17–APP21 capabilities and revised boundaries for existing courses. APP17–APP19 and APP21 have been introduced as `v0.2.0` drafts, and APP4 has been migrated. APP20 and the remaining scope, prerequisite and graduation-path revisions are **not active** until the corresponding course files and this catalog are updated through reviewed changes.
+**Roadmap, not active prerequisites:** The approved [APP migration architecture](ARCHITECTURE.md) describes the target 14-course core, including the new APP17–APP21 capabilities and revised boundaries for existing courses. APP17–APP19 and APP21 have been introduced as `v0.2.0` drafts, and APP4 and APP2 have been migrated. APP20 and the remaining scope, prerequisite and graduation-path revisions are **not active** until the corresponding course files and this catalog are updated through reviewed changes.
 
 ```text
 SEF10 → APP1, APP18, APP4
-APP1 → APP17, APP2, APP3
+APP1 → APP17, APP3
+APP17 + APP19 → APP2
 APP18 → APP19, APP21
 APP2 + APP3 + APP4 → APP5
 APP3 + APP5 → APP6
@@ -79,6 +80,6 @@ Every authored APP course is currently `draft`. Course files define public outco
 
 ## Course maturity and scope
 
-APP1, APP17, APP18, APP19, APP21 and APP4 use the outcome-driven `v0.2.0` draft format. The other 14 published APP courses retain their earlier format until individually reviewed and migrated. No course is yet `tested` or `verified`; educational quality, assessments, reproducibility, workload, and learner feedback require further evaluation. The [curriculum inventory](../INVENTORY.md) reports format and structural status without implying conformance.
+APP1, APP17, APP18, APP19, APP21, APP4 and APP2 use the outcome-driven `v0.2.0` draft format. The other 13 published APP courses retain their earlier format until individually reviewed and migrated. No course is yet `tested` or `verified`; educational quality, assessments, reproducibility, workload, and learner feedback require further evaluation. The [curriculum inventory](../INVENTORY.md) reports format and structural status without implying conformance.
 
-APP1 covers first-principles Internet and browser mechanisms, not JavaScript application or backend implementation. APP17 provides the complementary HTML/CSS authoring capability. APP18 introduces JavaScript programming and local Node/npm development tooling without requiring APP1, DOM programming or backend implementation. APP19 builds on APP18 with static TypeScript models, type/runtime boundaries and reproducible compiler checking; it is not a React or backend framework course. APP4 now provides an independent SEF10-entry foundation in SQL, relational integrity, transactions, query planning, tenant security and recovery, before backend frameworks. APP21 follows APP18 and teaches the Node backend runtime, asynchronous I/O, streams and a small raw HTTP service without a TypeScript, database or framework prerequisite. Course-specific outcomes and assessment expectations belong in their linked course definitions; the [Curriculum Design Guide](../DESIGN-GUIDE.md) provides non-normative guidance on lesson depth, scope, and sequencing.
+APP1 covers first-principles Internet and browser mechanisms, not JavaScript application or backend implementation. APP17 provides the complementary HTML/CSS authoring capability. APP18 introduces JavaScript programming and local Node/npm development tooling without requiring APP1, DOM programming or backend implementation. APP19 builds on APP18 with static TypeScript models, type/runtime boundaries and reproducible compiler checking; it is not a React or backend framework course. APP4 now provides an independent SEF10-entry foundation in SQL, relational integrity, transactions, query planning, tenant security and recovery, before backend frameworks. APP21 follows APP18 and teaches the Node backend runtime, asynchronous I/O, streams and a small raw HTTP service without a TypeScript, database or framework prerequisite. APP2 now follows APP17 and APP19 and teaches framework-neutral browser DOM, event, form, state, network, navigation, accessibility, usability and security engineering without React or a mandatory backend server. Course-specific outcomes and assessment expectations belong in their linked course definitions; the [Curriculum Design Guide](../DESIGN-GUIDE.md) provides non-normative guidance on lesson depth, scope, and sequencing.

@@ -161,16 +161,36 @@ class APPCatalogTests(unittest.TestCase):
         self.assertIn("[APP17](APP17.md)",
                       (self.app.APP / "APP9.md").read_text(encoding="utf-8"))
 
-    def test_app17_cannot_be_silently_removed_from_capstone_closure(self):
+    def test_app21_cannot_be_silently_removed_from_capstone_closure(self):
+        # APP17 is now also required transitively through APP2. Removing
+        # APP17 only from APP9's direct links must not be mistaken for
+        # losing its actual core capability. APP21 currently has no other
+        # core successor, so removing its APP9 reference genuinely removes it.
         catalog = self.catalog.read_text(encoding="utf-8")
-        self.assertIn("APP1–APP8, APP17", catalog)
-        self.catalog.write_text(catalog.replace("APP1–APP8, APP17", "APP1–APP8", 1),
-                                encoding="utf-8")
-        self.change_course("APP9", ", [APP17](APP17.md)", "")
+        self.assertIn("APP17–APP19, APP21 | `project`", catalog)
+        self.catalog.write_text(
+            catalog.replace("APP17–APP19, APP21 | `project`",
+                            "APP17–APP19 | `project`", 1),
+            encoding="utf-8",
+        )
+        self.change_course("APP9", ", [APP21](APP21.md)", "")
         status, errors = self.check()
         self.assertNotEqual(status, 0)
-        self.assertIn("APP17", errors)
+        self.assertIn("APP21", errors)
         self.assertIn("graduation capstone is missing core prerequisites", errors)
+
+    def test_app17_remains_required_transitively_through_app2(self):
+        # Direct APP9 links can be shortened only when the validated
+        # transitive graph still includes the complete core.
+        catalog = self.catalog.read_text(encoding="utf-8")
+        app9_row = next(line for line in catalog.splitlines()
+                        if line.startswith("| [APP9](APP9.md) |"))
+        self.assertIn("APP17–APP19", app9_row)
+        revised = app9_row.replace("APP17–APP19", "APP18–APP19", 1)
+        self.change_catalog(app9_row, revised)
+        self.change_course("APP9", ", [APP17](APP17.md)", "")
+        status, errors = self.check()
+        self.assertEqual(status, 0, errors)
 
     def test_catalog_is_explicitly_ordered_not_sorted_by_code(self):
         lines = self.catalog.read_text(encoding="utf-8").splitlines()
@@ -237,10 +257,17 @@ class APPCatalogTests(unittest.TestCase):
         self.assertIn("APP9 must be a core project", errors)
 
     def test_prerequisite_mismatch_fails(self):
-        self.change_catalog(
-            "| [APP2](APP2.md) | Frontend Engineering | 9 weeks | APP1 |",
-            "| [APP2](APP2.md) | Frontend Engineering | 9 weeks | APP1, APP3 |",
-        )
+        # Keep this regression independent of renaming and duration
+        # revisions to APP2. Mutate only its prerequisite column.
+        catalog = self.catalog.read_text(encoding="utf-8")
+        row = next(line for line in catalog.splitlines()
+                   if line.startswith("| [APP2](APP2.md) |"))
+        parts = row.split(" | ")
+        self.assertIn("APP17, APP19", row)
+        self.assertIn("APP17, APP19", parts[3])
+        updated = row.replace(" | APP17, APP19 |", " | APP17, APP19, APP3 |", 1)
+        self.assertNotEqual(updated, row)
+        self.change_catalog(row, updated)
         status, errors = self.check()
         self.assertNotEqual(status, 0)
         self.assertIn("prerequisites differ from catalog", errors)
