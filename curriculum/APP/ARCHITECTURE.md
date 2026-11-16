@@ -3,11 +3,11 @@
 **Decision record:** Approved program migration target, academically amended
 on 2026-11-16 in [PR #78](https://github.com/0xbuffdev/open-engineering-education/pull/78).
 
-**Implementation status:** Partially implemented. APP1, APP17 and APP18
-are published as `v0.2.0` draft courses; APP19 is added by its separate
-course migration PR. APP20–APP21 and the remaining scope, prerequisites
-and assessment changes below are **target decisions**, not current learner
-requirements. The [active APP catalog](README.md) and its linked course
+**Implementation status:** Partially implemented. APP1, APP17, APP18 and
+APP19 are published as `v0.2.0` draft courses. APP4 is being migrated
+through a separate course PR. APP20–APP21 and the remaining scope,
+prerequisites and assessment changes below are **target decisions**, not
+current learner requirements. The [active APP catalog](README.md) and its linked course
 definitions remain authoritative until individually amended.
 
 **Authority:** This is a non-normative, program-specific architecture
@@ -596,13 +596,13 @@ course definition is actually merged.
 2. **Preserve preparation already done:** catalog-driven
    classification and ordering checks merged in
    [PR #44](https://github.com/0xbuffdev/open-engineering-education/pull/44).
-   APP1, APP17 and APP18 are published `v0.2.0` course drafts;
-   avoid rewriting them solely to recreate earlier work.
+   APP1, APP17, APP18 and APP19 are published `v0.2.0` course
+   drafts; avoid rewriting them solely to recreate earlier work.
 3. **Foundation PRs:** APP18 was introduced in [PR #82](https://github.com/0xbuffdev/open-engineering-education/pull/82)
-   with SEF10 as its prerequisite. APP19 follows APP18 in its own
-   `v0.2.0` migration PR. APP4's data/SQL migration (SEF10)
-   can proceed independently. Update the live catalog alongside
-   course files as each PR merges.
+   and APP19 in [PR #84](https://github.com/0xbuffdev/open-engineering-education/pull/84).
+   APP4's independent data/SQL migration uses SEF10, rather than
+   the former APP3 prerequisite. Update the live catalog alongside
+   each course file in its reviewed PR.
 4. **Separate implementation branches:** APP21 can follow
    APP18; APP2 follows APP17 and APP19; APP20 follows APP2;
    APP3 follows APP19, APP21 and APP4. Publish valid outcomes,
@@ -689,11 +689,11 @@ The recorded target decisions are:
   examples here remain non-normative; they must not be
   misrepresented as additional v0.2.0 conformance rules.
 
-**Current implementation snapshot:** APP1, APP17 and APP18 are
-published in the outcome-driven `v0.2.0` draft format; APP19 is
-introduced by its own course migration PR. APP20–APP21, the remaining
-legacy course migrations, elective revisions and the complete independent
-APP evidence review remain future work. Use the
+**Current implementation snapshot:** APP1, APP17, APP18 and APP19
+are published in the outcome-driven `v0.2.0` draft format; APP4 is
+being migrated through its independent course PR. APP20–APP21,
+remaining legacy courses, elective revisions and the complete
+independent APP evidence review remain future work. Use the
 [current APP catalog](README.md) for active learner requirements;
 planned dependencies are not live until the relevant course PR merges.
 
