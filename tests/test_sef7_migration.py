@@ -33,7 +33,7 @@ class SEF7MigrationTests(unittest.TestCase):
             "**Specification:** `v0.2.0`" in path.read_text(encoding="utf-8")
             for path in COURSE.parent.glob("SEF[0-9]*.md")
         )
-        self.assertIn(f"{migrated} v0.2.0, {10 - migrated} legacy", run.stdout)
+        self.assertIn(f"{migrated} v0.2.0, {11 - migrated} legacy", run.stdout)
 
     def test_all_fourteen_outcomes_map_to_seven_required_assessments(self):
         text = COURSE.read_text(encoding="utf-8")
@@ -94,7 +94,7 @@ class SEF7MigrationTests(unittest.TestCase):
             self.assertIn(term.lower(), course.lower())
         catalog = CATALOG.read_text(encoding="utf-8")
         self.assertIn("[SEF7](SEF7.md)", catalog)
-        self.assertIn("All ten SEF courses (SEF1–SEF10)", catalog)
+        self.assertIn("All eleven SEF course files use", catalog)
         self.assertIn("no historical-format SEF course definitions remain", catalog)
 
 

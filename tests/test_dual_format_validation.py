@@ -91,6 +91,9 @@ class DualFormatValidationTests(unittest.TestCase):
         self.root = Path(self.directory.name)
         shutil.copytree(ROOT / "curriculum", self.root / "curriculum")
         shutil.copytree(ROOT / "spec", self.root / "spec")
+        # The public SEF catalog and SEF11 link the accepted architecture RFC.
+        # Keep the isolated repository fixture faithful to those local links.
+        shutil.copytree(ROOT / "rfcs", self.root / "rfcs")
         self.app.ROOT = self.root
         self.app.APP = self.root / "curriculum" / "APP"
         self.sef.ROOT = self.root
@@ -129,7 +132,7 @@ class DualFormatValidationTests(unittest.TestCase):
         course = example_course(
             "SEF10", "Software Engineering Foundations Capstone",
             "SEF — Software Engineering Foundations", "8–10 weeks",
-            "SEF1–SEF9", project=True,
+            "SEF1–SEF9, SEF11", project=True,
         )
         self.replace_course("SEF10", course)
         self.assertEqual(self.sef.validate(), 0)
@@ -265,16 +268,16 @@ Complete the required exercises, checkpoints and lab.
         self.assertTrue(any("SEF7: prerequisites differ from catalog" in e
                             for e in self.sef.ERRORS))
 
-    def test_sef10_linked_range_expands_to_nine_prerequisites(self):
+    def test_sef10_linked_range_expands_to_ten_prerequisites(self):
         self.assertEqual(self.sef.validate(), 0)
         self.assertEqual(
-            self.sef.DEPS["SEF10"], [f"SEF{i}" for i in range(1, 10)]
+            self.sef.DEPS["SEF10"], [f"SEF{i}" for i in range(1, 10)] + ["SEF11"]
         )
 
     def test_sef10_cannot_silently_skip_middle_prerequisites(self):
         path = self.root / "curriculum" / "SEF" / "SEF10.md"
         source = path.read_text(encoding="utf-8")
-        actual = "**Prerequisites:** [SEF1](SEF1.md)–[SEF9](SEF9.md)"
+        actual = "**Prerequisites:** [SEF1](SEF1.md)–[SEF9](SEF9.md), [SEF11](SEF11.md)"
         self.assertIn(actual, source)
         self.replace_course("SEF10", source.replace(
             actual, "**Prerequisites:** [SEF1](SEF1.md), [SEF9](SEF9.md)"

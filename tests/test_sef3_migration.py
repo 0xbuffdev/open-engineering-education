@@ -33,7 +33,7 @@ class SEF3MigrationTests(unittest.TestCase):
             "**Specification:** `v0.2.0`" in course.read_text(encoding="utf-8")
             for course in COURSE.parent.glob("SEF[0-9]*.md")
         )
-        self.assertIn(f"{migrated} v0.2.0, {10 - migrated} legacy", result.stdout)
+        self.assertIn(f"{migrated} v0.2.0, {11 - migrated} legacy", result.stdout)
 
     def test_twelve_outcomes_covered_by_six_required_assessments(self):
         text = COURSE.read_text(encoding="utf-8")
@@ -93,7 +93,7 @@ class SEF3MigrationTests(unittest.TestCase):
         self.assertIn("No root privileges", text)
         catalog = CATALOG.read_text(encoding="utf-8")
         self.assertIn("[SEF3](SEF3.md)", catalog)
-        self.assertIn("All ten SEF courses (SEF1–SEF10)", catalog)
+        self.assertIn("All eleven SEF course files use", catalog)
         self.assertIn("no historical-format SEF course definitions remain", catalog)
 
 

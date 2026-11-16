@@ -10,14 +10,14 @@ Each program README is the authoritative catalog for its **current** courses, st
 
 | Code | Program | Published course files | Catalog |
 | --- | --- | --- | --- |
-| `SEF` | Software Engineering Foundations | 10 core | [Explore SEF](SEF/README.md) |
+| `SEF` | Software Engineering Foundations | 11 core | [Explore SEF](SEF/README.md) |
 | `APP` | Application Engineering | 10 core, 7 electives | [Explore APP](APP/README.md) |
 | `SYS` | Systems Engineering | 9 core | [Explore SYS](SYS/README.md) |
 | `AI` | AI Engineering | 9 core | [Explore AI](AI/README.md) |
 | `SEC` | Security Engineering | 9 core | [Explore SEC](SEC/README.md) |
-| **Total** | **Five programs** | **47 core, 7 electives** | |
+| **Total** | **Five programs** | **48 core, 7 electives** | |
 
-SEF provides the common software-engineering foundation. APP develops applications and production delivery; SYS focuses on software close to hardware and operating systems; AI develops data, model, and production AI capabilities; SEC applies security engineering to systems and applications.
+SEF provides the common software-engineering foundation, including the newly adopted [SEF11 discrete-mathematics prerequisite](SEF/SEF11.md) before algorithms and numerical mathematics. APP develops applications and production delivery; SYS focuses on software close to hardware and operating systems; AI develops data, model, and production AI capabilities; SEC applies security engineering to systems and applications.
 
 The APP catalog currently includes 10 core courses and seven optional electives. Its [migration decision](APP/ARCHITECTURE.md) describes a **different target architecture**, not additional current graduation requirements. New target courses and prerequisite changes take effect only when adopted in the public course catalog and course files.
 

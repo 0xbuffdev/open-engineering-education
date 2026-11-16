@@ -2,7 +2,7 @@
 
 **Program:** SEF — Software Engineering Foundations
 **Type:** `project`
-**Prerequisites:** [SEF1](SEF1.md)–[SEF9](SEF9.md)
+**Prerequisites:** [SEF1](SEF1.md)–[SEF9](SEF9.md), [SEF11](SEF11.md)
 **Duration:** 8–10 weeks
 **Status:** `draft`
 **Specification:** `v0.2.0`
@@ -31,9 +31,12 @@ supply a complete assessed implementation. Feedback and escalating
 hints are permitted; the learner must own the technical decisions,
 code, verification, and final unassisted challenge.
 
-SEF8 may be studied alongside earlier SEF courses, but the required
-SEF1–SEF9 capabilities must be demonstrated before this capstone is
-completed. The duration is a planning estimate, not evidence of
+After SEF11 establishes discrete proof and recurrence readiness, SEF4 and
+SEF8 may be studied concurrently. **All required SEF1–SEF9 and SEF11
+capabilities** must be demonstrated before entry to this capstone.
+The design defense integrates mathematical reasoning about invariants,
+algorithmic costs and quantitative evidence; the project is still one
+bounded developer utility rather than an extra mathematics submission. The duration is a planning estimate, not evidence of
 completion or course readiness.
 
 ## Learning outcomes
