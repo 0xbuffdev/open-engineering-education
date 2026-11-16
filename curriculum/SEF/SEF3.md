@@ -3,7 +3,7 @@
 **Program:** SEF — Software Engineering Foundations
 **Type:** `course`
 **Prerequisites:** [SEF2](SEF2.md)
-**Duration:** 8 weeks
+**Duration:** 10–12 weeks
 **Status:** `draft`
 **Specification:** `v0.2.0`
 **Expected workload:** 10–15 focused hours/week (provisional; calibrate with learner evidence)
@@ -14,13 +14,15 @@
 
 Develop the ability to explain and safely automate work in a Linux shell. Starting from the basic terminal skills introduced by SEF2, investigate files, links, expansion, redirection, pipelines, permissions, processes, and the shell's inherited environment. Then use Bash scripts to search and transform local data, handle failures, and deliver a small tested command-line toolkit.
 
-Bash 5.x and common Linux command-line tools are the reference environment. Use a Linux workstation or an already available free Linux virtual machine, container, or equivalent local environment with a nonprivileged shell. Record the actual Bash, operating-system, and utility versions. Bash arrays, `[[ ... ]]`, `pipefail`, and NUL-delimited `read` options are **Bash features**, not claims about generic POSIX `sh`. Where GNU and POSIX utilities differ, document the dependency or use a supported equivalent.
+Bash 5.x and common Linux command-line tools are the reference environment. Distinguish **three contracts**: POSIX shell language and semantics, Bash extensions, and external POSIX/GNU/other utility implementations. A Bash script is not automatically portable to `sh`, and portable shell syntax does not make GNU-specific flags portable. Use a Linux workstation or an already available free Linux virtual machine, container, or equivalent local environment with a nonprivileged shell. Record the actual Bash, operating-system, and utility versions. Bash arrays, `[[ ... ]]`, `pipefail`, and NUL-delimited `read` options are **Bash features**, not claims about generic POSIX `sh`. Where GNU and POSIX utilities differ, document the exact standard edition or local implementation/version, demonstrate a supported alternative, or explicitly constrain the supported platform. Running `bash --posix` is not independent proof of portability to another shell; a second shell such as `dash` is optional if already available, not an installation gate. A local `sh` may itself be Bash: document that limitation.
 
 All assessed work uses synthetic data, explicitly owned temporary directories, and only processes started by the learner for the exercise. No root privileges, `sudo`, system-wide package changes, real scheduled jobs, external network access, personal-file manipulation, or paid service are required. Package-management and network tools can be studied using local documentation and available loopback diagnostics; their presence is not a hidden installation gate.
 
-The 11-module learning sequence is preserved as a guide, not a quota of per-module tests or labs. Six required assessments integrate connected capabilities and can reuse already verified scripts, fixtures, and explanations. **Published outcomes, assessment criteria, and evidence determine course completion**, not attendance or the number of activities performed.
+The 13-module learning sequence is a progression, not a quota of per-module tests or labs. Seven required assessments integrate connected capabilities and may reuse earlier verified scripts, fixtures and explanations. The portability assessment extends the same shell toolkit, not a separate application. **Published outcomes, assessment criteria, and evidence determine course completion**, not attendance or the number of activities performed.
 
-The 8-week duration is a planning estimate. The course remains `draft` until the applicable learner and reviewer evidence justifies a readiness promotion.
+The 10–12-week duration is a provisional estimate for the additional environment and portability investigations; it is not validated learner study-time evidence. The course remains `draft` until the applicable learner and reviewer evidence justifies a readiness promotion.
+
+For optional standards cross-checks, consult the freely accessible [POSIX.1-2024 Shell Command Language](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/V3_chap02.html), [Bash Startup Files](https://www.gnu.org/software/bash/manual/html_node/Bash-Startup-Files.html), [Bash POSIX Mode](https://www.gnu.org/software/bash/manual/html_node/Bash-POSIX-Mode.html) and [GNU Coreutils manual](https://www.gnu.org/software/coreutils/manual/). These free references clarify implementation details but are not substitutes for the complete public learning outcomes and assessment criteria below.
 
 ## Learning outcomes
 
@@ -36,6 +38,8 @@ The 8-week duration is a planning estimate. The course remains `draft` until the
 - **SEF3-O10:** Detect and report pipeline and subprocess failures, use narrowly scoped cleanup traps, and explain which interruptions and durability outcomes cannot be guaranteed.
 - **SEF3-O11:** Reproduce and explain a noninteractive or restricted-environment failure, distinguishing Bash-specific features from POSIX-sh behavior and documenting platform, locale, path, and tool assumptions.
 - **SEF3-O12:** Deliver, verify, and defend a small offline shell toolkit that safely coordinates multiple scripts, preserves unrelated files, handles required error cases, and reproduces its claims from clean fixtures.
+- **SEF3-O13:** Build and actually exercise a small POSIX-sh-compatible helper and a deliberately Bash-specific alternative; distinguish shell syntax from external utility portability, explain real interpreter/version behavior, and defend a verified compatibility boundary rather than assuming portability from a shebang or a single Bash run.
+- **SEF3-O14:** Predict and reproduce exported versus shell-local variable inheritance, child/subshell effects, login/interactive/noninteractive startup behavior, working directory, command lookup, and locale-dependent output in controlled environments without modifying real user configuration.
 
 ## Modules
 
@@ -70,6 +74,8 @@ The 8-week duration is a planning estimate. The course remains `draft` until the
 3. Aliases
 4. Standard input, output, and error
 5. Pipelines and filters
+6. Redirection evaluation order — Compare `2>&1 >out` with `>out 2>&1` using harmless synthetic stdout/stderr.
+7. Command status across pipelines — Explain why a final successful command can conceal an upstream failure.
 
 *Optional practice:* Identify built-ins and external commands with the shell's documentation tools; compare stdout, stderr, and status for a harmless failing helper.
 
@@ -86,6 +92,8 @@ The 8-week duration is a planning estimate. The course remains `draft` until the
 2. Parameter and command substitution
 3. Quoting
 4. Command-line editing and history
+5. Field splitting, globbing and the argument vector — Verify `"$@"` versus `"$*"`, empty/unset parameters, unusual pathnames and unmatched Bash globs using a harmless argument-display helper.
+6. Expansion and safety — Trace brace, tilde, arithmetic, parameter and command expansion, quoting and later word splitting; never need `eval` to explain an argument vector.
 
 *Optional practice:* Use a safe argument-display function rather than `eval` to compare quoted and unquoted expansions, including an empty value and an unmatched glob.
 
@@ -119,10 +127,35 @@ The 8-week duration is a planning estimate. The course remains `draft` until the
 3. Editing files with vi(m)
 4. Package management
 5. Networking tools
+6. Shell-local and exported variables — Demonstrate per-command assignments and `export` without changing real startup files.
+7. Bash invocation modes — Distinguish interactive login, interactive non-login, noninteractive execution and the `BASH_ENV` mechanism; never source untrusted scripts.
 
 *Optional practice:* Edit a local configuration example in a terminal editor; compare a normal shell with a restricted environment using explicit command paths.
 
-### Module 6 — Searching & Text Processing
+### Module 6 — Process Environments and Deterministic Execution
+
+#### Outcomes
+
+- SEF3-O5
+- SEF3-O8
+- SEF3-O11
+- SEF3-O14
+
+#### Lessons
+
+1. **Process context** — Trace inherited exported variables, open standard streams, current working directory and shell options separately.
+2. **Local versus exported variables** — Show `export`, `unset`, one-command assignments and why an unexported value is absent in a child.
+3. **Subshells and parent effects** — Compare `( ... )`, command substitutions, functions, sourced code and external child processes without claiming child mutations reach the parent.
+4. **Search paths and command identities** — Diagnose `PATH`, executable permissions, shell built-ins, functions and aliases under different invocation modes.
+5. **Startup and profiles** — Compare login, interactive and noninteractive Bash startup and `BASH_ENV`; use disposable fixtures rather than editing real profile files.
+6. **Working directory and scheduler simulation** — Reproduce failures under a changed working directory, an explicitly constrained `PATH`, and a controlled `env -i` environment without installing or enabling a real scheduled job.
+7. **Locale and encoding** — Compare a supported locale's sorting/regex assumptions with a deliberate `LC_ALL=C` byte-order contract; explain the trade-off for non-ASCII text.
+8. **Minimal safe diagnostics** — Record interpreter identity, selected paths and status without dumping full private environments, secrets or unrelated user files.
+9. **Failure and correction** — Predict, reproduce and fix a command-lookup or environment-inheritance error on unfamiliar synthetic input.
+
+*Optional practice:* In a disposable folder, compare one unexported shell variable and a one-command exported assignment in two child processes; verify the parent environment is unchanged and an `env -i` run reports the expected lookup failure.
+
+### Module 7 — Searching & Text Processing
 
 #### Outcomes
 
@@ -140,7 +173,7 @@ The 8-week duration is a planning estimate. The course remains `draft` until the
 
 *Optional practice:* Build a reference count by hand, then search and sort synthetic log records; test empty input and malformed lines.
 
-### Module 7 — Shell Scripts: Foundations
+### Module 8 — Shell Scripts: Foundations
 
 #### Outcomes
 
@@ -156,7 +189,7 @@ The 8-week duration is a planning estimate. The course remains `draft` until the
 
 *Optional practice:* Write a small script with help, functions, argument validation, and meaningful nonzero errors for rejected inputs.
 
-### Module 8 — Shell Scripts: Control Flow & Robustness
+### Module 9 — Shell Scripts: Control Flow & Robustness
 
 #### Outcomes
 
@@ -174,7 +207,7 @@ The 8-week duration is a planning estimate. The course remains `draft` until the
 
 *Optional practice:* Seed a quoting or argument-handling defect in a copy, capture the bad output, correct it, and retain a regression test.
 
-### Module 9 — Shell Safety & Process Boundaries
+### Module 10 — Shell Safety & Process Boundaries
 
 #### Outcomes
 
@@ -192,7 +225,7 @@ The 8-week duration is a planning estimate. The course remains `draft` until the
 
 *Optional practice:* Use a disposable directory containing filenames with whitespace and newlines; compare NUL-delimited iteration with the unsafe line-splitting example without deleting real files.
 
-### Module 10 — Automation Diagnostics & Portability
+### Module 11 — Automation Diagnostics & Portability
 
 #### Outcomes
 
@@ -210,10 +243,37 @@ The 8-week duration is a planning estimate. The course remains `draft` until the
 
 *Optional practice:* Compare a clean environment with the interactive one, then simulate the actual PATH and working-directory assumptions of a scheduled task.
 
-### Module 11 — Shell Toolkit
+### Module 12 — POSIX Shell, Bash and Utility Compatibility
 
 #### Outcomes
 
+- SEF3-O3
+- SEF3-O7
+- SEF3-O11
+- SEF3-O13
+- SEF3-O14
+
+#### Lessons
+
+1. **Language versus implementation** — Identify the POSIX shell command language, Bash extensions and separately implemented external utilities; report the reference POSIX edition and actual Linux toolchain.
+2. **Interpreters and shebangs** — Check the available `sh` interpreter and contrast `#!/bin/sh`, `#!/usr/bin/env bash`, explicit `sh script` and `bash script` invocation; a Bash-backed `sh` does not prove implementation independence.
+3. **Portable syntax** — Use `case`, `test`, simple functions, `printf`, quoted arguments, redirections and explicit failure status in a minimal POSIX-sh helper.
+4. **Bash extensions** — Show the purpose and absence from some `sh` implementations of indexed arrays, `[[ ... ]]`, brace expansion, process substitution and Bash-specific `read` options.
+5. **Error control** — Test pipeline status, `set -e` exceptions, command substitution and subshell behavior, and whether `pipefail` is actually supported by the target shell and standard edition.
+6. **Utility provenance** — Inspect which `find`, `grep`, `sed`, `sort`, `date` and `xargs` options are available; distinguish POSIX-required behavior from GNU extensions instead of assuming the name guarantees flags.
+7. **Regexes and output semantics** — Document basic/extended/implementation-specific expressions and locale effects on collation, sorting and text classification.
+8. **Unusual pathnames** — Contrast unsafe line-delimited filename loops with declared NUL-delimited Bash/tool implementations, and state which filename/utility guarantees actually apply.
+9. **Path policy and concurrency** — Explain leading-dash operands and supported `--` handling, symlink policies and why lexical prefixes/quoting cannot guarantee safety against adversarial filesystem races.
+10. **Evidence and trade-offs** — Run the portable helper under actual `sh` and Bash, a Bash-only example in both interpreters, record failures accurately and defend whether the final toolkit intentionally relies on Bash/GNU or offers a constrained portable subset.
+
+*Optional practice:* Compare a POSIX-sh `case`/quoted-parameter helper with a Bash-array variant on a fixture containing spaces. Document whether `sh` is Bash and which external utility flags were actually tested; do not install any extra shell.
+
+### Module 13 — Shell Toolkit
+
+#### Outcomes
+
+- SEF3-O13
+- SEF3-O14
 - SEF3-O6
 - SEF3-O7
 - SEF3-O8
@@ -228,6 +288,8 @@ The 8-week duration is a planning estimate. The course remains `draft` until the
 2. Report pipeline and staging design
 3. Failure-path test harness
 4. Clean-start documentation and engineering defense
+5. Actual shell and utility compatibility matrix
+6. Clean-environment reproduction and failure explanation
 
 *Optional practice:* Sketch a two-script log-reporting toolkit and plan its clean-checkout reproduction, failure cases, safety boundary, and technical defense.
 
@@ -235,7 +297,7 @@ The 8-week duration is a planning estimate. The course remains `draft` until the
 
 ### Assessment environment and safety
 
-Complete the six required assessments with a documented nonprivileged Bash 5.x (or compatible Bash) environment and generated, non-sensitive fixtures. Specify the shell, operating-system/tool versions, locale when output ordering matters, exact commands, expected results, and actual results. Run all mutating tests inside a verified learner-owned fixture root, never through a broad cleanup command pointed at a home directory or unknown path. Do not use `sudo`, install packages system-wide, alter real startup files or crontabs, fetch remote data, or signal unrelated processes.
+Complete the seven required assessments with a documented nonprivileged Bash 5.x (or compatible Bash) environment and generated, non-sensitive fixtures. Specify the shell, operating-system/tool versions, locale when output ordering matters, exact commands, expected results, and actual results. Run all mutating tests inside a verified learner-owned fixture root, never through a broad cleanup command pointed at a home directory or unknown path. Do not use `sudo`, install packages system-wide, alter real startup files or crontabs, fetch remote data, or signal unrelated processes.
 
 Some exercises use unusual pathnames, symlinks, redirection, signals, and injected failures. For each, establish the expected boundaries **before** executing commands; demonstrate that unrelated sentinel data remains unchanged. Where a platform lacks an optional diagnostic utility, document the limitation and use a reproducible equivalent, not an undisclosed dependency. A separate network namespace or administrative capabilities are not needed.
 
@@ -280,8 +342,23 @@ For each assessment, provide inspectable scripts or command transcripts, the inp
   - Criteria: Both scripts run independently from documented clean-start commands with no privilege, paid resource, or network dependency. Reports match independently checked reference counts; help, input validation, dry-run, safe staging, declared mutations, and nonzero failures behave as specified. Neither an invalid request nor an injected interruption deletes unrelated inputs or silently replaces a valid report with partial output. The restricted-environment run uses explicit, documented dependencies and distinguishes environment defects from data defects. The learner can explain command expansion, functions/control flow, failure propagation, portability limits, and one concrete design trade-off using the submitted evidence, not merely a passing test claim.
   - Evidence: Source or portable archive for both scripts and test harness, README with fixtures and reproducible commands, input/output and status contract, independent count oracle, normal/negative/repeated-run logs, before/after sentinel and report-byte checks, environment/locale/version matrix, repaired-defect record, and a concise written, recorded, live, or otherwise accessible technical defense.
 
+- **SEF3-AS7** (required shell portability and process-environment verification)
+  - Outcomes: SEF3-O3, SEF3-O5, SEF3-O7, SEF3-O8, SEF3-O11, SEF3-O12, SEF3-O13, SEF3-O14
+  - Work: Reuse the existing SEF3-AS6 toolkit and extract one read-only report helper, not an unrelated new program. Implement a small POSIX-sh-compatible variant using quoted positional parameters, `case`, `test`, `printf`, standard loops, and explicit error checking. Exercise it under the available `sh` and Bash with a normal fixture, a path containing whitespace, an invalid argument and a deliberately failing command; record the actual `sh` implementation. Add or isolate a deliberately Bash-only variant using `[[ ... ]]` or arrays, run it under Bash and `sh`, and report the actual syntax/behavior difference; if `sh` is Bash, disclose that no independent shell was tested. Identify the `find`, `grep`, `sed` or other external utility flags required by these helpers, classify portability against an identified standard edition and local implementation, and demonstrate one meaningful supported option or interpretation difference or explain why a comparison is unavailable. Reproduce a controlled `env -i` invocation with explicit safe `PATH`, locale and changed working directory; show an unexported shell value absent in a child, a one-command assignment, and at least one expected command-lookup or startup assumption failure and its repair. Present an interpreter/tool/locale compatibility matrix and defend the intended portability boundary under an unfamiliar reviewer-provided fixture.
+  - Criteria: The claimed portable helper uses an appropriate POSIX-sh subset and documented external options; real runs correctly handle whitespace, known invalid inputs and intentional command failures without touching unrelated files. A Bash-only feature is identified as such, not mislabeled POSIX portable; `bash --posix` or a Bash-backed `sh` is never claimed to prove independent portability. Predictions accurately separate exported variables from shell-local state, child/subshell effects, startup mode, working directory, `PATH`, locale, and observed process status. Utility provenance and unknown versions are transparently documented; portability does not rest on an assumption that a GNU option works everywhere. Input/sentinel safety and failure propagation remain intact, and a new or seeded defect is diagnosed and repaired. No root privileges, extra package installation, real cron modification, real startup-file edits, external network access or proprietary tools are needed.
+  - Evidence: Reused toolkit and two small helper variants, interpreter/shebang and external-utility compatibility matrix, actual `sh` identity, versions and optional reference documentation, scripts and reproducible fixture commands, before/after sentinel checks, stdout/stderr/status for normal and failing cases, controlled-environment and locale trace without sensitive variables, independent reference counts, a defect/fix regression, and an accessible technical defense.
+
 ### Completion decision
 
-A learner completes SEF3 when **all six required summative assessments** meet their published criteria and collectively demonstrate SEF3-O1 through SEF3-O12. Assessed source and fixture work may be reused and expanded across the six assessments; learners are not required to write six unrelated utilities or duplicate a quiz and lab in every module. Optional practice and course lessons support learning but are not unannounced completion gates.
+A learner completes SEF3 when **all seven required summative assessments** meet their published criteria and collectively demonstrate SEF3-O1 through SEF3-O14. Assessed source and fixture work may be reused and expanded across the seven assessments; learners are not required to write six unrelated utilities or duplicate a quiz and lab in every module. Optional practice and course lessons support learning but are not unannounced completion gates.
 
 A reviewer records each assessment decision with the required inspectable evidence and may request bounded clarification on unfamiliar, but equivalent, inputs under the published criteria. Safety-critical mistakes, hidden dependencies, and non-reproducible output must be corrected before a passing decision. Learner work stays under learner control; sharing raw private machine state, production credentials, or sensitive data is never required. The course itself remains `draft`; an automated structural pass does not satisfy the learner-feedback and reviewer thresholds in [Status Labels](../../spec/status-labels.md).
+
+### Revision history and evidence compatibility
+
+[Accepted RFC 0003](../../rfcs/0003-sef-academic-progression.md) authorized focused SEF3 educational hardening. The historical reference is [SEF3 at commit `1fb369a251a093736f63fa1cfa95656ded87ad99`](https://github.com/0xbuffdev/open-engineering-education/blob/1fb369a251a093736f63fa1cfa95656ded87ad99/curriculum/SEF/SEF3.md) and must remain immutable when interpreting old work.
+
+- **Unchanged:** `SEF3-O1`–`O12` retain their original descriptions, and `SEF3-AS1`–`AS6` retain their original Work, Criteria, Evidence and review variation. Existing completion claims remain pinned to that source revision.
+- **Added:** `SEF3-O13` establishes demonstrated shell and utility portability, and `SEF3-O14` establishes reproducible environment reasoning. They are assessed by the new `SEF3-AS7` using the existing shell toolkit, not a new independent project.
+- **Study plan:** Two instructional modules were added for explicit environment and portability reasoning, with provisional duration increasing from eight to 10–12 weeks. No additional per-module lab or required quiz quota is introduced.
+- **No automatic equivalence:** Prior learner completion is neither deleted nor silently marked complete against new outcomes; an evidence-based review must establish current readiness for the new requirements. The course still has `draft` status, and the downstream SEF7 C/POSIX system-interface assessment remains unchanged.

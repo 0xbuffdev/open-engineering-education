@@ -35,21 +35,21 @@ class SEF3MigrationTests(unittest.TestCase):
         )
         self.assertIn(f"{migrated} v0.2.0, {11 - migrated} legacy", result.stdout)
 
-    def test_twelve_outcomes_covered_by_six_required_assessments(self):
+    def test_fourteen_outcomes_covered_by_seven_required_assessments(self):
         text = COURSE.read_text(encoding="utf-8")
         learning = text.split("\n## Learning outcomes\n", 1)[1].split(
             "\n## Modules\n", 1
         )[0]
         outcomes = set(re.findall(r"(?m)^- \*\*(SEF3-O\d+):\*\*", learning))
         self.assertEqual(
-            outcomes, {f"SEF3-O{i}" for i in range(1, 13)}
+            outcomes, {f"SEF3-O{i}" for i in range(1, 15)}
         )
 
         completion = text.split("\n## Completion requirements\n", 1)[1]
         assessment_blocks = re.split(
             r"(?=^- \*\*SEF3-AS\d+\*\* \(required )", completion, flags=re.M
         )[1:]
-        self.assertEqual(len(assessment_blocks), 6)
+        self.assertEqual(len(assessment_blocks), 7)
         covered = set()
         for number, block in enumerate(assessment_blocks, start=1):
             self.assertTrue(block.startswith(f"- **SEF3-AS{number}**"))
@@ -60,13 +60,13 @@ class SEF3MigrationTests(unittest.TestCase):
             covered.update(re.findall(r"SEF3-O\d+", references.group(1)))
         self.assertEqual(covered, outcomes)
 
-    def test_eleven_modules_use_unique_stable_outcome_references(self):
+    def test_thirteen_modules_use_unique_stable_outcome_references(self):
         text = COURSE.read_text(encoding="utf-8")
         modules = text.split("\n## Modules\n", 1)[1].split(
             "\n## Completion requirements\n", 1
         )[0]
         matches = list(re.finditer(r"(?m)^### Module (\d+) — ", modules))
-        self.assertEqual([int(m.group(1)) for m in matches], list(range(1, 12)))
+        self.assertEqual([int(m.group(1)) for m in matches], list(range(1, 14)))
         for index, match in enumerate(matches):
             end = matches[index + 1].start() if index + 1 < len(matches) else len(modules)
             content = modules[match.start():end]
@@ -84,7 +84,7 @@ class SEF3MigrationTests(unittest.TestCase):
     def test_preserved_scope_and_no_legacy_assessment_quotas(self):
         text = COURSE.read_text(encoding="utf-8")
         self.assertIn("**Prerequisites:** [SEF2](SEF2.md)", text)
-        self.assertIn("**Duration:** 8 weeks", text)
+        self.assertIn("**Duration:** 10–12 weeks", text)
         self.assertIn("**Status:** `draft`", text)
         self.assertIn("**Specification:** `v0.2.0`", text)
         self.assertNotIn("— `test`", text)
@@ -93,6 +93,7 @@ class SEF3MigrationTests(unittest.TestCase):
         self.assertIn("No root privileges", text)
         catalog = CATALOG.read_text(encoding="utf-8")
         self.assertIn("[SEF3](SEF3.md)", catalog)
+        self.assertIn("| 10–12 weeks | SEF2 |", catalog)
         self.assertIn("All eleven SEF course files use", catalog)
         self.assertIn("no historical-format SEF course definitions remain", catalog)
 

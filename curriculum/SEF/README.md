@@ -39,7 +39,7 @@ This table is the **authoritative prerequisite-valid study order**, not numerica
 | [SEF1](SEF1.md) | Demystifying the Computer System | 5 weeks | — | `course` |
 | [SEF2](SEF2.md) | Programming & Computational Thinking | 10–12 weeks | SEF1 | `course` |
 | [SEF11](SEF11.md) | Discrete Mathematics for Computing | 10–14 weeks | SEF2 | `course` |
-| [SEF3](SEF3.md) | Linux & the Command Line | 8 weeks | SEF2 | `course` |
+| [SEF3](SEF3.md) | Linux & the Command Line | 10–12 weeks | SEF2 | `course` |
 | [SEF4](SEF4.md) | Data Structures & Algorithms | 10 weeks | SEF11 | `course` |
 | [SEF5](SEF5.md) | Software Engineering Practice | 8 weeks | SEF2 | `course` |
 | [SEF8](SEF8.md) | Mathematics for Numerical Computing & AI | 12–14 weeks | SEF11 | `course` |
@@ -60,7 +60,7 @@ SEF1–SEF9 + SEF11 → SEF10
 
 ## Study notes and course maturity
 
-SEF3 and SEF5 can begin after SEF2 while SEF11's required mathematical preparation is underway. Once SEF11 is complete, SEF4 and SEF8 may be studied in parallel. Course codes are stable identifiers, not rigid sequential enrollment numbers. Learners who need additional foundational mathematics are supported by SEF11's **ungraded entry diagnostic** and unlimited reasonable remediation/reassessment under published criteria.
+SEF3 and SEF5 can begin after SEF2 while SEF11's required mathematical preparation is underway. SEF3 develops Bash automation, explicit POSIX-sh/GNU portability boundaries and reproducible environment reasoning before later Unix/C system interfaces in SEF7; its portability and process-environment work has publicly assessed outcomes, not hidden prerequisites. Once SEF11 is complete, SEF4 and SEF8 may be studied in parallel. Course codes are stable identifiers, not rigid sequential enrollment numbers. Learners who need additional foundational mathematics are supported by SEF11's **ungraded entry diagnostic** and unlimited reasonable remediation/reassessment under published criteria.
 
 **All eleven SEF course files use the OEE `v0.2.0` outcome-driven draft format and remain `draft`.** (no historical-format SEF course definitions remain). A clean structural migration does not show verified learner outcomes or educational effectiveness. The estimated durations, including SEF11's bridge and SEF8's revised numerical work, remain provisional until actual learner and reviewer feedback justifies them. See [curriculum inventory](../INVENTORY.md) for reproducible structural observations.
 
