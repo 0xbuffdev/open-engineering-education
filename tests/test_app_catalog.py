@@ -266,6 +266,39 @@ class APPCatalogTests(unittest.TestCase):
         self.assertIn("APP5", errors)
         self.assertIn("prerequisites differ from catalog", errors)
 
+    def test_app6_core_quality_requires_app5_not_redundant_app3(self):
+        # APP5 already requires APP3, so APP6's only direct
+        # prerequisite must be the completed full-stack course.
+        entries, errors = read_app_catalog(self.catalog)
+        self.assertFalse(errors, errors)
+        codes = [entry.code for entry in entries]
+        app6 = next(entry for entry in entries if entry.code == "APP6")
+        self.assertEqual(
+            (app6.title, app6.kind, app6.classification, app6.status),
+            ("Software Quality & Engineering Operations",
+             "course", "core", "draft"),
+        )
+        self.assertEqual(prerequisite_codes(app6.prerequisites), ["APP5"])
+        self.assertLess(codes.index("APP5"), codes.index("APP6"))
+        source = (self.app.APP / "APP6.md").read_text(encoding="utf-8")
+        self.assertIn("**Specification:** `v0.2.0`", source)
+        self.assertIn("**Classification:** `core`", source)
+        capstone = next(entry for entry in entries if entry.code == "APP9")
+        self.assertIn("APP6", prerequisite_codes(capstone.prerequisites))
+
+    def test_app6_catalog_only_prerequisite_edit_is_rejected(self):
+        catalog = self.catalog.read_text(encoding="utf-8")
+        row = next(line for line in catalog.splitlines()
+                   if line.startswith("| [APP6](APP6.md) |"))
+        self.assertIn(" | APP5 |", row)
+        changed = row.replace(" | APP5 |", " | APP3, APP5 |", 1)
+        self.assertNotEqual(row, changed)
+        self.change_catalog(row, changed)
+        status, errors = self.check()
+        self.assertNotEqual(status, 0)
+        self.assertIn("APP6", errors)
+        self.assertIn("prerequisites differ from catalog", errors)
+
     def test_app8_cannot_be_silently_removed_from_capstone_closure(self):
         # APP20 is now required transitively through migrated APP5.
         # APP8 has no further required core successor before APP9.
