@@ -4,8 +4,8 @@
 on 2026-11-16 in [PR #78](https://github.com/0xbuffdev/open-engineering-education/pull/78).
 
 **Implementation status:** Partially implemented. APP1, APP17, APP18,
-APP19, APP4, APP21, APP2, APP20, APP3 and APP5 are published
-as `v0.2.0` draft courses. APP6 is being migrated in its own
+APP19, APP4, APP21, APP2, APP20, APP3, APP5 and APP6 are published
+as `v0.2.0` draft courses. APP7 is being migrated in its own
 course-and-catalog PR. All 14 core identities are published;
 remaining legacy scope/dependency changes are **targets**,
 not current learner requirements. The [active APP catalog](README.md)
@@ -598,7 +598,7 @@ course definition is actually merged.
    classification and ordering checks merged in
    [PR #44](https://github.com/0xbuffdev/open-engineering-education/pull/44).
    APP1, APP17, APP18, APP19, APP4, APP21, APP2, APP20,
-   APP3 and APP5 are published `v0.2.0` course drafts; do
+   APP3, APP5 and APP6 are published `v0.2.0` course drafts; do
    not rewrite them merely to recreate earlier work.
 3. **Foundation PRs:** APP18 was introduced in [PR #82](https://github.com/0xbuffdev/open-engineering-education/pull/82)
    and APP19 in [PR #84](https://github.com/0xbuffdev/open-engineering-education/pull/84).
@@ -614,16 +614,18 @@ course definition is actually merged.
    and APP4 in [PR #93](https://github.com/0xbuffdev/open-engineering-education/pull/93).
    APP5's full-stack integration of APP20 and APP3 followed
    through [PR #95](https://github.com/0xbuffdev/open-engineering-education/pull/95).
-   APP6 now deepens cross-system quality strategy, verifiable
-   CI, observability and incident/performance diagnosis after
-   APP5 in its own course-and-catalog PR.
+   APP6's risk-based quality, CI, observability and incident
+   investigation course followed APP5 in [PR #97](https://github.com/0xbuffdev/open-engineering-education/pull/97).
+   APP7 now turns those foundations into actual deployed
+   environment, ingress, release and restore evidence in
+   its own reviewed course-and-catalog PR.
 4. **Separate implementation branches:** APP21 follows APP18;
    APP2 follows APP17 and APP19; APP20 follows APP2;
    APP3 follows APP19, APP21 and APP4. Publish valid outcomes,
    assessments and genuine overlap relocation on each PR.
-   APP6's course and catalog update must not change the
-   still-legacy APP7–APP9 assessment requirements or
-   silently reinterpret historical APP6 completion evidence.
+   APP7's course and catalog update must not change the
+   still-legacy APP8–APP9 assessment requirements or
+   silently reinterpret historical APP7 completion evidence.
 5. **Integration and production:** APP5 after APP20 and
    APP3; then APP6, APP7, APP8; APP9 after complete
    required-core prerequisite closure and substantive
@@ -707,9 +709,9 @@ The recorded target decisions are:
   misrepresented as additional v0.2.0 conformance rules.
 
 **Current implementation snapshot:** APP1, APP17, APP18, APP19,
-APP4, APP21, APP2, APP20, APP3 and APP5 are published in the
-outcome-driven `v0.2.0` draft format. APP6 is under review
-in a separate course migration PR. APP7–APP9, elective
+APP4, APP21, APP2, APP20, APP3, APP5 and APP6 are published in the
+outcome-driven `v0.2.0` draft format. APP7 is under review
+in a separate course migration PR. APP8–APP9, elective
 migrations and independent educational evidence review
 remain future work. Use the
 [current APP catalog](README.md) for active learner requirements;

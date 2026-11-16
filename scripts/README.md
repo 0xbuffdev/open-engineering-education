@@ -44,9 +44,11 @@ APP2 follows APP17 + APP19 as framework-neutral browser engineering,
 APP20 follows APP2 as React Application Engineering, APP3
 follows APP19 + APP21 + APP4 for typed framework API engineering,
 APP5 combines APP20 + APP3 for full-stack integration (with
-APP4 included transitively through APP3), and APP6 follows APP5
+APP4 included transitively through APP3), APP6 follows APP5
 for risk-based quality, CI, supply-chain evidence, observability,
-performance and incident-driven improvement.
+performance and incident-driven improvement, and APP7 follows
+APP5 + APP6 for deployable artifacts, verified HTTPS, applied
+infrastructure, safe releases, data restoration and recovery.
 Unmigrated course scope/dependency changes remain in the
 [APP migration decision](../curriculum/APP/ARCHITECTURE.md).
 The [current APP catalog](../curriculum/APP/README.md) contains
