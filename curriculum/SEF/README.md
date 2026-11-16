@@ -18,7 +18,7 @@ By the end of the program, the learner can:
 - Implement, structure, test and debug Python software, including explicit state, functions, object construction/composition, type annotations, runtime validation, files, failures and reproducible command-line behavior.
 - Solve arithmetic, algebraic, logical, set, counting, proof, recurrence and finite-graph problems independently and apply that reasoning to algorithm correctness.
 - Select and implement fundamental data structures and algorithms and justify invariants, worst/expected/amortized complexity and trade-offs with independent evidence.
-- Use Git, testing, debugging, review, documentation, reproducible CI-equivalent checks, requirements and professional engineering workflows.
+- Use Git, testing, debugging, module/interface contracts, cohesive and appropriately decoupled designs, accessible code review, documentation, reproducible CI-equivalent checks, requirements and professional engineering workflows.
 - Explain and safely apply C object representation, pointers, lifetimes, dynamic allocation and compiler/linker behavior.
 - Use the Linux shell and foundational Unix process, file-descriptor, filesystem, pipe and bounded-network interfaces.
 - Interpret functions, vectors, matrices, probability, statistics, derivatives, integrals and elementary numerical optimization with justified assumptions and uncertainty.
@@ -41,7 +41,7 @@ This table is the **authoritative prerequisite-valid study order**, not numerica
 | [SEF11](SEF11.md) | Discrete Mathematics for Computing | 10–14 weeks | SEF2 | `course` |
 | [SEF3](SEF3.md) | Linux & the Command Line | 10–12 weeks | SEF2 | `course` |
 | [SEF4](SEF4.md) | Data Structures & Algorithms | 10 weeks | SEF11 | `course` |
-| [SEF5](SEF5.md) | Software Engineering Practice | 8 weeks | SEF2 | `course` |
+| [SEF5](SEF5.md) | Software Engineering Practice | 10–12 weeks | SEF2 | `course` |
 | [SEF8](SEF8.md) | Mathematics for Numerical Computing & AI | 12–14 weeks | SEF11 | `course` |
 | [SEF6](SEF6.md) | C Programming & Machine Memory | 8 weeks | SEF3, SEF4, SEF5 | `course` |
 | [SEF7](SEF7.md) | Unix System Interfaces | 7 weeks | SEF3, SEF6 | `course` |
@@ -64,7 +64,7 @@ SEF3 and SEF5 can begin after SEF2 while SEF11's required mathematical preparati
 
 **All eleven SEF course files use the OEE `v0.2.0` outcome-driven draft format and remain `draft`.** (no historical-format SEF course definitions remain). A clean structural migration does not show verified learner outcomes or educational effectiveness. The estimated durations, including SEF11's bridge and SEF8's revised numerical work, remain provisional until actual learner and reviewer feedback justifies them. See [curriculum inventory](../INVENTORY.md) for reproducible structural observations.
 
-The accepted [RFC 0003](../../rfcs/0003-sef-academic-progression.md) introduced SEF11 and moved discrete mathematical readiness out of the previous SEF8. The [historical evidence map](MATH-MIGRATION.md) records the old/current outcome and assessment identities; neither learners nor implementations may silently convert old completion records into completion of a new course. Other SEF academic hardening work proceeds in separate reviewable course revisions under the accepted RFC; the SEF2 revision introduces classes, object composition and typing while preserving existing ten-outcome learner evidence.
+The accepted [RFC 0003](../../rfcs/0003-sef-academic-progression.md) introduced SEF11 and moved discrete mathematical readiness out of the previous SEF8. The [historical evidence map](MATH-MIGRATION.md) records the old/current outcome and assessment identities; neither learners nor implementations may silently convert old completion records into completion of a new course. Other SEF academic hardening work proceeds in separate reviewable course revisions under the accepted RFC. Focused SEF2, SEF3 and SEF5 revisions respectively establish Python abstractions/typing, shell portability/environment reasoning, and demonstrable software design/quality/review, preserving their original outcome IDs and assessment contracts while newly assessed competencies receive new IDs.
 
 ## Independent study
 

@@ -35,18 +35,18 @@ class SEF5MigrationTests(unittest.TestCase):
         )
         self.assertIn(f"{migrated} v0.2.0, {11 - migrated} legacy", result.stdout)
 
-    def test_twelve_stable_outcomes_covered_by_six_required_assessments(self):
+    def test_fifteen_stable_outcomes_covered_by_seven_required_assessments(self):
         text = COURSE.read_text(encoding="utf-8")
         section = text.split("\n## Learning outcomes\n", 1)[1].split(
             "\n## Modules\n", 1
         )[0]
         outcomes = set(re.findall(r"(?m)^- \*\*(SEF5-O\d+):\*\*", section))
-        self.assertEqual(outcomes, {f"SEF5-O{i}" for i in range(1, 13)})
+        self.assertEqual(outcomes, {f"SEF5-O{i}" for i in range(1, 16)})
         completion = text.split("\n## Completion requirements\n", 1)[1]
         blocks = re.split(
             r"(?=^- \*\*SEF5-AS\d+\*\* \(required )", completion, flags=re.M
         )[1:]
-        self.assertEqual(len(blocks), 6)
+        self.assertEqual(len(blocks), 7)
         covered = set()
         for index, block in enumerate(blocks, start=1):
             self.assertTrue(block.startswith(f"- **SEF5-AS{index}**"))
@@ -57,13 +57,13 @@ class SEF5MigrationTests(unittest.TestCase):
             covered.update(re.findall(r"SEF5-O\d+", references.group(1)))
         self.assertEqual(covered, outcomes)
 
-    def test_all_seven_modules_have_outcomes_and_ordered_lessons(self):
+    def test_all_nine_modules_have_outcomes_and_ordered_lessons(self):
         text = COURSE.read_text(encoding="utf-8")
         modules = text.split("\n## Modules\n", 1)[1].split(
             "\n## Completion requirements\n", 1
         )[0]
         matches = list(re.finditer(r"(?m)^### Module (\d+) — ", modules))
-        self.assertEqual([int(m.group(1)) for m in matches], list(range(1, 8)))
+        self.assertEqual([int(m.group(1)) for m in matches], list(range(1, 10)))
         for i, match in enumerate(matches):
             next_index = matches[i + 1].start() if i + 1 < len(matches) else len(modules)
             chunk = modules[match.start():next_index]
@@ -80,7 +80,7 @@ class SEF5MigrationTests(unittest.TestCase):
     def test_version_scope_and_offline_review_boundaries(self):
         text = COURSE.read_text(encoding="utf-8")
         self.assertIn("**Prerequisites:** [SEF2](SEF2.md)", text)
-        self.assertIn("**Duration:** 8 weeks", text)
+        self.assertIn("**Duration:** 10–12 weeks", text)
         self.assertIn("**Status:** `draft`", text)
         self.assertIn("**Specification:** `v0.2.0`", text)
         self.assertNotIn("— `test`", text)
@@ -90,6 +90,7 @@ class SEF5MigrationTests(unittest.TestCase):
         self.assertIn("independent reproduction", text.lower())
         catalog = CATALOG.read_text(encoding="utf-8")
         self.assertIn("[SEF5](SEF5.md)", catalog)
+        self.assertIn("| 10–12 weeks | SEF2 |", catalog)
         self.assertIn("All eleven SEF course files use", catalog)
         self.assertIn("no historical-format SEF course definitions remain", catalog)
 
