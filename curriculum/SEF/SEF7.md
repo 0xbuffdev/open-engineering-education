@@ -12,7 +12,7 @@
 
 ## Overview
 
-SEF3 already establishes safe shell invocation, process-environment inheritance, command lookup, Bash versus POSIX-sh portability and known GNU-tool dependencies. This course instead examines **C and POSIX system interfaces** (file descriptors, fork/exec, directory identity, signals, sockets) with explicit resource ownership; it does not replace the earlier command-line portability assessments. Actual shell behavior is not conflated with the C ABI or operating-system syscall semantics.
+SEF3 already establishes safe shell invocation, process-environment inheritance, command lookup, Bash versus POSIX-sh portability and known GNU-tool dependencies. SEF6 also establishes ISO C11 memory/object lifetime, checked allocation, bounded parsing, manually owned container libraries and reproducible toolchain diagnostics before SEF7 begins. This course instead examines **C and POSIX system interfaces** (file descriptors, fork/exec, directory identity, signals, sockets) with explicit resource ownership; it does not replace the earlier command-line portability assessments. Actual shell behavior is not conflated with the C ABI or operating-system syscall semantics.
 
 Understand how a C program requests Unix operating-system services and handles their failure. Start with file descriptors and partial I/O, then investigate process creation and termination, filesystem identity, signals, pipes, and framed TCP streams. Finish by building a small, reproducible Unix utility that combines these interfaces with explicit resource ownership.
 
