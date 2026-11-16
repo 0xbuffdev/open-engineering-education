@@ -299,6 +299,40 @@ class APPCatalogTests(unittest.TestCase):
         self.assertIn("APP6", errors)
         self.assertIn("prerequisites differ from catalog", errors)
 
+    def test_app7_deployment_core_requires_full_stack_and_quality(self):
+        # Deployment operates the integrated product using the
+        # independently verified quality/CI foundations from APP6.
+        entries, errors = read_app_catalog(self.catalog)
+        self.assertFalse(errors, errors)
+        codes = [entry.code for entry in entries]
+        app7 = next(entry for entry in entries if entry.code == "APP7")
+        self.assertEqual(
+            (app7.title, app7.kind, app7.classification, app7.status),
+            ("Deployment, Cloud & DevOps", "course", "core", "draft"),
+        )
+        self.assertEqual(prerequisite_codes(app7.prerequisites),
+                         ["APP5", "APP6"])
+        self.assertLess(codes.index("APP5"), codes.index("APP7"))
+        self.assertLess(codes.index("APP6"), codes.index("APP7"))
+        source = (self.app.APP / "APP7.md").read_text(encoding="utf-8")
+        self.assertIn("**Specification:** `v0.2.0`", source)
+        self.assertIn("**Classification:** `core`", source)
+        capstone = next(entry for entry in entries if entry.code == "APP9")
+        self.assertIn("APP7", prerequisite_codes(capstone.prerequisites))
+
+    def test_app7_catalog_only_prerequisite_edit_is_rejected(self):
+        catalog = self.catalog.read_text(encoding="utf-8")
+        row = next(line for line in catalog.splitlines()
+                   if line.startswith("| [APP7](APP7.md) |"))
+        self.assertIn(" | APP5, APP6 |", row)
+        changed = row.replace(" | APP5, APP6 |", " | APP3, APP6 |", 1)
+        self.assertNotEqual(row, changed)
+        self.change_catalog(row, changed)
+        status, errors = self.check()
+        self.assertNotEqual(status, 0)
+        self.assertIn("APP7", errors)
+        self.assertIn("prerequisites differ from catalog", errors)
+
     def test_app8_cannot_be_silently_removed_from_capstone_closure(self):
         # APP20 is now required transitively through migrated APP5.
         # APP8 has no further required core successor before APP9.
