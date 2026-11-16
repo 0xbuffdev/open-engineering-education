@@ -40,10 +40,12 @@ the course's own prerequisite metadata, including expanded ranges
 such as `APP1–APP8`. APP17–APP19 are published new core courses;
 APP4 provides an independent SEF10-entry database foundation,
 APP21 provides Node.js backend runtime foundations after APP18,
-and APP2 follows APP17 + APP19 as framework-neutral browser engineering.
-APP20 remains planned in the [APP migration decision](../curriculum/APP/ARCHITECTURE.md).
+APP2 follows APP17 + APP19 as framework-neutral browser engineering,
+and APP20 follows APP2 as React Application Engineering.
+Unmigrated course scope/dependency changes remain in the
+[APP migration decision](../curriculum/APP/ARCHITECTURE.md).
 The [current APP catalog](../curriculum/APP/README.md) contains
-**13 core courses and 7 electives** and is authoritative until reviewed
+**14 core courses and 7 electives** and is authoritative until reviewed
 course-migration PRs change it. The validator does not change course
 requirements or historical learner records.
 

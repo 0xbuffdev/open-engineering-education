@@ -161,16 +161,50 @@ class APPCatalogTests(unittest.TestCase):
         self.assertIn("[APP17](APP17.md)",
                       (self.app.APP / "APP9.md").read_text(encoding="utf-8"))
 
+    def test_app20_react_core_requires_app2_without_backend_runtime(self):
+        # APP20 is a React client-application course, not a Node service
+        # course. The program's numeric IDs do not imply sequence.
+        entries, errors = read_app_catalog(self.catalog)
+        self.assertFalse(errors, errors)
+        codes = [entry.code for entry in entries]
+        react = next(entry for entry in entries if entry.code == "APP20")
+        self.assertEqual(
+            (react.title, react.kind, react.classification, react.status),
+            ("React Application Engineering", "course", "core", "draft"),
+        )
+        self.assertEqual(prerequisite_codes(react.prerequisites), ["APP2"])
+        self.assertLess(codes.index("APP2"), codes.index("APP20"))
+        self.assertLess(codes.index("APP20"), codes.index("APP3"))
+        source = (self.app.APP / "APP20.md").read_text(encoding="utf-8")
+        self.assertIn("**Specification:** `v0.2.0`", source)
+        self.assertIn("**Classification:** `core`", source)
+        capstone = next(entry for entry in entries if entry.code == "APP9")
+        self.assertIn("APP20", prerequisite_codes(capstone.prerequisites))
+
+    def test_react_core_catalog_mismatch_still_fails(self):
+        # A course-specific prerequisite mutation must be detected even
+        # when APP9's full-core closure remains otherwise complete.
+        catalog = self.catalog.read_text(encoding="utf-8")
+        row = next(line for line in catalog.splitlines()
+                   if line.startswith("| [APP20](APP20.md) |"))
+        changed = row.replace(" | APP2 |", " | APP2, APP21 |", 1)
+        self.assertNotEqual(row, changed)
+        self.change_catalog(row, changed)
+        status, errors = self.check()
+        self.assertNotEqual(status, 0)
+        self.assertIn("APP20", errors)
+        self.assertIn("prerequisites differ from catalog", errors)
+
     def test_app21_cannot_be_silently_removed_from_capstone_closure(self):
         # APP17 is now also required transitively through APP2. Removing
         # APP17 only from APP9's direct links must not be mistaken for
         # losing its actual core capability. APP21 currently has no other
         # core successor, so removing its APP9 reference genuinely removes it.
         catalog = self.catalog.read_text(encoding="utf-8")
-        self.assertIn("APP17–APP19, APP21 | `project`", catalog)
+        self.assertIn("APP17–APP21 | `project`", catalog)
         self.catalog.write_text(
-            catalog.replace("APP17–APP19, APP21 | `project`",
-                            "APP17–APP19 | `project`", 1),
+            catalog.replace("APP17–APP21 | `project`",
+                            "APP17–APP20 | `project`", 1),
             encoding="utf-8",
         )
         self.change_course("APP9", ", [APP21](APP21.md)", "")
@@ -185,8 +219,8 @@ class APPCatalogTests(unittest.TestCase):
         catalog = self.catalog.read_text(encoding="utf-8")
         app9_row = next(line for line in catalog.splitlines()
                         if line.startswith("| [APP9](APP9.md) |"))
-        self.assertIn("APP17–APP19", app9_row)
-        revised = app9_row.replace("APP17–APP19", "APP18–APP19", 1)
+        self.assertIn("APP17–APP21", app9_row)
+        revised = app9_row.replace("APP17–APP21", "APP18–APP21", 1)
         self.change_catalog(app9_row, revised)
         self.change_course("APP9", ", [APP17](APP17.md)", "")
         status, errors = self.check()
