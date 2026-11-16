@@ -1,12 +1,12 @@
 # Application Engineering — Migration Architecture Decision
 
-**Decision record:** Approved program migration target, amended for academic
-review on 2026-11-16. The amendment takes effect only after steward review
-and merger of its public pull request.
+**Decision record:** Approved program migration target, academically amended
+on 2026-11-16 in [PR #78](https://github.com/0xbuffdev/open-engineering-education/pull/78).
 
-**Implementation status:** Partially implemented. APP1 and APP17 are published
-as `v0.2.0` draft courses. APP18–APP21 and the scope, prerequisites, and
-assessment changes below are **target decisions**, not current learner
+**Implementation status:** Partially implemented. APP1, APP17 and APP18
+are published as `v0.2.0` draft courses; APP19 is added by its separate
+course migration PR. APP20–APP21 and the remaining scope, prerequisites
+and assessment changes below are **target decisions**, not current learner
 requirements. The [active APP catalog](README.md) and its linked course
 definitions remain authoritative until individually amended.
 
@@ -589,19 +589,19 @@ reinterpretation.** Use short, separately reviewable public
 course PRs. The catalog is changed only when a corresponding
 course definition is actually merged.
 
-1. **Architecture amendment:** accept the revised dependency
-   graph, ownership matrix, learning/assessment review gates,
-   and APP15–SYS boundary in a focused reviewable architecture
-   PR. Align the open [APP migration issue #55](https://github.com/0xbuffdev/open-engineering-education/issues/55)
-   with the amended target **after the decision merges**.
+1. **Architecture amendment — completed:** the revised dependency
+   graph, ownership matrix, learning/assessment review gates and
+   APP15–SYS boundary were adopted in [PR #78](https://github.com/0xbuffdev/open-engineering-education/pull/78).
+   Track staged implementation in [issue #55](https://github.com/0xbuffdev/open-engineering-education/issues/55).
 2. **Preserve preparation already done:** catalog-driven
    classification and ordering checks merged in
    [PR #44](https://github.com/0xbuffdev/open-engineering-education/pull/44).
-   APP1 and APP17 are already `v0.2.0` course drafts; avoid
-   rewriting them solely to recreate earlier work.
-3. **Foundation PRs:** APP18 is the next new course (SEF10);
-   APP4's data/SQL migration (SEF10) can proceed independently.
-   APP19 follows APP18. Update the live catalog alongside
+   APP1, APP17 and APP18 are published `v0.2.0` course drafts;
+   avoid rewriting them solely to recreate earlier work.
+3. **Foundation PRs:** APP18 was introduced in [PR #82](https://github.com/0xbuffdev/open-engineering-education/pull/82)
+   with SEF10 as its prerequisite. APP19 follows APP18 in its own
+   `v0.2.0` migration PR. APP4's data/SQL migration (SEF10)
+   can proceed independently. Update the live catalog alongside
    course files as each PR merges.
 4. **Separate implementation branches:** APP21 can follow
    APP18; APP2 follows APP17 and APP19; APP20 follows APP2;
@@ -645,8 +645,9 @@ new APP17–APP21 allocations, ordered catalog, core/elective
 separation, framework/browser/runtime boundaries and public
 reference-technology choices.
 
-**Academic amendment proposed:** 2026-11-16. The specific
-changes proposed for steward acceptance are:
+**Academic amendment accepted:** 2026-11-16,
+[PR #78](https://github.com/0xbuffdev/open-engineering-education/pull/78).
+The recorded target decisions are:
 
 1. Remove unnecessary APP1 prerequisites from APP18 and APP4:
    both begin after SEF10.
@@ -688,13 +689,13 @@ changes proposed for steward acceptance are:
   examples here remain non-normative; they must not be
   misrepresented as additional v0.2.0 conformance rules.
 
-**Current implementation snapshot:** Only APP1 and APP17
-are migrated to the outcome-driven `v0.2.0` draft format.
-The target graph, APP18–APP21, other course migrations,
-the elective revisions and the complete independent
+**Current implementation snapshot:** APP1, APP17 and APP18 are
+published in the outcome-driven `v0.2.0` draft format; APP19 is
+introduced by its own course migration PR. APP20–APP21, the remaining
+legacy course migrations, elective revisions and the complete independent
 APP evidence review remain future work. Use the
-[current APP catalog](README.md) for real learner requirements
-until the corresponding course PRs are merged.
+[current APP catalog](README.md) for active learner requirements;
+planned dependencies are not live until the relevant course PR merges.
 
 ## 10. Non-binding review references
 
