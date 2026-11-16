@@ -195,22 +195,56 @@ class APPCatalogTests(unittest.TestCase):
         self.assertIn("APP20", errors)
         self.assertIn("prerequisites differ from catalog", errors)
 
-    def test_app21_cannot_be_silently_removed_from_capstone_closure(self):
-        # APP17 is now also required transitively through APP2. Removing
-        # APP17 only from APP9's direct links must not be mistaken for
-        # losing its actual core capability. APP21 currently has no other
-        # core successor, so removing its APP9 reference genuinely removes it.
+    def test_app3_framework_core_requires_ts_node_and_database(self):
+        # Backend framework design combines three independent core
+        # foundations; the browser/React branch is not its prerequisite.
+        entries, errors = read_app_catalog(self.catalog)
+        self.assertFalse(errors, errors)
+        app3 = next(entry for entry in entries if entry.code == "APP3")
+        self.assertEqual(
+            (app3.title, app3.kind, app3.classification, app3.status),
+            ("Backend Framework Engineering", "course", "core", "draft"),
+        )
+        self.assertEqual(
+            prerequisite_codes(app3.prerequisites),
+            ["APP19", "APP21", "APP4"],
+        )
+        source = (self.app.APP / "APP3.md").read_text(encoding="utf-8")
+        self.assertIn("**Specification:** `v0.2.0`", source)
+        self.assertIn("**Classification:** `core`", source)
+        capstone = next(entry for entry in entries if entry.code == "APP9")
+        self.assertIn("APP3", prerequisite_codes(capstone.prerequisites))
+
+    def test_app3_catalog_only_prerequisite_edit_is_rejected(self):
+        catalog = self.catalog.read_text(encoding="utf-8")
+        row = next(line for line in catalog.splitlines()
+                   if line.startswith("| [APP3](APP3.md) |"))
+        self.assertIn(" | APP19, APP21, APP4 |", row)
+        changed = row.replace(
+            " | APP19, APP21, APP4 |", " | APP19, APP21 |", 1
+        )
+        self.assertNotEqual(row, changed)
+        self.change_catalog(row, changed)
+        status, errors = self.check()
+        self.assertNotEqual(status, 0)
+        self.assertIn("APP3", errors)
+        self.assertIn("prerequisites differ from catalog", errors)
+
+    def test_app20_cannot_be_silently_removed_from_capstone_closure(self):
+        # APP21 is now required transitively through APP3. APP20 does
+        # not yet have a migrated core successor (APP5 is still legacy),
+        # so removing it from APP9 genuinely removes that core capability.
         catalog = self.catalog.read_text(encoding="utf-8")
         self.assertIn("APP17–APP21 | `project`", catalog)
         self.catalog.write_text(
             catalog.replace("APP17–APP21 | `project`",
-                            "APP17–APP20 | `project`", 1),
+                            "APP17–APP19, APP21 | `project`", 1),
             encoding="utf-8",
         )
-        self.change_course("APP9", ", [APP21](APP21.md)", "")
+        self.change_course("APP9", ", [APP20](APP20.md)", "")
         status, errors = self.check()
         self.assertNotEqual(status, 0)
-        self.assertIn("APP21", errors)
+        self.assertIn("APP20", errors)
         self.assertIn("graduation capstone is missing core prerequisites", errors)
 
     def test_app17_remains_required_transitively_through_app2(self):

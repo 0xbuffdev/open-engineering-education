@@ -41,7 +41,8 @@ such as `APP1–APP8`. APP17–APP19 are published new core courses;
 APP4 provides an independent SEF10-entry database foundation,
 APP21 provides Node.js backend runtime foundations after APP18,
 APP2 follows APP17 + APP19 as framework-neutral browser engineering,
-and APP20 follows APP2 as React Application Engineering.
+APP20 follows APP2 as React Application Engineering, and APP3
+follows APP19 + APP21 + APP4 for typed framework API engineering.
 Unmigrated course scope/dependency changes remain in the
 [APP migration decision](../curriculum/APP/ARCHITECTURE.md).
 The [current APP catalog](../curriculum/APP/README.md) contains

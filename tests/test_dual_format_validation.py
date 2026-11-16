@@ -287,13 +287,12 @@ Complete the required exercises, checkpoints and lab.
                             for e in self.sef.ERRORS))
 
     def test_legacy_course_without_final_lab_still_fails(self):
-        # APP2 has moved to v0.2.0 and intentionally has no legacy
-        # final-lab contract. Use an untouched legacy APP course to
-        # verify that the old-generation validation still fails closed.
-        path = self.root / "curriculum" / "APP" / "APP3.md"
+        # APP3 is now a v0.2.0 outcome-and-assessment course;
+        # preserve legacy lab enforcement against an unmigrated course.
+        path = self.root / "curriculum" / "APP" / "APP5.md"
         content = path.read_text(encoding="utf-8")
         self.assertIn("**Final integration lab", content)
-        self.replace_course("APP3", content.replace(
+        self.replace_course("APP5", content.replace(
             "**Final integration lab", "**Removed integration lab"
         ))
         self.assertNotEqual(self.app.validate(), 0)
