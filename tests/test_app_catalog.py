@@ -230,21 +230,57 @@ class APPCatalogTests(unittest.TestCase):
         self.assertIn("APP3", errors)
         self.assertIn("prerequisites differ from catalog", errors)
 
-    def test_app20_cannot_be_silently_removed_from_capstone_closure(self):
-        # APP21 is now required transitively through APP3. APP20 does
-        # not yet have a migrated core successor (APP5 is still legacy),
-        # so removing it from APP9 genuinely removes that core capability.
-        catalog = self.catalog.read_text(encoding="utf-8")
-        self.assertIn("APP17–APP21 | `project`", catalog)
-        self.catalog.write_text(
-            catalog.replace("APP17–APP21 | `project`",
-                            "APP17–APP19, APP21 | `project`", 1),
-            encoding="utf-8",
+    def test_app5_full_stack_core_requires_react_and_backend(self):
+        # APP5 combines the two course branches; APP4 remains
+        # required transitively through APP3 rather than duplicated.
+        entries, errors = read_app_catalog(self.catalog)
+        self.assertFalse(errors, errors)
+        codes = [entry.code for entry in entries]
+        app5 = next(entry for entry in entries if entry.code == "APP5")
+        self.assertEqual(
+            (app5.title, app5.kind, app5.classification, app5.status),
+            ("Full-Stack Application Architecture", "course", "core", "draft"),
         )
-        self.change_course("APP9", ", [APP20](APP20.md)", "")
+        self.assertEqual(prerequisite_codes(app5.prerequisites),
+                         ["APP20", "APP3"])
+        self.assertLess(codes.index("APP20"), codes.index("APP5"))
+        self.assertLess(codes.index("APP3"), codes.index("APP5"))
+        source = (self.app.APP / "APP5.md").read_text(encoding="utf-8")
+        self.assertIn("**Specification:** `v0.2.0`", source)
+        self.assertIn("**Classification:** `core`", source)
+        capstone = next(entry for entry in entries if entry.code == "APP9")
+        self.assertIn("APP5", prerequisite_codes(capstone.prerequisites))
+
+    def test_app5_catalog_only_prerequisite_edit_is_rejected(self):
+        catalog = self.catalog.read_text(encoding="utf-8")
+        row = next(line for line in catalog.splitlines()
+                   if line.startswith("| [APP5](APP5.md) |"))
+        self.assertIn(" | APP20, APP3 |", row)
+        changed = row.replace(
+            " | APP20, APP3 |", " | APP20, APP3, APP4 |", 1
+        )
+        self.assertNotEqual(row, changed)
+        self.change_catalog(row, changed)
         status, errors = self.check()
         self.assertNotEqual(status, 0)
-        self.assertIn("APP20", errors)
+        self.assertIn("APP5", errors)
+        self.assertIn("prerequisites differ from catalog", errors)
+
+    def test_app8_cannot_be_silently_removed_from_capstone_closure(self):
+        # APP20 is now required transitively through migrated APP5.
+        # APP8 has no further required core successor before APP9.
+        # Removing APP8 from the project must still fail closed.
+        catalog = self.catalog.read_text(encoding="utf-8")
+        self.assertIn("APP1–APP8, APP17–APP21 | `project`", catalog)
+        self.catalog.write_text(
+            catalog.replace("APP1–APP8, APP17–APP21 | `project`",
+                            "APP1–APP7, APP17–APP21 | `project`", 1),
+            encoding="utf-8",
+        )
+        self.change_course("APP9", ", [APP8](APP8.md)", "")
+        status, errors = self.check()
+        self.assertNotEqual(status, 0)
+        self.assertIn("APP8", errors)
         self.assertIn("graduation capstone is missing core prerequisites", errors)
 
     def test_app17_remains_required_transitively_through_app2(self):

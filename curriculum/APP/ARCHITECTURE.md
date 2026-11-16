@@ -4,12 +4,12 @@
 on 2026-11-16 in [PR #78](https://github.com/0xbuffdev/open-engineering-education/pull/78).
 
 **Implementation status:** Partially implemented. APP1, APP17, APP18,
-APP19, APP4, APP21, APP2 and APP20 are published as `v0.2.0` drafts.
-APP3 is being migrated through its own course-and-catalog PR. All
-14 planned core identities are published, but remaining legacy
-scope/dependency changes are **targets**, not current learner
-requirements. The [active APP catalog](README.md) and linked
-course files remain authoritative.
+APP19, APP4, APP21, APP2, APP20 and APP3 are published as
+`v0.2.0` draft courses. APP5 is being migrated in its own
+course-and-catalog PR. All 14 core identities are already
+published; remaining legacy scope/dependency changes remain
+**targets**, not current learner requirements. The
+[active APP catalog](README.md) and linked course files are authoritative.
 
 **Authority:** This is a non-normative, program-specific architecture
 decision. It does not revise OEE's [Course Format](../../spec/course-format.md),
@@ -597,9 +597,9 @@ course definition is actually merged.
 2. **Preserve preparation already done:** catalog-driven
    classification and ordering checks merged in
    [PR #44](https://github.com/0xbuffdev/open-engineering-education/pull/44).
-   APP1, APP17, APP18, APP19, APP4, APP21, APP2 and APP20
-   are published `v0.2.0` course drafts; avoid rewriting
-   them merely to recreate earlier work.
+   APP1, APP17, APP18, APP19, APP4, APP21, APP2, APP20
+   and APP3 are published `v0.2.0` course drafts; avoid
+   rewriting them merely to recreate earlier work.
 3. **Foundation PRs:** APP18 was introduced in [PR #82](https://github.com/0xbuffdev/open-engineering-education/pull/82)
    and APP19 in [PR #84](https://github.com/0xbuffdev/open-engineering-education/pull/84).
    APP4's independent data/SQL migration was merged in [PR #86](https://github.com/0xbuffdev/open-engineering-education/pull/86),
@@ -610,16 +610,17 @@ course definition is actually merged.
    through [PR #89](https://github.com/0xbuffdev/open-engineering-education/pull/89).
    APP20's React application course followed APP2 in
    [PR #91](https://github.com/0xbuffdev/open-engineering-education/pull/91).
-   APP3's typed Fastify reference API is being migrated after
-   APP19, APP21 and APP4 in a separately reviewed course PR;
-   future APP5 integration requirements remain pending.
+   APP3's typed Fastify reference API followed APP19, APP21
+   and APP4 in [PR #93](https://github.com/0xbuffdev/open-engineering-education/pull/93).
+   APP5 now integrates that backend with APP20 React in its
+   separate course-and-catalog PR, without re-teaching either.
 4. **Separate implementation branches:** APP21 follows APP18;
    APP2 follows APP17 and APP19; APP20 follows APP2;
    APP3 follows APP19, APP21 and APP4. Publish valid outcomes,
    assessments and genuine overlap relocation on each PR.
-   APP3's course and catalog update must not change
-   the still-legacy APP5 or APP6 requirements or
-   silently reinterpret historical APP3 completion evidence.
+   APP5's course and catalog update must not change
+   still-legacy APP6–APP9 assessment requirements or
+   silently reinterpret historical APP5 completion evidence.
 5. **Integration and production:** APP5 after APP20 and
    APP3; then APP6, APP7, APP8; APP9 after complete
    required-core prerequisite closure and substantive
@@ -703,11 +704,11 @@ The recorded target decisions are:
   misrepresented as additional v0.2.0 conformance rules.
 
 **Current implementation snapshot:** APP1, APP17, APP18, APP19,
-APP4, APP21, APP2 and APP20 are published in the outcome-driven
-`v0.2.0` draft format. APP3 is under review in a separate course
-migration PR. Remaining legacy core/elective migrations, APP5
-cross-layer integration and independent educational evidence
-review remain future work. Use the
+APP4, APP21, APP2, APP20 and APP3 are published in the
+outcome-driven `v0.2.0` draft format. APP5 is under review
+in a separate course migration PR. Remaining legacy
+core/elective migrations, production-course integrations
+and independent educational evidence review remain future work. Use the
 [current APP catalog](README.md) for active learner requirements;
 planned dependencies are not live until the relevant course PR merges.
 
