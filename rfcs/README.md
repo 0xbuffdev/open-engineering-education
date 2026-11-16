@@ -53,3 +53,4 @@ The decision record should identify the decision-maker, date, reasons, significa
 | --- | --- | --- |
 | [0001 — Outcome-driven curriculum and proportionate assessment](0001-outcome-driven-curriculum.md) | Accepted, 2026-11-07 | [Normative specification update, PR #34](https://github.com/0xbuffdev/open-engineering-education/pull/34) |
 | [0002 — Public Toolkit stewardship, scope, and licensing](0002-toolkit-stewardship-and-licensing.md) | Accepted, 2026-11-15 | [Steward decision, PR #63](https://github.com/0xbuffdev/open-engineering-education/pull/63); official package release remains separately gated |
+| [0003 — SEF academic progression and mathematical readiness](0003-sef-academic-progression.md) | Draft — pending steward review | Implementation gated on acceptance |
