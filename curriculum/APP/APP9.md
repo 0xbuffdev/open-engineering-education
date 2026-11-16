@@ -2,7 +2,7 @@
 
 **Program:** APP — Application Engineering
 **Type:** `project`
-**Prerequisites:** [APP1](APP1.md), [APP2](APP2.md), [APP3](APP3.md), [APP4](APP4.md), [APP5](APP5.md), [APP6](APP6.md), [APP7](APP7.md), [APP8](APP8.md), [APP17](APP17.md)
+**Prerequisites:** [APP1](APP1.md), [APP2](APP2.md), [APP3](APP3.md), [APP4](APP4.md), [APP5](APP5.md), [APP6](APP6.md), [APP7](APP7.md), [APP8](APP8.md), [APP17](APP17.md), [APP18](APP18.md)
 **Duration:** 12–16 weeks
 **Status:** `draft`
 **Expected workload:** 10–15 focused hours/week
@@ -12,6 +12,8 @@
 ## Overview
 
 The capstone is the final project course in Application Engineering. You will combine frontend, backend, data, testing, deployment, observability, and production architecture into one coherent product. The project should be substantial enough to demonstrate professional engineering without relying on unnecessary architectural complexity.
+
+The new core [APP18](APP18.md) JavaScript Programming requirement is included in the capstone's prerequisites so the *currently published* core graduation path cannot omit that capability. This is a prerequisite reference change only; APP9's existing legacy project outcomes and evaluation contract still require their own separately reviewed v0.2.0 migration. Earlier completions and evidence remain attributable to their recorded course revisions.
 
 ## Learning outcomes
 
