@@ -48,7 +48,10 @@ APP4 included transitively through APP3), APP6 follows APP5
 for risk-based quality, CI, supply-chain evidence, observability,
 performance and incident-driven improvement, and APP7 follows
 APP5 + APP6 for deployable artifacts, verified HTTPS, applied
-infrastructure, safe releases, data restoration and recovery.
+infrastructure, safe releases, data restoration and recovery,
+and APP8 follows APP5 + APP6 + APP7 for measured architecture
+capacity, overload fairness, cache/data consistency, failure
+containment and reversible performance/cost evolution.
 Unmigrated course scope/dependency changes remain in the
 [APP migration decision](../curriculum/APP/ARCHITECTURE.md).
 The [current APP catalog](../curriculum/APP/README.md) contains
