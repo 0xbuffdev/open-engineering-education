@@ -261,8 +261,8 @@ Submit reviewable handwritten, typed, spoken or equivalent accessible reasoning.
   - Criteria: Every required competency is linked to actual independently checkable evidence. The unfamiliar variation is reasoned from the given rules; false generalizations are rejected, missing proof steps corrected and logical/numeric assumptions explicit. The learner can justify any optional verifier and distinguish its bounded coverage from proof. No proprietary evaluator, paid resource, or advanced programming library is needed.
   - Evidence: Consolidated written or recorded explanation, diagrams/state tables, proofs, exact-check fixtures, outcome-to-evidence map, corrections, reviewer challenge and a reviewable defense.
 
-### Completion decision and historical transition
+### Completion decision
 
 All six required assessments must demonstrate SEF11-O1 through SEF11-O10. Optional examples and the **ungraded entry diagnostic** never add hidden pass requirements; an essential missing skill is remediated and reassessed with equivalent unfamiliar examples rather than ignored. Assessment evidence must remain reproducible and reviewable using public material and the learner's accessible chosen format.
 
-SEF11 is a **new** course with new identifiers. It does not retroactively rename or replace completed SEF8 work. The original SEF8-O1/O2/O4/O5/O13 and SEF8-AS1/AS2 remain historically interpretable under their prior course revision; equivalence to new SEF11 outcomes requires an explicit assessment of existing evidence. See the [migration table](MATH-MIGRATION.md). The new course stays `draft` until the [readiness requirements](../../spec/status-labels.md) are satisfied.
+Completion of SEF11 establishes the required discrete mathematics preparation for SEF4 and SEF8; work from another course does not automatically satisfy these assessments without an explicit evidence-based equivalence decision. This course remains `draft` until the [readiness requirements](../../spec/status-labels.md) are satisfied.

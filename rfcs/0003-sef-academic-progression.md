@@ -203,4 +203,24 @@ These questions do not alter the central proposed prerequisite and competency-ow
 - **Decision-maker:** 0xBUFF steward
 - **Rationale:** The steward approved the RFC and its SEF11-first mathematical prerequisite architecture after review and merger of [proposal PR #80](https://github.com/0xbuffdev/open-engineering-education/pull/80). Explicit proof readiness before SEF4 and bounded numerical mathematics in SEF8 correct material learning dependencies without renumbering public course IDs.
 - **Conditions:** Implement the curriculum and catalog together with automated and substantive review; preserve historical outcome/assessment evidence by revision; keep all courses `draft` without learner validation; defer any SEF7-to-SYS transfer until SYS adopts the receiving competency; preserve free independent study.
-- **Implementation pull request:** [#83 — SEF11 mathematical progression and SEF8 curriculum migration](https://github.com/0xbuffdev/open-engineering-education/pull/83) (under review; not merged)
+- **Initial implementation pull request:** [#83 — SEF11 mathematical progression and SEF8 curriculum migration](https://github.com/0xbuffdev/open-engineering-education/pull/83) (**merged 2026-11-16**). Subsequent focused course PRs are recorded in the closure appendix below. The preceding proposal, risk analysis and delivery plan remain **historical statements about the pre-change curriculum**; they do not override today's authoritative SEF catalog.
+
+## 11. Implementation closure record — 2026-11-16
+
+**Implementation disposition: course-level curriculum architecture and RFC 0003 follow-up edits complete and merged.** The original proposal sections above describe the problems, options and open questions **as they stood at acceptance**. They remain historical decision context; current adopted prerequisites, outcomes and evidence contracts are in the actual [SEF catalog](../curriculum/SEF/README.md) and course files.
+
+| Accepted component | Merged implementation |
+| --- | --- |
+| Formal RFC adoption | [PR #80](https://github.com/0xbuffdev/open-engineering-education/pull/80) |
+| Physical-to-logical SEF1 foundations | [PR #81](https://github.com/0xbuffdev/open-engineering-education/pull/81) |
+| New SEF11, numerical SEF8, mathematical migration/catalog/validation | [PR #83](https://github.com/0xbuffdev/open-engineering-education/pull/83) |
+| Python abstraction and typing in SEF2 | [PR #85](https://github.com/0xbuffdev/open-engineering-education/pull/85) |
+| Shell/portability/environment in SEF3 | [PR #88](https://github.com/0xbuffdev/open-engineering-education/pull/88) |
+| Cohesive design, interfaces and accessible review in SEF5 | [PR #90](https://github.com/0xbuffdev/open-engineering-education/pull/90) |
+| Proof/algorithm correctness transfer in SEF4 | [PR #92](https://github.com/0xbuffdev/open-engineering-education/pull/92) |
+| C11 memory and data-structure library in SEF6 | [PR #94](https://github.com/0xbuffdev/open-engineering-education/pull/94) |
+| Unix/POSIX foundations and non-normative SYS destination mapping in SEF7 | [PR #96](https://github.com/0xbuffdev/open-engineering-education/pull/96) |
+| Non-AI ethics, rights, privacy, accessibility and public fixtures in SEF9 | [PR #98](https://github.com/0xbuffdev/open-engineering-education/pull/98) |
+| Ten-prerequisite closure, integrated capstone and responsible release in SEF10 | [PR #101](https://github.com/0xbuffdev/open-engineering-education/pull/101) |
+
+The [SEF catalog](../curriculum/SEF/README.md) now publishes the current course order, prerequisites, workload guidance and graduation requirements. Authentic learner completions, feedback and qualified review remain necessary for course-readiness promotion. **This closes the RFC's planned course-edit milestones, not the learner-testing or program-conformance requirements.** All eleven current SEF courses are still labelled `draft`. None is promoted to `tested` or `verified` by the merge of the course PRs, by a structural validator, or by this closure record. The original `## 9. Open questions` remain informative historically; workload calibration, learner pilots, real independent review and any future SYS transfer continue to require actual evidence and separately reviewed decisions.

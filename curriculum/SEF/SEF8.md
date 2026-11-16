@@ -8,17 +8,17 @@
 **Specification:** `v0.2.0`
 **Expected workload:** 10–15 focused hours/week (provisional; calibrate with learner evidence)
 
-> [Software Engineering Foundations](README.md) · [Course format](../../spec/course-format.md) · [Mathematics migration](MATH-MIGRATION.md)
+> [Software Engineering Foundations](README.md) · [Course format](../../spec/course-format.md)
 
 ## Overview
 
 Study algebraic functions, exponentials, logarithms and limits, then linear algebra, probability and statistics, derivatives, elementary integration, floating-point behavior, numerical methods and introductory optimization. Develop independently checkable mathematical arguments before comparing them with Python calculations, and distinguish exact results, numerical estimates and uncertain statistical claims.
 
-**SEF11 is now the prerequisite**, supplying the original arithmetic/pre-algebra, logic, counting, proof, recurrence and graph reasoning from the prior SEF8 contract. No separate entrance diagnostic is required here; mathematics support is available through formative review without an additional admission gate. SEF4 may proceed in parallel with SEF8 after SEF11, but both retain their own completion requirements.
+**SEF11 is the prerequisite**, providing arithmetic and algebraic fluency, logic, counting, proof, recurrence and graph reasoning for the numerical topics in this course. No separate entrance diagnostic is required here; mathematics support is available through formative review without an additional admission gate. SEF4 may proceed in parallel with SEF8 after SEF11, but both retain their own completion requirements.
 
 Use Python 3.11+ and its standard library (`fractions`, `math`, `statistics`, `itertools`, `random`, `unittest`) alongside reviewable paper or accessible digital derivations. Paid books, proprietary assessment, NumPy, network services and other scientific packages are **not** required. Document calculation domains, platforms, actual commands, seeds, numeric tolerances and independent expected values.
 
-The 12–14-week duration is provisional pending learner calibration. Four substantively unchanged assessments retain their original IDs; changed ones have new IDs. Historical results are not silently rewritten. See [MATH-MIGRATION.md](MATH-MIGRATION.md). Required assessments are outcome-based, not a quiz/lab quota per module.
+The 12–14-week duration is provisional pending learner calibration. The six required assessments below are outcome-based; their identifiers are intentionally nonconsecutive and do not imply missing exams. There is no mandatory quiz/lab quota per module.
 
 ## Learning outcomes
 
@@ -260,8 +260,8 @@ Each assessed executable artifact must be reproducible from a clean environment 
   - Criteria: Every outcome has actual inspectable evidence rather than merely a declared ID. Mathematical working and tests agree on independent references; singular, invalid, non-finite or nonconvergent cases are not misrepresented as successes. Statistical simulations are reproducible without claiming exact frequencies or causation, and numerical tolerances are explained. No hidden paid tool, package or service is needed, and independent reproduction and defense establish personal understanding.
   - Evidence: Versioned portable source and README, exact clean-start commands and tool versions, mathematical oracle and test matrix, numeric tolerances and seeds, worked derivations, negative fixtures, reviewer observations, a fault correction and technical defense.
 
-### Completion decision and historical transition
+### Completion decision
 
 All six required assessments (`SEF8-AS3`, `SEF8-AS4`, `SEF8-AS6`, `SEF8-AS7`, `SEF8-AS9`, `SEF8-AS10`) must pass; together they evaluate the fifteen current outcomes. The integrated notebook may reuse inspected work and does not demand a duplicate project.
 
-Former `SEF8-O1`, `O2`, `O4`, `O5`, `O13` and `SEF8-AS1`, `AS2`, `AS5`, `AS8` are retired **prospectively** and remain valid identifiers for historical revisions. Original mathematics is assigned to SEF11; stable remaining outcomes and unchanged assessments retain their identity. New `SEF8-O19`, `SEF8-O20`, `SEF8-AS9` and `SEF8-AS10` cover genuinely changed mathematical and integration requirements. Prior learner evidence must remain pinned to its original revision; explicit evaluation, not string matching, is required before recognizing equivalence. This course remains `draft` pending [readiness evidence](../../spec/status-labels.md).
+Assessment identifiers are stable and intentionally nonconsecutive; the six assessments listed above are the complete current requirement. Mathematical preparation in discrete reasoning is established through SEF11, while numerical mathematics is assessed in this course. This course remains `draft` pending [readiness evidence](../../spec/status-labels.md).
