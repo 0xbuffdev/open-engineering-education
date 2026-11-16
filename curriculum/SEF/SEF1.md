@@ -26,7 +26,12 @@ electronics kit, or privately hosted evaluator is not required.
 The reference machine below is intentionally small and deterministic. It
 helps teach fundamental boundaries; it is **not** a faithful simulation of
 a modern CPU, firmware, operating system, electrical circuit, or device
-driver. Differences must be explained rather than hidden.
+driver. In particular, a simulated logical 0 or 1 is an abstraction over
+physical switching: actual circuits use voltage ranges, have noise and
+propagation delays, and depend on defined electrical conventions. This
+course explains the abstraction without making transistor-level electronics
+or real hardware work an entry requirement. Differences between the model
+and real systems must be explained rather than hidden.
 
 The duration is an initial planning estimate, not a readiness claim.
 Course completion depends on the outcome evidence below.
@@ -51,12 +56,12 @@ Course completion depends on the outcome evidence below.
 
 #### Lessons
 
-1. **From Bits to Computers** — Describe the course's machine-building approach and the distinction between a model and a physical computer.
-2. **Two-State Signals** — Explain logical states and why physical voltage or switch conventions must be defined.
-3. **Bits and Bytes** — Reason about eight-bit patterns and their 256 possible states.
-4. **Number Representations** — Convert selected unsigned values between binary, decimal, and hexadecimal.
-5. **Codes and Meaning** — Explain how one byte can represent different things under different encodings.
-6. **Addresses and Values** — Distinguish a memory location from the byte stored at that location.
+1. **From Bits to Computers** — Introduce the machine-building purpose, a short history from switching devices and stored-program computers to transistors and integrated circuits, and examples of where the same underlying computing model appears today. Distinguish a teaching model from a physical computer without suggesting they are identical.
+2. **Physical Signals and Logical States** — Explain how an agreed high/low convention represents logical states; distinguish abstract 0/1 values from real voltage ranges, thresholds, noise, and switching delays without requiring transistor-level circuit design.
+3. **Bits and Bytes** — Reason about individual bits, ordered bit patterns, eight-bit bytes, and the 256 possible eight-bit patterns.
+4. **Number Representations** — Convert selected unsigned values between binary, decimal, and hexadecimal; distinguish the stored pattern from a signed or unsigned interpretation.
+5. **Codes and Meaning** — Explain how the same byte pattern has different meanings under number and character encodings, and why a character is not necessarily one byte in every encoding.
+6. **Addresses and Values** — Distinguish a memory location, the address identifying it, and the byte stored there.
 
 ### Module 2 — Logic Gates
 
@@ -340,7 +345,18 @@ published evaluation behaviors.
 The following are study aids, **not additional summative submissions**:
 
 - Convert unfamiliar bit patterns and compare signed/unsigned
-  interpretations using an explicitly chosen convention.
+  interpretations using an explicitly chosen convention; for example,
+  compare the unsigned value 255 with the signed eight-bit two's-complement
+  interpretation -1 of `11111111`. This is preparatory interpretation
+  practice, not a new required SEF1 summative assessment.
+- Sketch how a physical switch or transistor-based logic element can
+  represent an abstract Boolean state; identify voltage thresholds, noise,
+  timing and device physics as details intentionally omitted by the
+  idealized gate simulator.
+- Place stored-program computing, the transistor, integrated circuits,
+  and single-chip microprocessors in a short historical narrative;
+  explain what is relevant to the course model without asserting
+  that the eight-bit machine represents modern CPU internals.
 - Predict a NAND/AND/XOR output before inspecting a simulator.
 - Trace register behavior for changing bus inputs with enable disabled.
 - Explain a bus-contention diagram and replace it with controlled selection.
