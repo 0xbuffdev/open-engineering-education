@@ -39,9 +39,10 @@ A catalog entry's displayed prerequisite codes must agree with
 the course's own prerequisite metadata, including expanded ranges
 such as `APP1–APP8`. APP17–APP19 are published new core courses;
 APP4 is migrated as an independent SEF10-entry database foundation,
-while APP20–APP21 remain planned in the [APP migration decision](../curriculum/APP/ARCHITECTURE.md).
+and APP21 provides Node.js backend runtime foundations after APP18.
+APP20 remains planned in the [APP migration decision](../curriculum/APP/ARCHITECTURE.md).
 The [current APP catalog](../curriculum/APP/README.md) contains
-**12 core courses and 7 electives** and is authoritative until reviewed
+**13 core courses and 7 electives** and is authoritative until reviewed
 course-migration PRs change it. The validator does not change course
 requirements or historical learner records.
 
