@@ -163,9 +163,9 @@ review of assessment quality, evidence, and independence from paid tools.
 
 ## Current coverage and limitations
 
-**All eleven SEF courses** use the outcome-driven v0.2.0 draft format and remain `draft`; neither a structural check nor the mathematics migration establishes learner-tested readiness. SEF11 appears before SEF4/SEF8 in the authoritative catalog, and SEF10 requires all other ten SEF courses. The [mathematics migration map](../curriculum/SEF/MATH-MIGRATION.md) preserves historical outcome and assessment identities.
+**All eleven SEF course-level RFC 0003 changes are merged**; all 11 current course files publish outcome-driven v0.2.0 draft contracts and still remain `draft`. The [SEF catalog](../curriculum/SEF/README.md) publishes their prerequisite-valid study order, provisional workload and capstone graduation conditions; automated checks verify source structure, not educational effectiveness. SEF11 precedes SEF4/SEF8 and SEF10 requires all other ten courses. Earlier curriculum design decisions remain documented in [RFC 0003](../rfcs/0003-sef-academic-progression.md) and Git history. Structural checks do not establish learner-tested effectiveness or full program conformance.
 
-APP1 and APP17 also use v0.2.0, while other APP courses may retain legacy format until migrated. Neither a legacy checker pass nor successful v0.2.0 structural validation alone establishes educational conformance.
+The [current APP catalog](../curriculum/APP/README.md) has **14 core courses and seven electives**. Thirteen APP core courses currently declare v0.2.0; APP9 and the seven electives retain legacy definitions at this snapshot. APP is a **separate, ongoing program migration**, not part of the completed SEF course-hardening milestone. Neither a legacy checker pass nor successful v0.2.0 structural validation alone establishes educational conformance.
 
 The repository-local [Toolkit](../tooling/README.md) implements pinned
 course checks and derived exports. Its

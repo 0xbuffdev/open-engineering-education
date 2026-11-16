@@ -291,16 +291,13 @@ For each proposed course or major restructuring, check:
     records, resource mappings, and downstream integrations have
     an explicit impact plan.
 
-Apply this guide first to representative courses:
+Earlier **curriculum-design review examples** using this guide included:
 
-- **SEF1:** foundational understanding, reasoning, and simulation.
-- **APP1:** Internet and browser foundations without unnecessary
-  backend implementation or fixed per-module test/lab pairs.
-- **SEF10:** one cumulative engineering project with appropriate
-  milestones, evaluation, and defense.
+- **SEF1:** foundational understanding, reasoning and reproducible simulation.
+- **APP1:** internet/browser foundations without unnecessary backend implementation or fixed universal per-module test/lab pairs.
+- **SEF10:** one cumulative engineering project with clearly bounded milestones, evidence, ethical release decisions and independent defense.
 
-These pilots should inform later revisions; they do not warrant
-claiming broader educational efficacy before learner evidence exists.
+The [current SEF curriculum](SEF/README.md) incorporates these design principles. Editorial reviews do not establish learner-tested effectiveness; this guide also applies to other programs and future evidence-driven improvements.
 
 ## 11. Normative boundary
 

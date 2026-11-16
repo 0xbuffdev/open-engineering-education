@@ -9,7 +9,6 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 COURSE = ROOT / "curriculum" / "SEF" / "SEF8.md"
 CATALOG = COURSE.parent / "README.md"
-MIGRATION = COURSE.parent / "MATH-MIGRATION.md"
 
 
 class SEF8MigrationTests(unittest.TestCase):
@@ -78,11 +77,10 @@ class SEF8MigrationTests(unittest.TestCase):
         catalog = CATALOG.read_text(encoding="utf-8")
         self.assertIn("[SEF8](SEF8.md)", catalog)
         self.assertIn("All eleven SEF course files use", catalog)
-        migration = MIGRATION.read_text(encoding="utf-8")
-        for old in ("SEF8-O1", "SEF8-O2", "SEF8-O4", "SEF8-O5",
-                    "SEF8-O13", "SEF8-AS1", "SEF8-AS2", "SEF8-AS5", "SEF8-AS8"):
-            self.assertIn(old, migration)
-        self.assertIn("39426b73bdc3ae8af44c4b54b21fc4ea4e53c7ec", migration)
+        self.assertIn("**SEF11 is the prerequisite**", text)
+        self.assertIn("intentionally nonconsecutive", text)
+        self.assertNotIn("MATH-MIGRATION.md", text)
+        self.assertNotIn("migration table", text.lower())
 
 
 if __name__ == "__main__":
