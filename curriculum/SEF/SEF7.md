@@ -12,6 +12,8 @@
 
 ## Overview
 
+SEF3 already establishes safe shell invocation, process-environment inheritance, command lookup, Bash versus POSIX-sh portability and known GNU-tool dependencies. This course instead examines **C and POSIX system interfaces** (file descriptors, fork/exec, directory identity, signals, sockets) with explicit resource ownership; it does not replace the earlier command-line portability assessments. Actual shell behavior is not conflated with the C ABI or operating-system syscall semantics.
+
 Understand how a C program requests Unix operating-system services and handles their failure. Start with file descriptors and partial I/O, then investigate process creation and termination, filesystem identity, signals, pipes, and framed TCP streams. Finish by building a small, reproducible Unix utility that combines these interfaces with explicit resource ownership.
 
 The reference environment is a **nonprivileged local Linux environment**, C11-capable compiler, and available POSIX interfaces. Document actual tool and OS versions, compilation flags and feature-test macros; a typical compiler invocation is `cc -std=c11 -D_POSIX_C_SOURCE=200809L -Wall -Wextra -Wpedantic`. Use a learner-owned temporary tree, controlled child processes, and `127.0.0.1` loopback only. No root account, external network service, production files, real unrelated processes, paid service, or proprietary grader is needed. A correct in-program interface trace is an acceptable alternative when optional kernel tracing software such as `strace` is unavailable; label the evidence accurately.
