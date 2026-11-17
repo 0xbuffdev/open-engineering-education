@@ -19,7 +19,7 @@ Each program README is the authoritative catalog for its **current** courses, st
 
 SEF provides the completed current **foundational curriculum design**, including [SEF11 discrete mathematics](SEF/SEF11.md) before algorithmic and numerical mathematics, plus a one-project [SEF10 capstone](SEF/SEF10.md) with ten prior-course evidence checks. APP develops applications and production delivery; SYS focuses on software close to hardware and operating systems; AI develops data, model, and production AI capabilities; SEC applies security engineering to systems and applications.
 
-The APP catalog contains 14 required core courses and seven genuinely optional electives. Its [migration architecture decision](APP/ARCHITECTURE.md) documents the already adopted restructuring and its historical rationale; the [current APP catalog](APP/README.md) and linked course files alone publish the active prerequisite and graduation requirements. Learner completion records retain the course revisions under which their evidence was evaluated.
+The APP catalog contains 14 required core courses and seven genuinely optional electives. The [current APP catalog](APP/README.md) and linked course definitions publish the authoritative study sequence, prerequisites and graduation requirements; reviewed Git history preserves earlier design rationale. Learner completion records retain the course revisions under which their evidence was evaluated.
 
 ## Follow a course
 

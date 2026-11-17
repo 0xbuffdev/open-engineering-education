@@ -77,7 +77,7 @@ real Android packaging, accessible device interaction, lifecycle and
 local transactional storage, offline command replay, secure native
 permissions, mobile OS/background limits and compatible test upgrades.
 APP20 is required only for an optional React-based implementation.
-APP14 is the optional gateway and edge-delivery specialization after APP3 + APP7. APP15 is the optional TypeScript–Rust interoperation specialization after APP19 + APP21 + APP6, plus demonstrated prior Rust foundations; no provisional SYS course code is forced. APP16 now also publishes an outcome-driven platform-as-product specialization with 17 outcomes and seven independently checkable assessments; all 21 APP courses are v0.2.0 drafts. The [APP architecture decision](../curriculum/APP/ARCHITECTURE.md) records the platform competency boundary.
+APP14 is the optional gateway and edge-delivery specialization after APP3 + APP7. APP15 is the optional TypeScript–Rust interoperation specialization after APP19 + APP21 + APP6, plus demonstrated prior Rust foundations; no provisional SYS course code is forced. APP16 now also publishes an outcome-driven platform-as-product specialization with 17 outcomes and seven independently checkable assessments; all 21 APP courses are v0.2.0 drafts. The [current APP catalog](../curriculum/APP/README.md) and [APP16 course](../curriculum/APP/APP16.md) publish the platform competency boundary and active requirements.
 The [current APP catalog](../curriculum/APP/README.md) contains
 **14 core courses and 7 electives** and is authoritative until reviewed
 course-migration PRs change it. The validator does not change course

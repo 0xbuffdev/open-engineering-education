@@ -38,8 +38,7 @@ asynchronous views, client-side navigation and user needs.
 Use TypeScript and standard browser DOM/Fetch/History APIs,
 not React component lifecycles, framework routers,
 framework-specific state management or server rendering.
-Those belong to planned [APP20](ARCHITECTURE.md)
-React Application Engineering. Likewise, designing a
+Those belong to [APP20](APP20.md) — React Application Engineering. Likewise, designing a
 production API, implementing authorization on a server,
 building Node HTTP infrastructure, database engineering,
 distributed caching and infrastructure deployment belong
