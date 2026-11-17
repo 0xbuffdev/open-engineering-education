@@ -291,13 +291,51 @@ Complete the required exercises, checkpoints and lab.
                             for e in self.sef.ERRORS))
 
     def test_legacy_course_without_final_lab_still_fails(self):
-        # APP13 is now v0.2.0. Preserve strict final-lab validation
-        # with APP14, an elective not yet migrated.
-        path = self.root / "curriculum" / "APP" / "APP14.md"
-        content = path.read_text(encoding="utf-8")
-        self.assertIn("**Final integration lab", content)
-        self.replace_course("APP14", content.replace(
-            "**Final integration lab", "**Removed integration lab"
+        # Construct a legacy-format fixture from current catalog metadata.
+        # Do not depend on any particular APP elective remaining unmigrated.
+        path = self.root / "curriculum" / "APP" / "APP16.md"
+        source = path.read_text(encoding="utf-8")
+        header = source.split("## Overview", 1)[0]
+        header = re.sub(
+            r"^\*\*Specification:\*\* `v0\.2\.0`\n", "", header,
+            flags=re.MULTILINE,
+        )
+        legacy = header + """## Overview
+
+        Validate the legacy final-lab contract independently of migration state.
+
+## Learning outcomes
+
+- Explain and test a small integration.
+
+## Modules
+
+### Module 1 — Integration
+
+#### Outcomes
+
+- Explain and test the integration.
+
+#### Lessons
+
+1. **Course introduction: Legacy integration** — `lesson`
+2. **Final integration lab — required** — `lab`
+
+## Completion requirements
+
+**Final integration lab — required:**
+
+Explain and demonstrate the integration.
+
+**Exit demonstration:**
+
+Show the artifact and explain its limitations.
+"""
+        self.replace_course("APP16", legacy)
+        self.assertEqual(self.app.validate(), 0)
+        self.replace_course("APP16", legacy.replace(
+            "**Final integration lab — required:**",
+            "**Removed integration lab — required:**",
         ))
         self.assertNotEqual(self.app.validate(), 0)
 
