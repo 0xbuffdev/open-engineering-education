@@ -232,7 +232,7 @@ These edits preserve **SYS1-O1–O11** and **SYS1-AS1–AS4** but clarify the ev
 
 ### Optional disciplinary references
 
-- [UC Berkeley CS61C](https://cs61c.org/fa26/policies/) and [open notes](https://notes.cs61c.org/) — ISA, processor organization, locality and virtual memory.
+- [UC Berkeley CS61C course materials](https://cs61c.org/fa26/) and [open notes](https://notes.cs61c.org/) — ISA, processor organization, locality and virtual memory.
 - [Carnegie Mellon 15-213](https://www.cs.cmu.edu/~213/) — machine-level programming, optimization and performance.
 - [RISC-V ISA specifications](https://docs.riscv.org/) and [ELF psABI](https://riscv-non-isa.github.io/riscv-elf-psabi-doc/) — target-dependent ISA and calling-convention standards.
 - [Linux perf-stat](https://man7.org/linux/man-pages/man1/perf-stat.1.html) and [perf_event_open](https://man7.org/linux/man-pages/man2/perf_event_open.2.html) — optional hardware counter limits.
