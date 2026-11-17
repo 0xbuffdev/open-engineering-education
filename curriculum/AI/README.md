@@ -4,13 +4,11 @@
 
 ## Overview
 
-AI Engineering turns the programming and mathematics from the foundations program into practical machine learning. You work through data, classical machine learning, deep learning, transformers and language models, retrieval and agents, training and evaluation, and production AI systems. The program stresses reproducible experiments and measurable evaluation, so you learn to operate models, measure their behavior, and document their limits.
+AI Engineering turns the assessed programming and numerical mathematics from the foundations program into practical, evidence-driven artificial intelligence. You work through data, classical machine learning, deep learning, transformers and language models, retrieval and agents, training and evaluation, and production AI systems. The program stresses reproducible experiments and measurable evaluation, so you learn to operate models, measure their behavior, and document their limits.
 
 ## Prerequisites
 
-**Program 1 — SEF — Software Engineering Foundations.**
-
-Python and the mathematics covered in SEF8 are used throughout the program. Individual AI courses have their own explicit prerequisites; systems preparation is recommended where noted.
+**Assessed completion of Program 1 — SEF — Software Engineering Foundations**, including [SEF10](../SEF/SEF10.md). Python and the mathematics covered in SEF2 and SEF8 are assumed, not repeated. Individual AI courses have their own explicit prerequisites; downstream specialist courses must be reviewed against relevant APP and SYS competencies rather than silently making an elective or entire separate program mandatory.
 
 ## Learning outcomes
 
@@ -31,11 +29,11 @@ The learner must demonstrate the knowledge, practical skills, and engineering ju
 
 ## Courses
 
-The nine published course files are **legacy drafts**. They preserve their original learning activities and completion requirements but have not been migrated or assessed against the `v0.2.0` outcome-driven contract. They are course outlines for study and review, not claims of learner-tested readiness or `v0.2.0` conformance. See the [curriculum inventory](../INVENTORY.md) for a reproducible structural audit.
+**AI1 has been substantively migrated to the outcome-driven OEE `v0.2.0` draft format**, with its own assessed scientific-data competence, source/evaluation integrity checks and clean-reproduction requirements. **AI2–AI9 remain legacy draft outlines** until their academic boundaries, stable course identities and replacement assessments have been separately reviewed and migrated. The migration does not claim learner-tested readiness, independent academic verification or automatic equivalence with historical learner records. See the [curriculum inventory](../INVENTORY.md) for a derived structural audit.
 
 | Course | Title | Duration | Prerequisites | Type |
 | --- | --- | --- | --- | --- |
-| [AI1](AI1.md) | Data & Scientific Python | 5 weeks | SEF2 and SEF8 | `course` |
+| [AI1](AI1.md) | Scientific Computing & Data Engineering for AI | 14–18 weeks | Completed SEF (SEF10) | `course` |
 | [AI2](AI2.md) | Machine Learning Foundations | 6 weeks | AI1 | `course` |
 | [AI3](AI3.md) | Deep Learning & Representation Learning | 6 weeks | AI2 | `course` |
 | [AI4](AI4.md) | Transformers & Large Language Models | 7 weeks | AI3 | `course` |
@@ -45,4 +43,4 @@ The nine published course files are **legacy drafts**. They preserve their origi
 | [AI8](AI8.md) | Responsible AI, Safety & Governance | 3 weeks | AI5 | `course` |
 | [AI9](AI9.md) | AI Engineering Capstone | 8–10 weeks | AI1–AI8 | `project` |
 
-The course files remain the authoritative source for each course's published work and prerequisites. Use [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) or another learner-controlled environment for practical work and evidence. The [OEE specification](../../spec/README.md) governs newly authored or explicitly migrated course revisions.
+The individual course files remain the authoritative source for each course's published work, identity and prerequisites. The existing AI2–AI9 identifiers must not be repurposed silently for a proposed expanded architecture: any replacement requires explicit catalog, downstream-link and historical evidence review. Use [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) or another learner-controlled environment for practical work and evidence. The [OEE specification](../../spec/README.md) governs newly authored or explicitly migrated course revisions.
