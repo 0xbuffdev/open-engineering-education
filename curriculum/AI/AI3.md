@@ -251,16 +251,7 @@
 #### Outcomes
 
 - AI3-O1
-- AI3-O2
 - AI3-O5
-- AI3-O6
-- AI3-O8
-- AI3-O10
-- AI3-O11
-- AI3-O12
-- AI3-O13
-- AI3-O14
-- AI3-O15
 - AI3-O16
 - AI3-O17
 
@@ -337,9 +328,9 @@ The fixtures below are intentionally tiny so a learner and independent assessor 
   - **Evidence:** Small CPD/factor tables, independently calculated exact probabilities, implementation or transparent factor traces, positive/negative/zero-evidence checks, utility/threshold derivation, model and safety boundaries and a concise interpretation.
 
 - **AI3-AS7** (required integrated local reasoning artifact and unfamiliar technical defense)
-  - **Outcomes:** AI3-O1, AI3-O2, AI3-O5, AI3-O6, AI3-O8, AI3-O10, AI3-O11, AI3-O12, AI3-O13, AI3-O14, AI3-O15, AI3-O16, AI3-O17.
+  - **Outcomes:** AI3-O1, AI3-O5, AI3-O16, AI3-O17.
   - **Work:** Build or consolidate **one bounded learner-owned** synthetic/local decision or problem-solving artifact integrating **at least two genuinely interacting mechanisms** drawn from this course (for example, constraint propagation before a plan search, rule eligibility before state-space routing, or Bayesian fault belief before a gated one-step decision). Reuse prior assessed source and proofs as appropriate; do **not** reimplement all six preceding assessments. Publish the problem contract, observable source-to-decision trace, clear component boundaries, independent normal and adverse expected results, a limited expansion/time/memory budget, safe failure handling and realistic operator/nonexpert limitations. An independent reviewer supplies one **unfamiliar bounded** change to a graph edge, constraint, fact, rule, action, observation or probability; predict its consequence **before** running any solver, then demonstrate correct repair or justified safe refusal. Defend individual authorship and the actual evidence in an accessible form.
-  - **Criteria:** The two mechanisms materially affect a single defensible outcome; clean-state reproduction is possible without hidden fixtures, special hardware, paid APIs or real external actions. A reviewer can independently verify the positive case, adverse case and unfamiliar change; no state, cost, logical consequence, plan or posterior is accepted merely because the learner's code printed it. Exhaustion, unknown/budget failure, inconsistency and invalid inputs have distinct honest behavior. A qualified explanation and new evidence establish independent transfer, not a second full set of six separate projects.
+  - **Criteria:** The two mechanisms materially affect a single defensible outcome, while each specialty outcome remains assessed by AI3-AS1–AS6; clean-state reproduction is possible without hidden fixtures, special hardware, paid APIs or real external actions. A reviewer can independently verify the positive case, adverse case and unfamiliar change; no state, cost, logical consequence, plan or posterior is accepted merely because the learner's code printed it. Exhaustion, unknown/budget failure, inconsistency and invalid inputs have distinct honest behavior. A qualified explanation and new evidence establish independent transfer, not a second full set of six separate projects.
   - **Evidence:** Coherent versioned source or inspectable equivalent, setup/test commands and synthetic fixtures, interface/state/evidence traces, independent outcome oracles, recorded controlled failure and unfamiliar-case before/after results, resource/safety assumptions and individually reviewable written/recorded/live technical defense.
 
 ### Required outcome-to-assessment coverage
@@ -347,20 +338,20 @@ The fixtures below are intentionally tiny so a learner and independent assessor 
 | Outcome | Required summative evidence |
 | --- | --- |
 | AI3-O1 | AI3-AS1, AI3-AS2, AI3-AS3, AI3-AS5, AI3-AS6, AI3-AS7 |
-| AI3-O2 | AI3-AS1, AI3-AS7 |
+| AI3-O2 | AI3-AS1 |
 | AI3-O3 | AI3-AS1 |
 | AI3-O4 | AI3-AS1 |
 | AI3-O5 | AI3-AS1, AI3-AS2, AI3-AS3, AI3-AS5, AI3-AS7 |
-| AI3-O6 | AI3-AS2, AI3-AS7 |
+| AI3-O6 | AI3-AS2 |
 | AI3-O7 | AI3-AS3 |
-| AI3-O8 | AI3-AS4, AI3-AS7 |
+| AI3-O8 | AI3-AS4 |
 | AI3-O9 | AI3-AS4 |
-| AI3-O10 | AI3-AS4, AI3-AS7 |
-| AI3-O11 | AI3-AS5, AI3-AS7 |
-| AI3-O12 | AI3-AS5, AI3-AS7 |
-| AI3-O13 | AI3-AS6, AI3-AS7 |
-| AI3-O14 | AI3-AS6, AI3-AS7 |
-| AI3-O15 | AI3-AS6, AI3-AS7 |
+| AI3-O10 | AI3-AS4 |
+| AI3-O11 | AI3-AS5 |
+| AI3-O12 | AI3-AS5 |
+| AI3-O13 | AI3-AS6 |
+| AI3-O14 | AI3-AS6 |
+| AI3-O15 | AI3-AS6 |
 | AI3-O16 | AI3-AS7 |
 | AI3-O17 | AI3-AS7 |
 
