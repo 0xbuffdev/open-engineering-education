@@ -8,20 +8,21 @@
 
 SEF7, [Unix System Interfaces](SEF7.md), is the assessed **common foundational Unix programming course** following C11 memory and resource models in SEF6 and shell behavior in SEF3. It uses a single controlled Linux environment and learner-owned fixtures to teach descriptor/resource ownership, two-child process behavior, files and directories, signals, pipes and bounded *single-peer* loopback TCP including a `poll` state machine.
 
-The intended advanced SYS program deepens these models through **C/Rust comparative systems programming, concurrency, multi-client services, backpressure, observability, storage durability and production failure behavior**. These are not silently folded into SEF7 and are not considered passed merely because a learner produced a small Unix utility.
+The migrated advanced SYS program deepens these models through **C/Rust comparative systems programming, concurrency, multi-client services, backpressure, observability, storage durability and production failure behavior**. These are not silently folded into SEF7 and are not considered passed merely because a learner produced a small Unix utility.
 
 **Current evidence authority:**
 
 - The 14 published `SEF7-O1`–`SEF7-O14` and seven published `SEF7-AS1`–`SEF7-AS7` remain required *in SEF7*. The SEF7 [course definition](SEF7.md) and current SEF [catalog](README.md) govern completion. Historical review evidence remains tied to its assessed course revision.
-- [SYS1](../SYS/SYS1.md)–[SYS9](../SYS/SYS9.md) are **legacy drafts** (course outlines) under the [current SYS catalog](../SYS/README.md). They have **not** been translated and independently validated as outcome-driven OEE `v0.2.0` assessment contracts. The identifiers in this map designate **candidate owners for future SYS redesign**, not verified replacements or current equivalence.
+- [SYS1](../SYS/SYS1.md)–[SYS9](../SYS/SYS9.md) now publish outcome-driven OEE `v0.2.0` **draft** requirements and summative evidence in the [SYS catalog](../SYS/README.md). The destinations in this historical mapping remain **non-binding candidates for a hypothetical future SEF7 transfer**, not evidence of equivalent credit, learner-tested readiness or a governance approval.
 - No SYS outcome/assessment has been added by this map. No SEF7 requirement may be removed based solely on a common topic title. Transfer would require an accepted subsequent architecture revision, a real matching assessed SYS capability with public Work/Criteria/Evidence and prerequisite access, explicit version-pinned evidence mapping, steward review and separate migration/approval.
-- Rust study and C/Rust comparison belong in SYS, especially **[SYS2](../SYS/SYS2.md)**, not in the SEF7 C/POSIX foundation. SYS itself requires a later academic overhaul; this mapping **does not prematurely finalize SYS**.
+- Rust study and C/Rust comparison belong in SYS, especially **[SYS2](../SYS/SYS2.md)**, not in SEF7. The new SYS source does not alter any original SEF7 completion expectation or historical learner result.
 
 ## Shared foundation versus advanced systems depth
 
 | Boundary | Required SEF7 foundation | Candidate advanced SYS extension |
 | --- | --- | --- |
 | Language and platform | C11 with documented POSIX interfaces and Linux implementation assumptions; identify system call vs library wrappers | [SYS2](../SYS/SYS2.md): Rust ownership/borrowing and **side-by-side C/Rust resource/FFI/system-interface analysis**, additional platform details and robust systems-component design |
+| Operating-system implementation | SEF7 uses C/POSIX resource APIs without a kernel-internals completion obligation | [SYS10](../SYS/SYS10.md): educational kernel traps, scheduling, virtual-memory management, VFS/device pathways and protection, beyond SEF7's public interface work |
 | Processes and signals | Bounded, directly launched **owned local children**; correct exit/exec distinction, safe handler and reaping | [SYS2](../SYS/SYS2.md): robust cross-language process supervision, system-resource architecture and deep OS behavior; [SYS3](../SYS/SYS3.md) for concurrent-process/thread scheduling and synchronization |
 | Files and directories | Fixture `stat`/`lstat`/`fstat`, directory-relative reasoning, nonadversarial safe paths and honest TOCTOU limitations | [SYS2](../SYS/SYS2.md): more sophisticated resource abstraction and OS-specific primitives; [SYS5](../SYS/SYS5.md): durable files, WAL, crash-recovery and data integrity |
 | Pipes and local IPC | One two-child pipe, descriptor closure/EOF and finite failure handling | [SYS2](../SYS/SYS2.md): more robust IPC facilities and lifecycle integration; [SYS3](../SYS/SYS3.md): concurrent queues, atomics and memory-ordering guarantees |
@@ -66,10 +67,10 @@ The **target is a curricular destination to review**, not proof it currently has
 
 A subsequent separately approved SYS architecture and outcome-driven migration must, **before editing SEF7 requirements**:
 
-1. Review and correct SYS's curricular architecture, course progression, programming language handoff, Linux/Unix platform scope and feasible workload. Preserve the approved direction that Rust and explicit C/Rust comparison are taught in SYS.
+1. Recheck the current SYS architecture, prerequisite graph, Rust handoff, Linux/Unix scope and realistic workload for the specific competency proposed for transfer; a migrated draft format alone does not prove educational equivalence.
 2. Specify the advanced SYS outcome and required assessment in public OEE `v0.2.0` Work, Criteria and Evidence terms; validate against a real downstream prerequisite path, including learners who complete SEF without enrolling in SYS.
 3. Compare actual competencies rather than matching topic names. Prove that **every** removed SEF7 requirement has a valid new teaching and assessed-evidence destination available to affected learners; if it has no such destination, **do not remove it**.
 4. Publish source-revision-pinned mapping from the old outcome/assessment IDs and learner evidence to new IDs; distinguish reusing genuine evidence from automatically awarding untested credit. Do not revoke or silently regrade past completions.
-5. Perform separate SYS migration/validation and steward review on dedicated branches, then propose any SEF7 changes in a subsequent focused PR. The current map is not acceptance of a future transfer.
+5. Require a separately reviewed and approved, revision-pinned SEF7 change on a focused branch after substantive equivalence and downstream learner access are established. The SYS migration and this historical map do not approve any SEF7 transfer.
 
-**Decision for this milestone: keep all SEF7 outcomes and assessment obligations intact.** Advanced learning can build on them in SYS, but SYS's current legacy status and separate future redesign prohibit replacing them now.
+**Standing decision: keep every SEF7 outcome and assessment obligation intact.** Advanced SYS work builds on them; source migration of SYS neither cancels any requirement nor automatically awards equivalent completion. A future SEF7 transfer would require its own evidence-backed governance decision.
