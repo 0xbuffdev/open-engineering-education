@@ -4,12 +4,13 @@
 on 2026-11-16 in [PR #78](https://github.com/0xbuffdev/open-engineering-education/pull/78).
 
 **Implementation status:** All 14 APP core source definitions,
-including APP9, and electives APP10/APP11 are published as
-`v0.2.0` drafts. APP12 Realtime Systems is being migrated in its
-own elective course-and-catalog PR; APP13–APP16 remain legacy
-electives pending separate review. The [active APP catalog](README.md)
-and linked course files remain authoritative. Source conversion
-does not establish learner validation or official conformance.
+including APP9, and electives APP10–APP12 are published as
+`v0.2.0` drafts. APP13 Mobile Application Engineering is being
+migrated in its own elective course-and-catalog PR; APP14–APP16
+remain legacy electives pending separate review. The
+[active APP catalog](README.md) and linked course files remain
+authoritative. Source conversion does not establish learner
+validation or official conformance.
 
 **Authority:** This is a non-normative, program-specific architecture
 decision. It does not revise OEE's [Course Format](../../spec/course-format.md),
@@ -628,18 +629,20 @@ course definition is actually merged.
    through [PR #104](https://github.com/0xbuffdev/open-engineering-education/pull/104).
    APP11's advanced backend ownership/coordination elective
    completed through [PR #105](https://github.com/0xbuffdev/open-engineering-education/pull/105).
-   APP12 now advances application-level SSE/WebSocket transport,
-   snapshots and event replay, secure client synchronization,
-   concurrent editing, bounded fan-out and reconnect recovery
-   in its own optional elective PR.
+   APP12's secure realtime synchronization specialization
+   completed through [PR #112](https://github.com/0xbuffdev/open-engineering-education/pull/112).
+   APP13 now advances a packaged offline-capable mobile client,
+   device lifecycle/permissions, local migration, secure sync,
+   accessibility and signed test-release recovery without
+   requiring APP20, macOS or paid app-store access.
 4. **Separate implementation branches:** APP21 follows APP18;
    APP2 follows APP17 and APP19; APP20 follows APP2;
    APP3 follows APP19, APP21 and APP4. Publish valid outcomes,
    assessments and genuine overlap relocation on each PR.
-   APP12's course and catalog update must not change
+   APP13's course and catalog update must not change
    APP9's complete core graduation requirements, still-legacy
-   APP13–APP16 elective assessment contracts, or previous
-   APP12 learner evidence.
+   APP14–APP16 elective assessment contracts, or previous
+   APP13 learner evidence.
 5. **Integration and production:** APP5 after APP20 and
    APP3; then APP6, APP7, APP8; APP9 after complete
    required-core prerequisite closure and substantive
@@ -723,12 +726,12 @@ The recorded target decisions are:
   misrepresented as additional v0.2.0 conformance rules.
 
 **Current implementation snapshot:** All 14 APP core courses
-(including APP9 project) plus electives APP10 and APP11 are
-published as outcome-driven `v0.2.0` drafts. APP12 is under
-review in a distinct elective course PR; APP13–APP16 remain
-legacy optional elective courses, with downstream resource/
-evidence review, workload calibration and independent
-educational validation still future work. Use the
+(including APP9 project) and electives APP10–APP12 are
+published as outcome-driven `v0.2.0` drafts. APP13 is under
+review in a distinct mobile elective PR; APP14–APP16 remain
+legacy optional electives, with downstream resource/evidence
+review, workload calibration and independent educational
+validation still future work. Use the
 [current APP catalog](README.md) for active learner requirements;
 planned dependencies are not live until the relevant course PR merges.
 

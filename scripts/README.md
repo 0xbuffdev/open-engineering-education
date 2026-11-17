@@ -68,7 +68,12 @@ APP12 follows APP3 + APP5 + APP6 as an optional realtime
 application elective: SSE/WebSocket and polling choices, secure
 subscriptions, snapshot/cursor replay and two-client conflict
 reconciliation, bounded fan-out and reconnect recovery.
-Remaining APP13–APP16 elective scope/dependency changes remain in the
+APP13 follows APP19 + APP3 as an optional TypeScript/mobile elective:
+real Android packaging, accessible device interaction, lifecycle and
+local transactional storage, offline command replay, secure native
+permissions, mobile OS/background limits and compatible test upgrades.
+APP20 is required only for an optional React-based implementation.
+Remaining APP14–APP16 elective scope/dependency changes remain in the
 [APP migration decision](../curriculum/APP/ARCHITECTURE.md).
 The [current APP catalog](../curriculum/APP/README.md) contains
 **14 core courses and 7 electives** and is authoritative until reviewed
