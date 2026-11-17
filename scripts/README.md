@@ -59,7 +59,12 @@ APP10 follows APP20 + APP6 as an optional advanced frontend
 performance elective: browser/React traces, meaningful Core Web
 Vitals, critical delivery, correct cache/version and accessibility,
 long-session memory and reproducible performance regression gates.
-Remaining APP11–APP16 elective scope/dependency changes remain in the
+APP11 follows APP3 + APP4 + APP6 as an optional advanced backend
+architecture elective: domain/module ownership, PostgreSQL
+transactional outbox/inbox correctness, compensation and
+reconciliation, tenant-safe cross-boundary work and measured
+compatible extraction. APP9 graduation remains unchanged.
+Remaining APP12–APP16 elective scope/dependency changes remain in the
 [APP migration decision](../curriculum/APP/ARCHITECTURE.md).
 The [current APP catalog](../curriculum/APP/README.md) contains
 **14 core courses and 7 electives** and is authoritative until reviewed
