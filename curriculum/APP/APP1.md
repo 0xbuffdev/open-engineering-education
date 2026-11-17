@@ -133,12 +133,11 @@ course capability.
 2. **DNS Hierarchy** — Distinguish root, top-level domains, and delegated zones.
 3. **Domain Registration** — Trace registrant, registrar, registry, ICANN, renewal, transfer, and expiration roles.
 4. **Nameserver Delegation** — Explain how delegated authority differs from owning a website or hosting it.
-5. **DNS Resolvers** — Distinguish local stub, recursive, and authoritative resolvers.
-6. **Resolution Walkthrough** — Trace referrals, records, caching, and the resulting answer.
-7. **DNS Records** — Interpret A, AAAA, CNAME, NS, and the limited role of MX.
-8. **DNS Caching** — Explain TTLs, positive/negative caching, stale answers, and hosts-file overrides.
-9. **DNS Failures** — Distinguish NXDOMAIN, SERVFAIL, timeout, and local cache effects.
-10. **DNS Observation Limits** — Explain why a local or browser lookup does not prove a public-network query and where DoH/privacy affects visibility.
+5. **DNS Resolver Behavior and Resolution Tracing** — Distinguish local stub, recursive, and authoritative resolvers; trace referrals, records, caching, and the resulting answer.
+6. **DNS Records** — Interpret A, AAAA, CNAME, NS, and the limited role of MX.
+7. **DNS Caching** — Explain TTLs, positive/negative caching, stale answers, and hosts-file overrides.
+8. **DNS Failures** — Distinguish NXDOMAIN, SERVFAIL, timeout, and local cache effects.
+9. **DNS Observation Limits** — Explain why a local or browser lookup does not prove a public-network query and where DoH/privacy affects visibility.
 
 ### Module 5 — Hosting and Delivery
 
@@ -186,12 +185,11 @@ course capability.
 
 1. **HTTP Exchange** — Interpret the application-layer request and response model.
 2. **Message Structure** — Explain request targets, fields, bodies, and representation metadata.
-3. **Request Methods** — Distinguish GET, HEAD, POST, PUT, PATCH, and DELETE semantics.
-4. **Safety and Idempotence** — Separate protocol method properties from application retry behavior.
-5. **Response Status** — Classify successful, redirected, client-error, and server-error responses.
-6. **Representations** — Interpret Content-Type, negotiation, compression, and body-length constraints.
-7. **Authority and Headers** — Explain the request's target authority and selected headers.
-8. **HTTP Versions** — Distinguish shared HTTP semantics from HTTP/1.1, HTTP/2, and HTTP/3 framing and transport.
+3. **HTTP Methods, Safety and Idempotence** — Distinguish GET, HEAD, POST, PUT, PATCH, and DELETE semantics; separate protocol method properties from application retry behavior.
+4. **Response Status** — Classify successful, redirected, client-error, and server-error responses.
+5. **Representations** — Interpret Content-Type, negotiation, compression, and body-length constraints.
+6. **Authority and Headers** — Explain the request's target authority and selected headers.
+7. **HTTP Versions** — Distinguish shared HTTP semantics from HTTP/1.1, HTTP/2, and HTTP/3 framing and transport.
 
 ### Module 8 — HTTP Caching and Redirects
 
@@ -221,12 +219,11 @@ course capability.
 
 1. **HTTPS Guarantees** — Explain protected transport and the risks of plaintext HTTP.
 2. **TLS Handshake** — Describe negotiated cryptography and authenticated key establishment conceptually.
-3. **Certificate Chains** — Explain trust anchors, issuers, and certificate validation.
-4. **Hostname Verification** — Relate requested host identity to a certificate without equating it to content honesty.
-5. **Protocol Negotiation** — Explain SNI and ALPN at an appropriate introductory level.
-6. **TLS and QUIC** — Distinguish TLS use with TCP-based HTTPS and HTTP/3 over QUIC.
-7. **Mixed Content** — Explain security warnings, downgrade risks, and secure-context boundaries.
-8. **Trust Failures** — Classify supplied certificate/hostname errors without bypassing browser validation.
+3. **Certificate Chains and Hostname Identity** — Explain trust anchors, issuers, and certificate validation; relate requested host identity to a certificate without equating it to content honesty.
+4. **Protocol Negotiation** — Explain SNI and ALPN at an appropriate introductory level.
+5. **TLS and QUIC** — Distinguish TLS use with TCP-based HTTPS and HTTP/3 over QUIC.
+6. **Mixed Content** — Explain security warnings, downgrade risks, and secure-context boundaries.
+7. **Trust Failures** — Classify supplied certificate/hostname errors without bypassing browser validation.
 
 ### Module 10 — Browser Architecture
 

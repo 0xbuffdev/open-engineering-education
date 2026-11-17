@@ -106,21 +106,19 @@ graduation obligations.
 
 #### Lessons
 
-1. **Course Orientation and Database History** — Introduce durable shared data and the progression from file processing and hierarchical/network models to relational systems; locate relational databases within modern application architecture without presupposing an API framework.
+1. **Relational Data Foundations and Application Boundaries** — Introduce durable shared data and the progression from file processing and hierarchical/network models to relational systems; locate relational databases within modern application architecture without presupposing an API framework; contrast persistent domain facts, derived values, cached representations and ephemeral state; identify ownership, access patterns, retention and consistency questions in a supplied product brief.
 
-2. **Data versus Application Behavior** — Contrast persistent domain facts, derived values, cached representations and ephemeral state; identify ownership, access patterns, retention and consistency questions in a supplied product brief.
+2. **Relations, Tuples, Attributes, and Domains** — Relate mathematical sets and predicates to practical SQL tables, rows and columns; explain how SQL bags, NULLs and ordering differ from the idealized relational model.
 
-3. **Relations, Tuples, Attributes, and Domains** — Relate mathematical sets and predicates to practical SQL tables, rows and columns; explain how SQL bags, NULLs and ordering differ from the idealized relational model.
+3. **Database Process, Sessions, and Client Roles** — Identify server, database, schema, connection, transaction and SQL client responsibilities; distinguish language-portable concepts from vendor implementation.
 
-4. **Database Process, Sessions, and Client Roles** — Identify server, database, schema, connection, transaction and SQL client responsibilities; distinguish language-portable concepts from vendor implementation.
+4. **Safe Local PostgreSQL Laboratory** — Prepare a disposable locally controlled PostgreSQL database under ordinary OS-user permissions, record server/client versions, and establish safe teardown and synthetic-data rules.
 
-5. **Safe Local PostgreSQL Laboratory** — Prepare a disposable locally controlled PostgreSQL database under ordinary OS-user permissions, record server/client versions, and establish safe teardown and synthetic-data rules.
+5. **Requirements-to-Questions Walkthrough** — List entities, user-facing questions, integrity invariants, expected data volume and privacy assumptions for a fictional lending, inventory or reservation problem.
 
-6. **Requirements-to-Questions Walkthrough** — List entities, user-facing questions, integrity invariants, expected data volume and privacy assumptions for a fictional lending, inventory or reservation problem.
+6. **Exploratory Schema and Query** — Create minimal tables with sample records, run SELECT safely, inspect exact results and list model assumptions that require correction.
 
-7. **Exploratory Schema and Query** — Create minimal tables with sample records, run SELECT safely, inspect exact results and list model assumptions that require correction.
-
-8. **Formative Investigation: A Misleading Table** — Explain why one wide, duplicated spreadsheet-like table cannot reliably represent every domain update; propose a bounded relational decomposition.
+*Optional practice — Investigation: A Misleading Table:* Explain why one wide, duplicated spreadsheet-like table cannot reliably represent every domain update; propose a bounded relational decomposition.
 
 ### Module 2 — Entities, Keys, Dependencies, and Normalization
 
@@ -146,7 +144,7 @@ graduation obligations.
 
 7. **Evolving Requirements and Data Dictionaries** — Document field meaning, units, ranges, lifecycle and ownership; record a newly discovered cardinality requirement before writing migration SQL.
 
-8. **Formative Schema Review** — Compare two designs against a counterexample dataset and demonstrate which one preserves stated identities and modification invariants.
+*Optional practice — Schema Review:* Compare two designs against a counterexample dataset and demonstrate which one preserves stated identities and modification invariants.
 
 ### Module 3 — SQL Retrieval, Joins, and Data Modification
 
@@ -172,7 +170,7 @@ graduation obligations.
 
 7. **Ordering, Pagination, and Determinism** — Explain why tables and query results lack guaranteed row order without ORDER BY; use stable tie-breakers and describe offset/keyset trade-offs.
 
-8. **Formative SQL Counterexamples** — Predict and verify result sets containing zero matches, duplicated relationships, nulls and tied sort keys using independently computed expected rows.
+*Optional practice — SQL Counterexamples:* Predict and verify result sets containing zero matches, duplicated relationships, nulls and tied sort keys using independently computed expected rows.
 
 ### Module 4 — Analytical SQL, CTEs, and Reporting Correctness
 
@@ -199,7 +197,7 @@ graduation obligations.
 
 8. **Independent Analytical Oracle** — Compute a sample report from a small hand-checkable fixture in plain reasoning or independent code; compare it with the SQL output.
 
-9. **Formative Report Audit** — Fix a wrong total, unstable tie or unexpected NULL omission and defend the correction using source rows and expected result tables.
+*Optional practice — Report Audit:* Fix a wrong total, unstable tie or unexpected NULL omission and defend the correction using source rows and expected result tables.
 
 ### Module 5 — Database Integrity, Constraints, and Safe Writes
 
@@ -225,7 +223,7 @@ graduation obligations.
 
 7. **Negative-Path Integrity Tests** — Attempt invalid references, double claims, impossible quantities and failed multi-row updates in disposable sessions; inspect rejection versus silent acceptance.
 
-8. **Formative Repair without Data Loss** — Correct a flawed constraint or write statement and re-run both valid and invalid fixtures to prove the improvement.
+*Optional practice — Repair without Data Loss:* Correct a flawed constraint or write statement and re-run both valid and invalid fixtures to prove the improvement.
 
 ### Module 6 — Indexes, Query Plans, and Performance Experiments
 
@@ -252,7 +250,7 @@ graduation obligations.
 
 8. **Maintenance and Performance Limitations** — Recognize vacuum/autovacuum, stale statistics, locks and cache effects as reasons benchmark results may vary; distinguish a local result from a production forecast.
 
-9. **Formative Index Decision** — Recommend, reject or revise an index based on observed plans and stated write/read workload rather than an unsupported rule of thumb.
+*Optional practice — Index Decision:* Recommend, reject or revise an index based on observed plans and stated write/read workload rather than an unsupported rule of thumb.
 
 ### Module 7 — Transactions, Isolation, Locks, and Retry
 
@@ -267,17 +265,15 @@ graduation obligations.
 
 2. **MVCC and Snapshot Visibility** — Trace committed and uncommitted versions across two SQL sessions and distinguish a snapshot from a physical database copy.
 
-3. **Read Committed and Repeatable Read** — Demonstrate nonrepeatable-read visibility and explain PostgreSQL's stronger-than-minimum Repeatable Read behavior, including why phantom anomalies are not reproduced there.
+3. **Isolation Levels and Transaction Anomalies** — Demonstrate nonrepeatable-read visibility and explain PostgreSQL's stronger-than-minimum Repeatable Read behavior, including why phantom anomalies are not reproduced there; build a controlled interleaving with two sessions and evaluate which data invariants each isolation configuration does or does not preserve.
 
-4. **Lost Updates and Write Skew** — Build a controlled interleaving with two sessions and evaluate which data invariants each isolation configuration does or does not preserve.
+4. **Serializable Transactions and Retry** — Interpret a serialization failure and require a bounded retry of the complete transaction with re-evaluated inputs, rather than a blind retry of one statement.
 
-5. **Serializable Transactions and Retry** — Interpret a serialization failure and require a bounded retry of the complete transaction with re-evaluated inputs, rather than a blind retry of one statement.
+5. **Explicit Locks and Deadlocks** — Use row-level locking or a documented alternative to protect a stated invariant; explain deadlock detection and why lock order and short transactions matter.
 
-6. **Explicit Locks and Deadlocks** — Use row-level locking or a documented alternative to protect a stated invariant; explain deadlock detection and why lock order and short transactions matter.
+6. **Commit Failure and External Side Effects** — Separate database atomicity from sending an email or calling another service; introduce the need for outbox/idempotency strategies without teaching the full APP3 service course.
 
-7. **Commit Failure and External Side Effects** — Separate database atomicity from sending an email or calling another service; introduce the need for outbox/idempotency strategies without teaching the full APP3 service course.
-
-8. **Formative Two-Session Investigation** — Record an interleaving table with initial state, each session's actions, observed results and the corrected mitigation.
+*Optional practice — Two-Session Investigation:* Record an interleaving table with initial state, each session's actions, observed results and the corrected mitigation.
 
 ### Module 8 — Schema Migration, Compatibility, and Change Safety
 
@@ -297,13 +293,11 @@ graduation obligations.
 
 4. **Index and DDL Locking Risks** — Explain transactionality and operational risks of a schema change, distinguishing transactional DDL from operations with special restrictions.
 
-5. **Data Backfills and Idempotence** — Choose bounded batches, checkpointing and repeat-safe transformations that do not duplicate or lose rows.
+5. **Safe Data Backfills and Migration Verification** — Choose bounded batches, checkpointing and repeat-safe transformations that do not duplicate or lose rows; check row counts, integrity invariants, existing query consumers and version compatibility before and after a change; preserve the migration artifact.
 
-6. **Migration Verification and Historical Revisions** — Check row counts, integrity invariants, existing query consumers and version compatibility before and after a change; preserve the migration artifact.
+6. **Reversal versus Restore versus Forward Repair** — Distinguish changes that are safely reversible from destructive data transformations requiring backup restoration or a separately justified forward correction.
 
-7. **Reversal versus Restore versus Forward Repair** — Distinguish changes that are safely reversible from destructive data transformations requiring backup restoration or a separately justified forward correction.
-
-8. **Formative Rolling-Upgrade Scenario** — Demonstrate two successive consumer versions on an expanded schema and explain exactly when the contract step becomes safe.
+*Optional practice — Rolling-Upgrade Scenario:* Demonstrate two successive consumer versions on an expanded schema and explain exactly when the contract step becomes safe.
 
 ### Module 9 — Access Control, Tenant Isolation, and Query Safety
 
@@ -332,7 +326,7 @@ graduation obligations.
 
 8. **Privacy, Retention, and Audit Trade-offs** — Minimize stored sensitive data, document retention and selective logging, and protect backups and dumps against unintended exposure.
 
-9. **Formative Authorized-Role Test** — Demonstrate a bypass caused by an overprivileged fixture, then repair the roles/policies and capture effective-role evidence.
+*Optional practice — Authorized-Role Test:* Demonstrate a bypass caused by an overprivileged fixture, then repair the roles/policies and capture effective-role evidence.
 
 ### Module 10 — Operations, Backups, and Reproducible Recovery
 
@@ -358,7 +352,7 @@ graduation obligations.
 
 7. **Sensitive Information in Backups** — Explain least-privilege dump access, synthetic data, backup access control, retention and why an exported SQL file is not harmless metadata.
 
-8. **Formative Interrupted Migration Recovery** — Take a validated backup, inject a safe migration fault into a disposable database, recover into a clean target and explain data that could not be recovered.
+*Optional practice — Interrupted Migration Recovery:* Take a validated backup, inject a safe migration fault into a disposable database, recover into a clean target and explain data that could not be recovered.
 
 ### Module 11 — Minimal Data Access Interfaces and Independent Tests
 
@@ -385,7 +379,7 @@ graduation obligations.
 
 7. **Schema/Client Compatibility Regression** — Execute an old consumer and revised consumer against a staged schema and verify intended compatibility and explicitly rejected obsolete behavior.
 
-8. **Formative External-Consumer Review** — Provide another reviewer with just the SQL/scripts, setup instructions and contract; investigate one discovered ambiguity and amend the interface.
+*Optional practice — External-Consumer Review:* Provide another reviewer with just the SQL/scripts, setup instructions and contract; investigate one discovered ambiguity and amend the interface.
 
 ### Module 12 — Integrated Relational Data Component and Engineering Defense
 

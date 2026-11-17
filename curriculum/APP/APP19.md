@@ -101,17 +101,15 @@ explicitly requires their evidence.
 
 1. **Course Orientation and History** — Situate TypeScript as a typed development layer over JavaScript, from its motivations to modern use; identify why language and tooling evolution does not change the JavaScript runtime contract.
 
-2. **Review of APP18 JavaScript Semantics** — Recall objects, closures, promises, ESM, runtime validation and tests before introducing annotations; inspect an existing JavaScript utility and its verified failure cases.
+2. **TypeScript and JavaScript Runtime Semantics** — Recall objects, closures, promises, ESM, runtime validation and tests before introducing annotations; inspect an existing JavaScript utility and its verified failure cases; observe type errors independently of running code; compare `tsc --noEmit`, emitted JavaScript, and Node's limited type stripping where supported.
 
-3. **Types, Type Checking and JavaScript Execution** — Observe type errors independently of running code; compare `tsc --noEmit`, emitted JavaScript, and Node's limited type stripping where supported.
+3. **The Compiler, Language Service and Host** — Differentiate the compiler's static analysis, editor language services, JavaScript output and execution host; identify assumptions from external declaration files.
 
-4. **The Compiler, Language Service and Host** — Differentiate the compiler's static analysis, editor language services, JavaScript output and execution host; identify assumptions from external declaration files.
+4. **First Strict TypeScript Program** — Write a typed function, run a real type check with a locally available TypeScript compiler and execute the intended JavaScript output or supported erasable syntax.
 
-5. **First Strict TypeScript Program** — Write a typed function, run a real type check with a locally available TypeScript compiler and execute the intended JavaScript output or supported erasable syntax.
+5. **Prediction Before Compilation** — Predict which operations type-check and which fail, then verify; distinguish diagnostics from actual JavaScript exceptions and value changes.
 
-6. **Prediction Before Compilation** — Predict which operations type-check and which fail, then verify; distinguish diagnostics from actual JavaScript exceptions and value changes.
-
-7. **Study and Toolchain Boundaries** — Record a compiler/runtime baseline, avoid real credentials and online-only tooling, and explain how type-checking dependencies can be reproduced with provided local files.
+6. **Study and Toolchain Boundaries** — Record a compiler/runtime baseline, avoid real credentials and online-only tooling, and explain how type-checking dependencies can be reproduced with provided local files.
 
 ### Module 2 — Inference, Everyday Types and Literal Precision
 
@@ -137,7 +135,7 @@ explicitly requires their evidence.
 
 7. **`as const` and `satisfies`** — Distinguish expression-level literal preservation, validating assignment to a target type, and unsafe assertion; demonstrate where none supplies runtime validation.
 
-8. **Formative Investigation: Inference Gone Wrong** — Repair a widening or nullability bug and explain a compiler warning without papering it over with `any` or a non-null assertion.
+*Optional practice — Investigation: Inference Gone Wrong:* Repair a widening or nullability bug and explain a compiler warning without papering it over with `any` or a non-null assertion.
 
 ### Module 3 — Structural Object Contracts and Compatibility
 
@@ -163,7 +161,7 @@ explicitly requires their evidence.
 
 7. **Classes, Implements and Visibility** — Explain compile-time `implements` and access modifiers versus runtime behavior; prefer composition where it produces clearer contracts.
 
-8. **Formative Contract Review** — Review an object type with contradictory optionality or a hidden excess-property assumption and create a failing type expectation.
+*Optional practice — Contract Review:* Review an object type with contradictory optionality or a hidden excess-property assumption and create a failing type expectation.
 
 ### Module 4 — Control-Flow Analysis and Exhaustive State Modeling
 
@@ -189,7 +187,7 @@ explicitly requires their evidence.
 
 7. **Error and Result Shapes** — Distinguish expected validation errors from exceptional programming faults; model honest success/error outcomes without depending on TypeScript for runtime catching.
 
-8. **Formative Variant Migration** — Add a new state to an existing union, locate affected consumers, and repair the code while retaining negative-path tests.
+*Optional practice — Variant Migration:* Add a new state to an existing union, locate affected consumers, and repair the code while retaining negative-path tests.
 
 ### Module 5 — Functions, Callbacks and Asynchronous Contracts
 
@@ -215,7 +213,7 @@ explicitly requires their evidence.
 
 7. **`this` Parameters and Class Methods** — Model receiver-sensitive methods appropriately without hiding APP18's JavaScript call-context behavior.
 
-8. **Formative Callback Repair** — Diagnose a consumer/compiler mismatch and one runtime error in an async callback; retain both static and runtime tests.
+*Optional practice — Callback Repair:* Diagnose a consumer/compiler mismatch and one runtime error in an async callback; retain both static and runtime tests.
 
 ### Module 6 — Generic Abstractions and Relational Type Design
 
@@ -241,7 +239,7 @@ explicitly requires their evidence.
 
 7. **Safe Reuse versus Assertions** — Compare a well-typed generic implementation against an `as any` shortcut and explain what actually breaks in the latter.
 
-8. **Formative Generic Refactor** — Replace duplicated record functions with a bounded generic implementation and verify both caller-specific static expectations and runtime behavior.
+*Optional practice — Generic Refactor:* Replace duplicated record functions with a bounded generic implementation and verify both caller-specific static expectations and runtime behavior.
 
 ### Module 7 — Type Transformations and Useful Utility Types
 
@@ -267,7 +265,7 @@ explicitly requires their evidence.
 
 7. **When Not to Use Advanced Types** — Compare a complex conditional/mapped type to a clear interface or explicit domain union; select the simplest design that preserves correctness.
 
-8. **Formative Type Evolution** — Introduce a versioned field, examine type transformation behavior, and fix a misleading type-level abstraction.
+*Optional practice — Type Evolution:* Introduce a versioned field, examine type transformation behavior, and fix a misleading type-level abstraction.
 
 ### Module 8 — Compiler Configuration, Emission and Diagnostics
 
@@ -283,17 +281,15 @@ explicitly requires their evidence.
 
 2. **Strict Checking and Diagnostic Categories** — Use `strict`, null checks and implicit-any diagnostics; evaluate `noUncheckedIndexedAccess` and `exactOptionalPropertyTypes` with concrete trade-offs.
 
-3. **Target, Library and JavaScript Output** — Distinguish syntax emission targets and ambient library declarations from available runtime APIs; show why `lib` does not install a polyfill.
+3. **Compiler Output Targets and Type-Only Checks** — Distinguish syntax emission targets and ambient library declarations from available runtime APIs; show why `lib` does not install a polyfill; compare an independent type-check step with emitting executable JavaScript; verify an actual output and explain the behavior of erased types.
 
-4. **`noEmit` versus Compiled JavaScript** — Compare an independent type-check step with emitting executable JavaScript; verify an actual output and explain the behavior of erased types.
+4. **Modules and Resolution Modes** — Explain Node ESM, `module`/`moduleResolution`, file extensions and package export maps; do not assume every environment resolves the same specifiers.
 
-5. **Modules and Resolution Modes** — Explain Node ESM, `module`/`moduleResolution`, file extensions and package export maps; do not assume every environment resolves the same specifiers.
+5. **Native Node Type Stripping** — Inspect supported erasable syntax in a declared Node baseline, why Node does not read `tsconfig` or type-check, and when a regular `tsc` workflow is required.
 
-6. **Native Node Type Stripping** — Inspect supported erasable syntax in a declared Node baseline, why Node does not read `tsconfig` or type-check, and when a regular `tsc` workflow is required.
+6. **Type Imports, Declaration-only Outputs and Source Maps** — Distinguish `import type`, value exports, `.d.ts` artifacts and debugging source positions; avoid treating declarations as runtime code.
 
-7. **Type Imports, Declaration-only Outputs and Source Maps** — Distinguish `import type`, value exports, `.d.ts` artifacts and debugging source positions; avoid treating declarations as runtime code.
-
-8. **Formative Configuration Failure** — Repair a mismatched target/module setting or phantom runtime API after recording the original diagnostic and observed runtime behavior.
+*Optional practice — Configuration Failure:* Repair a mismatched target/module setting or phantom runtime API after recording the original diagnostic and observed runtime behavior.
 
 ### Module 9 — Typed Modules, Public APIs and JavaScript Interoperability
 
@@ -320,7 +316,7 @@ explicitly requires their evidence.
 
 7. **Structural Types versus Trusted Implementations** — Explain why a consumer may conform structurally yet fail domain validation; use contract tests to reinforce trust boundaries.
 
-8. **Formative Consumer Repair** — Create two independent local consumers, change the public API and diagnose both compile-time and runtime consequences.
+*Optional practice — Consumer Repair:* Create two independent local consumers, change the public API and diagnose both compile-time and runtime consequences.
 
 ### Module 10 — Runtime Data Boundaries and Security
 
@@ -347,7 +343,7 @@ explicitly requires their evidence.
 
 7. **Prototype and Key Safety** — Check suspicious object fields, inherited properties and arbitrary keys before merging or indexing untrusted records; use explicit allowlists and safe maps.
 
-8. **Formative Adversarial Fixture** — Apply malformed, additional-field, duplicate and wrong-type fixtures to a typed parser; show that runtime acceptance matches the documented policy.
+*Optional practice — Adversarial Fixture:* Apply malformed, additional-field, duplicate and wrong-type fixtures to a typed parser; show that runtime acceptance matches the documented policy.
 
 ### Module 11 — Gradual JavaScript Migration, Testing and Maintainability
 
@@ -376,7 +372,7 @@ explicitly requires their evidence.
 
 7. **Refactoring Without Changing Semantics** — Preserve JS runtime behavior while improving module types, avoid `as any` suppression, and record a justified compatibility decision.
 
-8. **Formative Maintenance Request** — Implement a bounded feature in a partially typed codebase, verify a regression and explain unresolved type holes.
+*Optional practice — Maintenance Request:* Implement a bounded feature in a partially typed codebase, verify a regression and explain unresolved type holes.
 
 ### Module 12 — Integrated TypeScript Library and Engineering Defense
 

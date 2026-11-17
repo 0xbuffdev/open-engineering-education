@@ -76,7 +76,7 @@
 
 8. **Avoid a benchmark-first design trap** — Explain why a faster synthetic empty page, isolated component or compressed transfer does not alone prove a better task.
 
-9. **Formative experiment review** — Reject an optimization proposal lacking a controlled baseline, meaningful interaction and trustworthy result threshold.
+*Optional practice — experiment review:* Reject an optimization proposal lacking a controlled baseline, meaningful interaction and trustworthy result threshold.
 
 ### Module 2 — Laboratory, Field, Core Web Vitals and Bias
 
@@ -101,11 +101,9 @@
 
 6. **Cache, warmup and thermal conditions** — Separate first load, return visit, JS JIT, browser memory, throttling and local machine interference.
 
-7. **Sampling, attribution and missing data** — Record representative input types, incomplete measurement, cross-origin iframe, browser API support and noisy trace overhead.
+7. **Measurement Coverage and Reproducibility** — Record representative input types, incomplete measurement, cross-origin iframe, browser API support and noisy trace overhead; use repeated runs with sample counts/spread and an explicit declared error/timeout policy rather than one winning trial.
 
-8. **Variance and reproducible measurements** — Use repeated runs with sample counts/spread and an explicit declared error/timeout policy rather than one winning trial.
-
-9. **Formative bad-vitals audit** — Correct a report that advertises a TBT-only synthetic audit as 'INP passed' and conflates field with lab results.
+*Optional practice — bad-vitals audit:* Correct a report that advertises a TBT-only synthetic audit as 'INP passed' and conflates field with lab results.
 
 ### Module 3 — Browser Main Thread, Frames and Rendering Traces
 
@@ -134,7 +132,7 @@
 
 8. **Source maps and causality** — Locate source and dependency chunks in a trace, mark the affected task and distinguish observational correlation from proven cause.
 
-9. **Formative render trace repair** — Explain a jank sequence that persists despite reducing JS handler time because layout and paint still dominate.
+*Optional practice — render trace repair:* Explain a jank sequence that persists despite reducing JS handler time because layout and paint still dominate.
 
 ### Module 4 — Largest Contentful Paint and Critical Content Delivery
 
@@ -163,7 +161,7 @@
 
 8. **Verify content paint and task usability** — Check LCP and first usable protected interaction separately, ensuring fast hero image isn't concealing unusable application.
 
-9. **Formative slow-hero experiment** — Repair a late discovered or overcompressed image and show the relevant waterfall plus rendering consequences.
+*Optional practice — slow-hero experiment:* Repair a late discovered or overcompressed image and show the relevant waterfall plus rendering consequences.
 
 ### Module 5 — JavaScript Supply, Bundles and Startup Work
 
@@ -192,7 +190,7 @@
 
 8. **Deployable asset build and rollback** — Verify chunk names/hashes, old page/new asset availability, cache compatibility and versioned client behavior.
 
-9. **Formative startup regression** — Catch a route split that reduces entry bytes but breaks deep-link/slow-network navigation and restore accessible fallback.
+*Optional practice — startup regression:* Catch a route split that reduces entry bytes but breaks deep-link/slow-network navigation and restore accessible fallback.
 
 ### Module 6 — HTTP, Browser Cache, Service Workers and Return Visits
 
@@ -222,7 +220,7 @@
 
 8. **Back/forward cache versus app cache** — Check bfcache restoration and page lifecycle, including reasons it may not apply; preserve private UI state cleanup.
 
-9. **Formative cache poisoning scenario** — Repair an identity-scoped resource or version mismatch that becomes observable on repeat navigation.
+*Optional practice — cache poisoning scenario:* Repair an identity-scoped resource or version mismatch that becomes observable on repeat navigation.
 
 ### Module 7 — INP, Input Handling, Scheduling and Worker Offload
 
@@ -252,7 +250,7 @@
 
 8. **Perceived feedback and accessible pending states** — Show immediate truthful feedback while heavy work progresses without lying about committed server results.
 
-9. **Formative INP breakdown repair** — Reduce a slow interaction and demonstrate which phase improved instead of calling TBT directly measured INP.
+*Optional practice — INP breakdown repair:* Reduce a slow interaction and demonstrate which phase improved instead of calling TBT directly measured INP.
 
 ### Module 8 — React Render/Commit Attribution and State Ownership
 
@@ -282,7 +280,7 @@
 
 8. **Route and asynchronous data architecture** — Avoid redundant refetch, race, cascading loading boundary and inaccurate optimistic state during route changes.
 
-9. **Formative React optimization audit** — Reject global memoization where profiling shows network image decode or unrelated layout is the actual bottleneck.
+*Optional practice — React optimization audit:* Reject global memoization where profiling shows network image decode or unrelated layout is the actual bottleneck.
 
 ### Module 9 — Large Data Interfaces, Virtualization and Accessibility
 
@@ -312,7 +310,7 @@
 
 8. **Responsive, zoom and reduced-motion states** — Verify constrained viewport, zoom/reflow, keyboard and accessible feedback after virtualization.
 
-9. **Formative virtualization failure** — Repair a fast list that traps focus or loses screen-reader context and show the corrected task despite DOM limits.
+*Optional practice — virtualization failure:* Repair a fast list that traps focus or loses screen-reader context and show the corrected task despite DOM limits.
 
 ### Module 10 — Visual Stability, Animations and User Preferences
 
@@ -342,7 +340,7 @@
 
 8. **Non-visual user performance** — Consider keyboard, assistive technology, speech output and perceived wait feedback beyond screenshots or visual speed.
 
-9. **Formative fast-but-unstable design** — Reject a slight transfer-size gain if font/image shifts disrupt form completion or focus context.
+*Optional practice — fast-but-unstable design:* Reject a slight transfer-size gain if font/image shifts disrupt form completion or focus context.
 
 ### Module 11 — Memory Retention, Long Sessions and Navigation Lifecycle
 
@@ -371,7 +369,7 @@
 
 8. **Long-running interaction and memory test** — Measure repeated browsing task, heap trend, responsiveness and source of retained data after a justified repair.
 
-9. **Formative non-leak distinction** — Separate legitimate warm cache or GC variability from a demonstrably retained detached component.
+*Optional practice — non-leak distinction:* Separate legitimate warm cache or GC variability from a demonstrably retained detached component.
 
 ### Module 12 — Field Telemetry, Performance Budgets and CI Governance
 
@@ -401,7 +399,7 @@
 
 8. **Flaky performance checks and human judgment** — Distinguish meaningful regression from noisy machines, small samples and threshold chasing; document override/escalation.
 
-9. **Formative field-to-lab confusion** — Correct a dashboard that reports synthetic TBT as production INP or leaks raw user search terms.
+*Optional practice — field-to-lab confusion:* Correct a dashboard that reports synthetic TBT as production INP or leaks raw user search terms.
 
 ### Module 13 — Integrated Measured Frontend Upgrade and Defense
 

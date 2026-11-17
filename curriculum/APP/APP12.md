@@ -82,7 +82,7 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 8. **Independent local test harness** — Pin free tools, browser versions, synthetic data, real ports and disposable resources.
 
-9. **Formative contract critique** — Reject claims that an open socket implies durable delivery, universal order or human attention.
+*Optional practice — contract critique:* Reject claims that an open socket implies durable delivery, universal order or human attention.
 
 ### Module 2 — Polling, HTTP Long Polling and Streaming Trade-offs
 
@@ -112,7 +112,7 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 8. **Browser API capability limits** — Compare EventSource header/credential constraints and browser WebSocket no built-in receive backpressure.
 
-9. **Formative transport decision** — Select the least costly sufficient option and define what evidence would justify switching.
+*Optional practice — transport decision:* Select the least costly sufficient option and define what evidence would justify switching.
 
 ### Module 3 — SSE Framing, Last-Event-ID and Authorized Resume
 
@@ -132,17 +132,15 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 3. **EventSource native reconnect** — Observe browser-managed retry and Last-Event-ID after an actual interrupted SSE connection.
 
-4. **Cursor identity and stream epoch** — Bind last-event cursors to tenant/room/version and reject mismatched or malformed input.
+4. **Authorized Resume Cursors and Replay** — Bind last-event cursors to tenant/room/version and reject mismatched or malformed input; replay events still available within explicit server retention without depending on browser memory.
 
-5. **Persistent authorized replay** — Replay events still available within explicit server retention without depending on browser memory.
+5. **Expired or invalid cursor** — Reject an unfulfillable replay gap and require fresh authorized snapshot resync.
 
-6. **Expired or invalid cursor** — Reject an unfulfillable replay gap and require fresh authorized snapshot resync.
+6. **Proxy flushing and keepalives** — Exercise comment heartbeats, buffering, idle closes and cancellation with local settings.
 
-7. **Proxy flushing and keepalives** — Exercise comment heartbeats, buffering, idle closes and cancellation with local settings.
+7. **Session expiry during a stream** — Close or block invalid subscriptions and verify old cursor cannot disclose a revoked resource.
 
-8. **Session expiry during a stream** — Close or block invalid subscriptions and verify old cursor cannot disclose a revoked resource.
-
-9. **Formative foreign-room resume** — Demonstrate unauthorized Last-Event-ID misuse then repair cursor scope and fallback.
+*Optional practice — foreign-room resume:* Demonstrate unauthorized Last-Event-ID misuse then repair cursor scope and fallback.
 
 ### Module 4 — WebSocket Upgrade, Framing and Persistent Command Security
 
@@ -172,7 +170,7 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 8. **Error, timeout and cleanup** — Handle malformed payloads, close, session expiry, route navigation and resource release.
 
-9. **Formative forged publish** — Reject a syntactically valid WebSocket message attempting a forbidden tenant action.
+*Optional practice — forged publish:* Reject a syntactically valid WebSocket message attempting a forbidden tenant action.
 
 ### Module 5 — Event Identity, Ordering Domains and Delivery Contracts
 
@@ -202,7 +200,7 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 8. **Clock skew and causality** — Demonstrate why browser wall-clock time cannot prove total order or one-way latency.
 
-9. **Formative stale overwrite** — Prevent an old notification from replacing a newer committed version in client state.
+*Optional practice — stale overwrite:* Prevent an old notification from replacing a newer committed version in client state.
 
 ### Module 6 — Snapshot, Delta and Bootstrap Race-Free Synchronization
 
@@ -232,7 +230,7 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 8. **Cross-account and page switch** — Cancel old reads and streams and ignore late events from prior generation identifiers.
 
-9. **Formative convergence proof** — Verify multiple clients match independent PostgreSQL after a forced bootstrap gap.
+*Optional practice — convergence proof:* Verify multiple clients match independent PostgreSQL after a forced bootstrap gap.
 
 ### Module 7 — React Synchronization, Reconnect and Offline Lifecycle
 
@@ -262,7 +260,7 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 8. **Session expiration and logout** — Stop replaying protected data and re-bootstrap after current valid authorization.
 
-9. **Formative duplicate-subscription defect** — Repair a React lifecycle issue creating multiple stale streams after navigation.
+*Optional practice — duplicate-subscription defect:* Repair a React lifecycle issue creating multiple stale streams after navigation.
 
 ### Module 8 — Concurrent Collaborative Edits and Conflict Semantics
 
@@ -292,7 +290,7 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 8. **Out-of-order command acknowledgements** — Prevent delayed events from overriding a more recent confirmed user revision.
 
-9. **Formative two-user recovery** — Demonstrate a conflict and reconcile both clients without inventing missing updates.
+*Optional practice — two-user recovery:* Demonstrate a conflict and reconcile both clients without inventing missing updates.
 
 ### Module 9 — Origin, Room Permissions and Live Security Revocation
 
@@ -322,7 +320,7 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 8. **Privacy-safe event and audit payload** — Keep protected fields, raw auth tokens and private presence out of unauthorized logs.
 
-9. **Formative cross-tenant leak** — Seed a guessed room subscription and prove it produces no protected event or DB effect.
+*Optional practice — cross-tenant leak:* Seed a guessed room subscription and prove it produces no protected event or DB effect.
 
 ### Module 10 — Backpressure, Slow Readers and Abuse-Resistant Fan-out
 
@@ -353,7 +351,7 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 8. **Coalescing versus durable commands** — Drop replaceable notifications only when a snapshot can recover persisted business state.
 
-9. **Formative overflow diagnosis** — Fix memory growth from a disconnected subscriber retaining an unlimited stream buffer.
+*Optional practice — overflow diagnosis:* Fix memory growth from a disconnected subscriber retaining an unlimited stream buffer.
 
 ### Module 11 — Ephemeral Presence and Typing as Lease-Based Hints
 
@@ -382,7 +380,7 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 8. **Accessible lower-rate alternatives** — Offer textual state and manual refresh without flickering or endless announcements.
 
-9. **Formative ghost-presence repair** — Correct a stale member list after a sudden disconnected or terminated process.
+*Optional practice — ghost-presence repair:* Correct a stale member list after a sudden disconnected or terminated process.
 
 ### Module 12 — Fan-out Topologies, Broker/Process Loss and Recovery
 
@@ -413,7 +411,7 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 8. **Topology and maintenance cost** — Compare sockets, DB connections, proxy limits, incident labor and monitoring complexity.
 
-9. **Formative no-broker decision** — Show why simpler polling or one-process SSE can be optimal for the actual use case.
+*Optional practice — no-broker decision:* Show why simpler polling or one-process SSE can be optimal for the actual use case.
 
 ### Module 13 — Observability, Clock Limits and Failure Test Methodology
 
@@ -444,7 +442,7 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 8. **Privacy-aware fixture and logs** — Seed synthetic records and redact IDs/tokens/content while preserving diagnostic correlation.
 
-9. **Formative false-green monitor** — Catch a metrics page reporting healthy sockets despite stale or unauthorized room state.
+*Optional practice — false-green monitor:* Catch a metrics page reporting healthy sockets despite stale or unauthorized room state.
 
 ### Module 14 — Accessible Collaboration, Privacy and Operations
 
@@ -475,7 +473,7 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 8. **Operator recovery instructions** — Document diagnosing room leaks, cursor expiry, proxy close and broker/notification outage.
 
-9. **Formative deceptive success badge** — Fix UI claiming a write committed merely because a push notification arrived.
+*Optional practice — deceptive success badge:* Fix UI claiming a write committed merely because a push notification arrived.
 
 ### Module 15 — Integrated Recoverable Realtime Feature and Defense
 

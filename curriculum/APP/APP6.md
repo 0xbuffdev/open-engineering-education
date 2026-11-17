@@ -160,15 +160,13 @@ completion contract.
 
 4. **Quality attributes and trade-off conflicts** — Identify tension between response latency, confidentiality, developer change cost and measured reliability for a bounded user outcome.
 
-5. **Risk inventory by severity and exposure** — Identify likely failure, likelihood uncertainty, impacted users/data and detectability; prioritize observed risks over arbitrary fashionable tooling.
+5. **Risk Inventory and Verifiable Acceptance Criteria** — Identify likely failure, likelihood uncertainty, impacted users/data and detectability; prioritize observed risks over arbitrary fashionable tooling; derive normal, denied, conflict, failed, recovered, accessibility and maintenance outcomes with measurable thresholds appropriate to a local environment.
 
-6. **Public acceptance and evidence criteria** — Derive normal, denied, conflict, failed, recovered, accessibility and maintenance outcomes with measurable thresholds appropriate to a local environment.
+6. **Verification traceability map** — Map each critical risk to an appropriate test layer, observable artifact, reviewer and limitation.
 
-7. **Verification traceability map** — Map each critical risk to an appropriate test layer, observable artifact, reviewer and limitation.
+7. **Review evidence versus conformance** — Separate evidence that one run passed from a claim of systematic quality, security certification or production availability.
 
-8. **Review evidence versus conformance** — Separate evidence that one run passed from a claim of systematic quality, security certification or production availability.
-
-9. **Formative risk audit** — Compare two proposed quality investments, defend priority using a known failure scenario and identify which tests would remain weak.
+*Optional practice — risk audit:* Compare two proposed quality investments, defend priority using a known failure scenario and identify which tests would remain weak.
 
 ### Module 2 — Test Architecture, Realism and Contract Verification
 
@@ -195,11 +193,9 @@ completion contract.
 
 7. **Real browser end-to-end journeys** — Test navigation, session expiry, keyboard/focus, pending/job states and partial failures with a browser and local components.
 
-8. **Test doubles and simulated confidence** — Select fakes for controlled failure/race injection but disclose when a mock cannot prove driver, OS or database behavior.
+8. **Test Realism and Coverage Limits** — Select fakes for controlled failure/race injection but disclose when a mock cannot prove driver, OS or database behavior; interpret statement/branch coverage and scenario matrices without equating coverage percentages to correctness.
 
-9. **Coverage claims versus risk confidence** — Interpret statement/branch coverage and scenario matrices without equating coverage percentages to correctness.
-
-10. **Formative misplaced-test exercise** — Move a flaky browser test to a stable lower level while retaining one real journey that verifies the integration boundary.
+*Optional practice — misplaced-test exercise:* Move a flaky browser test to a stable lower level while retaining one real journey that verifies the integration boundary.
 
 ### Module 3 — Invariants, Generative Tests and Mutation Analysis
 
@@ -228,7 +224,7 @@ completion contract.
 
 8. **Security and negative assertions** — Test denied access, hidden fields and data cleanup; inspect unauthorized DB state rather than only a 403 status.
 
-9. **Formative mutant repair** — Demonstrate a surviving authorization or retry mutant, add a meaningful failing test and record limitations of the mutation runner.
+*Optional practice — mutant repair:* Demonstrate a surviving authorization or retry mutant, add a meaningful failing test and record limitations of the mutation runner.
 
 ### Module 4 — Determinism, Test Isolation and Flake Investigation
 
@@ -243,21 +239,19 @@ completion contract.
 
 1. **Fixture lifetimes and ownership** — Allocate and clean local database schemas, users, files, ports and processes per test or per isolated suite.
 
-2. **Virtual time and injected clocks** — Replace real waits with controlled clocks for expiry, retries and deadlines where the behavior permits, while retaining one real lifecycle test.
+2. **Controlling Time and Randomness** — Replace real waits with controlled clocks for expiry, retries and deadlines where the behavior permits, while retaining one real lifecycle test; record generator seeds and distribution assumptions so a failure can be rerun as the same case.
 
-3. **Reproducible randomness and seeds** — Record generator seeds and distribution assumptions so a failure can be rerun as the same case.
+3. **Concurrency barriers and ordering** — Use controlled scheduling points and independent sessions to reproduce a race rather than rely on sleeps or a lucky interleaving.
 
-4. **Concurrency barriers and ordering** — Use controlled scheduling points and independent sessions to reproduce a race rather than rely on sleeps or a lucky interleaving.
+4. **Unstable external services** — Simulate third-party failures locally, keep one independent integration boundary and disclose which assumptions are unverified.
 
-5. **Unstable external services** — Simulate third-party failures locally, keep one independent integration boundary and disclose which assumptions are unverified.
+5. **Flake diagnosis and evidence** — Classify nondeterministic failures by observable timings, shared state, environment, dependency or invalid assertion before changing code.
 
-6. **Flake diagnosis and evidence** — Classify nondeterministic failures by observable timings, shared state, environment, dependency or invalid assertion before changing code.
+6. **Why retries do not fix flakiness** — Explain how retry-on-fail can hide a defect; document temporary quarantine, triage ownership and deadline where necessary.
 
-7. **Why retries do not fix flakiness** — Explain how retry-on-fail can hide a defect; document temporary quarantine, triage ownership and deadline where necessary.
+7. **Isolation and teardown tests** — Detect leaked listeners, handles, workers, stale DB rows and unexpected file artifacts, including partial setup failures.
 
-8. **Isolation and teardown tests** — Detect leaked listeners, handles, workers, stale DB rows and unexpected file artifacts, including partial setup failures.
-
-9. **Formative intermittent test repair** — Capture a failing seed/timing schedule, fix the root cause and compare repeated controlled runs without claiming zero future flakes.
+*Optional practice — intermittent test repair:* Capture a failing seed/timing schedule, fix the root cause and compare repeated controlled runs without claiming zero future flakes.
 
 ### Module 5 — Continuous Integration, Change Gates and Trust Boundaries
 
@@ -289,7 +283,7 @@ completion contract.
 
 9. **Local pipeline and hosted differences** — Demonstrate equivalent shell/container execution, record which permissions and event semantics require a real GitHub Actions security review.
 
-10. **Formative attack on the pipeline** — Inspect an untrusted change that tries to publish an artifact or read a secret and document why the revised job policy prevents it.
+*Optional practice — attack on the pipeline:* Inspect an untrusted change that tries to publish an artifact or read a secret and document why the revised job policy prevents it.
 
 ### Module 6 — Reproducible Builds, Dependencies and Artifact Integrity
 
@@ -318,7 +312,7 @@ completion contract.
 
 8. **Artifacts and deployment ownership** — Prepare versioned trusted inputs and reviewable outputs but defer actual public deployment, cluster rollout and release promotion to APP7.
 
-9. **Formative build drift** — Reproduce a build mismatch after an unpinned transitive dependency or environment change and verify the repaired documented inputs.
+*Optional practice — build drift:* Reproduce a build mismatch after an unpinned transitive dependency or environment change and verify the repaired documented inputs.
 
 ### Module 7 — Static Analysis, Supply-Chain Security and Provenance
 
@@ -347,7 +341,7 @@ completion contract.
 
 8. **Policy gates and human review** — Fail locally on a seeded material credential/vulnerability finding while documenting accepted false positives and a steward override procedure.
 
-9. **Formative supply-chain scenario** — Detect a fake package-origin mismatch or unsafe build step, correct inputs and record what the check actually proves.
+*Optional practice — supply-chain scenario:* Detect a fake package-origin mismatch or unsafe build step, correct inputs and record what the check actually proves.
 
 ### Module 8 — Configuration, Secrets and Operational Safety Controls
 
@@ -374,7 +368,7 @@ completion contract.
 
 7. **Rotation and response to exposure** — Simulate detection, revocation, replacement, log cleanup and historical artifact review without using any real secret or promising deletion from all history.
 
-8. **Formative credential leak** — Seed a fake token in a disposable branch, ensure the gate fails, remove/rotate the fixture and verify artifact/log outputs contain no value.
+*Optional practice — credential leak:* Seed a fake token in a disposable branch, ensure the gate fails, remove/rotate the fixture and verify artifact/log outputs contain no value.
 
 ### Module 9 — Logging, Metrics, Traces and Privacy-Aware Signals
 
@@ -403,7 +397,7 @@ completion contract.
 
 8. **Sensitive telemetry and retention** — Bound logs/metric labels, decide retention and access, and test that redaction succeeds during error and exception paths.
 
-9. **Formative telemetry audit** — Repair a request-ID-as-metric-label or raw-token logging defect and show the resulting bounded metric series.
+*Optional practice — telemetry audit:* Repair a request-ID-as-metric-label or raw-token logging defect and show the resulting bounded metric series.
 
 ### Module 10 — User-Centered SLIs, SLOs and Error-Budget Reasoning
 
@@ -432,7 +426,7 @@ completion contract.
 
 8. **Quality gates and release decisions** — Use local SLO/error-budget evidence to inform an engineering decision; APP7 owns actual production rollouts and operational policy.
 
-9. **Formative SLO failure analysis** — Revise an objective based on aggregate HTTP 200 that ignores denied or permanently pending user tasks.
+*Optional practice — SLO failure analysis:* Revise an objective based on aggregate HTTP 200 that ignores denied or permanently pending user tasks.
 
 ### Module 11 — Incident Triage, Diagnosis and Learning Loop
 
@@ -462,7 +456,7 @@ completion contract.
 
 8. **Feedback into quality policy** — Update a CI gate, test plan, SLI or review checklist based on what the investigation actually exposed.
 
-9. **Formative incident drill** — Distinguish a cache-scope leak from a session-expiry symptom using evidence from the same cross-layer request.
+*Optional practice — incident drill:* Distinguish a cache-scope leak from a session-expiry symptom using evidence from the same cross-layer request.
 
 ### Module 12 — Performance Experiments, Saturation and Regression Gates
 
@@ -492,7 +486,7 @@ completion contract.
 
 8. **Safe local-only load scope** — Bound concurrency and duration to learner-owned loopback systems; avoid public-service testing or dangerous denial-of-service conditions.
 
-9. **Formative load defect** — Find a hidden saturated client generator or cache-warmth mismatch and correct the measurement before claiming the service improved.
+*Optional practice — load defect:* Find a hidden saturated client generator or cache-warmth mismatch and correct the measurement before claiming the service improved.
 
 ### Module 13 — Reliability Failure Injection and Resilience Trade-offs
 
@@ -522,7 +516,7 @@ completion contract.
 
 8. **Security regression from outage** — Test that fail-open authorization, private cache fallback or leaked error details do not appear during failure.
 
-9. **Formative dependency outage** — Repair a retry storm or falsely successful UI fallback and provide a local failure/normal test pair.
+*Optional practice — dependency outage:* Repair a retry storm or falsely successful UI fallback and provide a local failure/normal test pair.
 
 ### Module 14 — Maintainability, Code Review and Evidence-Based Evolution
 
@@ -552,7 +546,7 @@ completion contract.
 
 8. **Quantifying engineering improvement** — Track measured flake frequency, changed test reliability, incident recurrence or developer feedback without inventing long-run data.
 
-9. **Formative maintainability review** — Defend a small simplification over an unproven broad rewrite with risk and passing negative-path evidence.
+*Optional practice — maintainability review:* Defend a small simplification over an unproven broad rewrite with risk and passing negative-path evidence.
 
 ### Module 15 — Integrated Reliability Upgrade and Independent Defense
 

@@ -63,17 +63,15 @@ Seventeen measurable outcomes are developed across thirteen varied modules and s
 
 3. **Prior APP competence** — Locate APP19 type/runtime boundaries, APP21 Node processes and APP6 testing responsibilities without re-teaching fundamentals.
 
-4. **Rust entry diagnostic** — Compile a small Cargo crate using ownership-aware data, Result errors, JSON decode and unit tests to demonstrate prior readiness.
+4. **Rust Readiness and Repair Plan** — Compile a small Cargo crate using ownership-aware data, Result errors, JSON decode and unit tests to demonstrate prior readiness; identify missing Rust ownership, borrowing or error skills for study in SYS or equivalent foundations before assessed integration.
 
-5. **Readiness correction path** — Identify missing Rust ownership, borrowing or error skills for study in SYS or equivalent foundations before assessed integration.
+5. **Choose a bounded task** — Select a deterministic parser, formatter, document transformer or rule evaluator with meaningful validated inputs.
 
-6. **Choose a bounded task** — Select a deterministic parser, formatter, document transformer or rule evaluator with meaningful validated inputs.
+6. **TypeScript-only comparison** — Build a correct in-process reference implementation to avoid language-fashion justification.
 
-7. **TypeScript-only comparison** — Build a correct in-process reference implementation to avoid language-fashion justification.
+7. **Hazard and cost register** — Identify binary distribution, process startup, copies, security and staff-maintenance costs.
 
-8. **Hazard and cost register** — Identify binary distribution, process startup, copies, security and staff-maintenance costs.
-
-9. **Formative architecture decision** — Reject unnecessary Rust where measured constraints or existing dependencies do not warrant it.
+*Optional practice — architecture decision:* Reject unnecessary Rust where measured constraints or existing dependencies do not warrant it.
 
 ### Module 2 — TypeScript Package and Runtime Contracts
 
@@ -103,7 +101,7 @@ Seventeen measurable outcomes are developed across thirteen varied modules and s
 
 8. **Consumer compatibility probe** — Run a fixture client pinned to previous TypeScript declarations and runtime behavior.
 
-9. **Formative type illusion** — Show that a casted wire response compiles yet fails contract validation and repair the adapter.
+*Optional practice — type illusion:* Show that a casted wire response compiles yet fails contract validation and repair the adapter.
 
 ### Module 3 — Rust Processing Component and Isolation
 
@@ -133,7 +131,7 @@ Seventeen measurable outcomes are developed across thirteen varied modules and s
 
 8. **Diagnostic stack** — Instrument local trace context and structured errors without serializing secrets.
 
-9. **Formative bad boundary** — Repair a Rust worker that panics on a missing key and loses all pending requests.
+*Optional practice — bad boundary:* Repair a Rust worker that panics on a missing key and loses all pending requests.
 
 ### Module 4 — Language-Neutral Data and Versioned Envelopes
 
@@ -165,7 +163,7 @@ Seventeen measurable outcomes are developed across thirteen varied modules and s
 
 9. **Message length abuse** — Reject oversized, truncated, duplicated and malformed frames before allocating unbounded buffers.
 
-10. **Formative mixed-version replay** — Use an old Rust response with a new TS client and record the versioned failure/result.
+*Optional practice — mixed-version replay:* Use an old Rust response with a new TS client and record the versioned failure/result.
 
 ### Module 5 — Spawned Process and IPC Lifecycle
 
@@ -198,7 +196,7 @@ Seventeen measurable outcomes are developed across thirteen varied modules and s
 
 9. **Graceful termination** — Drain or reject outstanding requests with a finite deadline then terminate an unresponsive child.
 
-10. **Formative crash injection** — Kill the Rust worker during a request and validate the caller's unsettled-versus-failed state.
+*Optional practice — crash injection:* Kill the Rust worker during a request and validate the caller's unsettled-versus-failed state.
 
 ### Module 6 — Failure Semantics, Cancellation and Replay
 
@@ -230,7 +228,7 @@ Seventeen measurable outcomes are developed across thirteen varied modules and s
 
 9. **Propagation into API** — Map boundary failures to stable TypeScript/APP3 user-visible errors without leaking panic internals.
 
-10. **Formative lost-response incident** — Repair duplicate side effects created by naive timeout-driven resubmission.
+*Optional practice — lost-response incident:* Repair duplicate side effects created by naive timeout-driven resubmission.
 
 ### Module 7 — Boundary Security and Untrusted Inputs
 
@@ -260,7 +258,7 @@ Seventeen measurable outcomes are developed across thirteen varied modules and s
 
 8. **Sandbox limits** — Compare process user/OS permissions and optional stronger isolation without claiming process spawning is a sandbox.
 
-9. **Formative confused deputy** — Reproduce a malicious document/path request and reject it without weakening the input schema.
+*Optional practice — confused deputy:* Reproduce a malicious document/path request and reject it without weakening the input schema.
 
 ### Module 8 — Concurrency, Queues and Resource Backpressure
 
@@ -290,7 +288,7 @@ Seventeen measurable outcomes are developed across thirteen varied modules and s
 
 8. **Fairness under load** — Prevent a large batch from starving a short request without claiming a global scheduler guarantee.
 
-9. **Formative queue exhaustion** — Fix a worker API that exhausts memory under simultaneous expensive documents.
+*Optional practice — queue exhaustion:* Fix a worker API that exhausts memory under simultaneous expensive documents.
 
 ### Module 9 — Differential, Property and Contract Testing
 
@@ -324,7 +322,7 @@ Seventeen measurable outcomes are developed across thirteen varied modules and s
 
 9. **Build reproducibility** — Re-run clean dependency/toolchain installs and verify exact artifact hashes or explain nondeterminism.
 
-10. **Formative independently seeded fault** — Correct a property failure whose original hidden fixture was not in the published test suite.
+*Optional practice — independently seeded fault:* Correct a property failure whose original hidden fixture was not in the published test suite.
 
 ### Module 10 — Reproducible Builds and Multi-Artifact Delivery
 
@@ -355,7 +353,7 @@ Seventeen measurable outcomes are developed across thirteen varied modules and s
 
 8. **Rollback and migration** — Reject unsafe downgrade when persisted worker data or message contracts cannot be interpreted.
 
-9. **Formative missing binary incident** — Repair a package that works in source checkout but fails in a clean consuming project.
+*Optional practice — missing binary incident:* Repair a package that works in source checkout but fails in a clean consuming project.
 
 ### Module 11 — Workload Measurement and Design Economics
 
@@ -386,7 +384,7 @@ Seventeen measurable outcomes are developed across thirteen varied modules and s
 
 8. **Performance regression contract** — Create a bounded reproducible budget that fails only after correctness checks.
 
-9. **Formative false speedup** — Diagnose a faster Rust result caused by missing validation or a different input fixture.
+*Optional practice — false speedup:* Diagnose a faster Rust result caused by missing validation or a different input fixture.
 
 ### Module 12 — Native Addon, Wasm and Alternative Boundary Review
 
@@ -404,21 +402,19 @@ Seventeen measurable outcomes are developed across thirteen varied modules and s
 
 1. **Node-API stability scope** — Explain Node-API ABI guarantees and the limits imposed by wrappers, native dependencies and target packages.
 
-2. **FFI ownership questions** — Model allocation, free, aliasing, lifetimes and panic translation without requiring learner-written unsafe glue.
+2. **FFI Ownership, Threads and Errors** — Model allocation, free, aliasing, lifetimes and panic translation without requiring learner-written unsafe glue; explain how native add-ons must respect JS runtime affinity and error propagation.
 
-3. **Error and thread boundaries** — Explain how native add-ons must respect JS runtime affinity and error propagation.
+3. **WebAssembly execution model** — Contrast WASM linear memory, host calls, browser and Node support and ecosystem constraints.
 
-4. **WebAssembly execution model** — Contrast WASM linear memory, host calls, browser and Node support and ecosystem constraints.
+4. **WASM copy semantics** — Compare host bridging, memory growth, binary size and async integration overhead.
 
-5. **WASM copy semantics** — Compare host bridging, memory growth, binary size and async integration overhead.
+5. **Process isolation advantage** — Evaluate crash containment and deploy simplicity versus native-call latency and sharing.
 
-6. **Process isolation advantage** — Evaluate crash containment and deploy simplicity versus native-call latency and sharing.
+6. **Security claims audit** — Explicitly reject claims that Rust memory safety automatically enforces input validity or tenant authorization.
 
-7. **Security claims audit** — Explicitly reject claims that Rust memory safety automatically enforces input validity or tenant authorization.
+7. **Decision matrix** — Choose process IPC, Node-API or WASM per platform constraints with empirical evidence or bounded analysis.
 
-8. **Decision matrix** — Choose process IPC, Node-API or WASM per platform constraints with empirical evidence or bounded analysis.
-
-9. **Formative adapter comparison** — Sketch an equivalent contract on an alternative boundary and identify new risks without implementing it.
+*Optional practice — adapter comparison:* Sketch an equivalent contract on an alternative boundary and identify new risks without implementing it.
 
 ### Module 13 — Integrated Cross-Language Feature and Defense
 
@@ -470,7 +466,7 @@ Seventeen measurable outcomes are developed across thirteen varied modules and s
 
 ## Completion requirements
 
-All **APP15-O1–APP15-O17** require independently inspectable evidence across **seven mandatory summative assessments**. One integrated TypeScript application and Rust engine may support them all. The readiness diagnostic and module formative checks orient study and provide feedback, but are not unpublished completion tests; no particular SYS course identifier, native FFI, WASM build, paid service or web framework is required.
+All **APP15-O1–APP15-O17** require independently inspectable evidence across **seven mandatory summative assessments**. One integrated TypeScript application and Rust engine may support them all. The public Rust-readiness diagnostic supplies feedback before entry; APP15-AS1 separately evaluates application-facing Rust competence. This does not impose a specific SYS course or an additional private exam. Module formative checks are not completion tests; no particular SYS course identifier, native FFI, WASM build, paid service or web framework is required.
 
 - **APP15-AS1** — Prior Readiness, Bounded Use Case and Public TypeScript Package
   - **Outcomes:** APP15-O1, APP15-O2, APP15-O4, APP15-O16.

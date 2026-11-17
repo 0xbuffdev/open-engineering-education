@@ -4,8 +4,8 @@
 on 2026-11-16 in [PR #78](https://github.com/0xbuffdev/open-engineering-education/pull/78).
 
 **Implementation status:** All 14 APP core source definitions,
-including APP9, and electives APP10–APP14 are published as
-`v0.2.0` drafts. APP15–APP16 remain legacy electives pending
+including APP9, and electives APP10–APP15 are published as
+`v0.2.0` drafts. APP16 alone remains a legacy-format elective pending
 separate review. The
 [active APP catalog](README.md) and linked course files remain
 authoritative. Source conversion does not establish learner
@@ -92,7 +92,7 @@ prerequisite, workload, and assessment review.
 ## 2. Course identity is not course sequence
 
 The existing APP1–APP16 course codes are published identifiers;
-most associated course files still use a legacy authoring format.
+all except optional APP16 now have outcome-driven v0.2.0 course definitions.
 Renumbering them to make the path appear sequential would change
 identities referenced by prerequisites, evidence, curriculum exports,
 OEE Workspace, content mappings, and 0xNAND.
@@ -109,10 +109,10 @@ automatically satisfies a new or materially revised assessment contract.
 
 ## 3. Amended target core progression
 
-This is the **proposed target prerequisite graph**, not the currently
-published learner pathway. A course and the authoritative APP catalog
-must be updated together in a reviewed migration PR before these
-changes become active.
+This is the **adopted core progression**. The current [APP catalog](README.md)
+and course files are authoritative for active prerequisites; historical
+proposals here do not supersede the published learner path. All fourteen
+core courses now publish their v0.2.0 outcome-driven definitions.
 
 | Display sequence | Code | Target course | Public exit capability | Direct prerequisites |
 | --- | --- | --- | --- | --- |
@@ -129,7 +129,7 @@ changes become active.
 | 11 | APP6 | Software Quality & Engineering Operations | Improve quality, CI, observability, maintainability, and reliability with evidence | APP5 |
 | 12 | APP7 | Deployment, Cloud & DevOps | Deploy, observe, restore, and roll back a secure application reproducibly | APP5, APP6 |
 | 13 | APP8 | Production Application Architecture | Investigate capacity, failure, and data trade-offs; defend measured architectural evolution | APP5, APP6, APP7 |
-| 14 | APP9 | Application Engineering Capstone | Deliver, reproduce, improve, and defend an integrated application | APP8; verified transitive closure must cover every preceding core course |
+| 14 | APP9 | Application Engineering Capstone | Deliver, reproduce, improve, and defend an integrated application | APP1–APP8, APP17–APP21 (all 13 preceding core identities) |
 
 **Why the graph changes:**
 
@@ -154,10 +154,9 @@ changes become active.
 APP18, and APP4 can run in parallel after SEF10. APP17 follows APP1;
 APP19 and APP21 follow APP18. APP2 needs both APP17 and APP19;
 APP20 follows APP2. APP3 needs APP19, APP21, and APP4. APP5 joins
-the two implementation branches. APP9's direct APP8 link is sufficient **only if** the validated
-transitive prerequisite closure includes all 13 preceding core
-identities; a future prerequisite change must rerun this check.
-No elective may enter the closure.
+the two implementation branches. APP9 explicitly lists all 13
+preceding core course identities; a future prerequisite revision must
+rerun this full graduation closure. No elective may enter the closure.
 
 A publicly available, outcome-equivalent diagnostic may establish
 prerequisite competence in place of repeating instruction, without
@@ -165,9 +164,9 @@ silently changing the assessment requirements of the later course.
 
 ## 4. Exact course ownership boundaries
 
-These boundaries identify **what future course authoring must clarify**.
-The course files themselves, not this decision, will publish the actual
-learning outcomes and assessments.
+These boundaries record the competency-ownership decisions implemented
+in the current core. Course files, not this historical decision, publish
+actual learning outcomes and assessments.
 
 ### APP1 — Web & Internet Foundations (already migrated)
 
@@ -382,9 +381,11 @@ be presented as proof of actual collaborative team experience.
 
 ## 5. Electives, Rust, and cross-program boundaries
 
-Keep APP10–APP16 as seven **optional** specializations. Their
-prerequisites are targets for their own reviewed migration PRs,
-not automatic edits to the active catalog.
+APP10–APP16 remain seven **optional** specializations, never a condition
+for APP9 or core graduation. APP10–APP15 now publish their migrated
+prerequisites and assessed outcomes. APP16's legacy course and prerequisites
+remain active until its separate reviewed migration; this table records
+ownership rationale, not alternative current requirements.
 
 | Code | Proposed specialization | Proposed foundation or boundary |
 | --- | --- | --- |
@@ -417,6 +418,23 @@ Advanced TypeScript library/package design may remain relevant in
 APP15, but does not justify a second complete TypeScript foundations
 course. No APP elective is required by APP9, any other core course,
 or core graduation requirements.
+
+**APP16 design boundary before its remaining migration:** Treat a platform as
+a product for internal application teams, not as a second APP7 deployment
+course. Begin with measured developer needs and service ownership;
+combine versioned templates with reproducible self-service environments;
+make catalog/API discovery and justified escape hatches usable;
+apply least-privilege policy to provision, deploy and promote immutable
+artifacts; operate and recover the platform using developer-facing
+SLOs; and defend its maintenance/adoption cost against a simpler
+non-platform alternative. The current legacy curriculum duplicates
+service catalogs, environment promotion and reliability/economics,
+while its mandatory module checkpoint/lab pairs do not map the nine
+exit statements to independently assessable evidence. A separate
+APP16 v0.2.0 migration must resolve those issues with stable outcomes,
+assessment IDs/criteria, viable local fixtures and realistic workload,
+not a forced module count. Its course identity and elective status
+are unchanged.
 
 ## 6. Program-wide competency ownership review
 
@@ -638,10 +656,9 @@ course definition is actually merged.
    APP2 follows APP17 and APP19; APP20 follows APP2;
    APP3 follows APP19, APP21 and APP4. Publish valid outcomes,
    assessments and genuine overlap relocation on each PR.
-   APP13's course and catalog update must not change
-   APP9's complete core graduation requirements, still-legacy
-   APP14–APP16 elective assessment contracts, or previous
-   APP13 learner evidence.
+   Course and catalog revisions must preserve APP9's complete
+   core graduation closure, historical learner evidence, and
+   separately reviewed elective assessment contracts.
 5. **Integration and production:** APP5 after APP20 and
    APP3; then APP6, APP7, APP8; APP9 after complete
    required-core prerequisite closure and substantive
@@ -725,13 +742,13 @@ The recorded target decisions are:
   misrepresented as additional v0.2.0 conformance rules.
 
 **Current implementation snapshot:** All 14 APP core courses
-(including APP9 project) and electives APP10–APP14 are
-published as outcome-driven `v0.2.0` drafts. APP15–APP16 remain
-legacy optional electives, with downstream resource/evidence
+(including APP9 project) and electives APP10–APP15 are
+published as outcome-driven `v0.2.0` drafts. APP16 remains the only
+legacy optional elective, with downstream resource/evidence
 review, workload calibration and independent educational
 validation still future work. Use the
 [current APP catalog](README.md) for active learner requirements;
-planned dependencies are not live until the relevant course PR merges.
+any remaining APP16 proposals are not active until its reviewed course and catalog change merges.
 
 ## 10. Non-binding review references
 

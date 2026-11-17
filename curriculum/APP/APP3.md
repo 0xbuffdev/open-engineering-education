@@ -154,21 +154,19 @@ can provide evidence throughout the course.
 
 #### Lessons
 
-1. **Backend Course Scope and the API's Place** — Situate API services between browser clients, domain decisions, persistent records and external dependencies; identify what APP19, APP21 and APP4 already teach.
+1. **Backend Framework Scope and Verifiable API Contracts** — Situate API services between browser clients, domain decisions, persistent records and external dependencies; identify what APP19, APP21 and APP4 already teach; derive actors, user actions, resources, invariants, observable successes, failures, privacy assumptions and consumption requirements from a synthetic stakeholder brief.
 
-2. **From Problem to Verifiable Contract** — Derive actors, user actions, resources, invariants, observable successes, failures, privacy assumptions and consumption requirements from a synthetic stakeholder brief.
+2. **HTTP and Domain Terminology** — Review rather than reteach APP21 request/response handling; distinguish transport semantics, application policy, authorization and database state.
 
-3. **HTTP and Domain Terminology** — Review rather than reteach APP21 request/response handling; distinguish transport semantics, application policy, authorization and database state.
+3. **Reference Stack and Version Baseline** — Record maintained Node, TypeScript, Fastify and PostgreSQL versions plus free locally available dependencies, scripts, lockfile and unprivileged test setup.
 
-4. **Reference Stack and Version Baseline** — Record maintained Node, TypeScript, Fastify and PostgreSQL versions plus free locally available dependencies, scripts, lockfile and unprivileged test setup.
+4. **Independent Consumer and Controlled Fixture** — Provide a local API test client and synthetic users/tenants; separate initial free dependency provisioning from repeatable offline assessment execution.
 
-5. **Independent Consumer and Controlled Fixture** — Provide a local API test client and synthetic users/tenants; separate initial free dependency provisioning from repeatable offline assessment execution.
+5. **Threat and Trust Inventory** — List untrusted URL/path/body/header/cookie inputs, validated principals, server-side secrets, database roles and which component owns each check.
 
-6. **Threat and Trust Inventory** — List untrusted URL/path/body/header/cookie inputs, validated principals, server-side secrets, database roles and which component owns each check.
+6. **Requirements Traceability Matrix** — Map example requirements to API operations, errors, security policies and tests, marking unsupported or unknown claims honestly.
 
-7. **Requirements Traceability Matrix** — Map example requirements to API operations, errors, security policies and tests, marking unsupported or unknown claims honestly.
-
-8. **Formative Bounded API Design Review** — Inspect a tempting overfeatured service brief, choose a coherent vertical slice and document deferred needs without omitting required negative cases.
+*Optional practice — Bounded API Design Review:* Inspect a tempting overfeatured service brief, choose a coherent vertical slice and document deferred needs without omitting required negative cases.
 
 ### Module 2 — Fastify Architecture, Plugins and Request Lifecycle
 
@@ -197,7 +195,7 @@ can provide evidence throughout the course.
 
 8. **Boot, Close and Test Isolation** — Make factory/create, ready and close operations explicit so integration tests do not open unmanaged sockets or leave active database handles.
 
-9. **Formative Plugin Boundary Fault** — Repair an encapsulation or hook-order defect and explain it with a request trace rather than a vocabulary-only answer.
+*Optional practice — Plugin Boundary Fault:* Repair an encapsulation or hook-order defect and explain it with a request trace rather than a vocabulary-only answer.
 
 ### Module 3 — HTTP Resource and Consumer Contract Design
 
@@ -226,7 +224,7 @@ can provide evidence throughout the course.
 
 8. **API Contract Change Review** — Change a field/operation while marking affected clients, compatibility expectations, status semantics and required migration evidence.
 
-9. **Formative HTTP Ambiguity Audit** — Find an underspecified DELETE, pagination tie or invalid method response, then revise the contract and independent tests.
+*Optional practice — HTTP Ambiguity Audit:* Find an underspecified DELETE, pagination tie or invalid method response, then revise the contract and independent tests.
 
 ### Module 4 — Runtime Schemas, Validation and Safe Error Handling
 
@@ -254,7 +252,7 @@ can provide evidence throughout the course.
 
 8. **Unexpected and Duplicate Failure Paths** — Inject malformed JSON, validation failure, thrown domain error and serialization failure; confirm exactly one deliberate client response and preserved internal cause.
 
-9. **Formative Schema/Type Drift** — Produce a counterexample where a declared inferred type and actual validator behavior differ, then fix both evidence and code.
+*Optional practice — Schema/Type Drift:* Produce a counterexample where a declared inferred type and actual validator behavior differ, then fix both evidence and code.
 
 ### Module 5 — Domain Rules, Application Services and Dependency Boundaries
 
@@ -281,7 +279,7 @@ can provide evidence throughout the course.
 
 7. **Refactor a Coupled Route** — Move a rule-heavy handler into domain/application/adapters without changing supported status/error/transaction behavior.
 
-8. **Formative Refactor Review** — Add a new business constraint and demonstrate one place where the rule belongs plus a regression that catches bypass.
+*Optional practice — Refactor Review:* Add a new business constraint and demonstrate one place where the rule belongs plus a regression that catches bypass.
 
 ### Module 6 — Authentication, Sessions and Credential Safety
 
@@ -310,7 +308,7 @@ can provide evidence throughout the course.
 
 8. **Auth Hook and Principal Injection** — Verify session once at a carefully placed boundary, construct a trusted principal context and ensure route-level authorization still executes.
 
-9. **Formative Authentication Failure** — Inject expired/revoked or forged session data and show denial plus appropriately sanitized diagnostic evidence.
+*Optional practice — Authentication Failure:* Inject expired/revoked or forged session data and show denial plus appropriately sanitized diagnostic evidence.
 
 ### Module 7 — Authorization, Tenant Isolation and Property-Level Safety
 
@@ -340,7 +338,7 @@ can provide evidence throughout the course.
 
 8. **Global Admin and Service Accounts** — Separate deliberately elevated maintenance operations from ordinary tenant actors and verify audit boundaries and exemptions.
 
-9. **Formative Cross-Tenant Attack Fixture** — Reproduce a local unauthorized request that initially succeeds, then fix the policy and verify all negative matrix entries.
+*Optional practice — Cross-Tenant Attack Fixture:* Reproduce a local unauthorized request that initially succeeds, then fix the policy and verify all negative matrix entries.
 
 ### Module 8 — PostgreSQL Integration, Transactions and Concurrency
 
@@ -361,17 +359,15 @@ can provide evidence throughout the course.
 
 4. **Atomic Domain Change** — Demonstrate two related writes and an invariant protected by constraints or transactionally checked state under malformed and failed cases.
 
-5. **Optimistic Concurrency and Revision Tokens** — Use a version column or conditional update to reject stale writes and map conflicts to an independently specified HTTP response.
+5. **Revision-Controlled Concurrent Writes** — Use a version column or conditional update to reject stale writes and map conflicts to an independently specified HTTP response; run two controlled API requests against real local PostgreSQL sessions, inspect the interleaving and verify no silent lost update or double-spend.
 
-6. **Concurrent Request Race** — Run two controlled API requests against real local PostgreSQL sessions, inspect the interleaving and verify no silent lost update or double-spend.
+6. **Isolation and Full Transaction Retry** — Choose PostgreSQL isolation/locking appropriately, handle recognized serialization/deadlock failures with bounded retry of the complete unit, and avoid retrying non-idempotent side effects.
 
-7. **Isolation and Full Transaction Retry** — Choose PostgreSQL isolation/locking appropriately, handle recognized serialization/deadlock failures with bounded retry of the complete unit, and avoid retrying non-idempotent side effects.
+7. **Schema Migrations with Two Client Versions** — Apply a staged schema change with existing API consumers, preserve compatibility claims and keep migration ownership distinct from handler code.
 
-8. **Schema Migrations with Two Client Versions** — Apply a staged schema change with existing API consumers, preserve compatibility claims and keep migration ownership distinct from handler code.
+8. **Resource and Cleanup Boundaries** — Release clients/connections on errors, aborts and shutdown without promising all interrupted DB work is automatically canceled.
 
-9. **Resource and Cleanup Boundaries** — Release clients/connections on errors, aborts and shutdown without promising all interrupted DB work is automatically canceled.
-
-10. **Formative Transaction Leak** — Repair a repository method that uses a different connection mid-transaction and prove rollback/commit integrity with real database evidence.
+*Optional practice — Transaction Leak:* Repair a repository method that uses a different connection mid-transaction and prove rollback/commit integrity with real database evidence.
 
 ### Module 9 — Idempotency, Asynchronous Work and Partial Failure
 
@@ -400,7 +396,7 @@ can provide evidence throughout the course.
 
 8. **Cancellation, Deadlines and Service Shutdown** — Own timers/workers/abort signals and state what work remains pending or can be replayed after a service stop.
 
-9. **Formative Duplicate Request Drill** — Replay concurrent identical and conflicting requests and a simulated dispatcher restart, verifying each business invariant and documented status/result.
+*Optional practice — Duplicate Request Drill:* Replay concurrent identical and conflicting requests and a simulated dispatcher restart, verifying each business invariant and documented status/result.
 
 ### Module 10 — Outbound Services, Resilience and Dependency Trust
 
@@ -428,7 +424,7 @@ can provide evidence throughout the course.
 
 7. **Consumer of Third-Party Data** — Validate external response contracts, restrict unexpected properties and apply least authority rather than trusting a well-known partner API.
 
-8. **Formative External Failure** — Simulate malformed responses, slow dependency, redirect to an unapproved target or repeated 503s and verify controlled behavior and clean logs.
+*Optional practice — External Failure:* Simulate malformed responses, slow dependency, redirect to an unapproved target or repeated 503s and verify controlled behavior and clean logs.
 
 ### Module 11 — API Documentation, Contract Evolution and Compatibility
 
@@ -458,7 +454,7 @@ can provide evidence throughout the course.
 
 8. **Local Contract Verification** — Compare documented examples against actual independently issued HTTP requests and a schema/contract checker, including malformed/forbidden cases.
 
-9. **Formative API Revision Review** — Apply a bounded requirements change and identify one breaking consumer consequence caught by a failing test.
+*Optional practice — API Revision Review:* Apply a bounded requirements change and identify one breaking consumer consequence caught by a failing test.
 
 ### Module 12 — Configuration, Health, Lifecycle and Observability
 
@@ -487,7 +483,7 @@ can provide evidence throughout the course.
 
 8. **Local Operational Troubleshooting** — Read an incident timeline and identify request IDs, retries, database conflicts and affected endpoints without inventing unavailable telemetry.
 
-9. **Formative Health and Shutdown Audit** — Find a green-but-broken readiness check or connection leak and verify a corrected bounded test.
+*Optional practice — Health and Shutdown Audit:* Find a green-but-broken readiness check or connection leak and verify a corrected bounded test.
 
 ### Module 13 — API Security Engineering and Abuse Cases
 
@@ -518,7 +514,7 @@ can provide evidence throughout the course.
 
 8. **Security Regression and Limits** — Maintain a published attack/defense matrix for the local service and clearly distinguish verified cases from production pentest or external certification.
 
-9. **Formative Authorization Bypass Repair** — Inject two synthetic security defects and prove remediation with independent HTTP and persistence evidence.
+*Optional practice — Authorization Bypass Repair:* Inject two synthetic security defects and prove remediation with independent HTTP and persistence evidence.
 
 ### Module 14 — Testing, Contract Verification and Incident Investigation
 
@@ -554,7 +550,7 @@ can provide evidence throughout the course.
 
 9. **Reproducibility and Review Integrity** — Start from pinned local artifacts, run tests on unprivileged loopback with synthetic data, disclose flaky timings and avoid private or invented measurements.
 
-10. **Formative Security/Incident Review** — Fix a selected failure and show failing-before/passing-after evidence in multiple relevant test layers.
+*Optional practice — Security/Incident Review:* Fix a selected failure and show failing-before/passing-after evidence in multiple relevant test layers.
 
 ### Module 15 — Integrated Typed API Service and Independent Defense
 

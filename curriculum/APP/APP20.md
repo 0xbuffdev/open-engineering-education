@@ -126,21 +126,19 @@ summative assessment below explicitly includes their evidence.
 
 1. **Course Orientation and React's Role** — Locate React in the history of interactive UIs and explain why the component model addresses coordination and change, not replacement of Internet, HTML/CSS, JavaScript or browser mechanics.
 
-2. **Recall the APP2 Browser Contract** — Review native DOM/events, form semantics, user journeys, fetch failure, client history and focus management; identify React-specific decisions to learn here.
+2. **Browser Foundations and React Runtime Boundaries** — Review native DOM/events, form semantics, user journeys, fetch failure, client history and focus management; identify React-specific decisions to learn here; distinguish React's declarative model and state update APIs, the browser renderer `react-dom`, JSX transformation and actual DOM APIs.
 
-3. **React and React DOM Responsibilities** — Distinguish React's declarative model and state update APIs, the browser renderer `react-dom`, JSX transformation and actual DOM APIs.
+3. **Choose and Record the Reference Toolchain** — Prepare an explicitly versioned open-source React/TypeScript project using a simple local build tool such as Vite, or an equivalent compatible toolchain; document React and React DOM versions.
 
-4. **Choose and Record the Reference Toolchain** — Prepare an explicitly versioned open-source React/TypeScript project using a simple local build tool such as Vite, or an equivalent compatible toolchain; document React and React DOM versions.
+4. **Developer Tool versus Browser Runtime** — Trace what Node/npm do during development/build versus what a delivered bundle executes in a browser; APP21 server implementation is not a prerequisite.
 
-5. **Developer Tool versus Browser Runtime** — Trace what Node/npm do during development/build versus what a delivered bundle executes in a browser; APP21 server implementation is not a prerequisite.
+5. **A Minimal Root and Clean Bootstrap** — Render a typed root into a known DOM container, detect missing mounts and verify output with a local server, without a proprietary deployment target.
 
-6. **A Minimal Root and Clean Bootstrap** — Render a typed root into a known DOM container, detect missing mounts and verify output with a local server, without a proprietary deployment target.
+6. **React Frameworks versus React Library** — Explain why production-scale React apps may use integrated frameworks; justify using a small client-only project for mechanism study and reserve full-stack server frameworks for later courses.
 
-7. **React Frameworks versus React Library** — Explain why production-scale React apps may use integrated frameworks; justify using a small client-only project for mechanism study and reserve full-stack server frameworks for later courses.
+7. **Deprecations and Supported APIs** — Avoid relying on deprecated Create React App or accidental experimental API behavior; compare the current official React API contract with installed package versions.
 
-8. **Deprecations and Supported APIs** — Avoid relying on deprecated Create React App or accidental experimental API behavior; compare the current official React API contract with installed package versions.
-
-9. **Formative Setup Failure** — Diagnose incompatible renderer/dependency versions, failed JSX compilation or wrong browser import assumptions, then reproduce from a clean copy.
+*Optional practice — Setup Failure:* Diagnose incompatible renderer/dependency versions, failed JSX compilation or wrong browser import assumptions, then reproduce from a clean copy.
 
 ### Module 2 — JSX, Typed Components and Composition Contracts
 
@@ -169,7 +167,7 @@ summative assessment below explicitly includes their evidence.
 
 8. **Safe Text and Intentional HTML** — Demonstrate React's normal escaping of rendered strings and define a narrow, reviewed policy for any genuinely necessary `dangerouslySetInnerHTML` case.
 
-9. **Formative Component Contract Review** — Refactor a monolithic static/reactive view into typed composable parts and verify its semantics and invalid-prop boundaries.
+*Optional practice — Component Contract Review:* Refactor a monolithic static/reactive view into typed composable parts and verify its semantics and invalid-prop boundaries.
 
 ### Module 3 — Render, Commit, Identity and Reconciliation
 
@@ -186,19 +184,17 @@ summative assessment below explicitly includes their evidence.
 
 2. **Pure Render Logic** — Reproduce a bug from mutating external variables or making a network call while rendering and repair it without assuming renders run exactly once.
 
-3. **State Bound to Component Position** — Trace which component identity preserves state across parent rerenders and which type/position changes cause reset.
+3. **Position, Keys and Component State Identity** — Trace which component identity preserves state across parent rerenders and which type/position changes cause reset; demonstrate resetting a form by changing a key deliberately versus accidentally resetting every row with unstable identity.
 
-4. **Key-Driven Identity** — Demonstrate resetting a form by changing a key deliberately versus accidentally resetting every row with unstable identity.
+4. **Reordering, Controlled Tests and DOM Observations** — Observe list reorder with stable versus index keys and explain visible wrong-value/focus consequences without depending on private Fiber details.
 
-5. **Reordering, Controlled Tests and DOM Observations** — Observe list reorder with stable versus index keys and explain visible wrong-value/focus consequences without depending on private Fiber details.
+5. **Development Strict Mode Checks** — Inspect development-only render purity and effect setup/cleanup stress behavior; avoid claiming every extra observation occurs in production.
 
-6. **Development Strict Mode Checks** — Inspect development-only render purity and effect setup/cleanup stress behavior; avoid claiming every extra observation occurs in production.
+6. **React Element Identity versus DOM Mutation** — Explain why a React element value is a description and why directly mutating React-owned DOM can be overwritten on a subsequent commit.
 
-7. **React Element Identity versus DOM Mutation** — Explain why a React element value is a description and why directly mutating React-owned DOM can be overwritten on a subsequent commit.
+7. **State Preservation across Dynamic Layout** — Move a subtree and evaluate whether intended draft, focus or selection state should survive; document the chosen identity mechanism.
 
-8. **State Preservation across Dynamic Layout** — Move a subtree and evaluate whether intended draft, focus or selection state should survive; document the chosen identity mechanism.
-
-9. **Formative Identity Diagnosis** — Repair a list whose typed rows swap internal input values after reordering and provide a small regression demonstration.
+*Optional practice — Identity Diagnosis:* Repair a list whose typed rows swap internal input values after reordering and provide a small regression demonstration.
 
 ### Module 4 — State Snapshots, Events, Updates and Derived Data
 
@@ -226,7 +222,7 @@ summative assessment below explicitly includes their evidence.
 
 8. **State Lifetime and Reset** — Reset a scoped feature intentionally on identity or navigation changes while preserving unrelated drafts and accessible focus.
 
-9. **Formative Stale Snapshot Repair** — Reproduce an incorrect double update or state mutation, write a behavior test, then fix it without introducing a spurious Effect.
+*Optional practice — Stale Snapshot Repair:* Reproduce an incorrect double update or state mutation, write a behavior test, then fix it without introducing a spurious Effect.
 
 ### Module 5 — Accessible React Forms and Submission Lifecycles
 
@@ -256,7 +252,7 @@ summative assessment below explicitly includes their evidence.
 
 8. **React Version-Specific Form APIs** — Inspect whether the installed maintained React version supports action-based form mechanisms; compare with standard event submission without making unverified new APIs mandatory.
 
-9. **Formative Form Defect** — Fix a lost draft, stale validation message or inadvertent repeated submit, then verify keyboard and negative-path behavior.
+*Optional practice — Form Defect:* Fix a lost draft, stale validation message or inadvertent repeated submit, then verify keyboard and negative-path behavior.
 
 ### Module 6 — Hooks Rules, Effects and Synchronization
 
@@ -286,7 +282,7 @@ summative assessment below explicitly includes their evidence.
 
 8. **Custom Hook as Shared Behavior** — Extract reusable stateful behavior while preserving Rules of Hooks, dependency correctness and independent hook instance state.
 
-9. **Formative Effect Bug** — Repair a stale closure, subscription leak or dependency-suppression defect with a reproducible Strict Mode test and documented cleanup.
+*Optional practice — Effect Bug:* Repair a stale closure, subscription leak or dependency-suppression defect with a reproducible Strict Mode test and documented cleanup.
 
 ### Module 7 — Refs, Imperative Escape Hatches and Non-React Integration
 
@@ -313,7 +309,7 @@ summative assessment below explicitly includes their evidence.
 
 7. **Synchronizing a Third-Party Instance** — Avoid reinitializing a widget on every render; update it through a justified Effect and tear it down cleanly.
 
-8. **Formative Integration Leak** — Reproduce duplicate widget creation, stale focus or a lingering external callback, then repair with verified lifecycle evidence.
+*Optional practice — Integration Leak:* Reproduce duplicate widget creation, stale focus or a lingering external callback, then repair with verified lifecycle evidence.
 
 ### Module 8 — React Feature Architecture and State Ownership
 
@@ -345,7 +341,7 @@ summative assessment below explicitly includes their evidence.
 
 9. **Maintainability and Change Cost** — Implement a bounded new feature in one component tree and justify whether reuse reduced or increased coupling and test burden.
 
-10. **Formative Architecture Review** — Compare a broad context and an intentional feature-local reducer, make a defensible choice and test independent feature instances.
+*Optional practice — Architecture Review:* Compare a broad context and an intentional feature-local reducer, make a defensible choice and test independent feature instances.
 
 ### Module 9 — React Data Integration, Loading and Mutation Recovery
 
@@ -375,7 +371,7 @@ summative assessment below explicitly includes their evidence.
 
 8. **Request Cancellation Limitations** — Explain that abort may stop browser-side work but not reverse already completed server mutations; keep feedback truthful after uncertain network outcomes.
 
-9. **Formative Async Race** — Fix a user-switch stale-data leak under deterministic deferred responses and document a regression for the changed component identity.
+*Optional practice — Async Race:* Fix a user-switch stale-data leak under deterministic deferred responses and document a regression for the changed component identity.
 
 ### Module 10 — React Routing, Navigation and User Context
 
@@ -404,7 +400,7 @@ summative assessment below explicitly includes their evidence.
 
 8. **Authorization Display versus Actual Policy** — Present forbidden/unauthenticated states honestly while stating that client-side route guards cannot enforce server permissions.
 
-9. **Formative Navigation Failure** — Repair a direct-link reload, stale loader or lost focus and verify with real browser history interactions.
+*Optional practice — Navigation Failure:* Repair a direct-link reload, stale loader or lost focus and verify with real browser history interactions.
 
 ### Module 11 — React Error Boundaries, Suspense and Scheduling
 
@@ -434,7 +430,7 @@ summative assessment below explicitly includes their evidence.
 
 8. **React Version-Specific Async Actions** — Inspect documented installed-release capabilities such as action state/optimistic helpers where available; classify optional enhancements separately from required stable React guarantees.
 
-9. **Formative Boundary Diagnosis** — Inject a render failure, an async rejection and a slow UI update; assign correct handling to boundary, event/error policy or transition and verify actual output.
+*Optional practice — Boundary Diagnosis:* Inject a render failure, an async rejection and a slow UI update; assign correct handling to boundary, event/error policy or transition and verify actual output.
 
 ### Module 12 — Accessibility, Browser Security and Privacy in React
 
@@ -467,7 +463,7 @@ summative assessment below explicitly includes their evidence.
 
 9. **Usability Evidence and Provenance** — Evaluate a provided task with honest synthetic, peer or participant observations; document consent and limits when any real-person testing occurs.
 
-10. **Formative Trust and Accessibility Repair** — Repair a markup sink, persistent user-data flash or lost modal focus and collect clear negative-path evidence.
+*Optional practice — Trust and Accessibility Repair:* Repair a markup sink, persistent user-data flash or lost modal focus and collect clear negative-path evidence.
 
 ### Module 13 — React Testing, Debugging and Performance Decisions
 
@@ -504,7 +500,7 @@ summative assessment below explicitly includes their evidence.
 
 10. **Reproducible Load and Interaction Experiment** — Record device/browser/throttling and before/after traces, then rerun functional, async and accessible user-task checks.
 
-11. **Formative Performance Repair** — Fix a measured unnecessary render or expensive operation and defend the change with trace, correctness and accessibility evidence.
+*Optional practice — Performance Repair:* Fix a measured unnecessary render or expensive operation and defend the change with trace, correctness and accessibility evidence.
 
 ### Module 14 — React Application Integration, Delivery and Defense
 

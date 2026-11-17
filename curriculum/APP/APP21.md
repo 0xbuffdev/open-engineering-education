@@ -116,7 +116,7 @@ incorporated into an assessment.
 
 7. **Safe Loopback Environment** — Record a supported Node version and OS, use a high unprivileged port or ephemeral port on `127.0.0.1`, and explain the difference between local loopback and public exposure.
 
-8. **Formative Host Boundary Audit** — Classify a mixed JavaScript/Node example by language, runtime or OS ownership; test one host-only assumption and explain its implications.
+*Optional practice — Host Boundary Audit:* Classify a mixed JavaScript/Node example by language, runtime or OS ownership; test one host-only assumption and explain its implications.
 
 ### Module 2 — Process, Modules, Configuration and Startup
 
@@ -143,7 +143,7 @@ incorporated into an assessment.
 
 7. **EventEmitter Basics and Error Events** — Subscribe and unsubscribe safely, understand listener lifetime, recognize unhandled `error` event consequences, and avoid treating every event as a promise.
 
-8. **Formative Startup Incident** — Reproduce a misconfigured startup and a lingering-handle case, then repair configuration or cleanup without hiding the symptom.
+*Optional practice — Startup Incident:* Reproduce a misconfigured startup and a lingering-handle case, then repair configuration or cleanup without hiding the symptom.
 
 ### Module 3 — Event Loop, Scheduling and Nonblocking Work
 
@@ -172,7 +172,7 @@ incorporated into an assessment.
 
 8. **Choosing a Concurrency Mechanism** — Explain when cooperative async I/O, worker threads or multiple processes are appropriate; note that worker threads are not mandatory for the APP21 exit service.
 
-9. **Formative Scheduling Diagnosis** — Investigate a supplied log trace containing a misleading ordering assumption and propose a corrected, reproducible explanation.
+*Optional practice — Scheduling Diagnosis:* Investigate a supplied log trace containing a misleading ordering assumption and propose a corrected, reproducible explanation.
 
 ### Module 4 — Filesystem I/O, Paths and Failure Policies
 
@@ -191,17 +191,15 @@ incorporated into an assessment.
 
 3. **Errors and Context Preservation** — Classify missing files, permissions, conflicting paths and other I/O failures; preserve safe error codes and causes without leaking sensitive absolute paths to clients.
 
-4. **Path Resolution and Traversal Threats** — Parse only intended relative file identifiers, reject traversal, apply explicit allowlists, and reason about why simple string-prefix path checks are unsafe.
+4. **Filesystem Paths, Symlinks and TOCTOU** — Parse only intended relative file identifiers, reject traversal, apply explicit allowlists, and reason about why simple string-prefix path checks are unsafe; describe links and race conditions in hostile directories; keep learner fixtures in disposable trusted trees rather than claiming a naive path check is a sandbox.
 
-5. **Symbolic Links and Time-of-Check/Time-of-Use** — Describe links and race conditions in hostile directories; keep learner fixtures in disposable trusted trees rather than claiming a naive path check is a sandbox.
+5. **Atomicity and Durable Writes** — Distinguish write completion from crash durability, temporary-file/rename patterns and whether a given filesystem provides the needed guarantees.
 
-6. **Atomicity and Durable Writes** — Distinguish write completion from crash durability, temporary-file/rename patterns and whether a given filesystem provides the needed guarantees.
+6. **Abort Signals and Resource Disposal** — Inspect an API's actual AbortSignal support, explain that cancellation can be best-effort and cannot necessarily roll back completed I/O.
 
-7. **Abort Signals and Resource Disposal** — Inspect an API's actual AbortSignal support, explain that cancellation can be best-effort and cannot necessarily roll back completed I/O.
+7. **Bounded File Operations** — Impose fixture size and count limits, avoid unbounded `readFile` for large arbitrary files, and pick streaming when appropriate.
 
-8. **Bounded File Operations** — Impose fixture size and count limits, avoid unbounded `readFile` for large arbitrary files, and pick streaming when appropriate.
-
-9. **Formative I/O Failure Injection** — Reproduce an invalid-path or missing-file error with a local fixture, verify cleanup and test that no other files are touched.
+*Optional practice — I/O Failure Injection:* Reproduce an invalid-path or missing-file error with a local fixture, verify cleanup and test that no other files are touched.
 
 ### Module 5 — Buffers, Encodings and Data Interpretation
 
@@ -217,15 +215,13 @@ incorporated into an assessment.
 
 2. **Creating and Slicing Buffers** — Use explicit encodings, byte lengths and bounded allocations; distinguish view-like slicing and copying as appropriate to the active API.
 
-3. **Multibyte Boundary Errors** — Demonstrate decoding a split UTF-8 sequence with an incremental decoder rather than arbitrarily converting each chunk to a string.
+3. **Multibyte Encoding and Protocol Boundaries** — Demonstrate decoding a split UTF-8 sequence with an incremental decoder rather than arbitrarily converting each chunk to a string; recognize when a file or HTTP body is bytes versus a declared text or JSON representation; validate encoding and stated media type rather than trust it.
 
-4. **Binary Protocol and Content-Type Assumptions** — Recognize when a file or HTTP body is bytes versus a declared text or JSON representation; validate encoding and stated media type rather than trust it.
+4. **Network and Disk Payload Size** — Measure bytes actually received, enforce byte-based limits and explain why character counts and Content-Length alone cannot prove request-body safety.
 
-5. **Network and Disk Payload Size** — Measure bytes actually received, enforce byte-based limits and explain why character counts and Content-Length alone cannot prove request-body safety.
+5. **JSON and Error Semantics** — Parse a bounded JSON payload, distinguish malformed syntax from valid JSON with an unacceptable domain shape, and serialize explicit response contracts.
 
-6. **JSON and Error Semantics** — Parse a bounded JSON payload, distinguish malformed syntax from valid JSON with an unacceptable domain shape, and serialize explicit response contracts.
-
-7. **Formative Encoding Defect** — Repair a chunk-splitting or truncation bug with a fixture containing multibyte characters and a reproducible byte-count check.
+*Optional practice — Encoding Defect:* Repair a chunk-splitting or truncation bug with a fixture containing multibyte characters and a reproducible byte-count check.
 
 ### Module 6 — Streams, Backpressure and Pipelines
 
@@ -252,7 +248,7 @@ incorporated into an assessment.
 
 7. **Slow Consumer and Failure Injection** — Simulate a bounded slow writable target or rejected stream; inspect buffer growth and demonstrate propagation to the controlling promise.
 
-8. **Formative Backpressure Repair** — Diagnose a stream-copy implementation that ignores backpressure or drops an error; repair and retest using controlled local inputs.
+*Optional practice — Backpressure Repair:* Diagnose a stream-copy implementation that ignores backpressure or drops an error; repair and retest using controlled local inputs.
 
 ### Module 7 — HTTP/1.1 Server and Request/Response Lifecycles
 
@@ -281,7 +277,7 @@ incorporated into an assessment.
 
 8. **Raw HTTP Service versus Framework API** — Document which repetitive routing/validation/error concerns APP3 Fastify will later help organize, without turning this course into an API framework tutorial.
 
-9. **Formative HTTP Trace** — Use a local Node client or equivalent tool to inspect a response sequence and repair an incorrect status, header or lifecycle handling issue.
+*Optional practice — HTTP Trace:* Use a local Node client or equivalent tool to inspect a response sequence and repair an incorrect status, header or lifecycle handling issue.
 
 ### Module 8 — HTTP Security, Trust and Resource Limits
 
@@ -310,7 +306,7 @@ incorporated into an assessment.
 
 8. **Trust of Proxies and Deployment Boundaries** — Recognize that forwarded headers and external TLS termination require a trusted proxy/deployment model; do not trust client-supplied origin or proxy headers as authoritative.
 
-9. **Formative Negative-Path Attack Fixture** — Inject malformed JSON, oversize input, wrong media type and an unauthorized-looking request; verify controlled behavior and clearly state protections not implemented.
+*Optional practice — Negative-Path Attack Fixture:* Inject malformed JSON, oversize input, wrong media type and an unauthorized-looking request; verify controlled behavior and clearly state protections not implemented.
 
 ### Module 9 — Errors, Timeouts, Cancellation and Cleanup
 
@@ -337,7 +333,7 @@ incorporated into an assessment.
 
 7. **Cleanup with Finally and Ownership** — Use `finally` and idempotent cleanup for file handles, timers, connections and test fixtures, including the case where setup only partially succeeded.
 
-8. **Formative Cancellation Incident** — Inject a timeout and a late failure in a local operation, trace state transitions and prove the system does not leak its owned resources.
+*Optional practice — Cancellation Incident:* Inject a timeout and a late failure in a local operation, trace state transitions and prove the system does not leak its owned resources.
 
 ### Module 10 — Startup, Health, Shutdown and Operational Behavior
 
@@ -364,7 +360,7 @@ incorporated into an assessment.
 
 7. **Configuration and Secret Hygiene** — Use fabricated environment values; distinguish required configuration from sensitive material and prevent leakage into responses/logs.
 
-8. **Formative In-Flight Shutdown** — Begin a controlled local request, initiate shutdown and record whether it completes, fails deliberately or meets the stated deadline.
+*Optional practice — In-Flight Shutdown:* Begin a controlled local request, initiate shutdown and record whether it completes, fails deliberately or meets the stated deadline.
 
 ### Module 11 — Testing, Observability and Resource Diagnosis
 
@@ -395,7 +391,7 @@ incorporated into an assessment.
 
 8. **Bounded Load Investigation** — Run a small local-only load test with concurrency/time limits, compare a baseline and a deliberately blocking handler, and identify backpressure or event-loop starvation evidence.
 
-9. **Formative Incident Analysis** — Given fixture logs and measured traces, distinguish a slow client, slow disk, blocking callback and unhandled error, then defend one verified change.
+*Optional practice — Incident Analysis:* Given fixture logs and measured traces, distinguish a slow client, slow disk, blocking callback and unhandled error, then defend one verified change.
 
 ### Module 12 — Integrated Framework-Free Service and Engineering Defense
 

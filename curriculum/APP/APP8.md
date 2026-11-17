@@ -152,17 +152,15 @@ can satisfy them all.
 
 3. **History of application scaling approaches** — Contrast single-process, scale-up, scale-out, caching and partitioned service approaches as historical responses to constraints, not inevitable maturity levels.
 
-4. **Stakeholders, assumptions and provenance** — Separate synthetic workload forecasts, measured local traces and independently observed user behavior; never pass estimates off as production measurements.
+4. **Stakeholder Assumptions and Service Objectives** — Separate synthetic workload forecasts, measured local traces and independently observed user behavior; never pass estimates off as production measurements; derive bounded latency/throughput, tail, availability, correctness, privacy and maintainability objectives with explicit sample/window and failure definitions.
 
-5. **Service-level and data-risk objectives** — Derive bounded latency/throughput, tail, availability, correctness, privacy and maintainability objectives with explicit sample/window and failure definitions.
+5. **Operating responsibility and architectural ownership** — Map browser, API, database, queue, cache, proxy and external dependencies to owners and authority boundaries; inherit APP7's release mechanisms.
 
-6. **Operating responsibility and architectural ownership** — Map browser, API, database, queue, cache, proxy and external dependencies to owners and authority boundaries; inherit APP7's release mechanisms.
+6. **Baseline before architecture changes** — Preserve the simplest verified modular-monolith baseline, its deployment identity and supported consumer contracts before experimenting.
 
-7. **Baseline before architecture changes** — Preserve the simplest verified modular-monolith baseline, its deployment identity and supported consumer contracts before experimenting.
+7. **Change hypothesis and falsifiability** — Describe how a proposed architecture improvement should affect measured user behavior and which counterexample could disprove the hypothesis.
 
-8. **Change hypothesis and falsifiability** — Describe how a proposed architecture improvement should affect measured user behavior and which counterexample could disprove the hypothesis.
-
-9. **Formative architecture review** — Reject a proposed microservice split unsupported by workload data and identify a measurable alternative with lower cost and risk.
+*Optional practice — architecture review:* Reject a proposed microservice split unsupported by workload data and identify a measurable alternative with lower cost and risk.
 
 ### Module 2 — Workload Characterization, Measurement Quality and Test Harnesses
 
@@ -191,7 +189,7 @@ can satisfy them all.
 
 8. **Fixed baseline protocol** — Record CPU/RAM/OS, versions, concurrency, data seed, duration and instrument overhead to make comparisons meaningful.
 
-9. **Formative invalid experiment** — Detect a suspicious throughput gain caused by an accidentally warmed cache, changed response shape or underdriving client.
+*Optional practice — invalid experiment:* Detect a suspicious throughput gain caused by an accidentally warmed cache, changed response shape or underdriving client.
 
 ### Module 3 — Queueing Theory, Concurrency and Capacity Boundaries
 
@@ -208,19 +206,17 @@ can satisfy them all.
 
 2. **Little's law and assumptions** — Apply L = λW to a stable system with consistent boundaries/averages; explain why overload and growing backlogs violate casual steady-state calculations.
 
-3. **Service time versus wait time** — Decompose time into arrival, admission, queue, CPU/IO, database pool, external dependency and return path.
+3. **Service Time, Utilization and Queueing Tails** — Decompose time into arrival, admission, queue, CPU/IO, database pool, external dependency and return path; observe increased tail delay near resource saturation without assuming a universal fixed curve or deterministic behavior.
 
-4. **Utilization and nonlinear tails** — Observe increased tail delay near resource saturation without assuming a universal fixed curve or deterministic behavior.
+4. **Capacity planning with safety margins** — Estimate bounded demand from arrival rate and measured resource requirement, including headroom and burst assumptions.
 
-5. **Capacity planning with safety margins** — Estimate bounded demand from arrival rate and measured resource requirement, including headroom and burst assumptions.
+5. **Concurrency pools and semaphore limits** — Test thread/event-loop-adjacent work, DB pool and worker concurrency budgets with a reproducible local setup.
 
-6. **Concurrency pools and semaphore limits** — Test thread/event-loop-adjacent work, DB pool and worker concurrency budgets with a reproducible local setup.
+6. **Queue length and wait-time growth** — Measure backlog under load and discuss stable versus unbounded queue behavior and error/timeout consequences.
 
-7. **Queue length and wait-time growth** — Measure backlog under load and discuss stable versus unbounded queue behavior and error/timeout consequences.
+7. **Admission, rejection and work conservation** — Choose explicit enqueue/reject/defer policy for tasks with different deadlines and protect invariants under overload.
 
-8. **Admission, rejection and work conservation** — Choose explicit enqueue/reject/defer policy for tasks with different deadlines and protect invariants under overload.
-
-9. **Formative saturation worksheet** — Calculate response/wait/queue quantities on a supplied local trace and identify invalid inference under overload.
+*Optional practice — saturation worksheet:* Calculate response/wait/queue quantities on a supplied local trace and identify invalid inference under overload.
 
 ### Module 4 — Profiling the Actual System and Removing Work
 
@@ -249,7 +245,7 @@ can satisfy them all.
 
 8. **Compare removing work versus adding machines** — Test optimization before scale-out and explain when extra capacity remains justified.
 
-9. **Formative bottleneck triage** — Reject a CPU-scaling proposal when pool contention or query fan-out is the actual limiting factor.
+*Optional practice — bottleneck triage:* Reject a CPU-scaling proposal when pool contention or query fan-out is the actual limiting factor.
 
 ### Module 5 — Vertical, Horizontal and Partitioned Scaling Choices
 
@@ -265,21 +261,19 @@ can satisfy them all.
 
 1. **Scale-up economics and failure limits** — Compare more CPU/RAM/IO on one instance with actual bottleneck resources, upgrade downtime and single-failure-domain risk.
 
-2. **Horizontal scaling and stateless handlers** — Identify sticky in-memory state, session, worker, scheduler and file assumptions before adding service replicas.
+2. **Horizontal Scaling and Shared Bottlenecks** — Identify sticky in-memory state, session, worker, scheduler and file assumptions before adding service replicas; explain why additional API instances can worsen database connections, locks, cache misses or remote service limits.
 
-3. **Shared resources as bottlenecks** — Explain why additional API instances can worsen database connections, locks, cache misses or remote service limits.
+3. **Connection and resource budgeting across replicas** — Calculate safe per-instance pool size from a declared shared DB budget and reserved capacity.
 
-4. **Connection and resource budgeting across replicas** — Calculate safe per-instance pool size from a declared shared DB budget and reserved capacity.
+4. **Request routing and traffic locality** — Compare simple proxy balancing/affinity and their impact on cache behavior, hot tenants and failure.
 
-5. **Request routing and traffic locality** — Compare simple proxy balancing/affinity and their impact on cache behavior, hot tenants and failure.
+5. **Partitioning by domain or tenant** — Reason about key selection, skew, cross-partition operations, ownership and operational burden without a mandatory sharded cluster.
 
-6. **Partitioning by domain or tenant** — Reason about key selection, skew, cross-partition operations, ownership and operational burden without a mandatory sharded cluster.
+6. **Hot partitions and uneven load** — Measure or simulate skewed tenant/key demand and compare a rebalanced scheme against the baseline.
 
-7. **Hot partitions and uneven load** — Measure or simulate skewed tenant/key demand and compare a rebalanced scheme against the baseline.
+7. **When not to distribute** — Quantify extra consistency, deployment, tracing and ownership costs of a proposed split.
 
-8. **When not to distribute** — Quantify extra consistency, deployment, tracing and ownership costs of a proposed split.
-
-9. **Formative scaling decision** — Use measured bottleneck plus DB capacity limits to defend vertical upgrade, query repair, horizontal scale or no change.
+*Optional practice — scaling decision:* Use measured bottleneck plus DB capacity limits to defend vertical upgrade, query repair, horizontal scale or no change.
 
 ### Module 6 — Overload Admission, Rate Limits and Tenant Fairness
 
@@ -309,7 +303,7 @@ can satisfy them all.
 
 8. **Compare pre/post admission under burst** — Measure p95, success rate, rejection fraction, queue growth, throughput and tenant fairness with a controlled workload.
 
-9. **Formative abusive burst** — Repair a single-tenant load pattern that saturates shared capacity or causes a misleading fallback authorization bypass.
+*Optional practice — abusive burst:* Repair a single-tenant load pattern that saturates shared capacity or causes a misleading fallback authorization bypass.
 
 ### Module 7 — Background Work, Queues, Backpressure and Replay
 
@@ -330,15 +324,13 @@ can satisfy them all.
 
 4. **Durable intent from APP5** — Reuse PostgreSQL outbox/job state to explain at-least-once dispatch and why ephemeral in-process queues are not durable.
 
-5. **Worker concurrency and downstream capacity** — Tune consumer count against actual pool/remote API limits rather than assuming more workers always improve throughput.
+5. **Worker Capacity and Fair Scheduling** — Tune consumer count against actual pool/remote API limits rather than assuming more workers always improve throughput; assess starvation, slow tasks, per-tenant quotas and consequences of adding priority lanes.
 
-6. **Priority and fair scheduling** — Assess starvation, slow tasks, per-tenant quotas and consequences of adding priority lanes.
+6. **Duplicate delivery and visibility timeout** — Simulate lost acknowledgements, redelivery and expiration with safe idempotent consumer handling.
 
-7. **Duplicate delivery and visibility timeout** — Simulate lost acknowledgements, redelivery and expiration with safe idempotent consumer handling.
+7. **Poison messages and terminal failures** — Bound retries/backoff, identify permanently invalid jobs and preserve recoverable human-facing states.
 
-8. **Poison messages and terminal failures** — Bound retries/backoff, identify permanently invalid jobs and preserve recoverable human-facing states.
-
-9. **Formative worker crash under burst** — Restart a disposable worker with pending and duplicate work, then inspect actual durable state and no double business effect.
+*Optional practice — worker crash under burst:* Restart a disposable worker with pending and duplicate work, then inspect actual durable state and no double business effect.
 
 ### Module 8 — Cache Hierarchies, Coherence, Stampedes and Data Privacy
 
@@ -367,7 +359,7 @@ can satisfy them all.
 
 8. **Cache failure and bypass policy** — Define whether protected reads may bypass cache, fail closed or report degraded service without leaking tenant data.
 
-9. **Formative stale identity leak** — Fix a synthetic previous-user cache leak that only appears under concurrent session changes.
+*Optional practice — stale identity leak:* Fix a synthetic previous-user cache leak that only appears under concurrent session changes.
 
 ### Module 9 — Data-Intensive Boundaries, Replicas and Consistency
 
@@ -397,7 +389,7 @@ can satisfy them all.
 
 8. **Schema migration with active traffic** — Plan expand/backfill/contract compatible with existing reads/writes, quantifying lock and backfill uncertainty.
 
-9. **Formative replica misuse** — Repair a workflow that uses lagged data for an authorization or strongly consistent write decision.
+*Optional practice — replica misuse:* Repair a workflow that uses lagged data for an authorization or strongly consistent write decision.
 
 ### Module 10 — Idempotency, Ordering and Event-Driven Correctness
 
@@ -411,23 +403,21 @@ can satisfy them all.
 
 #### Lessons
 
-1. **Idempotency scope and business meaning** — Distinguish HTTP method properties from tenant/user/operation-specific deduplication of effects.
+1. **Idempotency Scope, Fingerprints and Expiration** — Distinguish HTTP method properties from tenant/user/operation-specific deduplication of effects; bind keys to authenticated scope and validated payload; test same-key mismatched input and expiry policies.
 
-2. **Request fingerprints and TTL** — Bind keys to authenticated scope and validated payload; test same-key mismatched input and expiry policies.
+2. **Atomic state and deduplication** — Store idempotency result/intention transactionally with affected domain rows when required to avoid race windows.
 
-3. **Atomic state and deduplication** — Store idempotency result/intention transactionally with affected domain rows when required to avoid race windows.
+3. **Concurrency and optimistic versions** — Use actual PostgreSQL conflict/revision checks to avoid lost updates and duplicated committed changes.
 
-4. **Concurrency and optimistic versions** — Use actual PostgreSQL conflict/revision checks to avoid lost updates and duplicated committed changes.
+4. **Out-of-order response completion** — Prove a late response does not replace more recent UI or account state under client navigation and retries.
 
-5. **Out-of-order response completion** — Prove a late response does not replace more recent UI or account state under client navigation and retries.
+5. **Worker redelivery and external calls** — Describe at-least-once delivery, limited external guarantees and mechanisms to reconcile uncertain remote effects.
 
-6. **Worker redelivery and external calls** — Describe at-least-once delivery, limited external guarantees and mechanisms to reconcile uncertain remote effects.
+6. **Event ordering and partition keys** — Evaluate same-key ordering and when globally ordered messages are neither necessary nor free.
 
-7. **Event ordering and partition keys** — Evaluate same-key ordering and when globally ordered messages are neither necessary nor free.
+7. **Replay under a recovering service** — Simulate retry storms during partial outage and ensure bounded dedup/retry does not exhaust shared capacity.
 
-8. **Replay under a recovering service** — Simulate retry storms during partial outage and ensure bounded dedup/retry does not exhaust shared capacity.
-
-9. **Formative replay and stale read** — Reproduce two concurrent same-key submissions plus delayed projection and verify one intended durable effect.
+*Optional practice — replay and stale read:* Reproduce two concurrent same-key submissions plus delayed projection and verify one intended durable effect.
 
 ### Module 11 — Cascading Dependency Failure and Resource Isolation
 
@@ -457,7 +447,7 @@ can satisfy them all.
 
 8. **Recovery with controlled ramp-up** — Avoid overwhelming a restarted dependency with pending retries and limit half-open probes/work replay.
 
-9. **Formative cascading outage** — Identify a misleading cache fallback or unbounded retry loop and verify repaired unaffected user operations.
+*Optional practice — cascading outage:* Identify a misleading cache fallback or unbounded retry loop and verify repaired unaffected user operations.
 
 ### Module 12 — Availability, Degraded Experience and Reliability Budget Trade-offs
 
@@ -486,7 +476,7 @@ can satisfy them all.
 
 8. **User-facing explanations and accessibility** — Make pending/retry/error/degraded states understandable, keyboard accessible and nondeceptive.
 
-9. **Formative degraded-mode review** — Reject a proposal to serve stale confidential data merely to improve aggregate latency.
+*Optional practice — degraded-mode review:* Reject a proposal to serve stale confidential data merely to improve aggregate latency.
 
 ### Module 13 — Incremental Architecture Migration, Governance and Compatibility
 
@@ -516,7 +506,7 @@ can satisfy them all.
 
 8. **Architecture decision record with evidence** — Publish decision, alternatives, measurements, security implications, economic impact, risks and trigger for revisiting it.
 
-9. **Formative reversible migration** — Stage a bounded cache/worker/service boundary change and prove failing candidate can be disabled safely.
+*Optional practice — reversible migration:* Stage a bounded cache/worker/service boundary change and prove failing candidate can be disabled safely.
 
 ### Module 14 — Performance, Complexity and Operational Cost Economics
 
@@ -542,11 +532,9 @@ can satisfy them all.
 
 6. **Engineering and maintenance burden** — Record additional deployment complexity, configuration, incident paths, change coordination and support costs.
 
-7. **Sensitivity and confidence intervals** — Vary arrivals, payload, data growth, burst profile and price assumptions rather than reporting one exact future spend.
+7. **Sensitivity Analysis and Design Baselines** — Vary arrivals, payload, data growth, burst profile and price assumptions rather than reporting one exact future spend; make a reproducible table of bottleneck, p95, error, user outcome, complexity and cost for at least two plausible designs.
 
-8. **Baseline versus two alternatives** — Make a reproducible table of bottleneck, p95, error, user outcome, complexity and cost for at least two plausible designs.
-
-9. **Formative complexity rejection** — Argue against an unjustified shared message broker or microservice based on measured scale, privacy and operational overhead.
+*Optional practice — complexity rejection:* Argue against an unjustified shared message broker or microservice based on measured scale, privacy and operational overhead.
 
 ### Module 15 — Integrated Production Architecture Review and Independent Defense
 
