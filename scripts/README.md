@@ -73,7 +73,7 @@ real Android packaging, accessible device interaction, lifecycle and
 local transactional storage, offline command replay, secure native
 permissions, mobile OS/background limits and compatible test upgrades.
 APP20 is required only for an optional React-based implementation.
-APP14 is the optional gateway and edge-delivery specialization after APP3 + APP7. APP15 is the optional TypeScript–Rust interoperation specialization after APP19 + APP21 + APP6, plus demonstrated prior Rust foundations; no provisional SYS course code is forced. Only APP16 retains its legacy format and awaits separate review and migration. The [APP architecture decision](../curriculum/APP/ARCHITECTURE.md) records the platform competency boundary.
+APP14 is the optional gateway and edge-delivery specialization after APP3 + APP7. APP15 is the optional TypeScript–Rust interoperation specialization after APP19 + APP21 + APP6, plus demonstrated prior Rust foundations; no provisional SYS course code is forced. APP16 now also publishes an outcome-driven platform-as-product specialization with 17 outcomes and seven independently checkable assessments; all 21 APP courses are v0.2.0 drafts. The [APP architecture decision](../curriculum/APP/ARCHITECTURE.md) records the platform competency boundary.
 The [current APP catalog](../curriculum/APP/README.md) contains
 **14 core courses and 7 electives** and is authoritative until reviewed
 course-migration PRs change it. The validator does not change course
@@ -185,7 +185,7 @@ review of assessment quality, evidence, and independence from paid tools.
 
 **All eleven SEF course-level RFC 0003 changes are merged**; all 11 current course files publish outcome-driven v0.2.0 draft contracts and still remain `draft`. The [SEF catalog](../curriculum/SEF/README.md) publishes their prerequisite-valid study order, provisional workload and capstone graduation conditions; automated checks verify source structure, not educational effectiveness. SEF11 precedes SEF4/SEF8 and SEF10 requires all other ten courses. Earlier curriculum design decisions remain documented in [RFC 0003](../rfcs/0003-sef-academic-progression.md) and Git history. Structural checks do not establish learner-tested effectiveness or full program conformance.
 
-The [current APP catalog](../curriculum/APP/README.md) has **14 core courses and seven electives**. All 14 core courses and six electives (APP10–APP15) now publish outcome-driven OEE `v0.2.0` `draft` definitions, including the APP9 `project` capstone; **APP16 is the only legacy-format optional elective**. APP still has a separate incomplete elective migration and an academic/readiness review, not part of finalized SEF. Neither a legacy checker pass nor successful v0.2.0 structural validation alone establishes educational conformance.
+The [current APP catalog](../curriculum/APP/README.md) has **14 core courses and seven electives**. All 14 core courses and all seven electives (APP10–APP16) now publish outcome-driven OEE `v0.2.0` `draft` definitions, including the APP9 `project` capstone; **no APP source course remains legacy**. APP still requires independent academic/learner readiness review, distinct from finalized SEF. Neither a legacy checker pass nor successful v0.2.0 structural validation alone establishes educational conformance.
 
 The repository-local [Toolkit](../tooling/README.md) implements pinned
 course checks and derived exports. Its
@@ -195,10 +195,10 @@ current, release a supported Toolkit package, or validate educational
 quality. A stabilized package/API and official release require separate
 readiness review.
 
-Migration of the remaining course definitions requires public outcome
-and assessment criteria, substantive quality review, careful catalog
-and prerequisite updates, and explicit treatment of changed course
-revisions. Automated success is never proof of learner mastery.
+Future course revisions require public outcome and assessment criteria,
+substantive quality review, careful catalog and prerequisite updates,
+and explicit treatment of historical source/evidence revisions. Automated
+success is never proof of learner mastery.
 
 ## Public documentation checks
 
