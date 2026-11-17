@@ -164,12 +164,24 @@ class SEF7AcademicBoundaryTests(unittest.TestCase):
                         (ROOT / "curriculum" / "SYS" / filename).exists()
                     )
         for phrase in (
-            "legacy drafts", "not an enacted transfer or assessment migration",
+            "v0.2.0", "draft",
+            "not an enacted transfer or assessment migration",
             "No SEF7 requirement may be removed",
             "C/Rust comparison", "Rust", "separately approved",
         ):
             self.assertIn(phrase.lower(), mapping.lower())
-        self.assertIn("legacy drafts", SYS_CATALOG.read_text(encoding="utf-8"))
+        sys_catalog = SYS_CATALOG.read_text(encoding="utf-8")
+        self.assertIn("All ten courses remain educationally `draft`", sys_catalog)
+        self.assertIn(
+            "no sef7 outcome or assessment is transferred",
+            sys_catalog.lower(),
+        )
+        # Migration changes source format, not historical SEF7 completion.
+        self.assertEqual(
+            len(re.findall(r"(?m)^\| \[SYS\d+\]\(SYS\d+\.md\) \|", sys_catalog)),
+            10,
+        )
+        self.assertIn("[SYS10](SYS10.md)", sys_catalog)
 
     def test_non_normative_SYS_handoff_preserves_C_and_single_peer_SEF(self):
         source, _, modules, _ = sections()
@@ -192,7 +204,7 @@ class SEF7AcademicBoundaryTests(unittest.TestCase):
             SEF_CATALOG.read_text(encoding="utf-8"),
         )
         self.assertIn(
-            "published SEF7-to-SYS competency boundary",
+            "[SEF7–SYS boundary map](../SEF/UNIX-SYS-BOUNDARY.md)",
             SYS_CATALOG.read_text(encoding="utf-8"),
         )
 
