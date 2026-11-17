@@ -12,6 +12,33 @@ APP = ROOT / "curriculum" / "APP"
 REQUIRED = ["Overview", "Learning outcomes", "Modules", "Completion requirements"]
 TICK = chr(96)
 
+def markdown_table_errors(data: str) -> list[str]:
+    """Catch broken APP Markdown table rows; not a normative OEE rule."""
+    issues: list[str] = []
+    expected_pipes: int | None = None
+    in_fence = False
+    for line_number, line in enumerate(data.splitlines(), 1):
+        if line.lstrip().startswith("```"):
+            in_fence = not in_fence
+            expected_pipes = None
+            continue
+        if in_fence or not line.startswith("|"):
+            expected_pipes = None
+            continue
+        # Authoring convention: pipes are table separators unless escaped.
+        pipes = len(re.findall(r"(?<!\\)\|", line))
+        if expected_pipes is None:
+            expected_pipes = pipes
+        elif pipes != expected_pipes:
+            issues.append(
+                f"table line {line_number}: expected {expected_pipes} "
+                f"pipe separators but found {pipes}"
+            )
+        if line.count("`") % 2:
+            issues.append(f"table line {line_number}: unclosed inline-code delimiter")
+    return issues
+
+
 def validate():
     catalog_path = APP / "README.md"
     entries, errors = read_app_catalog(catalog_path)
@@ -95,6 +122,7 @@ def validate():
         if migrated:
             # Keep catalog, prerequisite, metadata, and link checks above.
             # Only legacy lesson-kind/assessment-count gates are bypassed.
+            errors.extend(f"{code}: {issue}" for issue in markdown_table_errors(data))
             migrated_count += 1
             errors.extend(f"{code}: {issue}" for issue in validate_outcome_course(file))
             continue

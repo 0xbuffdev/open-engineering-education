@@ -718,9 +718,9 @@ prerequisites with an outcome-driven OEE `v0.2.0`
 remains required transitively. Historical learner
 records remain pinned to their actual prior course
 revision; they cannot be silently interpreted as
-passing these new outcomes. APP8/APP9 and APP10–APP16
-remain separately reviewed migrations. OEE Workspace,
-content/book mappings and 0xNAND consumer pins must
+passing these new outcomes. APP8/APP9 and APP10–APP16 now publish their own
+outcome-driven `v0.2.0` drafts, not legacy migrations.
+OEE Workspace, content/book mappings and 0xNAND consumer pins must
 be reconciled deliberately rather than auto-upgraded.
 
 ### Public non-mandatory study references

@@ -25,7 +25,9 @@ By the end of the core program, the learner will be able to:
 
 ## Program completion standard
 
-Complete the required core courses and successfully deliver, evaluate and defend the APP9 capstone, with reproducible artifacts, documented design choices, verification results, failure analysis and a technical retrospective.
+**Graduation requires two distinct decisions:** (1) authentic, assessed completion evidence for the thirteen core courses preceding APP9 (APP1–APP8 and APP17–APP21), or governed outcome-equivalent decisions tied to the applicable course/spec revisions; and (2) successful, independently inspectable completion of all eight APP9 summative evaluations and all sixteen capstone outcomes through **one** reproducible, evaluated and defended application. Verify the predecessor decisions **before capstone entry**. A polished APP9 product cannot substitute for missing prior course mastery, and a prior course checkmark cannot substitute for new APP9 evidence.
+
+APP9 assesses a meaningful integrated product, not thirteen re-created course assignments. Its [pre-entry and graduation-evidence procedure](APP9.md#verified-prerequisite-closure-and-capstone-integration) distinguishes verified prior competence from relevant new application and does not demand unrelated features simply to re-demonstrate earlier topics. The capstone includes reproducible artifacts, design choices, verification results, failure analysis, source/reuse attribution, professional release judgment and a technical retrospective.
 
 Electives provide optional specialization and are **not** prerequisites for the capstone or graduation.
 
@@ -86,7 +88,7 @@ The table is one **prerequisite-valid study order**, not compulsory serial enrol
 - **Separate browser and server branches:** APP2 combines APP17 and APP19 for framework-neutral interaction, browser security, accessibility and usable state. APP20 adds React-specific rendering, Hooks and component/data lifecycles. Separately, APP21 follows APP18 for raw Node I/O, streams, HTTP and lifecycle mechanisms; APP3 joins APP19, APP21 and APP4 for secure, typed Fastify service contracts and durable PostgreSQL behavior.
 - **Integration and professional quality:** APP5 joins React and backend branches around one authenticated end-to-end product. APP6 then develops system-level test strategy, CI/supply-chain safety, observability, incident investigation and maintainability, without re-teaching language or framework basics.
 - **Operation and evolution:** APP7 makes the integrated system deployable and recoverable through verified HTTPS, isolated configuration, immutable promotion, actual database restores and rollback/forward repair. APP8 evaluates measured capacity, overload, fairness, data consistency, architecture evolution and operational cost; no unsupported microservice requirement is introduced.
-- **Graduation:** APP9 starts only after all 13 preceding core courses have demonstrated completion or appropriately assessed equivalence. Seven cumulative project stages lead to **one independently reproduced, tested, operated, evaluated and defended application**, with a genuinely unfamiliar bounded change. Prior completed work may supply supporting evidence; submitting prior course names alone is insufficient.
+- **Graduation:** APP9 starts only after all 13 preceding core courses have recorded assessed completion decisions or appropriately governed outcome-equivalent evidence. Seven cumulative project stages lead to **one independently reproduced, tested, operated, evaluated and defended application**, with a genuinely unfamiliar bounded change. The prerequisite register is an entry check, not a ninth project assessment; previous source revisions and actual learner evidence remain distinct from APP9's new outcomes.
 
 ## Workload and pacing
 

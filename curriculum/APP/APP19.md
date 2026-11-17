@@ -421,7 +421,7 @@ completion evidence merely because they are listed.
 | `APP19-AS1` — Static Modeling and Structural Compatibility Review | APP19-O1, APP19-O2, APP19-O3, APP19-O5, APP19-O9 | TS source, compiler configuration and diagnostics, a prediction-versus-observation table, executable JS tests or counterexamples, repaired definitions and a concise distinction between checking and execution |
 | `APP19-AS2` — Discriminated State and Runtime Validation Investigation | APP19-O2, APP19-O4, APP19-O5, APP19-O11 | Union and validation source, negative/normal fixture matrix, compiler diagnostics before/after the new variant, executable tests, and explanation of type predicates, `never` and the runtime trust boundary |
 | `APP19-AS3` — Generic API and Type Transformation Review | APP19-O3, APP19-O6, APP19-O7, APP19-O8, APP19-O10 | Typed module, two local consumer fixtures, compiler-positive and compiler-negative test evidence, runtime tests for callback/async behavior, public API contract and justification of type complexity and limitations |
-| `APP19-AS4` — Compiler, Module, and JavaScript Migration Audit | APP19-O1, APP19-O5, APP19-O9, APP19-O10, APP19-O12 | Migrated source, original JS behavior fixtures, `tsconfig |
+| `APP19-AS4` — Compiler, Module, and JavaScript Migration Audit | APP19-O1, APP19-O5, APP19-O9, APP19-O10, APP19-O12 | Migrated source, original JS behavior fixtures, `tsconfig.json`, toolchain and local package recipe, type-check output, runtime test log, repaired module/configuration defect, and migration/compatibility notes |
 | `APP19-AS5` — Typed Library Evolution and Engineering Defense | APP19-O1, APP19-O2, APP19-O3, APP19-O4, APP19-O5, APP19-O6, APP19-O7, APP19-O8, APP19-O9, APP19-O10, APP19-O11, APP19-O12 | Versioned source and interface documentation, fixture and consumer matrix, reproducible `tsc`/runtime commands and test results, migration/change diff, negative-path reproduction, compatibility note, and written/recorded/otherwise accessible technical defense |
 
 ### Shared environment, assessment and trust boundaries
@@ -520,12 +520,12 @@ evidence references and decisions according to
 
 APP19 is introduced as a `v0.2.0` **draft**, not a
 learner-tested or independently verified course.
-The active APP catalog and APP9's current core prerequisite
-closure include APP19 only when the reviewed source PR
-merges. Existing APP18 and legacy APP course evidence
-retain their recorded historical interpretation.
-APP2, APP3, APP20 and optional APP15 remain distinct,
-separately reviewed future migrations.
+The current APP catalog and APP9's thirteen-course prerequisite
+closure already include APP19; APP2, APP3, APP20 and elective APP15
+have also merged their separate outcome-driven `v0.2.0` drafts.
+Historical APP18 and other prior-course completion records remain
+tied to their actual assessed source revisions; no consumer record
+or prerequisite decision is automatically rewritten.
 
 ### Public non-mandatory study references
 

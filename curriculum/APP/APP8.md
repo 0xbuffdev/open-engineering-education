@@ -768,11 +768,11 @@ architecture. Historical completion evidence
 continues to refer to its original course
 revision and must not be retroactively
 reinterpreted as meeting the new outcome
-or assessment IDs. APP9's capstone remains
-a separately reviewed project with its
-own graduation evidence; APP10–APP16
-electives and OEE Workspace/content/0xNAND
-consumer pins need distinct review.
+or assessment IDs. APP9's capstone is now a separately source-migrated
+`v0.2.0` project with its own graduation evidence;
+APP10–APP16 are optional migrated drafts. OEE Workspace,
+content/resource and 0xNAND consumer pins still need
+distinct review before any historical evidence is upgraded.
 
 Passing structural checks, tests or this
 local architecture exercise does not

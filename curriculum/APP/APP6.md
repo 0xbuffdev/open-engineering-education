@@ -775,9 +775,10 @@ completion of these new assessment IDs.
 A passing repository validator does not
 mean the curriculum has become
 `tested` or `verified`.
-APP7–APP9 and APP10–APP16 require their
-own course-by-course reviews, while
-OEE Workspace, content/resource mappings
+APP7–APP9 and APP10–APP16 now publish separately migrated
+`v0.2.0` drafts; independent academic review and learner
+readiness are separate from source conversion. OEE Workspace,
+content/resource mappings
 and 0xNAND pinned consumers must account
 for actual revised course identity.
 

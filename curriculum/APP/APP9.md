@@ -15,7 +15,7 @@
 
 **Independently define, build, deploy, evaluate, improve and defend one coherent application** integrating the full Application Engineering core. The capstone is a graduation project, **not** a retest of every previous lab or a collection of screenshots. Engineering independence is shown through responsible problem selection, substantive personally defensible implementation, factual evidence, ethics, actual software behavior and an independent unfamiliar change or diagnosis.
 
-**Complete required core:** The explicit prerequisites cover APP1–APP8 and APP17–APP21. They encompass first-principles web/Internet and HTML/CSS; JavaScript, TypeScript and the Node runtime; framework-neutral browser and React; data/SQL and typed backend service engineering; integrated application, quality/CI, actual deployment/recovery and measured production architecture. Every capability must find meaningful use in the *same product*. Simply citing completed course IDs does not establish APP9 mastery. Optional APP10–APP16 electives, SYS/Rust and proprietary or paid services are **not** required.
+**Complete required core:** The explicit prerequisites cover APP1–APP8 and APP17–APP21. They encompass first-principles web/Internet and HTML/CSS; JavaScript, TypeScript and the Node runtime; framework-neutral browser and React; data/SQL and typed backend service engineering; integrated application, quality/CI, actual deployment/recovery and measured production architecture. The capstone integrates **relevant transferable capabilities** in the *same product* without requiring an artificial demonstration of every prior topic, lab or elective. Authentic predecessor-course completion is a **separate entry requirement**, while APP9 requires new, independently evaluated product performance. Simply citing completed course IDs does not establish APP9 mastery. Optional APP10–APP16 electives, SYS/Rust and proprietary or paid services are **not** required.
 
 **Acceptable product problem spaces:** An accessible education tool, multi-user business workflow, developer platform/tool, document/resource system or other bounded authenticated application with real user tasks, persistent state, authorization boundaries and a justified asynchronous or simulated external side effect. The product must include frontend, typed service, PostgreSQL, quality and a real locally operated deployment. A modular monolith is sufficient when evidence does not justify distribution. Avoid mandatory AI features, public hosting, microservice fleets or a commercial identity provider.
 
@@ -30,6 +30,14 @@
 **Independent evaluation:** A reviewer must be able to reproduce actual behavior from a clean environment with documented free provisioned dependencies, ask a bounded unfamiliar requirement or fault within published outcomes, inspect the learner's corrective evidence and challenge design alternatives. Technical defense may be live, written, recorded or equivalently accessible. The reviewer must not impose private criteria, unpublished technologies or paid systems.
 
 **Duration and completion:** 12–16 weeks at 10–15 focused hours/week is provisional, not an evidence-backed workload guarantee. This course uses **eight cumulative summative assessments** with one evolving project. All ordinary lessons and planning milestones are formative unless explicitly used as evidence for a required assessment; no hidden attendance or checkmark gates apply.
+
+### Verified prerequisite closure and capstone integration
+
+Before starting Module 1, verify independently assessed completion decisions for **all thirteen** directly required APP core courses—APP1–APP8 and APP17–APP21—or separately approved, genuinely assessed outcome-equivalent preparation. Record each course code, actually assessed course/spec revision, decision and safe evidence reference; do not copy sensitive student records or substitute attendance, a passed unassessed diagnostic, a portfolio label or the capstone itself. A missing, unknown or rejected predecessor decision **blocks capstone entry** and must be resolved through that prerequisite's evaluation or governed equivalence process.
+
+The prerequisite register and the project integration map answer **different questions**: prior completion establishes admission readiness; the project shows how applicable earlier competence transfers to one real product. Directly applied skills should point to actual product evidence; a bounded explanation may establish relevant conceptual transfer; a prior topic not naturally needed by the selected product does **not** justify manufacturing an unrelated feature. Mark such integration as not applicable while retaining its **required prior completion**. A course titled `draft` may still have legitimately evaluated individual learner work; source readiness status and learner completion are not interchangeable.
+
+This is an entry and graduation-verification procedure, **not a ninth APP9 summative assessment** and not permission to regrade historic course revisions under new outcomes. The eight required APP9 assessments still evaluate APP9's own sixteen outcomes. Self-directed study may retain an inspectable evidence register, but a self-written completion claim without an actual assessed decision does not satisfy the admission requirement.
 
 ## Learning outcomes
 
@@ -66,7 +74,7 @@ The modules below are **cumulative project work stages**, not a second sequence 
 
 #### Lessons
 
-1. **Prior learning and authorship** — Establish which prior core course artifacts can be reused and what the learner must independently design, implement and defend; distinguish completion evidence from a new product claim.
+1. **Prior learning, admission evidence and authorship** — Verify all thirteen prerequisite course-completion decisions with authentic revisions and assessed evidence (or approved equivalence), stopping if a prerequisite remains unverified. Then distinguish prior artifacts worth reusing from the new product change the learner must independently design, implement and defend.
 
 2. **Real problem and affected people** — Describe a specific user task, stakeholder constraints and credible provenance; distinguish a supplied brief from observed demand and state whose interests and data are at risk.
 
@@ -265,7 +273,9 @@ The modules below are **cumulative project work stages**, not a second sequence 
 The following describe **supporting project deliverables** for
 the eight publicly defined assessments below; they are not
 eight more independent summative gates or a demand for
-a separate app for every previous course.
+a separate app for every previous course. Authentic completion
+of all thirteen prerequisite courses is verified separately
+before entry and remains necessary for APP graduation.
 
 - **Product and inquiry:** bounded problem, attributed
   stakeholder/public-evidence task, hypothesis, ethical
@@ -438,8 +448,13 @@ evidence, not an ID or checkbox, determine mastery.
 ### Core capability-to-APP9 evidence mapping
 
 This is an *explanatory integration map*,
-not an extra independent assessment or a
+not an extra independent assessment, a proof
+of the earlier course-completion decisions or a
 substitute for observing new APP9 outcomes.
+A topic not naturally implemented in this specific
+product retains its earlier independently assessed
+prerequisite evidence; unnecessary feature insertion
+is not a graduation requirement.
 
 | Core course | Integrated capstone evidence |
 | --- | --- |
@@ -499,18 +514,21 @@ substitute for observing new APP9 outcomes.
   - Outcomes: APP9-O1, APP9-O2, APP9-O3, APP9-O5, APP9-O9, APP9-O14, APP9-O15
   - Work: Revisit a consequential product assumption on the now functional application through consented low-risk user/stakeholder task review where possible or attributable public/secondary evidence and an honestly labeled structured heuristic evaluation otherwise. Describe actual results and selection bias, update a substantive product requirement/UX behavior/privacy policy or justify explicitly retaining scope, test any change and revise clear user/operator documentation, retained-data rules, known limitations and a factual engineering retrospective.
   - Criteria: A traceable initial assumption, suitable method and real source observations support a responsible decision; fabricated interviews, unconsented participant data and synthetic feedback presented as real are unacceptable. At least one meaningful acceptance/priority/design decision is reviewed and either implemented/tested or transparently deferred with justification. Relevant accessibility, role/privacy and regression checks are preserved. Collaboration, authorship and project handoff reflect what actually happened, not simulated teamwork.
-  - Evidence: Initial/final product assumption, consented anonymized or cited secondary evidence with methodology, findings and uncertainty, updated acceptance and decision record, bounded change and regression or no-change defense, privacy/user docs and retrospective.
+  - Evidence: Initial/final product assumption, consented anonymized or cited secondary evidence with methodology, findings and uncertainty, updated acceptance and decision record, bounded change and regression or no-change defense, privacy/user docs, applicable source/dependency license and assistance attribution, material release-rights uncertainties and retrospective.
 
 - **APP9-AS8** (required independent reproduction, unfamiliar change and graduation defense)
   - Outcomes: APP9-O1, APP9-O2, APP9-O3, APP9-O4, APP9-O5, APP9-O6, APP9-O7, APP9-O8, APP9-O9, APP9-O10, APP9-O11, APP9-O12, APP9-O13, APP9-O14, APP9-O15, APP9-O16
-  - Work: Present a single independently reproducible final product and reference all qualifying APP9-AS1–AS7 artifacts. An assessor or independently documented clean-state procedure must install and run free local dependencies, exercise protected browser/API/SQL/async behavior, verify security negative tests, a faulty deployed release and actual restored database, and inspect reasoned product and architecture choices. Then introduce an **unfamiliar bounded** new authorized field/role, API contract variant, stale-state bug, deployment failure, workload constraint or dependency fault within published outcomes. Implement or correctly diagnose it, show an appropriate failing-before/passing-after test or equivalent causal evidence, and defend authorship, source reuse, design choices, uncertainties and remaining risks in an accessible format.
-  - Criteria: The software, deployment and evidence can be independently examined without hidden environment state, undocumented manual intervention or required paid services. All eight required assessment decisions and every actual APP9 outcome have credible observable evidence; an evaluator does not grant credit merely because a course was previously passed or an outcome ID is listed. The unfamiliar scenario preserves protected data, meaningful user experience, old/new contract and rollback safety, and the learner can explain personally contributed code/decisions and attribution. The challenge stays within public outcome classes, feasible local tools and equivalent accessible written/recorded/live defense criteria.
-  - Evidence: Single versioned source/product and complete outcome/evidence index, clean-run/fixture transcript, independent browser/API/PostgreSQL/security and deployed recovery traces, assessor's bounded scenario and source/test changes, product/architecture/cost decisions, evidence-limited reflections and accessible recorded/written/live defense.
+  - Work: Confirm the pre-entry register of thirteen authentic predecessor-course completion decisions or governed equivalence evidence, without re-assessing those courses. Present a single independently reproducible final product and reference all qualifying APP9-AS1–AS7 artifacts. An assessor or independently documented clean-state procedure must install and run free local dependencies, exercise protected browser/API/SQL/async behavior, verify security negative tests, a faulty deployed release and actual restored database, and inspect reasoned product and architecture choices. Then introduce an **unfamiliar bounded** new authorized field/role, API contract variant, stale-state bug, deployment failure, workload constraint or dependency fault within published outcomes. Implement or correctly diagnose it, show an appropriate failing-before/passing-after test or equivalent causal evidence, and defend authorship, source reuse, design choices, uncertainties and remaining risks in an accessible format.
+  - Criteria: All thirteen predecessor-course completion decisions are revision-linked and authentic; missing or unassessed prerequisite evidence blocks APP9 entry/graduation rather than receiving automatic capstone credit. The software, deployment and evidence can be independently examined without hidden environment state, undocumented manual intervention or required paid services. All eight required APP9 assessment decisions and every actual APP9 outcome have credible observable evidence; an evaluator does not grant credit merely because a course was previously passed or an outcome ID is listed. The unfamiliar scenario preserves protected data, meaningful user experience, old/new contract and rollback safety, and the learner can explain personally contributed code/decisions and attribution. The challenge stays within public outcome classes, feasible local tools and equivalent accessible written/recorded/live defense criteria.
+  - Evidence: Revision-linked thirteen-course pre-entry completion index with safe references to actual assessed decisions, a separate APP9 outcome/evidence index, single versioned source/product, clean-run/fixture transcript, independent browser/API/PostgreSQL/security and deployed recovery traces, assessor's bounded scenario and source/test changes, product/architecture/cost decisions, evidence-limited reflections and accessible recorded/written/live defense.
 
 ### Graduation decision, evaluation revision and handoff
 
 **APP9 is the core Application Engineering graduation
-project.** Award completion only after an evaluator
+project.** Admission and graduation first require authentic
+assessed completion decisions for all thirteen direct core
+prerequisites (or governed outcome-equivalent assessments).
+Award APP9 completion only after an evaluator
 records an acceptable decision for each
 `APP9-AS1` through `APP9-AS8`, observes
 the stated integrated deliverables, verifies
@@ -546,11 +564,11 @@ pinned to their prior assessed course
 revision; no newly authored outcome
 may silently mark earlier learners
 complete or incomplete. APP10–APP16
-remain optional and still require
-their own migrations. OEE Workspace,
-content/resource mappings and 0xNAND
-course-consumer evidence pins require
-separate reviewed alignment.
+remain optional and now publish their
+own outcome-driven `v0.2.0` drafts.
+OEE Workspace, content/resource mappings
+and 0xNAND course-consumer evidence pins
+still require separate reviewed alignment.
 
 The source course remains `draft`
 after green structural CI. Learner

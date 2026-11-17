@@ -2,7 +2,7 @@
 
 The Open Engineering Education (OEE) curriculum publishes five engineering programs and their course definitions. It is designed for independent learners, educators, reviewers, and implementations that need a common, publicly inspectable educational contract.
 
-**Current state:** All five programs have published draft course definitions. The [SEF program](SEF/README.md) has eleven outcome-driven `v0.2.0` courses, a published prerequisite-valid study path and a cumulative graduation capstone. All remain `draft` pending real learner and reviewer evidence. Other programs contain a mixture of migrated and legacy course definitions; format validation does not, by itself, establish educational conformance.
+**Current state:** All five programs have published draft course definitions. [SEF](SEF/README.md) now has eleven outcome-driven `v0.2.0` core courses and a cumulative graduation capstone; [APP](APP/README.md) has fourteen outcome-driven `v0.2.0` core courses (including its capstone) and seven optional outcome-driven electives. All of these courses remain `draft` pending real learner and independent reviewer evidence. SYS, AI and SEC currently retain legacy course definitions. Source format or structural validation does not establish educational effectiveness or formal conformance.
 
 ## Choose a program
 
@@ -19,7 +19,7 @@ Each program README is the authoritative catalog for its **current** courses, st
 
 SEF provides the completed current **foundational curriculum design**, including [SEF11 discrete mathematics](SEF/SEF11.md) before algorithmic and numerical mathematics, plus a one-project [SEF10 capstone](SEF/SEF10.md) with ten prior-course evidence checks. APP develops applications and production delivery; SYS focuses on software close to hardware and operating systems; AI develops data, model, and production AI capabilities; SEC applies security engineering to systems and applications.
 
-The APP catalog currently includes 14 core courses and seven optional electives. Its [migration decision](APP/ARCHITECTURE.md) describes a **different target architecture**, not additional current graduation requirements. New target courses and prerequisite changes take effect only when adopted in the public course catalog and course files.
+The APP catalog contains 14 required core courses and seven genuinely optional electives. Its [migration architecture decision](APP/ARCHITECTURE.md) documents the already adopted restructuring and its historical rationale; the [current APP catalog](APP/README.md) and linked course files alone publish the active prerequisite and graduation requirements. Learner completion records retain the course revisions under which their evidence was evaluated.
 
 ## Follow a course
 

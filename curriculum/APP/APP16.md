@@ -457,5 +457,5 @@ These are research and background references, not paid prerequisites, additional
 - [DORA: State of AI-assisted Software Development 2025](https://dora.dev/research/2025/dora-report/) — investigate platform quality, developer outcomes and the limitations of organizational correlations.
 - [Backstage Software Catalog](https://backstage.io/docs/features/software-catalog/) — reference patterns for software ownership metadata and discoverability, without requiring Backstage.
 - [OWASP CI/CD Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/CI_CD_Security_Cheat_Sheet.html) — analyze delegated permissions, credential and pipeline trust boundaries.
-- [SLSA v1.1 provenance](https://slsa.dev/spec/v1.1/provenance) — identify what artifact provenance supports and why verification policy matters.
+- [SLSA v1.2 provenance](https://slsa.dev/spec/v1.2/provenance) — identify what artifact provenance supports and why verification policy matters.
 - [Google SRE Workbook: Error Budget Policy](https://sre.google/workbook/error-budget-policy/) — examine SLO-driven change and reliability decisions; adapt to a developer platform rather than copying an enterprise policy.
