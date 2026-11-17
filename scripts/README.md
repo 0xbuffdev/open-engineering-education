@@ -52,7 +52,10 @@ infrastructure, safe releases, data restoration and recovery,
 and APP8 follows APP5 + APP6 + APP7 for measured architecture
 capacity, overload fairness, cache/data consistency, failure
 containment and reversible performance/cost evolution.
-Unmigrated course scope/dependency changes remain in the
+APP9 is the independently assessed `project` capstone with direct
+prerequisite closure over all 13 preceding APP core courses and
+eight outcome-mapped v0.2.0 summative graduation assessments.
+Unmigrated elective scope/dependency changes remain in the
 [APP migration decision](../curriculum/APP/ARCHITECTURE.md).
 The [current APP catalog](../curriculum/APP/README.md) contains
 **14 core courses and 7 electives** and is authoritative until reviewed

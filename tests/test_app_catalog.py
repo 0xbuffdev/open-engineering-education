@@ -368,6 +368,41 @@ class APPCatalogTests(unittest.TestCase):
         self.assertIn("APP8", errors)
         self.assertIn("prerequisites differ from catalog", errors)
 
+    def test_app9_is_integrated_v020_project_with_full_core_coverage(self):
+        # This is a graduation PROJECT, not a fourteenth lecture course.
+        # The catalog's full 13-core prerequisite graph must remain intact.
+        entries, errors = read_app_catalog(self.catalog)
+        self.assertFalse(errors, errors)
+        app9 = next(entry for entry in entries if entry.code == "APP9")
+        self.assertEqual(
+            (app9.title, app9.kind, app9.classification, app9.status),
+            ("Application Engineering Capstone", "project", "core", "draft"),
+        )
+        core = {entry.code for entry in entries
+                if entry.classification == "core" and entry.code != "APP9"}
+        self.assertEqual(set(prerequisite_codes(app9.prerequisites)), core)
+        text = (self.app.APP / "APP9.md").read_text(encoding="utf-8")
+        self.assertIn("**Type:** `project`", text)
+        self.assertIn("**Classification:** `core`", text)
+        self.assertIn("**Specification:** `v0.2.0`", text)
+        self.assertIn("### Formative project milestones", text)
+        self.assertIn("### Core capability-to-APP9 evidence mapping", text)
+        self.assertIn("APP9-AS8", text)
+        self.assertIn("unfamiliar", text.lower())
+        self.assertIn("independent", text.lower())
+        self.assertEqual(sum(1 for line in text.splitlines() if line.startswith("- **APP9-O") and ":**" in line), 16)
+        self.assertEqual(sum(1 for line in text.splitlines() if line.startswith("- **APP9-AS") and "(required " in line), 8)
+
+    def test_app9_required_defense_cannot_be_silently_made_optional(self):
+        text = (self.app.APP / "APP9.md").read_text(encoding="utf-8")
+        old = "- **APP9-AS8** (required independent reproduction"
+        self.assertIn(old, text)
+        self.change_course("APP9", old,
+                           "- **APP9-AS8** (optional independent reproduction")
+        status, errors = self.check()
+        self.assertNotEqual(status, 0)
+        self.assertIn("APP9", errors)
+
     def test_app8_cannot_be_silently_removed_from_capstone_closure(self):
         # APP20 is now required transitively through migrated APP5.
         # APP8 has no further required core successor before APP9.
