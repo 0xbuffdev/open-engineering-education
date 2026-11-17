@@ -8,7 +8,7 @@ Systems Engineering teaches you to reason about and build software close to the 
 
 ## Prerequisites
 
-**Program 1 — SEF — Software Engineering Foundations.**
+**Completed Program 1 — SEF — Software Engineering Foundations, including SEF10.** SYS entrants must have actually demonstrated all required SEF outcomes against the applicable published course revisions; an individual C/POSIX course or self-reported experience is not sufficient.
 
 A Linux environment is required for the program. Individual SYS courses may additionally require specific preceding SYS courses.
 
@@ -31,11 +31,11 @@ The learner must demonstrate the knowledge, practical skills, and engineering ju
 
 ## Courses
 
-The nine published course files are **legacy drafts**. They preserve their original learning activities and completion requirements but have not been migrated or assessed against the `v0.2.0` outcome-driven contract. Accordingly, their topic outlines are **not** outcome-driven successors that can replace assessed SEF7 requirements. They are course outlines for study and review, not claims of learner-tested readiness or `v0.2.0` conformance. See the [curriculum inventory](../INVENTORY.md) for a reproducible structural audit.
+**SYS1 is an outcome-driven `v0.2.0` draft** with published summative assessment requirements, following the completed SEF foundation. **SYS2–SYS9 remain legacy drafts** with their existing course identities, prerequisites, activities and assessment requirements until separately reviewed migrations merge. No legacy outline is claimed to conform to `v0.2.0`, and none replaces any assessed SEF7 requirement. Numeric renumbering and proposed additional SYS courses have not been published. See the [curriculum inventory](../INVENTORY.md) for a reproducible structural audit and [the migration tracker](https://github.com/0xbuffdev/open-engineering-education/issues/106) for proposed work. Neither structural validation nor draft publication establishes learner-tested readiness.
 
 | Course | Title | Duration | Prerequisites | Type |
 | --- | --- | --- | --- | --- |
-| [SYS1](SYS1.md) | Computer Architecture, Memory & Performance | 6 weeks | SEF6 | `course` |
+| [SYS1](SYS1.md) | Computer Architecture, Memory & Performance | 10–14 weeks | SEF10 | `course` |
 | [SYS2](SYS2.md) | Systems Programming with C & Rust | 6 weeks | SYS1 | `course` |
 | [SYS3](SYS3.md) | Concurrency, Atomics & Memory Models | 6 weeks | SYS2 | `course` |
 | [SYS4](SYS4.md) | Linux Networking & Services | 6 weeks | SYS2 and SYS3 | `course` |
