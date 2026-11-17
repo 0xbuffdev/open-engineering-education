@@ -45,7 +45,6 @@ The learner must demonstrate the knowledge, practical skills, and engineering ju
 
 **Migration boundary:** the AI2 row above refers to the *proposed integration-branch replacement only*; the existing AI3–AI9 rows retain historical identities and may carry dependencies on the historic AI2 rather than the staged revision. Do not use this mixed intermediate catalog as a published degree pathway. Each course definition is authoritative for its own revision, but a coherent, public program catalog requires the completed cutover. The old course identifiers must not be repurposed on main until downstream links and historical learner evidence have been reviewed. Use [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) or another learner-controlled environment for practical work and evidence. The [OEE specification](../../spec/README.md) governs newly authored or explicitly migrated course revisions.
 
-
 ## Expanded AI architecture under review (integration branch only)
 
 The steward-approved working target is **sixteen required core courses (AI1–AI16, including the capstone) and four optional electives (AI17–AI20)**. This planning list does not claim the referenced successor course files already exist. Course boundaries, prerequisites and duration estimates require course-by-course academic review against SEF/APP/SYS.
