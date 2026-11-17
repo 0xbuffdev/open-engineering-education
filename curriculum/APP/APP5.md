@@ -717,10 +717,10 @@ Earlier APP5 learner evidence remains tied to its
 historical revision and is not silently upgraded
 to the new criteria. A green repository parser
 or successful software test does **not** establish
-learner `tested` or `verified` status. The
-separate APP6–APP9 and elective migrations,
-plus pinned OEE Workspace/content/0xNAND
-consumer updates, require their own review.
+learner `tested` or `verified` status. APP6–APP9 and all APP electives now have separately
+migrated `v0.2.0` drafts. Pinned OEE Workspace,
+content/resource and 0xNAND consumer updates still
+require explicit revision and evidence review.
 
 ### Public non-mandatory study references
 

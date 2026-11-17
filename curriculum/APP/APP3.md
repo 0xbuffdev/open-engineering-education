@@ -752,9 +752,10 @@ remain attached to their prior course revision and
 cannot silently satisfy these new outcomes. APP3 is
 not automatically `tested` or `verified` simply
 because repository validators and CI pass.
-The separately reviewed migrations of APP5–APP9,
-the elective curriculum and any connected downstream
-content/workspace/teaching platform are distinct.
+APP5–APP9 and all APP electives now publish their own separately
+migrated `v0.2.0` drafts. Downstream OEE Workspace,
+content/resource and 0xNAND source/evidence pins still require
+deliberate revision review; they are not automatically upgraded.
 
 ### Public non-mandatory study references
 

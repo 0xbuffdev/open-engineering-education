@@ -6,7 +6,7 @@ purposes, and **none** replaces a substantive conformance review.
 ## Program validators
 
 - `python3 scripts/check-sef-curriculum.py` validates **all eleven** published SEF v0.2.0 courses, catalog-defined prerequisite-valid study order, new SEF11 mathematical prerequisites and capstone closure. SEF course IDs are stable identities, not numeric study order.
-- `python3 scripts/check-app-curriculum.py` validates the published APP catalog, including both migrated and still-legacy course contracts.
+- `python3 scripts/check-app-curriculum.py` validates the published APP catalog and the current outcome-driven APP course contracts. The checker still contains legacy-format support for historical cases, but **all 21 published APP course files now use `v0.2.0`**.
 
 Both program validators now classify courses using the shared
 `course_format_versions.py` helper. **Untouched legacy courses** retain
@@ -15,7 +15,11 @@ their original per-module test/lab, final-lab, and public brief checks.
 instead of being required to preserve legacy assessment patterns.
 
 Both program validators continue checking shared metadata, catalog
-consistency, course prerequisites, and local links. A failed outcome check
+consistency, course prerequisites, and local links. The APP validator also
+checks the basic integrity of authored Markdown tables, including stable
+column counts and closed inline code spans, so truncation cannot silently
+hide evidence-summary text. These editorial checks are not normative OEE
+format requirements. A failed outcome check
 also fails the applicable APP or SEF validator. Neither type of successful
 structural check proves educational conformance or learner mastery.
 

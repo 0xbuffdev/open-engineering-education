@@ -740,5 +740,33 @@ class APPCatalogTests(unittest.TestCase):
             prerequisite_codes("APP5–APP2")
 
 
+    def test_app19_assessment_summary_table_rejects_unclosed_code(self):
+        self.change_course(
+            "APP19",
+            "`tsconfig.json`, toolchain and local package recipe",
+            "`tsconfig.json, toolchain and local package recipe",
+        )
+        status, errors = self.check()
+        self.assertNotEqual(status, 0)
+        self.assertIn("unclosed inline-code delimiter", errors)
+
+    def test_app19_assessment_summary_table_rejects_truncated_row(self):
+        self.change_course(
+            "APP19",
+            "repaired module/configuration defect, and migration/compatibility notes |",
+            "repaired module/configuration defect, and migration/compatibility notes",
+        )
+        status, errors = self.check()
+        self.assertNotEqual(status, 0)
+        self.assertIn("expected 4 pipe separators", errors)
+
+    def test_app9_graduation_requires_separate_authentic_predecessor_evidence(self):
+        app9 = (self.app.APP / "APP9.md").read_text(encoding="utf-8")
+        app_catalog = self.catalog.read_text(encoding="utf-8")
+        self.assertIn("Verified prerequisite closure and capstone integration", app9)
+        self.assertIn("thirteen authentic predecessor-course completion decisions", app9)
+        self.assertIn("not a ninth APP9 summative assessment", app9)
+        self.assertIn("Graduation requires two distinct decisions", app_catalog)
+
 if __name__ == "__main__":
     unittest.main()
