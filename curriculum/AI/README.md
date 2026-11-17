@@ -33,7 +33,7 @@ The learner must demonstrate the knowledge, practical skills, and engineering ju
 
 | Course | Title | Duration | Prerequisites | Type |
 | --- | --- | --- | --- | --- |
-| [AI1](AI1.md) | Scientific Computing & Data Engineering for AI | 14–18 weeks | Completed SEF (SEF10) | `course` · v0.2.0 draft |
+| [AI1](AI1.md) | Scientific Computing & Data Engineering for AI | 14–18 weeks | Completed SEF (SEF10) | `course` |
 | [AI2](AI2.md) | Machine Learning Foundations | 6 weeks | AI1 | `course` |
 | [AI3](AI3.md) | Deep Learning & Representation Learning | 6 weeks | AI2 | `course` |
 | [AI4](AI4.md) | Transformers & Large Language Models | 7 weeks | AI3 | `course` |
