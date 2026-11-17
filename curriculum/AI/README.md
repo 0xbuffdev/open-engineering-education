@@ -29,7 +29,7 @@ The learner must demonstrate the knowledge, practical skills, and engineering ju
 
 ## Courses
 
-**Integration-branch review only — not the currently published AI program.** AI1 has been migrated on main. This integration branch additionally stages **AI2 — Mathematics of Statistical and Neural Models**, **AI3 — Classical Artificial Intelligence, Search & Reasoning**, and **AI4 — Machine Learning & Statistical Learning Theory** under OEE v0.2.0. **AI5–AI9 here remain legacy drafts**, and their old course-code assumptions are not compatible with the proposed expanded sequence. They must not be presented as an enrollment-ready prerequisite graph. The nine-course legacy catalog on main remains authoritative until an explicitly reviewed **atomic expanded-catalog cutover**. The migration does not award historic learner equivalence, establish educational readiness, or claim formal conformance. See the [curriculum inventory](../INVENTORY.md) for derived source-format observations.
+**Integration-branch review only — not the currently published AI program.** AI1 has been migrated on main. This integration branch additionally stages **AI2 — Mathematics of Statistical and Neural Models**, **AI3 — Classical Artificial Intelligence, Search & Reasoning**, , **AI4 — Machine Learning & Statistical Learning Theory**, and **AI5 — Deep Learning & Representation Learning** under OEE v0.2.0. **AI6–AI9 here remain legacy drafts**, and their old course-code assumptions are not compatible with the proposed expanded sequence. They must not be presented as an enrollment-ready prerequisite graph. The nine-course legacy catalog on main remains authoritative until an explicitly reviewed **atomic expanded-catalog cutover**. The migration does not award historic learner equivalence, establish educational readiness, or claim formal conformance. See the [curriculum inventory](../INVENTORY.md) for derived source-format observations.
 
 | Course | Title | Duration | Prerequisites | Type |
 | --- | --- | --- | --- | --- |
@@ -37,13 +37,13 @@ The learner must demonstrate the knowledge, practical skills, and engineering ju
 | [AI2](AI2.md) | Mathematics of Statistical and Neural Models (staged) | 16–20 weeks | AI1 | `course` |
 | [AI3](AI3.md) | Classical Artificial Intelligence, Search & Reasoning (staged) | 18–24 weeks | AI1 | `course` |
 | [AI4](AI4.md) | Machine Learning & Statistical Learning Theory (staged) | 20–26 weeks | AI2 | `course` |
-| [AI5](AI5.md) | Retrieval, Agents & Applied Generative AI | 6 weeks | AI4 | `course` |
+| [AI5](AI5.md) | Deep Learning & Representation Learning (staged) | 20–26 weeks | AI4 | `course` |
 | [AI6](AI6.md) | Training, Fine-Tuning & Evaluation | 5 weeks | AI4 | `course` |
 | [AI7](AI7.md) | Production AI Systems & MLOps | 6 weeks | AI5 and AI6 | `course` |
 | [AI8](AI8.md) | Responsible AI, Safety & Governance | 3 weeks | AI5 | `course` |
 | [AI9](AI9.md) | AI Engineering Capstone | 8–10 weeks | AI1–AI8 | `project` |
 
-**Migration boundary:** the AI2, AI3 and AI4 rows above refer to *proposed integration-branch replacements only*; the existing AI5–AI9 rows retain historical identities and may carry dependencies on historic AI2/AI3/AI4 rather than the staged revisions. Do not use this mixed intermediate catalog as a published degree pathway. Each course definition is authoritative for its own revision, but a coherent, public program catalog requires the completed cutover. The old course identifiers must not be repurposed on main until downstream links and historical learner evidence have been reviewed. Use [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) or another learner-controlled environment for practical work and evidence. The [OEE specification](../../spec/README.md) governs newly authored or explicitly migrated course revisions.
+**Migration boundary:** the AI2, AI3, AI4 and AI5 rows above refer to *proposed integration-branch replacements only*; the existing AI6–AI9 rows retain historical identities and may carry dependencies on historic AI2/AI3/AI4/AI5 rather than the staged revisions. Do not use this mixed intermediate catalog as a published degree pathway. Each course definition is authoritative for its own revision, but a coherent, public program catalog requires the completed cutover. The old course identifiers must not be repurposed on main until downstream links and historical learner evidence have been reviewed. Use [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) or another learner-controlled environment for practical work and evidence. The [OEE specification](../../spec/README.md) governs newly authored or explicitly migrated course revisions.
 
 ## Expanded AI architecture under review (integration branch only)
 
@@ -55,7 +55,7 @@ The steward-approved working target is **sixteen required core courses (AI1–AI
 | AI2 | Mathematics of Statistical and Neural Models | Required · staged for review |
 | AI3 | Classical Artificial Intelligence, Search & Reasoning | Required · staged for review |
 | AI4 | Machine Learning & Statistical Learning Theory | Required · staged for review |
-| AI5 | Deep Learning & Representation Learning | Required · pending |
+| AI5 | Deep Learning & Representation Learning | Required · staged for review |
 | AI6 | Sequential Decision Making & Reinforcement Learning | Required · pending |
 | AI7 | Natural Language Processing & Information Retrieval | Required · pending |
 | AI8 | Computer Vision & Multimodal Learning | Required · pending |
@@ -72,4 +72,4 @@ The steward-approved working target is **sixteen required core courses (AI1–AI
 | AI19 | Causal Inference | Optional · pending |
 | AI20 | Graph Representation Learning | Optional · pending |
 
-AI1 depends on completed SEF via SEF10; AI2 and AI3 each depend directly on AI1 and may be studied in parallel; AI4 requires completed AI2 but not AI3. No APP/SYS dependency is necessary for AI2, AI3 or AI4. Later specialized AI courses will reference specific APP preparation only when their real assessment demands it, not an entire program by default. Electives are not hidden capstone prerequisites. Before promoting the complete integration branch to main, replace this temporary dual catalog with one coherent prerequisite-valid AI1–AI20 learner catalog, review downstream consumer identities and migration history, and perform a final program-wide academic and source validation. Historical AI9 capstone evidence must never silently convert into new AI9 transformer credit.
+AI1 depends on completed SEF via SEF10; AI2 and AI3 each depend directly on AI1 and may be studied in parallel; AI4 requires completed AI2 but not AI3, and AI5 requires completed AI4 but not AI3. No APP/SYS dependency is necessary for AI2, AI3, AI4 or AI5. Later specialized AI courses will reference specific APP preparation only when their real assessment demands it, not an entire program by default. Electives are not hidden capstone prerequisites. Before promoting the complete integration branch to main, replace this temporary dual catalog with one coherent prerequisite-valid AI1–AI20 learner catalog, review downstream consumer identities and migration history, and perform a final program-wide academic and source validation. Historical AI9 capstone evidence must never silently convert into new AI9 transformer credit.
