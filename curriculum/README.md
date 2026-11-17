@@ -2,7 +2,7 @@
 
 The Open Engineering Education (OEE) curriculum publishes five engineering programs and their course definitions. It is designed for independent learners, educators, reviewers, and implementations that need a common, publicly inspectable educational contract.
 
-**Current state:** All five programs have published draft course definitions. [SEF](SEF/README.md) now has eleven outcome-driven `v0.2.0` core courses and a cumulative graduation capstone; [APP](APP/README.md) has fourteen outcome-driven `v0.2.0` core courses (including its capstone) and seven optional outcome-driven electives. All of these courses remain `draft` pending real learner and independent reviewer evidence. SYS, AI and SEC currently retain legacy course definitions. Source format or structural validation does not establish educational effectiveness or formal conformance.
+**Current state:** All five programs have published draft course definitions. [SEF](SEF/README.md) now has eleven outcome-driven `v0.2.0` core courses and a cumulative graduation capstone; [APP](APP/README.md) has fourteen outcome-driven `v0.2.0` core courses (including its capstone) and seven optional outcome-driven electives. All of these courses remain `draft` pending real learner and independent reviewer evidence. SYS now has ten outcome-driven `v0.2.0` draft core courses and a cumulative systems graduation capstone; AI and SEC currently retain legacy course definitions. Source format or structural validation does not establish educational effectiveness or formal conformance.
 
 ## Choose a program
 
@@ -12,12 +12,12 @@ Each program README is the authoritative catalog for its **current** courses, st
 | --- | --- | --- | --- |
 | `SEF` | Software Engineering Foundations | 11 core | [Explore SEF](SEF/README.md) |
 | `APP` | Application Engineering | 14 core, 7 electives | [Explore APP](APP/README.md) |
-| `SYS` | Systems Engineering | 9 core | [Explore SYS](SYS/README.md) |
+| `SYS` | Systems Engineering | 10 core | [Explore SYS](SYS/README.md) |
 | `AI` | AI Engineering | 9 core | [Explore AI](AI/README.md) |
 | `SEC` | Security Engineering | 9 core | [Explore SEC](SEC/README.md) |
-| **Total** | **Five programs** | **52 core, 7 electives** | |
+| **Total** | **Five programs** | **53 core, 7 electives** | |
 
-SEF provides the completed current **foundational curriculum design**, including [SEF11 discrete mathematics](SEF/SEF11.md) before algorithmic and numerical mathematics, plus a one-project [SEF10 capstone](SEF/SEF10.md) with ten prior-course evidence checks. APP develops applications and production delivery; SYS focuses on software close to hardware and operating systems; AI develops data, model, and production AI capabilities; SEC applies security engineering to systems and applications.
+SEF provides the completed current **foundational curriculum design**, including [SEF11 discrete mathematics](SEF/SEF11.md) before algorithmic and numerical mathematics, plus a one-project [SEF10 capstone](SEF/SEF10.md) with ten prior-course evidence checks. APP develops applications and production delivery; **SYS develops machine-level understanding, Rust, OS internals, concurrency, networking, storage, distributed correctness and production systems engineering**; AI develops data, model, and production AI capabilities; SEC applies security engineering to systems and applications.
 
 The APP catalog contains 14 required core courses and seven genuinely optional electives. The [current APP catalog](APP/README.md) and linked course definitions publish the authoritative study sequence, prerequisites and graduation requirements; reviewed Git history preserves earlier design rationale. Learner completion records retain the course revisions under which their evidence was evaluated.
 
