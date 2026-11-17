@@ -4,10 +4,9 @@
 on 2026-11-16 in [PR #78](https://github.com/0xbuffdev/open-engineering-education/pull/78).
 
 **Implementation status:** All 14 APP core source definitions,
-including APP9, and electives APP10–APP12 are published as
-`v0.2.0` drafts. APP13 Mobile Application Engineering is being
-migrated in its own elective course-and-catalog PR; APP14–APP16
-remain legacy electives pending separate review. The
+including APP9, and electives APP10–APP14 are published as
+`v0.2.0` drafts. APP15–APP16 remain legacy electives pending
+separate review. The
 [active APP catalog](README.md) and linked course files remain
 authoritative. Source conversion does not establish learner
 validation or official conformance.
@@ -726,9 +725,8 @@ The recorded target decisions are:
   misrepresented as additional v0.2.0 conformance rules.
 
 **Current implementation snapshot:** All 14 APP core courses
-(including APP9 project) and electives APP10–APP12 are
-published as outcome-driven `v0.2.0` drafts. APP13 is under
-review in a distinct mobile elective PR; APP14–APP16 remain
+(including APP9 project) and electives APP10–APP14 are
+published as outcome-driven `v0.2.0` drafts. APP15–APP16 remain
 legacy optional electives, with downstream resource/evidence
 review, workload calibration and independent educational
 validation still future work. Use the
