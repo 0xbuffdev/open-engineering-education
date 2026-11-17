@@ -1,309 +1,324 @@
 # Curriculum Design Guide
 
-This guide describes how to organize OEE programs, courses, modules, and lessons
-without sacrificing depth or overloading any single course. It applies the
-[outcome-driven Course Format](../spec/course-format.md) and
-[Evidence Rules](../spec/evidence-rules.md) to curriculum planning.
+This guide explains how to **research, design, review, and revise** Open Engineering Education (OEE) programs, courses, modules, lessons, practice, and assessments. Use it for the existing [SEF](SEF/README.md) and [APP](APP/README.md) curricula and when designing or reviewing [SYS](SYS/README.md), [AI](AI/README.md), and [SEC](SEC/README.md).
 
-**Status:** Non-normative editorial guidance. This guide does not add
-conformance requirements, fixed course durations, a mandatory lesson count,
-a new serialization format, or a separate authoring specification. Where
-guidance and the normative `spec/` requirements differ, the specification
-takes precedence.
+**Status:** Non-normative editorial guidance. Binding educational requirements remain in [Course Format](../spec/course-format.md), [Evidence Rules](../spec/evidence-rules.md), [Status Labels](../spec/status-labels.md), and [Conformance](../spec/conformance.md). This is **not** a separate authoring specification, required document template, course-completion rubric, or new conformance test. It establishes no fixed counts of courses, modules, lessons, activities, assessments, or weeks. Where this guide and the OEE specification disagree, the specification takes precedence.
 
-## 1. Design from capabilities, not content volume
+**Central principle:** Research the capabilities a learner must demonstrate; establish the knowledge, reasoning, and experience needed to achieve them; then derive the appropriate course architecture. Never begin by choosing how many modules or lessons to produce.
 
-Begin with the capabilities graduates should demonstrate, then determine
-where each capability is taught and assessed.
+## 1. Use the seven-stage curriculum-design workflow
 
-| Level | Primary design question | Expected result |
+The same workflow applies to new programs, new courses, substantial revisions, and reviews of previously migrated curricula.
+
+1. **Establish the subject boundary.** Research the discipline, relevant primary technical documentation, appropriate academic syllabi and curriculum standards, representative engineering practice, and skills already taught by prerequisites. Define what belongs in the subject and what does not.
+2. **Revalidate course learning outcomes.** Specify observable exit capabilities at the appropriate depth. Retain existing stable identifiers when their competency meaning is unchanged; do not design toward a preferred outcome count.
+3. **Derive module responsibilities.** Group the mechanisms and decisions necessary for those outcomes into cohesive stages, following real conceptual and prerequisite dependencies. Do not start from a target number of modules.
+4. **Design individual lessons.** Give each instructional unit one primary learning objective, the necessary mechanisms, an observation or application, and useful feedback. Split or combine lessons based on cognitive and instructional coherence.
+5. **Select proportional practice and assessment.** Place formative work where it improves understanding. Choose summative work that actually measures required outcomes and publishes clear success criteria and evidence, without duplicate submissions.
+6. **Review against neighboring courses.** Remove needless repetition, prerequisite jumps, hidden tool or language assumptions, unjustified vendor restrictions, and unsupported claims. Protect a clear foundational-to-advanced progression.
+7. **Recalculate workload and validate.** Estimate time from actual learner activities, experiments, debugging, assessments, and iteration. Review technical accuracy, curriculum alignment, course/catalog consistency, accessibility, reproducibility, and change impact.
+
+These stages are **iterative**, not a rigid waterfall. If the designed assessments cannot validly evaluate an outcome, revisit the outcome. If a module assumes skills never previously taught, revise the prerequisites or the progression. If workload is unrealistic, correct the scope or learning sequence rather than deleting essential concepts to satisfy a timetable.
+
+A temporary working research map or editorial checklist can support the process. It does not become a mandatory public course artifact or a parallel source of curricular authority.
+
+## 2. Research before designing the outline
+
+A curriculum is not made academically sound by increasing its length or naming more advanced topics. For each substantial course or program review, investigate at least these **types of evidence**, selecting sources relevant to the subject:
+
+| Evidence | What to learn from it | What not to assume |
 | --- | --- | --- |
-| Program | What can a graduate do across this engineering discipline? | A coherent progression of complementary course capabilities |
-| Course | What substantial capability can a learner demonstrate after completing this course? | A bounded learning experience with assessable exit outcomes |
-| Module | Which closely related abilities form a useful stage of that capability? | A coherent sequence of lessons and relevant practice |
-| Lesson | What one primary objective should this instructional unit develop? | A focused explanation, demonstration, or investigation |
-| Concept | Which ideas, principles, terms, and mechanisms support that objective? | Material inside one or more lessons, not automatically a separate lesson |
-| Assessment | What evidence can establish that the required outcomes were achieved? | Published, outcome-aligned criteria and proportionate evidence |
+| Primary standards and official documentation | Mechanisms, supported behavior, formal models, constraints, version-dependent details | One vendor's tutorial defines the discipline |
+| Respected university and disciplinary curricula | Foundational concepts, prerequisite expectations, levels of rigor, and possible coverage gaps | Another university's course packaging is the only correct packaging |
+| Discipline-wide guidance (for example, CS2023) | Knowledge areas, competencies, relationships, and representative educational scope | Every knowledge unit requires its own OEE module |
+| Reproducible engineering practice | Real workflows, errors, incident patterns, trade-offs, and skills needed in unfamiliar situations | Popularity, benchmarks, or anecdote prove correctness |
+| Existing OEE catalogs and courses | Competency ownership, already-assessed prerequisites, graduate capability, and progression | A similar lesson title means the same depth was taught |
+| Learner and environment constraints | Setup cost, tooling access, hardware, safe experiments, accessibility, and realistic independent-study effort | Every learner has paid infrastructure, specialized equipment, or an instructor |
 
-The unit to optimize is **the learner's demonstrated capability**, not the
-number of modules, lessons, tests, labs, or recorded study hours.
+**Source evaluation:** Prefer authoritative and current sources for changing technologies. Check publication or specification versions, distinguish standard behavior from implementation-specific behavior, and identify where evidence is provisional, disputed, historical, or context-dependent. Compare multiple credible perspectives for substantial design decisions. Do not invent citations, claimed experiments, learner feedback, formal accreditation, or consensus.
 
-## 2. Define course boundaries
+**Research questions:**
 
-A course should develop a recognizable, useful capability that can be described
-in a concise statement and assessed with meaningful evidence. Avoid both:
+- What is the discipline's indispensable conceptual and mathematical foundation?
+- What can an appropriately prepared graduate actually explain, predict, implement, diagnose, evaluate, or defend?
+- Which mechanisms matter independently of specific tools, products, or languages?
+- Which capabilities are fundamental, applied, advanced, or elective?
+- What failures, unsafe assumptions, or limitations reveal shallow understanding?
+- What do the prerequisites already teach, and what is missing from the actual prerequisite closure?
+- Which representative tasks could be demonstrated with accessible, reproducible resources?
+- What knowledge is evolving, and what confidence should an educator attach to the selected source?
 
-- **Encyclopedic courses:** unrelated or only loosely connected areas are
-  combined simply to cover an entire field in one course.
-- **Artificial microcourses:** a coherent capability is divided into so many
-  small courses that learners repeatedly cross enrollment and assessment
-  boundaries without educational benefit.
+Make a **working competency coverage map** before drafting or removing lessons. The map can link capability, primary source or rationale, first course owner, prerequisites, expected depth, evidence of mastery, and appropriate follow-on specialization. Use it to find omissions and duplication, not to generate a mandatory document for every learner.
 
-Review a course boundary by asking:
+Research informs the public curriculum. It must not silently become a required paid reading list or hidden assessment prerequisite.
 
-1. Can I state its core capability without listing dozens of unrelated topics?
-2. Are its outcomes mutually reinforcing, or do they describe separate
-   capabilities with substantially different prerequisites?
-3. Is its exit assessment appropriate for the actual capability being taught?
-4. Could a later course deepen the subject without repeating the same lessons?
-5. If I split the course, will learners still have a complete and meaningful
-   experience within each new course?
-6. If I combine courses, does the merger simplify the learning pathway, or
-   only lengthen it?
+## 3. Define program architecture and competency ownership
 
-Use **program-level coverage** to preserve breadth: each competency should
-have an appropriate owning course, prerequisites, and a known place for later
-advanced treatment. A topic can recur when it is needed at greater depth or
-in a new context, but repetition should teach a new capability.
+A program should develop recognizable graduate capabilities through a sequence of distinct, complementary courses. Begin with those capabilities and their dependencies; choose course names and ordering afterward.
 
-### Length and workload
+A useful working matrix is:
 
-There is **no ideal universal course length**. For initial planning,
-a focused taught course might span roughly 4–8 weeks of part-time study,
-while an integrated project course may take longer. These are calibration
-examples, not limits or proof of quality.
-
-Estimate time from the actual demands of explanations, practice,
-debugging, assessments, prerequisite gaps, and project iteration. State
-assumptions, including approximate focused hours per week. Review estimates
-against learner evidence when available, and retain `draft` status until
-the existing readiness rules are met.
-
-When a course appears too long, first identify whether it contains multiple
-distinct exit capabilities. If yes, split at a meaningful competency and
-prerequisite boundary. If no, preserve the course but simplify sequencing,
-eliminate unnecessary repeated submissions, or move advanced material into
-an optional or follow-on course.
-
-Do not shorten a course by dropping essential mechanisms or by relying on
-undocumented paid teaching material to fill a public-curriculum gap.
-
-## 3. Make modules cohesive
-
-A module is a meaningful stage within a course. Its lessons should develop a
-small group of closely related abilities with a clear prerequisite sequence.
-
-A useful editorial starting point is several focused lessons, often around
-4–8, but both shorter and longer modules can be justified. Do not split a
-module merely to satisfy a numerical target.
-
-Split a module when:
-
-- It contains two substantially different competency clusters.
-- The second half has materially different prerequisites.
-- Learners need a distinct integration or feedback point before proceeding.
-- The module's title no longer describes much of its content.
-
-Keep a module together when its concepts jointly explain the same mechanism
-or the same family of engineering decisions.
-
-Module names should describe the capability or system being studied rather
-than a generic stage such as `Advanced Topics` or `Part Two`.
-
-## 4. One primary learning objective per lesson
-
-**A lesson is a focused instructional unit.** Its primary objective is an
-observable statement of what the learner should be able to explain, trace,
-predict, implement, compare, debug, or justify.
-
-A *topic* names a subject area (for example, `DNS`). A *concept* names an
-idea or mechanism (for example, `DNS caching`). Neither automatically
-defines the boundary of a lesson.
-
-One lesson may need several closely connected concepts to develop its
-primary objective. Conversely, a broad topic may require multiple lessons
-when it includes distinct learning objectives.
-
-For example:
-
-| Unit | Name | Primary objective |
-| --- | --- | --- |
-| Module | Domain Names and DNS | Understand domain registration, resolution, and failures |
-| Lesson | Domain Names | Explain the purpose and structure of domain names |
-| Lesson | Domain Registration | Trace the roles involved in registering a domain |
-| Lesson | DNS Records | Interpret common DNS record types |
-| Lesson | DNS Resolution | Trace recursive and authoritative resolution |
-| Lesson | Caching and Failures | Diagnose effects of caches and common lookup failures |
-
-The `DNS Resolution` lesson may explain resolvers, authoritative servers,
-referrals, and query results together. Splitting each noun into its own lesson
-would fragment the mechanism rather than improve understanding.
-
-### Deciding when to split a lesson
-
-Consider splitting when learners must acquire two independent primary
-objectives, a different prerequisite is needed halfway through, or one
-instructional unit becomes hard to navigate and practice.
-
-Keep material together when separation would force learners to reconstruct
-a single mechanism across several disconnected lessons. Duration is a
-diagnostic, not the definition: an advanced debugging lesson may reasonably
-take longer than a short terminology lesson.
-
-A lesson outline can answer four authoring questions without requiring
-four mandatory headings:
-
-1. **Purpose:** What capability is this lesson developing?
-2. **Mechanism:** How does the system or idea work, including important
-   boundaries and assumptions?
-3. **Observation or application:** What example, trace, experiment, or
-   worked reasoning makes the mechanism concrete?
-4. **Feedback:** How will a learner notice a misunderstanding, mistake,
-   or limitation before moving forward?
-
-Not every lesson needs a separate exercise or retained evidence artifact.
-Practice should be frequent where useful but chosen intentionally.
-
-## 5. Use short, meaningful lesson titles
-
-Prefer concise noun phrases or clear action-oriented phrases. As an
-editorial heuristic, **two to five words often suffice**. Longer titles
-are acceptable when needed to remove ambiguity.
-
-| Weak title | Prefer |
-| --- | --- |
-| Introduction to the Basics of How DNS Works | DNS Resolution |
-| The Different Types of Records Used in DNS | DNS Records |
-| Some More Information About the Browser | Browser Processes |
-| Advanced Concepts | HTTP Caching |
-| Lesson 7: Learn About Security | Same-Origin Policy |
-| Understanding How Pages Get Rendered in the Browser | Browser Rendering |
-
-Avoid decorative labels, repeated `Introduction to`, vague difficulty
-adjectives, and titles that list every subtopic. Titles should distinguish
-neighboring lessons and remain understandable in course indexes, search
-results, and 0xNAND or OEE Workspace navigation.
-
-A short title is not an instruction to write a shallow lesson.
-
-## 6. Preserve foundational depth without repeating everything
-
-Foundational courses should explain important mechanisms and boundaries
-well enough for learners to form a reliable mental model. Later applied
-courses can use that model and revisit the same area for new objectives.
-
-Illustrative APP ownership:
-
-| Course area | Appropriate responsibility |
-| --- | --- |
-| Web and Internet Foundations | Networking, domain names, DNS, HTTP, TLS, and how browsers navigate and render |
-| HTML and CSS Engineering | Authoring documents, semantics, layout, styling, accessibility fundamentals |
-| JavaScript Programming | Language semantics, execution model, program design |
-| TypeScript Programming | Type system, type-driven design, integration with JavaScript |
-| Browser and Frontend Engineering | DOM APIs, browser application behavior, event handling, performance fundamentals |
-| React Application Engineering | Component design, state, rendering, composition, application architecture |
-| Backend and Data Engineering | Service construction, persistence, API correctness, operational concerns |
-
-This is an **illustration of competency ownership**, not an adopted APP
-course catalog. A real redesign should account for the complete prerequisite
-graph, workload, and overlaps with SEF, SYS, SEC, and AI before renumbering
-or creating courses.
-
-For example, APP1 may explain *why* HTML/CSS parsing and rendering occur
-without teaching comprehensive website authoring. It need not also teach
-production backend framework implementation to establish web foundations.
-
-## 7. Build a coverage map before cutting content
-
-Before restructuring a program, create a temporary planning matrix:
-
-| Capability | Owning course | Supporting module | Evidence of mastery | Follow-on depth |
+| Capability | First substantial owner | Preparation needed | Evidence of understanding | Later application |
 | --- | --- | --- | --- | --- |
-| Trace DNS resolution | Web Foundations | Domain Names and DNS | Diagnose a failed resolution | Operations / systems |
-| Explain browser rendering | Web Foundations | Browser Rendering | Trace an HTML-to-pixels pipeline | Frontend performance |
-| Author semantic HTML | HTML and CSS | Document Semantics | Build and inspect a document | Accessibility engineering |
+| Explain DNS resolution and failure | Web foundations | Addressing and networking concepts | Trace an actual or supplied resolution failure | Deployment and operations |
+| Reason about shared mutable state | Appropriate programming/systems foundations | Control flow and state | Predict and reproduce a race | Database and distributed correctness |
+| Evaluate model failure modes | Appropriate AI/data course | Statistics and evaluation concepts | Analyze held-out errors and limitations | Deployment and monitoring |
+| Diagnose authorization errors | Appropriate application/security owner | Identity and trust boundaries | Show rejected access and unaffected authoritative state | Security assurance and incident response |
 
-These are *illustrative* rows. The map is a planning and review aid,
-not a mandatory new source of truth or another public requirements file.
-Once course requirements are finalized, their canonical outcomes and
-assessments remain in the public course definitions.
+These are **illustrative** rows, not newly adopted OEE course assignments.
 
-Use the map to find missing skills, duplicated ownership, circular
-prerequisites, unexplained jumps in difficulty, and excessive course
-scope. If a course is split, preserve or deliberately revise its exit
-capabilities rather than silently deleting them.
+Review the **entire prerequisite graph**, including transitive preparation. A course prerequisite should supply knowledge actually needed before starting, not merely be numerically earlier or fashionable. Do not introduce an elective as a hidden core-graduation condition. When competence is available through a different program or equivalent preparation, document that boundary appropriately without inventing a current course code.
 
-## 8. Select practice and assessment based on outcomes
+### Distinguish repetition from progression
 
-Different learning objectives warrant different evidence:
+Concepts may legitimately recur when the next course makes a **new claim of competence**:
 
-- Explanations and conceptual tracing may be demonstrated through
-  predictions, diagrams, analysis, or diagnosis.
-- Engineering implementation can be demonstrated through inspected
-  artifacts, behavior tests, and design reasoning.
-- Experimental or systems understanding may be demonstrated through
-  reproducible observations and interpretation.
-- Capstones should integrate work over time, with milestone feedback,
-  substantial deliverables, and a reviewable defense.
+- **Foundation:** Explain the mechanism and its key assumptions.
+- **Application:** Use the mechanism responsibly in a different engineering task.
+- **Specialization:** Analyze a subtle failure, scale limit, security property, or competing technique.
+- **Integration:** Select and defend an approach in an unfamiliar system or project.
 
-A single required evaluation may validly cover several outcomes. An
-optional self-check need not generate a permanent completion record.
-A software test inside a lab is not automatically an additional learner
-knowledge test. Avoid one quiz plus one lab per module as a default.
+Ask what is genuinely *new* the second time. A brief recall or link may be appropriate; repeating the same introduction, example, and assessment is usually not. Conversely, deleting every recurrence would prevent valuable transfer. Protect critical foundations without turning every advanced course into an introductory one.
 
-For binding assessment requirements, consult
-[Course Format](../spec/course-format.md) and
-[Evidence Rules](../spec/evidence-rules.md). An editorial design guide
-does not redefine those requirements.
+### Cross-program boundaries
 
-## 9. Keep public curriculum separate from delivery
+All five programs should use the **same quality of research and review**, not the same course shape.
 
-OEE describes the canonical capability, learning sequence, outcomes,
-public assessments, evidence expectations, and prerequisites. It must
-remain understandable for independent learners.
+- **SEF:** Transferable computing, mathematical and programming foundations. Subsequent programs should rely on capabilities it actually demonstrates, not merely on its course titles.
+- **APP:** Application, integration, delivery, operating and specialization capabilities. Systems-level Rust ownership and C/Rust comparison should not be re-taught just to fill an APP interoperability elective.
+- **SYS:** Investigate its own hardware-near, language/runtime, operating-system, concurrency, memory, performance, and resource boundaries before selecting courses; do not inherit APP's structure.
+- **AI:** Determine which mathematical, statistical, data, modeling, evaluation and deployment capabilities belong at each level. Map prerequisites against what SEF and APP **actually** provide rather than assuming every AI learner starts from zero.
+- **SEC:** Cover security-specific reasoning, threats, controls, validation, safe experimentation, privacy and incident work while relying transparently on software and systems preparation already acquired.
 
-OEE Workspace can organize learning material and learner-owned
-artifacts. 0xNAND can provide richer explanations, demonstrations,
-instructor feedback, guided exercises, adaptive sequencing, and
-evaluation tooling. Neither delivery layer should silently replace
-the public course's required outcomes or completion criteria.
+These descriptions identify **review concerns**, not new authoritative course lists, approved prerequisite changes, or a universal sequence among programs. Refer to each program's current catalog for its actual published scope.
 
-A lesson's primary objective should remain stable even if its teaching
-material is presented as a written explanation, interactive trace,
-instructor session, or an alternative accessible format. A future data
-export may expose lesson structure, but this guide does not introduce
-new required lesson identifiers or a platform-specific schema.
+## 4. Define coherent course boundaries and outcomes
 
-## 10. Review before migrating a course
+Each taught course should develop a recognizable, substantial exit capability. A project course may integrate multiple prior capabilities into a coherent product, investigation, or engineering defense. Electives should deepen competence without being necessary for unrelated core graduation.
 
-For each proposed course or major restructuring, check:
+**Too broad:** Unrelated skill sets with different prerequisite paths, many detached topics, and an assessment that cannot convincingly evaluate the whole scope.
 
-1. **Capability boundary:** the course has a coherent purpose and
-   meaningful exit outcomes.
-2. **Coverage:** required program capabilities have a deliberate owner;
-   no essential topic disappears during a split or consolidation.
-3. **Prerequisites:** there are no accidental cycles, hidden assumed
-   skills, or unrelated barriers to entry.
-4. **Module cohesion:** each module groups related objectives and has
-   a teachable progression.
-5. **Lesson focus:** each lesson has one primary objective, with
-   logically related concepts and a concise descriptive title.
-6. **Practice:** examples, labs, and checks serve actual learning
-   needs rather than filling a quota.
-7. **Assessment:** every required course outcome is covered by
-   appropriate, publicly described evaluation and proportionate
-   evidence.
-8. **Workload:** duration estimates reflect realistic independent
-   learner effort, not a fixed lesson/module target.
-9. **Delivery independence:** no mandatory requirement is hidden in
-   0xNAND, paid books, or other proprietary resources.
-10. **Migration:** existing course codes, prerequisites, learner
-    records, resource mappings, and downstream integrations have
-    an explicit impact plan.
+**Artificially fragmented:** Several course boundaries around one mechanism, duplicated onboarding, or multiple submissions for a single authentic performance.
 
-Earlier **curriculum-design review examples** using this guide included:
+Review the intended boundary:
 
-- **SEF1:** foundational understanding, reasoning and reproducible simulation.
-- **APP1:** internet/browser foundations without unnecessary backend implementation or fixed universal per-module test/lab pairs.
-- **SEF10:** one cumulative engineering project with clearly bounded milestones, evidence, ethical release decisions and independent defense.
+1. Can the main exit competence be expressed without listing dozens of unrelated technologies?
+2. Are the outcomes mutually reinforcing and appropriate for the same prerequisite level?
+3. Does another course already own the foundational treatment?
+4. What new mechanism or failure mode makes this course different?
+5. Would splitting, merging, or reordering genuinely improve the learning pathway?
+6. Does the course depend on a single vendor even when the competency is portable?
 
-The [current SEF curriculum](SEF/README.md) incorporates these design principles. Editorial reviews do not establish learner-tested effectiveness; this guide also applies to other programs and future evidence-driven improvements.
+### Write observable learning outcomes
 
-## 11. Normative boundary
+Outcomes should specify a performance and useful context: trace, explain, calculate, implement, verify, compare, investigate, justify, or defend. Replace vague statements such as "know X" with something a reviewer could recognize in a solution, demonstration, or explanation.
 
-This document is a non-normative design aid. The current OEE
-specification determines valid course structure, evidence rules,
-status labels, conformance, and the RFC process. Requiring exact
-lesson counts, time limits, a new mandatory authoring schema, or
-new assessment obligations would be a separate normative change
-and would require the established RFC process.
+Check each outcome for **observability, importance, distinctness, depth, prerequisite readiness, and assessability**. Outcomes should not be artificially multiplied to fill a standard count, nor combined so broadly that meaningful evaluation becomes impossible.
+
+Where OEE has already published stable outcome identifiers, retain them for genuine continuity. A material change in the expected capability requires explicit treatment under the existing [Course Format](../spec/course-format.md); reusing an old ID must not silently misrepresent a new requirement. The same applies to changed assessment expectations.
+
+An authentic exit task is often useful for testing the course boundary before modules are written: if it cannot demonstrate the proposed outcomes without a collection of unrelated exercises, reconsider the scope.
+
+## 5. Derive modules from conceptual cohesion
+
+A module is a meaningful stage in developing the course capability. Group concepts when they explain the **same mechanism**, depend on one another, or jointly support an engineering decision. Separate them when the learner must acquire a genuinely different model, prerequisite, or independent capability.
+
+**Do not choose a preferred module count or lessons-per-module range.** A course introduction may be brief; a transaction, operating-system scheduler, statistical inference, or security boundary may require greater depth. They should not be forced into equal-sized outlines.
+
+Split a module if:
+
+- It contains two independent primary competencies.
+- The second portion requires materially different preparation.
+- A distinct learning, practice, or feedback stage would improve comprehension.
+- The module title no longer describes the contents.
+
+Keep it together if:
+
+- Splitting would disconnect a mechanism from its essential assumptions or failure cases.
+- Several topics form one causal model or engineering decision.
+- A unified experiment makes relationships clearer.
+- The apparent length comes from genuinely necessary depth rather than unrelated scope.
+
+Module titles should express a real capability or system, not "Part Two", "Advanced Topics", or a convenient difficulty label.
+
+### Investigate numerical and template patterns
+
+Repeated counts are **diagnostic signals**, not automatic violations. When nearly every module has eight or nine lessons, every module ends with a formative task, or every course ends in the same final lab, inspect the learning objectives before changing the source.
+
+- Can two neighboring lessons be combined because they support one objective?
+- Does a repeated "introduction" merely recap a prerequisite?
+- Is a formative exercise better inside a lesson or cumulative project milestone?
+- Does a large lesson contain distinct objectives that merit separation?
+- Is the final integration stage assessing previously developed work or re-teaching the entire course?
+
+**Do not "fix" an arbitrary uniform count by creating artificial numerical variety.** Reorganize only when the conceptual and instructional evidence supports a change. Programmatically flagging repetitive counts may help human review but cannot serve as a course-design rule.
+
+## 6. Design lessons around one primary learning objective
+
+A *topic* identifies an area (such as DNS). A *concept* identifies an idea (such as recursive resolution). A *lesson* is a focused instructional unit whose primary objective can be explained, observed, practiced, and checked.
+
+Before accepting a lesson, ask:
+
+1. **Purpose:** What should the learner be able to do or reason about afterward?
+2. **Mechanism:** Which definitions, relationships, invariants, assumptions, constraints, or failure modes are necessary?
+3. **Observation/application:** What concrete trace, worked example, comparison, proof, simulation, or experiment makes the mechanism tangible?
+4. **Feedback:** What misconception, negative case, prediction, or correction would reveal incomplete understanding?
+
+These are authoring **questions**, not four mandatory lesson headings. A lesson may contain several closely related concepts. It does not need a separate lab, quiz, worksheet, or retained evidence record merely because it is a lesson.
+
+### Example: choosing a useful DNS lesson boundary
+
+| Unit | Name | Primary instructional aim |
+| --- | --- | --- |
+| Module | Domain Names and DNS | Explain name ownership, lookup and failures |
+| Lesson | Domain Names | Explain naming structure and purpose |
+| Lesson | Domain Registration | Trace registration and delegation responsibilities |
+| Lesson | DNS Records | Interpret records relevant to an observed resolution |
+| Lesson | DNS Resolution | Trace resolver, authoritative server, referrals and response |
+| Lesson | Caching and Failures | Diagnose stale results, TTL behavior and resolution errors |
+
+The "DNS Resolution" lesson can contain several mechanisms that belong together. Splitting every named component into a separate lesson would fragment the explanation. Conversely, registration and cache-related failure analysis can justify separate lessons because their primary objectives differ.
+
+Prefer short, descriptive titles that distinguish neighboring lessons. Two to five words often work well, but this is **only a readability heuristic**, not a quota or a reason to omit necessary precision. Avoid decorative or repeated "Introduction to..." labels. A concise title is not permission to teach the subject superficially.
+
+## 7. Sequence learning for understanding and transfer
+
+The sequence must respect **prerequisite knowledge**, support progressive reasoning, and give learners opportunities to apply knowledge under changing conditions.
+
+A useful design may move through scope and motivation, foundational mechanism, guided observation, independent application, failure diagnosis, and integration. This is **not** a six-stage template for every course or module. Different subjects require different teaching sequences:
+
+- A mathematical module may move from definitions and proofs to counterexamples and derivations.
+- An operating-system module may use scheduling traces, resource models, controlled experiments and failure cases.
+- An AI module may use a data hypothesis, evaluation design, baseline model, errors and limitations.
+- A security module may begin with a threat, then establish the mechanism and test safe countermeasures.
+- A capstone may follow cumulative product milestones, independent evaluation, revision and defense rather than repeating previous courses.
+
+Use worked examples and feedback to support learning, then gradually reduce scaffolding. An unfamiliar problem is particularly useful where a course claims transferable reasoning or independent engineering judgment.
+
+Do not create a separate "formative lesson" at the end of every module by habit. Feedback might be embedded in a worked example, an observation task, a failure investigation, a revision, or a project checkpoint. It need not always produce permanent evidence.
+
+## 8. Align practice, assessment, and outcome evidence
+
+Start by asking: **What would convince an independent reviewer that the learner has achieved this outcome?** Then ensure lessons and formative practice prepare the learner for that performance.
+
+| Claimed capability | Suitable evidence or assessment form |
+| --- | --- |
+| Explain a mechanism | Causal explanation, trace, prediction, counterexample |
+| Apply mathematical reasoning | Derivation, calculation, justification of assumptions |
+| Implement a system | Behavior and negative tests, inspected artifact, rationale |
+| Conduct an experiment | Reproducible method, measurements, uncertainty, interpretation |
+| Evaluate security or safety | Threat model, denied/allowed behavior, safe failure analysis |
+| Make an architecture decision | Alternatives, constraints, measured consequences, defended trade-offs |
+| Integrate a product | Cumulative deliverables, independent reproduction, technical defense |
+
+Choose formative activities for **feedback**; choose summative assessments for **decisions about required outcomes**. One authentic assessment may support several outcomes if its criteria genuinely distinguish competence in each. Software tests run inside an assessed lab are not automatically additional learner knowledge tests.
+
+Challenge each assessment:
+
+- Could a learner pass by memorizing definitions or reproducing a tutorial without understanding?
+- Are the test oracles independent, or do they merely restate the implementation's assumptions?
+- Are important invalid, hostile, partial-failure or limitation cases missing?
+- Is the required evidence proportional to what is claimed?
+- Is some artifact submitted repeatedly despite establishing no new outcome?
+- Can an independent learner understand and reproduce the required work without hidden tools or a paid provider?
+
+The binding rules for assessed work and evidence remain in [Course Format](../spec/course-format.md) and [Evidence Rules](../spec/evidence-rules.md). This guide does not impose a test-then-lab sequence or a universal final integration exercise.
+
+## 9. Recalculate workload after designing the real work
+
+Estimate time from **conceptual study, worked reasoning, setup, practice, experimentation, debugging, assessment, evidence preparation, feedback and revision**. A short lesson list may demand substantial time, while a long list of terminology items may be shallow.
+
+Make the assumptions explicit: prior knowledge, weekly focused hours, access to hardware or emulators, tool installation, mathematical maturity, realistic experiment duration, and expected iterations. Distinguish prerequisite gaps from time required to learn the current course.
+
+If the total looks excessive, inspect unrelated scope, repeated onboarding, duplicated submissions, needless technology requirements and artificial course boundaries **before removing important mechanisms**. If it looks unrealistically short, look for unspoken prerequisites and tasks whose difficulty was underestimated.
+
+Duration is provisional until learner evidence supports calibration. A repository check, author's intuition, or another university's credit timetable is not proof that OEE learners can complete the work at the stated pace.
+
+## 10. Build accessibility and independent study into the curriculum
+
+The public curriculum should be understandable without a commercial service, a particular instructor, or undisclosed paid books. Identify essential environment requirements, free reproducible alternatives where reasonable, assumptions about devices and operating systems, and limitations of a simulation versus real-world behavior.
+
+Review whether required work can be understood and demonstrated using accessible explanations, diagrams or equivalent descriptions, keyboard/assistive navigation where relevant, inspectable examples, and appropriate alternative forms of expression that preserve the same competency. Do not equate accessibility with removing important reasoning or safety criteria.
+
+OEE publishes competencies and assessment expectations. OEE Workspace, 0xNAND and other implementations may add teaching, guidance, practice and feedback without becoming the only place where the public completion contract can be discovered. This guide is about curriculum **design**, not a platform-specific lesson-content schema.
+
+## 11. Review a whole program, not just one course file
+
+A course can look comprehensive in isolation while creating gaps or redundant teaching in the program. Review across the entire published prerequisite graph.
+
+| Program-wide question | What to inspect |
+| --- | --- |
+| Coverage | Does every essential graduate capability have a deliberate substantial owner? |
+| Dependency | Does each course inherit the concepts its actual prerequisites teach? |
+| Depth | Where is a mechanism first taught, later applied, and finally specialized? |
+| Duplication | Are the same explanations or assessments repeated without a new competency? |
+| Sequence | Does every course progress toward independent transfer rather than only tutorial following? |
+| Access | Are tools, environments, mathematical preparation and experiment constraints disclosed? |
+| Scope | Are electives truly optional, and are project courses integrations rather than repetitions? |
+| Coherence | Are course outcomes, modules, lessons, practice, and required evidence mutually aligned? |
+
+For APP audits, scrutinize repetitive module structures **without presuming they are wrong solely because the counts match**. For SYS, AI and SEC redesigns, research the actual discipline and existing SEF/APP capabilities before selecting new modules. Do not transplant an APP-style outline, fixed duration, assessment count, or course architecture into another field.
+
+A temporary coverage matrix or review notes may be useful for decisions, but the authoritative result is the revised public program catalog and course definitions—not a permanent duplicate curriculum registry.
+
+## 12. Review migration and preserve educational meaning
+
+For a published course, compare old and proposed outcomes, assessments, modules, prerequisites, classification, workload and independent-study assumptions before revising it.
+
+- Preserve established course identities and stable outcome/assessment IDs where their meaning remains continuous.
+- Identify materially replaced outcomes and changed evaluation expectations explicitly.
+- Protect useful prior learning while moving or consolidating lessons; do not delete a capability because its old lesson was awkwardly placed.
+- Examine affected prerequisite closure and downstream courses, resource mappings and consumer integrations.
+- Keep historical course revisions and learner evidence interpretable; do not silently regrade old work against new requirements.
+- Update course source and its authoritative program catalog consistently through the repository's review process.
+- Record rationale and substantive review findings in the existing PR or governance channel, not in a permanent audit report that competes with the current curriculum.
+
+Editorial course reorganization alone does not automatically change normative OEE requirements. If a proposal actually alters binding specification rules, follow [OEE governance](../GOVERNANCE.md) and its RFC process.
+
+## 13. Academic review before source migration is called complete
+
+Use **separate review lenses**. A passing structural validator cannot establish whether lessons are well chosen or assessments really measure the claimed capability.
+
+| Review lens | Questions |
+| --- | --- |
+| Disciplinary accuracy | Are mechanisms, technical claims, and cited references correct, complete within scope and current enough? |
+| Program architecture | Are graduate capabilities covered? Are prerequisites and ownership coherent? |
+| Instructional sequence | Are modules cohesive and lessons focused without filler, fragmentation or arbitrary symmetry? |
+| Assessment validity | Do required tasks and criteria genuinely measure all claimed outcomes? |
+| Workload and accessibility | Are the tasks feasible under stated preparation, access and time assumptions? |
+| Change and provenance | Are identifiers, prior evidence, catalog data and downstream dependencies treated correctly? |
+| Source maintenance | Do links, metadata, parser-supported format, assessments and repository checks pass? |
+| Learner evidence | Do real study and independent review support claims about effectiveness or readiness? |
+
+A reviewer should identify **the concrete defect, its effect on learner capability, the proposed correction, and evidence or reasoning for it**. Avoid vague labels such as "needs more depth" or replacing a uniform lesson count with a random distribution.
+
+A course can be **source-migrated** while still requiring independent pedagogical review and learner validation. Preserve the published readiness status until the evidence required by [Status Labels](../spec/status-labels.md) exists. Never describe a curriculum as verified solely because all files use the current format.
+
+### Final editorial questions
+
+Use these questions as a review aid, **not** a mandatory new metadata section or a scoring formula:
+
+1. Was the course researched against credible, attributable, discipline-appropriate sources?
+2. Is its substantial exit capability clear and distinct from neighboring courses?
+3. Does each outcome describe something observable and important?
+4. Are assumed prerequisites actually provided by the published path?
+5. Does each module exist because of a coherent conceptual stage rather than a numerical target?
+6. Does each lesson contribute a focused, necessary objective and meaningful depth?
+7. Is formative practice placed where learners need feedback rather than at a fixed template position?
+8. Are assessments aligned with outcomes and free of unnecessary duplicate evidence?
+9. Are failure cases, uncertainty, accessibility and safety addressed where materially relevant?
+10. Is the workload plausible under independently reproducible conditions?
+11. Are historical source identities and downstream consumers treated explicitly?
+12. Are readiness, conformance and performance claims limited to available evidence?
+
+## 14. Editorial foundations and further reading
+
+These public sources informed the guide's research-led, outcome-aligned approach; they are **review references**, not mandatory learner resources or evidence of OEE accreditation.
+
+- [Carnegie Mellon Eberly Center — Align Assessments, Objectives, Instructional Strategies](https://www.cmu.edu/teaching/assessment/basics/alignment.html): alignment between learning outcomes, evaluation and teaching.
+- [Carnegie Mellon Eberly Center — Plan Your Course Content and Schedule](https://www.cmu.edu/teaching/designteach/design/contentschedule.html): purposeful topic selection, sequencing, practice and workload planning.
+- [Carnegie Mellon Eberly Center — Learning Objectives](https://www.cmu.edu/teaching/designteach/syllabus/newcourse/learningobjectives.html): measurable, student-centered objectives.
+- [ACM/IEEE-CS/AAAI CS2023](https://csed.acm.org/): knowledge-area comparison, competence-driven curricula and flexible course packaging.
+- [CAST Universal Design for Learning Guidelines 3.0](https://udlguidelines.cast.org/): accessible engagement, representation, feedback and expression of learning.
+
+Sources guide editorial reasoning rather than overriding OEE's adopted curriculum, specifications, governance or evidence requirements.
