@@ -1,268 +1,525 @@
-# APP15 — Advanced TypeScript/Rust Application Development
+# APP15 — TypeScript–Rust Application Interoperability
 
 **Program:** APP — Application Engineering
-**Classification:** `elective`
 **Type:** `course`
-**Prerequisites:** [APP2](APP2.md), [APP3](APP3.md), [APP6](APP6.md)
-**Duration:** 10 weeks
+**Classification:** `elective`
+**Prerequisites:** [APP19](APP19.md) — TypeScript Programming, [APP21](APP21.md) — Node.js & Backend Foundations, [APP6](APP6.md) — Software Quality & Engineering Operations
+**Duration:** 14–18 weeks
 **Status:** `draft`
-**Expected workload:** 10–15 focused hours/week
+**Specification:** `v0.2.0`
+**Expected workload:** 10–14 focused hours/week (provisional; validate with learners)
 
 > [Application Engineering](README.md) · [OEE curriculum](../README.md) · [Course format](../../spec/course-format.md)
 
 ## Overview
 
-Build applications using TypeScript and Rust where explicit type contracts, runtime boundaries, ownership and concurrency matter. Compare their strengths without presenting one language as universally superior, and integrate a Rust component into a TypeScript-facing application through a documented interface.
+**Design, implement, version, verify, distribute and defend a TypeScript-facing application feature powered by a bounded Rust component.** APP15 is an **optional** specialization and is never needed for APP9 or APP core graduation. Its accepted direct APP preparation is **APP19 + APP21 + APP6**, replacing legacy APP2 + APP3 + APP6. APP19 provides TypeScript language competence, APP21 provides the Node process/async foundation, and APP6 provides testing, CI and incident discipline. Backend framework and browser UI knowledge are not mandatory.
 
-This specialization is optional and not required for APP9 or APP graduation.
+**Rust entry readiness, not a second foundation course:** Learners must already demonstrate elementary Rust competence, whether obtained from a future reviewed SYS curriculum or equivalent prior study. The precise SYS course code remains **undecided until SYS is redesigned**; legacy SYS2 must not be claimed as the formal prerequisite. Before starting assessed interop, independently complete this public diagnostic: create a small Cargo-tested CLI that parses a bounded JSON request, uses ownership/borrowing and a useful data structure, returns explicit `Result` errors for invalid input, and produces a documented deterministic response; explain how memory/resource ownership and error propagation work. This checks readiness; it does **not** teach Rust grammar, ownership, lifetimes, C-versus-Rust comparison, compiler internals or the broader SYS concurrency curriculum. Learners who cannot yet pass should acquire those skills separately; the diagnostic is formative and does not replace the seven published APP15 summative assessments.
+
+**Reference implementation:** Choose a small useful application engine (document transformation, deterministic validation, parser, constrained search, or rule evaluation), a strict TypeScript/Node consumer and one local Rust executable. Use a clearly framed, versioned **process IPC** interface first: it is cross-language, auditable, free and does not require unsafe FFI or a specific WebAssembly toolchain. Observe actual stdout/stderr framing, spawn paths, runtime input validation, startup cost, failure, cancellation, resource limits and upgrade behavior. Use the same benchmark fixtures and semantics for a TypeScript-only comparator; the Rust option must earn its maintenance cost.
+
+**Alternatives and limitations:** Native addons through Node-API and WebAssembly are evaluated as advanced boundary choices but are **not** mandated as extra implementations. Node-API ABI stability does not magically guarantee every wrapper or dependent native library is compatible; FFI requires explicit memory ownership and panic/error safety. WebAssembly has host/runtime/memory limits and is not inherently faster. Rust's memory safety is not input validation or application authorization. No paid hosting, unsafe FFI exercise, arbitrary external binary installer, production identity system or native mobile toolchain is required.
+
+Seventeen measurable outcomes are developed across thirteen varied modules and seven public required summative assessments. Authored source remains `draft` pending learner testing and independent academic review.
 
 ## Learning outcomes
 
-By the end of this course, the learner will be able to:
-
-- Model domain invariants with TypeScript discriminated unions, strict narrowing and runtime validation.
-- Explain Rust ownership, borrowing, lifetimes and error handling through executable examples.
-- Design a stable typed boundary between TypeScript and Rust using explicit serialization and versioning.
-- Test async and concurrent behavior, cancellation and error propagation across boundaries.
-- Measure integration costs and defend a deliberate language/tool choice.
-- Create and evolve a reusable TypeScript package with compatible runtime and type contracts.
-- Build safe Rust application components with explicit ownership, error contracts and tested concurrency.
-- Integrate TypeScript and Rust through a versioned, validated interface with documented memory and failure boundaries.
-- Profile a reproducible cross-language workload and defend the build/deployment and architecture trade-offs.
+- **APP15-O1:** Select a TypeScript–Rust boundary only for an evidenced application capability, comparing a TypeScript-only implementation and total maintenance cost.
+- **APP15-O2:** Publish a TypeScript-facing package interface with runtime validated inputs/outputs, explicit errors and a stable consumer compatibility policy.
+- **APP15-O3:** Model language-neutral request, response and event envelopes with wire/version compatibility, integer, text, time and binary data semantics.
+- **APP15-O4:** Integrate a bounded Rust processing component while respecting documented prior ownership, borrowing, Result and Cargo proficiency rather than re-teaching SYS foundations.
+- **APP15-O5:** Operate a local child-process/IPC integration with safe spawning, clean shutdown, supervision and bounded stdout, stderr and resource behavior.
+- **APP15-O6:** Translate cross-boundary errors, panics, malformed results and uncertain execution into honest typed application states without silent loss or double effects.
+- **APP15-O7:** Implement cancellation, explicit deadlines and bounded concurrency/backpressure for async TypeScript-to-Rust work while proving observable behavior.
+- **APP15-O8:** Define reliable command identity, replay and idempotency when a boundary may fail after performing an effect but before returning a reply.
+- **APP15-O9:** Defend the boundary against malformed payloads, arbitrary code execution, untrusted paths, credential leakage and confused-deputy authorization.
+- **APP15-O10:** Build deterministic differential, property-based and adversarial tests that compare Rust and TypeScript behavior against independently justified invariants.
+- **APP15-O11:** Evolve package and wire versions with old/new TS and Rust compatibility matrices and safe rollback or forward repair.
+- **APP15-O12:** Build and distribute reproducible multi-artifact TypeScript/Rust releases with declared runtime/OS/CPU constraints, integrity and provenance.
+- **APP15-O13:** Measure end-to-end workload latency, tail behavior, memory, serialization/copy and startup overhead against a fair TypeScript-only baseline.
+- **APP15-O14:** Compare process IPC with native Node-API addons and WebAssembly, correctly analyzing ABI, memory ownership, sandbox and platform limitations without mandatory FFI.
+- **APP15-O15:** Observe and recover from worker crashes, corrupt streams, stale version negotiation, lost replies and partial upgrades through privacy-safe traces and runbooks.
+- **APP15-O16:** Document security, operating, portability and developer experience trade-offs of the chosen integration with reproducible independent evidence.
+- **APP15-O17:** Deliver and defend a complete TypeScript-facing application feature using a bounded Rust component under an unfamiliar interoperability or failure change.
 
 ## Modules
 
-### Module 1 — TypeScript Contracts & Runtime Boundaries
+### Module 1 — Boundary Need, History and Rust Readiness
 
 #### Outcomes
 
-- Distinguish compile-time types from runtime validation.
-- Design discriminated data models and safe parsing boundaries.
-
-- Model interfaces with TypeScript types while verifying real runtime input.
+- APP15-O1
+- APP15-O4
+- APP15-O14
+- APP15-O16
+- APP15-O17
 
 #### Lessons
 
-1. **Course introduction: Advanced TypeScript/Rust Application Development** — `lesson`
+1. **Why mix languages** — Compare scenarios where Rust's native execution, existing library or determinism is worth shipping another runtime.
 
-   Build applications using TypeScript and Rust where explicit type contracts, runtime boundaries, ownership and concurrency matter. Compare their strengths without presenting one language as universally superior, and integrate a Rust component into a TypeScript-facing application through a documented interface.
-2. **Discriminated unions, generics and strict narrowing** — `lesson`
-3. **Runtime validation and versioned schema contracts** — `lesson`
-4. **Advanced conditional and mapped types** — `lesson`
-5. **Strict compiler options and type narrowing** — `lesson`
-6. **Safe runtime parsing and schema migration** — `lesson`
-7. **Type safety versus runtime safety** — `test`
-8. **Harden a TypeScript API boundary** — `lab`
+2. **Historical integration routes** — Trace executable protocols, native shared libraries, WebAssembly and modern Node-API to explain design alternatives.
 
-### Module 2 — Rust Ownership & Error Semantics
+3. **Prior APP competence** — Locate APP19 type/runtime boundaries, APP21 Node processes and APP6 testing responsibilities without re-teaching fundamentals.
+
+4. **Rust entry diagnostic** — Compile a small Cargo crate using ownership-aware data, Result errors, JSON decode and unit tests to demonstrate prior readiness.
+
+5. **Readiness correction path** — Identify missing Rust ownership, borrowing or error skills for study in SYS or equivalent foundations before assessed integration.
+
+6. **Choose a bounded task** — Select a deterministic parser, formatter, document transformer or rule evaluator with meaningful validated inputs.
+
+7. **TypeScript-only comparison** — Build a correct in-process reference implementation to avoid language-fashion justification.
+
+8. **Hazard and cost register** — Identify binary distribution, process startup, copies, security and staff-maintenance costs.
+
+9. **Formative architecture decision** — Reject unnecessary Rust where measured constraints or existing dependencies do not warrant it.
+
+### Module 2 — TypeScript Package and Runtime Contracts
 
 #### Outcomes
 
-- Explain moves, borrows, lifetimes and trait-based abstraction.
-- Handle fallible operations with Result and explicit error context.
-
-- Build a Rust library with explicit ownership, testable error contracts and safe resource handling.
+- APP15-O2
+- APP15-O3
+- APP15-O6
+- APP15-O11
+- APP15-O16
 
 #### Lessons
 
-1. **Ownership, borrowing and lifetimes** — `lesson`
-2. **Enums, traits and structured errors** — `lesson`
-3. **Cargo projects, packages and Rust test tooling** — `lesson`
-4. **Ownership, borrowing and move semantics** — `lesson`
-5. **Lifetimes, trait objects and error ergonomics** — `lesson`
-6. **Modules, visibility and safe resource cleanup** — `lesson`
-7. **Reasoning about ownership** — `test`
-8. **Repair ownership and error defects** — `lab`
+1. **Consumer-first API** — Specify one stable TypeScript function and honest promises, cancellation semantics and error variants.
 
-### Module 3 — Interoperability & Contract Evolution
+2. **Types are not validators** — Reuse APP19 principles to validate all untrusted native/IPC responses at runtime.
+
+3. **Strict public exports** — Design ESM package exports, declarations and supported runtime entrypoints rather than relying on private paths.
+
+4. **Input normalization** — Publish units, limits, Unicode normalization policy and accepted numeric ranges.
+
+5. **Domain error vocabulary** — Distinguish user-correctable input, transient worker, incompatible protocol and internal faults.
+
+6. **Ownership of mutable results** — Decide which side may mutate buffers and when a result becomes immutable to consumers.
+
+7. **Package semver contracts** — Separate compatible API additions, breaking signatures and wire version changes with examples.
+
+8. **Consumer compatibility probe** — Run a fixture client pinned to previous TypeScript declarations and runtime behavior.
+
+9. **Formative type illusion** — Show that a casted wire response compiles yet fails contract validation and repair the adapter.
+
+### Module 3 — Rust Processing Component and Isolation
 
 #### Outcomes
 
-- Design a language-independent wire or FFI boundary.
-- Avoid unchecked memory sharing and version coupling.
-
-- Choose interoperation mechanisms according to reliability, security and deployment constraints.
+- APP15-O1
+- APP15-O4
+- APP15-O6
+- APP15-O9
+- APP15-O10
 
 #### Lessons
 
-1. **Serialization and public interface boundaries** — `lesson`
-2. **FFI versus process interfaces and compatibility** — `lesson`
-3. **Process, JSON and FFI boundary trade-offs** — `lesson`
-4. **Schema evolution and compatibility testing** — `lesson`
-5. **Encoding, ABI and memory ownership across language boundaries** — `lesson`
-6. **Choosing an integration mechanism** — `test`
-7. **Integrate a typed Rust component** — `lab`
+1. **Rust public operation surface** — Define functions with owned result data and explicit Result conditions at a stable component boundary.
 
-### Module 4 — Async, Concurrency & Diagnostics
+2. **Cargo artifact identity** — Pin Rust toolchain, dependencies, features and target triple for reproducible builds.
+
+3. **Correctness before optimization** — Implement the same deterministic domain rules as the TypeScript reference and publish invariants.
+
+4. **Non-panic input handling** — Validate large, malformed and unknown records without relying on panic as a routine error.
+
+5. **State lifetime design** — Choose request-scoped versus long-lived worker state and document cleanup and reentrancy.
+
+6. **Explicit memory budgets** — Bound per-request allocation, total input size and retained shared state.
+
+7. **Resource effects** — Decide whether the Rust worker may access files or networks and enforce minimum necessary capability.
+
+8. **Diagnostic stack** — Instrument local trace context and structured errors without serializing secrets.
+
+9. **Formative bad boundary** — Repair a Rust worker that panics on a missing key and loses all pending requests.
+
+### Module 4 — Language-Neutral Data and Versioned Envelopes
 
 #### Outcomes
 
-- Explain cancellation, backpressure and shared-state hazards.
-- Measure and diagnose performance without relying on language stereotypes.
-
-- Implement observable asynchronous workflows without unbounded resource consumption.
+- APP15-O2
+- APP15-O3
+- APP15-O6
+- APP15-O8
+- APP15-O11
 
 #### Lessons
 
-1. **Async execution and bounded work** — `lesson`
-2. **Thread safety, tracing and benchmarking** — `lesson`
-3. **Tokio-style async concepts and executors** — `lesson`
-4. **Cancellation, bounded work and backpressure** — `lesson`
-5. **Synchronization, shared state and tracing** — `lesson`
-6. **Diagnosing concurrency failures** — `test`
-7. **Reproduce a concurrency defect** — `lab`
+1. **Framing the wire** — Compare newline-delimited JSON, length-delimited messages and message-size boundaries.
 
-### Module 5 — Advanced TypeScript Architecture
+2. **Request identity** — Include operation ID, protocol version, correlation key and a bounded payload in every request.
+
+3. **Cross-language integers** — Test signed, unsigned and JavaScript safe-integer limits without silent precision loss.
+
+4. **Unicode and bytes** — Round-trip UTF-8, invalid encoding, byte length and composed text with declared transformations.
+
+5. **Time and precision** — Specify timezone, timestamp precision, monotonic versus wall-clock use and special numeric values.
+
+6. **Null, missing and defaults** — Distinguish omitted fields, explicit null and unknown enum variants in both languages.
+
+7. **Backward-compatible fields** — Add an optional field while exercising older runtime defaults and unknown-field policy.
+
+8. **Version negotiation** — Design explicit feature capability and incompatible version rejection rather than best-effort silent decoding.
+
+9. **Message length abuse** — Reject oversized, truncated, duplicated and malformed frames before allocating unbounded buffers.
+
+10. **Formative mixed-version replay** — Use an old Rust response with a new TS client and record the versioned failure/result.
+
+### Module 5 — Spawned Process and IPC Lifecycle
 
 #### Outcomes
 
-- Publish a predictable TypeScript package with coherent runtime and type contracts.
-- Control module boundaries and version changes without depending on unsafe type assertions.
+- APP15-O3
+- APP15-O5
+- APP15-O6
+- APP15-O7
+- APP15-O9
+- APP15-O15
 
 #### Lessons
 
-1. **Type-level modeling and inference boundaries** — `lesson`
-2. **Module resolution, ESM and package exports** — `lesson`
-3. **Build and bundling strategies** — `lesson`
-4. **Type-safe APIs with runtime validation** — `lesson`
-5. **Type soundness and package compatibility** — `test`
-6. **Publish and test a reusable TypeScript module** — `lab`
+1. **Why IPC first** — Choose child-process JSON over FFI for inspectable isolation and manageable cross-platform setup.
 
-### Module 6 — Rust Systems Foundations for Applications
+2. **Safe process spawning** — Spawn a fixed executable with separate argument vector, no untrusted shell interpolation and controlled working directory.
+
+3. **Channel separation** — Reserve stdout for framed protocol, stderr for sanitized diagnostics and logs.
+
+4. **Handshake and readiness** — Distinguish executable found, process spawned, handshake accepted and worker ready to receive tasks.
+
+5. **Request multiplexing** — Correlate concurrent responses by operation ID and prevent one slow request from blocking all progress.
+
+6. **Crash and exit semantics** — Observe exit code, signal, closed streams and partially written output without fabricating success.
+
+7. **Bounded buffers and pipes** — Limit queued writes, parser frames and unread stderr to prevent deadlock or memory exhaustion.
+
+8. **Supervision policy** — Apply finite restarts, backoff, circuit state and a manual stop switch.
+
+9. **Graceful termination** — Drain or reject outstanding requests with a finite deadline then terminate an unresponsive child.
+
+10. **Formative crash injection** — Kill the Rust worker during a request and validate the caller's unsettled-versus-failed state.
+
+### Module 6 — Failure Semantics, Cancellation and Replay
 
 #### Outcomes
 
-- Implement a safe bounded service component using Rust ownership and concurrency rules.
-- Test parsers and state transitions against invalid and adversarial inputs.
+- APP15-O3
+- APP15-O6
+- APP15-O7
+- APP15-O8
+- APP15-O15
 
 #### Lessons
 
-1. **Memory layout and data representation** — `lesson`
-2. **Iterators, ownership-aware collections and traits** — `lesson`
-3. **Error composition, tracing and panics** — `lesson`
-4. **Concurrency primitives and Send/Sync** — `lesson`
-5. **Testing, fuzzing and property-based verification** — `lesson`
-6. **Rust memory, concurrency and error mechanisms** — `test`
-7. **Build a tested Rust processing engine** — `lab`
+1. **Semantic failure taxonomy** — Model invalid input, Rust domain error, unknown outcome, process failure and incompatible version separately.
 
-### Module 7 — Cross-Language API Evolution & Security
+2. **Deadlines as contracts** — Pass bounded execution deadlines through TS queue and worker and report observed cancellation.
+
+3. **Abort is not undo** — Show why a client AbortSignal does not reverse already completed Rust or database side effects.
+
+4. **Response-loss window** — Deliberately drop a reply after the worker has completed and explain remaining uncertainty.
+
+5. **Idempotency ownership** — Use stable operation identifiers and durable effect deduplication where any external mutation is allowed.
+
+6. **Retry eligibility** — Retry pure deterministic operations safely and distinguish them from replay-sensitive writes.
+
+7. **Partial results** — Specify whether a batch returns all-or-nothing, per-item errors or a durable committed prefix.
+
+8. **Worker restart recovery** — Reconcile uncertain requests against authoritative state instead of assuming failed means uncommitted.
+
+9. **Propagation into API** — Map boundary failures to stable TypeScript/APP3 user-visible errors without leaking panic internals.
+
+10. **Formative lost-response incident** — Repair duplicate side effects created by naive timeout-driven resubmission.
+
+### Module 7 — Boundary Security and Untrusted Inputs
 
 #### Outcomes
 
-- Evolve a TypeScript–Rust integration without hidden coupling.
-- Choose isolation based on memory and failure consequences.
+- APP15-O2
+- APP15-O5
+- APP15-O6
+- APP15-O9
+- APP15-O15
 
 #### Lessons
 
-1. **Contract-first schema design** — `lesson`
-2. **Version negotiation and compatibility matrices** — `lesson`
-3. **Boundary authentication, encoding and validation** — `lesson`
-4. **FFI safety audits and process isolation** — `lesson`
-5. **Data ownership, lifetimes and failure translation** — `lesson`
-6. **Cross-language schema and memory safety** — `test`
-7. **Break and repair a versioned TS–Rust contract** — `lab`
+1. **Boundary threat model** — Map caller, executable, IPC transport, filesystem, runtime and application authority for every trust decision.
 
-### Module 8 — Build, Debug, Measure & Ship
+2. **Execution path safety** — Pin the worker binary path and integrity rather than accepting an arbitrary user-supplied command.
+
+3. **Argument and environment hygiene** — Restrict inherited environment, working directories, PATH and unsafe shell invocation.
+
+4. **Untrusted file references** — Validate path traversal, symlinks and capability boundaries before allowing Rust to open files.
+
+5. **Payload size and cost** — Bound depth, count, numeric range, CPU budget and decompression bombs.
+
+6. **Authorization provenance** — Enforce origin-side principal/object/tenant rules before giving worker a privileged task.
+
+7. **Sensitive diagnostics** — Prevent secrets, private payloads and stacks from entering stdout protocol or persistent logs.
+
+8. **Sandbox limits** — Compare process user/OS permissions and optional stronger isolation without claiming process spawning is a sandbox.
+
+9. **Formative confused deputy** — Reproduce a malicious document/path request and reject it without weakening the input schema.
+
+### Module 8 — Concurrency, Queues and Resource Backpressure
 
 #### Outcomes
 
-- Operate a hybrid application from reproducible build to deployment and debugging.
-- Measure the language boundary cost using defensible benchmarks and trace propagation.
+- APP15-O5
+- APP15-O6
+- APP15-O7
+- APP15-O8
+- APP15-O13
 
 #### Lessons
 
-1. **Reproducible Cargo and TypeScript build pipelines** — `lesson`
-2. **Tracing and profiling across process boundaries** — `lesson`
-3. **Throughput versus latency benchmarks** — `lesson`
-4. **Binary distribution and artifact supply chain** — `lesson`
-5. **Hybrid deployment and benchmarking claims** — `test`
-6. **Release a measured cross-language feature** — `lab`
+1. **Parallelism placement** — Compare Node event loop, worker pool and native worker processes at a controlled concurrency level.
 
-### Module 9 — TypeScript–Rust Integrated Application
+2. **Bounded in-flight operations** — Set queue, worker and per-principal limits and return an intelligible busy outcome.
+
+3. **Cancellation race** — Verify whether a canceled request can still emit a late response and how its ID is discarded.
+
+4. **Reordering and correlation** — Send concurrent tasks with different costs and prevent response mix-ups.
+
+5. **Safe shared state** — Decide where Rust state must be synchronized and test invariant-preserving access patterns.
+
+6. **Streamed results** — Evaluate chunk framing, partial data and backpressure before promising incremental responses.
+
+7. **Queue shutdown behavior** — Drain, reject or preserve pending operations explicitly during restart and upgrade.
+
+8. **Fairness under load** — Prevent a large batch from starving a short request without claiming a global scheduler guarantee.
+
+9. **Formative queue exhaustion** — Fix a worker API that exhausts memory under simultaneous expensive documents.
+
+### Module 9 — Differential, Property and Contract Testing
 
 #### Outcomes
 
-- Integrate the elective's techniques in a working and verifiable application change or system.
-- Evaluate correctness, operational limitations and trade-offs through reproducible evidence.
+- APP15-O2
+- APP15-O3
+- APP15-O4
+- APP15-O6
+- APP15-O9
+- APP15-O10
+- APP15-O11
 
 #### Lessons
 
-1. **TypeScript–Rust Integrated Application** — `lab`
+1. **Shared invariant catalogue** — Write domain laws independent of implementation language for valid/invalid input classes.
+
+2. **Cross-language golden corpus** — Execute identical versioned fixtures against TypeScript and Rust and compare semantic outputs.
+
+3. **Generator design** — Produce boundary cases for lengths, Unicode, integers, ordering and parser ambiguity.
+
+4. **Shrinkable failure** — Reduce a discovered property counterexample into a stable short regression.
+
+5. **Error equivalence** — Compare typed error categories without requiring identical internal exception strings.
+
+6. **Transport fault matrix** — Inject split frames, malformed JSON, process exit, timeout and out-of-order responses.
+
+7. **Version-matrix CI** — Test old/new public package and worker combinations against published compatibility rules.
+
+8. **Negative security tests** — Exercise injected paths, command characters, unauthorized calls and overlarge frames.
+
+9. **Build reproducibility** — Re-run clean dependency/toolchain installs and verify exact artifact hashes or explain nondeterminism.
+
+10. **Formative independently seeded fault** — Correct a property failure whose original hidden fixture was not in the published test suite.
+
+### Module 10 — Reproducible Builds and Multi-Artifact Delivery
+
+#### Outcomes
+
+- APP15-O2
+- APP15-O5
+- APP15-O11
+- APP15-O12
+- APP15-O15
+- APP15-O16
+
+#### Lessons
+
+1. **Runtime target matrix** — Declare supported Node versions, OS platforms, CPU architectures, libc and Rust target triples.
+
+2. **Artifact inventory** — Record JS, declarations, worker binary, schema and lockfiles as one compatible release set.
+
+3. **Process bundle location** — Find the packaged Rust executable independent of fragile developer source paths.
+
+4. **Release manifests** — Publish checksums, toolchain versions and protocol compatibility with controlled download/install steps.
+
+5. **Permissions and signing choices** — Distinguish code signing, artifact integrity and authenticated installation without inventing trust.
+
+6. **No arbitrary installer execution** — Avoid privileged postinstall scripts or opaque remote binary fetching as mandatory prerequisites.
+
+7. **Upgrade order** — Model new-client/old-worker and old-client/new-worker before replacing a running binary.
+
+8. **Rollback and migration** — Reject unsafe downgrade when persisted worker data or message contracts cannot be interpreted.
+
+9. **Formative missing binary incident** — Repair a package that works in source checkout but fails in a clean consuming project.
+
+### Module 11 — Workload Measurement and Design Economics
+
+#### Outcomes
+
+- APP15-O1
+- APP15-O7
+- APP15-O12
+- APP15-O13
+- APP15-O14
+- APP15-O16
+
+#### Lessons
+
+1. **Hypothesis and baseline** — State the expected gain in a bounded realistic workload and establish a TS-only correct reference.
+
+2. **Correctness equivalence** — Refuse to compare speed until both implementations pass identical domain and security tests.
+
+3. **Cold start and handshake** — Measure worker startup and process readiness cost separately from steady-state compute.
+
+4. **Serialization and copy cost** — Record byte count, frame parse time and transfer overhead rather than assuming zero-copy.
+
+5. **Latency distribution** — Compare median, high percentile and resource use under fixed sample count and concurrency.
+
+6. **Memory and CPU observation** — Report resident process memory, Node event-loop impact and limitations of host monitoring.
+
+7. **Energy and operating cost** — Explain platform and maintenance trade-offs without inventing battery or cloud cost results.
+
+8. **Performance regression contract** — Create a bounded reproducible budget that fails only after correctness checks.
+
+9. **Formative false speedup** — Diagnose a faster Rust result caused by missing validation or a different input fixture.
+
+### Module 12 — Native Addon, Wasm and Alternative Boundary Review
+
+#### Outcomes
+
+- APP15-O1
+- APP15-O3
+- APP15-O9
+- APP15-O12
+- APP15-O13
+- APP15-O14
+- APP15-O16
+
+#### Lessons
+
+1. **Node-API stability scope** — Explain Node-API ABI guarantees and the limits imposed by wrappers, native dependencies and target packages.
+
+2. **FFI ownership questions** — Model allocation, free, aliasing, lifetimes and panic translation without requiring learner-written unsafe glue.
+
+3. **Error and thread boundaries** — Explain how native add-ons must respect JS runtime affinity and error propagation.
+
+4. **WebAssembly execution model** — Contrast WASM linear memory, host calls, browser and Node support and ecosystem constraints.
+
+5. **WASM copy semantics** — Compare host bridging, memory growth, binary size and async integration overhead.
+
+6. **Process isolation advantage** — Evaluate crash containment and deploy simplicity versus native-call latency and sharing.
+
+7. **Security claims audit** — Explicitly reject claims that Rust memory safety automatically enforces input validity or tenant authorization.
+
+8. **Decision matrix** — Choose process IPC, Node-API or WASM per platform constraints with empirical evidence or bounded analysis.
+
+9. **Formative adapter comparison** — Sketch an equivalent contract on an alternative boundary and identify new risks without implementing it.
+
+### Module 13 — Integrated Cross-Language Feature and Defense
+
+#### Outcomes
+
+- APP15-O1
+- APP15-O2
+- APP15-O3
+- APP15-O4
+- APP15-O5
+- APP15-O6
+- APP15-O7
+- APP15-O8
+- APP15-O9
+- APP15-O10
+- APP15-O11
+- APP15-O12
+- APP15-O13
+- APP15-O14
+- APP15-O15
+- APP15-O16
+- APP15-O17
+
+#### Lessons
+
+1. **Defensible feature brief** — Define one real application behavior, input hazards, user errors and TypeScript-only alternative.
+
+2. **Rust readiness provenance** — Show diagnostic evidence or prior equivalent competence without asking for a new mandatory SYS course code.
+
+3. **Working TS consumer** — Publish an installable typed package and actual application integration, not only a CLI demonstration.
+
+4. **Verified Rust processor** — Execute domain logic under a versioned Cargo toolchain against real adversarial input.
+
+5. **IPC contract** — Trace framed request, version handshake, correlated reply and bounded process lifecycle.
+
+6. **Security and privilege defense** — Reject malicious paths, forged inputs, unknown identity and resource exhaustion attempts.
+
+7. **Cancellation and uncertainty** — Demonstrate process crash, late response, lost reply and correct typed failure or reconciliation.
+
+8. **Compatibility proof** — Run a two-dimensional old/new package-worker matrix and inspect both supported and rejected combinations.
+
+9. **Independent quality evidence** — Present property/differential fuzz regressions, cross-platform build constraints and exact test commands.
+
+10. **Fair performance report** — Compare TS-only, IPC Rust and optional analyzed FFI/WASM cost against identical accepted work.
+
+11. **Recovery and rollback** — Restart, re-provision and roll forward a broken binary with version and resource guardrails.
+
+12. **Unfamiliar technical defense** — Diagnose and correct a reviewer-supplied bounded encoding, protocol, worker, security or performance defect.
 
 ## Completion requirements
 
-- Complete the required module checkpoints and practical exercises, then complete the final integration lab.
-- State tools, versions, system assumptions and test data for reproducibility.
-- Retain artifacts, test results, design decisions, an investigated failure and a technical retrospective in accordance with [OEE Evidence Rules](../../spec/evidence-rules.md).
+All **APP15-O1–APP15-O17** require independently inspectable evidence across **seven mandatory summative assessments**. One integrated TypeScript application and Rust engine may support them all. The readiness diagnostic and module formative checks orient study and provide feedback, but are not unpublished completion tests; no particular SYS course identifier, native FFI, WASM build, paid service or web framework is required.
 
-**Required module checkpoints and practical work:**
+- **APP15-AS1** — Prior Readiness, Bounded Use Case and Public TypeScript Package
+  - **Outcomes:** APP15-O1, APP15-O2, APP15-O4, APP15-O16.
+  - **Work:** Demonstrate independent Rust readiness, define an application problem and publish strict TypeScript API declarations, validation, supported errors and TS-only comparator.
+  - **Criteria:** Cargo fixture compiles/tests with ownership-aware code and Result error paths; TypeScript consumer rejects forged and invalid runtime inputs; Rust is justified by evidence or specialized capability, not a universal performance slogan.
+  - **Evidence:** Readiness diagnostic source and test results, package exports and contracts, domain requirements, TS reference, rationale and declared environment.
 
-- **Module 1 — TypeScript Contracts & Runtime Boundaries:** Pass `Type safety versus runtime safety` by explaining and applying the module outcomes; perform the `Harden a TypeScript API boundary` lab: Replace unchecked casts with validated inputs and tests for invalid, missing and newer-version fields. Retain Type-level checks, malformed-input tests and schema documentation.
-- **Module 2 — Rust Ownership & Error Semantics:** Pass `Reasoning about ownership` by explaining and applying the module outcomes; perform the `Repair ownership and error defects` lab: Build a small Rust parser/library, repair seeded ownership and error-handling mistakes and demonstrate deterministic failures. Retain Compiler diagnostics, tests and a short ownership explanation.
-- **Module 3 — Interoperability & Contract Evolution:** Pass `Choosing an integration mechanism` by explaining and applying the module outcomes; perform the `Integrate a typed Rust component` lab: Expose a Rust data transform to a TypeScript client via a process/API or well-defined binding; test corrupt and mixed-version inputs. Retain Interface specification, build recipe and contract tests.
-- **Module 4 — Async, Concurrency & Diagnostics:** Pass `Diagnosing concurrency failures` by explaining and applying the module outcomes; perform the `Reproduce a concurrency defect` lab: Introduce controlled cancellation or concurrent load; detect races/partial work and implement a bounded, tested fix. Retain Concurrency test, traces and measurement conditions.
+- **APP15-AS2** — Versioned Rust Component and Lossless Wire Contract
+  - **Outcomes:** APP15-O2, APP15-O3, APP15-O4, APP15-O6, APP15-O11.
+  - **Work:** Implement a Rust component and a framed versioned IPC exchange that represents valid/invalid texts, integers, times, nulls and message limits.
+  - **Criteria:** Identical semantic output on TS/Rust fixtures; malformed or incompatible input is rejected with typed error; unsafe lossy conversions and unbounded frames are absent; old/new compatibility is explicit.
+  - **Evidence:** Pinned Rust/TS source and schemas, version matrix, golden and adversarial frames, observed subprocess trace, rejected cases and protocol decisions.
 
-**Final integration lab — TypeScript–Rust Integrated Application:**
+- **APP15-AS3** — Supervised Process, Uncertain Effects and Bounded Concurrency
+  - **Outcomes:** APP15-O5, APP15-O6, APP15-O7, APP15-O8, APP15-O15.
+  - **Work:** Integrate a supervised Rust child process through a Node/TS API, inject crash, split reply, cancellation, concurrent requests, exhaustion and unknown committed outcome.
+  - **Criteria:** Fixed executable spawn without shell injection; no unbounded queues/pipes; deadlines, exit status, late replies and retry semantics are observable; replay-sensitive effects are not doubled under uncertain replies.
+  - **Evidence:** Startup/shutdown traces, timed injected faults, queue metrics, idempotency/authority logs, code, tests, explicit error and restart-state matrix.
 
-Create a TypeScript application or API that uses a Rust library or service for a bounded domain capability. Define and version the interface, validate untrusted input, test concurrency and failure behavior and measure whether the split improves the intended constraint.
+- **APP15-AS4** — Security, Differential and Property Verification
+  - **Outcomes:** APP15-O2, APP15-O3, APP15-O4, APP15-O9, APP15-O10, APP15-O15.
+  - **Work:** Produce an independently justified invariant suite and malformed/adversarial corpus across the TS/Rust boundary, including attacker-controlled paths and privilege requests.
+  - **Criteria:** Run matched inputs through both implementations; preserve authorized task boundaries; show reproducible shrinking/regression or seeded repair; keep secrets and user data out of diagnostic output.
+  - **Evidence:** Property generators/corpus, fixture hashes, negative authorization tests, signed-off threat matrix, sanitized logs, failure diff and reproducibility instructions.
 
-**Success criteria:**
+- **APP15-AS5** — Multi-Artifact Versioned Distribution and Upgrade Defense
+  - **Outcomes:** APP15-O2, APP15-O5, APP15-O11, APP15-O12, APP15-O15, APP15-O16.
+  - **Work:** Package a typed JS library with a compatible Rust binary, run clean consumer installs and stage old/new package-worker upgrades and rollback/failure recovery.
+  - **Criteria:** Independent installation works with declared supported runtime and OS; incompatible pairs reject deliberately; no hidden privileged postinstall; artifact hashes and compatibility behavior are inspectable.
+  - **Evidence:** Lockfiles/toolchain, binary and package manifests, clean checkout/consumer transcript, old/new matrix, failed install/repair traces and operator notes.
 
-- Run both components from a clean checkout with documented toolchain versions.
-- Reject malformed data and demonstrate compatibility or explicit failure across interface versions.
-- Show safe, bounded concurrent operation and evidence for recovery from one injected failure.
-- Explain ownership and runtime safety boundaries, benchmark limitations and the cost of the language split.
+- **APP15-AS6** — Fair Performance and Alternate-Mechanism Decision
+  - **Outcomes:** APP15-O1, APP15-O7, APP15-O12, APP15-O13, APP15-O14, APP15-O16.
+  - **Work:** Benchmark TS-only versus actual Rust IPC under same validated workload; review Node-API and WASM as genuine alternatives without requiring native FFI implementation.
+  - **Criteria:** Correctness equivalence precedes timing; report startup, serialization, p50/tail, memory and uncertainty with consistent sample controls; defend whether complexity is justified.
+  - **Evidence:** Input corpus, workload settings, measurement CSV/traces, system constraints, alternatives matrix, build/deploy cost model and decision with limitations.
 
-**Evidence to retain:**
+- **APP15-AS7** — Integrated Typed Application and Independent Unfamiliar Interoperability Defense
+  - **Outcomes:** APP15-O1, APP15-O2, APP15-O3, APP15-O4, APP15-O5, APP15-O6, APP15-O7, APP15-O8, APP15-O9, APP15-O10, APP15-O11, APP15-O12, APP15-O13, APP15-O14, APP15-O15, APP15-O16, APP15-O17.
+  - **Work:** Rebuild and demonstrate an application feature using a versioned supervised Rust component; independently resolve an unfamiliar bounded protocol, compatibility, security, crash or measurement defect.
+  - **Criteria:** Clean installation works; failure and attack tests are observable; state/cancellation/replay claims are honest; full version and performance evidence supports chosen boundary; defend source decisions and remaining risk.
+  - **Evidence:** Complete source and artifacts, schema/golden corpus, clean TS consumer, runnable Rust binary, test/upgrade/fault traces, comparative measurements, review change and technical defense.
 
-- Version-controlled implementation and configuration, including clean-rebuild instructions.
-- Inputs and repeatable tests, output or measurements, and failure/recovery records.
-- Trade-off analysis, limitations and technical retrospective.
+### Shared academic and interoperability boundaries
 
-**Failure analysis:**
-
-Analyze mismatched schemas, panics escaping service boundaries, stale generated bindings, cancellation races, and overgeneralization from microbenchmarks.
-
-**Expanded module assessment and lab requirements:**
-
-- **Module 1 checkpoint and micro-lab:** Catch invalid versioned API payloads through runtime tests and preserve compile-time exhaustiveness.
-- **Module 2 checkpoint and micro-lab:** Demonstrate why the compiler rejects an invalid borrow and how explicit result types prevent silent failures.
-- **Module 3 checkpoint and micro-lab:** Reject malformed payloads, handle version mismatches and avoid unsound foreign memory ownership.
-- **Module 4 checkpoint and micro-lab:** Reproduce and repair cancellation or concurrent-state bugs under a controlled workload.
-
-- **Module 5 — Advanced TypeScript Architecture (Publish and test a reusable TypeScript module):**
-  - Prerequisites: Explain the module outcomes and complete its teaching lessons.
-  - Environment: Document a safe, reproducible local or simulated environment with exact relevant settings.
-  - Required work: Construct a small versioned package consumed by two application configurations, including intentionally malformed runtime input.
-  - Verification: Both consumers compile, malformed data fails deterministically and package export rules work in supported runtimes.
-  - Evidence: Source, package metadata, build outputs, consumers and contract tests.
-  - Failure analysis: Explain ESM/CJS interoperability faults, dangerous any casts and stale declaration files.
-- **Module 6 — Rust Systems Foundations for Applications (Build a tested Rust processing engine):**
-  - Prerequisites: Explain the module outcomes and complete its teaching lessons.
-  - Environment: Document a safe, reproducible local or simulated environment with exact relevant settings.
-  - Required work: Implement a streaming parser or queued worker with bounded memory, explicit errors and property-based tests against invalid payloads.
-  - Verification: Demonstrate deterministic failure behavior and no unbounded queue growth under a reproducible workload.
-  - Evidence: Cargo project, tests, profiling traces and documented invariants.
-  - Failure analysis: Distinguish recoverable errors, panic boundaries, deadlocks and memory growth.
-- **Module 7 — Cross-Language API Evolution & Security (Break and repair a versioned TS–Rust contract):**
-  - Prerequisites: Explain the module outcomes and complete its teaching lessons.
-  - Environment: Document a safe, reproducible local or simulated environment with exact relevant settings.
-  - Required work: Evolve a field in both implementations, test old and new clients, inject invalid encoding and handle boundary failures gracefully.
-  - Verification: Document compatibility and demonstrate rejection of malformed fields and correct resource cleanup.
-  - Evidence: Schema, consumer matrix, integration tests and failure traces.
-  - Failure analysis: Address ABI instability, encoding corruption, stale generated bindings and panics crossing an unsafe FFI boundary.
-- **Module 8 — Build, Debug, Measure & Ship (Release a measured cross-language feature):**
-  - Prerequisites: Explain the module outcomes and complete its teaching lessons.
-  - Environment: Document a safe, reproducible local or simulated environment with exact relevant settings.
-  - Required work: Deploy a TS frontend/service backed by a Rust component, profile one workload and compare an alternative implementation boundary.
-  - Verification: Clean build succeeds, errors propagate with correlation IDs, and measurements cite workload and runtime conditions.
-  - Evidence: Build scripts, provenance notes, trace data and trade-off report.
-  - Failure analysis: Identify unrealistic benchmarks, build artifact mismatch and hidden platform dependencies.
-
-**Exit assessment expectation:**
-
-Demonstrate the subject outcomes on an unfamiliar example, show at least one negative path and retain evidence allowing another reviewer to reproduce the result. Checkpoint answers must explain mechanisms, while the final integration lab must integrate and verify the expanded topics.
-
-**Exit demonstration:**
-
-Demonstrate the resulting implementation, explain its key mechanisms, reproduce at least one failure and recovery and defend the chosen trade-offs with inspectable evidence.
+- **Preparation ownership:** APP19 and APP21 are used, not re-taught. Prior Rust competence may come from future SYS or documented equivalent study. Do not prescribe SYS2 or require APP2/APP3/APP20 as hidden prerequisites. The public diagnostic discloses expected Rust knowledge, not an additional course-wide assessment gate.
+- **Real boundaries:** A TypeScript wrapper that merely prints a string or a Rust-only CLI without a consuming application is insufficient. Required work has versioned executable exchange, runtime-validated cross-language contracts, actionable failures, reproducible software tests and defended reason to keep both implementations.
+- **Process IPC reference:** Use fixed executable paths, controlled argv/environment, explicit message framing, size and concurrency bounds, correct stdout versus stderr roles, correlation IDs, trustworthy errors, clean shutdown and meaningful crash/restart behavior. A retry after uncertain side effects is not necessarily safe.
+- **Versions and distribution:** Publish exact toolchain, Cargo/Node dependency locks, target support, binary/build hashes and paired package-worker compatibility. Verify independent clean-state consumption and at least one intentional incompatible or interrupted upgrade. Do not claim automatic binary portability.
+- **Security and privacy:** Apply real runtime checks and client/service authorization outside the Rust worker as appropriate, reject untrusted commands and paths, protect sensitive payloads and use synthetic local data. Memory safety does not imply policy or protocol correctness.
+- **Measurement integrity:** Compare identical accepted work, controlled warmup, sample counts and resource budgets; include cold start and serialization overhead. Account for uncertainty; do not infer global app speed or battery advantage from local microbenchmarks.
+- **Independent defense:** An unfamiliar bounded failure must be reproduced and explained, with a corrected implementation or defensible containment, regression evidence, operator guidance, limitations and a technical retrospective.
