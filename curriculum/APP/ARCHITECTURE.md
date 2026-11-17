@@ -3,15 +3,14 @@
 **Decision record:** Approved program migration target, academically amended
 on 2026-11-16 in [PR #78](https://github.com/0xbuffdev/open-engineering-education/pull/78).
 
-**Implementation status:** Core source migration is being completed.
-APP1, APP17, APP18, APP19, APP4, APP21, APP2, APP20, APP3,
-APP5, APP6, APP7 and APP8 are published as `v0.2.0` drafts.
-APP9's independent capstone is being migrated in its own
-course-and-catalog PR. All 14 core identities are published;
-seven still-legacy **electives** remain targets pending
-separate review. The [active APP catalog](README.md) and
-linked course files are authoritative; source conversion
-is not educational conformance or learner verification.
+**Implementation status:** All 14 APP core source definitions,
+including the APP9 independent project capstone, are published
+as `v0.2.0` drafts. APP10's advanced frontend performance
+**elective** is being migrated in its own course-and-catalog
+PR; APP11–APP16 remain legacy elective drafts pending review.
+The [active APP catalog](README.md) and linked course files
+are authoritative. Source conversion does not establish
+educational conformance or learner verification.
 
 **Authority:** This is a non-normative, program-specific architecture
 decision. It does not revise OEE's [Course Format](../../spec/course-format.md),
@@ -600,8 +599,9 @@ course definition is actually merged.
    classification and ordering checks merged in
    [PR #44](https://github.com/0xbuffdev/open-engineering-education/pull/44).
    APP1, APP17, APP18, APP19, APP4, APP21, APP2, APP20,
-   APP3, APP5, APP6, APP7 and APP8 are published `v0.2.0`
-   drafts; do not rewrite them merely to recreate earlier work.
+   APP3, APP5, APP6, APP7, APP8 and APP9 are published
+   `v0.2.0` drafts; do not rewrite them merely to recreate
+   earlier work.
 3. **Foundation PRs:** APP18 was introduced in [PR #82](https://github.com/0xbuffdev/open-engineering-education/pull/82)
    and APP19 in [PR #84](https://github.com/0xbuffdev/open-engineering-education/pull/84).
    APP4's independent data/SQL migration was merged in [PR #86](https://github.com/0xbuffdev/open-engineering-education/pull/86),
@@ -623,17 +623,19 @@ course definition is actually merged.
    APP8's measured architecture/capacity, consistency,
    failure-containment and cost decision course followed in
    [PR #100](https://github.com/0xbuffdev/open-engineering-education/pull/100).
-   APP9 now completes the required-core source migration
-   through its own project-and-catalog review: an independent
-   problem, ethical validation, complete integrated product,
-   measured production choices and unfamiliar-change defense.
+   APP9's independent full-core project/graduation evidence
+   source migration completed through [PR #102](https://github.com/0xbuffdev/open-engineering-education/pull/102).
+   APP10 is the first staged optional elective, deepening
+   browser/React loading, rendering, interaction, memory,
+   visual-stability and performance governance after APP20 + APP6.
 4. **Separate implementation branches:** APP21 follows APP18;
    APP2 follows APP17 and APP19; APP20 follows APP2;
    APP3 follows APP19, APP21 and APP4. Publish valid outcomes,
    assessments and genuine overlap relocation on each PR.
-   APP9's project and catalog migration must not modify
-   elective APP10–APP16 requirements, graduation prerequisites
-   or prior APP9 completion records without separate review.
+   APP10's course and catalog update must not change
+   APP9's complete core graduation requirements, still-legacy
+   APP11–APP16 elective assessment contracts, or previous
+   APP10 learner evidence.
 5. **Integration and production:** APP5 after APP20 and
    APP3; then APP6, APP7, APP8; APP9 after complete
    required-core prerequisite closure and substantive
@@ -716,13 +718,12 @@ The recorded target decisions are:
   examples here remain non-normative; they must not be
   misrepresented as additional v0.2.0 conformance rules.
 
-**Current implementation snapshot:** APP1, APP17, APP18, APP19,
-APP4, APP21, APP2, APP20, APP3, APP5, APP6, APP7 and APP8 are
-published as outcome-driven `v0.2.0` drafts. APP9 is under
-review as an independently assessed `v0.2.0` project course;
-APP10–APP16 optional elective source migrations, downstream
-resource/evidence pin review and independent educational
-validation remain future work. Use the
+**Current implementation snapshot:** All 14 APP core source
+courses (including APP9 project) are published as outcome-driven
+`v0.2.0` drafts. APP10's elective source migration is under
+review, while APP11–APP16 elective courses and downstream
+resource/evidence pins, workload review and independent
+educational validation remain future work. Use the
 [current APP catalog](README.md) for active learner requirements;
 planned dependencies are not live until the relevant course PR merges.
 

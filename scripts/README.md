@@ -55,7 +55,11 @@ containment and reversible performance/cost evolution.
 APP9 is the independently assessed `project` capstone with direct
 prerequisite closure over all 13 preceding APP core courses and
 eight outcome-mapped v0.2.0 summative graduation assessments.
-Unmigrated elective scope/dependency changes remain in the
+APP10 follows APP20 + APP6 as an optional advanced frontend
+performance elective: browser/React traces, meaningful Core Web
+Vitals, critical delivery, correct cache/version and accessibility,
+long-session memory and reproducible performance regression gates.
+Remaining APP11–APP16 elective scope/dependency changes remain in the
 [APP migration decision](../curriculum/APP/ARCHITECTURE.md).
 The [current APP catalog](../curriculum/APP/README.md) contains
 **14 core courses and 7 electives** and is authoritative until reviewed
