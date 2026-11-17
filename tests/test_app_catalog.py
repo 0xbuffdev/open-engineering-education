@@ -445,6 +445,59 @@ class APPCatalogTests(unittest.TestCase):
         self.assertIn("APP10", errors)
         self.assertIn("prerequisites differ from catalog", errors)
 
+    def test_app11_backend_architecture_elective_requires_approved_foundations(self):
+        # Domain coordination specialization remains optional, after
+        # backend framework, relational data and quality foundations.
+        entries, errors = read_app_catalog(self.catalog)
+        self.assertFalse(errors, errors)
+        codes = [entry.code for entry in entries]
+        app11 = next(entry for entry in entries if entry.code == "APP11")
+        self.assertEqual(
+            (app11.title, app11.kind, app11.classification, app11.status),
+            ("Advanced Backend Architecture", "course", "elective", "draft"),
+        )
+        self.assertEqual(prerequisite_codes(app11.prerequisites),
+                         ["APP3", "APP4", "APP6"])
+        for foundation in ("APP3", "APP4", "APP6"):
+            self.assertLess(codes.index(foundation), codes.index("APP11"))
+        content = (self.app.APP / "APP11.md").read_text(encoding="utf-8")
+        self.assertIn("**Classification:** `elective`", content)
+        self.assertIn("**Specification:** `v0.2.0`", content)
+        self.assertEqual(
+            sum(1 for line in content.splitlines()
+                if line.startswith("- **APP11-O") and ":**" in line), 16
+        )
+        self.assertEqual(
+            sum(1 for line in content.splitlines()
+                if line.startswith("- **APP11-AS") and "(required " in line), 7
+        )
+        capstone = next(entry for entry in entries if entry.code == "APP9")
+        self.assertNotIn("APP11", prerequisite_codes(capstone.prerequisites))
+
+    def test_app11_catalog_only_prerequisite_edit_is_rejected(self):
+        catalog = self.catalog.read_text(encoding="utf-8")
+        row = next(line for line in catalog.splitlines()
+                   if line.startswith("| [APP11](APP11.md) |"))
+        self.assertIn(" | APP3, APP4, APP6 |", row)
+        changed = row.replace(" | APP3, APP4, APP6 |",
+                              " | APP3, APP6 |", 1)
+        self.assertNotEqual(row, changed)
+        self.change_catalog(row, changed)
+        status, errors = self.check()
+        self.assertNotEqual(status, 0)
+        self.assertIn("APP11", errors)
+        self.assertIn("prerequisites differ from catalog", errors)
+
+    def test_app11_required_independent_defense_is_not_optional(self):
+        content = (self.app.APP / "APP11.md").read_text(encoding="utf-8")
+        old = "- **APP11-AS7** (required integrated architecture"
+        self.assertIn(old, content)
+        self.change_course("APP11", old,
+                           "- **APP11-AS7** (optional integrated architecture")
+        status, errors = self.check()
+        self.assertNotEqual(status, 0)
+        self.assertIn("APP11", errors)
+
     def test_app8_cannot_be_silently_removed_from_capstone_closure(self):
         # APP20 is now required transitively through migrated APP5.
         # APP8 has no further required core successor before APP9.
