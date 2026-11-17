@@ -13,7 +13,7 @@ The migrated advanced SYS program deepens these models through **C/Rust comparat
 **Current evidence authority:**
 
 - The 14 published `SEF7-O1`–`SEF7-O14` and seven published `SEF7-AS1`–`SEF7-AS7` remain required *in SEF7*. The SEF7 [course definition](SEF7.md) and current SEF [catalog](README.md) govern completion. Historical review evidence remains tied to its assessed course revision.
-- [SYS1](../SYS/SYS1.md)–[SYS9](../SYS/SYS9.md) now publish outcome-driven OEE `v0.2.0` **draft** requirements and summative evidence in the [SYS catalog](../SYS/README.md). The destinations in this historical mapping remain **non-binding candidates for a hypothetical future SEF7 transfer**, not evidence of equivalent credit, learner-tested readiness or a governance approval.
+- All ten SYS courses, including [SYS10](../SYS/SYS10.md), now publish outcome-driven OEE `v0.2.0` **draft** requirements and summative evidence in the [SYS catalog](../SYS/README.md). The destinations in this historical mapping remain **non-binding candidates for a hypothetical future SEF7 transfer**, not evidence of equivalent credit, learner-tested readiness or a governance approval.
 - No SYS outcome/assessment has been added by this map. No SEF7 requirement may be removed based solely on a common topic title. Transfer would require an accepted subsequent architecture revision, a real matching assessed SYS capability with public Work/Criteria/Evidence and prerequisite access, explicit version-pinned evidence mapping, steward review and separate migration/approval.
 - Rust study and C/Rust comparison belong in SYS, especially **[SYS2](../SYS/SYS2.md)**, not in SEF7. The new SYS source does not alter any original SEF7 completion expectation or historical learner result.
 
