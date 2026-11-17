@@ -291,12 +291,12 @@ Complete the required exercises, checkpoints and lab.
                             for e in self.sef.ERRORS))
 
     def test_legacy_course_without_final_lab_still_fails(self):
-        # APP11 is now v0.2.0. Exercise the strict legacy final-lab
-        # contract with APP12, an elective not yet migrated.
-        path = self.root / "curriculum" / "APP" / "APP12.md"
+        # APP12 is now v0.2.0. Preserve strict final-lab validation
+        # with APP13, an elective not yet migrated.
+        path = self.root / "curriculum" / "APP" / "APP13.md"
         content = path.read_text(encoding="utf-8")
         self.assertIn("**Final integration lab", content)
-        self.replace_course("APP12", content.replace(
+        self.replace_course("APP13", content.replace(
             "**Final integration lab", "**Removed integration lab"
         ))
         self.assertNotEqual(self.app.validate(), 0)
