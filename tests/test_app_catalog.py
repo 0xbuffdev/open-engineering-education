@@ -552,6 +552,61 @@ class APPCatalogTests(unittest.TestCase):
         self.assertNotEqual(status, 0)
         self.assertIn("APP12", errors)
 
+    def test_app13_mobile_elective_requires_typescript_and_backend_not_react(self):
+        # Mobile can be built and tested using framework-neutral TypeScript.
+        # APP20 React must not be an undeclared elective prerequisite.
+        entries, errors = read_app_catalog(self.catalog)
+        self.assertFalse(errors, errors)
+        codes = [entry.code for entry in entries]
+        app13 = next(entry for entry in entries if entry.code == "APP13")
+        self.assertEqual(
+            (app13.title, app13.kind, app13.classification, app13.status),
+            ("Mobile Application Engineering", "course", "elective", "draft"),
+        )
+        self.assertEqual(prerequisite_codes(app13.prerequisites),
+                         ["APP19", "APP3"])
+        self.assertNotIn("APP20", prerequisite_codes(app13.prerequisites))
+        for foundation in ("APP19", "APP3"):
+            self.assertLess(codes.index(foundation), codes.index("APP13"))
+        content = (self.app.APP / "APP13.md").read_text(encoding="utf-8")
+        self.assertIn("**Type:** `course`", content)
+        self.assertIn("**Classification:** `elective`", content)
+        self.assertIn("**Specification:** `v0.2.0`", content)
+        self.assertEqual(
+            sum(1 for line in content.splitlines()
+                if line.startswith("- **APP13-O") and ":**" in line), 17
+        )
+        self.assertEqual(
+            sum(1 for line in content.splitlines()
+                if line.startswith("- **APP13-AS") and "(required " in line), 7
+        )
+        capstone = next(entry for entry in entries if entry.code == "APP9")
+        self.assertNotIn("APP13", prerequisite_codes(capstone.prerequisites))
+
+    def test_app13_catalog_only_prerequisite_change_is_rejected(self):
+        catalog = self.catalog.read_text(encoding="utf-8")
+        row = next(line for line in catalog.splitlines()
+                   if line.startswith("| [APP13](APP13.md) |"))
+        self.assertIn(" | APP19, APP3 |", row)
+        changed = row.replace(" | APP19, APP3 |",
+                              " | APP2, APP3 |", 1)
+        self.assertNotEqual(row, changed)
+        self.change_catalog(row, changed)
+        status, errors = self.check()
+        self.assertNotEqual(status, 0)
+        self.assertIn("APP13", errors)
+        self.assertIn("prerequisites differ from catalog", errors)
+
+    def test_app13_device_level_independent_defense_is_required(self):
+        content = (self.app.APP / "APP13.md").read_text(encoding="utf-8")
+        old = "- **APP13-AS7** (required integrated offline mobile"
+        self.assertIn(old, content)
+        self.change_course("APP13", old,
+                           "- **APP13-AS7** (optional integrated offline mobile")
+        status, errors = self.check()
+        self.assertNotEqual(status, 0)
+        self.assertIn("APP13", errors)
+
     def test_app8_cannot_be_silently_removed_from_capstone_closure(self):
         # APP20 is now required transitively through migrated APP5.
         # APP8 has no further required core successor before APP9.
