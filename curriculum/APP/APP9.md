@@ -52,37 +52,9 @@
 
 ## Modules
 
-### Module 1 — Project Charter, Ownership and Evidence
+The modules below are **cumulative project work stages**, not a second sequence of lectures that reteaches APP1–APP8 or APP17–APP21. Review the named learning outcomes and corresponding `APP9-AS1`–`APP9-AS8` requirements as the product evolves. Small checks and critique are formative unless explicitly cited as required assessment evidence. Retain useful work across stages rather than rebuilding the same product.
 
-#### Outcomes
-
-- APP9-O1
-- APP9-O3
-- APP9-O4
-- APP9-O15
-- APP9-O16
-
-#### Lessons
-
-1. **Capstone versus previous laboratories** — Explain why independent product ownership is different from submitting earlier APP5–APP8 coursework.
-
-2. **Full-core capability inventory** — Map HTML/CSS, JS/TS/Node, React, HTTP, Fastify, SQL, quality, deployment and production architecture to integrated work.
-
-3. **Choosing a bounded product** — Compare an educational, workflow, developer, document or business application by actual user tasks and completion risk.
-
-4. **Constraints and scope** — Limit the product to an inspectable protected user journey and measurable outcomes in 12–16 weeks.
-
-5. **Authorship and reused components** — Attribute former course code, templates, third-party dependencies, AI help and real collaborators; identify new learner-owned work.
-
-6. **Public evidence and provenance** — Map claims to independently inspectable source, HTTP, database, browser, research and operating artifacts.
-
-7. **Free local toolchain** — Identify compatible versions, synthetic fixtures, runtime permissions and provisioned dependencies without requiring commercial accounts.
-
-8. **Milestone risk plan** — Allocate time to risk-first implementation, product evaluation, security, recovery and defense.
-
-9. **Formative charter critique** — Challenge an unjustified product-success claim or mandatory distributed dependency.
-
-### Module 2 — Ethical Product Discovery and Validation
+### Module 1 — Charter, Ethical Inquiry and Feasible Scope
 
 #### Outcomes
 
@@ -94,55 +66,21 @@
 
 #### Lessons
 
-1. **User tasks and affected stakeholders** — Differentiate imagined personas from observed users and actual existing alternatives.
+1. **Prior learning and authorship** — Establish which prior core course artifacts can be reused and what the learner must independently design, implement and defend; distinguish completion evidence from a new product claim.
 
-2. **Falsifiable product questions** — State what evidence would favor or reject a consequential product assumption.
+2. **Real problem and affected people** — Describe a specific user task, stakeholder constraints and credible provenance; distinguish a supplied brief from observed demand and state whose interests and data are at risk.
 
-3. **Research ethics and consent** — If people participate, define voluntary informed consent, privacy, minimal retention and withdrawal.
+3. **Responsible product inquiry** — Choose a falsifiable product assumption and a consented, secondary or explicitly synthetic evaluation method; define risks, sampling limits and what evidence cannot support.
 
-4. **Secondary and synthetic alternatives** — Use cited public documents, structured scenario tasks or heuristic audits when participants are unavailable, clearly identifying unobserved behavior.
+4. **Interpreting imperfect evidence** — Analyze findings or a public/synthetic case without claiming real user trials; identify alternatives and record a defensible scope or interaction decision.
 
-5. **Sampling and bias** — Identify convenience samples, researcher expectation and limitations of synthetic feedback.
+5. **Acceptance and failure contracts** — Express prioritized end-to-end user outcomes, authorization/tenant invariants, accessibility and privacy obligations, recovery behavior and measurable acceptance tests.
 
-6. **Task success and observation protocol** — Specify task, accessibility accommodations, outcome and minimally necessary evidence.
+6. **Constraints, exclusions and milestones** — Bound the smallest coherent product, plan its dependency-aware development, and record unimplemented features and assumptions rather than concealing them.
 
-7. **Consent-conscious research records** — Avoid names, secrets, personal screenshots and identifiable transcripts when anonymous outcomes suffice.
+7. **Critique and revise the charter** — Expose the charter to a counterexample or independent review, revise a weak assumption, and preserve the reasoned decision; this is formative unless the published assessment evaluates the result.
 
-8. **Interpretation and decision** — Map evidence to scope or acceptance changes without inventing demand or success metrics.
-
-9. **Formative provenance audit** — Rewrite false claims that role-play or simulated users prove real-world usability.
-
-### Module 3 — Requirements, Acceptance and Domain Planning
-
-#### Outcomes
-
-- APP9-O1
-- APP9-O3
-- APP9-O4
-- APP9-O9
-- APP9-O15
-
-#### Lessons
-
-1. **Actors and capability boundaries** — Define authenticated roles, tenants, resources and user intent for the proposed product.
-
-2. **Observable acceptance tests** — State setup/action/result for normal, invalid, denied, conflict, slow, unavailable and recovered flows.
-
-3. **Domain model and invariants** — Identify entities, keys, states, ownership and prohibited transitions.
-
-4. **Traceability matrix** — Link requirement to interface, API, SQL, independent tests, risk and assessment evidence.
-
-5. **Prioritization and exclusions** — Classify essential protected behavior and explicitly defer nonessential realtime, microservices or commercial features.
-
-6. **Nonfunctional measurement targets** — Define representative accessibility, security, latency, reliability, privacy and cost objectives with units and uncertainty.
-
-7. **Risk-first implementation plan** — Order authentication/data, working vertical slice, adverse tests and independent deployment early enough for repair.
-
-8. **Requirement change control** — Track changed user assumptions and acceptance rules before and after product evaluation.
-
-9. **Formative requirement challenge** — Strengthen an underspecified update flow with role denial, concurrent revision and expired session behavior.
-
-### Module 4 — Application Architecture, Alternatives and Threat Models
+### Module 2 — Architecture, Trust and Reproducible Design
 
 #### Outcomes
 
@@ -153,119 +91,52 @@
 - APP9-O8
 - APP9-O9
 - APP9-O14
+- APP9-O15
 
 #### Lessons
 
-1. **Context and component diagrams** — Show actual browser, service, DB, worker, local dependencies and ingress instead of unrelated architecture illustrations.
+1. **One product and its boundaries** — Draw context and component views for browser, typed React client, Node/Fastify service, PostgreSQL and any genuinely required worker or external fixture; justify a modular monolith where sufficient.
 
-2. **Programming and service boundaries** — Explain semantic HTML/CSS, JS behavior, TS boundaries, Node lifetime and Fastify request/serialization responsibilities.
+2. **User, system and failure sequences** — Trace a protected task from client intent through API and authoritative data changes to UI confirmation, denied access, timeout and recovery; distinguish local feedback from a committed result.
 
-3. **Domain/application/repository seams** — Choose cohesive modularity and explain dependency direction without speculative abstractions.
+3. **Identity, authorization and privacy** — Specify roles, object/field/tenant authority, session trust, retention/deletion and sensitive-data flow at each cross-process or cache boundary.
 
-4. **Identity and data-flow trust** — Track client claims through server authentication, resource authorization, SQL constraints and output filtering.
+4. **Data model and concurrency contract** — Define entities, keys, relational constraints, transactions, query assumptions and schema compatibility, including two conflicting writers and durable outcomes.
 
-5. **State and transaction scope** — Separate UI drafts, cache, committed DB facts, job intent and external side effects.
+5. **Contract and asynchronous boundaries** — Specify runtime validation, HTTP status/error semantics, replay safety, background intent, status visibility and client reconciliation without promising exactly-once side effects.
 
-6. **Request and failure sequences** — Map protected HTTP requests, latency, error classification, retry and partial commit uncertainty.
+6. **Architecture alternatives, review and evidence** — Compare at least two credible designs against correctness, accessibility, risk, operations and cost; map requirements to independent tests, then review a supplied counterexample or trust flaw and correct the choice before implementing.
 
-7. **Alternative architecture options** — Compare simple monolith, worker separation, caching or extraction by measured need and risks.
-
-8. **ADRs and falsifiable decisions** — Publish meaningful alternatives, security, maintainability, cost and change triggers.
-
-9. **Formative alternative defense** — Reject premature microservices where a bounded simpler approach meets product requirements.
-
-### Module 5 — Accessible Browser and React User Journey
-
-#### Outcomes
-
-- APP9-O3
-- APP9-O5
-- APP9-O6
-- APP9-O9
-- APP9-O10
-
-#### Lessons
-
-1. **Semantic interface and responsive CSS** — Build task-oriented HTML structure with keyboard access and usable narrow/zoomed layouts.
-
-2. **React ownership and identity** — Distinguish component state, server data, drafts and cached resources and prevent cross-account disclosure.
-
-3. **Typed and runtime-validated Fetch** — Handle real response shapes and network/status/error semantics independent of static TypeScript assurance.
-
-4. **Forms, validation and navigation** — Design accessible field feedback and preserve input under failed submissions.
-
-5. **Authentication and expiry UX** — Handle actual session expiry, revocation and logout while verifying server-side permission independently.
-
-6. **Optimistic and uncertain states** — Distinguish pending, conflict, committed and lost-response results without false success.
-
-7. **Error focus and announcements** — Inspect keyboard/focus, status messages, accessible notifications and correct empty/forbidden states.
-
-8. **Usability across environments** — Check reduced motion, small display/reflow and selected assistive-technology behavior with honest limits.
-
-9. **Formative client race** — Repair stale tenant data after a late Fetch or a failed mutation that erases user input.
-
-### Module 6 — Typed API, Identity and Relational Integrity
+### Module 3 — Implement the Protected Application Journey
 
 #### Outcomes
 
 - APP9-O4
+- APP9-O5
 - APP9-O6
 - APP9-O7
 - APP9-O8
 - APP9-O9
-- APP9-O10
 
 #### Lessons
 
-1. **Typed service contracts** — Design independently consumable Fastify/TS routes, runtime JSON schemas and safe status/error responses.
+1. **Semantic and accessible client skeleton** — Implement responsive HTML/CSS, meaningful navigation, forms, focus and named controls for the selected task; verify keyboard and failure-state access rather than repeating basic HTML instruction.
 
-2. **Server-side input authority** — Validate URL, body and query and exclude unapproved mass-assignment/output properties.
+2. **React state and network lifecycle** — Integrate typed components, navigation, session continuity, validated Fetch responses and explicit pending, empty, invalid, expired, forbidden, conflict and failed states.
 
-3. **Synthetic authentication lifecycle** — Demonstrate actual session creation, expiry, revocation, logout and correct credential handling.
+3. **Typed backend and authoritative authorization** — Build real Fastify routes, runtime schema checks and protected sessions; show direct HTTP requests cannot bypass role, tenant, object or field policy.
 
-4. **Action, object, property and tenant checks** — Test direct wrong-role and guessed-resource HTTP access and inspect durable state.
+4. **Relational schema and durable integrity** — Implement a PostgreSQL schema and versioned migrations with keys and constraints for the product's actual user task; inspect invalid-input rejection and authoritative persisted state using an independent SQL oracle.
 
-5. **Schema normalization and constraints** — Model meaningful keys, foreign keys, unique/check constraints, indexes and data ownership.
+5. **Transactional concurrency and replay** — Implement bounded transaction and revision controls; exercise two conflicting writers, duplicate submissions and an uncertain response while checking committed state and invariant preservation.
 
-6. **Actual concurrent transactions** — Use independent PostgreSQL sessions to test races, revisions, conflicts and committed invariants.
+6. **Durable asynchronous or external effect** — Implement a justified bounded worker or controlled external fixture with persisted intent, replay limits and truthful status; make lost-response recovery and identity scope observable.
 
-7. **Versioned migration compatibility** — Add a real schema/contract evolution while keeping defined older consumers safe.
+7. **Privacy-safe auxiliary resources** — Use caching or file workflows only when necessary for the product; demonstrate appropriate authorization, retention and invalidation without making unrelated features graduation requirements.
 
-8. **Domain and persistence ownership** — Separate domain decisions from SQL access without mocking away transactional claims.
+8. **Integrative failure walkthrough** — Trace the same user action through successful, denied, stale, racing and partially failed conditions; repair incorrect UI claims and preserve state invariants.
 
-9. **Formative integrity failure** — Find a partial transaction or authorization bypass that still returns a misleading successful response.
-
-### Module 7 — Asynchronous Work and Data Stewardship
-
-#### Outcomes
-
-- APP9-O5
-- APP9-O7
-- APP9-O8
-- APP9-O9
-- APP9-O12
-
-#### Lessons
-
-1. **Justified delayed work** — Choose a real bounded background or local external operation with clear user value and progress semantics.
-
-2. **Durable intent and transactional outbox** — Record important work with committed state and explain why remote effects are not DB-atomic.
-
-3. **Idempotent replay** — Repeat a request after a lost response and show no duplicated protected business effect.
-
-4. **Tenant-owned job visibility** — Authorize progress reads and stop polling or streams on logout and route teardown.
-
-5. **External partial failure** — Distinguish accepted, queued, completed, uncertain, retryable and permanently failed work.
-
-6. **Private files and caching when relevant** — Use safe ownership, capacity and cleanup controls if the product needs resource/file or cache features.
-
-7. **Retention/deletion with backups** — Define personal/synthetic data, logs, jobs, file deletion and surviving backup constraints honestly.
-
-8. **Failure recovery and UI reconciliation** — Refetch authoritative work state after missed events or dependency restoration.
-
-9. **Formative delayed-work race** — Repair a progress notification that falsely overrides a committed database status.
-
-### Module 8 — Software Quality, CI, Security and Accessibility
+### Module 4 — Independent Quality, Security and Corrective Evidence
 
 #### Outcomes
 
@@ -279,25 +150,19 @@
 
 #### Lessons
 
-1. **Risk-based verification** — Select component, domain, API, real-DB, consumer, browser, security and failure tests proportional to risk.
+1. **Risk-led verification plan** — Translate the actual product risks into domain, browser, API, database, contract, accessibility and deployment checks; avoid a test-count quota and independent-oracle circularity.
 
-2. **Independent negative oracles** — Check actual forbidden DB effects, not only status codes or self-validating mocks.
+2. **Authorization and data-integrity attacks** — Attempt invalid, cross-tenant, cross-role, replayed and concurrent actions through direct client and HTTP paths; inspect both response and authoritative database state.
 
-3. **Deterministic fixtures** — Use controlled clocks, concurrency, separate DBs, synthetic identities and reliable teardown.
+3. **Browser, accessibility and privacy inspection** — Test keyboard, focus, feedback and reduced-motion/zoom scenarios appropriate to the user task; audit sensitive DOM, logging, storage and data exposure.
 
-4. **Accessibility and privacy review** — Test focus/keyboard/zoom, status announcements, data visibility, secret-safe logs and retention.
+4. **Deterministic execution and fault controls** — Use declared fixtures, seeds, controlled time, process and network faults, isolated databases and teardown to make failure claims reproducible.
 
-5. **Fail-closed quality gates** — Author a versioned CI policy with free local runner equivalent, typecheck, lint and meaningful tests.
+5. **Secure build and CI decisions** — Publish reproducible build steps, dependency review, scoped CI privileges and meaningful fail-closed tests; document where the free local equivalent differs from a hosted provider.
 
-6. **Build and dependency provenance** — Record lockfiles/toolchain, source/artifact hashes and reviewed supply-chain limitations.
+6. **Seeded defect, correction and review** — Introduce a material regression, reproduce it using an independent failing check or causal trace, implement a correction, verify that security and integrity checks still hold, and produce an attributed, maintainer-reviewable change explanation with remaining limitations.
 
-7. **Meaningful code review** — Explain changed behavior, risk and corrections, attributing collaborators only if they actually contributed.
-
-8. **User/operator documentation** — Keep install, usage, config, security and troubleshooting aligned to observed source.
-
-9. **Formative seeded defect** — Demonstrate a material security/contract regression fails independently before a tested correction.
-
-### Module 9 — Local Deployment, Release and Verified Recovery
+### Module 5 — Release, Observe and Recover the Same Product
 
 #### Outcomes
 
@@ -309,86 +174,50 @@
 
 #### Lessons
 
-1. **Running deployment contract** — Operate the integrated service with protected app/data separation and a genuine user-facing HTTPS path.
+1. **Reproducible operational package** — Start the same full-stack system from versioned source and isolated synthetic data; identify immutable artifact versions, startup/shutdown health and service boundaries.
 
-2. **Artifact identity and promotion** — Apply recorded digest, quality/approval controls and a reproducible local release equivalent.
+2. **Verified HTTPS and secret isolation** — Demonstrate local certificate/hostname verification, trusted proxy headers, runtime configuration isolation and denied unauthorized environmental access.
 
-3. **Scoped TLS and secret security** — Verify local hostname/cert trust without insecure bypass and keep secrets outside static assets/image layers.
+3. **Compatible application and database release** — Stage old/new client, service and schema combinations; justify rollback versus forward repair for a persistent change and retain the tested artifact identity.
 
-4. **Safe stateful release** — Demonstrate compatible service/API/schema updates and a justified rollback or forward-repair policy.
+4. **Signals for user-visible service health** — Collect privacy-safe request, data and release observations that distinguish green process health from a broken protected user journey.
 
-5. **User-centered operational signals** — Connect logs, request IDs, failure rate/latency and actual protected task to release identity.
+5. **Controlled incident and restored service** — Inject a bounded failed release or dependency, diagnose impact, contain it and verify user-task recovery using before/after facts.
 
-6. **Controlled release or dependency failure** — Inject a bounded local fault and record user impact, diagnosis and mitigation.
+6. **Actual PostgreSQL recovery** — Back up real test data, restore into a separate clean instance and check relations, authorization, outstanding work and defensible recovery point/time; a backup command without restoration is insufficient.
 
-7. **Actual PostgreSQL backup and restore** — Restore separately into a disposable target and verify a protected task and authorization.
+7. **Operational handoff and limitations** — Publish clear setup, monitoring, release/recovery and shutdown instructions, unsafe assumptions and what the local exercise does not establish about public-cloud production.
 
-8. **Recovery point and time evidence** — Report observed restore time, recoverable commit and non-DB state gaps, not production guarantees.
-
-9. **Formative restore audit** — Identify a backup that exists but cannot support the user task or permission model after restoration.
-
-### Module 10 — Measured Performance and Architecture Economics
-
-#### Outcomes
-
-- APP9-O4
-- APP9-O12
-- APP9-O13
-- APP9-O14
-
-#### Lessons
-
-1. **Choose a real architecture question** — Target a bottleneck, saturation or fault affecting an actual user task rather than benchmark tourism.
-
-2. **Representative workload** — State arrival patterns, data size, tenant mix, warm-up, client saturation, errors and execution environment.
-
-3. **Tail and failure measurement** — Capture supported percentiles, timeouts, throughput, DB/pool/event-loop and other relevant resource symptoms.
-
-4. **Bottleneck alternatives** — Consider index/query fix, batching, bounded queue, cache and capacity before a service split.
-
-5. **Experiment and compare** — Implement or justify rejecting an intervention using matched repeated workload plus security regressions.
-
-6. **Fault containment at scale** — Bound retry, queue and timeout under synthetic dependency loss without leaking user data.
-
-7. **Costs and maintenance effort** — Estimate compute, DB, backups, egress, logs and developer/operational work with stated units/sensitivity.
-
-8. **Architecture decision and revisit trigger** — Explain why simplicity or added complexity best meets the evidence and future conditions for re-evaluation.
-
-9. **Formative invalid speedup** — Find warm-cache or underpowered load generator bias in a claimed production improvement.
-
-### Module 11 — Product Feedback, Revision and Handoff
+### Module 6 — Measured Evolution, Product Revision and Economics
 
 #### Outcomes
 
 - APP9-O1
 - APP9-O2
 - APP9-O3
-- APP9-O5
-- APP9-O9
+- APP9-O4
+- APP9-O12
+- APP9-O13
 - APP9-O14
 - APP9-O15
 
 #### Lessons
 
-1. **Revisit original product assumption** — Select a task hypothesis that can be evaluated against the delivered feature.
+1. **Return to the original product hypothesis** — Compare the promised user task with ethical observations, credible secondary evidence or a labeled synthetic evaluation; state uncertainty before deciding to change the interface.
 
-2. **Consent or evidence-based alternative** — Conduct a limited participant task with consent or a labeled secondary/heuristic audit without fabricated observations.
+2. **Capacity and correctness hypothesis** — Choose a measured latency, resource, saturation, or failure claim tied to a real task, protected data and an operational constraint rather than benchmark theater.
 
-3. **Actual versus expected task result** — Record objective evidence, sampling bias and unresolved uncertainty.
+3. **Representative workload and bias** — Record task/tenant mix, data scale, warm-up, request arrival, environment, trials and generator limits; distinguish throughput, tail latency, failures and unmeasured effects.
 
-4. **Scope and acceptance decision** — Change a meaningful requirement or document defensible no-change after checking the original criterion.
+4. **Locate the causal bottleneck** — Correlate browser/API/Node/SQL and dependency observations; challenge simplistic averages, coincidental correlations and unvalidated optimization claims.
 
-5. **Implement bounded improvement** — Demonstrate a tested UX or functional adjustment when new requirements call for it.
+5. **Compare at least two credible decisions** — Evaluate remove-work/no-change, caching/queue/concurrency or appropriate architectural alternatives against correctness, privacy, availability, cost and maintenance burden.
 
-6. **Retest accessibility and privacy** — Check changed focus, status, data retention and authorization under relevant conditions.
+6. **Implement or defensibly reject a change** — Apply one bounded improvement when supported, otherwise preserve the simpler design with evidence; rerun a matched negative and protected-journey check.
 
-7. **Evidence and participant data stewardship** — Minimize participant artifacts, cite public sources and honor retention choices.
+7. **Revise, document and hand off** — Revisit acceptance, user guidance, costs, energy/operational implications and original assumptions; identify bias, limitations, unsatisfied requests and next safe iteration.
 
-8. **User/operator handoff** — Update known limitations, help, runbooks and meaningful future work.
-
-9. **Formative product impact challenge** — Explain why one anecdote or synthetic success does not establish product-market fit.
-
-### Module 12 — Independent Reproduction and Engineering Defense
+### Module 7 — Independent Reproduction, Unfamiliar Change and Defense
 
 #### Outcomes
 
@@ -411,27 +240,23 @@
 
 #### Lessons
 
-1. **Evidence map and frozen release** — Link every requirement/outcome/assessment to commits, architecture, tests, product evaluation and operational records.
+1. **Freeze and index reviewable evidence** — Link every required assessment to the actual versioned artifact, evaluated outcomes, source authorship, relevant tests and decisions; do not duplicate submissions without new evidence.
 
-2. **Fresh-checkout reproduction** — Have an independent reviewer or clean environment provision from public free instructions without hidden private files.
+2. **Clean-state product reproduction** — Recreate the entire protected service and synthetic database from a clean checkout with publicly understandable commands and inspectable failure responses.
 
-3. **Complete protected journey** — Demonstrate accessible React to authenticated Fastify, real DB, async work and coherent normal/error outcomes.
+3. **One authentic end-to-end demonstration** — Exercise accessible client navigation, validated API, server-held permissions, concurrent persistence, async uncertainty and data lifecycle for the same user task.
 
-4. **Independent security challenge** — Exercise unauthorized tenant, expired session, malformed input and data retention without actual sensitive information.
+4. **Independent safety and correctness challenge** — Respond to a direct HTTP, race, replay, identity-switch or privacy scenario and verify the authoritative state using evidence independent of the implementation.
 
-5. **Live local recovery** — Trace a controlled failed release or dependency and independently verified restored DB state.
+5. **Operational fault and real restoration** — Reproduce an injected release/dependency incident and independently confirm recovery of actual PostgreSQL data and the protected user journey.
 
-6. **Capacity and product decision defense** — Explain measured bottleneck/cost choices and honestly sourced user research.
+6. **Performance and product decisions** — Defend the measured workload, comparative architecture and product evaluation findings without claiming measured effects or stakeholder experience that never occurred.
 
-7. **Unseen bounded requirement or fault** — Implement or diagnose an unfamiliar public-class case in authorization, stale state, a failing dependency, deployment or performance.
+7. **Unfamiliar bounded change** — Accept a previously unseen requirement or failure within the published core scope; implement or correctly diagnose it, demonstrate the change and protect critical invariants.
 
-8. **Preserve invariants and show evidence** — Capture failing-before/passing-after results, source diff and tested normal/negative regression behavior.
+8. **Attribution, limits and future obligations** — Explain personal work, reused material, assistance, consent, licensing, unresolved defects, accessibility accommodations and why the release is or is not fit for its defined purpose.
 
-9. **Authorship and attribution discussion** — Explain personal changes, dependency/template/AI use and genuine contribution of collaborators.
-
-10. **Critical design and limitation defense** — Answer architecture, correctness, safety, economic and future-scale questions with concrete evidence.
-
-11. **Reflect and hand off** — Record risks, unresolved constraints and tasks for a future maintainer.
+9. **Accessible technical defense** — Provide an inspectable live, recorded, written or equivalent defense of actual reasoning, causal observations, alternatives and limits; satisfy each public assessment criterion, not a presentation-style quota.
 
 ## Completion requirements
 
@@ -488,7 +313,7 @@ research panel are not required.
 
 ### Formative project milestones
 
-The eight milestones below are **planning and feedback
+The seven project-work stages below are **planning and feedback
 checkpoints**, not additional mandatory evaluations.
 Artifacts may contribute to a named required assessment
 if they satisfy its published criteria. Iteration and
@@ -497,14 +322,13 @@ if required outcomes and dependency safety are retained.
 
 | Milestone | Suggested sequence | Reviewable progress | Related summative |
 | --- | --- | --- | --- |
-| M1 — Charter and inquiry | Early | Bounded user task, problem evidence, ethics and initial assumptions | APP9-AS1 |
-| M2 — Architecture and trace | Early–middle | System/data/identity design, alternatives, runtime contracts and test plan | APP9-AS2 |
-| M3 — Protected vertical slice | Middle | Accessible React, typed API, genuine session/SQL and async state | APP9-AS3 |
-| M4 — Quality correction | Middle | Independent negative tests, deterministic CI, seeded fault and fix | APP9-AS4 |
-| M5 — Operated release and restore | Middle–late | Verified TLS, release failure, recovery and separate database restore | APP9-AS5 |
-| M6 — Capacity and alternatives | Later | Measured representative workload, bottleneck and economic decision | APP9-AS6 |
-| M7 — Product revision and handoff | Later | Feedback/provenance, justified scope/UX change and maintained documentation | APP9-AS7 |
-| M8 — Independent defense | Final | Clean reproduction and unfamiliar scoped change or diagnosis | APP9-AS8 |
+| M1 — Charter and inquiry | Early | Problem, evidence provenance, ethical scope, acceptance and risk | APP9-AS1 |
+| M2 — Architecture and trust | Early–middle | System/data/identity design, alternatives, runtime contracts and test plan | APP9-AS2 |
+| M3 — Protected vertical slice | Middle | Accessible React, typed API, genuine session/SQL and durable async state | APP9-AS3 |
+| M4 — Quality and correction | Middle | Independent negative tests, deterministic CI, seeded fault and proven fix | APP9-AS4 |
+| M5 — Operated release and recovery | Middle–late | Verified TLS, actual incident/recovery and separate PostgreSQL restore | APP9-AS5 |
+| M6 — Measured evolution and product revision | Later | Representative capacity evidence, design/cost decision, responsible product evaluation and handoff | APP9-AS6, APP9-AS7 |
+| M7 — Independent graduation defense | Final | Clean reproduction, unfamiliar bounded change, attribution and defense | APP9-AS8 |
 
 ### Required assessments and outcome coverage
 

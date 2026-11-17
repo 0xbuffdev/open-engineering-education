@@ -116,21 +116,19 @@ other module activities are formative.
 
 #### Lessons
 
-1. **Course introduction and application history** — Explain how static documents gained scriptable DOM and application-like behavior; situate browser apps among progressive enhancement, client-rendered and traditional navigation models.
+1. **Browser Application Scope and Prior Foundations** — Explain how static documents gained scriptable DOM and application-like behavior; situate browser apps among progressive enhancement, client-rendered and traditional navigation models; identify which prerequisites supply Web mechanisms, semantic markup/CSS and TypeScript contracts; list capabilities APP2 applies rather than re-teaches.
 
-2. **Bring forward APP1, APP17 and APP19** — Identify which prerequisites supply Web mechanisms, semantic markup/CSS and TypeScript contracts; list capabilities APP2 applies rather than re-teaches.
+2. **The browser as a constrained application host** — Describe Window, Document, DOM, events, storage, fetch and history as host APIs with security, lifecycle and support constraints.
 
-3. **The browser as a constrained application host** — Describe Window, Document, DOM, events, storage, fetch and history as host APIs with security, lifecycle and support constraints.
+3. **Problems, users and tasks** — Convert a fictional service request into a defined primary user task, expected result, business boundary and observable success without invented field research.
 
-4. **Problems, users and tasks** — Convert a fictional service request into a defined primary user task, expected result, business boundary and observable success without invented field research.
+4. **State inventory and failure inventory** — Enumerate idle, editing, loading, success, empty, invalid, forbidden, failed, stale and recovery states appropriate to the actual workflow.
 
-5. **State inventory and failure inventory** — Enumerate idle, editing, loading, success, empty, invalid, forbidden, failed, stale and recovery states appropriate to the actual workflow.
+5. **Acceptance criteria and risk** — Write testable examples for keyboard access, correct results, invalid input, privacy, network failure and navigation while separating functional from nonfunctional criteria.
 
-6. **Acceptance criteria and risk** — Write testable examples for keyboard access, correct results, invalid input, privacy, network failure and navigation while separating functional from nonfunctional criteria.
+6. **Data provenance and ethical evaluation** — Distinguish synthetic personas and supplied stakeholder briefs from interviews, usability observations and real user evidence; minimize any collected feedback.
 
-7. **Data provenance and ethical evaluation** — Distinguish synthetic personas and supplied stakeholder briefs from interviews, usability observations and real user evidence; minimize any collected feedback.
-
-8. **Formative task-mapping review** — Inspect a misleading happy-path-only interface specification and identify absent error, focus and authorization outcome cases.
+*Optional practice — task-mapping review:* Inspect a misleading happy-path-only interface specification and identify absent error, focus and authorization outcome cases.
 
 ### Module 2 — DOM Ownership, Safe Content and Structured Updates
 
@@ -157,7 +155,7 @@ other module activities are formative.
 
 7. **Component boundary without frameworks** — Organize a typed render/update/destroy interface using plain functions or classes; avoid assuming a virtual DOM or React lifecycle.
 
-8. **Formative DOM security defect** — Replace an unsafe dynamic HTML insertion with safe DOM construction and assert both displayed content and absence of injected executable elements.
+*Optional practice — DOM security defect:* Replace an unsafe dynamic HTML insertion with safe DOM construction and assert both displayed content and absence of injected executable elements.
 
 ### Module 3 — Events, Interaction and Lifecycle Cleanup
 
@@ -186,7 +184,7 @@ other module activities are formative.
 
 8. **Custom events and event contracts** — Use CustomEvent for a justified boundary, define payload shape and avoid accidental propagation or global event-bus coupling.
 
-9. **Formative interaction repair** — Reproduce a duplicate-action or lost-focus bug, provide failing test evidence and demonstrate a corrected listener lifecycle.
+*Optional practice — interaction repair:* Reproduce a duplicate-action or lost-focus bug, provide failing test evidence and demonstrate a corrected listener lifecycle.
 
 ### Module 4 — Browser Scheduling and Rendering Work
 
@@ -212,7 +210,7 @@ other module activities are formative.
 
 7. **Cleanup of pending work** — Cancel owned timers, animation frames, listeners or pending requests on navigation/teardown; distinguish stop-notification from rollback of completed actions.
 
-8. **Formative scheduling trace** — Predict an interaction trace, collect actual browser observations, repair one ordering or responsiveness fault and state unproven timing assumptions.
+*Optional practice — scheduling trace:* Predict an interaction trace, collect actual browser observations, repair one ordering or responsiveness fault and state unproven timing assumptions.
 
 ### Module 5 — Interactive Forms, Validation and User Recovery
 
@@ -239,7 +237,7 @@ other module activities are formative.
 
 7. **Progressive enhancement and server boundaries** — Explain native fallback and why JavaScript/client validation cannot replace server checks or prove authorization.
 
-8. **Formative form audit** — Inject missing and invalid values and repair a misleading success banner, hidden error or lost in-progress input.
+*Optional practice — form audit:* Inject missing and invalid values and repair a misleading success banner, hidden error or lost in-progress input.
 
 ### Module 6 — Typed Components and State Machines without React
 
@@ -266,7 +264,7 @@ other module activities are formative.
 
 7. **Shared state and accidental coupling** — Create two component instances and verify no unintentional singleton state, listener or cache cross-contamination.
 
-8. **Formative state refactor** — Turn an ad-hoc conditional UI into a typed transition-driven component and demonstrate corrected invalid-state behavior.
+*Optional practice — state refactor:* Turn an ad-hoc conditional UI into a typed transition-driven component and demonstrate corrected invalid-state behavior.
 
 ### Module 7 — Fetch, HTTP Failure and Browser Trust Boundaries
 
@@ -280,21 +278,19 @@ other module activities are formative.
 
 1. **Fetch versus server responses** — Explain Request, Response and response-body decoding, distinguishing network rejection from resolved 404/403/500 responses.
 
-2. **Request methods and body shape** — Use suitable methods, headers and JSON encoding with explicit media-type expectations and observable acceptance criteria.
+2. **HTTP Request and Response Contracts** — Use suitable methods, headers and JSON encoding with explicit media-type expectations and observable acceptance criteria; classify success, no-content, authentication-required, forbidden, conflict, rate-limited and server failure results without equating an HTTP 200 with a correct domain response.
 
-3. **HTTP status and structured errors** — Classify success, no-content, authentication-required, forbidden, conflict, rate-limited and server failure results without equating an HTTP 200 with a correct domain response.
+3. **AbortController and request lifetime** — Abort a superseded fetch where appropriate, distinguish aborting consumption from undoing server side effects and test race behavior explicitly.
 
-4. **AbortController and request lifetime** — Abort a superseded fetch where appropriate, distinguish aborting consumption from undoing server side effects and test race behavior explicitly.
+4. **Same-origin and CORS** — Explain browser-enforced origin restrictions, preflight, CORS response headers and why CORS is not an authentication or authorization mechanism.
 
-5. **Same-origin and CORS** — Explain browser-enforced origin restrictions, preflight, CORS response headers and why CORS is not an authentication or authorization mechanism.
+5. **Credentials, cookies and CSRF limits** — Reason about fetch credentials mode, cookie attributes and cross-site request threats without asking learners to implement a full identity provider.
 
-6. **Credentials, cookies and CSRF limits** — Reason about fetch credentials mode, cookie attributes and cross-site request threats without asking learners to implement a full identity provider.
+6. **Response validation** — Parse unknown JSON, reject wrong shapes and report errors without showing untrusted HTML; connect APP19 type/runtime boundaries to real browser input.
 
-7. **Response validation** — Parse unknown JSON, reject wrong shapes and report errors without showing untrusted HTML; connect APP19 type/runtime boundaries to real browser input.
+7. **Fixture service and deterministic transports** — Use supplied free local HTTP response fixtures, a service stub or an injected fetch adapter; no APP21 server authoring or cloud API is a prerequisite.
 
-8. **Fixture service and deterministic transports** — Use supplied free local HTTP response fixtures, a service stub or an injected fetch adapter; no APP21 server authoring or cloud API is a prerequisite.
-
-9. **Formative network matrix** — Simulate 200/204/400/401/403/404/409/500, malformed JSON, aborted fetch and offline cases; compare the visible UI to its documented failure policy.
+*Optional practice — network matrix:* Simulate 200/204/400/401/403/404/409/500, malformed JSON, aborted fetch and offline cases; compare the visible UI to its documented failure policy.
 
 ### Module 8 — Asynchronous Views, Cache Policies and Mutation Recovery
 
@@ -324,7 +320,7 @@ other module activities are formative.
 
 8. **Partial results and pagination** — Handle empty pages, partial success, cursor or offset mismatches and merged page state with stable keys.
 
-9. **Formative race and cache defect** — Reproduce a stale authorized result or duplicate mutation, repair it and write a deterministic regression test without network sleep timing.
+*Optional practice — race and cache defect:* Reproduce a stale authorized result or duplicate mutation, repair it and write a deterministic regression test without network sleep timing.
 
 ### Module 9 — Navigation, Browser History and Recovery of Context
 
@@ -351,7 +347,7 @@ other module activities are formative.
 
 7. **Route change and resource cleanup** — Cancel or ignore stale requests, dispose old listeners and avoid unauthorized content flashes on a changed route.
 
-8. **Formative deep-link incident** — Demonstrate a failure when loading a route directly or pressing Back, fix the environment/routing policy and record keyboard behavior.
+*Optional practice — deep-link incident:* Demonstrate a failure when loading a route directly or pressing Back, fix the environment/routing policy and record keyboard behavior.
 
 ### Module 10 — Browser Security, Persistence and Privacy
 
@@ -380,7 +376,7 @@ other module activities are formative.
 
 8. **Sensitive-state transitions** — Handle sign-out and forbidden responses by clearing identity-scoped views and caches, never displaying data solely because a hidden button exists.
 
-9. **Formative security and privacy test** — Repair untrusted text rendering or an identity-scoped stale-cache leak, and state server-side protections that APP2 cannot prove.
+*Optional practice — security and privacy test:* Repair untrusted text rendering or an identity-scoped stale-cache leak, and state server-side protections that APP2 cannot prove.
 
 ### Module 11 — Accessibility and Inclusive Dynamic Interaction
 
@@ -410,7 +406,7 @@ other module activities are formative.
 
 8. **Automated and manual evidence** — Combine automated checks, keyboard-only inspection and feasible screen-reader observations; clearly disclose when actual assistive-technology testing was not performed.
 
-9. **Formative accessibility defect triage** — Repair a focus trap, missing error announcement or inaccessible async status and show the before/after behavior in the same environment.
+*Optional practice — accessibility defect triage:* Repair a focus trap, missing error announcement or inaccessible async status and show the before/after behavior in the same environment.
 
 ### Module 12 — Human-Centered Evaluation, Localization and Feedback
 
@@ -439,7 +435,7 @@ other module activities are formative.
 
 8. **Assistive and low-bandwidth scenarios** — Inspect a constrained device/network/keyboard-only workflow and record usability evidence and explicitly unverified contexts.
 
-9. **Formative user-task improvement** — Use documented synthetic or consenting participant observations to correct one confusing state transition; explain limitations of the evaluation method.
+*Optional practice — user-task improvement:* Use documented synthetic or consenting participant observations to correct one confusing state transition; explain limitations of the evaluation method.
 
 ### Module 13 — Browser Performance, Testing and Independent Frontend Defense
 

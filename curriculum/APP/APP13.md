@@ -80,7 +80,7 @@ Seventeen learning outcomes across fifteen varied modules lead to seven cumulati
 
 8. **Initial risk and acceptance contract** — Publish observable denied, offline, terminated, conflicting, accessible and upgraded-device success rules.
 
-9. **Formative overpromised-platform critique** — Reject an iOS App Store requirement or claim of universal battery life from an Android emulator.
+*Optional practice — overpromised-platform critique:* Reject an iOS App Store requirement or claim of universal battery life from an Android emulator.
 
 ### Module 2 — Toolchain, Packaged Android Runtime and Bridge Contracts
 
@@ -109,7 +109,7 @@ Seventeen learning outcomes across fifteen varied modules lead to seven cumulati
 
 8. **Alternate architectures without hidden requirements** — Allow native Kotlin/Swift or React Native equivalents only with declared additional skills and identical assessment evidence.
 
-9. **Formative installed-protocol check** — Show why bundling a PWA without real Android build, bridge and lifecycle tests is insufficient.
+*Optional practice — installed-protocol check:* Show why bundling a PWA without real Android build, bridge and lifecycle tests is insufficient.
 
 ### Module 3 — Touch, Navigation, Assistive Access and Input State
 
@@ -138,7 +138,7 @@ Seventeen learning outcomes across fifteen varied modules lead to seven cumulati
 
 8. **Deep-link route restoration** — Validate inbound routes and protected data before opening saved destination after restart.
 
-9. **Formative inaccessible permission task** — Repair a touch-only action or invisible error that blocks task completion.
+*Optional practice — inaccessible permission task:* Repair a touch-only action or invisible error that blocks task completion.
 
 ### Module 4 — Typed Mobile Architecture and State Ownership
 
@@ -168,7 +168,7 @@ Seventeen learning outcomes across fifteen varied modules lead to seven cumulati
 
 8. **Application architecture guard tests** — Block UI imports of raw secrets, direct SQL bypass or unintended native permission work.
 
-9. **Formative tangled-screen refactor** — Move storage/network/permission handling from an untestable screen handler into owned modules.
+*Optional practice — tangled-screen refactor:* Move storage/network/permission handling from an untestable screen handler into owned modules.
 
 ### Module 5 — Android Lifecycle and Durable User-State Recovery
 
@@ -184,21 +184,19 @@ Seventeen learning outcomes across fifteen varied modules lead to seven cumulati
 
 1. **Foreground, background and paused states** — Observe Android activity and application lifecycle versus OS process lifetime.
 
-2. **Rotation versus process death** — Distinguish ordinary Activity recreation from real process termination and subsequent cold restart.
+2. **Lifecycle Transitions and Durable Draft Recovery** — Distinguish ordinary Activity recreation from real process termination and subsequent cold restart; save unsent protected user input before interruption and reconstruct acceptable navigation after restart.
 
-3. **Persist valid drafts and route** — Save unsent protected user input before interruption and reconstruct acceptable navigation after restart.
+3. **Low-memory and OS scheduling limits** — Demonstrate why listeners and JS timers cannot guarantee work after background restrictions.
 
-4. **Low-memory and OS scheduling limits** — Demonstrate why listeners and JS timers cannot guarantee work after background restrictions.
+4. **Typed App lifecycle plugin** — Observe pause, resume and appStateChange on installed Android, checking bridge support and cleanup.
 
-5. **Typed App lifecycle plugin** — Observe pause, resume and appStateChange on installed Android, checking bridge support and cleanup.
+5. **Crash in local transaction window** — Interrupt before and after committing local record-plus-pending-intent and inspect actual state.
 
-6. **Crash in local transaction window** — Interrupt before and after committing local record-plus-pending-intent and inspect actual state.
+6. **Listener and file handle cleanup** — Release native resources, app event handlers and canceled network work through repeated resume.
 
-7. **Listener and file handle cleanup** — Release native resources, app event handlers and canceled network work through repeated resume.
+7. **Reconcile on foreground return** — Recheck session, offline queue and remote revisions under bounded rates.
 
-8. **Reconcile on foreground return** — Recheck session, offline queue and remote revisions under bounded rates.
-
-9. **Formative killed-draft recovery** — Repair loss of a protected user draft without exposing it after account switch.
+*Optional practice — killed-draft recovery:* Repair loss of a protected user draft without exposing it after account switch.
 
 ### Module 6 — Local Database, Migrations and Privacy Lifecycle
 
@@ -228,7 +226,7 @@ Seventeen learning outcomes across fifteen varied modules lead to seven cumulati
 
 8. **Deletion and retention limits** — Distinguish logical deletion, encrypted storage, copied backups and server-retained data.
 
-9. **Formative interrupted schema upgrade** — Prove queued edits survive a failed migration or are safely quarantined and explained.
+*Optional practice — interrupted schema upgrade:* Prove queued edits survive a failed migration or are safely quarantined and explained.
 
 ### Module 7 — Offline Queues, Idempotency and Honest Pending UX
 
@@ -258,7 +256,7 @@ Seventeen learning outcomes across fifteen varied modules lead to seven cumulati
 
 8. **Conflict and rejection UI** — Preserve attempted edits, show current state and offer meaningful accessible recovery.
 
-9. **Formative duplicate replay failure** — Fix a restarted sync loop that double-applies an accepted database change.
+*Optional practice — duplicate replay failure:* Fix a restarted sync loop that double-applies an accepted database change.
 
 ### Module 8 — Multi-Client Reconciliation and Authorized Conflict Handling
 
@@ -288,7 +286,7 @@ Seventeen learning outcomes across fifteen varied modules lead to seven cumulati
 
 8. **Catch up after a long absence** — Refresh from authorized snapshot or bounded delta after old cursor expiration.
 
-9. **Formative silent overwrite diagnosis** — Repair a two-client conflict that had discarded one accepted version.
+*Optional practice — silent overwrite diagnosis:* Repair a two-client conflict that had discarded one accepted version.
 
 ### Module 9 — Mobile Session, Transport and Local Data Security
 
@@ -318,7 +316,7 @@ Seventeen learning outcomes across fifteen varied modules lead to seven cumulati
 
 8. **Redact crash and network evidence** — Keep credentials, private form fields and full sensitive URLs out of emitted diagnostics.
 
-9. **Formative stolen-session scenario** — Revoke a test token and show queue, cache and local secrets honor the new principal.
+*Optional practice — stolen-session scenario:* Revoke a test token and show queue, cache and local secrets honor the new principal.
 
 ### Module 10 — Native Device Permissions and Privacy-Safe Capabilities
 
@@ -348,7 +346,7 @@ Seventeen learning outcomes across fifteen varied modules lead to seven cumulati
 
 8. **Privacy and consent disclosure** — Describe why information is needed, who can view it and how long local copies persist.
 
-9. **Formative safe no-permission fallback** — Demonstrate manual entry after denial, simulator absence or canceled capability.
+*Optional practice — safe no-permission fallback:* Demonstrate manual entry after denial, simulator absence or canceled capability.
 
 ### Module 11 — Background Constraints, Power and Notification Hints
 
@@ -379,7 +377,7 @@ Seventeen learning outcomes across fifteen varied modules lead to seven cumulati
 
 8. **Battery/network proxy measurements** — Compare counts, CPU/wake behavior and bandwidth without unmeasured physical battery assertions.
 
-9. **Formative impossible timer promise** — Replace continuous background polling with documented OS-aware, resume-safe reconciliation.
+*Optional practice — impossible timer promise:* Replace continuous background polling with documented OS-aware, resume-safe reconciliation.
 
 ### Module 12 — Mobile Startup, Responsiveness, Memory and Bandwidth
 
@@ -409,7 +407,7 @@ Seventeen learning outcomes across fifteen varied modules lead to seven cumulati
 
 8. **Accessible performance outcomes** — Retest screen reader, large text, focus and reduced motion after optimizing.
 
-9. **Formative runaway sync repair** — Measure and fix high-frequency retry loops while preserving queued edits and auth state.
+*Optional practice — runaway sync repair:* Measure and fix high-frequency retry loops while preserving queued edits and auth state.
 
 ### Module 13 — Device-Level Quality, Failure Injection and Test Matrices
 
@@ -445,7 +443,7 @@ Seventeen learning outcomes across fifteen varied modules lead to seven cumulati
 
 9. **Fail-closed build and CI gate** — Run repeatable typecheck/build, independent HTTP/SQL, mobile emulator checks with declared machine limits.
 
-10. **Formative seeded fault correction** — Make a lifecycle, permission or offline regression fail before a genuine code fix.
+*Optional practice — seeded fault correction:* Make a lifecycle, permission or offline regression fail before a genuine code fix.
 
 ### Module 14 — Versioned Build, Test Signing and Reversible Upgrade
 
@@ -478,7 +476,7 @@ Seventeen learning outcomes across fifteen varied modules lead to seven cumulati
 
 9. **Store listing and iOS comparison** — Explain optional Play AAB, app privacy declarations and iOS Xcode/signing without requiring paid publication.
 
-10. **Formative upgrade break and repair** — Fix a release that destroys offline intent and document rollback restrictions and restore evidence.
+*Optional practice — upgrade break and repair:* Fix a release that destroys offline intent and document rollback restrictions and restore evidence.
 
 ### Module 15 — Integrated Installed Offline Mobile Client and Defense
 

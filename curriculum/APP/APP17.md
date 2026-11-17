@@ -217,12 +217,11 @@ or course-conformance claim follows merely from publication.
 #### Lessons
 
 1. **Image Formats and Sources** — Select an appropriate format and local asset sizes without an external hosting dependency.
-2. **Responsive Images** — Use width/size information, srcset and sizes or picture where genuinely beneficial.
-3. **Loading and Layout Stability** — Provide intrinsic dimensions or aspect ratios, inspect waterfalls, and reduce image-caused layout shifts.
-4. **File Organization** — Organize semantic page templates and layered or component-based CSS without importing a UI framework.
-5. **Progressive Enhancement** — Start with usable documents, add supported CSS features, and evaluate fallback when a feature is absent.
-6. **Cross-Browser Differences** — Reproduce one meaningful standards/support difference or a supplied compatibility scenario.
-7. **Regressions and Refactoring** — Refactor repeated styles while proving navigation, layout, and focus behavior did not regress.
+2. **Responsive Image Delivery and Layout Stability** — Use width/size information, srcset and sizes or picture where genuinely beneficial; provide intrinsic dimensions or aspect ratios, inspect waterfalls, and reduce image-caused layout shifts.
+3. **File Organization** — Organize semantic page templates and layered or component-based CSS without importing a UI framework.
+4. **Progressive Enhancement** — Start with usable documents, add supported CSS features, and evaluate fallback when a feature is absent.
+5. **Cross-Browser Differences** — Reproduce one meaningful standards/support difference or a supplied compatibility scenario.
+6. **Regressions and Refactoring** — Refactor repeated styles while proving navigation, layout, and focus behavior did not regress.
 
 ### Module 10 — Static Site Integration and Technical Review
 

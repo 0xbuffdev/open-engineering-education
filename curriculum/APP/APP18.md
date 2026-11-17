@@ -99,7 +99,7 @@ included in a required assessment below.
 
 6. **Runtime Readiness and Safe Fixtures** — Record runtime version and execution command, run from an ordinary user account, and use synthetic local data rather than secrets or remote service credentials.
 
-7. **Formative Investigation: Host or Language?** — Classify representative APIs and predict what happens under another host; independently verify one assumption with documentation and a runnable example.
+*Optional practice — Investigation: Host or Language?:* Classify representative APIs and predict what happens under another host; independently verify one assumption with documentation and a runnable example.
 
 ### Module 2 — Values, Conversion, Numbers, and Strings
 
@@ -124,7 +124,7 @@ included in a required assessment below.
 
 7. **Dates, Time Zones, and Localization Limits** — Explain timestamps versus local display, the risk of ambiguous date parsing, and when a host's internationalization facilities are presentation tools rather than business-domain logic.
 
-8. **Formative Debugging: Surprising Values** — Predict outputs for adversarial value fixtures, run them, explain mismatches and produce a corrected implementation with tests.
+*Optional practice — Debugging: Surprising Values:* Predict outputs for adversarial value fixtures, run them, explain mismatches and produce a corrected implementation with tests.
 
 ### Module 3 — Control Flow, Functions, and Problem Decomposition
 
@@ -149,7 +149,7 @@ included in a required assessment below.
 
 7. **Readable Decomposition and Complexity** — Decompose a data transformation into named operations; reason about representative linear, quadratic and lookup costs without optimizing prematurely.
 
-8. **Formative Change: New Rule, Same Invariants** — Extend an existing function for one changed requirement and verify earlier behavior with regression cases.
+*Optional practice — Change: New Rule, Same Invariants:* Extend an existing function for one changed requirement and verify earlier behavior with regression cases.
 
 ### Module 4 — Lexical Scope, Closures, and Call Context
 
@@ -175,7 +175,7 @@ included in a required assessment below.
 
 7. **Stack Frames and Debugging** — Walk a nested call/closure stack trace, inspect locals and captured variables, and explain why a log statement cannot prove every execution path.
 
-8. **Formative Closure Review** — Review a small callback-heavy program, write a prediction, run it, and fix one state or receiver bug without masking it.
+*Optional practice — Closure Review:* Review a small callback-heavy program, write a prediction, run it, and fix one state or receiver bug without masking it.
 
 ### Module 5 — Objects, Prototypes, and Classes
 
@@ -201,7 +201,7 @@ included in a required assessment below.
 
 7. **Data Parsing and Prototype Boundaries** — Test a record with keys such as `__proto__` and distinguish parsing from unsafe merging into application objects; prefer explicit allowlists and safe data structures.
 
-8. **Formative Object Repair** — Diagnose a bug in copying, method binding, or inherited fields and provide executable regression tests.
+*Optional practice — Object Repair:* Diagnose a bug in copying, method binding, or inherited fields and provide executable regression tests.
 
 ### Module 6 — Collections, Iteration, and Structured Data
 
@@ -229,7 +229,7 @@ included in a required assessment below.
 
 7. **Data Transformation Contracts** — Define invariants for filtering, grouping, deduplication or aggregation; check missing fields, duplicate keys and deterministic output.
 
-8. **Formative Dataset Investigation** — Compare an array/object implementation with a Map/Set alternative and explain correctness, complexity and iteration effects on a synthetic fixture.
+*Optional practice — Dataset Investigation:* Compare an array/object implementation with a Map/Set alternative and explain correctness, complexity and iteration effects on a synthetic fixture.
 
 ### Module 7 — Runtime Contracts, Errors, and Defensive Design
 
@@ -245,17 +245,15 @@ included in a required assessment below.
 
 2. **Shape and Domain Validation** — Implement explicit validation for record shape, length, range, allowed keys and relationships; distinguish missing fields, null, wrong type and out-of-range values.
 
-3. **Error Categories and Exceptions** — Use `throw` and `try`/`catch`/`finally` appropriately; distinguish programmer defects, expected invalid input and transient operational failures.
+3. **Error Classification, Causes and Diagnostics** — Use `throw` and `try`/`catch`/`finally` appropriately; distinguish programmer defects, expected invalid input and transient operational failures; preserve diagnostic context and error causes without leaking secrets or raw untrusted payloads into user-facing output.
 
-4. **Error Messages and Causes** — Preserve diagnostic context and error causes without leaking secrets or raw untrusted payloads into user-facing output.
+4. **Safe Data Boundaries** — Avoid `eval`, unchecked dynamic execution and merging arbitrary object keys; apply allowlists to accepted inputs and outputs.
 
-5. **Safe Data Boundaries** — Avoid `eval`, unchecked dynamic execution and merging arbitrary object keys; apply allowlists to accepted inputs and outputs.
+5. **Partial Processing and Atomicity** — Define the behavior when one dataset item fails: reject all, collect structured errors or proceed with documented partial results; test the decision.
 
-6. **Partial Processing and Atomicity** — Define the behavior when one dataset item fails: reject all, collect structured errors or proceed with documented partial results; test the decision.
+6. **Refactoring without Behavioral Drift** — Reorganize code while retaining published input/output semantics, supported error categories and regression coverage.
 
-7. **Refactoring without Behavioral Drift** — Reorganize code while retaining published input/output semantics, supported error categories and regression coverage.
-
-8. **Formative Negative-Path Review** — Inject malformed JSON, unexpected fields, invalid numbers and duplicates; demonstrate failures remain controlled and observable.
+*Optional practice — Negative-Path Review:* Inject malformed JSON, unexpected fields, invalid numbers and duplicates; demonstrate failures remain controlled and observable.
 
 ### Module 8 — Modules, Interfaces, and Reusable Packages
 
@@ -281,7 +279,7 @@ included in a required assessment below.
 
 7. **Refactoring a Monolith** — Split an existing script into source, input validation and CLI adapter modules; compare independent unit tests before/after.
 
-8. **Formative Interface Review** — Create a separate consumer for a small module and test misuse, missing exports and version-sensitive assumptions.
+*Optional practice — Interface Review:* Create a separate consumer for a small module and test misuse, missing exports and version-sensitive assumptions.
 
 ### Module 9 — Node.js Developer Tooling and Reproduction
 
@@ -296,19 +294,17 @@ included in a required assessment below.
 
 1. **Node Runtime Selection** — Choose a documented maintained runtime baseline and distinguish installed runtime, package manager and application execution host without prescribing a particular proprietary installer.
 
-2. **Project Manifest and Scripts** — Create `package.json` with `type: module`, entry points and safe `scripts`; explain how scripts execute in a local working directory.
+2. **Package Manifests, Scripts and Reproducible Dependencies** — Create `package.json` with `type: module`, entry points and safe `scripts`; explain how scripts execute in a local working directory; explain version ranges versus resolved versions, package-lock provenance and why clean installation can differ from an unlocked install.
 
-3. **Versions, Dependencies, and Lockfiles** — Explain version ranges versus resolved versions, package-lock provenance and why clean installation can differ from an unlocked install.
+3. **Offline-Ready Fixture Strategy** — Use a built-in-only example or a supplied local package fixture to make required assessment execution reproducible without paid hosting, remote registries or account login.
 
-4. **Offline-Ready Fixture Strategy** — Use a built-in-only example or a supplied local package fixture to make required assessment execution reproducible without paid hosting, remote registries or account login.
+4. **Install Scripts and Supply-Chain Risk** — Explain that package installation and scripts can execute untrusted code; audit declared scripts and use reviewed local inputs for required demonstrations.
 
-5. **Install Scripts and Supply-Chain Risk** — Explain that package installation and scripts can execute untrusted code; audit declared scripts and use reviewed local inputs for required demonstrations.
+5. **Environment and Configuration** — Separate harmless test fixtures from credentials, avoid committing secrets and compare host environment variables to JavaScript program arguments.
 
-6. **Environment and Configuration** — Separate harmless test fixtures from credentials, avoid committing secrets and compare host environment variables to JavaScript program arguments.
+6. **Clean-Checkout Verification** — Document version, setup command, test command, input fixtures and known limitations; test from a fresh directory and explain dependency/tool mismatch symptoms.
 
-7. **Clean-Checkout Verification** — Document version, setup command, test command, input fixtures and known limitations; test from a fresh directory and explain dependency/tool mismatch symptoms.
-
-8. **Formative Build Failure** — Investigate a missing module, incorrect package export or lockfile mismatch without rewriting version history to hide the cause.
+*Optional practice — Build Failure:* Investigate a missing module, incorrect package export or lockfile mismatch without rewriting version history to hide the cause.
 
 ### Module 10 — Asynchronous JavaScript and Scheduling
 
@@ -337,7 +333,7 @@ included in a required assessment below.
 
 8. **Uncaught Errors and Unhandled Rejections** — Reproduce and diagnose one sync throw and one async rejection; demonstrate an explicit error boundary and exit policy.
 
-9. **Formative Event-Order Investigation** — Predict logged steps, execute the fixture, distinguish guaranteed from host-dependent ordering and explain a concurrency bug.
+*Optional practice — Event-Order Investigation:* Predict logged steps, execute the fixture, distinguish guaranteed from host-dependent ordering and explain a concurrency bug.
 
 ### Module 11 — Testing, Debugging, and Software Evolution
 
@@ -366,7 +362,7 @@ included in a required assessment below.
 
 7. **Maintenance and Compatibility** — Apply a scoped new requirement to an existing module, protect public contracts and explain breaking versus backward-compatible changes.
 
-8. **Formative Defect Investigation** — Reproduce a seeded data-processing or async defect, add a failing test, fix the root cause and explain the regression evidence.
+*Optional practice — Defect Investigation:* Reproduce a seeded data-processing or async defect, add a failing test, fix the root cause and explain the regression evidence.
 
 ### Module 12 — Integrated JavaScript Engineering and Defense
 

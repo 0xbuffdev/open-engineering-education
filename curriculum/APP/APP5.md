@@ -152,7 +152,7 @@ are the only summative completion requirements.
 
 7. **Choose an achievable vertical slice** — Bound the problem to a small multi-tenant workspace, catalog/reservation or document-processing product rather than a distributed microservice estate.
 
-8. **Formative requirements review** — Expose a misleading 'works on my machine' success claim and add the missing acceptance and recovery evidence.
+*Optional practice — requirements review:* Expose a misleading 'works on my machine' success claim and add the missing acceptance and recovery evidence.
 
 ### Module 2 — Architecture Views, Responsibilities and Local Composition
 
@@ -165,21 +165,19 @@ are the only summative completion requirements.
 
 #### Lessons
 
-1. **System context and trust boundaries** — Draw browser, API, PostgreSQL, job runner, file resource and outbound fixture, distinguishing actors from processes and durable state.
+1. **System Boundaries and Architecture Views** — Draw browser, API, PostgreSQL, job runner, file resource and outbound fixture, distinguishing actors from processes and durable state; use level-appropriate context, component, deployment and interaction views without implying every diagram describes separate services.
 
-2. **Container/component and sequence diagrams** — Use level-appropriate context, component, deployment and interaction views without implying every diagram describes separate services.
+2. **Synchronous request path** — Trace browser event through React, Fetch, authenticated Fastify handler, domain operation and SQL transaction to returned response and UI result.
 
-3. **Synchronous request path** — Trace browser event through React, Fetch, authenticated Fastify handler, domain operation and SQL transaction to returned response and UI result.
+3. **Asynchronous side-effect path** — Trace an accepted mutation through durable work record, dispatcher, simulated external dependency, notification/progress and UI refetch.
 
-4. **Asynchronous side-effect path** — Trace an accepted mutation through durable work record, dispatcher, simulated external dependency, notification/progress and UI refetch.
+4. **Authority and data ownership** — Separate client drafts, cache replicas, authoritative resource rows, identity/session ownership and immutable audit facts.
 
-5. **Authority and data ownership** — Separate client drafts, cache replicas, authoritative resource rows, identity/session ownership and immutable audit facts.
+5. **Monolith versus distributed alternatives** — Choose a small modular monolith for the reference project and explain when a separate worker or object store becomes justified.
 
-6. **Monolith versus distributed alternatives** — Choose a small modular monolith for the reference project and explain when a separate worker or object store becomes justified.
+6. **Composition and configuration** — Wire independent frontend/backend/data components using documented local origins, environment values and ports; eliminate hidden absolute URLs.
 
-7. **Composition and configuration** — Wire independent frontend/backend/data components using documented local origins, environment values and ports; eliminate hidden absolute URLs.
-
-8. **Formative boundary trace** — Find a domain check leaking into React or a transaction falsely spanning an external HTTP call and repair the architecture view.
+*Optional practice — boundary trace:* Find a domain check leaking into React or a transaction falsely spanning an external HTTP call and repair the architecture view.
 
 ### Module 3 — Client–Service Contract Integration and Failure Mapping
 
@@ -207,7 +205,7 @@ are the only summative completion requirements.
 
 7. **Consumer-driven contract fixtures** — Run an independently written HTTP consumer alongside React integration tests and compare results with the published contract.
 
-8. **Formative mismatched-contract repair** — Repair a runtime response missing a required field or returning inconsistent errors, with both client and server regression cases.
+*Optional practice — mismatched-contract repair:* Repair a runtime response missing a required field or returning inconsistent errors, with both client and server regression cases.
 
 ### Module 4 — Session Continuity, Authorization and Tenant Isolation
 
@@ -236,7 +234,7 @@ are the only summative completion requirements.
 
 8. **Logout and identity switching** — Clear or invalidate scoped local state and stop stale updates; prove no prior tenant data flashes after sign-out or user switch.
 
-9. **Formative multi-tenant audit** — Inject a direct-resource access or stale-cache disclosure and verify the repaired server and UI behavior independently.
+*Optional practice — multi-tenant audit:* Inject a direct-resource access or stale-cache disclosure and verify the repaired server and UI behavior independently.
 
 ### Module 5 — State Ownership, Optimistic Mutations and Conflict Recovery
 
@@ -263,7 +261,7 @@ are the only summative completion requirements.
 
 7. **Read-after-write and consistency windows** — Explain what the user can expect after commit versus delayed cache/job projections, without promising instantly synchronized replicas.
 
-8. **Formative conflict scenario** — Run two synthetic clients editing the same resource and repair a misleading final-state message with database evidence.
+*Optional practice — conflict scenario:* Run two synthetic clients editing the same resource and repair a misleading final-state message with database evidence.
 
 ### Module 6 — Persistence, Transactions and Cross-Layer Invariants
 
@@ -291,7 +289,7 @@ are the only summative completion requirements.
 
 7. **Schema changes and old client behavior** — Keep a staged migration compatible with defined older consumers until usage and backfill evidence make a contract change safe.
 
-8. **Formative invariant failure** — Repair a handler that returns success before checking a failed transaction or leaves inconsistent file metadata after rollback.
+*Optional practice — invariant failure:* Repair a handler that returns success before checking a failed transaction or leaves inconsistent file metadata after rollback.
 
 ### Module 7 — Cache Keys, Freshness, Invalidations and Authorization
 
@@ -318,7 +316,7 @@ are the only summative completion requirements.
 
 7. **Cache stampedes and unavailable cache** — Consider a small controlled request burst and choose a simple fallback strategy; avoid manufacturing distributed-cache requirements.
 
-8. **Formative cache leak and stale row** — Reproduce a previous user's cached result or a stale post-edit list and verify the fixed key/invalidation policy.
+*Optional practice — cache leak and stale row:* Reproduce a previous user's cached result or a stale post-edit list and verify the fixed key/invalidation policy.
 
 ### Module 8 — Files, Object-Style Resources and Publication Safety
 
@@ -345,7 +343,7 @@ are the only summative completion requirements.
 
 7. **Cleanup of abandoned and rejected uploads** — Enforce expiration/garbage collection on local temporary objects and prove no cross-user access to orphaned artifacts.
 
-8. **Formative file boundary investigation** — Test forged metadata, oversize data, wrong tenant download, stale signed-like token and failed publication; show safe rejection.
+*Optional practice — file boundary investigation:* Test forged metadata, oversize data, wrong tenant download, stale signed-like token and failed publication; show safe rejection.
 
 ### Module 9 — Async Work, Durable Intent and Retry Semantics
 
@@ -372,7 +370,7 @@ are the only summative completion requirements.
 
 7. **Shutdown and work ownership** — Stop accepting new work, record in-progress ownership and recover durable uncompleted jobs without asserting all work ran exactly once.
 
-8. **Formative duplicate-delivery scenario** — Restart a disposable local worker after a simulated crash and prove accepted work is neither silently forgotten nor duplicated as a business operation.
+*Optional practice — duplicate-delivery scenario:* Restart a disposable local worker after a simulated crash and prove accepted work is neither silently forgotten nor duplicated as a business operation.
 
 ### Module 10 — Progress Delivery, Polling and Reconnect Reconciliation
 
@@ -399,7 +397,7 @@ are the only summative completion requirements.
 
 7. **Slow client, tab hidden and teardown** — Bound active timers/connections, clean up on route change or sign-out and resume by refetching actual job state.
 
-8. **Formative missed-notification test** — Drop a notification or pause polling and prove the client reaches the correct end state after reconnect.
+*Optional practice — missed-notification test:* Drop a notification or pause polling and prove the client reaches the correct end state after reconnect.
 
 ### Module 11 — External Dependencies, Degradation and Recovery
 
@@ -426,7 +424,7 @@ are the only summative completion requirements.
 
 7. **Recovery and reconciliation after restoration** — Reconcile durable job/resource state, refresh UI and verify no unauthorized or duplicate side effects appeared.
 
-8. **Formative cascading outage** — Simulate slow outbound dependency and retry storm; document bounded mitigation and what remains unsupported.
+*Optional practice — cascading outage:* Simulate slow outbound dependency and retry storm; document bounded mitigation and what remains unsupported.
 
 ### Module 12 — Full-Stack Security, Privacy and Data Lifecycle
 
@@ -454,7 +452,7 @@ are the only summative completion requirements.
 
 7. **Dependency and artifact provenance** — Pin packages and local fixture versions, document update risks and distinguish a reproducible stack from a production security audit.
 
-8. **Formative trust audit** — Identify one client-only permission check and one leaked output in a local test, repair both at actual enforcement boundaries.
+*Optional practice — trust audit:* Identify one client-only permission check and one leaked output in a local test, repair both at actual enforcement boundaries.
 
 ### Module 13 — Compatible Change, Tests and Staged Evolution
 
@@ -472,17 +470,15 @@ are the only summative completion requirements.
 
 2. **Expand/migrate/contract sequence** — Add backward-compatible schema/API support first, migrate data and clients, then remove obsolete behavior only with declared evidence.
 
-3. **Old and new consumer fixture tests** — Verify the previous client still works within the supported period and a new client exercises the updated contract.
+3. **Versioned Consumer Checks and Rollout Controls** — Verify the previous client still works within the supported period and a new client exercises the updated contract; use a small local configuration toggle or simulated staged release, stating that production multi-instance deployment is APP7's scope.
 
-4. **Feature toggles and rollout assumptions** — Use a small local configuration toggle or simulated staged release, stating that production multi-instance deployment is APP7's scope.
+4. **Rollback versus forward repair** — Distinguish application code revert from irreversible data/side-effect reversal; rehearse a repair path where rollback is unsafe.
 
-5. **Rollback versus forward repair** — Distinguish application code revert from irreversible data/side-effect reversal; rehearse a repair path where rollback is unsafe.
+5. **Contract, integration and browser test layers** — Choose independent tests for typed payloads, real HTTP/database, protected data, job delivery, navigation and visible user outcomes.
 
-6. **Contract, integration and browser test layers** — Choose independent tests for typed payloads, real HTTP/database, protected data, job delivery, navigation and visible user outcomes.
+6. **Deterministic race and failure controls** — Use explicitly controlled promises, test clocks, barriers, fixture events and isolated DB resets rather than brittle timing sleeps.
 
-7. **Deterministic race and failure controls** — Use explicitly controlled promises, test clocks, barriers, fixture events and isolated DB resets rather than brittle timing sleeps.
-
-8. **Formative compatibility break** — Inject a new required field or breaking enum and show which previous consumer fails, then amend staged evolution correctly.
+*Optional practice — compatibility break:* Inject a new required field or breaking enum and show which previous consumer fails, then amend staged evolution correctly.
 
 ### Module 14 — Evidence-Based End-to-End Investigation and Operability
 
@@ -509,7 +505,7 @@ are the only summative completion requirements.
 
 7. **Testing accessibility during failure** — Retest keyboard/focus and status announcements during slow, forbidden, uncertain and recovered flows.
 
-8. **Formative incident defense** — Repair a discovered misleading pending status or duplicate notification and provide before/after evidence across layers.
+*Optional practice — incident defense:* Repair a discovered misleading pending status or duplicate notification and provide before/after evidence across layers.
 
 ### Module 15 — Integrated Vertical Slice and Independent Architecture Defense
 

@@ -141,7 +141,7 @@ The provisional duration is not validated workload evidence.
 
 9. **Cold-start review** — Identify missing startup dependencies, stale state and unverified service assumptions before a first release.
 
-10. **Formative release-readiness audit** — Show why passing unit tests alone does not prove safe ingress, restoration or rollback.
+*Optional practice — release-readiness audit:* Show why passing unit tests alone does not prove safe ingress, restoration or rollback.
 
 ### Module 2 — Linux Processes, Service Supervision and State
 
@@ -156,23 +156,21 @@ The provisional duration is not validated workload evidence.
 
 1. **Process and user boundaries** — Inspect UID/GID, working directory, process environment, file ownership and open sockets.
 
-2. **Service supervision** — Use systemd, a controlled service runner or suitable process manager and verify restart/stop policy.
+2. **Supervision and Graceful Process Termination** — Use systemd, a controlled service runner or suitable process manager and verify restart/stop policy; trace SIGTERM and bounded shutdown through HTTP requests, database connections and worker loops.
 
-3. **Signals and graceful termination** — Trace SIGTERM and bounded shutdown through HTTP requests, database connections and worker loops.
+3. **Startup, liveness and readiness** — Distinguish existence, listening, dependency readiness and end-to-end user-workflow success.
 
-4. **Startup, liveness and readiness** — Distinguish existence, listening, dependency readiness and end-to-end user-workflow success.
+4. **Filesystem and volume semantics** — Separate ephemeral app data, temporary files, persisted database and recoverable private uploads.
 
-5. **Filesystem and volume semantics** — Separate ephemeral app data, temporary files, persisted database and recoverable private uploads.
+5. **Least privilege at runtime** — Run without unnecessary root capabilities and test a denied write or sensitive path read.
 
-6. **Least privilege at runtime** — Run without unnecessary root capabilities and test a denied write or sensitive path read.
+6. **Resource and connection budgets** — Apply feasible memory/CPU/connection limits and observe service behavior under safe constraints.
 
-7. **Resource and connection budgets** — Apply feasible memory/CPU/connection limits and observe service behavior under safe constraints.
+7. **Crash-loop controls** — Diagnose invalid environment, failed migrations and restart storms with useful error reporting.
 
-8. **Crash-loop controls** — Diagnose invalid environment, failed migrations and restart storms with useful error reporting.
+8. **Controlled failure cleanup** — Inspect open connections, timers, volumes and network handles after both successful and failed stop.
 
-9. **Controlled failure cleanup** — Inspect open connections, timers, volumes and network handles after both successful and failed stop.
-
-10. **Formative process incident** — Repair an instance that reports healthy while it cannot commit data or exit cleanly.
+*Optional practice — process incident:* Repair an instance that reports healthy while it cannot commit data or exit cleanly.
 
 ### Module 3 — Container Images, Runtime Isolation and Artifact Provenance
 
@@ -203,7 +201,7 @@ The provisional duration is not validated workload evidence.
 
 9. **Image replacement and volumes** — Replace the app image and independently verify intended PostgreSQL and file persistence.
 
-10. **Formative image review** — Reduce oversized build contents and repair root-required writes without breaking the user task.
+*Optional practice — image review:* Reduce oversized build contents and repair root-required writes without breaking the user task.
 
 ### Module 4 — Composed Application Services and Network Exposure
 
@@ -232,7 +230,7 @@ The provisional duration is not validated workload evidence.
 
 8. **Service and data cleanup** — Remove only named disposable resources, preserving a separate backup/restore target.
 
-9. **Formative isolation defect** — Fix a shared staging database or leaked unpublished backend port and verify the corrected topology.
+*Optional practice — isolation defect:* Fix a shared staging database or leaked unpublished backend port and verify the corrected topology.
 
 ### Module 5 — TLS, Reverse Proxies, DNS and Forwarded Trust
 
@@ -263,7 +261,7 @@ The provisional duration is not validated workload evidence.
 
 9. **Certificate expiry and renewal planning** — Distinguish public and local issuance, expiration checks and safe planned rotation.
 
-10. **Formative HTTPS defect** — Detect an invalid certificate or spoofed forwarded identity and repair the trust boundary.
+*Optional practice — HTTPS defect:* Detect an invalid certificate or spoofed forwarded identity and repair the trust boundary.
 
 ### Module 6 — Stage/Production-like Environments, Secrets and Access
 
@@ -291,7 +289,7 @@ The provisional duration is not validated workload evidence.
 
 8. **Audit and sensitive output checks** — Inspect logs, IaC plans and artifacts for leaked secrets and unnecessary personal data.
 
-9. **Formative environment leak** — Repair an implicit development-secret fallback during release-like startup.
+*Optional practice — environment leak:* Repair an implicit development-secret fallback during release-like startup.
 
 ### Module 7 — Infrastructure as Code, State Protection and Drift
 
@@ -322,7 +320,7 @@ The provisional duration is not validated workload evidence.
 
 9. **Local infrastructure teardown** — Destroy only the selected disposable resources and verify backup and other environment remain intact.
 
-10. **Formative drift decision** — Review a stale plan and explain why it must be regenerated after resource or state changes.
+*Optional practice — drift decision:* Review a stale plan and explain why it must be regenerated after resource or state changes.
 
 ### Module 8 — Trusted CI-to-CD Artifact Promotion and Release Audit
 
@@ -354,7 +352,7 @@ The provisional duration is not validated workload evidence.
 
 9. **Rollback approval and artifact availability** — Verify access to a previously known-good immutable artifact and compatible data.
 
-10. **Formative wrong-artifact incident** — Reject a floating tag, changed digest or skipped approval with documented failing evidence.
+*Optional practice — wrong-artifact incident:* Reject a floating tag, changed digest or skipped approval with documented failing evidence.
 
 ### Module 9 — Traffic Shifts, Health Signals and Bad-Release Recovery
 
@@ -386,7 +384,7 @@ The provisional duration is not validated workload evidence.
 
 9. **Observed rollback or forward repair** — Execute a safe previous-version switch or compatible fix and verify business state.
 
-10. **Formative unready-canary defect** — Repair a traffic switch that routes users to an instance with no database access.
+*Optional practice — unready-canary defect:* Repair a traffic switch that routes users to an instance with no database access.
 
 ### Module 10 — Stateful Releases and Database Schema Compatibility
 
@@ -415,7 +413,7 @@ The provisional duration is not validated workload evidence.
 
 8. **Migration audit and drift** — Record schema revision, backfill counts, affected constraints and data integrity without private records.
 
-9. **Formative incompatible deployment** — Seed a schema change that breaks an old writer, detect it and correct staging.
+*Optional practice — incompatible deployment:* Seed a schema change that breaks an old writer, detect it and correct staging.
 
 ### Module 11 — Real PostgreSQL Backup, Restore and Recovery Objectives
 
@@ -476,7 +474,7 @@ The provisional duration is not validated workload evidence.
 
 8. **Blameless timeline and handoff** — Publish evidence, causal hypotheses, completed recovery and runbook changes, not invented production history.
 
-9. **Formative bad signal diagnosis** — Identify alert noise versus a real rollout regression and justify mitigation steps.
+*Optional practice — bad signal diagnosis:* Identify alert noise versus a real rollout regression and justify mitigation steps.
 
 ### Module 13 — Hosting Choices, Shared Responsibility, Capacity and Cost
 
@@ -497,17 +495,15 @@ The provisional duration is not validated workload evidence.
 
 4. **Realistic workload assumptions** — Specify concurrency, monthly requests, data growth, retention, backup and service uptime goals.
 
-5. **Compute and storage cost units** — Calculate instance-hours, allocated disk, backup bytes and requests from disclosed rates.
+5. **Total Resource Costs, Egress and Logging** — Calculate instance-hours, allocated disk, backup bytes and requests from disclosed rates; include network transfer, storage operations, metrics retention and data restore costs.
 
-6. **Egress, logs and hidden charges** — Include network transfer, storage operations, metrics retention and data restore costs.
+6. **Scale strategy and failure modes** — Discuss vertical/horizontal changes, cold starts and dependency bottlenecks without APP8 deep modeling.
 
-7. **Scale strategy and failure modes** — Discuss vertical/horizontal changes, cold starts and dependency bottlenecks without APP8 deep modeling.
+7. **Responsibility and vendor lock-in** — Allocate IAM, OS patching, certificates, recovery, secret management and exit costs.
 
-8. **Responsibility and vendor lock-in** — Allocate IAM, OS patching, certificates, recovery, secret management and exit costs.
+8. **Sensitivity and cost guardrails** — Change traffic/storage/egress assumptions and compare alternatives and budget alert triggers.
 
-9. **Sensitivity and cost guardrails** — Change traffic/storage/egress assumptions and compare alternatives and budget alert triggers.
-
-10. **Formative economical deployment decision** — Reject an unjustified complex stack and defend a simpler reliable design.
+*Optional practice — economical deployment decision:* Reject an unjustified complex stack and defend a simpler reliable design.
 
 ### Module 14 — Integrated Deployed Product and Independent Operational Defense
 

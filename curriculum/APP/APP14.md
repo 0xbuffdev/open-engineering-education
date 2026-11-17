@@ -70,7 +70,7 @@ Seventeen observable outcomes are developed in thirteen deliberately varied modu
 
 7. **Developer and operator needs** — State deploy, diagnose and rollback needs with explicit availability and privacy limits.
 
-8. **Formative architecture review** — Identify a falsely trusted edge header and correct the origin-owned authority model.
+*Optional practice — architecture review:* Identify a falsely trusted edge header and correct the origin-owned authority model.
 
 ### Module 2 — Canonical Routing and HTTP Message Semantics
 
@@ -99,7 +99,7 @@ Seventeen observable outcomes are developed in thirteen deliberately varied modu
 
 8. **Desynchronization threat** — Explain conflicting message length/framing and why intermediary/backend parsing disagreement is dangerous.
 
-9. **Formative hostile request probe** — Produce raw valid and invalid requests and compare observed gateway and origin interpretation.
+*Optional practice — hostile request probe:* Produce raw valid and invalid requests and compare observed gateway and origin interpretation.
 
 ### Module 3 — TLS, Forwarding Identity and Origin Isolation
 
@@ -129,7 +129,7 @@ Seventeen observable outcomes are developed in thirteen deliberately varied modu
 
 8. **Secrets and certificates in logs** — Redact key material, tokens and sensitive URL components from gateway and upstream diagnostics.
 
-9. **Formative forged-proxy rehearsal** — Send contradictory address and scheme headers and verify server authority remains unchanged.
+*Optional practice — forged-proxy rehearsal:* Send contradictory address and scheme headers and verify server authority remains unchanged.
 
 ### Module 4 — Authentication Propagation and Application Authority
 
@@ -157,7 +157,7 @@ Seventeen observable outcomes are developed in thirteen deliberately varied modu
 
 7. **Error shape and privacy** — Keep 401/403 responses distinguishable without returning secrets, internal routes or sensitive policy detail.
 
-8. **Formative direct-origin attack** — Bypass the configured gateway in an isolated local lab and prove backend permission checks still reject.
+*Optional practice — direct-origin attack:* Bypass the configured gateway in an isolated local lab and prove backend permission checks still reject.
 
 ### Module 5 — HTTP Cache Semantics and Representation Identity
 
@@ -186,7 +186,7 @@ Seventeen observable outcomes are developed in thirteen deliberately varied modu
 
 8. **Stale response controls** — Model stale-while-revalidate and stale-if-error only on safely eligible representations with bounded age.
 
-9. **Formative cache-state trace** — Record MISS, HIT, validation and stale decisions against origin truth and explain mismatches.
+*Optional practice — cache-state trace:* Record MISS, HIT, validation and stale decisions against origin truth and explain mismatches.
 
 ### Module 6 — Invalidation, Assets and Content Negotiation
 
@@ -213,7 +213,7 @@ Seventeen observable outcomes are developed in thirteen deliberately varied modu
 
 7. **Error caching policy** — Explain when 404/5xx or maintenance pages may be cached and how to prevent persistent outage masking.
 
-8. **Formative stale asset recovery** — Deliberately publish a mismatched HTML-to-JavaScript release and repair via versioned asset rollout.
+*Optional practice — stale asset recovery:* Deliberately publish a mismatched HTML-to-JavaScript release and repair via versioned asset rollout.
 
 ### Module 7 — Admission Control, Identity Fairness and Abuse
 
@@ -242,7 +242,7 @@ Seventeen observable outcomes are developed in thirteen deliberately varied modu
 
 8. **Fail-open or fail-closed** — Choose and test limiter-store failure behavior according to feature risk and operability.
 
-9. **Formative fairness test** — Generate two identities and one noisy client, then inspect false denials and bypass attempts.
+*Optional practice — fairness test:* Generate two identities and one noisy client, then inspect false denials and bypass attempts.
 
 ### Module 8 — Delivery Protocols, Streaming and Compression
 
@@ -269,7 +269,7 @@ Seventeen observable outcomes are developed in thirteen deliberately varied modu
 
 7. **Timeouts during streaming** — Separate connect, header, idle and total budgets without prematurely killing valid bounded streams.
 
-8. **Formative delivery regression** — Compare identical traffic with and without compression/buffering and explain observed correctness trade-offs.
+*Optional practice — delivery regression:* Compare identical traffic with and without compression/buffering and explain observed correctness trade-offs.
 
 ### Module 9 — Measuring Latency, Tracing and Edge Cost
 
@@ -296,7 +296,7 @@ Seventeen observable outcomes are developed in thirteen deliberately varied modu
 
 7. **Egress and CDN fees** — Compare measured byte/request counts with hypothetical price tables, clearly labeling assumptions.
 
-8. **Formative before-and-after** — Reject an apparently faster cache when its results contain a stale or cross-user error.
+*Optional practice — before-and-after:* Reject an apparently faster cache when its results contain a stale or cross-user error.
 
 ### Module 10 — Timeouts, Overload and Failure Containment
 
@@ -326,7 +326,7 @@ Seventeen observable outcomes are developed in thirteen deliberately varied modu
 
 8. **Reconnection and retry storms** — Exercise deterministic jitter and admission budgets after a synchronized recovery.
 
-9. **Formative retry amplification** — Repair a gateway that retries a POST after an unknown committed database outcome.
+*Optional practice — retry amplification:* Repair a gateway that retries a POST after an unknown committed database outcome.
 
 ### Module 11 — Release Control, Incident Response and Rollback
 
@@ -356,7 +356,7 @@ Seventeen observable outcomes are developed in thirteen deliberately varied modu
 
 8. **Forward repair** — Explain when purged caches, changed keys or client-stored assets prevent rollback alone.
 
-9. **Formative unfamiliar failure** — Investigate a reviewer-injected route bypass or cache poisoning pattern without relying on the original author.
+*Optional practice — unfamiliar failure:* Investigate a reviewer-injected route bypass or cache poisoning pattern without relying on the original author.
 
 ### Module 12 — Edge Compute, Geographic Policy and Alternatives
 
@@ -384,7 +384,7 @@ Seventeen observable outcomes are developed in thirteen deliberately varied modu
 
 7. **Local emulation honesty** — Label simulated edge execution and never claim globally distributed timing from one host.
 
-8. **Formative placement decision** — Reject an edge feature whose measured benefit does not exceed its complexity and security cost.
+*Optional practice — placement decision:* Reject an edge feature whose measured benefit does not exceed its complexity and security cost.
 
 ### Module 13 — Integrated Gateway, Negative Tests and Defense
 

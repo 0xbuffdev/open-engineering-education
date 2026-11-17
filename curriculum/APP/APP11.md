@@ -79,7 +79,7 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 8. **Measurable risk and architecture hypothesis** — Record security, data, latency, incident, maintenance and cost criteria with evidence that could disconfirm a proposed split.
 
-9. **Formative false-complexity decision** — Reject a fashionable service extraction without a justified data, failure or team ownership benefit.
+*Optional practice — false-complexity decision:* Reject a fashionable service extraction without a justified data, failure or team ownership benefit.
 
 ### Module 2 — Domain Modeling, Aggregates, Modules and Fitness Tests
 
@@ -125,19 +125,17 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 2. **Transaction scope and connection ownership** — Ensure repository calls and persisted intent use the same actual transaction context where atomicity is required.
 
-3. **Optimistic revision and compare-and-set** — Verify lost-update protection under two independent connections and mismatched revision responses.
+3. **Transactional Concurrency and Idempotency Races** — Verify lost-update protection under two independent connections and mismatched revision responses; use actual DB uniqueness/locking under parallel duplicate requests, not a process-local Set as the only guard.
 
-4. **Unique constraints and idempotency races** — Use actual DB uniqueness/locking under parallel duplicate requests, not a process-local Set as the only guard.
+4. **Isolation anomalies and explicit tests** — Reproduce a relevant read/write skew or conflict using actual SQL while acknowledging selected isolation-mode behavior.
 
-5. **Isolation anomalies and explicit tests** — Reproduce a relevant read/write skew or conflict using actual SQL while acknowledging selected isolation-mode behavior.
+5. **Commit order versus event order** — Distinguish business aggregate version, database commit order, created timestamps and globally ordered events.
 
-6. **Commit order versus event order** — Distinguish business aggregate version, database commit order, created timestamps and globally ordered events.
+6. **Long transactions and lock contention** — Inspect lock waits, deadlocks and pool starvation and choose a bounded transaction duration before adding distributed machinery.
 
-7. **Long transactions and lock contention** — Inspect lock waits, deadlocks and pool starvation and choose a bounded transaction duration before adding distributed machinery.
+7. **Failure between commit and external effect** — Reproduce why an external HTTP message cannot be committed atomically with a PostgreSQL transaction by ordinary application code.
 
-8. **Failure between commit and external effect** — Reproduce why an external HTTP message cannot be committed atomically with a PostgreSQL transaction by ordinary application code.
-
-9. **Formative concurrent reservation bug** — Repair a double-claim or stale-state flow and verify one durable allowed outcome using independent SQL.
+*Optional practice — concurrent reservation bug:* Repair a double-claim or stale-state flow and verify one durable allowed outcome using independent SQL.
 
 ### Module 4 — Transactional Outbox, Dispatch and Lifecycle Guarantees
 
@@ -167,7 +165,7 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 8. **Observing stuck outbox state** — Expose privacy-safe backlog age, attempts, last failure and a testable alert/reconciliation action.
 
-9. **Formative outbox crash drill** — Kill the dispatcher at a controlled point, restart and confirm committed intent is eventually handled without duplicate business effects.
+*Optional practice — outbox crash drill:* Kill the dispatcher at a controlled point, restart and confirm committed intent is eventually handled without duplicate business effects.
 
 ### Module 5 — Inbox Contracts, Duplicate Consumers and Event Evolution
 
@@ -197,7 +195,7 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 8. **Replay and audit privacy** — Replay permitted synthetic data while preventing stale personal claims, tenant impersonation and unbounded historical retention.
 
-9. **Formative duplicate delivery repair** — Break a consumer with an acknowledgement race, repair it and show real DB invariants after repeated deliveries.
+*Optional practice — duplicate delivery repair:* Break a consumer with an acknowledgement race, repair it and show real DB invariants after repeated deliveries.
 
 ### Module 6 — Cross-Boundary Business Workflows and Compensation
 
@@ -227,7 +225,7 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 8. **Compensation failure and reconciliation** — Inject failure of the compensation itself and record unresolved state, retry/runbook and escalation instead of claiming rollback.
 
-9. **Formative saga fault matrix** — Exercise good flow, failed step, duplicated event, timeout and failed compensation with traceable participant state.
+*Optional practice — saga fault matrix:* Exercise good flow, failed step, duplicated event, timeout and failed compensation with traceable participant state.
 
 ### Module 7 — Materialized Projections, Lag and Reconciliation
 
@@ -257,7 +255,7 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 8. **Read-your-writes and user contract** — Choose when to await, poll, show pending, read authoritative source or reject a stale view instead of promising immediate consistency.
 
-9. **Formative lagged-order workflow** — Repair a user screen reporting completion while only an out-of-date projection exists.
+*Optional practice — lagged-order workflow:* Repair a user screen reporting completion while only an out-of-date projection exists.
 
 ### Module 8 — Process Boundaries, Contracts and Service Extraction Choices
 
@@ -287,7 +285,7 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 8. **When extraction fails the cost test** — Benchmark and explain a modular monolith with clear modules against a local process split, considering complexity and constraints.
 
-9. **Formative contract-break investigation** — Repair an independently restarted service that silently changed a required contract or trust assumption.
+*Optional practice — contract-break investigation:* Repair an independently restarted service that silently changed a required contract or trust assumption.
 
 ### Module 9 — Queue Capacity, Backpressure and Worker Recovery
 
@@ -317,7 +315,7 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 8. **Eventual completion and user status** — Report accepted, pending, failed, reconciled and completed outcomes from authoritative records rather than optimistic promises.
 
-9. **Formative stalled-work failure** — Kill a worker during processing, restart/reclaim a safe lease and show no unintended duplicate business action.
+*Optional practice — stalled-work failure:* Kill a worker during processing, restart/reclaim a safe lease and show no unintended duplicate business action.
 
 ### Module 10 — Tenant, Service Identity and Security Across Boundaries
 
@@ -347,7 +345,7 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 8. **Security negative test matrix** — Run cross-tenant direct API, event spoof, projection read and job-status authorization attacks against synthetic services.
 
-9. **Formative forged event drill** — Repair a consumer that trusts tenant identity from a producer message without independent authorization context.
+*Optional practice — forged event drill:* Repair a consumer that trusts tenant identity from a producer message without independent authorization context.
 
 ### Module 11 — Partial Failure Containment, Deadline Budgets and Recovery
 
@@ -377,7 +375,7 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 8. **Negative-path operational evidence** — Correlate real local HTTP failures, worker state, database facts and user-visible outcomes under a fixed fault scenario.
 
-9. **Formative cascading outage** — Show a slow optional service exhausting a shared pool, then measure verified containment and legitimate denied requests.
+*Optional practice — cascading outage:* Show a slow optional service exhausting a shared pool, then measure verified containment and legitimate denied requests.
 
 ### Module 12 — Incremental Migration, Schema Compatibility and Reversibility
 
@@ -408,7 +406,7 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 8. **Rollback versus forward repair after pivot** — Demonstrate previous version compatibility, irreversible writes and when rollback must be refused for safe forward repair.
 
-9. **Formative contract migration drill** — Seed an old-consumer break or stale projection during cutover, detect it and repair without losing legitimate state.
+*Optional practice — contract migration drill:* Seed an old-consumer break or stale projection during cutover, detect it and repair without losing legitimate state.
 
 ### Module 13 — Architecture Measurements, Operations and Economics
 
@@ -437,7 +435,7 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 8. **Decision record, rejected options and exit triggers** — Write an ADR explaining why to preserve the modular monolith or extract a boundary, and what future evidence changes the choice.
 
-9. **Formative no-benefit extraction** — Identify a service split that slows users and increases incidents despite satisfying a fashionable architecture diagram.
+*Optional practice — no-benefit extraction:* Identify a service split that slows users and increases incidents despite satisfying a fashionable architecture diagram.
 
 ### Module 14 — Integrated Advanced Backend and Independent Technical Defense
 
