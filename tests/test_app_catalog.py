@@ -403,6 +403,48 @@ class APPCatalogTests(unittest.TestCase):
         self.assertNotEqual(status, 0)
         self.assertIn("APP9", errors)
 
+    def test_app10_advanced_frontend_elective_requires_react_and_quality(self):
+        # This optional specialist course must follow the approved
+        # APP20 + APP6 foundations and never enter core graduation.
+        entries, errors = read_app_catalog(self.catalog)
+        self.assertFalse(errors, errors)
+        codes = [entry.code for entry in entries]
+        app10 = next(entry for entry in entries if entry.code == "APP10")
+        self.assertEqual(
+            (app10.title, app10.kind, app10.classification, app10.status),
+            ("Advanced Frontend Performance", "course", "elective", "draft"),
+        )
+        self.assertEqual(prerequisite_codes(app10.prerequisites),
+                         ["APP20", "APP6"])
+        for foundation in ("APP20", "APP6"):
+            self.assertLess(codes.index(foundation), codes.index("APP10"))
+        content = (self.app.APP / "APP10.md").read_text(encoding="utf-8")
+        self.assertIn("**Classification:** `elective`", content)
+        self.assertIn("**Specification:** `v0.2.0`", content)
+        self.assertEqual(
+            sum(1 for line in content.splitlines()
+                if line.startswith("- **APP10-O") and ":**" in line), 15
+        )
+        self.assertEqual(
+            sum(1 for line in content.splitlines()
+                if line.startswith("- **APP10-AS") and "(required " in line), 6
+        )
+        capstone = next(entry for entry in entries if entry.code == "APP9")
+        self.assertNotIn("APP10", prerequisite_codes(capstone.prerequisites))
+
+    def test_app10_catalog_only_prerequisite_edit_is_rejected(self):
+        catalog = self.catalog.read_text(encoding="utf-8")
+        row = next(line for line in catalog.splitlines()
+                   if line.startswith("| [APP10](APP10.md) |"))
+        self.assertIn(" | APP20, APP6 |", row)
+        modified = row.replace(" | APP20, APP6 |", " | APP2, APP6 |", 1)
+        self.assertNotEqual(row, modified)
+        self.change_catalog(row, modified)
+        status, errors = self.check()
+        self.assertNotEqual(status, 0)
+        self.assertIn("APP10", errors)
+        self.assertIn("prerequisites differ from catalog", errors)
+
     def test_app8_cannot_be_silently_removed_from_capstone_closure(self):
         # APP20 is now required transitively through migrated APP5.
         # APP8 has no further required core successor before APP9.
