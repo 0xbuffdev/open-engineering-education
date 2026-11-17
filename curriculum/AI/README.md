@@ -8,9 +8,9 @@ AI Engineering turns the programming and mathematics from the foundations progra
 
 ## Prerequisites
 
-**Program 1 — SEF — Software Engineering Foundations.**
+**Program 1 — SEF — Software Engineering Foundations, including all eleven required courses through the SEF10 capstone.**
 
-Python and the mathematics covered in SEF8 are used throughout the program. Individual AI courses have their own explicit prerequisites; systems preparation is recommended where noted.
+Python, algorithms, numerical mathematics, reproducibility and professional engineering are assumed from SEF, not retaught as beginner AI courses. Individual AI courses list their own explicit prerequisites. Any additional APP/SYS dependencies belong in the authoritative course and catalog entries when those course revisions are actually adopted.
 
 ## Learning outcomes
 
@@ -31,11 +31,11 @@ The learner must demonstrate the knowledge, practical skills, and engineering ju
 
 ## Courses
 
-The nine published course files are **legacy drafts**. They preserve their original learning activities and completion requirements but have not been migrated or assessed against the `v0.2.0` outcome-driven contract. They are course outlines for study and review, not claims of learner-tested readiness or `v0.2.0` conformance. See the [curriculum inventory](../INVENTORY.md) for a reproducible structural audit.
+**AI1 has an outcome-driven `v0.2.0` draft course definition; AI2–AI9 remain legacy drafts.** This is a staged source migration, not adoption of the separately proposed AI1–AI19 program redesign. Each active course's published completion requirements remain in its linked file. None of these course definitions has a learner-tested readiness or formal program-conformance claim. See the [curriculum inventory](../INVENTORY.md) for a reproducible source-format inventory.
 
 | Course | Title | Duration | Prerequisites | Type |
 | --- | --- | --- | --- | --- |
-| [AI1](AI1.md) | Data & Scientific Python | 5 weeks | SEF2 and SEF8 | `course` |
+| [AI1](AI1.md) | Scientific Computing & Data Engineering for AI | 7–9 weeks | SEF10 | `course` |
 | [AI2](AI2.md) | Machine Learning Foundations | 6 weeks | AI1 | `course` |
 | [AI3](AI3.md) | Deep Learning & Representation Learning | 6 weeks | AI2 | `course` |
 | [AI4](AI4.md) | Transformers & Large Language Models | 7 weeks | AI3 | `course` |
