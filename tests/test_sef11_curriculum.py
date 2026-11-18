@@ -53,25 +53,75 @@ class SEF11CurriculumTests(unittest.TestCase):
             covered.update(claimed)
         self.assertEqual(covered, outcomes)
 
-    def test_nine_instructional_modules_and_accessible_bridge(self):
+    def test_competency_derived_modules_and_accessible_bridge(self):
         text = COURSE.read_text(encoding="utf-8")
         source = text.split("\n## Modules\n", 1)[1].split(
             "\n## Completion requirements\n", 1)[0]
         modules = list(re.finditer(r"(?m)^### Module (\d+) — ", source))
-        self.assertEqual([int(x.group(1)) for x in modules], list(range(1, 10)))
+        # No fixed module/lesson quota: competencies determine the structure.
+        self.assertTrue(modules)
+        self.assertEqual(
+            [int(x.group(1)) for x in modules],
+            list(range(1, len(modules) + 1)),
+        )
+        first_coverage = {}
         for i, match in enumerate(modules):
             stop = modules[i + 1].start() if i + 1 < len(modules) else len(source)
             module = source[match.start():stop]
-            self.assertIn("#### Outcomes", module)
-            self.assertIn("#### Lessons", module)
+            self.assertEqual(module.count("#### Outcomes"), 1)
+            self.assertEqual(module.count("#### Lessons"), 1)
+            mapped = module.split("#### Outcomes", 1)[1].split(
+                "#### Lessons", 1)[0]
+            outcomes = re.findall(r"(?m)^- (SEF11-O\d+)$", mapped)
+            self.assertTrue(outcomes, "each module needs an actual exit capability")
+            for outcome in outcomes:
+                first_coverage.setdefault(outcome, i)
             numbers = [int(n) for n in re.findall(r"(?m)^(\d+)\. ", module)]
+            self.assertTrue(numbers)
             self.assertEqual(numbers, list(range(1, len(numbers) + 1)))
-            self.assertGreater(len(numbers), 0)
+
+        for predecessor, successor in (
+            ("SEF11-O1", "SEF11-O2"),  # arithmetic before algebra
+            ("SEF11-O3", "SEF11-O4"),  # logic before relations
+            ("SEF11-O3", "SEF11-O6"),  # logic before rigorous proofs
+            ("SEF11-O6", "SEF11-O5"),  # proof methods before counting proofs
+            ("SEF11-O6", "SEF11-O7"),  # proof methods before complexity bounds
+            ("SEF11-O6", "SEF11-O8"),  # proof methods before state invariants
+            ("SEF11-O8", "SEF11-O10"), # mechanisms before integration
+        ):
+            with self.subTest(preparation=f"{predecessor} before {successor}"):
+                self.assertIn(predecessor, first_coverage)
+                self.assertIn(successor, first_coverage)
+                self.assertLess(
+                    first_coverage[predecessor], first_coverage[successor]
+                )
+
         self.assertIn("ungraded entry diagnostic", text)
         self.assertIn("fixed attempt limit", text)
-        self.assertIn("**Status:** `draft`", text)
-        self.assertIn("**Specification:** `v0.2.0`", text)
+        self.assertIn("**Status:** ", text)
+        self.assertIn("**Specification:** ", text)
         self.assertIn("**Prerequisites:** [SEF2](SEF2.md)", text)
+
+    def test_functions_and_amortized_cost_are_directly_assessed(self):
+        text = COURSE.read_text(encoding="utf-8")
+        completion = text.split("\n## Completion requirements\n", 1)[1]
+        as2 = completion.split("- **SEF11-AS2**", 1)[1].split(
+            "- **SEF11-AS3**", 1)[0]
+        as5 = completion.split("- **SEF11-AS5**", 1)[1].split(
+            "- **SEF11-AS6**", 1)[0]
+        for expectation in (
+            r"(?i)injectiv", r"(?i)surjectiv",
+            r"(?i)composition", r"(?i)codomain",
+        ):
+            with self.subTest(assessment="AS2", expectation=expectation):
+                self.assertRegex(as2, expectation)
+        for expectation in (
+            r"(?i)doubl", r"(?i)amortized",
+            r"(?i)total", r"(?i)expected",
+            r"(?i)geometric",
+        ):
+            with self.subTest(assessment="AS5", expectation=expectation):
+                self.assertRegex(as5, expectation)
 
     def test_prerequisites_and_topological_course_order(self):
         catalog = CATALOG.read_text(encoding="utf-8")
