@@ -89,7 +89,7 @@ explicitly requires their evidence.
 
 ## Modules
 
-### Module 1 — From JavaScript to TypeScript
+### Module 1 — TypeScript's Static Contract and First Program
 
 #### Outcomes
 
@@ -99,19 +99,15 @@ explicitly requires their evidence.
 
 #### Lessons
 
-1. **Course Orientation and History** — Situate TypeScript as a typed development layer over JavaScript, from its motivations to modern use; identify why language and tooling evolution does not change the JavaScript runtime contract.
+1. **Why TypeScript Exists and Where It Stops** — Apply APP18 JavaScript competence to a short type-checked function; situate TypeScript's motivation and use briefly, distinguish source types from executable JavaScript, and define the non-browser/non-service course boundary.
 
-2. **TypeScript and JavaScript Runtime Semantics** — Recall objects, closures, promises, ESM, runtime validation and tests before introducing annotations; inspect an existing JavaScript utility and its verified failure cases; observe type errors independently of running code; compare `tsc --noEmit`, emitted JavaScript, and Node's limited type stripping where supported.
+2. **Compiler Diagnostics versus Runtime Evidence** — Predict a static rejection and a runtime failure in the same small utility; inspect a `tsc` diagnostic and actual JavaScript output without claiming type checking executes or protects the program.
 
-3. **The Compiler, Language Service and Host** — Differentiate the compiler's static analysis, editor language services, JavaScript output and execution host; identify assumptions from external declaration files.
+3. **A Real Strict Toolchain** — Run a strict locally available TypeScript compiler with a declared version and compare type-only `--noEmit` checking with deliberate executable JavaScript emission; record an offline-capable reproduction route.
 
-4. **First Strict TypeScript Program** — Write a typed function, run a real type check with a locally available TypeScript compiler and execute the intended JavaScript output or supported erasable syntax.
+4. **Language, Host and Declaration Assumptions** — Trace which observed effects come from ECMAScript, Node, TypeScript checks or supplied declarations; test a false type assumption against an actual runtime value and document its limitation.
 
-5. **Prediction Before Compilation** — Predict which operations type-check and which fail, then verify; distinguish diagnostics from actual JavaScript exceptions and value changes.
-
-6. **Study and Toolchain Boundaries** — Record a compiler/runtime baseline, avoid real credentials and online-only tooling, and explain how type-checking dependencies can be reproduced with provided local files.
-
-### Module 2 — Inference, Everyday Types and Literal Precision
+### Module 2 — Inference, Literal Models and Missing Values
 
 #### Outcomes
 
@@ -121,23 +117,19 @@ explicitly requires their evidence.
 
 #### Lessons
 
-1. **Annotations and Contextual Inference** — Use meaningful inference for local values and explicit annotations for public contracts; observe contextual typing in functions and collections.
+1. **Contextual Inference and Explicit API Types** — Choose inference for local expressions and annotations for meaningful public boundaries; compare predicted inferred types with compiler feedback.
 
-2. **Primitive, Array and Tuple Models** — Represent strings, numbers, booleans, optional elements, tuples, arrays and readonly array views with correct mutation assumptions.
+2. **Primitive, Array and Tuple Contracts** — Model JavaScript primitives, arrays, fixed-position tuples and readonly views without assuming immutability at runtime.
 
-3. **Literal Types and Widening** — Distinguish a broad `string` from specific literal unions; observe assignment behavior under `let`, `const` and explicit contexts.
+3. **Widening, Literals and Discriminants** — Compare widened variables with preserved literal values and union alternatives; use a specific domain rather than defining dozens of unrelated literal types.
 
-4. **Null and Undefined Under Strict Checking** — Use `strictNullChecks` and meaningful optionality; do not confuse absence, `undefined`, `null`, empty string and zero.
+4. **Null, Undefined and Optional State** — Explain meaningful absent versus undefined/null/zero/empty values under strict null checks and distinguish required properties from optional ones.
 
-5. **Union and Intersection Meaning** — Explain alternatives versus combined requirements using nontrivial domain examples; identify impossible intersections rather than treating them as runtime merging.
+5. **Unions, Intersections and Unreachable Combinations** — Represent alternative states and combined requirements, diagnose an impossible intersection and compare an explicit domain union with an overly broad shape.
 
-6. **`unknown`, `any` and `never`** — Compare the guarantees and hazards of each, including `any` propagation, untrusted `unknown` and impossible/exhausted states.
+6. **`unknown`, `any`, `never` and Safe Assertions** — Explain why unknown demands evidence, any suppresses checks and never denotes unreachable cases; compare `as const`, `satisfies` and an unsound cast in one compiler/runtime counterexample.
 
-7. **`as const` and `satisfies`** — Distinguish expression-level literal preservation, validating assignment to a target type, and unsafe assertion; demonstrate where none supplies runtime validation.
-
-*Optional practice — Investigation: Inference Gone Wrong:* Repair a widening or nullability bug and explain a compiler warning without papering it over with `any` or a non-null assertion.
-
-### Module 3 — Structural Object Contracts and Compatibility
+### Module 3 — Structural Object Contracts and Assignment Limits
 
 #### Outcomes
 
@@ -147,49 +139,40 @@ explicitly requires their evidence.
 
 #### Lessons
 
-1. **Types and Interfaces** — Define complementary object shapes and compare extension and intersection without declaring the constructs universally interchangeable.
+1. **Types, Interfaces and Structural Assignability** — Model a genuine record API with type aliases/interfaces and explain structural compatibility rather than nominal identity or automatic runtime schema checks.
 
-2. **Structural Compatibility** — Inspect why a value with additional fields can satisfy a structural contract; distinguish this from nominal identity and runtime schema validation.
+2. **Fresh Literals, Variables and Excess-Property Checks** — Predict which excess fields are rejected on a fresh literal and why the same value assigned through a variable can be structurally acceptable; verify that neither case validates external data.
 
-3. **Fresh Object Checks and Assignment** — Reproduce excess-property behavior for fresh literals versus variables; explain why a passing assignment is not an allowlist for external data.
+3. **Required, Optional, Readonly and Nested Shapes** — Express presence, nested constraints and readonly intent; demonstrate readonly's static limitation and the difference between absent and explicit undefined.
 
-4. **Required, Optional and Readonly Members** — Specify presence semantics and readonly access, noting that TypeScript's `readonly` does not necessarily freeze an object at runtime.
+4. **Index Signatures, Records and Known Keys** — Select explicit fields, Record, index signatures or a Map by actual domain-key requirements; use a constrained key example and inspect unsafe overly broad lookup assumptions.
 
-5. **Nested Objects, Tuples and Recursive Shapes** — Model a bounded nested configuration or tree with meaningful identifiers and optional branches; identify representational edge cases.
+5. **Class Contracts and Runtime Members** — Compare implements/visibility checks with APP18's prototype/class runtime behavior and distinguish TypeScript private from ECMAScript runtime-private members; do not require an unnecessary class hierarchy.
 
-6. **Index Signatures and Records** — Choose explicit property shapes, `Record`, index signatures or Maps by use case; investigate the consequences of unrestricted keys.
-
-7. **Classes, Implements and Visibility** — Explain compile-time `implements` and access modifiers versus runtime behavior; prefer composition where it produces clearer contracts.
-
-*Optional practice — Contract Review:* Review an object type with contradictory optionality or a hidden excess-property assumption and create a failing type expectation.
-
-### Module 4 — Control-Flow Analysis and Exhaustive State Modeling
+### Module 4 — Control-Flow Narrowing and Exhaustive States
 
 #### Outcomes
 
 - APP19-O2
 - APP19-O4
 - APP19-O5
+- APP19-O11
 
 #### Lessons
 
-1. **Union Narrowing with Runtime Checks** — Trace `typeof`, equality, null checks, `in` and `instanceof` on actual JavaScript values including null and inherited properties.
+1. **Narrowing with Observable JavaScript Checks** — Trace typeof, equality, null, in and instanceof guards on real values; identify edge cases such as null and inherited keys rather than treating a type guard as magic.
 
-2. **Discriminated Unions** — Encode a request lifecycle or domain result with distinct tags and variant-specific data; avoid a bag of loosely related optional fields.
+2. **Discriminated Result and State Models** — Replace loosely related optional flags with a meaningful tagged result union whose variants have distinct required fields and domain actions.
 
-3. **Truthiness and Empty Values** — Show how broad truthiness guards can lose valid zero or empty-string data and how precise checks preserve contract meaning.
+3. **Truthiness and Control-Flow Limits** — Show why truthy checks can discard valid zero/empty values and why assignment, mutable aliases or callback boundaries may invalidate a prior assumption.
 
-4. **Narrowing Across Assignments and Callbacks** — Inspect when control-flow facts are invalidated or maintained and why mutable aliasing can undermine a simplifying assumption.
+4. **Exhaustiveness with `never`** — Make a variant consumer exhaustively decidable at compile time, add a new variant and verify that the expected missing branch is flagged.
 
-5. **Exhaustiveness with `never`** — Write a `switch` that checks unreachable cases and demonstrate an appropriate compiler failure when a new variant is added.
+5. **Predicates, Assertions and Unsound Signatures** — Compare a truthful user-defined type predicate or assertion function against one that merely promises a type; verify both with actual counterexample data.
 
-6. **Assertions, Type Predicates and Assertion Functions** — Build a sound predicate from actual runtime checks; demonstrate that a predicate signature alone cannot prove a runtime condition.
+6. **Variant Migration and Runtime Recovery** — Introduce an unfamiliar bounded state change, repair static consumers and protect malformed-input behavior with runtime regression tests.
 
-7. **Error and Result Shapes** — Distinguish expected validation errors from exceptional programming faults; model honest success/error outcomes without depending on TypeScript for runtime catching.
-
-*Optional practice — Variant Migration:* Add a new state to an existing union, locate affected consumers, and repair the code while retaining negative-path tests.
-
-### Module 5 — Functions, Callbacks and Asynchronous Contracts
+### Module 5 — Functions, Callback Compatibility and Typed Async Results
 
 #### Outcomes
 
@@ -199,126 +182,72 @@ explicitly requires their evidence.
 
 #### Lessons
 
-1. **Typed Parameters, Returns and Function Values** — Declare callable contracts and understand how inference works across implementations and consumers.
+1. **Function Boundaries and Optional Inputs** — Model parameter, return, optional, default, rest and receiver signatures that correspond to actual JavaScript behavior and supported call paths.
 
-2. **Optional, Default and Rest Parameters** — Distinguish omitted values and defaults from callable overload contracts; test behavior as well as assignability.
+2. **Callbacks, Contextual Types and Variance** — Predict callback assignability under strict function checking; investigate a narrowed-parameter counterexample and qualify method-position exceptions rather than promising universal soundness.
 
-3. **Contextual Typing of Callbacks** — Use callback contracts for array operations, events or local abstractions; inspect accidental implicit-any surfaces.
+3. **Overload versus Union versus Generic** — Compare representations of one bounded API and justify which preserves an actual caller-specific input/output relationship; check implementation and consumers.
 
-4. **Parameter Compatibility and Variance** — Explain soundness risks involving callback parameter narrowing and why strict checking matters; contrast function parameters with method positions as necessary.
+4. **Promises and Error-Aware Result Contracts** — Type a local async result and rejection-handling boundary, distinguishing `Promise<T>` fulfillment type from unchecked thrown/rejected values and host behavior already learned in APP18.
 
-5. **Overloads, Unions and Generics** — Choose overloads only when they express real input/output relationships better than a union or generic; verify the implementation supports them.
+5. **Independent Function Consumer Checks** — Exercise valid and invalid calls from a separate consumer, test runtime behavior and demonstrate that declarations can omit or misdescribe important execution facts.
 
-6. **Generic Promise and Async Result Types** — Type promise-producing APIs, expected errors and result unions; demonstrate runtime rejection paths beyond TypeScript's return type.
-
-7. **`this` Parameters and Class Methods** — Model receiver-sensitive methods appropriately without hiding APP18's JavaScript call-context behavior.
-
-*Optional practice — Callback Repair:* Diagnose a consumer/compiler mismatch and one runtime error in an async callback; retain both static and runtime tests.
-
-### Module 6 — Generic Abstractions and Relational Type Design
+### Module 6 — Generics and Proportionate Type Transformations
 
 #### Outcomes
 
 - APP19-O3
 - APP19-O6
-- APP19-O7
-
-#### Lessons
-
-1. **Why Generic Parameters Exist** — Preserve a relationship between input and output types; contrast `unknown`, a union and a generic for a concrete operation.
-
-2. **Inference and Explicit Type Arguments** — Observe inferred type parameters from calls and use explicit arguments only where they convey information the compiler cannot infer.
-
-3. **Constrained Generics** — Apply `extends` constraints to object keys, records or collections without assuming they validate runtime values.
-
-4. **`keyof` and Indexed Access** — Write type-safe property lookup preserving the relationship between a key and its value while considering optional keys.
-
-5. **Generic Collections and Result Containers** — Implement a small typed index, page of results or error-bearing container with clear invariants and tests.
-
-6. **Type Parameter Defaults and Inference Limits** — Review when defaults and multiple type parameters improve an API and when they increase complexity.
-
-7. **Safe Reuse versus Assertions** — Compare a well-typed generic implementation against an `as any` shortcut and explain what actually breaks in the latter.
-
-*Optional practice — Generic Refactor:* Replace duplicated record functions with a bounded generic implementation and verify both caller-specific static expectations and runtime behavior.
-
-### Module 7 — Type Transformations and Useful Utility Types
-
-#### Outcomes
-
-- APP19-O3
 - APP19-O7
 - APP19-O8
 
 #### Lessons
 
-1. **Mapped Utility Types** — Use `Partial`, `Required`, `Readonly`, `Pick` and `Omit` as transformations of existing definitions; acknowledge their compile-time nature.
+1. **Generic Input/Output Relationships** — Use type parameters to preserve a meaningful relationship, comparing a generic signature with unknown or union alternatives on concrete consumer calls.
 
-2. **Key Remapping and Modifiers** — Create an understandable mapped type involving optional or readonly modifiers, justified by an actual library requirement.
+2. **Inference, Constraints and Defaults** — Derive a parameter from actual arguments, add a necessary extends bound and choose a default only when it clarifies rather than obscures the public API.
 
-3. **Conditional Type Relationships** — Represent a bounded type selection based on a generic parameter; distinguish type-level branching from JavaScript runtime conditionals.
+3. **Related Keys and Values** — Implement a safe generic lookup with `keyof`, indexed access and optional-key considerations; demonstrate valid and rejected key/value pairs.
 
-4. **Distributive Conditional Types** — Demonstrate how a naked generic parameter distributes over a union and how a tuple wrapper changes behavior.
+4. **Reusable Typed Collections or Results** — Design one modest generic result container, record index or callback interface with explicit invariants, not a generic framework for its own sake.
 
-5. **`infer` and Standard Utility Types** — Inspect `ReturnType`, `Parameters` and an appropriate inference example without building an unnecessary type-level programming language.
+5. **Utility and Mapped Transformations** — Use suitable Partial, Pick, Omit or Readonly and derive one small mapped transformation; explain shallow static modifiers and the real contract being transformed.
 
-6. **Template Literal and Indexed Types** — Express a small constrained event-name or message-key contract and assess readability/maintenance costs.
+6. **Conditional Selection, Distribution and `infer`** — Explain a bounded conditional relationship, the effect of a distributive type parameter versus tuple wrapping, and inspect inference only where a public consumer benefits.
 
-7. **When Not to Use Advanced Types** — Compare a complex conditional/mapped type to a clear interface or explicit domain union; select the simplest design that preserves correctness.
+7. **Template-Literal Contracts Where Appropriate** — Derive or inspect a small string-key or event-name relationship from declared keys; verify compiler-accepted and rejected names and explain when ordinary literals are clearer.
 
-*Optional practice — Type Evolution:* Introduce a versioned field, examine type transformation behavior, and fix a misleading type-level abstraction.
+8. **Type Complexity and Independent Consumer Tests** — Compare a sophisticated type with a simpler domain union/interface; use positive and negative `tsc` consumer cases to justify the smallest sufficient relationship.
 
-### Module 8 — Compiler Configuration, Emission and Diagnostics
+### Module 7 — Compiler, Module and Typed API Delivery
 
 #### Outcomes
 
 - APP19-O1
-- APP19-O5
-- APP19-O9
-
-#### Lessons
-
-1. **The `tsconfig.json` Project Model** — Explain config discovery, included/excluded files, project directories and the risks of relying on editor-only settings.
-
-2. **Strict Checking and Diagnostic Categories** — Use `strict`, null checks and implicit-any diagnostics; evaluate `noUncheckedIndexedAccess` and `exactOptionalPropertyTypes` with concrete trade-offs.
-
-3. **Compiler Output Targets and Type-Only Checks** — Distinguish syntax emission targets and ambient library declarations from available runtime APIs; show why `lib` does not install a polyfill; compare an independent type-check step with emitting executable JavaScript; verify an actual output and explain the behavior of erased types.
-
-4. **Modules and Resolution Modes** — Explain Node ESM, `module`/`moduleResolution`, file extensions and package export maps; do not assume every environment resolves the same specifiers.
-
-5. **Native Node Type Stripping** — Inspect supported erasable syntax in a declared Node baseline, why Node does not read `tsconfig` or type-check, and when a regular `tsc` workflow is required.
-
-6. **Type Imports, Declaration-only Outputs and Source Maps** — Distinguish `import type`, value exports, `.d.ts` artifacts and debugging source positions; avoid treating declarations as runtime code.
-
-*Optional practice — Configuration Failure:* Repair a mismatched target/module setting or phantom runtime API after recording the original diagnostic and observed runtime behavior.
-
-### Module 9 — Typed Modules, Public APIs and JavaScript Interoperability
-
-#### Outcomes
-
 - APP19-O3
-- APP19-O6
+- APP19-O5
 - APP19-O9
 - APP19-O10
 
 #### Lessons
 
-1. **Designing a Public Typed Surface** — Use named exports, cohesive modules and a public contract that consumers can exercise without seeing private implementation details.
+1. **Strict Project Definition and Type Precision Flags** — Create a scoped `tsconfig.json` with strict diagnostics; examine noUncheckedIndexedAccess and exactOptionalPropertyTypes on concrete indexed/optional inputs without assuming they are always enabled.
 
-2. **Type-only and Value Imports** — Demonstrate the distinction with a local ESM module and identify a runtime failure caused by treating erased symbols as values.
+2. **Checking, Target, Ambient Libraries and Emission** — Separate `--noEmit` checks, emitted JavaScript, source maps and the target/lib distinction: an ambient DOM/ES API declaration does not install a runtime API or polyfill.
 
-3. **Declarations and Ambient Assumptions** — Inspect generated or hand-authored `.d.ts` declarations; explain that a declaration describes expected types, not guaranteed live behavior.
+3. **Node Type Stripping as a Limited Host Path** — Compare a supported erasable TypeScript case against compiler-emitted JavaScript; verify that Node's native stripping does not type-check, transform arbitrary TS syntax, honor tsconfig or resolve paths for you.
 
-4. **Consuming a JavaScript Module** — Type a bounded existing JavaScript API with a declaration or suitable migration strategy and verify it against actual JavaScript behavior.
+4. **ESM Resolution and Type-Only Imports** — Investigate module/moduleResolution, a local relative specifier and an import type versus runtime value distinction; reproduce one erased-import or host-resolver failure.
 
-5. **Package Boundaries and Exports** — Explain a documented `package.json` export surface, relative import specifiers and consumer support under a chosen host/module target.
+5. **Public Modules and Declaration Surfaces** — Export a cohesive typed interface, inspect a .d.ts declaration and distinguish compile-time claims from executable values and trustworthy implementation behavior.
 
-6. **API Evolution and Compatibility** — Evaluate a change to required/optional fields or result variants against static consumers, runtime fixtures and prior behavior.
+6. **JavaScript Interoperation and Package Contracts** — Consume a bounded APP18-style JavaScript module using suitable declarations or incremental checking; qualify CommonJS/ESM and package exports under the declared host baseline.
 
-7. **Structural Types versus Trusted Implementations** — Explain why a consumer may conform structurally yet fail domain validation; use contract tests to reinforce trust boundaries.
+7. **Consumer Compatibility and Breaking Changes** — Change a required/optional property, callback or result variant and inspect compiler and runtime effects on two local consumers; avoid claiming a passing type check implies deployed behavioral compatibility.
 
-*Optional practice — Consumer Repair:* Create two independent local consumers, change the public API and diagnose both compile-time and runtime consequences.
+8. **Clean Local Build and Diagnostic Repair** — Reproduce type checks, chosen JavaScript execution and independent tests from pre-provisioned local tools; repair a relevant configuration/resolution defect without online registries, secrets or private CI.
 
-### Module 10 — Runtime Data Boundaries and Security
+### Module 8 — Untrusted Runtime Data and Checked Domain Boundaries
 
 #### Outcomes
 
@@ -329,23 +258,19 @@ explicitly requires their evidence.
 
 #### Lessons
 
-1. **Types Are Erased at Runtime** — Show that a cast, interface, generic or successful `tsc` run does not validate an HTTP-like JSON payload or filesystem data.
+1. **Erasure, `unknown` and Boundary Ownership** — Accept fabricated JSON/filesystem data as unknown, not as a trusted TypeScript domain value; show exactly how a cast and an external declaration can be wrong at runtime.
 
-2. **`unknown` as the Entry Boundary** — Parse a synthetic JSON value as `unknown`, validate presence, types, lengths, finite numbers and allowed tags before constructing a domain value.
+2. **Shape, Value, Missing and Optional Policies** — Validate actual record presence, type, finite range, allowed tags, null/undefined and optional fields; distinguish accepted absence from fabricated or invalid values.
 
-3. **Missing versus Optional versus Null** — Evaluate omitted fields, `undefined`, `null` and schema-version changes with explicit policies rather than accidental narrowing.
+3. **Truthful Predicates and Validated Constructors** — Build a predicate/decoder from executable checks and test a deceptive signature against a counterexample; construct a typed internal value only after validation.
 
-4. **Safe Predicates and Assertion Contracts** — Demonstrate an intentionally unsound type guard and repair it using executable tests and an actual runtime check.
+4. **Schema Evolution and Exhaustive Version Handling** — Accept or reject a changed version with explicit policy, compiler-supported variant handling and negative runtime fixtures; do not silently reinterpret an older payload.
 
-5. **Compatibility and Versioned Data** — Support a declared version migration or reject unsupported versions with a testable, nonambiguous error rather than asserting an old payload is new.
+5. **Untrusted Keys, Prototype and Error Privacy** — Reuse APP18 prototype/key security knowledge to protect typed indexing/merges and redact raw sensitive payloads; distinguish domain rejection from unexpected program defects.
 
-6. **Error Propagation and Privacy** — Return useful typed errors, avoid logging sensitive raw values and distinguish recoverable bad input from an internal programming failure.
+6. **Adversarial Validation and Consumer Recovery** — Use malformed, extra-field, nested, duplicate and version-shifted synthetic fixtures to prove rejected inputs never reach a typed operation as though validated.
 
-7. **Prototype and Key Safety** — Check suspicious object fields, inherited properties and arbitrary keys before merging or indexing untrusted records; use explicit allowlists and safe maps.
-
-*Optional practice — Adversarial Fixture:* Apply malformed, additional-field, duplicate and wrong-type fixtures to a typed parser; show that runtime acceptance matches the documented policy.
-
-### Module 11 — Gradual JavaScript Migration, Testing and Maintainability
+### Module 9 — Incremental JavaScript Migration and Dual Verification
 
 #### Outcomes
 
@@ -358,23 +283,17 @@ explicitly requires their evidence.
 
 #### Lessons
 
-1. **Audit an Existing JavaScript Program** — Start from a tested APP18-style module, identify implicit contracts, input sources, undefined behavior and an appropriately small migration boundary.
+1. **A Bounded APP18 Migration Slice** — Identify implicit input/output assumptions in a tested prior JavaScript module and choose a meaningful subset for typing; preserve existing runtime acceptance cases.
 
-2. **JSDoc and Incremental Typing** — Compare checkable JavaScript/JSDoc with moving selected files to TypeScript; explain why a migration can proceed without rewriting all modules.
+2. **JSDoc, `checkJs` and TypeScript Files** — Compare a locally checkable JSDoc boundary with a .ts conversion; explain which migration steps preserve emitted behavior and which require extra host setup.
 
-3. **Third-party and Missing Declarations** — Classify legitimate ambient type packages versus unsafe ad-hoc declarations, and identify risks of treating third-party declarations as ground truth.
+3. **Compiler-Negative and Consumer Tests** — Write stable compiler expectations for invalid calls/variants; independently exercise correct consumers without relying on one transcript of successful compilation.
 
-4. **Static Negative Tests** — Write compiler-expectation tests or captured diagnostics for a deliberate misuse; distinguish asserting a type failure from testing runtime behavior.
+4. **Runtime Tests for Valid and Adversarial Inputs** — Retain and strengthen Node tests for malformed input, version drift, promise rejection and actual behavior that erased TypeScript cannot guarantee.
 
-5. **Runtime and Contract Tests** — Retain Node tests for normal, invalid and async rejection paths; demonstrate a type-safe module with a runtime-invalid payload.
+5. **Trace, Regress and Explain a Change** — Use source/output/stack evidence to fix a deliberate type/host mismatch, explain unsafe declarations or type holes and record when a public interface change is breaking.
 
-6. **Debugging and Source Mapping** — Trace a failure across TS source, emitted JS and host stack traces with documented tooling conditions, and explain misleading error locations.
-
-7. **Refactoring Without Changing Semantics** — Preserve JS runtime behavior while improving module types, avoid `as any` suppression, and record a justified compatibility decision.
-
-*Optional practice — Maintenance Request:* Implement a bounded feature in a partially typed codebase, verify a regression and explain unresolved type holes.
-
-### Module 12 — Integrated TypeScript Library and Engineering Defense
+### Module 10 — One Typed Library, Real Evolution and Defense
 
 #### Outcomes
 
@@ -393,35 +312,36 @@ explicitly requires their evidence.
 
 #### Lessons
 
-1. **Define a Small Typed Library Problem** — Choose a self-contained command processor, typed configuration parser or event/result processing library with synthetic inputs, explicit clients and a meaningful trust boundary.
+1. **A Real Contract and One Cumulative Artifact** — Select a bounded typed library or local utility with genuine consumers, external synthetic input and explicit acceptance policy; plan to reuse inspected APP19-AS1–AS4 artifacts and evidence rather than produce unrelated projects.
 
-2. **Publish Domain Types and Acceptance Cases** — Specify input/output contracts, invalid data, optional fields, versioning and observable state transitions before implementing types.
+2. **Static Models and Runtime Data Gates** — Integrate a discriminated state model, checked unknown boundary, relational generic and one proportionate advanced type transformation; expose documented live module exports.
 
-3. **Compose Narrowing and Generics** — Build cohesive reusable data-processing operations with structural contracts, bounded generic relationships and exhaustively checked state variants.
+3. **Independent Consumers and Failure Evidence** — Verify positive/negative compiler examples and runtime consumers separately, including a malformed/changed input and declared toolchain/module assumptions.
 
-4. **Validate before Trusting** — Implement actual runtime parsing/validation from `unknown` and demonstrate a malicious or malformed example that a cast would falsely accept.
+4. **Unfamiliar Contract or Variant Change** — Respond to a bounded external change, reproduce its static and runtime consequences, repair domain and consumer behavior and check existing acceptance criteria.
 
-5. **Verify Compilation and Runtime Independently** — Run strict static checks, normal and negative runtime tests and a clean-install or pre-provisioned/offline verification path with recorded tool versions.
-
-6. **Evolution and Consumer Compatibility** — Add a new variant or data field and demonstrate which type-level and runtime consumers need amendment, using a structured compatibility note.
-
-7. **Unfamiliar Change and Technical Defense** — Respond to a new bounded client request, repair one broken assumption and defend compile-time versus runtime guarantees, API design, and recorded limits.
+5. **Clean Reproduction and Engineering Defense** — Deliver one offline-capable source/test bundle, references to prior accepted outcome evidence, a reproducible change trace and a reviewable explanation of soundness limitations, type/runtime ownership and remaining uncertainty.
 
 ## Completion requirements
 
-All **twelve required course outcomes** must be demonstrated
-through the **five required summative assessments** below.
-The assessments share a coherent set of typed module and
-consumer artifacts where appropriate. Formative investigations
-and lesson activities are preparation, not separate mandatory
-completion evidence merely because they are listed.
+All **twelve required outcomes** must be established through
+**five independently decidable summative assessments**. These
+may use **one evolving local typed-library or utility source**:
+APP19-AS1 diagnoses source semantics, AS2 establishes validated
+state and runtime boundaries, AS3 builds a genuinely relational
+typed API, AS4 verifies migration and compiler/module behavior,
+and AS5 evaluates the integrated artifact and an unfamiliar
+bounded change. Previously accepted evidence may be **referenced**
+rather than copied or rebuilt. Neither five separate libraries
+nor an assessment for every lesson is required. Formative
+investigations remain optional preparation, not hidden gates.
 
 | Required assessment | Outcomes evaluated | Principal evidence |
 | --- | --- | --- |
 | `APP19-AS1` — Static Modeling and Structural Compatibility Review | APP19-O1, APP19-O2, APP19-O3, APP19-O5, APP19-O9 | TS source, compiler configuration and diagnostics, a prediction-versus-observation table, executable JS tests or counterexamples, repaired definitions and a concise distinction between checking and execution |
 | `APP19-AS2` — Discriminated State and Runtime Validation Investigation | APP19-O2, APP19-O4, APP19-O5, APP19-O11 | Union and validation source, negative/normal fixture matrix, compiler diagnostics before/after the new variant, executable tests, and explanation of type predicates, `never` and the runtime trust boundary |
-| `APP19-AS3` — Generic API and Type Transformation Review | APP19-O3, APP19-O6, APP19-O7, APP19-O8, APP19-O10 | Typed module, two local consumer fixtures, compiler-positive and compiler-negative test evidence, runtime tests for callback/async behavior, public API contract and justification of type complexity and limitations |
-| `APP19-AS4` — Compiler, Module, and JavaScript Migration Audit | APP19-O1, APP19-O5, APP19-O9, APP19-O10, APP19-O12 | Migrated source, original JS behavior fixtures, `tsconfig.json`, toolchain and local package recipe, type-check output, runtime test log, repaired module/configuration defect, and migration/compatibility notes |
+| `APP19-AS3` — Generic API and Type Transformation Review | APP19-O3, APP19-O6, APP19-O7, APP19-O8, APP19-O10 | One relational generic API; justified utility/mapped, conditional and bounded template-literal type checks; two consumers; compiler-positive/negative and runtime evidence; proportionate complexity defense |
+| `APP19-AS4` — Compiler, Module, and JavaScript Migration Audit | APP19-O1, APP19-O5, APP19-O9, APP19-O10, APP19-O12 | Migrated APP18 source, separate compiler and executable-JavaScript evidence, declared toolchain and module assumptions, clean local reproduction, diagnosed resolver/configuration failure |
 | `APP19-AS5` — Typed Library Evolution and Engineering Defense | APP19-O1, APP19-O2, APP19-O3, APP19-O4, APP19-O5, APP19-O6, APP19-O7, APP19-O8, APP19-O9, APP19-O10, APP19-O11, APP19-O12 | Versioned source and interface documentation, fixture and consumer matrix, reproducible `tsc`/runtime commands and test results, migration/change diff, negative-path reproduction, compatibility note, and written/recorded/otherwise accessible technical defense |
 
 ### Shared environment, assessment and trust boundaries
@@ -482,33 +402,35 @@ completion evidence merely because they are listed.
   - Criteria: No invalid payload is trusted solely through an `as` cast or unsound type guard; malformed, missing, null, extra-field and wrong-version cases follow a documented acceptance/rejection policy. Control-flow narrowing is valid, new variants produce a meaningful compile-time exhaustiveness signal, and negative runtime tests demonstrate controlled failure without leaking sensitive test data.
   - Evidence: Union and validation source, negative/normal fixture matrix, compiler diagnostics before/after the new variant, executable tests, and explanation of type predicates, `never` and the runtime trust boundary.
 
-- **APP19-AS3** (required generic api and type transformation review)
+- **APP19-AS3** (required generic API and type transformation review)
   - Outcomes: APP19-O3, APP19-O6, APP19-O7, APP19-O8, APP19-O10
-  - Work: Create a small reusable TypeScript module/library for a bounded data-processing or typed-event task. Provide one genuinely relational generic API, constrained keys/indexed access, and a justified utility/mapped/conditional type. Include an asynchronous or callback-consuming function with explicit result/error semantics. Supply two independent consumers and deliberately attempt invalid uses to demonstrate the boundary of the declared interface.
-  - Criteria: Input/output generic relationships hold for representative different concrete types; selected transformations preserve intended required/optional and readonly semantics without obscuring runtime assumptions. Misuse cases are rejected by strict checking, valid consumers run as documented, callback or async behavior remains correct at runtime, and no `any` assertion masks a fundamental library defect. The learner defends why simpler types were or were not sufficient.
-  - Evidence: Typed module, two local consumer fixtures, compiler-positive and compiler-negative test evidence, runtime tests for callback/async behavior, public API contract and justification of type complexity and limitations.
+  - Work: Develop a small reusable data-processing, event or result module **within the evolving library**. Demonstrate one relational generic API with constrained `keyof`/indexed access, a justified standard utility and a small mapped type, a bounded conditional type (including an illustrative distributivity check), and a **meaningful template-literal key/name relationship**. A compact isolated consumer example is sufficient when the latter would overcomplicate the public API; do not mandate type gymnastics in the shipped interface. Include a typed callback or async result with explicit runtime failure handling, two independent local consumers, and intentionally invalid static calls.
+  - Criteria: Different concrete callers preserve their generic input/output relationships; utility/mapped, conditional and template-literal examples have correct compiler-positive and negative expectations, with limitations on actual runtime validation understood. The published API stays proportionate, required/optional/readonly meanings are not silently changed, consumer misuse is rejected by strict checking, and valid callback/async behavior is runtime-tested. No `any` cast masks a fundamental boundary. The learner can **reject unnecessary advanced types** in the exported API while still demonstrating and explaining their semantics in bounded checked examples.
+  - Evidence: Typed module, a focused mapping of each O8 type family to an accepted/rejected static example, two local consumer fixtures, separately recorded type-check and runtime results, callback/async tests, and a concise decision explaining the domain need or deliberate exclusion of an advanced type. Prior AS1/AS2 evidence may be linked rather than repeated.
 
-- **APP19-AS4** (required compiler, module, and javascript migration audit)
+- **APP19-AS4** (required compiler, module and JavaScript migration audit)
   - Outcomes: APP19-O1, APP19-O5, APP19-O9, APP19-O10, APP19-O12
-  - Work: Migrate an existing bounded APP18 JavaScript project or module to a checked TypeScript boundary without changing supported JavaScript behavior. Document `strict` configuration, appropriate `module`/`moduleResolution` choice, import type behavior, declaration output or a justified `noEmit` workflow, and a reproducible type-check command. Show a compiler-success/runtime-failure counterexample and diagnose an intentionally broken resolution or erased-type import. Verify a clean state with local compiler/toolchain availability.
-  - Criteria: Static checks run under a declared compiler version and fail on an intentional incompatible consumer; executable output works in the declared Node host and existing regression tests continue to pass. Type-only values are not imported as runtime objects; declarations are not treated as validation, and Node's native type stripping is not credited with `tsc` checking or `tsconfig` execution. No hidden global installation, unreviewed network dependency or proprietary account is needed for reproducible evaluation.
-  - Evidence: Migrated source, original JS behavior fixtures, `tsconfig.json`, toolchain and local package recipe, type-check output, runtime test log, a repaired module/configuration defect, and migration/compatibility notes.
+  - Work: Move a bounded, already-tested APP18 JavaScript module into an appropriately checked TypeScript boundary, preserving its documented runtime behavior and ideally extending the AS2/AS3 library. Define strict compiler options and `module`/`moduleResolution` appropriate to the actual host, distinguish type-only imports and declaration-only exports from live values, and compare **explicit type-only checking with a separately documented runnable JavaScript path**. A `tsc`-emitted output or appropriately versioned erasable-type Node execution may satisfy the runnable path; native type stripping must not be described as `tsconfig` evaluation or a checker. Diagnose and repair an erased-import, relative-path, package-exports or configuration mismatch, then reproduce from pre-provisioned free local tools.
+  - Criteria: A real `tsc` run produces meaningful static feedback under the recorded compiler baseline, including an intentionally failing invalid consumer; documented executable behavior matches prior APP18 regression cases and the declared Node/module environment. No checked type or `.d.ts` is mistaken for actual runtime validation, and no `lib` declaration is mistaken for an installed API. The identified module/configuration failure has a causal, verified correction. No private compiler, remote grading account, live registry or unreviewed install script is required.
+  - Evidence: Reused or migrated source and original behavior fixtures, minimal `tsconfig.json`, separately identified **static** diagnostic and **runtime** test/inspection outputs, one broken/fixed module or resolution case, exact material tool versions and clean local setup. Evidence from AS1–AS3 may be referenced.
 
 - **APP19-AS5** (required typed library evolution and engineering defense)
   - Outcomes: APP19-O1, APP19-O2, APP19-O3, APP19-O4, APP19-O5, APP19-O6, APP19-O7, APP19-O8, APP19-O9, APP19-O10, APP19-O11, APP19-O12
-  - Work: Deliver a maintainable TypeScript library or local application slice exposing a documented typed interface and at least two consumers. Integrate a validated `unknown` external input boundary, discriminated state handling, a justified generic abstraction, meaningful error behavior, strict checks and runtime tests. Reuse qualifying work from earlier assessments rather than build five unrelated products. Perform one unfamiliar bounded request such as a new result variant, data field, or changed consumer contract; prove backward-compatibility or explicitly document a breaking change. Rebuild and defend the system without requiring a browser, React, a backend HTTP service or a third-party cloud account.
-  - Criteria: Required contracts and variant behavior satisfy published acceptance cases; malformed data cannot reach typed domain operations unchecked; compiler and runtime tests verify different claims; consumers resolve actual values and type declarations correctly. The new request is implemented with a traceable contract impact and passing regression suite. The learner can explain structural typing, sound narrowing, a meaningful generic transformation, compiler configuration, the difference between emitted JS and type annotations, and remaining limitations with inspected evidence.
-  - Evidence: Versioned source and interface documentation, fixture and consumer matrix, reproducible `tsc`/runtime commands and test results, migration/change diff, negative-path reproduction, compatibility note, and written/recorded/otherwise accessible technical defense.
+  - Work: Complete **one coherent cumulative** local typed library or utility with a documented live API and at least two independent consumers. Integrate the validated `unknown` input boundary, exhaustive result states, justified generic and type-transform relationships, runtime error policy, strict checking and executable tests from APP19-AS1–AS4. Reference **previously evaluated** evidence rather than duplicate projects. Implement an **unfamiliar bounded state, field or caller-contract change**, observe the static and runtime effects, repair them and independently reproduce and defend the result. Do not add hidden browser, React, HTTP server, paid platform or external-data requirements.
+  - Criteria: Published domain cases, compiler-positive and compiler-negative expectations, live value exports and runtime failure scenarios are supported by inspectable evidence, not casts or declaration claims. Malformed external data cannot silently enter domain operations as validated. The new change has traceable impact, verified consumer revisions and no unaddressed breaking behavior relative to the stated compatibility policy. The learner explains inference, structural typing limits, trustworthy narrowing, generic/type transformation trade-offs, compiler/host boundaries and observed limitations. A successful compilation alone cannot pass.
+  - Evidence: One versioned local source/fixture package, concise public type/runtime API documentation, independently runnable consumer/test commands, a **references-first** evidence map for AS1–AS4, the new contract/variant change and static/runtime regression results, compatibility limitations, and a reviewable written, recorded or other accessible technical defense.
 
 ### Completion decision and revision safety
 
-Completion requires an inspectable acceptable decision on
-`APP19-AS1` through `APP19-AS5` and evidence establishing
-`APP19-O1` through `APP19-O12`. Reusing one evolving
-codebase across assessments is encouraged when reviewers
-can still distinguish the outcomes demonstrated. A passing
-test command, cosmetic typing, unsupported cast or
-unreviewed activity checkbox cannot establish competence.
+Completion requires an inspectable decision for each of
+`APP19-AS1` through `APP19-AS5` and authentic evidence
+for every `APP19-O1` through `APP19-O12`. **One evolving**
+source is sufficient where the five decisions remain distinct:
+AS5 integration does not excuse unproved AS1–AS4 outcomes.
+Previously judged evidence may be linked, not re-submitted.
+A passing compiler/test command, cosmetic typing, unchecked
+cast, excessive type complexity or lesson-attendance checkbox
+cannot substitute for domain understanding or runtime safety.
 
 The evaluator must check both type-system claims and the
 runtime behavior actually asserted, ask for repair of
@@ -518,14 +440,15 @@ Preserve applicable course/spec revision, assessment IDs,
 evidence references and decisions according to
 [OEE Evidence Rules](../../spec/evidence-rules.md).
 
-APP19 is introduced as a `v0.2.0` **draft**, not a
-learner-tested or independently verified course.
-The current APP catalog and APP9's thirteen-course prerequisite
-closure already include APP19; APP2, APP3, APP20 and elective APP15
-have also merged their separate outcome-driven `v0.2.0` drafts.
-Historical APP18 and other prior-course completion records remain
-tied to their actual assessed source revisions; no consumer record
-or prerequisite decision is automatically rewritten.
+APP19 remains a `v0.2.0` **draft**, not a learner-tested,
+independently accredited or educationally verified course.
+The APP catalog already includes APP19 in the required core
+path and APP9 graduation prerequisite closure; APP2, APP3,
+APP20 and optional APP15 consume TypeScript competence at
+different depth. This reassessment neither alters their
+course contracts nor silently re-evaluates historical APP18
+or other learner decisions, which remain tied to their
+actual assessed source/specification revisions.
 
 ### Public non-mandatory study references
 

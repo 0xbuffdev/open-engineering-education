@@ -741,21 +741,24 @@ class APPCatalogTests(unittest.TestCase):
 
 
     def test_app19_assessment_summary_table_rejects_unclosed_code(self):
-        self.change_course(
-            "APP19",
-            "`tsconfig.json`, toolchain and local package recipe",
-            "`tsconfig.json, toolchain and local package recipe",
-        )
+        # Select the stable assessment row, not editorial evidence wording.
+        course = (self.app.APP / "APP19.md").read_text(encoding="utf-8")
+        row = next(line for line in course.splitlines()
+                   if line.startswith("| `APP19-AS4`"))
+        broken = row.replace("`APP19-AS4`", "`APP19-AS4", 1)
+        self.assertNotEqual(row, broken)
+        self.change_course("APP19", row, broken)
         status, errors = self.check()
         self.assertNotEqual(status, 0)
         self.assertIn("unclosed inline-code delimiter", errors)
 
     def test_app19_assessment_summary_table_rejects_truncated_row(self):
-        self.change_course(
-            "APP19",
-            "repaired module/configuration defect, and migration/compatibility notes |",
-            "repaired module/configuration defect, and migration/compatibility notes",
-        )
+        # Remove a separator from the real row, regardless of its prose.
+        course = (self.app.APP / "APP19.md").read_text(encoding="utf-8")
+        row = next(line for line in course.splitlines()
+                   if line.startswith("| `APP19-AS4`"))
+        self.assertTrue(row.endswith(" |"))
+        self.change_course("APP19", row, row[:-2])
         status, errors = self.check()
         self.assertNotEqual(status, 0)
         self.assertIn("expected 4 pipe separators", errors)
