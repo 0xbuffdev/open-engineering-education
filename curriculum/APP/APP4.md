@@ -24,10 +24,10 @@ verified backup recovery. Finish by building and defending a small,
 reproducible data component against explicit invariants and failure
 scenarios.
 
-This course retains and deepens the important subjects in the
-earlier APP4 draft while **removing its obsolete prerequisite
-on APP3**. [SEF10](../SEF/SEF10.md) supplies prior programming,
-technical reasoning, basic tooling and engineering practices.
+[SEF10](../SEF/SEF10.md) supplies programming, mathematical
+reasoning, basic tooling and engineering practices. APP4 is an
+independent database foundation rather than an APP3-dependent
+backend service specialization.
 Database design does not fundamentally require DOM, React,
 TypeScript or a backend HTTP framework. Learners may perform the
 required work through SQL files and a local command-line client.
@@ -96,31 +96,26 @@ graduation obligations.
 
 ## Modules
 
-### Module 1 — Database Purpose, Relational Thinking, and Study Environment
+### Module 1 — Relational Purpose, Local SQL and Domain Questions
 
 #### Outcomes
 
 - APP4-O1
 - APP4-O3
-- APP4-O10
 
 #### Lessons
 
-1. **Relational Data Foundations and Application Boundaries** — Introduce durable shared data and the progression from file processing and hierarchical/network models to relational systems; locate relational databases within modern application architecture without presupposing an API framework; contrast persistent domain facts, derived values, cached representations and ephemeral state; identify ownership, access patterns, retention and consistency questions in a supplied product brief.
+1. **Relational Domain Purpose and Requirements** — Use a fictional lending or inventory problem to identify durable facts, derived/cache state, entity ownership, relevant data-access questions and preservation needs. Situate relational systems historically in one concrete authoring task, not a separate orientation lesson; record data assumptions and constraints.
 
 2. **Relations, Tuples, Attributes, and Domains** — Relate mathematical sets and predicates to practical SQL tables, rows and columns; explain how SQL bags, NULLs and ordering differ from the idealized relational model.
 
-3. **Database Process, Sessions, and Client Roles** — Identify server, database, schema, connection, transaction and SQL client responsibilities; distinguish language-portable concepts from vendor implementation.
+3. **Database, Session and Safe Local Fixture** — Identify server, database, schema, connection and SQL client roles while setting up a disposable local PostgreSQL environment with synthetic data, recorded versions and reliable teardown; distinguish engine behavior from SQL standard guarantees.
 
-4. **Safe Local PostgreSQL Laboratory** — Prepare a disposable locally controlled PostgreSQL database under ordinary OS-user permissions, record server/client versions, and establish safe teardown and synthetic-data rules.
-
-5. **Requirements-to-Questions Walkthrough** — List entities, user-facing questions, integrity invariants, expected data volume and privacy assumptions for a fictional lending, inventory or reservation problem.
-
-6. **Exploratory Schema and Query** — Create minimal tables with sample records, run SELECT safely, inspect exact results and list model assumptions that require correction.
+4. **First Query and Model Counterexample** — Create a minimal relation, execute a small SELECT and compare with independently expected rows; use an impossible or duplicated business fact to expose a modeling assumption that the schema cannot yet enforce.
 
 *Optional practice — Investigation: A Misleading Table:* Explain why one wide, duplicated spreadsheet-like table cannot reliably represent every domain update; propose a bounded relational decomposition.
 
-### Module 2 — Entities, Keys, Dependencies, and Normalization
+### Module 2 — Entities, Keys, Dependencies and Normalization
 
 #### Outcomes
 
@@ -136,17 +131,13 @@ graduation obligations.
 
 3. **Functional Dependencies** — Infer supported dependencies from stated business rules; separate accidental sample-data correlation from a genuine constraint.
 
-4. **First through Third Normal Forms** — Diagnose repeating groups, partial dependencies and transitive dependencies; choose decompositions that avoid update/insert/delete anomalies.
+4. **Normalization, Lossless Change and Denormalization** — Diagnose insert/update/delete anomalies, derive a justified 1NF–3NF decomposition and a bounded BCNF exception, and check meaningful lossless joins and dependency-enforcement trade-offs rather than treating higher forms as a score.
 
-5. **Beyond Third Normal Form** — Recognize BCNF-style conflicts and the trade-offs of a selective denormalization decision without treating higher normal forms as a universal scorecard.
-
-6. **Nullable Relationships and Missingness** — Model unknown, not applicable and optional data deliberately; explain how SQL NULL affects uniqueness, foreign keys and predicates in the chosen engine.
-
-7. **Evolving Requirements and Data Dictionaries** — Document field meaning, units, ranges, lifecycle and ownership; record a newly discovered cardinality requirement before writing migration SQL.
+5. **Missingness, Lifecycle and Domain Meaning** — Explain nullable/optional relationships with a data dictionary of units, field meaning, ownership and lifecycle, and test PostgreSQL NULL effects on uniqueness, predicates and referential links against actual domain rules.
 
 *Optional practice — Schema Review:* Compare two designs against a counterexample dataset and demonstrate which one preserves stated identities and modification invariants.
 
-### Module 3 — SQL Retrieval, Joins, and Data Modification
+### Module 3 — SQL Queries, Results and Bounded Data Changes
 
 #### Outcomes
 
@@ -156,23 +147,21 @@ graduation obligations.
 
 #### Lessons
 
-1. **SQL Tables and Typed Values** — Create domain-appropriate columns, keys and constraints; distinguish numeric versus text identifiers, timestamps, decimal money and engine-dependent representation.
+1. **Typed Values and SQL's Three-Valued Predicates** — Choose safe storage types for IDs, money and timestamps, then predict filtered query results with TRUE/FALSE/UNKNOWN including NULL edge cases; do not repeat schema normalization.
 
-2. **Projection, Filtering, and Three-Valued Logic** — Write SELECT/WHERE queries using explicit predicates and reason about TRUE, FALSE and UNKNOWN when NULL values appear.
+2. **Joins and Cardinality** — Implement INNER, LEFT and selected other joins; predict row multiplication and distinguish missing matches from duplicate matches.
 
-3. **Joins and Cardinality** — Implement INNER, LEFT and selected other joins; predict row multiplication and distinguish missing matches from duplicate matches.
+3. **Grouping and Aggregate Meaning** — Use COUNT variants, SUM, MIN/MAX, GROUP BY and HAVING with explicit group grain and null-handling policy.
 
-4. **Grouping and Aggregate Meaning** — Use COUNT variants, SUM, MIN/MAX, GROUP BY and HAVING with explicit group grain and null-handling policy.
+4. **Subqueries, EXISTS, and Set Semantics** — Compare EXISTS, NOT EXISTS and IN/NOT IN behaviors, especially with NULLs; use tests to confirm expected matches.
 
-5. **Subqueries, EXISTS, and Set Semantics** — Compare EXISTS, NOT EXISTS and IN/NOT IN behaviors, especially with NULLs; use tests to confirm expected matches.
+5. **INSERT, UPDATE, DELETE, and RETURNING** — Write bounded data modifications with clear predicates, affected-row checks and transaction boundaries; inspect unintended unqualified updates before execution.
 
-6. **INSERT, UPDATE, DELETE, and RETURNING** — Write bounded data modifications with clear predicates, affected-row checks and transaction boundaries; inspect unintended unqualified updates before execution.
-
-7. **Ordering, Pagination, and Determinism** — Explain why tables and query results lack guaranteed row order without ORDER BY; use stable tie-breakers and describe offset/keyset trade-offs.
+6. **Ordering, Pagination, and Determinism** — Explain why tables and query results lack guaranteed row order without ORDER BY; use stable tie-breakers and describe offset/keyset trade-offs.
 
 *Optional practice — SQL Counterexamples:* Predict and verify result sets containing zero matches, duplicated relationships, nulls and tied sort keys using independently computed expected rows.
 
-### Module 4 — Analytical SQL, CTEs, and Reporting Correctness
+### Module 4 — Analytical Queries and Independent Reporting
 
 #### Outcomes
 
@@ -185,47 +174,38 @@ graduation obligations.
 
 2. **Common Table Expressions** — Use CTEs to structure a readable multi-step query while recognizing that optimizer behavior is version- and query-dependent.
 
-3. **Window Functions and PARTITION BY** — Compute ranks and running totals without collapsing the underlying result set; distinguish window partitions from GROUP BY grouping.
+3. **Window Results, Rankings and Ties** — Compute ranks, running totals and row numbers using PARTITION BY and explicit ORDER BY; distinguish row-preserving window calculations from GROUP BY and record ties and NULL ordering so outputs can be reproduced.
 
-4. **Ranking, Ties, and Stable Ordering** — Compare ROW_NUMBER, RANK and DENSE_RANK; declare tie and NULL positioning policies so a report is reproducible.
+4. **Conditional Aggregates and Missing Records** — Test filters, CASE expressions and empty groups; distinguish missing rows from zero results and null results.
 
-5. **Conditional Aggregates and Missing Records** — Test filters, CASE expressions and empty groups; distinguish missing rows from zero results and null results.
+5. **Date Buckets and Time Interpretation** — Represent reporting intervals, time zones and inclusive/exclusive time bounds explicitly rather than assume timestamp strings encode local time.
 
-6. **Date Buckets and Time Interpretation** — Represent reporting intervals, time zones and inclusive/exclusive time bounds explicitly rather than assume timestamp strings encode local time.
-
-7. **Recursive Queries and Bounded Traversal** — Use a small recursive CTE where justified and impose finite termination or depth checks; document cycles and unsafe unbounded recursion.
-
-8. **Independent Analytical Oracle** — Compute a sample report from a small hand-checkable fixture in plain reasoning or independent code; compare it with the SQL output.
+6. **Independent Reporting Oracle and Repair** — Calculate a small expected report from source rows without copying the SQL logic, then reproduce and repair a wrong grain, inflated join total, nullable filter or unstable tie. Discuss a bounded recursive CTE only where the domain actually requires hierarchical traversal.
 
 *Optional practice — Report Audit:* Fix a wrong total, unstable tie or unexpected NULL omission and defend the correction using source rows and expected result tables.
 
-### Module 5 — Database Integrity, Constraints, and Safe Writes
+### Module 5 — Database-Enforced Invariants and Safe Writes
 
 #### Outcomes
 
 - APP4-O2
-- APP4-O3
 - APP4-O5
 
 #### Lessons
 
-1. **Constraints as Executable Domain Rules** — Use NOT NULL, UNIQUE, PRIMARY KEY, FOREIGN KEY and CHECK; distinguish shape constraints from cross-row business rules.
+1. **Declarative Constraints and Enforcement Timing** — Implement appropriate NOT NULL, CHECK, PK, FK and UNIQUE rules, explain cross-row limits, and contrast immediate and deliberately deferred constraint evaluation without mistaking constraints for authorization.
 
-2. **Defaults, Generated Values, and Sequence Behavior** — Explain identity generation, default expressions and PostgreSQL sequence gaps, including why sequence increments need not roll back with a failed transaction.
+2. **Identity Generation, Conflict Handling and Retry Meaning** — Explain sequence/default generation including nonrollback sequence consumption, and select a justified INSERT ON CONFLICT policy without equating upsert with exactly-once distributed execution.
 
 3. **Transaction-Scoped Multi-Row Operations** — Apply related writes in one transaction and prove a declared invariant survives a failed intermediate statement.
 
-4. **Upserts and Duplicate Identity** — Compare unique-conflict handling and idempotent write semantics; avoid equating INSERT ON CONFLICT with general exactly-once processing.
+4. **Cross-Row Invariants and Trigger Limits** — Compare transactional application SQL with a narrowly justified trigger or database procedure for a cross-row rule; state concurrency and readability costs instead of assuming a trigger by itself prevents races.
 
-5. **Deferrable Constraints and Ordering** — Investigate when constraint evaluation may be deferred, what remains checked and why this is not an authorization bypass.
-
-6. **Triggers and Derived State** — Use a small trigger as an optional investigation of enforcement trade-offs; explain when declarative constraints and explicit writes are easier to audit.
-
-7. **Negative-Path Integrity Tests** — Attempt invalid references, double claims, impossible quantities and failed multi-row updates in disposable sessions; inspect rejection versus silent acceptance.
+5. **Negative-Path Integrity Tests** — Attempt invalid references, double claims, impossible quantities and failed multi-row updates in disposable sessions; inspect rejection versus silent acceptance.
 
 *Optional practice — Repair without Data Loss:* Correct a flawed constraint or write statement and re-run both valid and invalid fixtures to prove the improvement.
 
-### Module 6 — Indexes, Query Plans, and Performance Experiments
+### Module 6 — Execution Plans, Index Selection and Measured Trade-offs
 
 #### Outcomes
 
@@ -234,25 +214,21 @@ graduation obligations.
 
 #### Lessons
 
-1. **From Query Meaning to Access Paths** — Distinguish logical query meaning from physical execution and identify sequential scans, index scans and join strategies.
+1. **Execution Paths, Statistics and Selectivity** — Explain scan and join choices as physical implementation of an unchanged SQL result, comparing planner estimates, statistics and actual row counts, including stale-statistics counterexamples.
 
 2. **B-Tree Indexes and Composite Ordering** — Explain search keys, leading columns, range predicates and sort support with concrete index layouts.
 
-3. **Selectivity and Statistics** — Inspect row estimates versus actual rows, learn when ANALYZE refreshes planner statistics and avoid presenting a single EXPLAIN estimate as a measurement.
+3. **Safe EXPLAIN and Statement Effects** — Interpret plans and timed EXPLAIN ANALYZE results, remembering that ANALYZE executes writes. Run only with disposable fixtures: ROLLBACK may not reverse sequence increments or external side effects, so inspect final state.
 
-4. **EXPLAIN and Safe ANALYZE** — Read representative plans, distinguish estimated cost from wall-clock time, and explain that EXPLAIN ANALYZE executes a query—including writes unless safely rolled back.
+4. **Designing a Controlled Query Experiment** — Use synthetic data at appropriate scale, record warmup, plan, row count and run conditions, and compare repeated trials without manufacturing performance conclusions.
 
-5. **Designing a Controlled Query Experiment** — Use synthetic data at appropriate scale, record warmup, plan, row count and run conditions, and compare repeated trials without manufacturing performance conclusions.
+5. **Index Decisions, Maintenance and Measurement Limits** — Compare a query rewrite/index with write and storage costs, autovacuum, cache warmth and environment effects; reject universal speedup claims based on a single synthetic plan.
 
-6. **Query Rewrites and Index Trade-offs** — Compare predicate form, join order opportunities, selectivity and an optional covering index while accounting for index storage and write amplification.
-
-7. **Pagination and Bounded Work** — Analyze OFFSET growth, deterministic keyset pagination, limit/ordering correctness and input bounds on potentially expensive queries.
-
-8. **Maintenance and Performance Limitations** — Recognize vacuum/autovacuum, stale statistics, locks and cache effects as reasons benchmark results may vary; distinguish a local result from a production forecast.
+6. **Pagination and Bounded Work** — Analyze OFFSET growth, deterministic keyset pagination, limit/ordering correctness and input bounds on potentially expensive queries.
 
 *Optional practice — Index Decision:* Recommend, reject or revise an index based on observed plans and stated write/read workload rather than an unsupported rule of thumb.
 
-### Module 7 — Transactions, Isolation, Locks, and Retry
+### Module 7 — Transactions, MVCC, Isolation and Conflict Recovery
 
 #### Outcomes
 
@@ -265,9 +241,9 @@ graduation obligations.
 
 2. **MVCC and Snapshot Visibility** — Trace committed and uncommitted versions across two SQL sessions and distinguish a snapshot from a physical database copy.
 
-3. **Isolation Levels and Transaction Anomalies** — Demonstrate nonrepeatable-read visibility and explain PostgreSQL's stronger-than-minimum Repeatable Read behavior, including why phantom anomalies are not reproduced there; build a controlled interleaving with two sessions and evaluate which data invariants each isolation configuration does or does not preserve.
+3. **Isolation Semantics and a Reproducible Two-Session Anomaly** — Trace a real stale-read/read-modify-write failure under Read Committed or write skew under Repeatable Read with exact interleaving and final invariant. PostgreSQL treats READ UNCOMMITTED as READ COMMITTED and prevents Repeatable Read phantoms; do not claim a conflict that the engine disallows.
 
-4. **Serializable Transactions and Retry** — Interpret a serialization failure and require a bounded retry of the complete transaction with re-evaluated inputs, rather than a blind retry of one statement.
+4. **Serializable Failures and Whole-Transaction Retry** — Reproduce a serialization conflict under a stated test fixture, then defend bounded retries of the complete transaction with fresh reads, avoiding duplicated external side effects.
 
 5. **Explicit Locks and Deadlocks** — Use row-level locking or a documented alternative to protect a stated invariant; explain deadlock detection and why lock order and short transactions matter.
 
@@ -275,7 +251,7 @@ graduation obligations.
 
 *Optional practice — Two-Session Investigation:* Record an interleaving table with initial state, each session's actions, observed results and the corrected mitigation.
 
-### Module 8 — Schema Migration, Compatibility, and Change Safety
+### Module 8 — Versioned Migrations, Data Backfills and Compatibility
 
 #### Outcomes
 
@@ -289,17 +265,15 @@ graduation obligations.
 
 2. **Non-Destructive Expand-and-Contract** — Add optional structure, backfill safely, coordinate old/new consumers, enforce the new constraint and remove obsolete structure only after compatibility is verified.
 
-3. **Constraints on Existing Data** — Inspect old rows before adding new CHECK/NOT NULL/UNIQUE constraints; use staged validation or a documented alternative on a realistic fixture.
+3. **Existing-Data Validation and DDL Lock Safety** — Inspect real existing rows before tightening CHECK/NOT NULL/UNIQUE rules, choose staged validation where appropriate and identify PostgreSQL-specific DDL transaction and locking constraints.
 
-4. **Index and DDL Locking Risks** — Explain transactionality and operational risks of a schema change, distinguishing transactional DDL from operations with special restrictions.
+4. **Safe Data Backfills and Migration Verification** — Choose bounded batches, checkpointing and repeat-safe transformations that do not duplicate or lose rows; check row counts, integrity invariants, existing query consumers and version compatibility before and after a change; preserve the migration artifact.
 
-5. **Safe Data Backfills and Migration Verification** — Choose bounded batches, checkpointing and repeat-safe transformations that do not duplicate or lose rows; check row counts, integrity invariants, existing query consumers and version compatibility before and after a change; preserve the migration artifact.
-
-6. **Reversal versus Restore versus Forward Repair** — Distinguish changes that are safely reversible from destructive data transformations requiring backup restoration or a separately justified forward correction.
+5. **Reversal versus Restore versus Forward Repair** — Distinguish changes that are safely reversible from destructive data transformations requiring backup restoration or a separately justified forward correction.
 
 *Optional practice — Rolling-Upgrade Scenario:* Demonstrate two successive consumer versions on an expanded schema and explain exactly when the contract step becomes safe.
 
-### Module 9 — Access Control, Tenant Isolation, and Query Safety
+### Module 9 — Least-Privilege Access, Tenant Isolation and Injection Safety
 
 #### Outcomes
 
@@ -310,25 +284,19 @@ graduation obligations.
 
 #### Lessons
 
-1. **Threat Model and Data Classification** — Inventory tenants, confidential fields, authentication claims, database roles and access paths; keep synthetic records and state the trust assumptions.
+1. **Threat Model, Restricted Roles and Sensitive Data** — Define actual tenant principals, sensitive data and authorized actions; use GRANT/REVOKE with non-owner/non-superuser/non-BYPASSRLS test roles and distinguish role setup from tested access. Include log, retention and backup exposure limits.
 
-2. **Privileges, Roles, and Least Authority** — Use GRANT/REVOKE and non-owner, non-superuser session roles; distinguish database privileges from application authorization decisions.
+2. **Safe Bound Values and Identifiers** — Demonstrate SQL injection from unsafe interpolation and correct server PREPARE/EXECUTE or checked driver value binding; explain why dynamic identifiers require explicit allowlists and naive psql variable substitution does not count as binding.
 
-3. **SQL Injection and Bound Parameters** — Show the failure of concatenating untrusted input into SQL; use server PREPARE/EXECUTE to demonstrate statement parameters and explain how an application driver safely binds values.
+3. **RLS Read and Write Policies with Bypass Cases** — Test both USING and WITH CHECK semantics and distinguish policy and privilege decisions, FORCE RLS, table-owner exemptions and superuser/BYPASSRLS privileges under the actual session roles.
 
-4. **Object Identifiers and Dynamic SQL** — Explain why parameters bind values rather than arbitrary table/column identifiers; apply explicit allowlists when a query legitimately varies its structure.
+4. **Tenant Scoping in Pooled Connections** — Investigate the hazard of a session- or transaction-context tenant identifier surviving a pooled connection; explain why client-controlled context alone is not a trusted identity boundary.
 
-5. **Row-Level Security and Its Limitations** — Construct a row-level security example with correct policies, and test as a role that does not bypass them; explain owner, superuser and BYPASSRLS exemptions.
-
-6. **Tenant Scoping in Pooled Connections** — Investigate the hazard of a session- or transaction-context tenant identifier surviving a pooled connection; explain why client-controlled context alone is not a trusted identity boundary.
-
-7. **Negative Access Matrix** — Test cross-tenant reads, writes and update-returning paths under a defined authorization matrix; distinguish policy enforcement from merely adding a WHERE tenant_id clause.
-
-8. **Privacy, Retention, and Audit Trade-offs** — Minimize stored sensitive data, document retention and selective logging, and protect backups and dumps against unintended exposure.
+5. **Authenticated Tenant Matrix and Negative Paths** — Exercise cross-tenant SELECT, INSERT, UPDATE, DELETE and RETURNING with real effective-role records, try spoofed or pooled tenant-context data, and verify unauthorized rows remain unchanged; a caller-set session variable is not trusted identity.
 
 *Optional practice — Authorized-Role Test:* Demonstrate a bypass caused by an overprivileged fixture, then repair the roles/policies and capture effective-role evidence.
 
-### Module 10 — Operations, Backups, and Reproducible Recovery
+### Module 10 — Consistent Logical Backup and Independently Tested Restore
 
 #### Outcomes
 
@@ -338,7 +306,7 @@ graduation obligations.
 
 #### Lessons
 
-1. **Logical versus Physical Backup** — Explain what a logical pg_dump captures, what cluster-level global objects it omits, and when a physical backup or WAL-based recovery would require a different procedure.
+1. **Backup Scope, Global Dependencies and Confidentiality** — Compare pg_dump logical snapshots with physical/WAL recovery only to establish scope; identify omitted cluster roles/configuration, table access and protections for exported synthetic data.
 
 2. **Dump Scope and Consistency** — Create a consistent disposable-database logical backup, record the exact database/schema scope, versions, permissions and inclusion/exclusion assumptions.
 
@@ -346,15 +314,11 @@ graduation obligations.
 
 4. **Integrity Verification after Restore** — Compare independently defined row/constraint checks, reproducible queries and a bounded checksum or manifest where appropriate; avoid declaring recovery successful from tool exit status alone.
 
-5. **Recovery Point and Recovery Time** — State a scenario's recovery point objective and recovery time objective; measure a local drill without pretending it demonstrates production guarantees.
-
-6. **Connections, Locks, and Query Health** — Inspect a limited set of session and query signals, timeouts and lock waits; distinguish diagnosis from infrastructure tuning owned by APP7.
-
-7. **Sensitive Information in Backups** — Explain least-privilege dump access, synthetic data, backup access control, retention and why an exported SQL file is not harmless metadata.
+5. **A Bounded Recovery-Point and Recovery-Time Decision** — Compare a real failed-change local restoration with a stated scenario's RPO/RTO goals, record restore timing and possible loss, and explicitly reject extrapolating a single drill to production reliability.
 
 *Optional practice — Interrupted Migration Recovery:* Take a validated backup, inject a safe migration fault into a disposable database, recover into a clean target and explain data that could not be recovered.
 
-### Module 11 — Minimal Data Access Interfaces and Independent Tests
+### Module 11 — SQL Data-Access Interfaces and Independent Contract Tests
 
 #### Outcomes
 
@@ -365,23 +329,19 @@ graduation obligations.
 
 #### Lessons
 
-1. **A Database Contract without a Backend Framework** — Publish a small local command/query interface with input schema, result columns, affected-row policy, transactional behavior and error categories.
+1. **A Public SQL Contract and Invariant Ownership** — Define input shape, results, affected rows, error policies and transaction boundaries, separating SQL facts from domain authorization and server service responsibilities.
 
-2. **SQL Files, psql and Parameter Discipline** — Organize numbered SQL files and predictable psql invocation; explain why unsafe string substitution is not a replacement for safe driver parameters.
+2. **Local SQL, Prepared Statements and Optional Clients** — Package executable SQL scripts and psql commands with safe value parameters using server PREPARE/EXECUTE or a pre-provisioned free driver; state why psql textual substitution is not an injection defense.
 
-3. **Server Prepared Statements and Optional Adapters** — Demonstrate PREPARE/EXECUTE for value placeholders; an optional Python or other client adapter may be used if its required free driver is pre-provisioned locally.
+3. **Deterministic Fixture Setup and Teardown** — Initialize synthetic tenants and records in a fresh disposable database and cleanly reset state without requiring root OS access or cloud services.
 
-4. **Data Access and Domain Invariants** — Separate records, queries and domain decisions; keep transaction ownership explicit and document where an API layer would add authorization.
+4. **Independent Verification Oracles** — Write expected result tables and contract tests for joins, duplicates, invalid writes, tenant boundaries and transaction outcomes; do not test only with self-referential query copies.
 
-5. **Deterministic Fixture Setup and Teardown** — Initialize synthetic tenants and records in a fresh disposable database and cleanly reset state without requiring root OS access or cloud services.
-
-6. **Independent Verification Oracles** — Write expected result tables and contract tests for joins, duplicates, invalid writes, tenant boundaries and transaction outcomes; do not test only with self-referential query copies.
-
-7. **Schema/Client Compatibility Regression** — Execute an old consumer and revised consumer against a staged schema and verify intended compatibility and explicitly rejected obsolete behavior.
+5. **Schema/Client Compatibility Regression** — Execute an old consumer and revised consumer against a staged schema and verify intended compatibility and explicitly rejected obsolete behavior.
 
 *Optional practice — External-Consumer Review:* Provide another reviewer with just the SQL/scripts, setup instructions and contract; investigate one discovered ambiguity and amend the interface.
 
-### Module 12 — Integrated Relational Data Component and Engineering Defense
+### Module 12 — One Integrated Relational Component and Technical Defense
 
 #### Outcomes
 
@@ -400,28 +360,27 @@ graduation obligations.
 
 #### Lessons
 
-1. **Choose the Bounded Problem and Invariants** — Select a fictional inventory, subscription entitlement, lending or similar system with two independent tenants, meaningful integrity rules and explicit data-access requirements.
+1. **One Domain, Schema and Accepted Evidence** — Choose a bounded two-tenant domain and meaningful data invariants, publish a coherent model and reuse one evolving schema, SQL source and previously reviewed APP4-AS1–AS5 evidence rather than require six unrelated databases.
 
-2. **Design and Normalize the Schema** — Publish a relationship diagram, functional dependencies, SQL DDL, sample data dictionary and one explained denormalization-or-not decision.
+2. **Queries, Reports and Measured Access Paths** — Integrate independently expected operational/analytical results and one honest index decision with data-integrity tests; refer to already accepted evidence where it evaluates the same capability.
 
-3. **Build Reusable SQL and Analytics** — Implement transactional reads/writes and one analytical report with independently computed expected outputs, including duplicates, NULLs and tied ordering.
+3. **Prove Integrity and Concurrency Behavior** — Record invalid-write rejections and a two-session isolation or locking scenario, then demonstrate mitigation without hidden application-server behavior.
 
-4. **Prove Integrity and Concurrency Behavior** — Record invalid-write rejections and a two-session isolation or locking scenario, then demonstrate mitigation without hidden application-server behavior.
+4. **Restrict, Migrate, and Recover** — Run a non-owner tenant authorization matrix, a staged schema migration with old/new consumers, and a separate clean restore with verified invariants.
 
-5. **Measure a Representative Query** — Record an EXPLAIN plan and repeatable experiment, evaluate a justified index change and disclose measurement limitations.
-
-6. **Restrict, Migrate, and Recover** — Run a non-owner tenant authorization matrix, a staged schema migration with old/new consumers, and a separate clean restore with verified invariants.
-
-7. **Unfamiliar Change and Technical Defense** — Respond to a bounded new requirement or fault, update schema/queries/tests safely, reproduce the result from a clean state and defend alternatives, security boundaries and remaining limitations.
+5. **Unfamiliar Change, Clean Reproduction and Defense** — Diagnose a reviewer-supplied bounded new invariant, denied access, query failure or migration issue, verify repairs and regressions and reproduce the local fixture cleanly. Defend schema, isolation, tenant safety, backup scope and performance limits without inventing production claims.
 
 ## Completion requirements
 
-**All twelve APP4 outcomes** must be demonstrated through the
-**six required summative assessments** below. Assessment artifacts
-may share one evolving domain database; learners do not need to
-produce six separate database applications. Modules include
-formative investigations, but each is **not** an additional
-compulsory assessment simply because it appears in the lesson list.
+**All twelve APP4 outcomes** must be demonstrated by **six distinct
+summative decisions**, usually on **one evolving local database**.
+APP4-AS1–AS5 each assess a different competence; APP4-AS6
+integrates and challenges the accepted results with an unfamiliar
+bounded change and independent defense. Previously accepted
+source/test evidence may be referenced rather than duplicated.
+Six independent database applications or repeated evidence packets
+are not required. Optional formative investigations never become
+hidden completion conditions.
 
 | Required assessment | Required outcome coverage | Principal evidence |
 | --- | --- | --- |
@@ -460,21 +419,23 @@ compulsory assessment simply because it appears in the lesson list.
   binding for dynamic values; identifiers and raw SQL fragments
   need separately reviewed allowlists. Avoid calling an
   interpolated psql variable a safe driver parameter.
-- Test tenant permissions through sessions actually subject
-  to privilege and row policy checks, identifying owner,
-  superuser and `BYPASSRLS` exceptions. A caller-set
-  tenant variable is not by itself an authenticated security
-  boundary; policy tests must verify the real trust model.
+- Test RLS `USING` and `WITH CHECK` behavior from truly restricted,
+  non-owner/non-superuser/non-`BYPASSRLS` sessions. Distinguish
+  trusted identity/role binding from a caller-controlled tenant
+  variable; explicitly challenge forged or stale pooled-session
+  context. Owner/superuser bypass must never be hidden behind
+  apparently passing tenant-policy checks.
 - Concurrency experiments must record actual isolation level,
   session roles, statement interleavings, initial/final
   states, observed errors and retry policy. Do not claim
   `READ UNCOMMITTED` dirty reads or `REPEATABLE READ`
   phantoms were reproduced in PostgreSQL when the engine
   prevents them.
-- `EXPLAIN ANALYZE` **executes** the statement. For a write
-  experiment use a controlled disposable transaction and
-  rollback or an otherwise harmless fixture, and verify no
-  unintended modifications remained.
+- `EXPLAIN ANALYZE` **executes** the statement. Use only disposable
+  data for write-plan experiments: even ROLLBACK does not necessarily
+  undo nontransactional sequence increments or external effects.
+  Inspect actual final state and never exercise destructive plans
+  on a shared database.
 - Backup and restore evidence must identify the backup
   method, which database objects/roles it includes, source
   consistency assumptions and the scope of recovery.
@@ -514,21 +475,21 @@ compulsory assessment simply because it appears in the lesson list.
 
 - **APP4-AS4** (required transaction anomaly and safe schema evolution)
   - Outcomes: APP4-O2, APP4-O5, APP4-O7, APP4-O8
-  - Work: Implement a two-session transaction schedule for a stated invariant (such as shared-stock reservation or reciprocal resource allocation), reproduce a lost-update or write-skew style failure under a documented isolation/locking setup, and apply a justified mitigation including bounded full-transaction retry when required. Then evolve the same dataset using a versioned expand/backfill/validate/contract migration while verifying defined old and new consumer queries; inject a staged failure and show a safe recovery or forward-repair plan.
-  - Criteria: The anomaly is real and shown by an explicit interleaving/state table, not merely asserted from concurrency terminology. PostgreSQL-specific Read Committed, Repeatable Read and Serializable semantics are described accurately (including Repeatable Read's phantom protections); the mitigation preserves the invariant under tested interleavings. Migrations are reproducible and check affected data, constraints, compatibility and locking risks. Any destructive or irreversible change is not falsely described as trivially reversible.
+  - Work: From a stated inventory/allocation invariant, orchestrate two **actual local PostgreSQL sessions** to demonstrate a Read Committed stale-read/read-modify-write failure or a Repeatable Read write-skew scenario with a published interleaving and observed violating final state. Do not assert a lost update for a concurrent single-statement arithmetic UPDATE that the engine serializes safely. Apply a justified locking/isolation change and bounded **whole-transaction retry** when warranted, then stage a versioned expand/backfill/validate/contract migration with actual old/new consumer fixtures, a seeded failure and independently checked recovery or forward repair.
+  - Criteria: Session evidence reproduces the named anomaly and shows an actual invariant violation before mitigation and an intact invariant afterward. Interpret PostgreSQL READ UNCOMMITTED as READ COMMITTED, Repeatable Read's phantom protection, and Serializable retry semantics accurately. The migration preserves declared identities, constraints, consumer compatibility and bounded locking assumptions, with no false claim that irreversible transformations can be rolled back trivially.
   - Evidence: Versioned SQL migrations, two-session action/observation log, initial/final invariant checks, regression tests, old/new consumer compatibility fixtures, fail/retry or recovery evidence and a documented risk decision.
 
 - **APP4-AS5** (required tenant access controls and verified restore)
   - Outcomes: APP4-O5, APP4-O8, APP4-O9, APP4-O10, APP4-O11
-  - Work: Using synthetic records for at least two tenants, define a least-privilege non-owner access role and a documented trust model. Demonstrate parametrized values rather than interpolated SQL; implement and test a database-enforced tenant boundary (PostgreSQL RLS in the reference environment) against attempted cross-tenant reads/writes and privilege misuse, including the owner/BYPASSRLS caveat. Create a local logical backup and restore into a separate clean target after a controlled failed migration or corrupted fixture. Re-verify row identities, invariants and access controls.
-  - Criteria: Authorized and rejected operations match a published role/tenant/action matrix, including negative-path modification attempts. Tests run as a role genuinely subject to policies, not a table owner, superuser or BYPASSRLS role; client-provided tenant context is not treated as intrinsically trustworthy. SQL value binding is distinguished from dynamic identifier handling. The backup's exact scope (including role/privilege or global-object limitations), restore process and data-integrity tests are recorded; measured local recovery is not claimed as a general production RPO/RTO guarantee.
+  - Work: Using the same synthetic two-tenant schema, configure a genuinely restricted non-owner test role with documented trusted role/tenant identity binding. Demonstrate safe prepared value parameters and explain identifier allowlisting, then test RLS reads (`USING`) and writes (`WITH CHECK`) for cross-tenant SELECT/INSERT/UPDATE/DELETE, including effective-role, owner/BYPASSRLS and caller-forged or stale pooled tenant-context counterexamples. Take a consistent local logical backup, simulate a controlled failed data/schema change, restore into a **separate clean target** and independently re-verify row identities, invariants and restricted access.
+  - Criteria: Authorized and denied operations match the actual role/tenant/action matrix, including negative modification cases and verified unchanged protected rows. The session is genuinely subject to policy, and a user-controlled tenant-context variable alone is not accepted as secure identity. Parameter binding cannot be confused with raw SQL/psql string interpolation. Record dump scope, omitted cluster-global roles/configuration, restore commands and independently verified data/policy behavior in the clean target; do not extrapolate local recovery timing into production guarantees.
   - Evidence: Role and RLS policy SQL, access matrix and negative test logs with effective-role evidence, prepared-statement or bound-parameter demonstration, backup/restore commands and target inventory, integrity comparisons, recovery measurements and documented limitations.
 
 - **APP4-AS6** (required integrated relational data component and engineering defense)
   - Outcomes: APP4-O1, APP4-O2, APP4-O3, APP4-O4, APP4-O5, APP4-O6, APP4-O7, APP4-O8, APP4-O9, APP4-O10, APP4-O11, APP4-O12
-  - Work: Deliver a cohesive, reproducible local relational data component for a bounded multi-user domain with normalized schema, declared invariants, SQL query interface, analytic report, appropriate index measurement, tested transaction behavior, staged schema change, tenant isolation and clean restoration. Provide a minimal client interface through SQL scripts or an optional pre-provisioned language adapter; no Web framework, remote PostgreSQL instance or paid host may be assumed. Reuse and integrate qualifying artifacts from APP4-AS1–AS5 instead of requiring six unrelated databases. Complete an unfamiliar bounded change or seeded failure, and defend the choices and limitations in an accessible reviewable format.
-  - Criteria: A fresh reviewer can initialize the declared local reference environment and run verified normal and failure cases without hidden network, global state or credentials. The component satisfies published data/authorization contracts and retains integrity under an invalid write, controlled concurrency and a schema-revision case. The learner correctly interprets an actual plan, demonstrates effective tenant restrictions, verifies recovered state rather than relying on a successful dump/restore exit code, and explains why schema, indexes, isolation, migration and recovery choices fit the stated requirements. The unfamiliar change is integrated without violating existing invariants; remaining risks and unsupported claims are explicit.
-  - Evidence: Portable versioned project or repository with DDL/migration/seed SQL, independent expected-result fixtures, read/write contract documentation, normal/negative SQL tests, transaction log, query plan evidence, role matrix, backup/restore drill, clean-start instructions, bounded change history and written/recorded/equivalently accessible defense.
+  - Work: Complete **the same evolving local relational component** whose model, SQL/reporting, transaction, indexing, authorization, migration and recovery behavior was evaluated in APP4-AS1–AS5. Cite accepted prior evidence instead of resubmitting separate databases. Address a new bounded invariant, access attempt, query counterexample or schema-change failure, diagnose the cause, recheck regressions and independently reproduce the project using only SQL scripts/psql or a free local adapter; defend alternatives and limitations without requiring APP3 or public hosting.
+  - Criteria: A fresh reviewer can run documented local normal and adverse tests with no hidden cloud access or credential. Actual data/authorization/recovery evidence supports every stated claim, and the unfamiliar change preserves accepted invariants with a demonstrated regression repair. AS6 integration cannot substitute for missing AS1–AS5 evidence. Required tenant, integrity and restoration blockers must be corrected before passing; the defense explains real SQL, index/isolation and recovery trade-offs without unsupported production assurances.
+  - Evidence: One versioned source/fixture package, local clean-start instructions, a short outcome-to-accepted-AS1–AS5 evidence index, the new unfamiliar change and observed regression checks, material integration observations and a reviewable written, recorded or otherwise accessible defense. Existing full backup, plan, SQL oracle and transaction logs may be linked rather than duplicated.
 
 ### Completion decision, cross-program boundaries, and revision safety
 
@@ -543,14 +504,12 @@ the course/spec revision, assessment/outcome IDs, relevant
 evidence references, observed limitations and any further
 work necessary for a sound decision.
 
-This migration preserves APP4's subject identity and useful
-legacy scope, but changes its direct prerequisite from
-APP3 to SEF10 and publishes new stable assessment/outcome
-identities. Earlier APP4 completions and historical project
-records must remain attributable to the previously published
-course revision; they do not automatically satisfy this
-revision. Its related APP3/APP5 integrations and subsequent
-operational specialization require separate course reviews.
+This competency-first editorial reassessment preserves APP4's
+subject identity, SEF10 direct prerequisite, twelve public
+outcome IDs and six summative assessment IDs. Earlier completion
+records remain attributed to their actual course/specification
+revision; historical decisions and downstream APP3/APP5 learner
+evidence are not silently rewritten by source consolidation.
 
 APP4 is published as an OEE `v0.2.0` **draft**, not learner-tested,
 verified or independently pedagogically conforming merely
