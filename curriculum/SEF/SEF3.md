@@ -14,11 +14,11 @@
 
 Develop the ability to explain and safely automate work in a Linux shell. Starting from the basic terminal skills introduced by SEF2, investigate files, links, expansion, redirection, pipelines, permissions, processes, and the shell's inherited environment. Then use Bash scripts to search and transform local data, handle failures, and deliver a small tested command-line toolkit.
 
-Bash 5.x and common Linux command-line tools are the reference environment. Distinguish **three contracts**: POSIX shell language and semantics, Bash extensions, and external POSIX/GNU/other utility implementations. A Bash script is not automatically portable to `sh`, and portable shell syntax does not make GNU-specific flags portable. Use a Linux workstation or an already available free Linux virtual machine, container, or equivalent local environment with a nonprivileged shell. Record the actual Bash, operating-system, and utility versions. Bash arrays, `[[ ... ]]`, `pipefail`, and NUL-delimited `read` options are **Bash features**, not claims about generic POSIX `sh`. Where GNU and POSIX utilities differ, document the exact standard edition or local implementation/version, demonstrate a supported alternative, or explicitly constrain the supported platform. Running `bash --posix` is not independent proof of portability to another shell; a second shell such as `dash` is optional if already available, not an installation gate. A local `sh` may itself be Bash: document that limitation.
+Bash 5.x and common Linux command-line tools are the reference environment. Distinguish **three contracts**: POSIX shell language and semantics, Bash extensions, and external POSIX/GNU/other utility implementations. A Bash script is not automatically portable to `sh`, and portable shell syntax does not make GNU-specific flags portable. Use a Linux workstation or an already available free Linux virtual machine, container, or equivalent local environment with a nonprivileged shell. Record the actual Bash, operating-system, and utility versions. Bash arrays, `[[ ... ]]`, and NUL-delimited `read -d` are **Bash-specific interfaces**, not generic POSIX `sh` requirements. **`set -o pipefail` is now part of POSIX.1-2024 (Issue 8)**, but older standard editions and installed `sh` implementations may lack it; verify actual support before using it. Likewise, `find -print0` and `xargs -0` were added to POSIX.1-2024, whereas Bash `read -d` is a separate shell feature. Where GNU and POSIX utilities differ, document the exact standard edition or local implementation/version, demonstrate a supported alternative, or explicitly constrain the supported platform. Running `bash --posix` is not independent proof of portability to another shell; a second shell such as `dash` is optional if already available, not an installation gate. A local `sh` may itself be Bash: document that limitation.
 
 All assessed work uses synthetic data, explicitly owned temporary directories, and only processes started by the learner for the exercise. No root privileges, `sudo`, system-wide package changes, real scheduled jobs, external network access, personal-file manipulation, or paid service are required. Package-management and network tools can be studied using local documentation and available loopback diagnostics; their presence is not a hidden installation gate.
 
-The 13-module learning sequence is a progression, not a quota of per-module tests or labs. Seven required assessments integrate connected capabilities and may reuse earlier verified scripts, fixtures and explanations. The portability assessment extends the same shell toolkit, not a separate application. **Published outcomes, assessment criteria, and evidence determine course completion**, not attendance or the number of activities performed.
+The learning sequence is derived from necessary shell competencies, not a predetermined number of modules, lessons, tests or labs. Seven required assessments integrate connected capabilities and may reuse earlier verified scripts, fixtures and explanations. The portability assessment extends the same shell toolkit, not a separate application. **Published outcomes, assessment criteria, and evidence determine course completion**, not attendance or the number of activities performed.
 
 The 10–12-week duration is a provisional estimate for the additional environment and portability investigations; it is not validated learner study-time evidence. The course remains `draft` until the applicable learner and reviewer evidence justifies a readiness promotion.
 
@@ -43,43 +43,43 @@ For optional standards cross-checks, consult the freely accessible [POSIX.1-2024
 
 ## Modules
 
-### Module 1 — Files & Directories
-
-#### Outcomes
-
-- SEF3-O1
-- SEF3-O2
-
-#### Lessons
-
-1. Course introduction: Linux & the Command Line
-2. The filesystem tree
-3. Copying, moving, and removing
-4. Wildcards
-5. Hard links and symbolic links
-
-*Optional practice:* Predict the tree before moving and renaming mock files; experiment with links and a hidden filename inside the owned fixture directory only.
-
-### Module 2 — Commands & Redirection
+### Module 1 — Shell Execution and Command Identity
 
 #### Outcomes
 
 - SEF3-O3
-- SEF3-O10
+- SEF3-O5
 
 #### Lessons
 
-1. Kinds of commands
-2. Getting help
-3. Aliases
-4. Standard input, output, and error
-5. Pipelines and filters
-6. Redirection evaluation order — Compare `2>&1 >out` with `>out 2>&1` using harmless synthetic stdout/stderr.
-7. Command status across pipelines — Explain why a final successful command can conceal an upstream failure.
+1. **What the shell executes** — Connect SEF2's terminal introduction to shell parsing, built-ins and externally launched processes; distinguish shell syntax from the programs it invokes.
+2. **Reproducible command context** — Record Bash, Linux and selected utility versions, a working directory and command status without exposing private environment variables.
+3. **Absolute and relative paths** — Predict resolution from a particular working directory and reproduce a wrong-directory failure in a deliberately owned fixture.
+4. **Command lookup and help** — Distinguish reserved words, functions, built-ins, aliases and executables using appropriate `type`, `command -v`, `help` and local manuals; explain why aliases depend on invocation context.
+5. **Three independent compatibility contracts** — Identify POSIX shell syntax, the actual Bash interpreter and available external utilities as separate claims requiring evidence.
 
-*Optional practice:* Identify built-ins and external commands with the shell's documentation tools; compare stdout, stderr, and status for a harmless failing helper.
+*Optional practice:* Predict a harmless command's identity and failure status under two explicitly controlled working directories and lookup paths.
 
-### Module 3 — Expansion & the Keyboard
+### Module 2 — Filesystem Objects, Links and Access
+
+#### Outcomes
+
+- SEF3-O1
+- SEF3-O4
+
+#### Lessons
+
+1. **Tree, names and objects** — Inspect a disposable filesystem tree and distinguish a pathname/directory entry from the object it names, with ordinary and dot-prefixed names.
+2. **Bounded file manipulation** — Create, copy, rename, move and remove individually chosen fixtures; compare predicted and actual inventories and confirm an unrelated sentinel is unchanged.
+3. **Unusual operands** — Inspect filenames containing spaces, literal wildcards, newlines and a leading dash without treating line-formatted terminal output as proof of exact filename identity.
+4. **Hard links and symbolic links** — Compare identity, link counts, link-target path resolution, dangling links and what removing an original name does to each.
+5. **Users, groups and effective permissions** — Predict read/write/search failures using the effective unprivileged identity, mode bits and parent-directory search requirements; distinguish a permission denied on a directory from a file's own mode.
+6. **Mode changes and umask** — Observe the actual creation masks and mode changes on owned fixtures only, restore the state afterward and acknowledge ACL/mount-policy effects where relevant.
+7. **A scoped mutation decision** — Define the target path, allowed object and fixture boundary before each operation; explain why quoting and lexical containment checks alone cannot establish a race-free security boundary.
+
+*Optional practice:* Predict which links remain valid after deleting one original filename and demonstrate a directory-search failure without modifying system-wide permissions.
+
+### Module 3 — Expansion, Quoting and Arguments
 
 #### Outcomes
 
@@ -88,51 +88,51 @@ For optional standards cross-checks, consult the freely accessible [POSIX.1-2024
 
 #### Lessons
 
-1. Pathname, tilde, arithmetic, and brace expansion
-2. Parameter and command substitution
-3. Quoting
-4. Command-line editing and history
-5. Field splitting, globbing and the argument vector — Verify `"$@"` versus `"$*"`, empty/unset parameters, unusual pathnames and unmatched Bash globs using a harmless argument-display helper.
-6. Expansion and safety — Trace brace, tilde, arithmetic, parameter and command expansion, quoting and later word splitting; never need `eval` to explain an argument vector.
+1. **Arguments as actual values** — Display each argument and its boundary using a harmless numbered-argument helper; distinguish the original command text from the resulting argv.
+2. **Variables, empty and unset parameters** — Compare quoted/unquoted expansion, word splitting and an unset variable with an explicitly empty one; diagnose arguments unexpectedly disappearing.
+3. **Quotes and positional parameters** — Trace single and double quoting, escaping, `"$@"` and `"$*"` for spaces, empty elements and newlines without conflating their argument counts.
+4. **Globbing and other expansions** — Predict pathname matching (hidden and unmatched names) separately from Bash brace, tilde and arithmetic expansion; record the actual shell options that affect matching.
+5. **Command substitution** — Trace captured stdout and removed trailing newlines, distinguish a Bash subshell effect and explain why command substitution is not a safe arbitrary-filename transport.
+6. **Expansion defect and regression** — Seed unquoted expansion in a read-only script, predict its failing argv, correct it without `eval`, and verify with an unfamiliar filename.
 
-*Optional practice:* Use a safe argument-display function rather than `eval` to compare quoted and unquoted expansions, including an empty value and an unmatched glob.
+*Optional practice:* Compare a literal wildcard filename with a pattern that matches several files, using an argument display rather than a mutating shell command.
 
-### Module 4 — Permissions & Processes
+### Module 4 — Streams, Pipelines and Error Semantics
+
+#### Outcomes
+
+- SEF3-O3
+- SEF3-O10
+
+#### Lessons
+
+1. **Three standard streams** — Demonstrate stdin, stdout and stderr using local synthetic input and a helper that deliberately emits different output and error messages.
+2. **Redirection is ordered** — Predict and verify the different destinations produced by `2>&1 >out` versus `>out 2>&1`, and distinguish file creation from a successful pipeline.
+3. **Pipeline dataflow** — Trace filters and stream connections across stages, identifying which process consumes and produces each observed record.
+4. **Detect hidden upstream failure** — Compare Bash default pipeline status to `pipefail` after a middle-stage failure; distinguish POSIX.1-2024's standardized option from an older shell's actual support.
+5. **Why `set -e` is not a complete contract** — Reproduce failures in a condition, AND/OR list and subshell, documenting when the shell continues and why deliberate status checks remain necessary.
+6. **Do not publish a partial report** — Independently derive expected output from a small input fixture, inject a failing stage, and verify that a plausible-but-incomplete result is not treated as success.
+
+*Optional practice:* Capture pipeline output and the actual status separately for both a valid record fixture and a failing command inside a pipeline.
+
+### Module 5 — Owned Processes, Jobs and Signals
 
 #### Outcomes
 
 - SEF3-O4
+- SEF3-O10
 
 #### Lessons
 
-1. Users and groups
-2. File modes
-3. Changing modes, owners, and the default mask
-4. Processes and the process table
-5. Signals, job control, and foreground and background work
+1. **Process state and identity** — Identify a specific child started by the learner, distinguishing process identity, PID, shell job number, foreground/background status and program name.
+2. **Start, observe and wait** — Launch a bounded helper, inspect it and collect its actual exit or wait status; explain why visible output does not prove successful completion.
+3. **Signal a verified child** — Send a catchable signal only to the explicitly identified owned process; distinguish normal exit from signal termination and avoid unsafe broad PID/name selection.
+4. **Ownership and reuse hazards** — Explain why PIDs may be reused and why a recorded number alone is not a secure ownership capability against hostile concurrency; record the narrow nonadversarial exercise boundary.
+5. **Process cleanup and limits** — Reap or wait for owned children, restore disposable state and explain when abrupt termination or a signal prevents a cleanup path.
 
-*Optional practice:* Investigate directory search bits and file modes on disposable files; start, inspect, and wait for one clearly owned short-lived child.
+*Optional practice:* Predict the status and observable state of an owned background child after one graceful termination, then compare with a real observation.
 
-### Module 5 — Environment, Editing & System Tasks
-
-#### Outcomes
-
-- SEF3-O5
-- SEF3-O11
-
-#### Lessons
-
-1. Environment variables and `PATH`
-2. Shell startup files
-3. Editing files with vi(m)
-4. Package management
-5. Networking tools
-6. Shell-local and exported variables — Demonstrate per-command assignments and `export` without changing real startup files.
-7. Bash invocation modes — Distinguish interactive login, interactive non-login, noninteractive execution and the `BASH_ENV` mechanism; never source untrusted scripts.
-
-*Optional practice:* Edit a local configuration example in a terminal editor; compare a normal shell with a restricted environment using explicit command paths.
-
-### Module 6 — Process Environments and Deterministic Execution
+### Module 6 — Inherited Environments and Startup
 
 #### Outcomes
 
@@ -143,53 +143,36 @@ For optional standards cross-checks, consult the freely accessible [POSIX.1-2024
 
 #### Lessons
 
-1. **Process context** — Trace inherited exported variables, open standard streams, current working directory and shell options separately.
-2. **Local versus exported variables** — Show `export`, `unset`, one-command assignments and why an unexported value is absent in a child.
-3. **Subshells and parent effects** — Compare `( ... )`, command substitutions, functions, sourced code and external child processes without claiming child mutations reach the parent.
-4. **Search paths and command identities** — Diagnose `PATH`, executable permissions, shell built-ins, functions and aliases under different invocation modes.
-5. **Startup and profiles** — Compare login, interactive and noninteractive Bash startup and `BASH_ENV`; use disposable fixtures rather than editing real profile files.
-6. **Working directory and scheduler simulation** — Reproduce failures under a changed working directory, an explicitly constrained `PATH`, and a controlled `env -i` environment without installing or enabling a real scheduled job.
-7. **Locale and encoding** — Compare a supported locale's sorting/regex assumptions with a deliberate `LC_ALL=C` byte-order contract; explain the trade-off for non-ASCII text.
-8. **Minimal safe diagnostics** — Record interpreter identity, selected paths and status without dumping full private environments, secrets or unrelated user files.
-9. **Failure and correction** — Predict, reproduce and fix a command-lookup or environment-inheritance error on unfamiliar synthetic input.
+1. **Export and inherited state** — Compare shell-local, exported and one-command environment assignments using a child; identify which values stay confined to the parent.
+2. **Functions, sourced code and subshells** — Trace variable and directory changes through a shell function, `( ... )`, `$(...)` and an external process without falsely attributing child changes to the parent.
+3. **PATH and command lookup** — Reproduce an unavailable-command failure under a deliberately restricted PATH, then repair it with a documented executable path or actual dependency.
+4. **Bash startup modes** — Explain login versus non-login, interactive versus noninteractive invocation and `BASH_ENV` using trusted disposable startup files, not real user profiles.
+5. **Editing user-controlled configuration** — Use an available terminal editor on a local fixture and distinguish program availability from its configuration; consult package-manager help without installing a package.
+6. **Simulated scheduled execution** — Model a scheduler's missing PATH, locale and working directory using bounded `env -i` and explicit command paths without creating a real cron job.
+7. **Locale and observable output** — Compare a supported locale with `LC_ALL=C` for sorting or regex classification, recording encoding assumptions instead of assuming all hosts share a locale.
+8. **A causal environment investigation** — Predict, reproduce and correct an unfamiliar lookup, startup or inherited-variable defect while reporting only selected non-sensitive environment evidence.
 
-*Optional practice:* In a disposable folder, compare one unexported shell variable and a one-command exported assignment in two child processes; verify the parent environment is unchanged and an `env -i` run reports the expected lookup failure.
+*Optional practice:* Compare two children, one inheriting an exported variable and another observing a one-command assignment, then verify that the parent is unchanged.
 
-### Module 7 — Searching & Text Processing
+### Module 7 — Searching, Text Processing and Reports
 
 #### Outcomes
 
-- SEF3-O6
 - SEF3-O3
+- SEF3-O6
 
 #### Lessons
 
-1. Finding files
-2. Archiving and compression
-3. Regular expressions
-4. Searching text
-5. Sorting, cutting, and comparing
-6. Stream editing
+1. **Choose files from a bounded tree** — Inspect `find` predicates, input roots and symlink policy, distinguishing traversal from an unsafe newline-delimited filename list.
+2. **Specify a record and error contract** — Define a small local log format, accepted severities, malformed-record handling and an independently calculated count-by-category oracle.
+3. **Regular expressions with an edition** — Distinguish basic/extended expressions and local tool behavior, test anchored matches and interpret no-match versus tool-error exit codes.
+4. **Filter and transform records** — Combine documented `grep`, `cut` and `sed` (or equivalents) with explicit delimiters, handling empty and malformed lines.
+5. **Order and count deterministically** — Use `sort`, `uniq` and `wc` under a stated locale; verify output independently and diagnose duplicate or missing groups.
+6. **Archive/help boundaries** — Inspect optional local archive, compression and networking diagnostics from help pages or loopback state; do not install tools or assume extracting an untrusted archive is safe.
 
-*Optional practice:* Build a reference count by hand, then search and sort synthetic log records; test empty input and malformed lines.
+*Optional practice:* Create a local log with a malformed row, predict the count table, then test the empty and no-match cases without contacting any network service.
 
-### Module 8 — Shell Scripts: Foundations
-
-#### Outcomes
-
-- SEF3-O7
-
-#### Lessons
-
-1. A script is a file of commands
-2. Variables and constants in scripts
-3. Shell functions and top-down design
-4. Testing conditions with `if`
-5. Reading input
-
-*Optional practice:* Write a small script with help, functions, argument validation, and meaningful nonzero errors for rejected inputs.
-
-### Module 9 — Shell Scripts: Control Flow & Robustness
+### Module 8 — Bash Script Contracts and Debugging
 
 #### Outcomes
 
@@ -198,52 +181,37 @@ For optional standards cross-checks, consult the freely accessible [POSIX.1-2024
 
 #### Lessons
 
-1. Loops with `while`, `until`, and `for`
-2. Branching with `case`
-3. Positional parameters and options
-4. Strings and numbers
-5. Arrays
-6. Troubleshooting scripts
+1. **Write a public CLI contract** — Define accepted arguments, mode, input/output format, success and nonzero error statuses for one reusable read-only Bash helper.
+2. **Functions and control flow** — Decompose parsing, validation, transformation and reporting; select `if`, `case`, `while`, `until` or `for` based on real control requirements.
+3. **Dynamic arguments and Bash arrays** — Use positional parameters and arrays to preserve real argument boundaries, distinguishing Bash constructs from portable `sh` syntax.
+4. **Input validation and standard input** — Use `read -r` for a declared line-oriented data format; distinguish a record delimiter from arbitrary filename bytes and reject invalid input deliberately.
+5. **Meaningful command failure** — Keep important subprocess errors and nonzero statuses visible instead of hiding them with a successful echo, broad catch or assumption that `set -e` solves every case.
+6. **Minimal reproductions and corrective reasoning** — Reproduce a quoting bug, a missing argument and a swallowed external failure in an owned script; state the hypothesis and the precise bounded change.
+7. **Independent regression cases** — Run normal, empty, odd-name, malformed and injected-error examples with expected values derived separately from the implementation.
 
-*Optional practice:* Seed a quoting or argument-handling defect in a copy, capture the bad output, correct it, and retain a regression test.
+*Optional practice:* Repair a supplied Bash helper that mishandles `"$@"`, then demonstrate the repaired argument count for an unfamiliar input.
 
-### Module 10 — Shell Safety & Process Boundaries
+### Module 9 — Safe Path Batches, Temporary State and Cleanup
 
 #### Outcomes
 
+- SEF3-O8
 - SEF3-O9
 - SEF3-O10
 
 #### Lessons
 
-1. Pipeline exit status and command failures
-2. Signals and trap cleanup
-3. Safe temporary files
-4. Pathnames with whitespace and newlines
-5. Subshell scope and environment
-6. When shell is the wrong tool
+1. **Define allowed mutations** — Establish an owned input/output root and sentinel fixtures before any batch action; distinguish lexical path checks from underlying filesystem identity.
+2. **Arbitrary filenames** — Show why `for f in $(find ...)` breaks on spaces, newlines and wildcards; represent names with precise argument boundaries, not human-oriented lines.
+3. **NUL-delimited enumeration** — Use a locally verified `find -print0` with Bash `read -r -d ''` or a supported equivalent; distinguish the POSIX.1-2024 `find`/`xargs` options from Bash-only `read -d` and earlier implementations.
+4. **Symlink and concurrency policy** — Reject or explicitly handle symlinks, leading-dash operands and unsafe output destinations; explain why check-then-use logic does not protect against an adversarial directory swap.
+5. **Owned staging and safe publication** — Create uniquely named staging under a verified fixture root and require successful validation and processing before replacing a report; do not delete an old valid output on a new failure.
+6. **Traps, signals and repetition** — Limit traps to the recorded staging location, preserve original failure status, repeat a run and explain the cleanup limits of `SIGKILL`, crashes and power loss.
+7. **Fault and sentinel verification** — Inject a processing error and catchable interruption, inspect exact results/exit status and compare unaffected fixture bytes and staging inventories to independent expectations.
 
-*Optional practice:* Use a disposable directory containing filenames with whitespace and newlines; compare NUL-delimited iteration with the unsafe line-splitting example without deleting real files.
+*Optional practice:* Inspect a path list containing whitespace and a newline without mutation; predict which unsafe loop would split the entries before checking the actual result.
 
-### Module 11 — Automation Diagnostics & Portability
-
-#### Outcomes
-
-- SEF3-O5
-- SEF3-O8
-- SEF3-O11
-
-#### Lessons
-
-1. System logs and process inspection
-2. Scheduled jobs and PATH assumptions
-3. Process and socket diagnostics
-4. POSIX versus Bash portability
-5. Structured command-line status reporting
-
-*Optional practice:* Compare a clean environment with the interactive one, then simulate the actual PATH and working-directory assumptions of a scheduled task.
-
-### Module 12 — POSIX Shell, Bash and Utility Compatibility
+### Module 10 — POSIX, Bash and Utility Compatibility
 
 #### Outcomes
 
@@ -255,25 +223,21 @@ For optional standards cross-checks, consult the freely accessible [POSIX.1-2024
 
 #### Lessons
 
-1. **Language versus implementation** — Identify the POSIX shell command language, Bash extensions and separately implemented external utilities; report the reference POSIX edition and actual Linux toolchain.
-2. **Interpreters and shebangs** — Check the available `sh` interpreter and contrast `#!/bin/sh`, `#!/usr/bin/env bash`, explicit `sh script` and `bash script` invocation; a Bash-backed `sh` does not prove implementation independence.
-3. **Portable syntax** — Use `case`, `test`, simple functions, `printf`, quoted arguments, redirections and explicit failure status in a minimal POSIX-sh helper.
-4. **Bash extensions** — Show the purpose and absence from some `sh` implementations of indexed arrays, `[[ ... ]]`, brace expansion, process substitution and Bash-specific `read` options.
-5. **Error control** — Test pipeline status, `set -e` exceptions, command substitution and subshell behavior, and whether `pipefail` is actually supported by the target shell and standard edition.
-6. **Utility provenance** — Inspect which `find`, `grep`, `sed`, `sort`, `date` and `xargs` options are available; distinguish POSIX-required behavior from GNU extensions instead of assuming the name guarantees flags.
-7. **Regexes and output semantics** — Document basic/extended/implementation-specific expressions and locale effects on collation, sorting and text classification.
-8. **Unusual pathnames** — Contrast unsafe line-delimited filename loops with declared NUL-delimited Bash/tool implementations, and state which filename/utility guarantees actually apply.
-9. **Path policy and concurrency** — Explain leading-dash operands and supported `--` handling, symlink policies and why lexical prefixes/quoting cannot guarantee safety against adversarial filesystem races.
-10. **Evidence and trade-offs** — Run the portable helper under actual `sh` and Bash, a Bash-only example in both interpreters, record failures accurately and defend whether the final toolkit intentionally relies on Bash/GNU or offers a constrained portable subset.
+1. **Standard editions versus installations** — Compare POSIX.1-2024 requirements, older target editions, the observed `sh` and Bash implementations and external utilities instead of treating one environment as every target.
+2. **Implement a POSIX-sh helper** — Use documented quoting, `case`, `test`, `printf`, standard loops and explicit error status in a bounded read-only script with independently checkable results.
+3. **Interpreter selection** — Compare direct shebang invocation, `sh script` and `bash script`; identify the real `sh` implementation and avoid claiming independent-shell verification when it is Bash.
+4. **Bash-only counterpart** — Exercise arrays or `[[ ... ]]` under Bash and the installed `sh`, reporting actual behavior rather than assuming every Bash-backed `sh` must reject the feature.
+5. **Pipeline edition and failure control** — Recognize that `pipefail` is **POSIX.1-2024**, not POSIX.1-2017; inspect actual interpreter support and explain `set -e`, substitution and pipeline failure exceptions.
+6. **Utility provenance and locale** — Compare `find`, `xargs`, `grep`, `sed`, `sort` and `date` options with the declared target edition; identify Issue 8 `-print0`/`-0`, GNU-only options and locale-sensitive behavior.
+7. **Operand and path portability** — Check leading-dash names, utility-specific `--`, symlink policies and the limits of pathname quoting; distinguish compatibility from hostile-filesystem security.
+8. **Evidence-backed compatibility decision** — Build an observed helper/interpreter/tool/locale matrix, preserve failing-case diagnostics and defend a constrained portable subset or intentional Bash/GNU dependency.
 
-*Optional practice:* Compare a POSIX-sh `case`/quoted-parameter helper with a Bash-array variant on a fixture containing spaces. Document whether `sh` is Bash and which external utility flags were actually tested; do not install any extra shell.
+*Optional practice:* Run a portable `case` helper and Bash-array alternative under both available interpreters, noting any untested shell and utility versions.
 
-### Module 13 — Shell Toolkit
+### Module 11 — Integrated Offline Shell Toolkit and Defense
 
 #### Outcomes
 
-- SEF3-O13
-- SEF3-O14
 - SEF3-O6
 - SEF3-O7
 - SEF3-O8
@@ -281,17 +245,19 @@ For optional standards cross-checks, consult the freely accessible [POSIX.1-2024
 - SEF3-O10
 - SEF3-O11
 - SEF3-O12
+- SEF3-O13
+- SEF3-O14
 
 #### Lessons
 
-1. Toolkit contract and bounded fixture layout
-2. Report pipeline and staging design
-3. Failure-path test harness
-4. Clean-start documentation and engineering defense
-5. Actual shell and utility compatibility matrix
-6. Clean-environment reproduction and failure explanation
+1. **Define the two-script toolkit** — State log syntax, report contract, input/output fixture boundaries and independently derived counts; reuse the preceding read-only reporting function.
+2. **Coordinate stages and publish safely** — Join parser and staged-report coordinator with explicit argument, output and status contracts, refusing partial publication after any required failed stage.
+3. **Test success and failure** — Verify clean, repeated, empty, malformed, odd-name and injected-failure runs against expected status and exact report/sentinel bytes.
+4. **Exercise environments and compatibility** — Reuse the toolkit to test restricted `env -i` execution and a POSIX-sh helper versus Bash-specific equivalent, recording interpreter and external utility assumptions.
+5. **Find and repair an unfamiliar defect** — Distinguish a quoting, data, permissions, shell-status, startup or utility-option cause with an isolated reproduction and independently checkable fix.
+6. **Independent technical defense** — Provide reproducible instructions and an outcome-to-evidence map, explain one design trade-off and model limitation, and defend a reviewer-selected changed fixture.
 
-*Optional practice:* Sketch a two-script log-reporting toolkit and plan its clean-checkout reproduction, failure cases, safety boundary, and technical defense.
+*Optional practice:* Have a peer reproduce the bounded toolkit with a changed log input and an intentionally failed command, without any paid tool or real customer data.
 
 ## Completion requirements
 
@@ -299,7 +265,7 @@ For optional standards cross-checks, consult the freely accessible [POSIX.1-2024
 
 Complete the seven required assessments with a documented nonprivileged Bash 5.x (or compatible Bash) environment and generated, non-sensitive fixtures. Specify the shell, operating-system/tool versions, locale when output ordering matters, exact commands, expected results, and actual results. Run all mutating tests inside a verified learner-owned fixture root, never through a broad cleanup command pointed at a home directory or unknown path. Do not use `sudo`, install packages system-wide, alter real startup files or crontabs, fetch remote data, or signal unrelated processes.
 
-Some exercises use unusual pathnames, symlinks, redirection, signals, and injected failures. For each, establish the expected boundaries **before** executing commands; demonstrate that unrelated sentinel data remains unchanged. Where a platform lacks an optional diagnostic utility, document the limitation and use a reproducible equivalent, not an undisclosed dependency. A separate network namespace or administrative capabilities are not needed.
+Some exercises use unusual pathnames, symlinks, redirection, signals, and injected failures. For each, establish the expected boundaries **before** executing commands; demonstrate that unrelated sentinel data remains unchanged. Filesystem exercises use learner-controlled, **nonadversarial fixtures**: quoting, path normalization and pre-operation checks do not provide race-free guarantees if another actor concurrently replaces a directory or symlink. Do not test on unrelated personal data or claim unsupported protection against hostile filesystem changes. Where a platform lacks an optional diagnostic utility, document the limitation and use a reproducible equivalent, not an undisclosed dependency. A separate network namespace or administrative capabilities are not needed.
 
 For each assessment, provide inspectable scripts or command transcripts, the input and expected-output fixtures, the actual outputs and exit statuses, and a concise explanation tying observations to the claimed outcomes. A reviewer may choose equivalent unfamiliar fixture values under the published criteria to check independent understanding. Code and output must be reproducible without paid tools or a proprietary grader. Safety-critical failures cannot be excused by extra optional practice or a passing unrelated check.
 
@@ -344,7 +310,7 @@ For each assessment, provide inspectable scripts or command transcripts, the inp
 
 - **SEF3-AS7** (required shell portability and process-environment verification)
   - Outcomes: SEF3-O3, SEF3-O5, SEF3-O7, SEF3-O8, SEF3-O11, SEF3-O12, SEF3-O13, SEF3-O14
-  - Work: Reuse the existing SEF3-AS6 toolkit and extract one read-only report helper, not an unrelated new program. Implement a small POSIX-sh-compatible variant using quoted positional parameters, `case`, `test`, `printf`, standard loops, and explicit error checking. Exercise it under the available `sh` and Bash with a normal fixture, a path containing whitespace, an invalid argument and a deliberately failing command; record the actual `sh` implementation. Add or isolate a deliberately Bash-only variant using `[[ ... ]]` or arrays, run it under Bash and `sh`, and report the actual syntax/behavior difference; if `sh` is Bash, disclose that no independent shell was tested. Identify the `find`, `grep`, `sed` or other external utility flags required by these helpers, classify portability against an identified standard edition and local implementation, and demonstrate one meaningful supported option or interpretation difference or explain why a comparison is unavailable. Reproduce a controlled `env -i` invocation with explicit safe `PATH`, locale and changed working directory; show an unexported shell value absent in a child, a one-command assignment, and at least one expected command-lookup or startup assumption failure and its repair. Present an interpreter/tool/locale compatibility matrix and defend the intended portability boundary under an unfamiliar reviewer-provided fixture.
+  - Work: Reuse the existing SEF3-AS6 toolkit and extract one read-only report helper, not an unrelated new program. Implement a small POSIX-sh-compatible variant using quoted positional parameters, `case`, `test`, `printf`, standard loops, and explicit error checking. Exercise it under the available `sh` and Bash with a normal fixture, a path containing whitespace, an invalid argument and a deliberately failing command; record the actual `sh` implementation. Add or isolate a deliberately Bash-only variant using `[[ ... ]]` or arrays, run it under Bash and `sh`, and report the actual syntax/behavior difference; if `sh` is Bash, disclose that no independent shell was tested. Identify the `find`, `grep`, `sed` or other external utility flags required by these helpers, classify portability against an identified standard edition and local implementation (including whether the POSIX.1-2024 `pipefail`, `find -print0` and `xargs -0` requirements are used and actually supported), and demonstrate one meaningful supported option or interpretation difference or explain why a comparison is unavailable. Do not label `pipefail` unconditionally Bash-only or assume that an older installed `sh` implements the newest edition. Reproduce a controlled `env -i` invocation with explicit safe `PATH`, locale and changed working directory; show an unexported shell value absent in a child, a one-command assignment, and at least one expected command-lookup or startup assumption failure and its repair. Present an interpreter/tool/locale compatibility matrix and defend the intended portability boundary under an unfamiliar reviewer-provided fixture.
   - Criteria: The claimed portable helper uses an appropriate POSIX-sh subset and documented external options; real runs correctly handle whitespace, known invalid inputs and intentional command failures without touching unrelated files. A Bash-only feature is identified as such, not mislabeled POSIX portable; `bash --posix` or a Bash-backed `sh` is never claimed to prove independent portability. Predictions accurately separate exported variables from shell-local state, child/subshell effects, startup mode, working directory, `PATH`, locale, and observed process status. Utility provenance and unknown versions are transparently documented; portability does not rest on an assumption that a GNU option works everywhere. Input/sentinel safety and failure propagation remain intact, and a new or seeded defect is diagnosed and repaired. No root privileges, extra package installation, real cron modification, real startup-file edits, external network access or proprietary tools are needed.
   - Evidence: Reused toolkit and two small helper variants, interpreter/shebang and external-utility compatibility matrix, actual `sh` identity, versions and optional reference documentation, scripts and reproducible fixture commands, before/after sentinel checks, stdout/stderr/status for normal and failing cases, controlled-environment and locale trace without sensitive variables, independent reference counts, a defect/fix regression, and an accessible technical defense.
 
@@ -360,5 +326,7 @@ A reviewer records each assessment decision with the required inspectable eviden
 
 - **Unchanged:** `SEF3-O1`–`O12` retain their original descriptions, and `SEF3-AS1`–`AS6` retain their original Work, Criteria, Evidence and review variation. Existing completion claims remain pinned to that source revision.
 - **Added:** `SEF3-O13` establishes demonstrated shell and utility portability, and `SEF3-O14` establishes reproducible environment reasoning. They are assessed by the new `SEF3-AS7` using the existing shell toolkit, not a new independent project.
-- **Study plan:** Two instructional modules were added for explicit environment and portability reasoning, with provisional duration increasing from eight to 10–12 weeks. No additional per-module lab or required quiz quota is introduced.
+- **Earlier study-plan extension:** A previous revision introduced two instructional modules for explicit environment and portability reasoning and provisionally increased duration from eight to 10–12 weeks. The present competency-derived realignment consolidates overlapping instruction without removing these competencies or adding mandatory labs or quizzes.
 - **No automatic equivalence:** Prior learner completion is neither deleted nor silently marked complete against new outcomes; an evidence-based review must establish current readiness for the new requirements. The course still has `draft` status, and the downstream SEF7 C/POSIX system-interface assessment remains unchanged.
+
+The current editorial review retains all fourteen existing outcome statements, seven assessment identities, prerequisite and `draft` status. POSIX.1-2024 clarifications refine the examples within the published shell-compatibility competency; historical evidence stays tied to its assessed course revision. No earlier pass is automatically treated as proof of newly explicit edition-specific cases.

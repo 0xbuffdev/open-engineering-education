@@ -60,26 +60,36 @@ class SEF3MigrationTests(unittest.TestCase):
             covered.update(re.findall(r"SEF3-O\d+", references.group(1)))
         self.assertEqual(covered, outcomes)
 
-    def test_thirteen_modules_use_unique_stable_outcome_references(self):
+    def test_all_instructional_modules_have_stable_outcome_references(self):
         text = COURSE.read_text(encoding="utf-8")
         modules = text.split("\n## Modules\n", 1)[1].split(
             "\n## Completion requirements\n", 1
         )[0]
         matches = list(re.finditer(r"(?m)^### Module (\d+) — ", modules))
-        self.assertEqual([int(m.group(1)) for m in matches], list(range(1, 14)))
+        self.assertTrue(matches)
+        # Modules are derived from actual competencies; do not encode a count.
+        self.assertEqual(
+            [int(match.group(1)) for match in matches],
+            list(range(1, len(matches) + 1)),
+        )
+        mapped_all = set()
         for index, match in enumerate(matches):
             end = matches[index + 1].start() if index + 1 < len(matches) else len(modules)
             content = modules[match.start():end]
             self.assertEqual(content.count("#### Outcomes"), 1)
             self.assertEqual(content.count("#### Lessons"), 1)
             outcome_segment, lessons = content.split("#### Lessons", 1)
-            self.assertRegex(outcome_segment, r"(?m)^- SEF3-O\d+")
+            ids = re.findall(r"(?m)^- (SEF3-O\d+)$", outcome_segment)
+            self.assertTrue(ids)
+            self.assertEqual(len(ids), len(set(ids)))
+            mapped_all.update(ids)
             ordinals = [
                 int(number)
                 for number in re.findall(r"(?m)^(\d+)\. [^\n]+", lessons)
             ]
             self.assertEqual(ordinals, list(range(1, len(ordinals) + 1)))
             self.assertGreater(len(ordinals), 0)
+        self.assertEqual(mapped_all, {f"SEF3-O{i}" for i in range(1, 15)})
 
     def test_preserved_scope_and_no_legacy_assessment_quotas(self):
         text = COURSE.read_text(encoding="utf-8")
