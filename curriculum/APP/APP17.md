@@ -65,7 +65,7 @@ or course-conformance claim follows merely from publication.
 
 ## Modules
 
-### Module 1 — From Web Documents to Authored Interfaces
+### Module 1 — From Web Foundations to Correct HTML Documents
 
 #### Outcomes
 
@@ -74,14 +74,12 @@ or course-conformance claim follows merely from publication.
 
 #### Lessons
 
-1. **Course Orientation** — Introduce the course's purpose, the history and evolution of HTML/CSS, common applications, prerequisites, and what this course does not teach.
-2. **The Authoring Loop** — Create, serve on loopback, inspect, and modify a tiny document with freely available tools.
-3. **HTML Document Skeleton** — Construct doctype, html, head, body, language, encoding, and viewport metadata; explain their roles.
-4. **HTML Parsing and the DOM** — Compare source markup, the parsed DOM, and a rendered view; recognize implicit element repair.
-5. **Text and Document Hierarchy** — Build a coherent page outline using headings, paragraphs, emphasis, quotations, and lists.
-6. **Source Validation** — Identify invalid nesting, duplicate identifiers, missing metadata, and repair effects using validation and DOM inspection.
+1. **Purpose and Authoring Loop** — Build an authored local page from APP1's observational foundation using an editor, static server and browser inspection; briefly situate HTML/CSS development and applications rather than requiring separate history.
+2. **Document Identity and Metadata** — Author doctype, html/head/body, document language, title, encoding and viewport metadata; choose writing direction where needed and verify their effects.
+3. **Readable Content Hierarchy** — Use meaningful headings, paragraphs, emphasis, quotations and lists based on information relationships, not visual appearance.
+4. **Validation, DOM Recovery and Correction** — Compare source to the parsed DOM; reproduce an invalid nesting, duplicate identifier or missing metadata defect and correct it without repeating APP1's complete parsing theory.
 
-### Module 2 — Semantic Content and Navigation
+### Module 2 — Semantic Relationships, Navigation and Content Media
 
 #### Outcomes
 
@@ -91,32 +89,30 @@ or course-conformance claim follows merely from publication.
 
 #### Lessons
 
-1. **Page Landmarks** — Distinguish header, main, nav, article, section, aside, and footer through content purpose.
-2. **Navigation Architecture** — Build consistent local and cross-page navigation with understandable link text.
-3. **URLs and Link Safety** — Use relative references, fragments, external destinations, and safe new-window disclosure deliberately.
-4. **Figures and Alternatives** — Choose informative, decorative, and complex-image text alternatives and captions for their actual purpose.
-5. **Data Versus Layout Tables** — Represent genuinely tabular relationships with headers, scope, and captions instead of using tables for layout.
-6. **Media and Embedded Content** — Provide meaningful fallback or captions for local media and explain when an embed creates a privacy boundary.
-7. **Semantics Inspection** — Compare visual grouping with programmatic names, roles, and relationships in developer tools.
+1. **Landmarks and Content Relationships** — Choose header, main, nav, article, section, aside and footer according to real meaning; inspect programmatic roles and reject mandatory landmark templates.
+2. **Links and Navigation Integrity** — Apply prior URL/fragment knowledge to linked pages, meaningful link text and safe destination behavior; diagnose broken links and misleading new-window actions.
+3. **Figures and Image Alternatives** — Distinguish informative, decorative and complex images; select captions, text alternatives and longer explanation when the communication task needs them.
+4. **Real Data Tables** — Use table caption, header cells and scope/associations for genuine tabular data; avoid using tables merely for visual layout.
+5. **Local Media and Embeds** — Provide usable text or captions for included audio/video, suitable fallbacks and honest privacy limits; no third-party embed is a mandatory dependency.
+6. **Semantic Inspection and Repair** — Compare visual groups and accessible names, roles and relationships through browser observations; repair a misleading landmark or content structure.
 
-### Module 3 — Native Forms and User Input
+### Module 3 — Native Forms, Feedback and Safe Demonstration
 
 #### Outcomes
 
 - APP17-O3
 - APP17-O8
+- APP17-O11
 
 #### Lessons
 
-1. **How Native Forms Work** — Distinguish controls, labels, names, values, submission methods, and what a static demonstration can verify.
-2. **Text and Choice Controls** — Select fitting text, email, number, checkbox, radio, select, and textarea semantics for a stated requirement.
-3. **Labels and Help** — Associate explicit labels, fieldsets, legends, hints, and required-state descriptions without placeholder-only labeling.
-4. **Native Constraints** — Apply suitable required, length, type, range, and pattern constraints and inspect browser validity behavior.
-5. **Error and Success Boundaries** — Distinguish built-in client-side feedback from nonexistent server processing and provide readable correction guidance.
-6. **Keyboard Form Journey** — Complete and repair a form using only a keyboard with understandable order and visible focus.
-7. **Privacy-Safe Test Fixtures** — Use fabricated input and local-only demonstrations; avoid collecting or transmitting real personal data.
+1. **Controls and Submission Semantics** — Select text, email, number, radio, checkbox, select and textarea by input purpose; explain form names/values and why a static page is not a processing service.
+2. **Labels, Groups and Persistent Guidance** — Associate explicit labels, fieldsets, legends and instructions with controls; demonstrate why placeholders do not replace labels.
+3. **Native Constraints and Error Limits** — Apply justified required/type/length/range/pattern constraints, distinguish valid and invalid states and explain browser differences and the limits of client-side security or announced error feedback.
+4. **Keyboard Form Recovery** — Use keyboard-only input and correction; inspect focus indication, activation and grouping, without claiming dynamic error announcements from CSS alone.
+5. **Nontransmitting Fixtures and Privacy** — Use synthetic data and local-only validation; prevent accidental external actions and GET query leaks. Testing constraints does not require form transmission.
 
-### Module 4 — The CSS Cascade and Computed Styles
+### Module 4 — Predictable CSS Cascade and State Styling
 
 #### Outcomes
 
@@ -126,15 +122,14 @@ or course-conformance claim follows merely from publication.
 
 #### Lessons
 
-1. **CSS Rules and Selectors** — Write type, class, attribute, combinator, and state selectors while minimizing unintentional matches.
-2. **The Cascade Algorithm** — Predict winning declarations from relevance, origin, importance, layers, specificity, scoping proximity, and order.
-3. **Inheritance and Initial Values** — Explain inherited versus noninherited properties and the effects of initial, inherit, unset, and revert.
-4. **Specificity and Layers** — Refactor competing rules with low-specificity selectors and predictable cascade layers.
-5. **Custom Properties** — Use named tokens, fallback expressions, and inheritance to manage a coherent visual system.
-6. **Pseudo-Classes and States** — Style focus, focus-visible, hover, active, invalid, and disabled states without removing usable defaults.
-7. **Computed-Style Diagnosis** — Inspect a contradictory stylesheet and show precisely why a declaration wins or is ignored.
+1. **Selectors and Relevant Rules** — Apply type, class, attribute, combinator and state selectors to actual elements, minimizing incidental matches.
+2. **Origins, Importance and Cascade Layers** — Trace relevant declarations through user-agent, user and author origins, normal/important precedence and reversed important-layer order; reject specificity-first shortcuts.
+3. **Specificity, Scope and Order** — Compare specificity, applicable scoping proximity and final source-order ties, choosing low-conflict CSS rather than escalating !important.
+4. **Inheritance and Resolved Values** — Explain inherited/noninherited properties, initial/inherit/unset/revert and specified versus computed styles.
+5. **Interactive and Focus States** — Style hover, focus-visible, active, invalid and disabled states without removing meaningful native affordances or conveying status by color alone.
+6. **Contradictory Rule Diagnosis** — Predict and inspect a rule conflict, including a scoped tie case (supplied when unsupported locally); repair it and show which observable declaration won.
 
-### Module 5 — Typography, Color, and Box Geometry
+### Module 5 — Readable Visual Design and Box Constraints
 
 #### Outcomes
 
@@ -143,15 +138,15 @@ or course-conformance claim follows merely from publication.
 
 #### Lessons
 
-1. **Typography and Reading** — Choose font stacks, relative sizes, line height, readable line length, and robust text alignment.
-2. **Color and Meaning** — Establish usable contrast and ensure status and emphasis are not communicated by color alone.
-3. **The CSS Box Model** — Predict content, padding, border, and margin dimensions with appropriate box sizing.
-4. **Flow and Spacing** — Use normal flow, block/inline formatting, spacing relationships, and logical direction-aware properties.
-5. **Sizing and Overflow** — Apply min/max constraints, intrinsic sizes, overflow behavior, and sensible long-word wrapping.
-6. **Visual Tokens** — Establish reusable spacing, typography, color, and surface variables without concealing semantics.
-7. **User Text Preferences** — Test text enlargement, zoom, and high-contrast settings for reading and navigation failures.
+1. **Typography and Readability** — Use robust font stacks, relative sizes, line height and readable measures that survive text enlargement and unavailable fonts.
+2. **Color and Noncolor Communication** — Check normal and large text contrasts as well as meaningful non-text indicators and focus cues; never rely on hue alone.
+3. **CSS Box Geometry** — Predict dimensions from content, padding, border, margin and box-sizing rules, then explain an observed sizing defect.
+4. **Flow, Spacing and Logical Directions** — Use normal flow, proportional spacing and logical properties instead of fragile physical-direction assumptions or source order distortion.
+5. **Intrinsic Sizes and Overflow** — Investigate min/max constraints, long words, replaced-element dimensions and overflow without clipping essential information.
+6. **Reusable Design Tokens** — Define coherent typography, spacing and color custom properties with fallbacks; inspect inheritance and maintainability trade-offs.
+7. **User Preference Stress Test** — Observe zoom, enlarged text and forced-colors/high-contrast where available; repair a legitimate reading obstacle and document coverage limits.
 
-### Module 6 — Layout with Flow, Flexbox, and Grid
+### Module 6 — Flow, Flexbox, Grid and Content-Based Layout
 
 #### Outcomes
 
@@ -160,33 +155,32 @@ or course-conformance claim follows merely from publication.
 
 #### Lessons
 
-1. **Intrinsic Layout First** — Use normal flow and content-based sizing before introducing explicit layout constraints.
-2. **Flexbox Axes and Distribution** — Build one-dimensional navigation and card arrangements using axes, wrapping, gap, and alignment.
-3. **Grid Tracks and Areas** — Build two-dimensional page structure using tracks, auto-placement, and explicit areas when justified.
-4. **Flex or Grid** — Explain why each mechanism fits different content requirements, including source versus visual order.
-5. **Alignment and Min-Content Failures** — Diagnose shrinking, min-content overflow, and unexpected grid/flex item sizing.
-6. **Positioning and Layering** — Use relative, absolute, sticky, and stacking contexts cautiously without obscuring content or focus.
-7. **Long and Sparse Content** — Test layouts with unusually long headings, missing images, short content, and localization-like text growth.
+1. **Intrinsic Flow as Baseline** — Establish usable normal formatting and content-based sizing before imposing rigid layout constraints.
+2. **Flexbox for One-Dimensional Relationships** — Choose axis, alignment, gaps and wrapping for a realistic navigation or card group and predict long-content behavior.
+3. **Grid for Two-Dimensional Relationships** — Choose tracks, placement or areas for a genuinely two-dimensional page arrangement, preserving source meaning.
+4. **Choosing a Layout Mechanism** — Compare Flexbox, Grid and flow for identical content demands; defend source order and keyboard progression.
+5. **Min-Content and Alignment Faults** — Reproduce and repair shrink/overflow or surprising sizing in flex/grid items by finding the underlying constraint.
+6. **Positioning, Stacking and Obscuration** — Use sticky, relative and absolute positioning deliberately; inspect overlap, stacking context and hidden focused content.
 
-### Module 7 — Responsive and Adaptive Interface Design
+### Module 7 — Responsive Behavior from Actual Constraints
 
 #### Outcomes
 
 - APP17-O6
 - APP17-O7
 - APP17-O8
+- APP17-O11
 
 #### Lessons
 
-1. **Content-First Breakpoints** — Derive breakpoints from actual layout failure instead of a device catalog.
-2. **Fluid Dimensions** — Use percentages, rem, flexible tracks, min/max, clamp, and intrinsic sizing appropriately.
-3. **Viewport Media Queries** — Respond to constrained space without requiring one fixed screen resolution.
-4. **Component-Level Adaptation** — Use container queries where supported and provide a usable fallback for unsupported environments.
-5. **No-Horizontal-Scroll Review** — Test narrow viewports and 200% zoom, distinguishing justified exceptions from broken layout.
-6. **Input and Motion Preferences** — Respond to reduced motion and relevant user preferences without removing essential information.
-7. **Responsive Failure Triage** — Record measured layout causes and repairs instead of relying on screenshots alone.
+1. **Fluid Sizing and Content-Derived Breakpoints** — Combine intrinsic, percentage, rem, min/max and clamp sizing and derive breakpoint changes from a genuine content failure rather than preset device categories.
+2. **Viewport-Based Adaptation** — Use media queries for actual space constraints while maintaining accessible content and function.
+3. **Container-Based Adaptation and Fallback** — Use container queries where appropriate, explain support assumptions and preserve usable baseline styles.
+4. **Reflow Versus Text Resize** — Inspect approximately 320 CSS pixels for WCAG-style reflow (honoring necessary two-dimensional data exceptions), and independently test 200% text/zoom behavior; one does not prove the other.
+5. **User Preferences Without Content Loss** — Adapt to reduced motion and relevant color/contrast/input preferences while preserving essential information without hover.
+6. **Content Stress and Failure Diagnosis** — Test long translated-like strings, missing imagery and constrained space; identify overflow/focus causes and recheck a repair.
 
-### Module 8 — Accessible Documents and Interaction
+### Module 8 — Independent Accessibility Evaluation and Repair
 
 #### Outcomes
 
@@ -197,16 +191,13 @@ or course-conformance claim follows merely from publication.
 
 #### Lessons
 
-1. **Accessibility Foundations** — Relate semantic HTML, assistive-technology exposure, and the limitations of visual inspection.
-2. **Keyboard Reachability** — Test links and native controls by tabbing through meaningful focus order with no keyboard trap.
-3. **Focus Visibility** — Provide unmistakable focus indication and prevent sticky content from fully obscuring focused controls.
-4. **Names and Relationships** — Inspect image alternatives, form labels, table relationships, and landmark names.
-5. **Contrast and Resizing** — Check representative text/non-text contrast and text resizing against explicit criteria.
-6. **Native Versus Custom Widgets** — Prefer real anchors, buttons, and controls over inaccessible clickable containers.
-7. **Accessibility Test Limits** — Combine keyboard testing, browser accessibility-tree inspection, and automated checks without claiming certification.
-8. **Accessible Error Repair** — Reproduce and fix a missing label, invisible focus, and invalid-form guidance regression.
+1. **Scoped Accessibility Evaluation** — Choose realistic keyboard, reading, navigation and form tasks and identify which representative WCAG 2.2 AA criteria can be tested without claiming certification.
+2. **Keyboard Reachability and Focus** — Follow actual tab/activation paths; identify traps, invisible or fully obscured focus and inappropriate source/visual order.
+3. **Names, Roles and Relationships** — Compare actual heading, table, landmark, image and form semantics using DOM/accessibility-tree inspection, not just a visual screenshot.
+4. **Contrast, Reflow and Preferences** — Evaluate applicable 4.5:1 ordinary text, 3:1 large text and 3:1 meaningful non-text contrast; check constrained reflow and user preference states.
+5. **Adversarial Repairs and Test Limits** — Reproduce label, keyboard/focus and content/contrast failures, repair and re-observe; distinguish automated hints and browser observations from real assistive-technology user testing.
 
-### Module 9 — Assets, Resilience, and CSS Maintenance
+### Module 9 — Resource-Aware Assets and Maintainable Static Delivery
 
 #### Outcomes
 
@@ -216,14 +207,13 @@ or course-conformance claim follows merely from publication.
 
 #### Lessons
 
-1. **Image Formats and Sources** — Select an appropriate format and local asset sizes without an external hosting dependency.
-2. **Responsive Image Delivery and Layout Stability** — Use width/size information, srcset and sizes or picture where genuinely beneficial; provide intrinsic dimensions or aspect ratios, inspect waterfalls, and reduce image-caused layout shifts.
-3. **File Organization** — Organize semantic page templates and layered or component-based CSS without importing a UI framework.
-4. **Progressive Enhancement** — Start with usable documents, add supported CSS features, and evaluate fallback when a feature is absent.
-5. **Cross-Browser Differences** — Reproduce one meaningful standards/support difference or a supplied compatibility scenario.
-6. **Regressions and Refactoring** — Refactor repeated styles while proving navigation, layout, and focus behavior did not regress.
+1. **Asset Choice and Communication** — Select local asset formats and text alternatives according to content, size and accessibility requirements rather than technology fashion.
+2. **Responsive Images and Reserved Geometry** — Use srcset/sizes or picture when beneficial; reserve dimensions/aspect ratios and compare loading evidence and visible layout shifts.
+3. **Resource Failure and Resilience** — Verify missing/delayed media and unsupported formats retain text meaning, accessible layout and safe local privacy boundaries.
+4. **Progressive Enhancement and Compatibility** — Keep the baseline HTML usable without script; compare an optional CSS feature and fallback with disclosed browser-version or supplied compatibility evidence.
+5. **CSS Organization and Regression Checks** — Organize maintainable source, refactor repeated styling and verify that meaning, navigation, focus and responsiveness do not regress.
 
-### Module 10 — Static Site Integration and Technical Review
+### Module 10 — One Integrated Static Site and Technical Defense
 
 #### Outcomes
 
@@ -242,122 +232,66 @@ or course-conformance claim follows merely from publication.
 
 #### Lessons
 
-1. **Define the Content Contract** — Choose a concrete multi-page information service, audiences, tasks, constraints, and success criteria.
-2. **Architecture and Navigation** — Plan pages, landmarks, content hierarchy, form purposes, and reusable presentation patterns.
-3. **Incremental Implementation** — Build the static interface using semantic HTML and maintainable styles with meaningful commits.
-4. **Responsive and Keyboard Audit** — Exercise real tasks in narrow/wide viewports, keyboard-only use, zoom, and relevant preference modes.
-5. **Failure Injection** — Introduce broken resource, invalid-control, and overflow scenarios and document their repair.
-6. **Evidence and Reproduction** — Prepare a self-contained clean-checkout project with validation steps and verifiable observations.
-7. **Trade-Off Defense** — Explain semantic, accessibility, cascade, layout, compatibility, and resource decisions with known limitations.
+1. **One Product and Reusable Evidence** — Define real audience, information tasks, three or more purposeful pages and observable acceptance criteria; plan APP17-AS1–AS5 around the same evolving site.
+2. **Information Architecture and Safe Native Form** — Build linked semantic content, informative media and a nontransmitting form demonstration with explicit privacy and functional limits.
+3. **Integrate and Refine Static Delivery** — Combine readable CSS, appropriate layout, responsive behavior and local assets in maintainable, script-free source.
+4. **Unfamiliar Change and Negative Cases** — Apply a bounded unexpected content or styling change, diagnose a real failure, verify the correction and check previously accepted evidence without recreating earlier submissions.
+5. **Clean Reproduction and Technical Defense** — Supply simple local setup, a single indexed evidence record, transparent limitations and defensible decisions with independent reproduction and a reviewable defense.
 
 ## Completion requirements
 
-All **twelve required course outcomes** are evaluated through five public,
-required summative assessments. The learning activities in the modules
-prepare learners for these evaluations but do **not** create separate
-submission requirements by being listed. A checklist or automated pass
-alone is insufficient evidence of semantic correctness, accessibility,
-maintainable styling or independent implementation.
+All twelve required APP17 outcomes must be demonstrated through **five distinct summative decisions on one cumulative static information site**. APP17-AS1–AS4 evaluate different capabilities as the same source evolves; APP17-AS5 evaluates the integrated artifact, unfamiliar correction and defense. Evidence meeting a previously evaluated criterion may be **referenced**, not rebuilt or repeatedly submitted. Five assessments do not mean five websites or five compulsory sets of identical test logs. Module lessons, suggestions and formative checks do not independently gate completion.
 
-| Assessment | Required outcome coverage | Principal evidence |
+| Assessment | Required outcome coverage | Primary decision |
 | --- | --- | --- |
-| `APP17-AS1` — Document Structure and Semantic Navigation | APP17-O1, APP17-O2, APP17-O11 | Semantic documents and validation evidence |
-| `APP17-AS2` — Native Form and Inclusive Input Review | APP17-O3, APP17-O8, APP17-O11 | Local form and keyboard-error evidence |
-| `APP17-AS3` — CSS Cascade and Layout Diagnosis | APP17-O4, APP17-O5, APP17-O6, APP17-O10, APP17-O11 | Cascade diagnosis and responsive layout |
-| `APP17-AS4` — Responsive Accessibility and Asset Review | APP17-O2, APP17-O6, APP17-O7, APP17-O8, APP17-O9, APP17-O11 | Accessibility, responsive and asset test matrix |
-| `APP17-AS5` — Multi-Page Static Interface and Engineering Defense | APP17-O1, APP17-O2, APP17-O3, APP17-O4, APP17-O5, APP17-O6, APP17-O7, APP17-O8, APP17-O9, APP17-O10, APP17-O11, APP17-O12 | Reproducible static project and technical defense |
+| `APP17-AS1` — Semantic Documents and Navigation | APP17-O1, APP17-O2, APP17-O11 | Accurate authored markup, linked content and reasoned semantic repair |
+| `APP17-AS2` — Safe Native Form and Inclusive Input | APP17-O3, APP17-O8, APP17-O11 | Valid/invalid state reasoning and accessible, nontransmitting form interaction |
+| `APP17-AS3` — CSS Cascade and Layout Investigation | APP17-O4, APP17-O5, APP17-O6, APP17-O10, APP17-O11 | Correct cascade prediction, layout construction and causal repair |
+| `APP17-AS4` — Responsive Accessibility and Assets | APP17-O2, APP17-O6, APP17-O7, APP17-O8, APP17-O9, APP17-O11 | Measured reflow, focused access, contrast, assets and fallback review |
+| `APP17-AS5` — Static-Site Integration and Defense | APP17-O1–APP17-O12 | One independently reproducible site, new bounded correction and defended trade-offs |
 
-### Shared execution and review boundaries
+### Shared environment, evidence and safety
 
-Use local assets and sanitized or synthetic test cases. Record browser
-family/version, viewport conditions, relevant accessibility
-preferences, environment and steps sufficient to reproduce observed
-behavior. A browser screenshot alone does not prove accessibility
-semantics; combine source/DOM inspection and meaningful keyboard use.
-An automated linter cannot certify full accessibility, and absence
-of visible failures does not prove broad cross-browser compatibility.
+A text editor, a standards-capable browser and browser developer tools, local assets and an unprivileged local static server are sufficient. A command such as `python3 -m http.server 8000 --bind 127.0.0.1` may serve fixtures, but Python, a hosted account, a domain, public network, framework, JS runtime, tracking tool or paid accessibility service is **not mandatory**. Equivalent free local serving is acceptable. Record browser/version, tool and environment information only where material to evaluation. Source/DOM inspection and keyboard testing provide evidence that screenshots or passing validators alone cannot.
 
-Assessment of design and user experience is made against **published
-functional and accessibility criteria**, not personal taste or
-mandatory reliance on one branded CSS library. A learner can satisfy
-requirements with standard HTML and CSS, an equivalent free editor,
-locally available fonts, and offline assets.
+Forms are **demonstrations of native controls and validation**, not a backend. Inspect named values and valid/invalid states with fabricated inputs **without needing to transmit** any submission. If submission is optionally shown, specify a demonstrably safe local nontransmitting mechanism; avoid real user data, external actions and GET query-string disclosures. Browser-native validity bubbles and CSS-only pseudo-classes are not evidence of reliable dynamically announced error messages or server-side protection.
 
-To verify a static form without an external receiver, inspect browser
-constraint-validation states and controls' names/values locally.
-If a submission is demonstrated, it must use a safe local
-nontransmitting fixture; do not suggest that a GET query or local page
-load constitutes server-side processing.
-
-Use these explicit review conditions where applicable:
-
-- Inspect narrow and wide viewports, keyboard-only navigation,
-  200% zoom, and relevant text/contrast/motion preferences.
-- Test representative WCAG 2.2 AA text contrast thresholds
-  (4.5:1 normal text, 3:1 large text), name/label relationships,
-  focus indication and content reflow. Do not claim the entire
-  site is WCAG-conformant based on those checks alone.
-- Distinguish content-dependent design decisions from arbitrary
-  viewport or fixed-technology assumptions; document meaningful
-  browser-support exceptions.
-- Disclose unsupported CSS features, data/form-processing limitations,
-  visual regressions and unresolved issues instead of inventing
-  positive test results.
-- Never require public hosting, real personal-data collection,
-  tracking scripts, server implementation or paid accessibility tools.
+Representative **WCAG 2.2 AA** checks, where relevant to the authored content, must distinguish: (a) normal text contrast **4.5:1**, large text **3:1**; (b) meaningful non-text UI indicators **3:1** where the criterion applies; (c) keyboard reachability, visible and not-entirely-obscured focus; (d) reflow around **320 CSS pixels of available viewport width**, allowing legitimate separately scrollable two-dimensional data such as a table; and (e) **200% text resize/zoom as a separate test**. Ordinary page content must not be inadvertently clipped or require two-dimensional scrolling. These focused observations do not prove full WCAG conformance, screen-reader user testing or universal browser support. Compare different browser implementations only when there is actual evidence or clearly labeled supplied scenarios.
 
 ### Required summative assessments
 
 - **APP17-AS1** (required document structure and semantic navigation)
   - Outcomes: APP17-O1, APP17-O2, APP17-O11
-  - Work: Create two linked, independently intelligible HTML documents for a realistic public-information task. One must include a nested content hierarchy, a navigation landmark, an informative figure, and a genuinely tabular dataset with suitable table semantics. Inspect both source and parsed DOM, document at least two deliberate semantic corrections, and demonstrate that links and fragments work without scripting.
-  - Criteria: Documents parse without unaddressed errors that affect meaning; language, title, headings, landmarks, unique identifiers, links, meaningful alternative text, table headings/caption, and source order match the stated information relationships. The learner distinguishes informative from decorative imagery, traces navigation and fragment targets, and explains any remaining browser-repair behavior.
-  - Evidence: Complete local HTML files and assets; a page/link map; validator findings with corrections; before/after source and DOM excerpts; keyboard navigation observations and a short rationale for semantics.
+  - Work: Establish the first **two linked pages of the same eventual site** for a realistic public-information task. Include a meaningful nested content structure, navigation landmark, informative figure, and one genuinely tabular dataset with appropriate captions/headers. Inspect source and parsed DOM, record two substantive semantic faults and their corrections, and verify linked/fragment navigation without scripting.
+  - Criteria: Accurate language/title, meaningful headings, landmarks, unique IDs, useful link text, images/alternatives, table relationships and source order; no unresolved parsing or navigation defect that changes meaning. The learner distinguishes an authored structure from browser-repaired DOM and explains why each correction is semantically necessary.
+  - Evidence: Local HTML and assets, an interpretable page/link map, before/after source and DOM observations, relevant validator findings and a concise semantic rationale.
 
-- **APP17-AS2** (required native form and inclusive input review)
+- **APP17-AS2** (required native form and inclusive input)
   - Outcomes: APP17-O3, APP17-O8, APP17-O11
-  - Work: Author a static contact or request form with text, one grouped choice, contextual help, and at least two meaningful native validation constraints. Demonstrate a valid-input path and invalid-input variants with fabricated data; explain submission semantics and why a static-only page does not persist or process input. Perform a keyboard-only review including label activation, focus indication, required-state and error recovery.
-  - Criteria: Every relevant control has an accessible name and meaningful input purpose; grouped choices use suitable semantics; native validation distinguishes missing, malformed, and valid states where applicable; focus is visible; keyboard navigation is logical; user data is not silently sent to an outside endpoint. The learner correctly identifies the limits of native client-side validation and avoids claiming backend security.
-  - Evidence: HTML form, synthetic test matrix, inspection of labels/relationships, keyboard/focus observations, documented invalid and corrected inputs, and explanation of local-only handling and its limitations.
+  - Work: Add a native static form **within that same site**, with text entry, grouped choices, useful persistent guidance and at least two justified native constraints. With fictional input, inspect missing/malformed/valid states and recovery by keyboard, including label activation and visible focus. Explain browser submission semantics and why the static page does not process, persist or authorize an input. A real submission is **not required**.
+  - Criteria: Controls have accurate labels, group relationships, meaningful purposes, persistent instructions and recoverable invalid states; documented native constraints work as claimed where applicable, with a logical keyboard sequence and visible focus. No data is transmitted to an unknown endpoint or leaked through a GET query. The learner does not mistake client validity or CSS styling for assured accessible error announcement or backend security.
+  - Evidence: The same site and form source, fictional input/validity examples, keyboard/label/focus observation and bounded explanation of nontransmission, browser differences and client-only limits.
 
-- **APP17-AS3** (required css cascade and layout diagnosis)
+- **APP17-AS3** (required CSS cascade and layout diagnosis)
   - Outcomes: APP17-O4, APP17-O5, APP17-O6, APP17-O10, APP17-O11
-  - Work: Implement a small responsive article-and-cards interface using a reusable visual token set and both Flexbox and Grid where each is justified. Predict and then inspect conflicting CSS declarations that together exercise user-agent versus author origins, importance, cascade layers, specificity, inheritance, and source order. Introduce an overflow or alignment defect and repair it without an indiscriminate `!important` override. Refactor one repeated style pattern and verify the result.
-  - Criteria: Predictions match browser computed styles with correct reasoning about origin, importance, layer precedence, specificity, inheritance, and source order; visual hierarchy remains readable; box and layout decisions respond to content rather than fixed pixels; Flexbox and Grid are used for their appropriate layout axes; the injected defect has a reproducible root cause and regression check; reuse does not create unexplainable overrides.
-  - Evidence: HTML/CSS source, a concise prediction-versus-observation matrix covering each named cascade mechanism, DevTools computed-style notes, wide/narrow comparison, injected-failure reproduction and repair, and concise rationale for the refactor.
+  - Work: Extend **the same site** with an article and responsive cards using reusable visual tokens and Flow, Flexbox and Grid only where each fits. Predict and inspect competing rules that exercise user-agent versus author origin, importance, **normal and important layer order**, specificity, inheritance and source order. Reason about a provided scoped-rule proximity tie case (a labeled standards-based example is acceptable if the browser lacks support). Inject and repair a sizing/overflow or alignment fault without blanket `!important`; refactor one duplicated style.
+  - Criteria: Prediction and observed computed styles align when the browser supports the case; the learner uses the correct ordering of origin/importance, layers, specificity, scoping proximity where applicable and source order rather than treating specificity as the first rule. Layout choices are content-driven and preserve useful source/keyboard order; a reproduced fault has a justified repair and regression check; refactoring does not add opaque overrides.
+  - Evidence: Existing site source, a concise rule-prediction/observation table (identify supplied, unexecuted cases), selected computed-style traces, fault/repair demonstration and explanation of layout/selector decisions.
 
 - **APP17-AS4** (required responsive accessibility and asset review)
   - Outcomes: APP17-O2, APP17-O6, APP17-O7, APP17-O8, APP17-O9, APP17-O11
-  - Work: Extend an interface with responsive media and a resource-aware content layout. Test at narrow and wide CSS viewports, at 200% browser zoom, and with keyboard navigation; assess representative contrast and focus visibility, form or navigation usability, image alternatives, image dimensions and one loading-related trade-off. Exercise a supported and a fallback CSS behavior without relying on JavaScript.
-  - Criteria: Ordinary content and controls remain operable and understandable at constrained sizes without unintended horizontal page scrolling; focus is visible and not completely obscured by authored elements; tested color combinations meet stated contrast thresholds (normal text 4.5:1 and large text 3:1 where WCAG 2.2 AA applies); images have appropriate alternatives or decorative treatment and do not cause avoidable layout jumps; relevant fallback content remains usable. These checks do not assert full WCAG conformance.
-  - Evidence: Browser/viewport/zoom test log with limitations, keyboard focus sequence, contrast calculations, image inspection/waterfall or equivalent local observation, source and repaired states, and a cross-browser or supplied-support-case explanation.
+  - Work: Audit and improve **the same site** with local responsive imagery and content-aware layout. Test wide/narrow viewports, reflow around 320 CSS pixels, a separate 200% text/zoom condition, keyboard travel, focus visibility/obscuration, representative normal/large text and relevant non-text contrast, image alternatives, reserved image dimensions and a loading trade-off. Compare one optional CSS feature with a usable fallback, reproduce a real failure and recheck its repair.
+  - Criteria: Ordinary content and controls remain understandable and operable at required constraints without unnecessary two-dimensional scrolling; legitimate exceptional tables or diagrams may have bounded independent scrolling. Focus is reachable, visible and not fully obscured. Applicable measured contrast meets **4.5:1** ordinary text, **3:1** large text and **3:1** necessary non-text indicators. Images have meaningful text treatment and avoidable layout shifts are mitigated; fallback works without JavaScript. No full conformance claim is inferred.
+  - Evidence: One bounded browser/viewport/reflow/zoom/keyboard observation log, relevant contrast calculations, image/loading or reserved-dimension trace, before/after defect evidence and version-qualified support/fallback explanation. Reference AS1–AS3 evidence instead of resubmitting it.
 
-- **APP17-AS5** (required multi-page static interface and engineering defense)
+- **APP17-AS5** (required integrated static site and independent defense)
   - Outcomes: APP17-O1, APP17-O2, APP17-O3, APP17-O4, APP17-O5, APP17-O6, APP17-O7, APP17-O8, APP17-O9, APP17-O10, APP17-O11, APP17-O12
-  - Work: Deliver a cohesive, at-least-three-page static information site for an explicitly defined audience. Include a structured content page, a meaningful native form demonstration, and reusable responsive layouts; provide linked navigation, local assets, a stylesheet organization strategy, and tested failure states. Conduct a clean-checkout reproduction and defend selected trade-offs in a reviewable written or recorded explanation.
-  - Criteria: The complete site is reproducible with freely available local tooling, usable without JavaScript, backed by appropriate semantic structure, and navigable by keyboard. Required pages, links, forms, assets, responsive states, and documented acceptance tests work as claimed. Blockers to essential keyboard navigation, understandable content and form use, focus visibility, and required contrast or responsive usability must be corrected before a passing decision; disclosing such a blocker does not satisfy the criterion. Other unresolved limitations must be recorded and their impact bounded. The defense ties concrete implementation and debugging evidence to decisions and avoids claiming untested accessibility or cross-browser guarantees.
-  - Evidence: Repository or portable source archive, README with clean-start commands, page and asset inventory, requirement-to-test matrix, representative keyboard/zoom/viewport and invalid-input checks, validation/diagnostic records, an injected failure and repair, version/environment notes, and a reviewable technical defense.
+  - Work: Complete **the one evolving static site** of at least three purposeful pages for an explicit audience. Integrate linked semantic information, safe native form demonstration, local assets, maintainable reusable CSS, responsive layouts and a documented failure-repair history. Reproduce it from clean source. Address an **unfamiliar but bounded content, accessibility, CSS or asset defect/change**, verify the correction without regressing earlier accepted criteria, and give a reviewable written, recorded or live technical defense.
+  - Criteria: Independent reproduction requires only disclosed, free local steps; navigation, content, forms, asset and responsive behaviors meet their public acceptance criteria without JavaScript. The new problem is understood, corrected and rechecked. Unresolved critical semantic, keyboard/focus, form, required contrast or responsive failures preclude passing even if disclosed; other material limitations are recorded and bounded. The defense distinguishes direct evidence from guesses, explains real decisions and avoids untested accessibility or compatibility claims.
+  - Evidence: One repository or portable source archive, clean-start instructions, a concise requirement-to-criterion map **referencing** already accepted AS1–AS4 evidence, the unfamiliar change/repair and regression record, materially necessary environment facts, limitations and a reviewable defense. No duplicate site or evidence packet is required.
 
 ### Completion decision and revision safety
 
-A learner completes this course only when **all five required
-assessments** satisfy their published criteria and collectively
-establish APP17-O1 through APP17-O12. Weak or fabricated evidence
-must be revised; effort, passive study, an unchecked page, or
-a successful validator alone cannot substitute for demonstrated
-capability. Independent reviewers may request a justified,
-reproducible clarification or defense tied to a published outcome.
+APP17 completion requires a defensible, separately recorded evaluation decision for every required assessment and demonstrated APP17-O1–APP17-O12. The cumulative assessment design reduces redundant artifacts, **not the required competencies**: passing AS5 cannot replace an unproven AS1–AS4 outcome. Optional formative exercises do not count as extra gates. A learner can use the public criteria without a paid platform or private answer key.
 
-The capstone assessment reuses and strengthens previous work where
-appropriate; learners need not produce five unrelated sites.
-Additional module exercises, sample layouts and practice audits
-are **optional formative work**, not hidden summative gates.
-
-This newly introduced APP17 revision uses the `v0.2.0`
-outcome-and-evidence contract. Earlier published APP2 includes
-overlapping HTML/CSS lessons until its separate migration PR
-narrows that course to framework-neutral browser/frontend engineering.
-Existing APP2/APP9 work and learner completion records remain
-attributable to their original course revisions; the new catalog
-does not silently revise historical evidence or claim equivalent
-competency without reassessment.
+Prior course and learner records remain identified with the applicable specification and source revision; the reorganization does not silently regrade or equate historical APP2, APP9 or APP17 evidence. APP17 remains **`draft`**: source validation and editorial review do not establish learner-tested effectiveness, full accessibility conformance, accreditation or `verified` readiness. See [Evidence Rules](../../spec/evidence-rules.md) and [Status Labels](../../spec/status-labels.md).
