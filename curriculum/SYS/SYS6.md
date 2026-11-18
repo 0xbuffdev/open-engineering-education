@@ -58,8 +58,6 @@
 4. **Reachability graphs and network partitions** — Draw a three-node connectivity graph for healthy, isolated leader and minority/majority partitions, tracking directional message links rather than treating partition as permanent node death.
 5. **Safety, availability and conditional progress under partition** — Specify never-commit-conflicting-results as safety and eventual service only under restored majority connectivity and fairness as liveness. Compare a minority refusal with an unsafe available response using an explicit failure model; qualify CAP vocabulary rather than treating packet availability, linearizability and durability as one slogan.
 
-
-
 ### Module 2 — RPC Identity, Retries, Fencing and Durable Duplicate Handling
 
 #### Outcomes
@@ -98,8 +96,6 @@
 5. **Read from a committed log position** — Analyze the conservative reference strategy of appending a read barrier/no-op or read command in the **current leader term**, waiting for durable majority commitment and local apply before serving a claimed linearizable read; distinguish optimized ReadIndex/lease approaches requiring their own proofs.
 6. **Independent history checking** — Write a tiny sequential key-value oracle and explore legal orders for bounded concurrent histories including pending operations; do not infer consistency solely by sorting response timestamps.
 
-
-
 ### Module 4 — Replica State, Fixed Membership and Leader Authority
 
 #### Outcomes
@@ -117,8 +113,6 @@
 4. **Up-to-date log voting rule** — Compare candidate versus voter lastLogTerm and then lastLogIndex; construct a trace where voting for a log with the wrong suffix would threaten an already committed entry.
 5. **Stale leadership, fencing and asymmetric partitions** — Model an isolated old leader that can still serve local reads or receive obsolete replies, but cannot validate a current quorum. Require step-down on higher term, safe refusal of strong reads/writes without current authority and an explicit external fencing contract if a non-replicated service is contacted; a term label alone does not fence external effects.
 6. **Heartbeat behavior and timer fairness** — Use randomized/deterministically seeded election timeouts and bounded heartbeats as liveness techniques, not as safety proofs or guaranteed fixed completion latency.
-
-
 
 ### Module 5 — Log Matching, Durable Replication and Safe Commitment
 
@@ -159,8 +153,6 @@
 5. **Disk-full, sync failure and read-only safety** — Treat failed persistence as refusal or safe step-down; never count an unsynced append as quorum durability and avoid silently serving strong results after local irrecoverable storage errors.
 6. **Independent hard-state fault oracles and record versions** — Hand-derive expected durable term, votedFor, log, commit/apply, version and response states for bounded crash/sync points, and reject incompatible persistence formats. Separate process-kill/injected errors from actual power-loss durability and identify a restart scenario where a corrupted schema must fail closed.
 
-
-
 ### Module 7 — Read Safety, Deduplication, Snapshots and State Transfer
 
 #### Outcomes
@@ -178,8 +170,6 @@
 4. **Durable snapshot publication and log retention** — Under SYS5's file/manifest ordering, persist snapshot before compacting covered log entries; keep the boundary term and any remaining suffix required for follower replication and safe restart.
 5. **Snapshot installation, stale-transfer rejection and atomic boundaries** — Model a lagging follower receiving a versioned bounded InstallSnapshot-like transfer with checksums, lastIncludedIndex/Term, applied key-value state and dedup horizon. Reject truncated/stale chunks and publish all-or-nothing durable installation under named SYS5 file/manifest assumptions; do not expose half-installed state or reapply earlier committed effects.
 6. **Log growth without mandatory snapshot implementation** — Require an *executable bounded log limit and safe refusal* if snapshot installation is only modeled/analysed, and explicitly publish that limitation. Implementing production-grade compaction/state transfer is optional only if all SYS6-O10 reasoning and AS3/AS5 inspection criteria are still met.
-
-
 
 ### Module 8 — Three-Replica Integration and Deterministic Adversarial Schedules
 
@@ -201,8 +191,6 @@
 5. **Crash recovery at durable cut points** — Stop and restart voters/leaders after term/vote sync, log append, follower sync, commit/apply and reply boundaries, comparing recovered state with independent expected or allowed histories.
 6. **Partition recovery, counterexample shrinking and proof limits** — Restore an asymmetric link or lost leader and inspect leader-correct catch-up and committed-prefix convergence under conditional fairness. Shrink a failing deterministic seed to a minimal state/event trace and label shared-host/proxy scheduling assumptions; finite successful seeds do not prove all asynchronous executions.
 7. **Independent history and state checker** — Compare observed client-operation intervals with a separately implemented sequential map plus dedup semantics and a bounded linearizability search; inspect log/term invariants in addition to final key-value equality.
-
-
 
 ### Module 9 — Replication Cost, Availability Limits and Operational Evidence
 
@@ -247,8 +235,6 @@
 3. **Safe reads, snapshot bounds, quorum loss and resource failure** — Check the per-read current-authority barrier or explicit refusal, then source/model-reason snapshot lastIncludedIndex/Term, dedup retention, follower catch-up or the safe refusal/log-cap alternative. Reuse actual partition, crash, malformed-RPC and persistence-error fixtures with finite resource ceilings.
 4. **Publish benchmark and limitation record** — Supply raw steady/degraded trials, accepted/committed/unknown counts, safe redacted traces, model-search bounds and the limitations of sharing one kernel, physical disk and local network.
 5. **Unknown-case diagnosis, minimal correction and independent defense** — For a genuinely unseen stale-term, overcommit, unsafe read, duplicate operation or snapshot mismatch, predict two rival causes and a discriminating term/log/client timeline. Make a minimal evidence-backed correction or conservative refusal, verify independent negative and previously valid regression, and defend omitted production guarantees without claiming formal Raft verification.
-
-
 
 ## Completion requirements
 
