@@ -12,7 +12,7 @@
 
 ## Overview
 
-Design, build, measure, release, and defend **one useful command-line developer utility**. The learner chooses and scopes a problem in the first module and develops the **same artifact** through versioned implementation, responsible release review and independent technical defense. The final module is not where the project begins. This capstone also performs the **documented completion audit of all ten prerequisite SEF courses**, but does not substitute a single polished project for actually verified prior mastery.
+Design, build, measure, review, release and defend **one useful command-line developer utility**. Before entry, an assessor verifies all ten prerequisite SEF course completions or genuinely governed assessed equivalences; an unverified prerequisite cannot be earned through this project. The learner scopes the useful problem at the first teaching stage, develops the **same artifact** through test-driven changes and measured decisions, and presents the result under an unfamiliar unassisted defense. The ten-course graduation index records authentic prior evidence and meaningful application or conceptual transfer, **not** ten miniature re-assessments.
 
 The capstone integrates software construction, algorithms, data structures, computing/operating-system models, version control, testing, debugging, reproducible measurement, mathematical reasoning and the professional responsibilities acquired throughout SEF. [SEF9](SEF9.md) supplies **honest risk communication**, non-AI ethics, licensing, privacy, accessible communication and truthful AI-use disclosures; those obligations still apply to hand-written code. **Integration is not a requirement to embed every earlier course's tool or exercise into one utility.** A Python-only tool need not implement C pointers or Unix sockets; a command-line tool need not manufacture calculus or a hardware simulator. Prior course evidence establishes that mastery, while the capstone makes genuine, relevant transfer visible and tests its own technical and professional claims.
 
@@ -72,203 +72,151 @@ For each row, link the prior assessment/decision and identify the one most relev
 
 ## Modules
 
-### Module 1 — Problem and Scope
+### Module 1 — Verified Entry, User Problem and Safe Scope
 
 #### Outcomes
 
 - SEF10-O1
-- SEF10-O2
-
-#### Lessons
-
-1. **Capstone Orientation** — Explain why one learner-owned project develops throughout the course and how evaluation differs from optional practice.
-2. **Users and Problems** — Identify a specific user, useful task, and observable improvement.
-3. **CLI Contracts** — Define commands, input formats, output behavior, exit codes, and safe file effects.
-4. **Acceptance Scenarios** — Specify normal, empty, boundary, invalid, and failure cases with checkable expected behavior.
-5. **Scope and Risk** — Distinguish achievable core work from optional stretch features and identify environmental constraints.
-6. **Scope Review** — Evaluate feasibility and record an explicit approval or structured self-review before substantial implementation.
-7. **Prerequisite decision preflight** — Before beginning, verify all ten prerequisite completions, their revisions and any separately assessed equivalence; an unresolved pre-entry requirement is not a capstone task.
-8. **One utility, many connections** — Record which prior competencies naturally inform the chosen project and which belong to previous assessments only.
-
-**Milestone M1 — Scope:** A bounded public-format project brief and
-acceptance cases exist. Any unbounded, destructive, untestable, or
-unreasonably large proposal must be revised before proceeding. M1
-contributes evidence to SEF10-AS1; it is not an additional standalone
-quiz or lab.
-
-### Module 2 — Graduation Evidence and Cross-Course Transfer Planning
-
-#### Outcomes
-
-- SEF10-O1
-- SEF10-O2
-- SEF10-O7
-- SEF10-O9
-
-#### Lessons
-
-1. **Ten-course evidence readiness** — Inventory SEF1–SEF9 and SEF11 completion by course revision and actual required assessment evidence; reject attendance or self-declared equivalence.
-2. **Entry gaps and governed equivalence** — Separate genuine approved diagnostic evidence from an unverified portfolio reference; report incomplete course work as a pre-entry stop, not a capstone substitute.
-3. **Evidence roles and provenance** — Define links to prior reviewed artifacts, current source revisions, direct capstone evidence, conceptual demonstrations and explicitly missing cases without copying confidential learner records.
-4. **What belongs in this project** — Choose genuinely useful SEF2/SEF4/SEF5 applications, not an artificial command added to cover a course code.
-5. **Machine and OS explanation** — Connect SEF1 instruction/representation models and SEF3 shell portability to an actual running CLI without pretending to have built a physical computer.
-6. **C and POSIX transfer boundaries** — Explain a concrete SEF6 lifetime/undefined-behavior issue and SEF7 partial-I/O or descriptor ownership error conceptually when the main utility is written in Python.
-7. **Mathematical roles** — Carry SEF11 proof/invariant reasoning and SEF8 variability/uncertainty into algorithm and measurement evidence without treating a benchmark as proof.
-8. **Professional obligations** — Map SEF9 privacy, license, ethics and accessibility to a real feature's release-risk check, regardless of AI use.
-9. **Challenge plan and limitations** — Choose one unfamiliar reasonable cross-course question, define an independent oracle/record and explain why the chosen application does not cover every prior topic.
-10. **One compact crosswalk** — Prepare a ten-row course-to-evidence index, not a second submission project or re-sit of all earlier courses.
-
-*Optional practice:* Draft one SEF1–9/11 table for a read-only log analyzer, identifying which prior skills are directly used versus boundedly explained.
-
-### Module 3 — Architecture and Design
-
-#### Outcomes
-
-- SEF10-O2
-- SEF10-O1
-- SEF10-O4
-
-#### Lessons
-
-1. **System Decomposition** — Separate parsing, validation, core processing, and reporting into justified components.
-2. **Interfaces and Ownership** — Describe data movement, errors, resource ownership, and trust boundaries.
-3. **Data Structures** — Select a useful representation and explain the alternatives.
-4. **Algorithmic Reasoning** — Estimate correctness constraints, time cost, and space cost under stated assumptions.
-5. **Test Strategy** — Map acceptance cases and risks to initial tests and fixtures.
-6. **Design Review** — Challenge an architectural assumption and record the response and first vertical slice.
-7. **Architecture and evidence trace** — Map chosen interfaces and algorithm proof obligations to capstone claims, keeping SEF4 invariants distinct from timing-only evidence.
-8. **Professional release implications** — Identify which design choices affect privacy, third-party rights, text accessibility and operational hazards.
-
-**Milestone M2 — Design:** Architecture sketch, interface contracts,
-data/algorithm decision, acceptance-to-component mapping, and the
-first test plan are inspectable. Material design gaps must be
-corrected before the affected implementation is relied upon. M2
-completes the initial evidence for SEF10-AS1.
-
-### Module 4 — Incremental Implementation
-
-#### Outcomes
-
-- SEF10-O3
-- SEF10-O4
-- SEF10-O2
-
-#### Lessons
-
-1. **Project Setup** — Establish a version-controlled project and documented build/test commands.
-2. **First Failing Test** — Define an acceptance test that exposes missing behavior before implementing it.
-3. **Vertical Slice** — Implement one useful command-to-result path with all relevant layers connected.
-4. **Input Validation** — Handle malformed, empty, and boundary inputs safely.
-5. **Debugging and Regression** — Reproduce a failure, correct it, and retain a test preventing recurrence.
-6. **Versioned Iteration** — Evolve the same project through explainable commits and repeatable checks.
-7. **Resource and integrity contracts** — Verify correct bytes/encoding, failure rollback and resource cleanup against actual runtime assumptions without requiring C or POSIX features not in scope.
-8. **Traceably bounded review** — Link implementation claims to versioned tests, legitimate reviewer feedback and changed code, not merely a green board state.
-
-**Milestone M3 — Build:** At least one complete feature and one
-negative path execute from documented commands. Retain the red/green
-test evidence, incremental history, and at least one diagnosed and
-corrected error. This is part of SEF10-AS2, not a separately
-mandated per-module lab.
-
-### Module 5 — Measurement and Release
-
-#### Outcomes
-
-- SEF10-O5
-- SEF10-O6
-- SEF10-O4
-
-#### Lessons
-
-1. **Measurement Design** — Choose a meaningful property, fixed fixtures, units, and relevant environment conditions.
-2. **Baseline Analysis** — Collect repeated measurements and describe variability and limitations.
-3. **Evidence-Based Revision** — Make or reject a justified change using comparable before/after results.
-4. **Technical Documentation** — Write clear setup, use, testing, failure-handling, and architecture instructions.
-5. **Reproducible Packaging** — Prepare a build or release that does not depend on undocumented local state.
-6. **Release Verification** — Repeat declared test/build/package checks from a clean checkout.
-7. **Quantitative interpretation** — Connect units, repeated measurements, variability and appropriate SEF8 statistical claims, including when no inferential conclusion is justified.
-8. **Inspectable release claims** — Ensure that the public test and measurement outputs substantiate—not just narrate—every stated improvement or known limitation.
-
-**Milestone M4 — Measure and Prepare:** Reproducible measurements,
-documented decision, README, release instructions, and repeatable
-validation are reviewable. An observed regression or inconclusive
-result may be reported honestly; a fabricated improvement is never
-required to satisfy the outcome. This evidence contributes to
-SEF10-AS2.
-
-### Module 6 — Responsible Release, Privacy, Licensing and Accessible Handoff
-
-#### Outcomes
-
-- SEF10-O6
 - SEF10-O7
 - SEF10-O9
 - SEF10-O10
 
 #### Lessons
 
-1. **Release decision is not a CI badge** — Distinguish proven acceptance, unresolved severity, review authority, risk ownership and a justified hold/ship-with-conditions determination.
-2. **Ethical harm and truthful reporting** — Investigate how malformed input, destructive paths, misleading success or biased test fixtures affect users; document mitigations and escalation without invented approval.
-3. **Data flow and confidentiality** — Inventory actual input/output/log/tmp fields and authorized exposure, minimize collection and use synthetic fixtures instead of private artifacts.
-4. **Cleanup and retention** — Check any temporary files, crash outputs and failure modes for unintended persistent copies; state realistic deletion and retention assumptions.
-5. **Third-party code rights** — Record sources, versions, SPDX/license evidence and attribution/notice obligations; hold or replace material with unknown permission, distinguishing use from redistribution.
-6. **Accessible CLI and release notes** — Use text-first status/diagnostics, clear commands, headings and reproducible examples without color-only flags or screenshot-only reviews.
-7. **Non-AI and AI accountability** — Report assistance precisely if used; verify tools and permissions, but state ethical, rights, privacy and communication obligations apply even without AI.
-8. **Observed review and resolution** — Obtain real substantive independent feedback or explicitly declare a self-evaluation limitation; preserve the before/after fix and never fabricate reviewer identity.
-9. **Final release manifest** — Include honest artifact version, setup commands, supported environment, known issues, risk decision, owner and remaining limitations.
+1. **Prerequisite evidence is an entry gate** — Before any project work, an assessor checks actual reviewed completions or governed equivalences for SEF1–SEF9 and SEF11 with source revisions; a missing course blocks entry instead of becoming capstone credit.
+2. **Select and bound one useful problem** — Choose a genuinely useful and feasible developer-utility problem, identify intended users and a substantive core algorithm/operation, then reject unrelated stretch features, copied tutorials and artificial predecessor demonstrations.
+3. **State the operating envelope** — Declare nonprivileged commands, supported tools, disposable paths, data limits, file permissions and safe cleanup before accepting a potentially destructive project.
+4. **Define observable CLI contracts** — Specify actual commands, argument/input validation, text or binary output, exit codes and persistence effects for an unfamiliar reader.
+5. **Construct independent acceptance oracles** — Derive normal, empty, boundary, malformed and operational-failure expectations from requirements rather than copying the first implementation.
+6. **Identify real professional risk** — Map data loss, private reporting, missing code rights or inaccessible evidence to plausible harm, an accountable authority and a proportionate safe fallback.
+7. **Review and revise the brief** — Challenge an assumption with a reproducible input and record actual scope approval or a clearly labeled structured self-review before implementation.
 
-*Optional practice:* Produce a one-page hold/release decision for an existing failing acceptance test and revise it when new evidence changes the risk.
+**Milestone M1 — Scope:** All ten genuine prerequisite completions have been verified before entry; the one-project brief, safe CLI scope and independent acceptance cases are inspectable. Missing evidence blocks entry, while unsafe or untestable proposals require revision. This prepares `SEF10-AS1`, not a new graded activity.
 
-### Module 7 — Integration and Review
+*Optional practice:* Compare a log analyzer with a dependency explorer, reject an unbounded option and identify exactly which existing prerequisite records must already be verified.
+
+### Module 2 — Algorithmic Architecture, Contracts and Proof Obligations
 
 #### Outcomes
 
-- SEF10-O7
-- SEF10-O6
+- SEF10-O1
+- SEF10-O2
 - SEF10-O4
+- SEF10-O10
 
 #### Lessons
 
-1. **Requirements Traceability** — Link each mandatory acceptance case to code, tests, observations, or explanation.
-2. **Failure-Path Review** — Check cleanup, permissions, invalid data, and critical safety conditions.
-3. **Clean-Start Reproduction** — Rebuild and rerun the project without relying on the original working directory.
-4. **Evidence Review** — Compare actual implementation and measurements with the submitted claims.
-5. **Finding Remediation** — Correct material defects and retain regression evidence.
-6. **Defense Preparation** — Organize a reviewer-accessible explanation without supplying scripted answers.
-7. **Program graduation crosswalk** — Check that all ten prior completions were evidenced, identify direct versus conceptual transfer and route any gaps to prerequisite reassessment.
-8. **Privacy, rights and accessibility review** — Replay actual error/log/output scenarios and review release text, permission/attribution inventory and stakeholder-risk status without fabricating independent review.
+1. **Decompose actual responsibilities** — Separate parsing, validation, meaningful computation and reporting into justified components, resisting file-count and design-pattern quotas.
+2. **Choose a substantial data representation** — Compare a real data structure with a plausible simpler alternative using the required input size, memory model and supported operations.
+3. **Establish correctness and termination** — Propose a relevant invariant, loop variant or counterexample and derive what must remain true for an actual capstone algorithm, not just a passing test.
+4. **Qualify algorithmic costs** — Explain worst-case and, where legitimate, amortized or expected time/space under explicit assumptions, keeping asymptotic claims distinct from machine timing.
+5. **Specify public interfaces and resources** — Describe valid and invalid inputs, error outputs, dependency direction, file effects and resource ownership for the actual components.
+6. **Plan independent tests and a viable vertical slice** — Derive normal/failure oracles from promised behavior, trace one input across command parsing, validated state and the selected algorithm, and map high-risk interfaces to concrete tests and privacy/licensing checks.
+7. **Make and review a decision** — Record alternatives, consequences and a testable decision driver, then resolve a genuine challenged assumption instead of retroactively fabricating agreement.
 
-**Milestone M5 — Rehearse:** A clean isolated checkout reproduces
-the project; the requirements-to-evidence map is usable; critical
-findings are resolved or explicitly reopen the relevant earlier
-milestone. A self-directed learner may provide a dated independent
-replay and self-review, disclosing the lack of external sign-off.
-M5 contributes to SEF10-AS3.
+**Milestone M2 — Design:** The bounded algorithm, architecture, invariant/termination reasoning, resource contracts, alternative and test-oracle strategy are inspectable. Repair material gaps before relying on the implementation. This develops the existing `SEF10-AS1`.
 
-### Module 8 — Delivery and Defense
+*Optional practice:* Compare two representations for the chosen utility's real input and derive a counterexample that would violate a poorly chosen invariant.
+
+### Module 3 — Versioned CLI Construction and Failure-Driven Verification
 
 #### Outcomes
 
-- SEF10-O8
-- SEF10-O7
+- SEF10-O2
 - SEF10-O3
-- SEF10-O5
+- SEF10-O4
+- SEF10-O7
 
 #### Lessons
 
-1. **Release Inspection** — Present the approved scope, delivered behavior, tests, version history, and reproducible build.
-2. **Design Defense** — Explain actual algorithm and data choices, interfaces, errors, and limitations.
-3. **Measurement Defense** — Interpret what the evidence proves and what remains uncertain.
-4. **Independent Change** — Diagnose a bounded new case or implement a small change without an assistant.
-5. **Final Evaluation** — Apply the published rubric and record pass or specific revise-and-reassess findings.
+1. **Reproducible project environment** — Set up the same learner-owned repository with known runtime/tool versions, local test commands and no undeclared hosted or private dependencies.
+2. **An actual red requirement test** — Run an independently specified acceptance test before implementation and retain real expected/observed outputs and source revision, not a reconstructed red/green story.
+3. **One complete useful vertical slice** — Implement parsing, validated processing and real CLI output end to end for one agreed behavior instead of building disconnected demonstration modules.
+4. **Normal and malformed input boundaries** — Extend the same feature with empty, large/boundary, malformed and invalid-resource cases checked against the published behavior.
+5. **State integrity on partial failure** — Reproduce a failure in parsing, output writing or resource access and verify previous valid files and unrelated sentinel data remain safe.
+6. **A causal bug correction** — Capture a reproducible defect, compare plausible hypotheses, repair the fault and preserve a regression that fails on the old version.
+7. **Traceable source evolution** — Keep focused commits, changed behavior, issue/decision references and genuine review observations without treating a board status as test evidence.
+8. **A failure-sensitive local quality gate** — Run real unit/integration/CLI checks and reject a deliberately failing required stage with nonzero status, describing hosted CI as optional unless it actually executed.
 
-6. **Bounded cross-course question** — Respond without an assistant to one evaluator-selected relevant transfer question linking mathematics, machine/OS behavior or professional risk to the utility.
-7. **Release/hold defense** — Defend the complete traceable release decision and how reviewer evidence changed a risk or communication judgment.
+**Milestone M3 — Build:** One complete functional slice, an actual red-then-green test, a repaired failure, reproducible negative cases and source history demonstrate the same utility's progress. The evidence belongs to `SEF10-AS2`, not a per-module lab quota.
 
-**Milestone M6 — Defend:** Deliver and defend the **same project**
-begun in Module 1. Complete the independent change, show its test
-evidence, and record the final rubric decision. M6 is evaluated
-through SEF10-AS3; it is not designated a mandatory final `lab`.
+*Optional practice:* Introduce a harmless invalid-input bug, establish a failed independent expectation, correct the behavior and preserve the regression.
+
+### Module 4 — Controlled Quantitative Decision and Reproducible Candidate
+
+#### Outcomes
+
+- SEF10-O2
+- SEF10-O4
+- SEF10-O5
+- SEF10-O6
+
+#### Lessons
+
+1. **Design a genuinely comparable measurement** — Choose a meaningful runtime or memory property, units, declared input scale, stable fixtures, comparable versions, run repetitions and significant cache/environment confounders before observing results.
+2. **Collect a genuine baseline** — Execute the declared measurement on a known initial revision and preserve raw observations, outliers and actual conditions.
+3. **Compare a bounded alternative** — Measure a justified implementation revision with an equivalent workload, avoiding an accidental speedup that silently changes required behavior.
+4. **Interpret variation and report qualified conclusions** — Apply suitable SEF8 variability reasoning to measured values and unknown confounders; link the actual source revisions, raw observations, units and scope of any conclusion to a decision a later independent reviewer can inspect.
+5. **Accept, reject or defer the change** — Explain whether the observed evidence justifies the revision, rollback or further study without demanding an improvement for the sake of assessment.
+6. **Verify correctness after any optimization** — Recheck normal and failure contracts and a substantial invariant across the candidate versions so that lower latency cannot disguise incorrect data or unsafe state.
+7. **Package one clean-start candidate** — Document supported runtime, dependencies, install/run/test/quality commands and real local release artifacts, then verify they work from a clean checkout.
+
+**Milestone M4 — Measure and Prepare:** Comparable baseline/revision measurements, documented variability and a defensible engineering decision accompany a clean-start release candidate. A properly explained inconclusive result is acceptable; manufactured performance improvement is not. This supports `SEF10-AS2`.
+
+*Optional practice:* Compare the same synthetic input under two algorithm settings, identify an actual confounder and justify why measured results do or do not warrant a change.
+
+### Module 5 — Independent Reproduction, Professional Risk and Release Review
+
+#### Outcomes
+
+- SEF10-O3
+- SEF10-O4
+- SEF10-O6
+- SEF10-O7
+- SEF10-O10
+
+#### Lessons
+
+1. **Requirements-to-evidence trace** — Connect every mandatory behavior and negative case to real code, independent expected results, executed tests and a specific source revision.
+2. **Separate clean-start replay** — Run the documented setup in an isolated checkout, distinguishing a self-conducted fresh replay from another person's genuine independent reproduction.
+3. **Material reviewer findings** — Capture actual source-located faults and feedback when available, repair critical defects and retain regression evidence; do not invent external approval or present screenshots as sole evidence.
+4. **Harm and accountable release authority** — Assess real destructive-path, data-loss, misleading success or vulnerability risks and document an evidence-backed hold or conditional release with an authorized owner.
+5. **Synthetic privacy and retention proof** — Trace input, output, logs and temporary records through their permitted readers and deletion policy, and execute a redacted failure/cleanup fixture without personal data.
+6. **Rights, provenance and notice audit** — Record the actual source, copyright/license permission and notice evidence for dependencies and copied material; hold or replace unverified distribution rights.
+7. **Accessible interfaces and explanations** — Produce navigable Markdown, meaningful CLI help and deterministic error/status text with text alternatives to optional diagrams and no color-only meaning.
+8. **Authentic AI-use or non-use disclosure** — Describe actual model/tool proposals and independently verified actions if used, without fabricating executions; maintain the same human ethical duties when no AI was involved.
+9. **Review remediation and release manifest** — Re-run critical cases after fixes, state unsupported platforms, residual risks, versioned outputs and real feedback before forming the final accountable release/hold decision.
+
+**Milestone M5 — Rehearse:** Clean-start evidence, actual reviewer observations or labeled self-review, corrected material faults and a truthful rights/privacy/accessibility release decision are available. Self-review is not independent endorsement. This prepares `SEF10-AS3` and `SEF10-AS4`.
+
+*Optional practice:* Reproduce and repair a synthetic data leak in a failed CLI report, then revise an accessible release-risk summary without assuming permission from an unknown owner.
+
+### Module 6 — Graduation Transfer, Unassisted Challenge and Technical Defense
+
+#### Outcomes
+
+- SEF10-O2
+- SEF10-O5
+- SEF10-O6
+- SEF10-O7
+- SEF10-O8
+- SEF10-O9
+- SEF10-O10
+
+#### Lessons
+
+1. **Confirm prior assessed closure** — Present the already-authenticated SEF1–SEF9/SEF11 course/revision decisions and escalate any newly discovered gap; do not reinterpret capstone work as earned predecessor credit.
+2. **Demonstrate meaningful direct transfer** — Show the real project's programming, data-structure, Git, testing, algorithm and measured-evidence uses with specific commits and independently verifiable behavior.
+3. **Explain machine and operating-system boundaries** — Defend a concrete SEF1/SEF3 representation/invocation model and a relevant SEF6 C-lifetime or SEF7 POSIX-resource failure at a conceptual level without implementing artificial C/OS features.
+4. **Prove rather than merely time an algorithm** — Connect one actual SEF4 invariant/cost claim to SEF11 proof/termination/counterexample reasoning and distinguish it from finite test runs.
+5. **Defend uncertainty and professional judgment** — Explain a relevant SEF8 measured quantity with justified variability, and SEF9 ethical, privacy, rights, accessibility and AI/no-AI accountability in the final release choice.
+6. **An unfamiliar bounded change unaided** — Respond to an evaluator-selected valid input, malformed case, small option or edge-case bug within the disclosed categories, implement or diagnose it **without an assistant**, then rerun appropriate tests.
+7. **Independent technical defense and limitations** — Explain algorithms, trade-offs, performance uncertainty, prior corrected defects, actual review findings and known risks in an inspectable live, recorded or written defense.
+8. **Publish the evidence map and actual graduation decision** — Map all ten capstone outcomes and the four existing summative assessments to actual source, normal/negative, measurement, professional and prerequisite evidence; apply the complete rubric and record an attributable pass or revise-and-reassess decision with specific unresolved gaps and labeled external or self-review provenance.
+
+**Milestone M6 — Defend:** The same project begun in M1 is defended under `SEF10-AS3` and `SEF10-AS4` with an unassisted unfamiliar change, authentic previously verified prerequisites, source-linked transfer and an evidence-backed release/hold decision. This is not a new final lab.
+
+*Optional practice:* Have a reviewer supply a previously unseen edge case plus a relevant SEF concept, and defend the response using actual evidence rather than a memorized script.
 
 ## Completion requirements
 
@@ -627,5 +575,7 @@ This revision completes the **SEF10 course follow-up** under [accepted RFC 0003]
 | Focus on correctness, CI, review, measuring and unassisted defense | Explicit professional release/hold decision including ethics, rights, privacy, accessibility, honest reviewer provenance and relevant mathematical/OS transfer | No mandatory hosted deployment, Rust, C, multi-client service or unrelated APP/SYS capability |
 
 An earlier SEF10 completion is not automatically rescinded or automatically upgraded to include O9/O10; any transition must use actual reviewed evidence and the applicable published revision. The [SEF catalog](README.md) remains the authoritative prerequisite order. SEF10 still has no hidden paid tool, AI requirement, new course-format rule or promotion beyond `draft`.
+
+**Subsequent competency-derived instructional consolidation:** The prior eight-module revision repeated pre-entry course evidence in two consecutive teaching blocks, blended measurement with release decisions before giving professional review its own purpose, and retaught integration/review in both final modules. This review consolidates these into genuine project milestones and distinguishes *assessor-verified entry eligibility* from later *capstone-specific transfer and defense*. The original ten outcomes and four complete summative assessment contracts stay unchanged, including the material O9/O10/AS4 obligations; six original M1–M6 progress milestones remain, and one cumulative utility still supplies the work. Module and lesson counts are outcomes of those boundaries, never a template. No historical learner credit, specialist-language gate or readiness status changes.
 
 This is the **Program 1 graduation requirement**.

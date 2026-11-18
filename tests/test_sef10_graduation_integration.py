@@ -23,16 +23,6 @@ CHECKER = ROOT / "scripts" / "check-outcome-curriculum.py"
 OLD_OUTCOME_CHECKSUM = "1ebbbd9e"
 OLD_ASSESSMENT_CHECKSUMS = ("0d0cef3e", "506bf454", "c5ebb0df")
 
-HEADINGS = (
-    "Problem and Scope",
-    "Graduation Evidence and Cross-Course Transfer Planning",
-    "Architecture and Design",
-    "Incremental Implementation",
-    "Measurement and Release",
-    "Responsible Release, Privacy, Licensing and Accessible Handoff",
-    "Integration and Review",
-    "Delivery and Defense",
-)
 PREREQUISITES = tuple(f"SEF{i}" for i in range(1, 10)) + ("SEF11",)
 
 
@@ -114,30 +104,74 @@ class SEF10GraduationIntegrationTests(unittest.TestCase):
         self.assertIn("SEF10-O9", blocks[-1])
         self.assertIn("SEF10-O10", blocks[-1])
 
-    def test_eight_modules_with_six_original_gates_are_sequenced(self):
+    def test_competency_modules_have_real_outcome_ownership_and_teaching(self):
         _, outcomes, modules, _ = parts()
         known = set(re.findall(r"(?m)^- \*\*(SEF10-O\d+):\*\*", outcomes))
-        headings = list(re.finditer(r"(?m)^### Module (\d+) — ([^\n]+)$", modules))
-        self.assertEqual([int(h.group(1)) for h in headings], list(range(1, 9)))
-        self.assertEqual(tuple(h.group(2) for h in headings), HEADINGS)
-        count = 0
-        for i, header in enumerate(headings):
-            stop = headings[i + 1].start() if i + 1 < len(headings) else len(modules)
-            block = modules[header.start():stop]
+        heads = list(re.finditer(r"(?m)^### Module (\d+) — (.+)$", modules))
+        self.assertTrue(heads)
+        self.assertEqual(
+            [int(m.group(1)) for m in heads],
+            list(range(1, len(heads) + 1)),
+        )
+        owned = set()
+        first = {}
+        for index, head in enumerate(heads):
+            stop = heads[index+1].start() if index+1 < len(heads) else len(modules)
+            block = modules[head.start():stop]
             self.assertEqual(block.count("#### Outcomes"), 1)
             self.assertEqual(block.count("#### Lessons"), 1)
-            outcome_part, lessons = block.split("#### Lessons", 1)
-            mapped = set(re.findall(r"(?m)^- (SEF10-O\d+)$", outcome_part))
-            self.assertTrue(mapped)
-            self.assertTrue(mapped.issubset(known))
-            nums = [int(n) for n in re.findall(r"(?m)^(\d+)\. ", lessons)]
-            self.assertTrue(nums)
-            self.assertEqual(nums, list(range(1, len(nums) + 1)))
-            count += len(nums)
-        self.assertEqual(count, 66)
-        gate_ids = re.findall(r"(?m)^\*\*Milestone (M[1-6]) —", modules)
-        self.assertEqual(gate_ids, [f"M{i}" for i in range(1, 7)])
-        self.assertIn("same project", modules.lower())
+            refs, lessons = block.split("#### Lessons", 1)
+            ids = re.findall(r"(?m)^- (SEF10-O\d+)$", refs)
+            self.assertTrue(ids)
+            self.assertEqual(len(ids), len(set(ids)))
+            self.assertTrue(set(ids).issubset(known))
+            owned.update(ids)
+            for id_ in ids:
+                first.setdefault(id_, index)
+            ordinals = [int(n) for n in re.findall(r"(?m)^(\d+)\. ", lessons)]
+            self.assertTrue(ordinals)
+            self.assertEqual(ordinals, list(range(1, len(ordinals)+1)))
+            self.assertEqual(
+                len(re.findall(r"(?m)^\d+\. \*\*.+?\*\* — \S", lessons)),
+                len(ordinals),
+                "each lesson must have an observable objective, not a noun",
+            )
+        self.assertEqual(owned, known)
+        # Prerequisite-valid capstone development: no imposed module count.
+        for prior, applied in (
+            ("SEF10-O1", "SEF10-O2"),
+            ("SEF10-O2", "SEF10-O3"),
+            ("SEF10-O3", "SEF10-O5"),
+            ("SEF10-O5", "SEF10-O8"),
+            ("SEF10-O4", "SEF10-O8"),
+        ):
+            with self.subTest(preparation=f"{prior} before {applied}"):
+                self.assertLess(first[prior], first[applied])
+
+    def test_six_published_milestones_and_entry_vs_defense_boundaries(self):
+        source, _, modules, completion = parts()
+        gates = re.findall(r"(?m)^\*\*Milestone (M[1-6]) —", modules)
+        self.assertEqual(gates, [f"M{i}" for i in range(1, 7)])
+        for prior, later in (
+            ("**Prerequisite evidence is an entry gate**",
+             "**Select and bound one useful problem**"),
+            ("**An actual red requirement test**", "**A causal bug correction**"),
+            ("**Collect a genuine baseline**", "**Compare a bounded alternative**"),
+            ("**Separate clean-start replay**", "**Material reviewer findings**"),
+            ("**An unfamiliar bounded change unaided**",
+             "**Publish the evidence map and actual graduation decision**"),
+        ):
+            with self.subTest(sequence=f"{prior} before {later}"):
+                self.assertLess(modules.index(prior), modules.index(later))
+        for text in (
+            "before any project work", "missing course blocks entry",
+            "one useful", "same utility", "not a per-module lab",
+            "unfamiliar", "without an assistant", "uncertainty",
+            "source revision", "rights", "privacy", "retention",
+            "color-only", "self-review", "independent",
+        ):
+            with self.subTest(meaning=text):
+                self.assertIn(text.lower(), (source + modules + completion).lower())
 
     def test_every_prior_sef_course_has_unique_explicit_evidence_role(self):
         source, _, _, _ = parts()
