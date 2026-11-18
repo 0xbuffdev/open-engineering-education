@@ -20,9 +20,6 @@ EXPECTED_STUDY_ORDER = (
     "SEF1", "SEF2", "SEF11", "SEF3", "SEF4",
     "SEF5", "SEF8", "SEF6", "SEF7", "SEF9", "SEF10",
 )
-EXPECTED_OUTCOME_TOTAL = 147
-EXPECTED_ASSESSMENT_TOTAL = 68
-EXPECTED_NOMINAL_WEEKS = (115, 143)
 
 COURSE_ROW = re.compile(
     r"(?m)^\| \[(SEF\d+)\]\((SEF\d+\.md)\) \| "
@@ -145,7 +142,7 @@ class SEFProgramConsistencyTests(unittest.TestCase):
             set(EXPECTED_SEF_IDS) - {"SEF10"},
         )
 
-    def test_required_assessments_cover_all_147_outcomes_without_unknown_ids(self):
+    def test_required_assessments_cover_all_declared_outcomes_without_unknown_ids(self):
         course_outcomes = 0
         required_count = 0
         for row in rows():
@@ -179,8 +176,63 @@ class SEFProgramConsistencyTests(unittest.TestCase):
                 covered, set(course_ids),
                 f"{identity} has missing or incorrectly claimed outcomes",
             )
-        self.assertEqual(course_outcomes, EXPECTED_OUTCOME_TOTAL)
-        self.assertEqual(required_count, EXPECTED_ASSESSMENT_TOTAL)
+        # Published totals follow the actual declared outcomes and assessments.
+        # They are not targets or permanent curriculum size requirements.
+        self.assertIn(f"{course_outcomes} learning outcomes", text(CATALOG))
+        self.assertIn(f"{required_count} required summative assessments", text(CATALOG))
+
+    def test_all_published_outcomes_are_taught_in_real_ordered_modules(self):
+        # A whole-program guard against dropping teaching ownership for
+        # an assessed outcome. Module and lesson counts are intentionally
+        # derived from the course, not made into design requirements.
+        for row in rows():
+            identity = row["id"]
+            source = text(SEF / row["path"])
+            learning = source.split("\n## Learning outcomes\n", 1)[1].split(
+                "\n## Modules\n", 1
+            )[0]
+            known = set(re.findall(
+                rf"(?m)^- \*\*({identity}-O\d+):\*\*", learning
+            ))
+            modules = source.split("\n## Modules\n", 1)[1].split(
+                "\n## Completion requirements\n", 1
+            )[0]
+            heads = list(re.finditer(r"(?m)^### Module (\d+) — (.+)$", modules))
+            self.assertTrue(heads, identity)
+            self.assertEqual(
+                [int(h.group(1)) for h in heads],
+                list(range(1, len(heads) + 1)),
+            )
+            prepared = set()
+            for i, head in enumerate(heads):
+                finish = heads[i+1].start() if i+1 < len(heads) else len(modules)
+                block = modules[head.start():finish]
+                with self.subTest(course=identity, module=i+1):
+                    self.assertEqual(block.count("#### Outcomes"), 1)
+                    self.assertEqual(block.count("#### Lessons"), 1)
+                    mapping, lessons = block.split("#### Lessons", 1)
+                    ids = re.findall(
+                        rf"(?m)^- ({identity}-O\d+)$", mapping
+                    )
+                    self.assertTrue(ids)
+                    self.assertEqual(len(ids), len(set(ids)))
+                    self.assertTrue(set(ids).issubset(known))
+                    prepared.update(ids)
+                    ordinals = [
+                        int(n) for n in re.findall(r"(?m)^(\d+)\. ", lessons)
+                    ]
+                    self.assertTrue(ordinals)
+                    self.assertEqual(
+                        ordinals, list(range(1, len(ordinals) + 1))
+                    )
+                    self.assertEqual(
+                        len(re.findall(
+                            r"(?m)^\d+\. \*\*.+?\*\* — \S", lessons
+                        )),
+                        len(ordinals),
+                        "each lesson requires a concrete objective and task",
+                    )
+            self.assertEqual(prepared, known, identity)
 
     def test_duration_sum_is_explained_without_imposing_calendar_credit(self):
         total_min = 0
@@ -190,17 +242,22 @@ class SEFProgramConsistencyTests(unittest.TestCase):
             self.assertIn(len(numbers), (1, 2))
             total_min += numbers[0]
             total_max += numbers[-1]
-        self.assertEqual((total_min, total_max), EXPECTED_NOMINAL_WEEKS)
         curriculum = text(CATALOG)
+        # Derive both ranges from the current source, allowing an academic
+        # revision to change duration estimates without patching a magic number.
+        self.assertIn(
+            f"{total_min}–{total_max} course-weeks", curriculum
+        )
+        self.assertIn(
+            f"{total_min * 10:,}–{total_max * 15:,} focused hours",
+            curriculum,
+        )
         for term in (
-            "115–143 course-weeks", "1,150–2,145 focused hours",
-            "provisional", "parallel courses",
-            "147 learning outcomes", "68 required summative",
-            "not an elapsed-time requirement",
+            "provisional", "parallel courses", "not an elapsed-time requirement",
         ):
             self.assertIn(term.lower(), curriculum.lower())
 
-    def test_readme_has_nine_program_outcomes_and_navigable_study_guidance(self):
+    def test_readme_has_substantive_program_outcomes_and_study_guidance(self):
         curriculum = text(CATALOG)
         outcome_section = curriculum.split("## Learning outcomes\n", 1)[1].split(
             "\n## Program completion standard", 1
@@ -209,7 +266,14 @@ class SEFProgramConsistencyTests(unittest.TestCase):
             line for line in outcome_section.splitlines()
             if line.startswith("- ")
         ]
-        self.assertEqual(len(outcome_lines), 9)
+        self.assertTrue(outcome_lines)
+        description = " ".join(outcome_lines).lower()
+        for competency in (
+            "bit", "python", "discrete", "algorithms", "git",
+            "c11", "unix", "statistics", "ethical", "project",
+        ):
+            with self.subTest(program_competency=competency):
+                self.assertIn(competency, description)
         pathway = curriculum.split("## How the courses fit together\n", 1)[1].split(
             "\n## Workload and pacing", 1
         )[0]
@@ -292,6 +356,18 @@ class SEFProgramConsistencyTests(unittest.TestCase):
             f"**{expected_core} core, {expected_electives} electives** |",
             overview,
         )
+
+    def test_umbrella_migration_claim_matches_ai_and_sef_catalogs(self):
+        overview = text(PROGRAMS)
+        ai = text(ROOT / "curriculum" / "AI" / "README.md")
+        sef = text(CATALOG)
+        self.assertIn("AI1 now publishes", overview)
+        self.assertIn("AI2–AI9", overview)
+        self.assertIn("SEC courses still use legacy", overview)
+        self.assertIn("AI1 has been substantively migrated", ai)
+        self.assertIn("AI2–AI9 remain legacy", ai)
+        self.assertIn("eleven required draft courses", overview)
+        self.assertIn("All eleven courses are required", sef)
 
     def test_readiness_is_truthful_and_has_normative_sources(self):
         curriculum = text(CATALOG)
