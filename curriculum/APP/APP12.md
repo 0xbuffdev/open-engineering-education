@@ -31,7 +31,7 @@ This is an **optional Application Engineering elective**, never a hidden APP9 gr
 
 **Free reproducible study:** A pinned Node/TypeScript/Fastify and React toolchain, local PostgreSQL, browser DevTools and free HTTP/WebSocket clients plus a restartable local fan-out fixture are sufficient. Initial free provisioning can fetch dependencies, but assessed runs must use documented local inputs. No paid queue or broker, cloud account, public DNS, cross-region cluster, required participant panel or proprietary monitoring platform is necessary.
 
-The **17 learning outcomes** flow through 15 varied modules and **six required cumulative summative assessments**. Other exercises are formative. The 14–18-week duration and workload estimates are provisional. Structural parser success does not confer learner-tested or officially verified educational readiness.
+**Instructional sufficiency:** All 17 outcomes use 15 distinct modules and **six required cumulative summative assessments**. Each new protocol, concurrency, trust and accessibility mechanism requires a clear model/assumptions, worked observable trace, implemented or reasoned counterexample, correction and feedback before independent summative work. SSE framing and browser limits, WebSocket authenticated upgrade and backpressure, coherent SQL snapshot/watermark, generation-safe React state, server-authoritative edit conflicts and revoked live permissions cannot be flattened into one generic socket lesson. Formative investigations are not additional hidden graduation gates. The 14–18-week duration and workload are provisional; CI does not establish learner-tested or officially verified educational readiness.
 
 ## Learning outcomes
 
@@ -66,21 +66,17 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 #### Lessons
 
-1. **Course scope and historical context** — Contrast polling, long polling, push, collaboration and event streaming as product responses rather than fashionable infrastructure.
+1. **Why timely updates became a user-state problem** — Place polling, long-held HTTP, SSE and WebSockets in the history of stateful web experiences; separate familiar APP5 authenticated HTTP and APP6 monitoring from APP12's new notification loss, concurrent-client and lifecycle guarantees.
 
-2. **Define a credible user task** — Choose a protected shared workflow where stale status or slow updates matter to users.
+2. **A user task requiring honest shared state** — Choose one real React/Fastify/PostgreSQL workflow with two authorized users, two synthetic tenants and a stale-state consequence; identify when an on-screen change is not yet committed.
 
-3. **Authoritative facts versus signals** — Model PostgreSQL commits as truth and push events as possibly delayed notifications.
+3. **Committed facts, ephemeral signals and delayed observers** — Work through a transaction whose notification is dropped after commit and a notification received before the client has fetched authority; compare independent SQL and display outcomes.
 
-4. **Freshness and response objectives** — State eligible state-change tasks, target age, delays, permissions and user-visible fallback.
+4. **Freshness objective, scope and truthful fallback** — Define eligible committed updates, acceptable observed stale interval, reconnect deadline, resource budgets and meaningful manual/slow-path behavior, qualifying unsynchronized clocks.
 
-5. **Data and permission invariants** — Describe what may never be exposed, duplicated, overwritten or silently acknowledged.
+5. **Permission, ordering and consistency invariants** — Describe current tenant/object/field rights, per-room version and authoritative completed mutation, then identify one duplicate, gap, stale permission or false-success counterexample.
 
-6. **Reasonable workload envelopes** — Define synthetic tenants, update frequency, idle periods and controlled failure limits.
-
-7. **Architecture and trust map** — Locate browser, Fastify, SQL and notification process boundaries and who owns each action.
-
-8. **Independent local test harness** — Pin free tools, browser versions, synthetic data, real ports and disposable resources.
+6. **Local topology, trust and repeatable fault harness** — Map actual React, HTTPS/Fastify, PostgreSQL and optionally restartable notifier ownership, pin browser/runtime and bounded tenant fixtures, and show which behaviors are simulated rather than real network partitions.
 
 *Optional practice — contract critique:* Reject claims that an open socket implies durable delivery, universal order or human attention.
 
@@ -96,21 +92,19 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 #### Lessons
 
-1. **Conditional short polling** — Build ETag or version-based checks and measure empty requests and freshness.
+1. **Conditional polling, data revisions and empty response cost** — Implement real conditional GET/version-based short polling with authentication, actual no-change requests and a committed update; inspect HTTP cache behavior and measured staleness.
 
-2. **Long-polling response lifecycle** — Observe server pending wait, timeout, cancel, reconnection and operational resource cost.
+2. **Long-poll wait, timeout, cancellation and resource ownership** — Run an actual held response through proxy/backend with bounded wait, client disconnect and repeated request, comparing resource pressure and trustworthy user status.
 
-3. **SSE one-way streams** — Explain HTTP text/event-stream with a server-to-client update channel and ordinary mutation endpoints.
+3. **SSE's HTTP stream and independent mutation path** — Probe a genuine text/event-stream response and ordinary protected HTTP write, separating one-way event delivery from durable SQL commit and browser native reconnect.
 
-4. **WebSocket duplex channels** — Inspect HTTP upgrade, WSS origin, framing, close and independent command/notification flow.
+4. **WebSocket duplex upgrade and application command authority** — Inspect one real authenticated Origin-checked upgrade, duplex message and close; distinguish transport frames from validated application commands and acknowledged SQL effects.
 
-5. **Proxy and connection considerations** — Evaluate idle timeouts, buffering and HTTP/1 tab connection limits versus HTTP/2 stream support.
+5. **Proxy idle/buffering and browser connection budgeting** — Compare HTTP/1.x per-origin SSE tab exhaustion, negotiated HTTP/2 concurrent streams, proxy timeouts and buffered responses, while noting browser EventSource cannot set arbitrary Authorization headers and standard WebSocket lacks receive backpressure.
 
-6. **Matched workload comparison** — Compare actual update delay, bytes, open connections, CPU and errors under idle and burst load.
+6. **Measured transport choice under matching real tasks** — Repeat idle and burst synthetic sessions with actual committed read/write work and controlled snapshots; count update age, bytes, open resources, errors and unauthorized refusals for polling versus the chosen primary stream.
 
-7. **Correct failure interpretation** — Distinguish lost notification, rejected command, delayed request and persistent SQL state.
-
-8. **Browser API capability limits** — Compare EventSource header/credential constraints and browser WebSocket no built-in receive backpressure.
+7. **Failure and user-completion counterexample** — Disconnect a stream as the DB commits, compare a failed command versus missed push and use independent SQL/user observation to reject the claim that lowest socket latency is always best.
 
 *Optional practice — transport decision:* Select the least costly sufficient option and define what evidence would justify switching.
 
@@ -126,19 +120,19 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 #### Lessons
 
-1. **Correct stream response** — Emit UTF-8 text/event-stream with proper event/data/id/retry fields and blank-line dispatch.
+1. **WHATWG SSE parsing and newline dispatch** — Transmit valid UTF-8 text/event-stream with comment, data, event, id and retry, multiline data and empty-line dispatch; show an incomplete frame that must not dispatch.
 
-2. **Named events and payload validation** — Separate native stream parsing from typed application event schema enforcement.
+2. **Named events, runtime schema and trusted data** — Separate browser EventSource parser events from versioned app payload validation; reject a type-correct untrusted tenant/room label rather than using it to grant access.
 
-3. **EventSource native reconnect** — Observe browser-managed retry and Last-Event-ID after an actual interrupted SSE connection.
+3. **Native reconnect, retry semantics and cleared event ID** — Interrupt an actual EventSource connection, inspect Last-Event-ID and native retry; exercise empty id field resetting the browser's stored ID and do not assume native reconnection replays missing server history.
 
-4. **Authorized Resume Cursors and Replay** — Bind last-event cursors to tenant/room/version and reject mismatched or malformed input; replay events still available within explicit server retention without depending on browser memory.
+4. **Authenticated retention cursors, not bearer authorization** — Bind server-recognized cursor to room/tenant/epoch/current identity with limits and a retained server-side source; test valid replay, foreign-room and oversize/malformed Last-Event-ID independently of the browser's internal state.
 
-5. **Expired or invalid cursor** — Reject an unfulfillable replay gap and require fresh authorized snapshot resync.
+5. **Expired cursor versus closed stream and fresh snapshot** — Distinguish a cursor below actual retained floor from invalid authorization, mark replay unfulfillable through an explicit app-level resync path and fetch a freshly authorized SQL snapshot, not silent gap skipping.
 
-6. **Proxy flushing and keepalives** — Exercise comment heartbeats, buffering, idle closes and cancellation with local settings.
+6. **Proxy flush, comments and canceled subscriber cleanup** — Show an actual streamed comment heartbeat and update under local buffering/timeout settings; inspect memory/registry cleanup after cancellation without confusing a keepalive with durable event history.
 
-7. **Session expiry during a stream** — Close or block invalid subscriptions and verify old cursor cannot disclose a revoked resource.
+7. **Revocation during live SSE and replay refusal** — Expire/revoke an authenticated session while connected, stop private events and reject a previously valid cursor on reconnect; independently inspect that SQL and protected content remain inaccessible.
 
 *Optional practice — foreign-room resume:* Demonstrate unauthorized Last-Event-ID misuse then repair cursor scope and fallback.
 
@@ -154,21 +148,21 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 #### Lessons
 
-1. **Inspect real HTTP upgrade** — Enforce explicit trusted Origin and appropriate authenticated cookie/token session handling.
+1. **WebSocket handshake, cookies, Origin and hijack denial** — Run a real WebSocket upgrade using a verified session and exact allowed Origin, then deny a cross-site browser handshake and unauthenticated client; Origin is a request signal, not proof of user identity.
 
-2. **Typed messages with bounded frames** — Validate application type, schema, resource and maximum bytes before processing.
+2. **Application frame validation, types and limits** — Accept only a bounded schema-validated event/command with permitted room/action/field; exercise oversized, malformed and unauthorized frames before expensive fan-out.
 
-3. **Transport connection versus permission** — Distinguish accepted socket, authenticated user and authorized room/action.
+3. **Handshake accepted is not continuous authorization** — Keep separate connection identity, scoped room membership, permitted publish actions and current role state; test an allowed socket attempting a newly forbidden command.
 
-4. **Browser protocol capabilities** — Explain readyState, bufferedAmount, close codes and no JS Ping control-frame API.
+4. **Browser WebSocket state and bounded send-side signals** — Inspect readyState, bufferedAmount and close/error status; demonstrate why bufferedAmount only counts browser outbound queued bytes and does **not** bound incoming receive work or permit JavaScript protocol Ping.
 
-5. **Server Ping/Pong and client heartbeat** — Compare server-side protocol liveness with optional application-level status heartbeat.
+5. **Server Ping/Pong versus app-visible heartbeat** — Observe a server-controlled RFC6455 Ping/Pong, and separately test an application status heartbeat for browser-visible liveness; avoid claiming one proves durable SQL state.
 
-6. **Subscribe and unsubscribe transitions** — Limit per-connection rooms and remove abandoned memberships after close or logout.
+6. **Membership transitions and identity-switch cleanup** — Subscribe/unsubscribe with max room count, verify cleanup on route/logout/revocation and test a late packet from the former user/room.
 
-7. **Publish action and acknowledgement** — Clearly differentiate accepted request, committed mutation and delivered notification.
+7. **Command receipt, DB commit and push acknowledgement** — Send a real client command, distinguish parsed/accepted, committed mutation and broadcast delivery, then lose one reply after SQL commit and verify safe idempotent client reconciliation.
 
-8. **Error, timeout and cleanup** — Handle malformed payloads, close, session expiry, route navigation and resource release.
+8. **Invalid frames, close behavior and bounded failure path** — Test malformed payloads, slow writes, expired sessions and clean close, recording server membership/byte limits and actual retained authoritative data after the connection dies.
 
 *Optional practice — forged publish:* Reject a syntactically valid WebSocket message attempting a forbidden tenant action.
 
@@ -184,21 +178,21 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 #### Lessons
 
-1. **Event versus authoritative record** — Use durable resource revisions to identify what a notification actually represents.
+1. **Authoritative row version versus notification delivery** — From an actual PostgreSQL transaction produce a committed resource revision, then show two delivered notifications with no newer business fact, and a committed fact with no delivered notification.
 
-2. **Stream envelope design** — Define event ID, schema version, room/tenant, aggregate revision and safe payload fields.
+2. **Cursor envelope, schema, room and epoch boundaries** — Define stable server-issued event ID, resource/tenant/room scope, stream epoch and schema revision with nonsecret payload, and test wrong-room ID reuse.
 
-3. **Monotonic per-resource sequence** — Use committed server-issued version rather than client timestamps for ordering.
+3. **Per-key version assignment in the commit boundary** — Use real atomic PostgreSQL increment/constraint for a per-resource version, contrast timestamp/nontransactional app counter and show revision continuity under two writers and process restart.
 
-4. **Duplicate and missing versions** — Exercise repeated events, skipped events, delayed earlier versions and correction logic.
+4. **Duplicate, gap and late-version test table** — Deliver 4,4,6,5 against acknowledged revision 3; distinguish discard, buffer, gap/resync and what independently verified SQL version is now authoritative.
 
-5. **Epoch and stream restart semantics** — Avoid reused or incomparable sequence IDs after process restart or room recreation.
+5. **Epoch reset and incomparable stream histories** — Restart a notifier or recreate a room and test a reused sequence with a new epoch, refusing stale cursor arithmetic or cross-tenant state leakage.
 
-6. **Replay limits and retention** — Define earliest/latest cursor and exact conditions requiring a full snapshot.
+6. **Real retention floor and authorized replay window** — Delete old optional notification records under a controlled retention policy, prove the server knows its earliest safely replayable version and forces an authorized full snapshot if incomplete.
 
-7. **At-most and at-least-once boundaries** — Describe best-effort push, replayable reads and server-command idempotency distinctly.
+7. **Transport delivery, command idempotency and user completion** — Build a table contrasting ephemeral best-effort notice, retained at-least-once replay, duplicate delivery, protected business commit and end-to-end status, explicitly refusing exactly-once claims.
 
-8. **Clock skew and causality** — Demonstrate why browser wall-clock time cannot prove total order or one-way latency.
+8. **Clock skew and observational order limits** — Skew client wall time, use comparable server monotonic durations only within one clock domain and base ordering on committed revisions, not perceived browser arrival timestamps.
 
 *Optional practice — stale overwrite:* Prevent an old notification from replacing a newer committed version in client state.
 
@@ -214,21 +208,21 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 #### Lessons
 
-1. **Authorized initial state** — Read room/tenant-scoped snapshot and a server-authoritative revision or watermark.
+1. **Consistent protected SQL snapshot plus watermark** — Read current authorized data and a matching server-issued committed version in a coherent database snapshot/transaction; test why independent read-committed queries can pair incompatible content and watermark.
 
-2. **Snapshot-to-subscribe race** — Induce a mutation between snapshot and stream registration and inspect the missing update.
+2. **Demonstrate the snapshot → subscribe lost-update race** — Pause before stream registration, commit an actual second-client transaction and show a naive subscriber remains stale even though its socket is open.
 
-3. **Buffered subscribe-first strategy** — Register a stream before snapshot then apply buffered deltas past the snapshot version.
+3. **Subscribe-buffer-snapshot with proven event boundary** — Register authorized subscription first and buffer bounded events while retrieving a consistent protected snapshot, dedupe/apply only versions after its watermark and handle overflow by full resync.
 
-4. **Replay-after-watermark strategy** — Obtain a consistent snapshot revision and replay all subsequent retained authorized events.
+4. **Watermark → retained replay with actual contiguous history** — Take a transaction-consistent SQL snapshot/watermark, replay every later authorized revision from the retention floor and demonstrate a case where a pruned/incomplete event source invalidates the protocol.
 
-5. **Ordered delta application** — Reject wrong stream epochs and gaps, and avoid applying stale out-of-order changes.
+5. **Versioned delta application, epoch/gap checks** — Apply only contiguous permitted versions or an explicitly proven commutative policy; reject wrong epoch, stale actor and out-of-order updates, with a concrete failing trace.
 
-6. **Snapshot replacement vs patch** — Compare full authorized refetch against carefully versioned incremental updates.
+6. **Patch versus complete snapshot and authorized replacement** — Compare incremental patches with full resource replacement for a slow/stale reader, checking whether removed fields and a revoked role are purged from client state.
 
-7. **Retention gap and recovery** — Signal incomplete replay and securely replace state rather than silently skipping commits.
+7. **Overflow, retention gap and known recovery condition** — Exhaust bounded replay/buffer capacity, refuse false catch-up, request a clean currently authorized snapshot and verify final SQL/client equality after another transaction.
 
-8. **Cross-account and page switch** — Cancel old reads and streams and ignore late events from prior generation identifiers.
+8. **Account switch and old generation race guard** — Abort room/subscription fetch and ignore old-generation delayed event/snapshot after switching tenant or session; confirm previous-user private state never flashes.
 
 *Optional practice — convergence proof:* Verify multiple clients match independent PostgreSQL after a forced bootstrap gap.
 
@@ -244,21 +238,21 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 #### Lessons
 
-1. **Explicit browser sync state** — Model disconnected, connecting, live, catching-up, stale, forbidden and permanently failed states.
+1. **Explicit UI freshness and committed-work state machine** — Model disconnected, authenticating, catching-up, live, stale, forbidden and terminal errors, separately tracking locally pending, server committed and unconfirmed operations.
 
-2. **React Effect cleanup** — Own subscriptions by user/room and avoid duplicate sockets after rerender or Strict Mode setup.
+2. **React subscriptions and Strict Mode cleanup** — Use React Effect lifecycle for room/session subscriptions, reproduce double-listener setup and actual cleanup after route change, including tolerated dev Strict Mode replay.
 
-3. **Backoff and reconnect jitter** — Bound retries and honor native EventSource behavior separately from custom WebSocket logic.
+3. **Native SSE retry versus application WS jitter** — Inspect EventSource's browser-managed retry and finite server rate controls, compare a custom WebSocket backoff/jitter policy and reject a home-grown duplicate SSE reconnect loop.
 
-4. **Stale async result guards** — Ignore fetch and stream results tied to old tenant, route, authentication or generation.
+4. **Late fetch and packet after account/room change** — Race two session-scoped bootstrap requests and a delayed SSE/WS message, using current generation and server authority to reject stale private content.
 
-5. **Pending and uncertain mutations** — Reflect accepted, pending, committed, rejected and unknown outcomes without false success.
+5. **Accepted/unknown commit versus visible success** — Lose an HTTP reply after PostgreSQL commit while a notification arrives late; reconcile client attempt/revision with current server truth rather than announce an unconfirmed success.
 
-6. **Page visibility and bfcache** — Evaluate background throttling, pagehide/pageshow and transport restoration in supported browsers.
+6. **Visibility, bfcache and page revival on real browser** — Exercise pagehide/pageshow, visibility and back-forward restoration where supported, considering persistent JS heap and changed permissions before resuming the stream.
 
-7. **Offline/manual fallback** — Provide accessible refresh or polling when live updates cannot connect.
+7. **Manual fallback accessible during long outage** — Offer an actual keyboard-usable protected refresh/conditional polling path and honest offline/stale states, not a disabled interface that assumes the push transport always returns.
 
-8. **Session expiration and logout** — Stop replaying protected data and re-bootstrap after current valid authorization.
+8. **Expired session and terminal unauthorized reconnect** — Close private connections and clear old tenant state on logout/revocation, ensure unauthorized retries stop and new permitted login bootstrap requires fresh validation.
 
 *Optional practice — duplicate-subscription defect:* Repair a React lifecycle issue creating multiple stale streams after navigation.
 
@@ -274,21 +268,21 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 #### Lessons
 
-1. **Authoritative update with revision** — Use a server-side resource version/If-Match or equivalent compare-and-set contract.
+1. **Authoritative revision precondition for every edit** — Use actual resource version/If-Match or server-side compare-and-set for a protected mutation, test one valid edit and one stale edit independently of push order.
 
-2. **Real competing clients** — Submit simultaneous valid actions through separate HTTP sessions and observe real PostgreSQL outcomes.
+2. **Simultaneous real clients against PostgreSQL** — Schedule two authenticated separate HTTP sessions writing the same resource, inspect row constraints/revisions and show how socket arrival order differs from committed order.
 
-3. **Meaningful conflict responses** — Report 409/412 or documented domain conflict and preserve the attempted edit.
+3. **Conflict status and accessible current-versus-draft review** — Return a documented 409/412/domain conflict, preserve the user's draft with real current state and test keyboard/focus and screen-reader explanation.
 
-4. **Idempotent operation identity** — Bind mutation retry IDs to validated principal, resource and content.
+4. **Idempotent mutation identity under lost acknowledgement** — Bind retries to verified user/resource/action/fingerprint on server, lose a post-commit response and show no repeated business effect despite duplicate push events.
 
-5. **Domain merge versus rejection** — Choose appropriate field merge, append-only event or explicit user conflict.
+5. **Policy-specific merge versus authoritative rejection** — Compare independent per-field merge, append-only activity and a protected nonmergeable invariant, avoiding a universal merge policy for permissions or inventory.
 
-6. **Limitations of last-write-wins** — Show timestamp/order assumptions that silently lose work or override a valid change.
+6. **Why last-write-wins loses legitimate work** — Replay two competing writes with skewed client timestamps and show a lost update; require an explicit user/developer policy for discard, conflict or intentional merge.
 
-7. **OT and CRDT design comparison** — Explain where automatic convergence helps and what additional complexity/metadata it requires.
+7. **OT/CRDT alternatives, assumptions and trade-offs** — Work through a small concurrent text or set operation trace to understand convergence, metadata and conflict semantics; full collaborative editor/consensus implementation is not mandatory.
 
-8. **Out-of-order command acknowledgements** — Prevent delayed events from overriding a more recent confirmed user revision.
+8. **Delayed acknowledgement and current-user state guard** — Cause an old command result/notification to arrive after a newer revision or user switch, verify UI never overwrites committed data or private current-identity state.
 
 *Optional practice — two-user recovery:* Demonstrate a conflict and reconcile both clients without inventing missing updates.
 
@@ -304,21 +298,21 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 #### Lessons
 
-1. **Handshake and Origin defense** — Test cross-site WebSocket handshake and cookie-session trust against an allowlist.
+1. **Cross-site WebSocket hijack and origin boundary** — Use a controlled cross-origin browser test with cookie-authenticated handshake, deny unapproved Origin and independently verify current session—CORS headers alone do not protect WS upgrade.
 
-2. **Room and resource subscriptions** — Check user/tenant membership independently for initial join and every replay request.
+2. **Per-room and per-cursor server authorization** — Join then revoke membership; independently attempt guessed room IDs, foreign tenant event streams and retained cursor replay, inspecting whether any private payload is emitted.
 
-3. **Per-message publish rights** — Verify current server-side action/object/field permissions on each incoming message.
+3. **Message-level object/action/property authorization** — Attempt syntactically valid publish/subscribe edits with forged role and forbidden fields on an already accepted socket; deny real PostgreSQL side effects.
 
-4. **Session revoke while connected** — Recheck current rights or close protected streams after logout, expiry and privilege change.
+4. **Revocation while connected and queued-events purge** — Revoke an authorized account with a real live room, verify active connection closes or is rechecked and already buffered private messages are not delivered after revocation.
 
-5. **Untrusted cursor and room IDs** — Validate forged, oversized, stale and cross-tenant stream cursors and room identifiers.
+5. **Untrusted stream cursor, length and epoch policy** — Send oversized, forged, expired, foreign-room and changed-epoch resume values, rejecting/rebootstrapping safely without using a cursor as proof of current identity.
 
-6. **Service trust versus user claims** — Do not authorize based solely on forwarded client headers or message fields.
+6. **Service actor versus caller-provided user claims** — Show server-authorized service dispatch distinct from human participant rights; reject client-supplied proxy headers, room metadata or websocket JSON identity as authorization.
 
-7. **Connection floods and message size** — Apply bounded unauthorized handshake, frame, room and rate policies.
+7. **Handshake flood, room/cardinality and payload protection** — Rate/bound unauthorized connection attempts, subscriptions, message/frame bytes and reconnect work ahead of database or fan-out allocation.
 
-8. **Privacy-safe event and audit payload** — Keep protected fields, raw auth tokens and private presence out of unauthorized logs.
+8. **Private payload/logs and independent negative matrix** — Review room events and redacted diagnostic fields, test old user/tenant after role removal, and verify forbidden HTTP/WS/SQL results rather than count closed sockets alone.
 
 *Optional practice — cross-tenant leak:* Seed a guessed room subscription and prove it produces no protected event or DB effect.
 
@@ -335,21 +329,21 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 #### Lessons
 
-1. **Native WebSocket backpressure limits** — Demonstrate why browser WebSocket lacks automatic receiving flow control.
+1. **Classic browser WebSocket has no receive backpressure** — Under a bounded high-rate local producer, demonstrate incoming processing overrun and growing app work while explaining why WebSocketStream/WebTransport are nonrequired alternatives, not automatic browser WebSocket controls.
 
-2. **Bounded outgoing queues** — Limit per-client bytes/messages and report explicit overflow action.
+2. **Explicit bounded server per-client send queue** — Choose queue-byte, item-count, age and aggregate tenant budgets; overflow triggers a defined coalesce/disconnect/resync response rather than unbounded memory.
 
-3. **Send buffering and drain** — Inspect server write pressure and browser bufferedAmount with documented API limitations.
+3. **Write backpressure versus browser outbound bufferedAmount** — Inspect actual Node/WS server socket writable drain or library buffered state and browser bufferedAmount for **outgoing** messages; never claim either bounds browser receive work.
 
-4. **Fair work across tenants** — Prevent one hot room or unauthenticated source from exhausting peer capacity.
+4. **Hot room and fair client/tenant scheduling** — Send a burst from one legitimate tenant while another performs a protected task, measuring queue age, rejection and resource share, with current access enforced before fan-out.
 
-5. **Publish and payload quotas** — Limit frames, requests, event-size, room-count and parser work before expensive fan-out.
+5. **Publish, parser and membership rate enforcement** — Test oversized frames, invalid payloads, excessive room joins and fast publishers, applying rate/CPU/memory and subscription limits before expensive serialization.
 
-6. **Slow-client injection** — Pause a subscriber and inspect queue bytes, disconnect/recovery and unaffected legitimate clients.
+6. **Paused slow reader and healthy peer preservation** — Throttle a controlled subscriber, measure bytes/memory/age and explicit close/resync or replaceable coalesce; prove unaffected authorized clients still reconcile.
 
-7. **SSE server-write backpressure** — Respect drain, cancellation and finite pending events with a local proxy where applicable.
+7. **SSE HTTP response draining and cancellation** — Force a paused HTTP stream consumer, inspect server write buffering, drain and client cancellation under local proxy, then bound pending notices without treating write acceptance as delivery.
 
-8. **Coalescing versus durable commands** — Drop replaceable notifications only when a snapshot can recover persisted business state.
+8. **Drop only replaceable notifications; never business truth** — Coalesce status-change *hints* only if an authorized SQL snapshot can restore all state; demonstrate a case where a discarded uncommitted user action would be a correctness failure.
 
 *Optional practice — overflow diagnosis:* Fix memory growth from a disconnected subscriber retaining an unlimited stream buffer.
 
@@ -364,21 +358,19 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 #### Lessons
 
-1. **Presence is not guaranteed attention** — Define recent validated activity rather than definitive human online status.
+1. **Presence lease is approximate, not proof of attention** — Define bounded server-observed recent activity and what a user is allowed to infer; compare a silent backgrounded tab with a genuinely active room participant.
 
-2. **Lease renewal and expiry** — Model join, refresh, timeout, disconnect and crash with finite server-managed TTL.
+2. **Lease renewal, monotonic expiry and crash behavior** — Use server-owned TTL/clock boundaries for join/renew/expiry, intentionally drop disconnect, and verify eventual absence without assuming reliable browser close notifications.
 
-3. **Multiple tabs and identities** — Aggregate approved connections carefully without marking a user absent after one tab closes.
+3. **Multi-tab reference/identity and logout semantics** — Maintain separately authorized tab/subscription identities, close one of two tabs and keep user present if appropriate; revoke all after logout or permission change.
 
-4. **Protocol heartbeat versus app liveness** — Distinguish browser limitations, server Ping/Pong and client-visible status.
+4. **Typing and cursor hints with privacy-safe throttling** — Bound per-room ephemeral typing/selection rates and TTL, never persist private draft text, and demonstrate that presence notifications cannot grant permissions.
 
-5. **Throttled ephemeral typing** — Limit per-room rates and avoid persisting private draft text in notification history.
+5. **Ghost members and sleep/network-loss counterexample** — Suspend a test client, bypass close handshake and inject lost heartbeat, observe a ghost until lease expiry and reconcile server membership fairly.
 
-6. **Ghost users and clock assumptions** — Test network loss, sleep and missed disconnect against expiration semantics.
+6. **Scope, consent and current-permission presence** — Authorize who may see a user online/typing and for how long, purge after room/role change and document narrow retention without inferring human attention.
 
-7. **Presence privacy and consent** — Broadcast only legitimately needed activity to currently authorized participants.
-
-8. **Accessible lower-rate alternatives** — Offer textual state and manual refresh without flickering or endless announcements.
+7. **Accessible quiet updates and manual presence refresh** — Provide meaningful low-frequency text state, accessible keyboard focus and an alternative refresh, avoiding endless assistive live-region announcements.
 
 *Optional practice — ghost-presence repair:* Correct a stale member list after a sudden disconnected or terminated process.
 
@@ -395,21 +387,21 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 #### Lessons
 
-1. **Single-process room registry** — Implement local subscription index and distinguish memory-resident updates from SQL facts.
+1. **Owned single-process subscription registry baseline** — Inspect actual current room membership and cache events in one process while keeping authoritative writes in PostgreSQL; test a notifier restart that loses this ephemeral registry.
 
-2. **Multiple server instances and routing** — Explain sticky connections, node ownership and why in-memory fan-out does not cross processes.
+2. **Two socket servers do not share in-memory subscribers** — Run locally isolated processes or a controlled equivalent, demonstrate that a room update on one process misses another and test connection routing/affinity consequences.
 
-3. **Optional local broker comparison** — Use controlled in-memory adapter or free local pub/sub service without paid requirements.
+3. **Optional free pub/sub adapter and limits** — When useful, link locally controlled fan-out processes through a free pub/sub fixture, distinguish ephemeral notification relay from retained ordered SQL event history and avoid mandatory broker subscriptions.
 
-4. **Loss of notification process** — Stop an independently restartable fan-out component while PostgreSQL commits correct state.
+4. **True independent notifier-process crash with SQL writes** — Stop the actual restartable notification layer while separate app PostgreSQL mutations commit, inspect missing pushes and verify private business state never disappears.
 
-5. **Replay or snapshot after restart** — Recover clients via authorized revisions rather than claiming lost ephemeral events were delivered.
+5. **Authenticated replay or snapshot after notifier reboot** — Reconnect clients with valid room identity, known epoch/cursor and retained authoritative source or complete snapshot; show why only replaying in-memory vanished notices cannot recover.
 
-6. **Cross-process ID propagation** — Preserve per-room versions and trace IDs without assuming global ordering.
+6. **Correlation without imagined global total order** — Propagate only safe stream/operation/room revision markers across processes, demonstrate duplicate/late notices and avoid inferring clock-synchronized total order.
 
-7. **Reconnect surge handling** — Bound admission, replay work and jitter under a synchronized network restart.
+7. **Reconnect thundering herd with finite admission** — Trigger bounded simultaneous 2–N local clients reconnecting after process loss, measure retry/jitter, replay slots and current-session denial before resync.
 
-8. **Topology and maintenance cost** — Compare sockets, DB connections, proxy limits, incident labor and monitoring complexity.
+8. **Maintainability and simpler alternative decision** — Compare one-process SSE, polling and local pub/sub on connections, SQL reads, memory, observability and incident response; defend not adding a broker if no supported need.
 
 *Optional practice — no-broker decision:* Show why simpler polling or one-process SSE can be optimal for the actual use case.
 
@@ -426,21 +418,19 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 #### Lessons
 
-1. **User-centered freshness metrics** — Measure actual correct client state age and successful user task rather than only open sockets.
+1. **Correct authorized client freshness and completed work** — Define an eligible committed resource revision and actual authorized client-visible state with independent SQL snapshots, refusing an open-socket metric as user-task success.
 
-2. **Event delivery timing caveats** — Separate same-process monotonic durations from clock-skewed browser/server wall time.
+2. **Clock domain, propagation samples and uncertainty** — Use server monotonic event durations and client-observed intervals without subtracting unsynchronized browser/server wall timestamps; report sample size, errors and missing events.
 
-3. **Gap, replay and stream metrics** — Record current cursor, retained floor, resync duration and failed catch-up reasons.
+3. **Gap, floor, replay and complete-state restoration** — Track server-issued stream epoch, retained floor, client cursor, gap detection and verified snapshot reconciliation latency with no raw tenant identifiers.
 
-4. **Security and bounded-buffer counters** — Track rejected subscriptions, auth expiry, slow readers and queue occupancy safely.
+4. **Rejected rooms, revoked sessions and finite queue measures** — Count authentically denied subscribes/publishes, current connected clients, buffer bytes and slow-consumer policy, limiting label cardinality and sensitive logging.
 
-5. **Controlled failure matrix** — Inject delayed, missing, duplicate and reordered messages plus wrong identities and role change.
+5. **Independent lost/duplicated/reordered live fault schedule** — Use seeded pause, kill, delay, duplicate, foreign-room cursor and changed role tests against real SSE/WS clients, with a baseline failing trace and corrected state.
 
-6. **Independent multi-client DB tests** — Compare two browser clients, two tenants and authoritative SQL after each injected fault.
+6. **Two independent clients and actual SQL truth oracle** — Compare two browser/HTTP identities across tenant boundaries and concurrent writes; inspect committed row versions rather than infer correctness from synchronized UI screenshots.
 
-7. **Reconnect storm scenario** — Produce finite synchronized reconnect attempts and measure resources, failure rates and convergence.
-
-8. **Privacy-aware fixture and logs** — Seed synthetic records and redact IDs/tokens/content while preserving diagnostic correlation.
+7. **Capacity- and identity-aware reconnect experiment** — Exercise bounded reconnect storms including revoked sessions and missing replay, measure CPU, attempts, access denial and complete client resync rather than raw connection restoration.
 
 *Optional practice — false-green monitor:* Catch a metrics page reporting healthy sockets despite stale or unauthorized room state.
 
@@ -457,25 +447,23 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 #### Lessons
 
-1. **Manual and low-bandwidth interaction** — Preserve meaningful application use when realtime transport is absent.
+1. **Manual low-bandwidth authorized task pathway** — Keep protected read/write and a real user-recoverable refresh possible without SSE/WS; show what remains correct after a prolonged transport failure.
 
-2. **Moderate live-region announcements** — Prioritize significant status updates without screen-reader or focus overload.
+2. **Live-region pacing, keyboard and focus stability** — Use a restrained ARIA status/announcements strategy on real updates and bursts, compare assistive-tech checks where supported, and avoid stealing focus on every notification.
 
-3. **Pending, stale and conflicting content** — Show correct user-facing language and keyboard-accessible action to reconcile.
+3. **Explicit stale, pending, conflict and forbidden states** — Show honest disconnected/unknown-commit/conflict/reauth UI, actual server-authorized current state and keyboard-accessible action; never mark a delivered hint as committed work.
 
-4. **Presence disclosure limits** — Scope typing/cursor/online information to authorized participants and legitimate product need.
+4. **Scoped presence and private activity disclosure** — Test room membership and current authorization before distributing cursor, typing or status hints, and provide a less intrusive user choice with bounded retention.
 
-5. **Logout, account swap and multi-tab privacy** — Stop previous streams and remove sensitive cached or replayed state.
+5. **Logout, old account and multi-tab secret purge** — Clear cached/queued previous-user data across React state, page restoration and stream events; simulate a late event after identity switch and verify no private DOM flash.
 
-6. **Retention and participant consent** — Declare event history and telemetry periods, minimizing personal activity trails.
+6. **Retention, participation rights and evidence limits** — Document retained notice cursor floor, optional activity trails and user privacy boundaries without claiming participant consent, external real-user observation or formal WCAG verification.
 
-7. **Bandwidth and CPU trade-offs** — Compare per-keystroke push with batched, throttled or pull-based decisions.
-
-8. **Operator recovery instructions** — Document diagnosing room leaks, cursor expiry, proxy close and broker/notification outage.
+7. **Operator fault recovery and accessible handoff** — Publish a short actionable local playbook for expired cursor, leaked room, proxy idle timeout and notifier loss, with real SQL state check and keyboard-friendly user fallback.
 
 *Optional practice — deceptive success badge:* Fix UI claiming a write committed merely because a push notification arrived.
 
-### Module 15 — Integrated Recoverable Realtime Feature and Defense
+### Module 15 — One Recoverable Realtime Feature and Independent Defense
 
 #### Outcomes
 
@@ -499,33 +487,21 @@ The **17 learning outcomes** flow through 15 varied modules and **six required c
 
 #### Lessons
 
-1. **Choose a shared authorized product task** — Extend APP5 real React/Fastify/PostgreSQL with a justified freshness requirement.
+1. **One actual collaborative task and previously accepted judgments** — Reuse the evolving APP5 product, cite independent accepted APP12-AS1–AS5 evidence and identify the real SQL record, protected room and permitted peer updates without creating six separate apps.
 
-2. **Implement comparable transports** — Run polling plus a primary SSE or WebSocket path and a bounded security/protocol probe of the other.
+2. **Reproduce selected protocol, version and bootstrap behavior** — From a clean pinned local fixture, run polling plus primary stream and alternate protocol probe, perform a consistent watermark/bootstrap and show one actual SQL/protected-user state convergence and a missed-notice correction.
 
-3. **Declare authorized stream contract** — Publish room/tenant identity, version, epoch, snapshot watermark, retention and gap behavior.
+3. **Restore correct users under revocation, overload and outage** — Recheck relevant accepted two-client conflicts, current role/room/replay denial, bounded slow-reader queue, lease expiry, browser lifecycle and restartable notifier outage with real persisted PostgreSQL truth.
 
-4. **Secure connect and message actions** — Verify Origin, session, live room permission, per-command trust and logout cleanup.
+4. **Assessor introduces unfamiliar bounded live failure** — Independently reproduce a new snapshot-to-subscribe race, expired/forged cursor, old-account packet, missing version, stale permission, slow client or reconnect storm, predicting a user-visible and authoritative-state failure before implementation.
 
-5. **Demonstrate race-safe bootstrap** — Inject a commit between snapshot and subscription and recover it exactly by versioned authority.
+5. **Causal correction and focused independent regression** — Fix or safely reconcile the unfamiliar scenario with before/after actual HTTP/SSE/WS/SQL and client evidence, rerun affected already accepted AS1–AS5 invariants and disclose any unsupported browser/clock/topology guarantee.
 
-6. **Prove multi-client convergence** — Force missed/duplicate/out-of-order notifications, cursor expiry and identity change.
-
-7. **Test concurrent editing semantics** — Use separate real sessions/SQL to show conflicts and accessible non-lossy reconciliation.
-
-8. **Protect slow peers and resource limits** — Bound buffers, payloads, room membership, retry and tenant quotas under bursts.
-
-9. **Test approximate presence and lifecycle** — Observe multi-tab lease expiration and private activity controls after a sudden close.
-
-10. **Interrupt push/fan-out and restore** — Restart a real local notification layer while persistent state remains correct.
-
-11. **Compare observability and UX costs** — Inspect user-state freshness, resource and errors, accessibility, privacy and operating trade-offs.
-
-12. **Handle unfamiliar bounded failure** — Diagnose or correct a new stream, race, room authorization, slow reader or reconnect incident.
+6. **Clean technical defense with honest transport and human costs** — Demonstrate user-accessible manual recovery and explain source authorship, server authority, protocol choice, latency/buffering, privacy, optional broker versus simple design and measurement limitations through equivalent accessible review.
 
 ## Completion requirements
 
-All **APP12-O1–APP12-O17** must be substantiated through the **six mandatory summative assessments**. One coherent APP5 application and controlled independent local notification process may supply evidence for all six. Practice lessons, transport experiments and optional technologies are formative except where specifically required in a public summative assessment; there are no unpublished graduation gates.
+All **APP12-O1–APP12-O17** require six **independently decidable** summative assessments: AS1 actual transport/protocol comparison; AS2 coherent bootstrap, gap/replay and two-client PostgreSQL convergence; AS3 live identity/room/permission denial; AS4 bounded buffers, presence and actual notifier process interruption; AS5 trustworthy freshness/reconnect and accessible degraded use; AS6 a **new unfamiliar** bounded failure and independent technical defense. One evolving APP5 product and separately controlled local notifier are sufficient. **Previously accepted AS1–AS5 evidence may be referenced, not resubmitted as six products; AS6 cannot replace a missing decision.** Practice, optional brokers and this elective never create APP9 graduation gates.
 
 | Required assessment | Required outcome coverage | Principal evidence |
 | --- | --- | --- |
@@ -557,39 +533,39 @@ All **APP12-O1–APP12-O17** must be substantiated through the **six mandatory s
 
 - **APP12-AS1** (required working transport comparison and standards-aware protocols)
   - Outcomes: APP12-O1, APP12-O2, APP12-O3, APP12-O4, APP12-O14
-  - Work: Choose one legitimate authenticated APP5 user task and implement an actual conditional/short polling path plus one primary production-style **SSE or WebSocket** notification path. Also demonstrate a narrow locally working probe of the *other* streaming protocol: a valid SSE event frame, reconnect and Last-Event-ID, or a valid WebSocket upgrade, authorized schema-checked exchange and close. Compare idle and burst behavior with real browser/server observations and independent SQL state. Report directionality, origin/session/credential capabilities, measured update delay, requests/bytes, server connection resources, disconnects and task correctness under declared profiles.
-  - Criteria: At least two real alternative transport paths plus the bounded other-protocol probe are independently executable; diagrams or mocked callbacks alone do not pass. SSE framing/Last-Event-ID and WS origin/upgrade/message boundaries are correct as applicable, and a browser's lack of WS receive backpressure/control Ping access is recognized. No claim that pushing a notification commits SQL, that TBT/performance metrics prove user freshness, or that a transport guarantees exactly-once delivery. Evidence preserves protected task access, browser compatibility notes, meaningful sampling and a justified choice.
+  - Work: Implement one real authenticated APP5 shared task with independent protected PostgreSQL state and two actually running delivery choices: conditional/short polling plus primary **SSE or browser WebSocket**; separately demonstrate a bounded working probe of the other streaming protocol (valid SSE framing/native reconnect/**empty-id reset**/Last-Event-ID or origin/session-checked WS upgrade/message/close). Exercise actual idle/burst updates, local HTTP/2 or HTTP/1.x/proxy behavior as available, native browser API header and buffering limits, live error/authorization and SQL mutation, and measure delivered **correct task state** alongside bytes/connections/error/timing with honest clock and sample limitations.
+  - Criteria: An independent browser/client can run the chosen two delivery paths and other-protocol probe, inspect valid WHATWG SSE or RFC6455 behavior and prove authenticated/forbidden status and actual SQL facts. SSE browser Last-Event-ID alone is not durable replay; native browser WS bufferedAmount cannot bound receive memory and JS cannot send protocol Ping. Browser EventSource cannot set arbitrary Authorization headers. Supported proxy connections, idle error rates, CPU and sample-clock limitations are declared. The selected transport improves the real authorized task with an explicit no-realtime alternative rather than presume more sockets equal better collaboration.
   - Evidence: Versioned local React/HTTP/stream source, fixture and pinned versions, browser/network trace of polling and primary stream, bounded secondary protocol probe, local traffic/latency/byte/CPU/resource/error comparison, actual SQL observations, architecture decision and known limitations.
 
 - **APP12-AS2** (required authoritative snapshot, gap-replay and concurrent client convergence)
   - Outcomes: APP12-O5, APP12-O6, APP12-O7, APP12-O8, APP12-O15, APP12-O16
-  - Work: Implement a protected PostgreSQL-backed shared resource, server-issued scoped stream epoch/version/cursor, authenticated snapshot endpoint and versioned update notification. Reproduce the race between snapshot read and subscription; choose and prove a reliable watermark-plus-replay or subscribe-buffer-snapshot handoff. Inject duplicate, delayed, missing, reordered and expired/foreign-epoch events, change room/identity, and submit conflicting edits simultaneously from two independent clients with real server-side revision checks. Restore correct client state via allowed retained events or fresh protected snapshot and report conflict/pending/stale status accessibly.
-  - Criteria: An independent test exposes the original bootstrap race and shows the repaired handoff preserves the final committed version even with intervening writes. Replay does not leak another tenant and cannot silently resume from an expired cursor, overwrite a newer version or conceal a gap. Actual PostgreSQL revisions and two real HTTP/browser clients establish final authorized domain invariants, with a meaningful 409/412 or documented merge behavior and no duplicate business effect after uncertain acknowledgement. Clients converge to independently observed DB truth, with honest user feedback.
+  - Work: Implement one real PostgreSQL-backed protected resource with server-issued **per-room/tenant/epoch revision**, authorized retained cursor policy and a **transaction-consistent snapshot plus matching watermark**; or prove an equivalent subscribe-buffer-snapshot bound. **First reproduce** the naive snapshot→subscribe lost-update race with a concurrent actual committed second-client write. Then correct it with contiguous retained replay from the actual floor or bounded buffer with explicit overflow resync. Deliver duplicates, out-of-order, missing versions, stale epochs and foreign/expired cursors; use separate authenticated clients to race writes with real SQL revision preconditions, retain a recoverable draft and show final authorized browser state matching independently queried committed rows.
+  - Criteria: A verifier sees a failing-before/passing-after bootstrap race, with snapshot content/watermark demonstrably consistent under actual PostgreSQL transaction semantics—not two independent read-committed queries guessed to describe one snapshot. Actual server retention source suffices for full replay or forces a fresh authorized snapshot; missed/late/duplicated updates cannot silently skip or overwrite committed revisions or leak a previous tenant. Two real independent simultaneous HTTP/SQL writers preserve authoritative invariants under declared conflict/merge rules and no operation is counted completed simply because a notification arrived. Keyboard/focus/conflict and current identity changes remain correctly recoverable.
   - Evidence: Snapshot and stream cursor/epoch contract, server-side sequence/retention policy, two-client deterministic fault schedule, tests of bootstrap race and out-of-order/expired/gap inputs, conflict HTTP/DB logs, authorized final-state comparison, screenshots/transcripts of accessible recovery and limitation notes.
 
 - **APP12-AS3** (required live authorization, connection lifecycle and cross-tenant attack resistance)
   - Outcomes: APP12-O3, APP12-O4, APP12-O7, APP12-O9, APP12-O10, APP12-O15, APP12-O16
-  - Work: Implement actual authenticated persistent streams and controlled protected rooms/subscriptions, with finite connection/room budgets, React lifecycle cleanup and server-side permission revalidation. Exercise wrong Origin where applicable, anonymous and expired clients, forged room/tenant IDs, unauthorized SSE replay cursors, WS publish/subscribe attempts and forbidden object/action/field operations. Change role or revoke the session while still connected; switch account/tenant and navigate between React routes; use multiple tabs and a local idle/disconnect trigger. Capture independent HTTP/WS/SQL checks and real server registry/cleanup measurements.
-  - Criteria: A valid initial connection does not grant subsequent unauthorized publish, subscribe, replay, or data access. Wrong-tenant, wrong-role, forged cursor and revoked identities cannot receive protected events, including delayed events from a prior browser generation. Handshake Origin and session authority are explicitly tested with an appropriate browser/client, and all application messages require schema/size validation. Cleanup closes inappropriate streams, releases listener/room registrations, and avoids duplicate subscriptions or infinite unauthorized reconnect loops; claims about browser Ping and proxy behavior stay within tested support. UI status and permitted recovery remain accessible.
+  - Work: Operate authenticated SSE/WS and current authorized rooms/subscriptions with finite connection limits and React Effect cleanup. Using actual browser and independent HTTP/WS clients, test forbidden Origin/cookie handshake (WS), invalid/malformed/oversize message, anonymous/expired user, guessed cross-tenant room, forged Last-Event-ID/stream epoch, unauthorized per-message object/action/property mutation and **permission or session revocation while a socket is still connected and a private event is queued**. Switch users, tabs and routes and observe real listener/room/HTTP/SQL/private DOM state and denied replay after the change.
+  - Criteria: Origin validation and actual session verification are both needed; CORS or an accepted WS handshake alone does not authorize protected actions. A formerly authorized persistent subscriber cannot receive newly forbidden event bytes after revocation (including queued/buffered path under the disclosed strategy), and a cursor never becomes an authorization credential. Actual independent HTTP/WS/SQL and server membership evidence shows denied cross-tenant/field effects and terminates unauthenticated reconnect loops. Browser Ping control is not misrepresented; client generations, route cleanup, limited rooms and secure status/fallback remain inspectable.
   - Evidence: Origin and authentication configuration, versioned subscription/WS command contracts, multi-tenant/role/revocation threat matrix and independent rejected requests, actual server registry and React effect traces, authorized/denied DB inspection, multi-tab/logout/timeout transcript and redacted log evidence.
 
 - **APP12-AS4** (required bounded fan-out, slow consumers, ephemeral presence and process restart)
   - Outcomes: APP12-O2, APP12-O10, APP12-O11, APP12-O12, APP12-O13, APP12-O14, APP12-O15
-  - Work: Run controlled authorized local clients with one deliberately slow or paused reader, a bursty publisher, a second healthy tenant and two tabs representing one identity. Establish and test finite send-buffer/message/connection/room/publish limits with a deliberate coalesce/disconnect-and-resync policy. Implement an ephemeral protected presence or typing lease, including abrupt close, missed heartbeat and TTL expiry; preserve accessibility and privacy. Stop and restart an independently controlled notification/fan-out process or isolated process adapter while actual PostgreSQL commits a domain update; show healthy users recover via authorized replay or snapshot without treating transient events as durable.
-  - Criteria: Queued outbound work and memory are bounded and slow/noisy clients cannot exhaust all healthy tenant capacity under the declared test budget. Any dropped/coalesced notifications are explicitly replaceable or safely recovered from authority; protected business mutation is never discarded merely to preserve socket throughput. Presence remains approximate under multi-tab and crash and cannot be used as an authorization source or disclosed to unauthorized users. A true local process interruption is observed, followed by independent DB/client state recovery and transparent topology/broker limitations; no multi-region reliability claims.
+  - Work: Run the **same** protected React/Fastify/PostgreSQL realtime product with several actual local clients, a deliberately slow reader, one high-rate tenant, healthy other-tenant work and two tabs for one identity. Instrument server-side per-client outbound queue bytes/age and finite room/connection/payload/publish budgets; distinguish browser outgoing bufferedAmount from incoming receive constraints. Test honest coalescing/disconnect-and-authorized-snapshot recovery, real server-driven presence lease expiry on dropped close and permitted multi-tab state. **Stop a separately running notifier/fan-out process while PostgreSQL writes a new resource revision**, then restart and verify actual clients recover authoritative state even if transient notifications vanished.
+  - Criteria: Actual measured queue/worker/memory limits prevent local slow-client/noisy-tenant overload and protect unaffected authorized users under the stated bounded load; only replaceable update hints may be dropped, never committed business truth. Presence remains approximate, scoped and based on observed server lease rather than proof of human attention, and an abrupt missing disconnect is eventually resolved. True local process interruption with independent SQL snapshot and client resynchronization is demonstrated, rather than a mocked event handler, while no multi-region or guaranteed broker-delivery claims are inferred.
   - Evidence: Local fan-out/optional broker and worker configuration, load and slow-reader schedule, byte/connection/resource/latency graphs or logs, lease-state/multi-tab evidence, real process stop/start and SQL state before/after, convergence tests, security/privacy checks and resource cost rationale.
 
 - **APP12-AS5** (required privacy-safe observability, reconnect storm and accessible degradation)
   - Outcomes: APP12-O1, APP12-O9, APP12-O10, APP12-O11, APP12-O12, APP12-O14, APP12-O15, APP12-O16
-  - Work: Instrument actual authorized state freshness, stream/cursor gap and resync, connection counts, expired sessions, denied subscriptions, outbound buffer bytes, slow-client closes and key user task outcomes, with sanitized limited labels. Inject a bounded synchronized reconnect surge after local network/proxy or fan-out loss, including expired sessions and changed room permissions; measure CPU/memory/requests, jitter/backoff, failed recoveries and legitimate tenant convergence. Validate accessible stale/connecting/offline/pending/conflict and forbidden states, keyboard/focus stability, restrained live announcements and a usable manual refresh or polling fallback. Explain sampling, clock uncertainty, retention and privacy decisions.
-  - Criteria: Metric claims concern actual delivered/authorized business state, not simply green socket counts or observed client-side timestamps treated as synchronized network clocks. Reconnect work remains bounded and expired/revoked users are not continually reconnected or given prior private state. The status interface communicates uncertain commits, missing data and recovery without hiding focus or spamming screen readers; manual fallback remains usable. Logs exclude raw credentials/private message payloads and telemetry is scope/consent/retention aware. Results identify local profile, missing observations and resource budget limitations.
+  - Work: Collect privacy-minimal actual local user-task freshness (committed authority versus authorized client), reconnection/cursor floor/gaps/resync, protected/denied session and outbound queue metrics on the same product. Define eligible changed records, controlled server durations, unsupported cross-device one-way latency and honest error/sample counts. Inject a **distinct bounded** reconnect wave with some sessions revoked, a room membership change and a stale delayed notifier, and measure attempts, CPU/queue use, jitter, failed user work and verified SQL/browser convergence. Show actual keyboard-focus, restrained live-announcement, manual protected refresh and truthful pending/unknown/forbidden/offline UX, with short practical operator recovery steps.
+  - Criteria: An open connection or successfully delivered notice is not treated as committed authorized user success; clock-domain and selection bias are explicit and data labels avoid private user/message identities. A reconnect surge is finite, current authorization prevents stale/revoked replay, and a lost server response has correct unknown-commit messaging until authoritative SQL checked. User input, focus and assistive status remain usable with optional/available supported testing; no invented WCAG certification, real field sample or production SLO. A separate actual fault is diagnosed with an actionable runbook rather than reusing only AS4's interrupted process transcript.
   - Evidence: Instrumented server/client and privacy audit, measure definitions and clock/source limitations, reproducible reconnect test profiles, buffer/connection/freshness metrics with errors and sample counts, access-control failure matrix, accessible UX observations and short operator recovery instructions.
 
 - **APP12-AS6** (required integrated recoverable realtime feature and independent technical defense)
   - Outcomes: APP12-O1, APP12-O2, APP12-O3, APP12-O4, APP12-O5, APP12-O6, APP12-O7, APP12-O8, APP12-O9, APP12-O10, APP12-O11, APP12-O12, APP12-O13, APP12-O14, APP12-O15, APP12-O16, APP12-O17
-  - Work: Deliver one coherent APP5 application feature demonstrating primary live delivery and a bounded alternative/second-protocol comparison, authority-scoped snapshots/cursors with gap and bootstrap-race recovery, two-client version/conflict correctness, current room/tenant/action permissions, finite slow-client queue and reconnect policy, approximate presence, restartable local fan-out outage with intact PostgreSQL state, privacy-safe useful monitoring, accessibility and justified resource/complexity choice. Reuse qualifying APP12-AS1–AS5 observations instead of building six disconnected apps. Under an independently supplied unfamiliar **bounded** stale/forged cursor, version race, revoked client, reconnect storm, slow reader, process restart or browser lifecycle defect, produce reproducible failed-before/passing-after tests or a documented safe diagnosis and defend the repaired guarantees.
-  - Criteria: An independent reviewer can clean-start the documented free local browser/TypeScript/Fastify/PostgreSQL environment, use two actual synthetic accounts, observe real protocol traffic and HTTP/SQL facts, repeat negative authorization and network/fault scenarios, and verify final protected client views match authoritative data. Every asserted ordering, retention, delivery and resource guarantee is scoped, and no required Kafka, managed broker, public cloud/DNS, third-party user data or SYS consensus mechanism is introduced. The bounded unknown case is addressed without sacrificing privacy, authorization, accessible recovery or durable invariants. The learner explains personally implemented code, failed design alternatives, real measurements and unresolved transport/browser/topology limits in written, recorded, live or equivalent accessible defense.
-  - Evidence: Complete source/lockfiles and starter instructions, protocol/authority/threat/replay documents, reproducible two-tenant browser and SQL fixtures, bootstrap/cursor/concurrency/auth/slow-consumer/reconnect tests and traces, actual fan-out restart and recovered client state, privacy/UX/runbook and cost decision, unfamiliar review diff/tests and accessible technical defense.
+  - Work: Deliver **one evolving APP5 protected shared React/Fastify/PostgreSQL feature** and **reference separately accepted APP12-AS1–AS5 evidence** rather than repeat whole transport, replay, security, buffer/presence and recovery tests as six new applications. Reproduce representative live stream/protocol, transaction-consistent bootstrap, independent concurrent conflict, current identity/room denial and a bounded notifier failure from a clean pinned free local fixture. The reviewer supplies a **previously unseen bounded** wrong epoch/retention, revocation with buffered event, snapshot race, old-user result, slow reader, process restart or reconnect issue. Predict an observable defect, reproduce an independent failing-before client/HTTP/SSE/WS/SQL oracle, repair the root cause or implement a safe demonstrated reconciliation and rerun targeted previously accepted invariants. Explain transport simplicity, privacy, accessibility, costs and honest local/platform limits.
+  - Criteria: APP12-AS1–AS5 must each have an independently passing decision; AS6 does not waive any or turn an elective into an APP9 gate. The genuinely unfamiliar problem is inside the published outcomes and locally feasible, and the new correction has an independent observed before/after event and authoritative SQL/user-state check—not rehearsed logs or a synthetic-only mock. The protected task, keyboard/focus/manual fallback, finite buffers and current permissions remain correct. No Kafka, paid broker, public DNS, SYS consensus or cross-region network partition proof is required; every ordering/delivery/clock/availability claim is limited to what was actually tested.
+  - Evidence: One versioned APP5 application/lockfile and free synthetic two-tenant client/SQL/fan-out fixture, **references-first outcome-to-accepted-APP12-AS1–AS5 index**, actual SSE/WS/HTTP and DB traces of scoped bootstrap/replay, independent concurrent auth/slow-reader/fan-out tests, selected privacy/freshness/accessibility observations, unfamiliar reviewer scenario and targeted failing-before/passing-after correction, local resource/cost limits and accessible written/recorded/live technical defense.
 
 ### Completion decision, revision safety and readiness
 
@@ -597,7 +573,7 @@ Passing APP12 requires independently inspectable satisfactory decisions for `APP
 
 Record OEE specification and APP12 source revision, assessment/outcome IDs, actual source and test artifacts, safe synthetic identity and environment, stream/snapshot/version contracts, real HTTP/SQL and transport/fault evidence, negative security results, resource and latency measures with uncertainty, privacy and accessible user-state checks, and review decision under [OEE Evidence Rules](../../spec/evidence-rules.md).
 
-APP12 preserves its `course` type, title, **optional `elective`** classification and approved direct prerequisites **APP3 + APP5 + APP6**, replacing the legacy seven-week checkpoint/final-lab contract with an OEE `v0.2.0` **draft**. Earlier learner evidence remains pinned to its original assessed revision and cannot be silently converted to newly defined outcomes or assessments. APP9's complete core graduation requirements are unchanged; APP13–APP16 elective source revisions and OEE Workspace/content/0xNAND consumer mappings require separate review and cannot be auto-reinterpreted. Structural CI is not learner testing, official educational verification or evidence of public production scalability.
+APP12 remains the published OEE `v0.2.0` **draft** `course`, **optional `elective`**, with APP3 + APP5 + APP6 direct prerequisites. The seven-week checkpoint format is a historical migration already reflected in the current catalog, not a newly imposed revision. APP9's core graduation and APP13–APP16 remain unchanged; prior learner decisions stay bound to their actual assessed course revision, and OEE Workspace/content/0xNAND source/evidence pins require deliberate separate review. Neither source CI nor this editorial reassessment establishes learner `tested`/`verified` status, public production guarantees or external accreditation.
 
 ### Public non-mandatory references
 
