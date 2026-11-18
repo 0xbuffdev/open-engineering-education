@@ -109,10 +109,16 @@ reversed by simply replacing application code.
 
 The provisional 14–18-week duration and 10–14-hour weekly
 workload are planning assumptions, **not** educational readiness
-evidence. All lesson investigations are formative unless included
-in one of the seven publicly required summative assessments.
-One evolving product with separately inspectable evidence
-can satisfy them all.
+evidence. **Instructional sufficiency governs this structure**:
+queueing models need numerical worked examples and assumption checks;
+overload, worker, cache, database and fault mechanisms need distinct
+bounded implementations, observable counterexamples and feedback;
+architecture alternatives need matched experiments and independent
+defense. Related terms may share context, but a mathematically or
+operationally new idea must not be hidden inside an overloaded lesson.
+All lesson investigations are formative unless required by the seven
+published summative assessments. One evolving product can provide
+separately judged evidence without repeated submissions.
 
 ## Learning outcomes
 
@@ -146,19 +152,17 @@ can satisfy them all.
 
 #### Lessons
 
-1. **From deployment to architectural evolution** — Locate APP8 after APP7's secure deployment, backup/release and APP6's quality/telemetry foundations; identify the *new* architectural decisions demanded by changing workload and failure patterns.
+1. **From Deploying Software to Evidence-Led Architecture** — Place APP8 after APP7 operations and APP6 quality, briefly trace how scaling strategies arose in response to measured problems, and distinguish an architecture decision from another tool or service purchase; diagnose a proposal that cannot name its constraint.
 
-2. **User task and product constraint** — Choose one high-value authenticated workflow and define real success, forbidden behavior and important state transitions rather than treating HTTP 200 as universal user success.
+2. **A Protected User Task and an Observable Success Definition** — Use one existing APP5 authorized user journey; define committed result, permission denial, deadline and acceptable degraded response, then show why HTTP 200 or an accepted queue item alone cannot be counted as completed work.
 
-3. **History of application scaling approaches** — Contrast single-process, scale-up, scale-out, caching and partitioned service approaches as historical responses to constraints, not inevitable maturity levels.
+3. **Historical Alternatives, Not a Scale Ladder** — Contrast scale-up, extra API replicas, cache and partitioned services as context-dependent remedies; examine a historical/synthetic bottleneck where adding instances worsens the shared database.
 
-4. **Stakeholder Assumptions and Service Objectives** — Separate synthetic workload forecasts, measured local traces and independently observed user behavior; never pass estimates off as production measurements; derive bounded latency/throughput, tail, availability, correctness, privacy and maintainability objectives with explicit sample/window and failure definitions.
+4. **Workload Provenance and Bounded Service Objectives** — Distinguish forecasts, real local measurements and actual user research; set explicit eligible tasks, data scale, latency/error/consistency/privacy limits and confidence before selecting architecture.
 
-5. **Operating responsibility and architectural ownership** — Map browser, API, database, queue, cache, proxy and external dependencies to owners and authority boundaries; inherit APP7's release mechanisms.
+5. **Verified Monolith Baseline, Trust Ownership and Options** — Capture actual proxy/app/DB/worker ownership, consumer contracts and release identity before comparison; map the first cheaper corrective option and explain its security/state boundary.
 
-6. **Baseline before architecture changes** — Preserve the simplest verified modular-monolith baseline, its deployment identity and supported consumer contracts before experimenting.
-
-7. **Change hypothesis and falsifiability** — Describe how a proposed architecture improvement should affect measured user behavior and which counterexample could disprove the hypothesis.
+6. **Falsifiable Change Hypothesis and Review Feedback** — Predict a measurable effect, a competing cause and a failure counterexample for two plausible designs; specify what observation would make a recommendation change.
 
 *Optional practice — architecture review:* Reject a proposed microservice split unsupported by workload data and identify a measurable alternative with lower cost and risk.
 
@@ -173,21 +177,19 @@ can satisfy them all.
 
 #### Lessons
 
-1. **Arrival patterns and client behavior** — Distinguish open versus closed-loop load generators and choose a workload consistent with the expected user/task arrivals.
+1. **Open versus Closed Arrivals and Real User Pressure** — Contrast scheduled independent arrivals with client-throttled closed-loop completion using a worked trace; select one model and explain when it understates a saturated service.
 
-2. **Tenant and endpoint mix** — Represent authorized/denied, read/write, small/large payload and hot/cold resource distributions rather than one artificial endpoint.
+2. **Task, Tenant, Payload and Denied-Request Mix** — Build a reproducible authorized/forbidden/read/write mix with hot/cold payloads and uneven tenants, then test whether a single fast endpoint is a misleading proxy for the real user journey.
 
-3. **Data scale and skew** — Control row count, fan-out, hot keys and tenant size with synthetic reproducible seeds and declare how they differ from unknown production patterns.
+3. **Data Growth, Distribution Skew and Seeded Fixtures** — Control row count, join/fan-out, tenant sizes and key popularity in a disposable Postgres dataset; check which distribution assumptions are synthetic rather than measured.
 
-4. **Warm-up, caches and JIT** — Record relevant runtime warm-up, DB page cache, browser cache and fixture initialization effects with separate cold/warm observations.
+4. **Warm/Cold Cache, JIT and Instrumentation Effects** — Separate browser/DB/service cache warm-up, runtime JIT and measurement overhead; use matched fixed runs to reveal a false performance gain.
 
-5. **Tail latency, percentiles and sample sizes** — Capture p50/p95/p99 or relevant distribution with request counts, confidence/variance limits and the distinction between percentiles and averages.
+5. **Percentiles, Error Mix and Observation Bias** — Read a concrete request trace, computing sample-aware latency summaries with completed, rejected, failed and timed-out operations; note why a mean or success-only p99 cannot describe all users.
 
-6. **Coordinated omission and load-generator saturation** — Show how a blocked/underpowered generator can under-sample slow requests and report both scheduled and completed work.
+6. **Coordinated Omission and Exhausted Load Generator** — Deliberately underdrive a loopback service or delay a generator and compare scheduled arrival times with issued/completed requests, then repair the reporting to avoid missing severe user waits.
 
-7. **Observation and sampling bias** — Correlate user completion, failed responses, timeouts, dropped requests and traces without treating unobserved traffic as success.
-
-8. **Fixed baseline protocol** — Record CPU/RAM/OS, versions, concurrency, data seed, duration and instrument overhead to make comparisons meaningful.
+7. **Controlled Baseline Protocol and Independent Recheck** — Fix version, hardware, dataset, release, warm-up, duration, generator utilization and samples; rerun a changed load and explain which observed differences may be noise or missing events.
 
 *Optional practice — invalid experiment:* Detect a suspicious throughput gain caused by an accidentally warmed cache, changed response shape or underdriving client.
 
@@ -202,19 +204,19 @@ can satisfy them all.
 
 #### Lessons
 
-1. **Throughput, concurrency, latency and occupancy** — Define completed operations/time, in-flight requests and service duration using actual measurement units.
+1. **Arrival, Throughput, Concurrency and Wait-Time Units** — Work through one real request timeline, distinguishing offered/accepted/completed operations, service time, queue wait and in-flight occupancy, with consistent units and boundaries.
 
-2. **Little's law and assumptions** — Apply L = λW to a stable system with consistent boundaries/averages; explain why overload and growing backlogs violate casual steady-state calculations.
+2. **Little's Law in an Actually Stable Boundary** — Derive and apply L=λW from a fixed-window stable queue trace with consistent arrivals/departures; contrast with a growing backlog that makes naïve steady-state capacity estimates invalid.
 
-3. **Service Time, Utilization and Queueing Tails** — Decompose time into arrival, admission, queue, CPU/IO, database pool, external dependency and return path; observe increased tail delay near resource saturation without assuming a universal fixed curve or deterministic behavior.
+3. **Queueing Tails, Utilization and Bottleneck Service** — Use a bounded controlled example to trace rising wait and tail latency near bottleneck saturation, separating CPU, event loop, DB pool and external service; reject a universal deterministic tail curve.
 
-4. **Capacity planning with safety margins** — Estimate bounded demand from arrival rate and measured resource requirement, including headroom and burst assumptions.
+4. **Burst Capacity, Headroom and Uncertain Demand** — Estimate how much bounded demand a measured resource can serve, contrasting sustained arrival rate and burst occupancy with evidence-based safety margin rather than extrapolating one benchmark indefinitely.
 
-5. **Concurrency pools and semaphore limits** — Test thread/event-loop-adjacent work, DB pool and worker concurrency budgets with a reproducible local setup.
+5. **Node Work, Database Pools and Explicit Semaphores** — Coordinate actual pool/worker limits with application request admission; demonstrate a setting where more concurrent API calls increase wait without increasing committed throughput.
 
-6. **Queue length and wait-time growth** — Measure backlog under load and discuss stable versus unbounded queue behavior and error/timeout consequences.
+6. **Bounded versus Unbounded Backlog and Latency Debt** — Measure real queue depth, age, memory and deadline misses during a burst, and show how pending work can remain unserviceable long after arrivals fall.
 
-7. **Admission, rejection and work conservation** — Choose explicit enqueue/reject/defer policy for tasks with different deadlines and protect invariants under overload.
+7. **Admit, Defer or Reject Based on Actual Work Ownership** — Choose admission for synchronous reads versus durable mutations, show honest rejection and no dropped committed intent, then verify the invariant using an unfamiliar request schedule.
 
 *Optional practice — saturation worksheet:* Calculate response/wait/queue quantities on a supplied local trace and identify invalid inference under overload.
 
@@ -229,21 +231,19 @@ can satisfy them all.
 
 #### Lessons
 
-1. **Trace the critical path** — Map a specific user action through React, Fastify, SQL, worker and outbound mock to real timing and status evidence.
+1. **User-Task Critical Path with Correlated Timings** — Trace one React→Fastify→Postgres→worker/proxy request through actual timestamps and status, identify untrusted/missing timing segments, and construct two testable bottleneck hypotheses.
 
-2. **Event loop and CPU contention** — Observe blocking CPU work, garbage collection, memory pressure and Node event-loop lag without confusing async syntax with parallel CPU execution.
+2. **Event Loop, CPU, Allocation and Queue Pressure** — Use sampled Node event-loop delay, CPU, GC/memory and application backlog under a matched workload to distinguish a blocking calculation from DB wait; avoid conflating async syntax with parallel CPU execution.
 
-3. **SQL execution plans and indexes** — Reuse APP4/APP3 to inspect a slow query, its plan and row counts, testing a measurable index/query change.
+3. **PostgreSQL EXPLAIN and Measured Query Repair** — Apply EXPLAIN (ANALYZE, BUFFERS) with synthetic safe data, compare actual rows/costs/IO, then trial an appropriate query/index adjustment without declaring all plan cost estimates to be measured latency.
 
-4. **Database connection-pool waiting** — Distinguish slow SQL from saturated pool, long-held transactions and connection setup or lock contention.
+4. **Pool Wait, Locks and Long-Held Transactions** — Use actual local PostgreSQL sessions to tell connection checkout delay apart from query execution and lock contention, checking pool size against DB budget and isolation behavior.
 
-5. **N+1 and read amplification** — Identify repeated database/service requests and reduce work through appropriate query shaping or bounded batching.
+5. **N+1 Amplification and Bounded Batching** — Identify duplicated application–database calls from an actual request trace, implement a scoped query/batch alternative, and verify that output ordering, permission and result shape remain correct.
 
-6. **Serialization and transfer cost** — Measure payload size, JSON serialization, compression/proxy cost and browser work; avoid attributing all latency to backend execution.
+6. **Serialization, Payload and Browser Work** — Measure HTTP transfer size, JSON serialization, compression/proxy and browser render cost for a real task; demonstrate a case where backend scaling does not cure total interaction latency.
 
-7. **Memory and queue capacity** — Measure resident memory, queued objects and per-request allocation under a declared workload, preventing misleading low-load conclusions.
-
-8. **Compare removing work versus adding machines** — Test optimization before scale-out and explain when extra capacity remains justified.
+7. **Remove Work before Adding Capacity** — Compare a measured work-reduction repair against the same system with an extra worker/process or increased resource bound, recording bottleneck migration, new costs, errors and remaining uncertainty.
 
 *Optional practice — bottleneck triage:* Reject a CPU-scaling proposal when pool contention or query fan-out is the actual limiting factor.
 
@@ -259,19 +259,19 @@ can satisfy them all.
 
 #### Lessons
 
-1. **Scale-up economics and failure limits** — Compare more CPU/RAM/IO on one instance with actual bottleneck resources, upgrade downtime and single-failure-domain risk.
+1. **Scale-Up and Resource-Specific Constraints** — Calculate whether extra CPU/RAM/IO on one process addresses an actually measured limit; include downtime, headroom and its single-failure domain without assuming a faster host is always cheaper.
 
-2. **Horizontal Scaling and Shared Bottlenecks** — Identify sticky in-memory state, session, worker, scheduler and file assumptions before adding service replicas; explain why additional API instances can worsen database connections, locks, cache misses or remote service limits.
+2. **Additional API Replicas and Stateful Assumptions** — Identify hidden local sessions/files/schedulers, request affinity and worker responsibility in APP7's deployed product; reproduce a shared DB pool that gets worse as replicas are added.
 
-3. **Connection and resource budgeting across replicas** — Calculate safe per-instance pool size from a declared shared DB budget and reserved capacity.
+3. **Pool Budget across Replicas and Reserved DB Capacity** — Compute per-instance connection allocation with explicit total DB budget, spare administrator/migration capacity and bounded bursts; test the consequences of excess connections.
 
-4. **Request routing and traffic locality** — Compare simple proxy balancing/affinity and their impact on cache behavior, hot tenants and failure.
+4. **Traffic Selection, Locality and Tenant Skew** — Compare proxy routing and affinity effects on hot tenants/cache state, measure imbalance and show why uniform replica counts do not imply uniform useful capacity.
 
-5. **Partitioning by domain or tenant** — Reason about key selection, skew, cross-partition operations, ownership and operational burden without a mandatory sharded cluster.
+5. **Partitions as Ownership and Cross-Partition Trade-Offs** — Reason through a tenant/domain partition key, hot partition, permissions, joins, transactions and change cost using a drawn example, not an undeclared mandatory sharded database.
 
-6. **Hot partitions and uneven load** — Measure or simulate skewed tenant/key demand and compare a rebalanced scheme against the baseline.
+6. **Skewed Partitions, Rebalance and Failure Modes** — Use synthetic skew to compare practical load distribution and tenant fairness before/after a partition strategy; record rebalancing, retry and stale-state risks.
 
-7. **When not to distribute** — Quantify extra consistency, deployment, tracing and ownership costs of a proposed split.
+7. **Decide Whether to Distribute at All** — Defend one scale-up, database query, routing or small partition improvement against a service split with actual measurement, consistency, incident/debugging and operational-cost evidence.
 
 *Optional practice — scaling decision:* Use measured bottleneck plus DB capacity limits to defend vertical upgrade, query repair, horizontal scale or no change.
 
@@ -287,21 +287,21 @@ can satisfy them all.
 
 #### Lessons
 
-1. **Overload versus ordinary traffic growth** — Define resource exhaustion, burst absorption, failure latency and user impact instead of declaring any slow response an overload incident.
+1. **Overload, Latency Debt and User Harm** — Differentiate a real saturated/queued user task from ordinary traffic variation with observed request age and error behavior; preserve auth and completed-work semantics under pressure.
 
-2. **Admission control and bounded queues** — Set capacity and backlog limits with deliberate rejection or deferral semantics, never unbounded memory accumulation.
+2. **Admission Boundaries and Explicit Queue Limits** — Set a finite in-flight/queued item and memory/age budget for two work classes, test a burst and count accepted, refused, expired and *actually committed* operations.
 
-3. **Token bucket and fixed-window boundaries** — Compare plausible limiter semantics, burst behavior, implementation scope and known distributed-instance limitations.
+3. **Rate-Limiter Mathematics and Distributed Limits** — Calculate a token bucket's burst/refill and a fixed-window boundary on a worked arrival sequence; identify clock and per-instance limits without implying one in-memory counter is a global quota.
 
-4. **Per-identity and per-tenant fairness** — Distinguish anonymous, authenticated and privileged task priority while preventing one synthetic tenant from starving others.
+4. **Per-Tenant Fairness and Guaranteed-Service Limits** — Reproduce one tenant monopolizing a shared pool, apply quotas or weighted fair scheduling with real admission traces and test that privileged work does not silently override authorization.
 
-5. **Deadline propagation and budget allocation** — Apply end-to-end time budgets to queueing, DB and upstream calls, with reasonable cancellation and uncertainty about already-committed effects.
+5. **End-to-End Deadline and Timeout Ownership** — Budget queue, database and upstream time across browser/API/worker boundaries; use an already committed operation to demonstrate why a timed-out client cannot assume it was rolled back.
 
-6. **HTTP overload responses and client behavior** — Use honest 429/503 or equivalent documented errors, Retry-After where appropriate and meaningful accessible retry guidance.
+6. **HTTP 429/503, Retry-After and Accessible Refusal** — Distinguish a rate quota from service overload, emit documented refusal/retry guidance and verify clients do not amplify requests or report refused work as success.
 
-7. **Queue shedding versus work loss** — Specify which tasks may be dropped, postponed or rejected and which durable mutation intents cannot simply disappear.
+7. **Shedding Safe Work without Dropping Durable Intent** — Classify optional suggestions, protected mutations and committed job intents; verify which may be refused, paused, retried or must survive a restart, with actual persisted-state evidence.
 
-8. **Compare pre/post admission under burst** — Measure p95, success rate, rejection fraction, queue growth, throughput and tenant fairness with a controlled workload.
+8. **Before/After Burst, Fairness and Invariant Defense** — Measure distribution of waits, rejects, throughput, queue growth and one denied tenant/duplicate replay under a fixed burst; demonstrate that an apparent p95 gain did not merely discard valid work.
 
 *Optional practice — abusive burst:* Repair a single-tenant load pattern that saturates shared capacity or causes a misleading fallback authorization bypass.
 
@@ -316,19 +316,19 @@ can satisfy them all.
 
 #### Lessons
 
-1. **Synchronous versus asynchronous product contract** — Choose inline execution or durable accepted work based on user deadlines, business result and failure honesty.
+1. **User Deadline versus Durable Accepted Work** — Choose when a user operation may be completed inline or accepted for processing, distinguishing HTTP 202, server commit, job progress and actual business completion.
 
-2. **Queue boundedness and ownership** — Select maximum age, depth, concurrency, retry attempts and worker ownership while preventing silently dropped committed work.
+2. **Queue Ownership, Capacity and Age Limits** — Derive finite backlog, worker concurrency and per-tenant age/priority rules from task arrivals and DB/upstream budgets, with an independently inspectable rejected/postponed state.
 
-3. **Backpressure and upstream signals** — Compare blocking/deferral, rejecting new work and queue partitioning as workload protection mechanisms.
+3. **Backpressure between Producers and Consumers** — Trace a consumer slower than incoming work, demonstrate safe producer throttling and failure reporting, and avoid buffering indefinitely in API memory or user-interface state.
 
-4. **Durable intent from APP5** — Reuse PostgreSQL outbox/job state to explain at-least-once dispatch and why ephemeral in-process queues are not durable.
+4. **Real Durable Intent and Restart Ownership** — Reuse APP5's transactionally recorded Postgres intent, inspect an actual stop/restart and independently verify no acknowledged committed job silently disappeared.
 
-5. **Worker Capacity and Fair Scheduling** — Tune consumer count against actual pool/remote API limits rather than assuming more workers always improve throughput; assess starvation, slow tasks, per-tenant quotas and consequences of adding priority lanes.
+5. **Worker Fairness and Downstream Pool Contention** — Measure worker count, task age and DB/outbound contention under mixed tenants; fix a starvation case rather than assuming more workers always improve completed work.
 
-6. **Duplicate delivery and visibility timeout** — Simulate lost acknowledgements, redelivery and expiration with safe idempotent consumer handling.
+6. **Redelivery, Visibility and Idempotent External Effects** — Inject lost worker acknowledgement and duplicate delivery with bounded redelivery semantics, inspecting real committed domain/idempotency rows and admitting any unverified external exactly-once limitations.
 
-7. **Poison messages and terminal failures** — Bound retries/backoff, identify permanently invalid jobs and preserve recoverable human-facing states.
+7. **Poison Work and Honest Terminal States** — Test retry exhaustion and a permanently invalid job with finite attempts, dead-letter/manual-review state and meaningful user-visible failure, plus correct cleanup on shutdown.
 
 *Optional practice — worker crash under burst:* Restart a disposable worker with pending and duplicate work, then inspect actual durable state and no double business effect.
 
@@ -343,21 +343,21 @@ can satisfy them all.
 
 #### Lessons
 
-1. **Cache layers and workload goals** — Compare browser HTTP cache, React memory, API-process memoization, shared cache and database query reuse for a defined bottleneck.
+1. **A Cache Layer Chosen for a Measured Read Problem** — Contrast browser, API process and shared cache paths for one real DB/latency bottleneck; require an explicit memory/consistency benefit rather than a default Redis dependency.
 
-2. **Cache key scope and tenant authorization** — Include validated resource/tenant/permissions/version attributes where necessary and avoid cross-user cache collisions.
+2. **Tenant, Permission, Filter and Revision Keying** — Derive cache keys and entry-sharing policy from server-held principal/tenant and authoritative permission scope; reproduce a cross-user cache collision or shared-key leak and repair it.
 
-3. **Freshness, TTL and invalidation** — Define expiration, explicit mutation invalidation, revision checking and stale-while-revalidate behavior with appropriate security guarantees.
+3. **Freshness, Write Invalidation and Stale-While-Revalidate** — Choose TTL, revision/ETag or explicit invalidation based on data criticality; show one stale legitimate read and a revoked-permission read and distinguish their acceptable recovery policies.
 
-4. **Cold-cache and warm-cache experiments** — Measure hit ratio, tail latency, extra DB load and memory cost under matched request distributions.
+4. **Matched Warm/Cold Cache and Hit/Miss Evidence** — Measure actual DB calls, hit ratio, memory and user-task tail latency under the same workload across cold/warm and identity variants, reporting cache invalidation cost.
 
-5. **Cache stampedes and request coalescing** — Reproduce a hot-key miss burst, then use controlled single-flight, jitter or bounded concurrency without globally blocking unrelated keys.
+5. **Hot-Key Stampede and Scoped Single-Flight** — Reproduce concurrent misses with a barrier, implement safe key-scoped coalescing or bounded admission, and test shared caller cancellation, failure and unrelated-key progress.
 
-6. **Negative caching and error risk** — Evaluate whether 404/error responses may be cached safely and how authorization changes affect that decision.
+6. **Negative Cache, Existence Disclosure and Error Semantics** — Decide whether absent/error results can be cached, then test whether authorization changes expose private existence or leak stale forbidden results.
 
-7. **Consistency with writes and replay** — Prevent a stale cache from reviving an invalid record or overriding a newer committed state after retries.
+7. **After-Commit Consistency and Replayed Requests** — Race a committed write, invalidation, old response and request replay and demonstrate newer authoritative data is not silently overwritten by stale cache state.
 
-8. **Cache failure and bypass policy** — Define whether protected reads may bypass cache, fail closed or report degraded service without leaking tenant data.
+8. **Unavailable Cache, Fail-Closed Identity and Fallback** — Inject cache outage and identity change; verify a safe DB fallback or honest failure, no cross-tenant result exposure and bounded fallback load under pressure.
 
 *Optional practice — stale identity leak:* Fix a synthetic previous-user cache leak that only appears under concurrent session changes.
 
@@ -373,21 +373,21 @@ can satisfy them all.
 
 #### Lessons
 
-1. **Workload-dependent database topology** — Estimate read/write mix, query shape, storage growth and transaction contention before choosing replicas or partitions.
+1. **Read/Write Demand and Storage Bottleneck Ownership** — Quantify actual query/read, mutation/write, row-growth and pool/lock pressure before proposing replica or partition topology; maintain an ordinary primary-only comparison.
 
-2. **Read replicas versus authoritative primary** — Explain asynchronous replication and read-your-writes assumptions; do not represent a locally delayed fake as real PostgreSQL streaming replication.
+2. **Primary, Async Replica and Visibility Semantics** — Explain WAL shipping/apply lag, read-your-writes and recovery conflicts with current PostgreSQL mechanisms; map which authenticated queries may tolerate a delayed view and which must hit the authority.
 
-3. **Controlled lag experiment** — Use a documented injected delayed-read adapter or actual supported local replication to show stale results and client reconciliation.
+3. **Labeled Delayed-Read Simulation and Reconciliation** — Use an explicit delayed-read adapter or a separately configured actual PostgreSQL standby, compare a stale successful response with a primary result and show identity-safe client reconciliation. **Never label the injected adapter as measured streaming replication.**
 
-4. **Strong consistency for protected mutations** — Keep authorization, quota and money/inventory-like invariants on authoritative transactional paths with real PostgreSQL tests.
+4. **Authoritative Writes, Permissions and Quotas** — Route security-critical membership, entitlement, inventory and other protected mutation decisions through real PostgreSQL transactions on the authority, rejecting stale replica-only checks.
 
-5. **Index, partition and materialized-view tradeoffs** — Compare improved query plans, write/index amplification, maintenance and stale projections under observed workload.
+5. **Indexes, Projection and Partition Alternatives** — Compare real query plan improvement, materialized view refresh and partitioned table complexity for the measured workload, including write amplification and maintenance/recovery costs.
 
-6. **Lock/contention and isolation** — Demonstrate an actual two-connection concurrent update and correct serializable/revision conflict handling.
+6. **Two-Session Write Race, Locks and Isolation** — Schedule two real independent PostgreSQL updates under explicit barriers, inspect final rows, lock/conflict status and safe retry/optimistic version behavior.
 
-7. **Connection pool and follower consistency** — Identify pool exhaustion, read routing and race effects in mixed-version or replica-lag environments.
+7. **Shared Pool, Replica Lag and Query Cancel Trade-Offs** — Budget primary and read-replica connections, explain how hot-standby query conflicts and lag affect availability and interpret actual standby monitoring only if real replication was deployed.
 
-8. **Schema migration with active traffic** — Plan expand/backfill/contract compatible with existing reads/writes, quantifying lock and backfill uncertainty.
+8. **Mixed-Version Schema Change and Stale Readers** — Test an expand/backfill/contract change against prior/new clients with deliberate delayed projections; identify permission, schema and consistency exceptions requiring forward repair.
 
 *Optional practice — replica misuse:* Repair a workflow that uses lagged data for an authorization or strongly consistent write decision.
 
@@ -403,19 +403,19 @@ can satisfy them all.
 
 #### Lessons
 
-1. **Idempotency Scope, Fingerprints and Expiration** — Distinguish HTTP method properties from tenant/user/operation-specific deduplication of effects; bind keys to authenticated scope and validated payload; test same-key mismatched input and expiry policies.
+1. **Idempotency under Saturation, Not a Repeat of APP3** — Start from an already working principal/tenant/operation-scoped APP3 idempotency key, then load-test fingerprint expiry, replay and starvation decisions; distinguish request de-duplication from server admission.
 
-2. **Atomic state and deduplication** — Store idempotency result/intention transactionally with affected domain rows when required to avoid race windows.
+2. **Atomic Deduplication with Backlog Contention** — Coordinate real PostgreSQL idempotency/domain records under concurrent admission, proving no race between a duplicate key and the committed business effect.
 
-3. **Concurrency and optimistic versions** — Use actual PostgreSQL conflict/revision checks to avoid lost updates and duplicated committed changes.
+3. **Different Keys, Same Invariant and Real Conflicts** — Use actual revision/constraint checks for simultaneous legitimate operations and explain why distinct keys do not protect against a shared-stock/entitlement invariant.
 
-4. **Out-of-order response completion** — Prove a late response does not replace more recent UI or account state under client navigation and retries.
+4. **Stale Client Completion and Current Identity** — Force late old-identity and out-of-order results after route/tenant change; verify the React view never overwrites newer authorized server state.
 
-5. **Worker redelivery and external calls** — Describe at-least-once delivery, limited external guarantees and mechanisms to reconcile uncertain remote effects.
+5. **Delayed/Repeated Worker Effect and Unknown Remote Outcome** — Lose an acknowledgement after a committed local intent, show safe redelivery/reconciliation and explicitly bound what cannot be guaranteed about external side effects.
 
-6. **Event ordering and partition keys** — Evaluate same-key ordering and when globally ordered messages are neither necessary nor free.
+6. **Ordering within a Key, Not Global Total Order** — Use a synthetic event stream with same-key sequence and independent tenants to choose an ordering/partition rule; show which global-order costs are unjustified.
 
-7. **Replay under a recovering service** — Simulate retry storms during partial outage and ensure bounded dedup/retry does not exhaust shared capacity.
+7. **Retry Storm, Dedup Storage and Expiry under Recovery** — Reproduce a bounded post-outage burst of old and new key requests; measure dedup table size, rejected load and committed state, and avoid retry amplification with finite budgets.
 
 *Optional practice — replay and stale read:* Reproduce two concurrent same-key submissions plus delayed projection and verify one intended durable effect.
 
@@ -431,21 +431,21 @@ can satisfy them all.
 
 #### Lessons
 
-1. **Failure domains and critical paths** — Draw dependency graph, fan-out and which user tasks share scarce CPU, pools or upstream limits.
+1. **Dependency Graph, Fan-Out and Shared Failure Domains** — Map critical and optional backend/API/worker dependencies with shared pools, fan-out and resource budgets for a protected task, identifying the single failure most likely to cascade.
 
-2. **Timeout versus end-to-end deadline** — Allocate per-hop and total budgets; distinguish an aborted client request from cancellation of external committed work.
+2. **Total Deadline versus a Per-Hop Timeout** — Allocate end-to-end queue/DB/external time on a concrete request trace, then show a deadline race where the caller cannot undo committed downstream work.
 
-3. **Retry ownership and budgets** — Coordinate retries across browser/API/worker to avoid multiplying calls when an upstream is impaired.
+3. **One Retry Owner, Finite Budget and Backoff** — Inject a local upstream failure and count actual browser/API/worker attempts; remove layered retries, justify eligibility and set a capped backoff without infinite synchronous waiting.
 
-4. **Circuit breaker state reasoning** — Model closed/open/half-open behavior and recovery probes where appropriate, documenting when it adds more complexity than value.
+4. **Circuit States and When Not to Add a Breaker** — Model open/closed/half-open with a sample error and probe timeline, implement only if observed failure conditions warrant; compare to a simpler timeout/admission limit.
 
-5. **Bulkheads and dedicated limits** — Give high-priority operations a bounded independent pool so a slow optional dependency cannot consume all connections.
+5. **Bulkhead Resource Partitioning** — Give critical authenticated work its own bounded resource budget when an optional dependency hangs; verify a tenant with valid entitlement still completes without bypassing permissions.
 
-6. **Graceful fallback correctness** — Keep security, authorization, payment-like invariants and private data fail-closed, while shedding genuinely optional work.
+6. **Fail-Closed Core and Truthful Optional Fallback** — Select only truly optional cached/reduced features for degraded responses and reject a scenario where stale forbidden data or false transaction success is served to improve an SLI.
 
-7. **Failure injection under realistic load** — Delay and reject a controlled local external service to observe retry amplification, queue growth, p95 and error rates.
+7. **Load Plus Dependency Fault and Retry Amplification Trace** — Under bounded repeatable traffic, delay a synthetic local upstream and inspect in-flight demand, queue/pool use, user-task success/reject, error mix and secret-safe correlation before/after repair.
 
-8. **Recovery with controlled ramp-up** — Avoid overwhelming a restarted dependency with pending retries and limit half-open probes/work replay.
+8. **Recovery Ramp, Circuit Probes and Work Replay** — Re-enable the dependency and prove limited probe/retry/admission rates, durable work reconciliation and a stable safe user path without a second load spike.
 
 *Optional practice — cascading outage:* Identify a misleading cache fallback or unbounded retry loop and verify repaired unaffected user operations.
 
@@ -460,21 +460,19 @@ can satisfy them all.
 
 #### Lessons
 
-1. **Availability from user tasks** — Define a successful signed-in operation, queue completion, protected data and degraded-but-valid behavior using actual APP6 SLI semantics.
+1. **A User-Centered Availability and Completion Contract** — Use APP6's defined SLI eligible signed-in tasks and durable completion states, not raw HTTP 200/202, to distinguish actual business success, honest refusal and optional degraded results.
 
-2. **Failure modes, impact and blast radius** — Rank component/dependency loss by affected tenants, duration, private data risk and recoverability.
+2. **Blast Radius, Tenant Harm and Partial State** — Analyze two component failures by affected tenants, privacy, time and durable data state; quantify actual local evidence separately from conjectural outage probabilities.
 
-3. **SLO targets and error-budget tradeoffs** — Interpret existing APP6 objective/burn-rate signals for architecture choices without reteaching the entire monitoring course.
+3. **SLO Error Budget as an Architecture Decision Input** — Use one previously established APP6 SLI window and actual/synthetic eligible counts to decide which reliability/capacity fix matters, without repeating the full SLO teaching sequence.
 
-4. **What can safely degrade** — Identify optional personalization, analytics or recommendations that may be disabled while core access remains correct.
+4. **Which Work May Degrade and Why** — Rank critical authorization, protected writes and optional personalization/analytics, demonstrating one useful degraded feature and one forbidden fallback.
 
-5. **Admission and latency versus success** — Choose when a quick honest 503 is better than requests hanging indefinitely or falsely reporting success.
+5. **Honest Rejection versus Unbounded Wait** — Compare a fast and explicit 429/503 with an indefinitely blocked accepted job, inspecting client retry guidance, deadline, resource consumption and completed user task.
 
-6. **Fail-closed invariants under stress** — Prove resource authorization, tenant isolation and transaction state survive cache/dependency outages.
+6. **Security/Invariants under Partial Dependency Loss** — Test protected read/write and tenant scope through cache outage, late replica-like results and optional dependency failure using real authoritative rows.
 
-7. **Recovery objectives and state guarantees** — Distinguish service recovery, data restoration and write correctness from APP7 backup/rollback execution.
-
-8. **User-facing explanations and accessibility** — Make pending/retry/error/degraded states understandable, keyboard accessible and nondeceptive.
+7. **Accessible Pending, Refused, Recovering and Final State** — Reproduce user-facing keyboard/focus/status after a slowed, denied or late-completed request and verify no earlier-user data flash or misleading success announcement.
 
 *Optional practice — degraded-mode review:* Reject a proposal to serve stale confidential data merely to improve aggregate latency.
 
@@ -490,21 +488,19 @@ can satisfy them all.
 
 #### Lessons
 
-1. **Architecture fitness versus novelty** — Document architecture problem, measured constraint, options, rejected alternatives and the minimal experiment needed.
+1. **Measured Architecture Fitness and Alternative Decision** — Take one observed bottleneck, failed SLI or growth constraint, compare simplest viable repair with at least one added boundary, and declare the test that would change the recommendation.
 
-2. **Modular monolith, extracted service and strangler** — Compare boundaries, transaction semantics, network call overhead, team ownership and failure domains.
+2. **Monolith Module, Extracted Worker and Service Split** — Compare ownership, deployment, transaction, auth, trace and failure cost for a focused boundary and show why a network hop may worsen a formerly atomic operation.
 
-3. **Feature flags and traffic shadowing** — Test an alternate code path or shadow request safely while preventing duplicate external mutations.
+3. **Safe Flags, Routing and Shadow Read Paths** — Select old/new code or route with observed tenant behavior and safely shadow only permitted side-effect-free requests; demonstrate a duplicate external effect caused by naïve shadow writes.
 
-4. **Dual-read/write and data migration risks** — Map consistency between old/new storage, reconciliation cost and which mirrored writes are prohibited by side-effect semantics.
+4. **Dual Write, Backfill and State Reconciliation Risk** — Map old/new schemas/stores and recovery after partial migration; distinguish a measured read-model rebuild from an unsafe two-source-of-truth write policy.
 
-5. **Compatibility matrix and public API changes** — Test older and candidate clients/services, schema revisions, statuses and event shapes under a staged contract.
+5. **Versioned Contracts and Independently Old/New Consumers** — Test historical/current API, DB/schema and job payload versions with actual clients and identify an incompatible change that a successful type checker would miss.
 
-6. **Gradual traffic migration** — Apply reversible local routing or feature selection with explicit safety checks inherited from APP7.
+6. **Traffic/Feature Switch with Verified Reversal Conditions** — Apply a bounded APP7-derived release switch to a measured architecture candidate and verify stop/forward-repair behavior after committed DB/files/remote side effects.
 
-7. **Rollback versus forward repair** — Explain how schema/data or remote side effects can make an architectural rollback unsafe despite a good previous image.
-
-8. **Architecture decision record with evidence** — Publish decision, alternatives, measurements, security implications, economic impact, risks and trigger for revisiting it.
+7. **Decision Record, Cost and Revisit Trigger** — Defend actual measured benefit, rejected simpler alternative, privacy/authorization, operating burden and compatibility plan with an explicit load/cost threshold for reconsideration.
 
 *Optional practice — reversible migration:* Stage a bounded cache/worker/service boundary change and prove failing candidate can be disabled safely.
 
@@ -520,23 +516,21 @@ can satisfy them all.
 
 #### Lessons
 
-1. **Cost per useful completed operation** — Define the unit of business work including failures, queue delays, cache/storage, operational staffing and reliability targets.
+1. **Cost per Authorized Completed Business Operation** — Define total useful completed user work as denominator and account for rejected/failed retries, queued work and degraded results rather than count raw HTTP requests.
 
-2. **Compute and memory marginal costs** — Estimate resource hours, peak headroom, scaling delay and throughput-per-instance from declared local measurements.
+2. **Capacity/Headroom and Marginal Compute** — Use measured CPU/memory/IO and plausible instance-hours to calculate a bounded cost curve for one process and replica alternative, with single-failure/overprovisioning costs.
 
-3. **Data, replica and cache total cost** — Include additional writes, storage, replication bandwidth, memory, backup and cache invalidation labor.
+3. **Storage, Cache, Replica and Write Amplification** — Estimate memory, persistent GB/month, backups, replication traffic, extra writes and coherence/maintenance effort for two meaningful designs.
 
-4. **Network and worker economics** — Account for request fan-out, ingress/egress, job attempts, external API quotas and failed/retried operations.
+4. **External Fan-Out, Worker Retries and Data Transfer** — Account for scheduled/failed attempts, egress, vendor quota and queue storage using explicit units and illustrative rates, not invented live quotes.
 
-5. **Availability and redundancy expense** — Compare cost of standby capacity, isolation and recovery with justified user-impact requirements.
+5. **Engineering, Availability and Support Burden** — Compare fault-domain isolation, idle/redundant capacity, deploy/recovery complexity, on-call/operating effort and additional code/tests—not just instance bills.
 
-6. **Engineering and maintenance burden** — Record additional deployment complexity, configuration, incident paths, change coordination and support costs.
-
-7. **Sensitivity Analysis and Design Baselines** — Vary arrivals, payload, data growth, burst profile and price assumptions rather than reporting one exact future spend; make a reproducible table of bottleneck, p95, error, user outcome, complexity and cost for at least two plausible designs.
+6. **Sensitivity Table, Pareto Trade-Off and Decision** — Vary arrival skew, data growth, burst, failure and pricing assumptions; compare both designs' task success/p95/errors/privacy/maintenance and identify where a simpler solution dominates.
 
 *Optional practice — complexity rejection:* Argue against an unjustified shared message broker or microservice based on measured scale, privacy and operational overhead.
 
-### Module 15 — Integrated Production Architecture Review and Independent Defense
+### Module 15 — One Measured Architecture Improvement and Independent Defense
 
 #### Outcomes
 
@@ -559,38 +553,29 @@ can satisfy them all.
 
 #### Lessons
 
-1. **Choose one APP7 product with a real constraint** — Start from the independently deployed, recoverable APP5 application and APP6 verification/observability baseline.
+1. **One Existing Product, Constraint and Prior Judgments** — Use the same APP7-deployed APP5 system assessed through APP8-AS1–AS6; identify independently accepted workload, capacity, security, consistency and cost decisions by reference instead of collecting a fifteenth checklist of full implementations.
 
-2. **Publish user-facing growth and failure assumptions** — Set throughput, latency, consistency, reliability, security and cost acceptance criteria and their evidence sources.
+2. **Competing Options, Evidence and One Coherent Change** — Connect verified bottleneck, measured alternatives, local admission, cache/read-path, durable-worker and failure choices into a defensible minimal improvement; do not implement an unrelated scaling feature solely to demonstrate breadth.
 
-3. **Capture representative workload and baseline** — Record synthetic traffic mix, data size, generator capability, cold/warm periods, failure/denial counts and matched local environment.
+3. **Adverse User/Data/Privacy and Recovery Recheck** — Reproduce the real selected change under a bounded mixed-tenant load and one failure, verify true committed PostgreSQL results, stale state and unauthorized access denial, and reuse accepted AS1–AS6 tests where unaffected.
 
-4. **Explain baseline capacity and bottleneck** — Correlate response tail, CPU/event loop, SQL pool/locks, queue depth and dependency timeouts and provide counterexamples.
+4. **Unfamiliar Growth, Lag, Starvation or Failure Challenge** — Receive a new bounded workload/tenant distribution, stale read, permission change, retry storm or cost constraint, predict failure, independently reproduce it and correct the responsible design with targeted regression.
 
-5. **Choose and implement justified overload protection** — Add rate/fairness/backpressure or worker-concurrency controls and verify bounded failure under an explicit burst.
-
-6. **Investigate cache and state correctness** — Compare scoped cache/invalidation and a delayed-read or replica-like adapter without weakening PostgreSQL authority.
-
-7. **Reproduce duplicate and partial-failure outcomes** — Exercise idempotency and external dependency overload, including retry amplification and safe degraded behavior.
-
-8. **Stage a reversible architectural boundary** — Deploy a selected change behind a safe switch with old/new contract evidence and rollback/repair policy.
-
-9. **Rerun measurements and calculate costs** — Compare repeated p95, throughput, rejections, correctness, resource use and illustrative operational cost with uncertainty.
-
-10. **Audit privacy and tenant protections** — Verify no cross-tenant cache, rate-limit, worker or stale-view exposure during load and failure.
-
-11. **Unfamiliar bounded scenario and independent defense** — Respond to a new workload distribution or failed dependency without replacing evidence with speculation; defend chosen simplicity or added complexity.
+5. **Clean Local Comparison and Independent Technical Defense** — Build/reproduce before and after with recorded free toolchain, traceable decision/evidence index, matched measurements and cost/complexity trade-offs, disclosing what remains a simulation and what would need real deployment or learning validation.
 
 ## Completion requirements
 
-**All sixteen APP8 outcomes** must be demonstrated through
-the **seven required summative assessments** below.
-Assessments may extend a single evolving deployed APP7
-product and APP6 quality baseline; seven unrelated systems,
-paid services, distributed microservices or hidden exercises
-are not required. Module-level investigations and comparisons
-are formative except where the summative work explicitly
-calls for their results.
+All **sixteen APP8 outcomes** require **seven independently
+decidable summative assessments** on **one evolving APP7-deployed
+product**. AS1 observes valid workload/capacity; AS2 verifies actual
+bounded admission, fair queue/worker recovery; AS3 verifies scoped
+cache/DB consistency; AS4 limits genuine dependency cascades; AS5
+tests a justified architecture change and compatibility; AS6
+independently judges privacy, SLO/cost and alternatives; AS7
+integrates **previously accepted evidence by reference** and an
+unfamiliar bounded engineering challenge. Distinct mechanisms remain
+teachable and examinable; seven unrelated systems, paid services,
+mandatory distributed clusters or hidden formative gates do not.
 
 | Required assessment | Required outcome coverage | Principal evidence |
 | --- | --- | --- |
@@ -759,20 +744,17 @@ migration evidence, assumptions, decision
 and limitations according to
 [OEE Evidence Rules](../../spec/evidence-rules.md).
 
-APP8 retains its code and core identity,
-replacing the legacy nine-week checkpoints/
-final-lab contract with an OEE `v0.2.0`
-**draft**. Its direct prerequisites remain
-APP5, APP6 and APP7, per approved program
-architecture. Historical completion evidence
-continues to refer to its original course
-revision and must not be retroactively
-reinterpreted as meeting the new outcome
-or assessment IDs. APP9's capstone is now a separately source-migrated
-`v0.2.0` project with its own graduation evidence;
-APP10–APP16 are optional migrated drafts. OEE Workspace,
-content/resource and 0xNAND consumer pins still need
-distinct review before any historical evidence is upgraded.
+APP8 remains an OEE `v0.2.0` **draft** with its
+established APP5, APP6 and APP7 direct prerequisites.
+The previous nine-week checkpoint format is historical;
+the core architecture and outcome-based APP9 project
+already exist in the published catalog. This source-only
+academic reassessment does not declare APP8 `tested`,
+independently `verified` or accredited; does not
+rewrite APP9 or elective requirements; and does not
+reinterpret prior learner completions. OEE Workspace,
+content and 0xNAND source/evidence pins must be updated
+only through deliberate revision review.
 
 Passing structural checks, tests or this
 local architecture exercise does not
