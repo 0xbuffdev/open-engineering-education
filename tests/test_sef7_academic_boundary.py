@@ -29,19 +29,6 @@ PRIOR_ASSESSMENTS = (
     "47f57310", "e95b0b86", "2fedbd2e",
 )
 
-EXPECTED_MODULES = (
-    "POSIX System Model and Resource Contracts",
-    "Descriptors, Open-File Descriptions and Reliable Byte I/O",
-    "Fork, Exec and Owned Child Processes",
-    "Signals, Handler Safety and Child Coordination",
-    "Filesystem Identity, Links and Permission Models",
-    "Directory Traversal and Race-Aware Fixture Safety",
-    "Pipes, Redirection and Two-Child IPC",
-    "Bounded Blocking TCP and Framing",
-    "poll-Driven Nonblocking I/O and Monotonic Deadlines",
-    "Resource Lifecycle, Fault Models and Reviewable Evidence",
-    "Integrated Mini Unix Utility and Technical Defense",
-)
 
 
 def checksum(text: str) -> str:
@@ -107,27 +94,76 @@ class SEF7AcademicBoundaryTests(unittest.TestCase):
             covered.update(re.findall(r"SEF7-O\d+", declaration.group(1)))
         self.assertEqual(covered, {f"SEF7-O{i}" for i in range(1, 15)})
 
-    def test_eleven_modules_and_ordered_lessons_follow_safe_progression(self):
+    def test_instructional_sequence_is_derived_from_outcome_prerequisites(self):
         _, defined, modules, _ = sections()
         known = set(re.findall(r"(?m)^- \*\*(SEF7-O\d+):\*\*", defined))
-        found = list(re.finditer(r"(?m)^### Module (\d+) — ([^\n]+)$", modules))
-        self.assertEqual([int(m.group(1)) for m in found], list(range(1, 12)))
-        self.assertEqual(tuple(m.group(2) for m in found), EXPECTED_MODULES)
-        count = 0
-        for i, header in enumerate(found):
-            stop = found[i + 1].start() if i + 1 < len(found) else len(modules)
-            text = modules[header.start():stop]
-            self.assertEqual(text.count("#### Outcomes"), 1)
-            self.assertEqual(text.count("#### Lessons"), 1)
-            outcome_area, lessons = text.split("#### Lessons", 1)
-            refs = set(re.findall(r"(?m)^- (SEF7-O\d+)$", outcome_area))
-            self.assertTrue(refs)
-            self.assertTrue(refs.issubset(known))
-            indexes = [int(n) for n in re.findall(r"(?m)^(\d+)\. ", lessons)]
-            self.assertTrue(indexes)
-            self.assertEqual(indexes, list(range(1, len(indexes) + 1)))
-            count += len(indexes)
-        self.assertEqual(count, 110)
+        heads = list(re.finditer(r"(?m)^### Module (\d+) — ([^\n]+)$", modules))
+        self.assertTrue(heads)
+        self.assertEqual(
+            [int(m.group(1)) for m in heads],
+            list(range(1, len(heads) + 1)),
+        )
+        first = {}
+        for i, head in enumerate(heads):
+            end = heads[i + 1].start() if i + 1 < len(heads) else len(modules)
+            content = modules[head.start():end]
+            self.assertEqual(content.count("#### Outcomes"), 1)
+            self.assertEqual(content.count("#### Lessons"), 1)
+            mapped, lessons = content.split("#### Lessons", 1)
+            ids = re.findall(r"(?m)^- (SEF7-O\d+)$", mapped)
+            self.assertTrue(ids)
+            self.assertEqual(len(ids), len(set(ids)))
+            self.assertTrue(set(ids).issubset(known))
+            for id_ in ids:
+                first.setdefault(id_, i)
+            numbers = [int(n) for n in re.findall(r"(?m)^(\d+)\. ", lessons)]
+            self.assertTrue(numbers)
+            self.assertEqual(numbers, list(range(1, len(numbers) + 1)))
+            # Real lessons name an objective and its observable task, not
+            # an unqualified list of Unix interface terms.
+            self.assertEqual(
+                len(re.findall(r"(?m)^\d+\. \*\*.+?\*\* — \S", lessons)),
+                len(numbers),
+            )
+        self.assertEqual(set(first), known)
+        for earlier, later in (
+            ("SEF7-O1", "SEF7-O7"),   # descriptor semantics before pipes
+            ("SEF7-O2", "SEF7-O7"),   # shared handles before pipe EOF
+            ("SEF7-O3", "SEF7-O7"),   # child/wait before two-child IPC
+            ("SEF7-O8", "SEF7-O9"),   # blocking protocol before nonblocking
+            ("SEF7-O9", "SEF7-O13"),  # finite deadlines before integration
+            ("SEF7-O7", "SEF7-O13"),  # IPC before integration
+            ("SEF7-O6", "SEF7-O13"),  # safe traversal before integration
+        ):
+            with self.subTest(prerequisite=f"{earlier}->{later}"):
+                self.assertLess(first[earlier], first[later])
+
+        # Identity and directory traversal belong to one coherent stage.
+        # Verify actual intra-module preparation rather than artificially
+        # forcing them into two separate modules.
+        self.assertLess(
+            modules.index("**Pathnames versus object identity**"),
+            modules.index("**Owned DIR streams and readdir errors**"),
+        )
+        self.assertLess(
+            modules.index("**Owned DIR streams and readdir errors**"),
+            modules.index("**Directory-relative identity checks**"),
+        )
+
+    def test_version_aware_posix_failures_and_downstream_sys_are_accurate(self):
+        source, _, modules, _ = sections()
+        for topic in (
+            "FD_CLOEXEC", "open-file description", "waitpid", "sig_atomic_t",
+            "lstat", "fstatat", "readdir", "SIGPIPE", "EINTR", "EAGAIN",
+            "CLOCK_MONOTONIC", "127.0.0.1", "poll", "partial",
+            "independent", "deadline", "close", "SO_ERROR", "errno",
+            "Linux", "POSIX.1-2024", "POLLHUP", "TOCTOU",
+        ):
+            with self.subTest(topic=topic):
+                self.assertIn(topic.lower(), (source + modules).lower())
+        self.assertIn("All ten published SYS courses now", source)
+        self.assertIn("not an enacted assessment migration", source)
+        self.assertIn("draft", source.lower())
 
     def test_complete_explicit_mapping_to_real_SYS_files_and_no_auto_credit(self):
         mapping = BOUNDARY.read_text(encoding="utf-8")

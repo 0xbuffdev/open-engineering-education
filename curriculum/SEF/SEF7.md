@@ -22,11 +22,11 @@ The course distinguishes **ISO C11**, **POSIX application interfaces**, Linux im
 
 **Standards and safety limits:** `close` interrupted by a signal has platform- and POSIX-edition-sensitive semantics, including a known Linux/POSIX.1-2024 divergence. The Linux implementation can release a descriptor before returning some errors; blindly retrying `close(fd)` may close a newly reused descriptor. Learners must record actual target behavior and must not claim a universal retry rule. Similarly, a prior check that a PID belongs to an owned child is not proof against every possible PID reuse or process-lifetime race. Use controlled children, bounded waits and clear ownership while stating the remaining limitations.
 
-The original eight subject areas now form **eleven progressively ordered modules**, separating foundational POSIX contracts, directory-traversal guarantees, and integrated failure/ownership investigation before the existing mini utility. The **same seven required summative assessments** measure all 14 outcomes and may reuse verified components, fixtures and explanations. No per-module graded quota, duplicate capstone, mandatory tracer, Rust requirement, paid product, external host or proprietary grader is added.
+The instruction now follows the distinct competencies of descriptor and byte-stream ownership; bounded child processes and signals; filesystem identity and directory traversal; two-child pipe EOF; blocking framed TCP; nonblocking readiness and deadlines; and one integrated Unix utility. Generic resource and evidence principles are introduced once and then applied at each interface's new failure boundary, not repeated as standalone topic surveys. The **same seven required summative assessments** measure all 14 outcomes and may reuse verified components, fixtures and explanations. No fixed module or lesson count defines proficiency. No per-module graded quota, duplicate capstone, mandatory tracer, Rust requirement, paid product, external host or proprietary grader is added.
 
 **Provisional duration:** 12–16 weeks at 10–15 focused hours per week (about 120–240 focused hours before individual remediation). The old seven-week estimate compressed descriptor/process lifetimes, filesystem identity hazards, and two distinct stages of TCP reliability. This estimate is **not** validated learner-time evidence, and course status remains `draft`.
 
-**SEF/SYS scope:** The [SEF7–SYS destination map](UNIX-SYS-BOUNDARY.md) maps every current SEF7 outcome and assessment to candidate advanced SYS courses. The nine published SYS courses are still **legacy drafts**, not verified `v0.2.0` evidence successors. Therefore no SEF7 outcome, assessment or existing learner completion is transferred or removed here. Future [SYS2](../SYS/SYS2.md) owns advanced C/Rust comparisons and low-level system-resource work, while [SYS4](../SYS/SYS4.md) owns multi-client/concurrent networking, service backpressure and reliability. Rust is not silently introduced as a SEF7 prerequisite.
+**SEF/SYS scope:** The [SEF7–SYS destination map](UNIX-SYS-BOUNDARY.md) maps every current SEF7 outcome and assessment to candidate advanced SYS courses. All ten published SYS courses now have outcome-driven `v0.2.0` definitions and remain educationally **`draft`**; they are not automatically approved substitutes for SEF7's assessed evidence. No SEF7 outcome, assessment or historical learner completion is transferred or removed here. The boundary map is non-normative, not an enacted assessment migration. Future [SYS2](../SYS/SYS2.md) owns advanced C/Rust comparisons and low-level system-resource work, while [SYS4](../SYS/SYS4.md) owns multi-client/concurrent networking, service backpressure and reliability. Rust is not silently introduced as a SEF7 prerequisite.
 
 Optional public references include the [Linux `close(2)` manual](https://man7.org/linux/man-pages/man2/close.2.html), [POSIX.1-2024 online standard](https://pubs.opengroup.org/onlinepubs/9799919799/), and [Linux signal-safety guidance](https://man7.org/linux/man-pages/man7/signal-safety.7.html). They are free cross-checks, not hidden mandatory course materials.
 
@@ -49,234 +49,162 @@ Optional public references include the [Linux `close(2)` manual](https://man7.or
 
 ## Modules
 
-### Module 1 — POSIX System Model and Resource Contracts
+### Module 1 — POSIX Resource Model, Descriptors and Reliable Byte I/O
 
 #### Outcomes
 
 - SEF7-O1
+- SEF7-O2
 - SEF7-O10
 - SEF7-O11
 - SEF7-O12
 
 #### Lessons
 
-1. **From C11 to POSIX** — Distinguish C language and standard-library guarantees from POSIX interfaces, Linux details, and actual kernel syscalls; a libc function call is not necessarily one kernel event.
-2. **Feature-test macros and environment** — Record Linux/libc/compiler versions, _POSIX_C_SOURCE and applicable headers, and identify optional Linux-only facilities.
-3. **Return values and errno** — Check each interface's success/error convention; capture errno promptly after failure and avoid reading a stale value after success.
-4. **Bounded fixture ownership** — Use only disposable owned files, known child processes and 127.0.0.1 loopback; prohibit altering unrelated user resources.
-5. **Resource ownership and state** — Describe ownership and cleanup of descriptors, directory handles, child PIDs, buffers, and sockets on normal and partial-error paths.
-6. **Independent output oracles** — Derive expected bytes, exit codes, directory identities and frame encodings separately from the tested implementation.
-7. **Partial progress and failure** — Distinguish positive transfers, EOF, EINTR and EAGAIN, and do not reset progress on a partially successful operation.
-8. **Portable claim boundaries** — Separate POSIX-conforming source from Linux-specific observed behavior, including the version-sensitive semantics of close.
-9. **Diagnostic provenance** — State whether observations are source-level logs, supplied traces, optional syscall traces or actual kernel evidence.
+1. **From C11 to actual POSIX calls** — Build on SEF6 ownership to distinguish ISO C11, POSIX interfaces, Linux behavior and a verified kernel-syscall trace; a libc wrapper call alone is not proof of one kernel event.
+2. **Feature-test and toolchain assumptions** — Compile a bounded fixture with declared POSIX headers/macros, and record Linux, libc, C compiler, supported features and exact commands before claiming portability.
+3. **Descriptor and open-file-description identity** — Draw owned integer descriptors and shared underlying open-file descriptions, specifying the lifetime and cleanup responsibility for each.
+4. **Return and errno contracts** — Interpret positive byte counts, zero, -1 and EOF for specific calls; capture errno promptly on failure rather than reading a stale errno after success.
+5. **Partial read/write loops** — Maintain a byte-progress invariant across short transfers and retry appropriate interrupted no-progress operations without duplicating previously transferred data.
+6. **EOF and would-block distinctions** — Distinguish an actual read EOF from EINTR, EAGAIN and EWOULDBLOCK, documenting the blocking mode and avoiding a false successful complete read.
+7. **dup, dup2 and shared offsets** — Predict a known file's offsets after duplication and bounded redirection, and validate observed bytes and offsets independently without touching real user files.
+8. **Descriptor flags versus file status** — Observe FD_CLOEXEC per descriptor against O_APPEND/O_NONBLOCK on the shared open-file description, recording effects of duplication and later exec.
+9. **Correct descriptor inheritance** — Specify the intended descriptors across exec, the special dup2 same-descriptor case and when closing unused inherited handles prevents leaks.
+10. **close, EINTR and descriptor reuse** — Explain the documented Linux/POSIX.1-2024 distinction for close interrupted by a signal and why blindly retrying a descriptor number can close an unrelated reused handle.
+11. **Owned failure and oracle cases** — Test clean, empty, short, interrupted, failed-open and invalid-target paths with independent expected bytes, flags, errors and a preserved sentinel.
+12. **Actual versus simulated diagnostic evidence** — Label direct call/return logs, deterministic fault wrappers and optional kernel tracer evidence accurately, then repair one defined-behavior descriptor bug.
 
-*Optional practice:* Draft an ownership/return/error table for a small disposable file operation and identify which assumptions depend on Linux.
+*Optional practice:* Predict the shared file offset of two duplicated handles, then verify it in a disposable file and explain the separate close-on-exec flag.
 
-### Module 2 — Descriptors, Open-File Descriptions and Reliable Byte I/O
+### Module 2 — Fork, Exec, Signals and Owned Child Lifecycles
+
+#### Outcomes
+
+- SEF7-O3
+- SEF7-O4
+- SEF7-O10
+- SEF7-O11
+- SEF7-O12
+
+#### Lessons
+
+1. **Child process and inherited resources** — Trace copied memory state, the environment and duplicated descriptor references after fork; do not mistake a new process for a new underlying open-file description.
+2. **Bounded fork and exec setup** — Launch only fixed local child fixtures from a single-threaded process, handle fork failure and avoid executing untrusted shell input.
+3. **Exec failure versus normal exit 127** — Use a close-on-exec error pipe to distinguish exec failure from a genuine program deliberately exiting with code 127.
+4. **Wait status and reaping** — Use waitpid and WIFEXITED/WEXITSTATUS/WIFSIGNALED to distinguish success, nonzero exit and signal termination, and prevent zombie children.
+5. **Signal disposition and sigaction** — Install a controlled handler and explain masks, signal order and interrupted calls without relying on deterministic scheduling or delivery order.
+6. **Async-signal-safe handler limitations** — Set a volatile sig_atomic_t flag in a handler and move logging, allocation, resource release and child coordination to safe normal flow.
+7. **Verified owned-child signalling** — Target only a child this test started, and explain why a stored PID alone is not a general capability against concurrent PID reuse.
+8. **Interrupted waits and finite shutdown** — Handle EINTR while preserving finite wait deadlines; reap or terminate only owned children and identify which cleanup conditions can fail.
+9. **Multithreaded-fork caveat and bounded environment** — Describe why arbitrary library calls in the child of a multithreaded parent are risky, without making multithreaded process supervision a new SEF prerequisite.
+10. **Independent lifecycle fault matrix** — Compare intended output and child status for success, missing exec target, exit 127, controlled signal termination and timeout, then repair one lifecycle error.
+
+*Optional practice:* Compare a deliberately missing executable with a child returning 127 and explain how the error pipe disambiguates the outcomes.
+
+### Module 3 — Filesystem Identity, Permissions and Race-Aware Directory Traversal
+
+#### Outcomes
+
+- SEF7-O5
+- SEF7-O6
+- SEF7-O10
+- SEF7-O11
+- SEF7-O12
+
+#### Lessons
+
+1. **Pathnames versus object identity** — Compare stat, lstat and fstat on a synthetic regular file, symlink, dangling link and renamed entry, distinguishing a name from the object actually opened.
+2. **Directory search and permission reality** — Predict mode/owner access with the actual unprivileged process and note ACL, filesystem, container and capability effects on expected permission failures.
+3. **Replace-after-check counterexample** — Change a fixture name after metadata inspection and show why the previously checked pathname cannot authenticate a later open, while fstat identifies an already-opened object.
+4. **Owned DIR streams and readdir errors** — Acquire opendir/closedir handles and set errno before readdir to distinguish end-of-directory from errors without assuming stable enumeration order.
+5. **Deterministic listing and entry types** — Use a declared stable sorting policy for names; do not trust optional dirent.d_type hints as universally populated metadata.
+6. **Symlink-follow and traversal policy** — Distinguish internal, dangling and outside-root links, and apply a documented no-follow or bounded-follow policy without altering external targets.
+7. **Directory-relative identity checks** — Use fstatat/openat where supported and explain what AT_SYMLINK_NOFOLLOW or O_NOFOLLOW protects, and what it does not guarantee about ancestor components.
+8. **Disappearing entries and denied access** — Handle deletion/rename between readdir and inspection; report missing, empty or unsupported permission-denial cases honestly.
+9. **Bounded tree walk and TOCTOU limits** — Limit entries/depth, avoid symlink cycles and explain why string-prefix tests or check-then-open logic are not a hostile concurrent-filesystem security proof against time-of-check/time-of-use (TOCTOU) replacement.
+10. **Independent metadata and cleanup evidence** — Compare a hand-built manifest with exact type/size/link observations and verify all directory handles close while unrelated sentinel bytes stay unchanged.
+
+*Optional practice:* Inspect a file and an opened descriptor after a symlink-path replacement, then explain why their identities need not match.
+
+### Module 4 — Pipe Inheritance, EOF and Two-Child IPC
 
 #### Outcomes
 
 - SEF7-O1
 - SEF7-O2
-- SEF7-O11
-- SEF7-O12
-
-#### Lessons
-
-1. Course introduction: Unix System Interfaces
-2. The user and kernel boundary
-3. System calls and error handling
-4. File descriptors
-5. Reading, writing, and file offsets
-6. Descriptors, duplication, and redirection
-7. Short reads, partial writes and EINTR handling
-8. Descriptor flags, descriptor sharing and close-on-exec
-9. Resource ownership and cleanup on failure
-
-10. **Return conventions and partial progress** — Check ssize_t and status results, advance after positive partial writes, retry only appropriate zero-progress EINTR errors, and preserve transferred bytes.
-11. **EOF, would-block and close** — Distinguish read EOF from EAGAIN/EWOULDBLOCK, and explain Linux close/EINTR descriptor-number reuse hazards and standards differences.
-12. **Descriptor versus open-file flags** — Compare FD_CLOEXEC per-descriptor with shared file-status flags including O_APPEND/O_NONBLOCK; record fcntl observations.
-13. **Independent descriptor oracle** — Predict offsets after dup and inspect a disposable file rather than assuming each integer descriptor has an independent file offset.
-
-*Optional practice:* Draw an open/dup/close descriptor table and inspect shared file offsets using a disposable file.
-
-### Module 3 — Fork, Exec and Owned Child Processes
-
-#### Outcomes
-
 - SEF7-O3
-- SEF7-O4
-- SEF7-O11
-- SEF7-O12
-
-#### Lessons
-
-1. The process abstraction
-2. Creating processes with `fork`
-3. Running programs with `exec`
-4. Waiting for children and exit status
-5. What a child inherits
-6. Process exit versus signal termination
-7. Environment and argument inheritance
-8. Zombie processes, reaping and failure cases
-
-9. **Exec-error evidence** — Use a close-on-exec error pipe or equivalent explicit launch-error protocol to distinguish exec failure from a child deliberately exiting with code 127.
-10. **Bounded child lifecycle** — Explain interrupted waitpid, controlled child cleanup, zombie avoidance and why PID identity checks alone have concurrency limits.
-11. **Multithreaded fork caveat** — Describe why executing unsafe library operations in a forked child of a multithreaded parent is hazardous; a single-threaded teaching fixture avoids this added system complexity.
-
-*Optional practice:* Reap a controlled child with a deliberately nonzero exit status and compare it with a missing executable.
-
-### Module 4 — Signals, Handler Safety and Child Coordination
-
-#### Outcomes
-
-- SEF7-O3
-- SEF7-O4
-- SEF7-O11
-- SEF7-O12
-
-#### Lessons
-
-1. Signal disposition and default actions
-2. Safe signal-handler behavior
-3. Process groups and terminal control
-4. Wait status, zombies and reaping
-5. Cancellation and graceful shutdown
-
-6. **sigaction and signal masks** — Describe signal registration, restart behavior, EINTR and why a handler should not assume a deterministic delivery order.
-7. **Async-signal-safe code** — Use volatile sig_atomic_t to record a flag; leave printf, malloc, complex logging and resource cleanup to the normal program flow.
-8. **Owned PID restrictions** — Terminate only a known test-owned process, track reaping and report residual PID-reuse safety limitations instead of claiming complete race freedom.
-9. **Reproducible signal faults** — Use bounded controlled children, a supplied trace when needed, and an independently predicted wait-status matrix.
-
-*Optional practice:* Use an owned process to observe a graceful termination request and a bounded wait.
-
-### Module 5 — Filesystem Identity, Links and Permission Models
-
-#### Outcomes
-
-- SEF7-O5
-- SEF7-O6
-- SEF7-O11
-- SEF7-O12
-
-#### Lessons
-
-1. File metadata
-2. Permission bits in code
-3. Directories
-4. Hard and symbolic links in code
-5. Pathnames versus inode identities
-6. Directory traversal and symlink safety
-7. Permission failures and race conditions
-
-8. **Object identity after open** — Compare stale pathname stat with fstat on the actual opened object after a fixture rename/replacement.
-9. **Directory-relative identity** — Introduce openat/fstatat and no-follow flags where supported, stating their real guarantees and remaining race limits.
-10. **Permission and access caveats** — Differentiate observed permission failures from a guarantee that an unprivileged environment can reproduce EACCES consistently.
-
-*Optional practice:* Compare stat, lstat and fstat for regular, symlink and dangling-link fixture entries.
-
-### Module 6 — Directory Traversal and Race-Aware Fixture Safety
-
-#### Outcomes
-
-- SEF7-O5
-- SEF7-O6
-- SEF7-O11
-- SEF7-O12
-
-#### Lessons
-
-1. **Directory handles and ownership** — Use opendir, readdir and closedir with proper success/EOF/error interpretation and owned cleanup.
-2. **Nondeterministic entry order** — Define and implement a stable presentation order; do not assume readdir enumeration order is portable.
-3. **Metadata without unsupported assumptions** — Check directory entry identity and optional d_type handling rather than trusting unsupported entry type hints.
-4. **Symbolic links and directory boundaries** — Apply a published link-follow policy, including dangling and outside-root symlink fixtures without modifying external targets.
-5. **Directory-relative interfaces** — Compare fstatat/openat with string-concatenated paths and accurately describe remaining symlink/TOCTOU risks.
-6. **Disappearing entries** — Handle a filename removed or renamed between enumeration and inspection without silently inventing a successful result.
-7. **Permissions and missing objects** — Exercise empty, hidden, missing, dangling and permission-denied fixtures when the local environment supports the denial.
-8. **Bounded traversal and cycles** — Prevent accidental recursive symlink cycles and avoid treating a string prefix as a sufficient hostile-filesystem security boundary.
-9. **Teardown and independent evidence** — Preserve unrelated sentinel files, release directory handles and compare a separately prepared fixture manifest.
-
-*Optional practice:* Inspect an owned directory with a dangling and outside-root symlink and explain why a nonadversarial fixture does not prove adversarial containment.
-
-### Module 7 — Pipes, Redirection and Two-Child IPC
-
-#### Outcomes
-
-- SEF7-O2
 - SEF7-O7
 - SEF7-O11
 - SEF7-O12
 
 #### Lessons
 
-1. Anonymous pipes and byte streams
-2. Duplication, inheritance and descriptor closure
-3. Producer-consumer pipelines and EOF
-4. Deadlock and pipe-buffer behavior
-5. IPC error handling and bounded data
+1. **Anonymous pipes as byte streams** — Define the producer/consumer byte contract and track both pipe ends separately from any application-level record boundary.
+2. **Parent and child descriptor graph** — Draw every inherited read/write copy after fork and dup2 and decide precisely which process must close each unused end.
+3. **Why EOF waits for all writers** — Prove that a consumer sees EOF only after every writer copy is closed, including forgotten parent or child handles.
+4. **Two child statuses and exec errors** — Launch a known producer and consumer, reap both and propagate missing executables, nonzero exits and signal termination instead of trusting the last visible output.
+5. **Partial progress and finite backpressure** — Respect short transfers and a bounded pipe-buffer capacity using small fixtures and a finite test harness, not an unbounded wait.
+6. **SIGPIPE, EPIPE and early consumer exit** — Use an explicit broken-pipe signal policy, report actual failures and avoid accidentally terminating the coordinator.
+7. **Injected writer-leak failure** — Retain one extra pipe write descriptor in a fault fixture, observe a bounded missing-EOF failure and correct the exact closure invariant.
+8. **Independent IPC acceptance matrix** — Verify normal bytes, empty production, early consumer close, unavailable child and cleanup against separately predicted output, error and status results.
 
-6. **Pipe EOF proof** — Explain why EOF requires every writer descriptor copy in parent and children to be closed.
-7. **SIGPIPE and EPIPE** — Demonstrate a documented broken-pipe signal policy and explicitly report both child results.
-8. **Bounded failure diagnosis** — Use a finite harness for a deliberately forgotten write end, then fix the owner/cleanup defect without signalling unrelated processes.
-9. **Byte oracle and stream framing** — Treat pipes as byte streams, retain partial transfer progress, and independently check the producer-consumer result.
+*Optional practice:* Annotate every writer copy remaining after a two-child fork and predict which one prevents a reader from seeing EOF.
 
-*Optional practice:* Explain why an inherited extra write end delays a pipe reader's EOF.
-
-### Module 8 — Bounded Blocking TCP and Framing
+### Module 5 — Blocking Loopback TCP and Explicit Framing
 
 #### Outcomes
 
+- SEF7-O1
 - SEF7-O8
 - SEF7-O10
-- SEF7-O12
-
-#### Lessons
-
-1. Client and server
-2. TCP/IP basics
-3. The sockets interface
-4. A minimal TCP server and client
-5. Blocking sockets and message framing
-6. Connection timeout and disconnection
-7. Network byte order and partial I/O
-
-8. **Local port discovery** — Bind to loopback using a controlled available unprivileged port and inspect getsockname; never connect to external peers.
-9. **Four-octet length prefix** — Describe network byte order and the four eight-bit-octet protocol header; declare compatibility assumptions of the reference Linux environment.
-10. **Frame limits and truncation** — Reject payloads above 4096 before allocation, and distinguish early EOF in header/body from a valid empty frame.
-11. **Segmentation versus message identity** — Test one length header split across writes and demonstrate that TCP does not preserve send boundaries.
-12. **Basic service versus SYS4** — Distinguish a bounded local single-peer experiment from advanced multi-client, concurrent, backpressure-aware service work.
-
-*Optional practice:* Send two framed messages using a small local client and inspect their length prefixes.
-
-### Module 9 — poll-Driven Nonblocking I/O and Monotonic Deadlines
-
-#### Outcomes
-
-- SEF7-O8
-- SEF7-O9
 - SEF7-O11
 - SEF7-O12
 
 #### Lessons
 
-1. Blocking versus nonblocking descriptors
-2. Readiness notification principles with poll
-3. Partial reads and writes over sockets
-4. Network message framing and malformed peers
-5. Timeouts and bounded buffers
+1. **One peer, ordered bytes, no message boundary** — Distinguish TCP stream order from send/recv call boundaries using small local client and server fixtures.
+2. **Loopback-only listener and selected port** — Bind to 127.0.0.1 at an unprivileged available port, discover it with getsockname and account for each listening, accepted and client socket.
+3. **Four network-order length octets** — Define a four-octet header and at-most-4096-octet payload with explicit empty-frame policy and eight-bit-octet compatibility assumptions for the Linux fixture.
+4. **Complete frame read and write loops** — Track partial header/body progress and reject the advertised length before allocation rather than reading truncated data as a complete message.
+5. **Fragmentation and coalescing experiments** — Split header and payload writes and send multiple frames; independently verify exact recovered bytes instead of assuming network packet or write boundaries.
+6. **EOF, EINTR and broken send failures** — Distinguish clean EOF after a frame from premature header/body EOF, connection failure and EPIPE, documenting a safe SIGPIPE policy.
+7. **Bounded blocking waits** — Use supported socket or enclosing-harness deadlines for accept/connect/read/write rather than presuming an idle peer will unblock itself.
+8. **Invalid and hostile-shaped local inputs** — Test over-4096 length, malformed/incomplete header, truncated body, empty payload by policy and refused loopback connection without any external host.
+9. **Protocol oracle and SYS4 boundary** — Record expected network-order bytes, observed listener, statuses and cleanup; explain why multi-client services, overload and backpressure are separate SYS4 work.
 
-6. **End-to-end timeout invariant** — Base the overall deadline on CLOCK_MONOTONIC and recompute remaining time after EINTR; never reset it on every successful fragment.
-7. **Partial-frame state machine** — Track header/body and send offsets and distinguish readiness from completion of a full frame.
-8. **POLLHUP and POLLERR** — Handle disconnection, would-block, and actual read/write results rather than treating revents as proof of payload arrival.
-9. **No busy spins** — Wait for readiness after EAGAIN and prove malformed/idle peers fail in finite time.
-10. **Advanced reliability destination** — Explain why multi-connection fairness, overload/backpressure and production shutdown are assessed later in SYS4.
+*Optional practice:* Hand-encode a small four-octet header and show how one-byte receiver progress reassembles it without relying on TCP packetization.
 
-*Optional practice:* Trace a header split across writes and predict how poll and recv interleave.
-
-### Module 10 — Resource Lifecycle, Fault Models and Reviewable Evidence
+### Module 6 — Nonblocking Poll, Frame State and Monotonic Deadlines
 
 #### Outcomes
 
+- SEF7-O1
+- SEF7-O8
+- SEF7-O9
+- SEF7-O10
+- SEF7-O11
+- SEF7-O12
+
+#### Lessons
+
+1. **What nonblocking mode actually changes** — Set O_NONBLOCK where needed and distinguish EAGAIN/EWOULDBLOCK from EOF without reintroducing the blocking TCP protocol.
+2. **poll readiness is not completed I/O** — Read revents together with the actual return of recv/send; readiness alone cannot establish receipt of a complete frame.
+3. **Pending nonblocking connect when applicable** — When using nonblocking connect, treat EINPROGRESS as pending and check SO_ERROR after writable readiness instead of assuming POLLOUT means connection success.
+4. **Separate header, body and send offsets** — Track partial progress with a bounded state machine and enforce the 4096-payload limit independently of packet segmentation.
+5. **A single CLOCK_MONOTONIC deadline** — Compute remaining time after each fragment and interrupted poll without restarting the original end-to-end deadline.
+6. **POLLHUP/POLLERR and interrupted operations** — Diagnose disconnection, EINTR, short I/O and error events by consulting real interface statuses rather than interpreting a ready bit as a completed frame.
+7. **No spin on EAGAIN** — Wait for later readiness and prove idle/malformed-peer cases terminate under finite bounds without busy-looping.
+8. **Independent timeout and fragmentation tests** — Exercise a four-part header, multi-part body, valid repeat, oversized frame, early close, idle peer and injected EINTR/would-block against predicted results.
+9. **Repair a state or deadline bug** — Capture a seeded offset/timer regression, correct it and verify both payload bytes and cleanup with a new unfamiliar case.
+10. **Explicit level-of-depth decision** — Document tested platform limits and distinguish a single-peer poll loop from SYS4 multi-client fairness/backpressure and SYS7 production observability.
+
+*Optional practice:* Trace an EINTR during poll halfway through an incomplete header and explain why its deadline stays fixed as the received-byte counter grows.
+
+### Module 7 — Integrated Unix Utility, Resource Faults and Independent Defense
+
+#### Outcomes
+
+- SEF7-O1
 - SEF7-O2
 - SEF7-O3
 - SEF7-O4
@@ -285,28 +213,6 @@ Optional public references include the [Linux `close(2)` manual](https://man7.or
 - SEF7-O7
 - SEF7-O8
 - SEF7-O9
-- SEF7-O10
-- SEF7-O11
-- SEF7-O12
-- SEF7-O14
-
-#### Lessons
-
-1. **Complete ownership ledger** — Track every descriptor, directory handle, child process and socket on both success and failure paths.
-2. **Partial success and rollback** — Distinguish partial byte transfers, already-started children, replaced file names and partially received frames.
-3. **Deterministic fault injection** — Use injected EINTR/short transfer, missing executable, early peer close and timeout fixtures instead of waiting for rare scheduling accidents.
-4. **Source trace versus syscall trace** — Label in-program logs, wrapper returns and optional strace output accurately without equating them.
-5. **Independent fixtures** — Retain byte oracle, child status table, filesystem metadata manifest and frame encoding independently from tested functions.
-6. **Nonprivileged cleanup** — Stop only test-owned children, release all owned resources, and retain a sentinel showing unrelated files were unchanged.
-7. **Portability disclosure** — Document libc, Linux version, feature macros, supported options and standards/implementation differences.
-8. **Real reviewer evidence** — Record source locations, a reproduced defect, corrective tests and an explicit incomplete-coverage statement.
-
-*Optional practice:* Create a resource state table linking an already assessed descriptor, child, directory, pipe and socket failure to the same final utility.
-
-### Module 11 — Integrated Mini Unix Utility and Technical Defense
-
-#### Outcomes
-
 - SEF7-O10
 - SEF7-O11
 - SEF7-O12
@@ -315,19 +221,17 @@ Optional public references include the [Linux `close(2)` manual](https://man7.or
 
 #### Lessons
 
-1. Mini utility behavior and resource contracts
-2. Directory inspection and file identity
-3. Owned child launcher and termination
-4. Loopback TCP message exchange
-5. Failure and cleanup test harness
-6. Interface trace and independent technical defense
+1. **One reusable mini Unix utility** — Reuse already assessed descriptor, owned-child, filesystem, pipe and framed-TCP helpers in an inspect/run/net-demo CLI rather than creating independent projects.
+2. **Real command and environment contracts** — Specify accepted inputs, statuses, file/process/network boundaries, compiler/Make setup and what evidence a fresh nonprivileged checkout can reproduce.
+3. **Complete ownership and partial-failure ledger** — Map each descriptor, DIR handle, child, socket and buffer to its creator, release, and correct state on full or partial success.
+4. **Independent cross-interface fault fixtures** — Exercise missing/dangling files, failed exec, signal exit, writer-leak EOF, truncated/oversized frame and finite deadline against known byte/status/identity oracles.
+5. **Controlled cleanup and unaffected state** — Verify valid owned-resource cleanup after normal and error paths, reaping test children and preserving an unrelated fixture sentinel, with honest PID/path race limits.
+6. **Trace provenance and portability** — Label in-process return/errno logs, wrapper-injected failures and actual optional syscall traces separately, recording standards edition, compiler and libc versions.
+7. **Source-located unfamiliar defect repair** — Reproduce one new error, identify which owner/state/return contract it violates, repair it and retain a failing-before/green-after regression.
+8. **Accessible independent reproduction** — Provide semantic text/Markdown docs, precise build/test commands and an outcome-evidence map; record actual independent reviewer results for a normal and failing case.
+9. **Foundational-to-SYS technical defense** — Defend the design choice, untested limitations and why Rust comparison, kernel internals and production multi-client services belong in SYS, not hidden SEF7 gates.
 
-7. **One reusable artifact** — Carry assessed AS1–AS6 helpers into the inspect/run/net-demo commands instead of building independent capstones.
-8. **Safe fixture and host boundaries** — Verify owned directories, test children, loopback-only sockets and bounded input/waits during clean setup.
-9. **Accessible independent review** — Use plain-text or semantic Markdown evidence and ask the reviewer to reproduce an unfamiliar normal/failure case.
-10. **SEF/SYS boundary in defense** — Explain why Rust comparisons, concurrent multi-client networking, storage durability and production observability belong in SYS.
-
-*Optional practice:* Sketch mini utility commands, error outcomes and an independent reviewer evidence map.
+*Optional practice:* Map the seven published assessment decisions onto the existing utility's source, independent oracle and reviewer evidence without adding a new assessment.
 
 ## Completion requirements
 
@@ -335,15 +239,15 @@ Optional public references include the [Linux `close(2)` manual](https://man7.or
 
 This table is a **teaching/evidence crosswalk**, not a new grading contract. The original Work, Criteria, Evidence and review conditions below remain unchanged, and the same tested helper may satisfy more than one existing assessed requirement.
 
-| Assessment | New module stages | Already required evidence |
+| Assessment | Instructional stages | Already required evidence |
 | --- | --- | --- |
-| `SEF7-AS1` | Modules 1–2 | Descriptor offsets/flags, partial I/O, EINTR and ownership |
-| `SEF7-AS2` | Modules 3–4 | fork/exec error pipe, signals, waitpid and bounded child cleanup |
-| `SEF7-AS3` | Modules 5–6 | Stat/link/permission behavior and race-aware directory inspection |
-| `SEF7-AS4` | Module 7 | Two-child pipes, SIGPIPE/EPIPE, EOF and independent byte checks |
-| `SEF7-AS5` | Module 8 | Bounded blocking loopback TCP with four-octet framing |
-| `SEF7-AS6` | Module 9 | Nonblocking poll state machine, EINTR, EAGAIN and deadlines |
-| `SEF7-AS7` | Modules 10–11 | Single integrated Unix utility, independent failure/cleanup defense |
+| `SEF7-AS1` | Module 1 | Descriptor offsets and flags, partial I/O, EINTR, accurate return/error and ownership contracts |
+| `SEF7-AS2` | Module 2 | Controlled fork/exec/error pipe, signals, waitpid and bounded child cleanup |
+| `SEF7-AS3` | Module 3 | stat/lstat/fstat, link/permission claims and race-aware bounded directory inspection |
+| `SEF7-AS4` | Modules 2 and 4 | Two-child pipe/dup2, EOF from actual writer closure, SIGPIPE/EPIPE and byte/status evidence |
+| `SEF7-AS5` | Module 5 | Blocking loopback TCP, four-octet frames, truncation and independent payload oracles |
+| `SEF7-AS6` | Modules 5–6 | Nonblocking poll state, EAGAIN/EINTR, finite monotonic deadline and cleanup |
+| `SEF7-AS7` | Module 7, reusing previous evidence | One C Unix utility, actual failure and resource ownership, independent review and technical defense |
 
 ### Assessment environment and evaluation
 
@@ -407,4 +311,4 @@ Reviewers retain inspectable decisions, source revisions and evidence for each c
 
 This review implements the SEF7 academic-boundary follow-up in [accepted RFC 0003](../../rfcs/0003-sef-academic-progression.md). The earlier [SEF7 curriculum at commit `635661746826e00751315a42ec39c4938f417f67`](https://github.com/0xbuffdev/open-engineering-education/blob/635661746826e00751315a42ec39c4938f417f67/curriculum/SEF/SEF7.md) remains the authoritative historical evidence contract for previously assessed work.
 
-**All fourteen original `SEF7-O1`–`SEF7-O14` definitions and seven original `SEF7-AS1`–`SEF7-AS7` blocks (including Work, Criteria, Evidence and review variations) are preserved exactly.** There is no new, removed, renumbered or automatically reassessed learner requirement. The eleven modules and 12–16-week provisional estimate adjust instruction and disclosure, not completion. The [explicit SEF7–SYS map](UNIX-SYS-BOUNDARY.md) is a proposal for later SYS redesign, **not an enacted transfer**: the mapped SYS courses are legacy drafts and cannot yet replace any SEF7 assessment. No Rust requirement, extra capstone, fixed lab count, global OEE specification or readiness-status promotion has been introduced.
+**All fourteen original `SEF7-O1`–`SEF7-O14` definitions and seven original `SEF7-AS1`–`SEF7-AS7` blocks (including Work, Criteria, Evidence and review variations) are preserved exactly.** There is no new, removed, renumbered or automatically reassessed learner requirement. The prior eleven-module revision and this competency-derived consolidation adjust instruction and disclosure, not completion; the 12–16-week planning estimate remains provisional. The [explicit SEF7–SYS map](UNIX-SYS-BOUNDARY.md) remains a non-binding candidate comparison, **not an enacted transfer**: all ten SYS courses now publish `v0.2.0` **draft** requirements, but no accepted governance action or learner-assessment evidence authorizes substitution for SEF7. No Rust requirement, extra capstone, fixed lab count, global OEE specification or readiness-status promotion has been introduced.
