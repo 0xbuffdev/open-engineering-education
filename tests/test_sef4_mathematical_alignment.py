@@ -153,10 +153,18 @@ class SEF4MathAlignmentTests(unittest.TestCase):
             "| [SEF4](SEF4.md) | Data Structures & Algorithms | 12–14 weeks | SEF11 |",
             CATALOG.read_text(encoding="utf-8"),
         )
-        self.assertIn(
-            "how [sef4](sef4.md) will apply demonstrated quantified reasoning",
-            SEF11.read_text(encoding="utf-8").lower(),
-        )
+        # SEF11 must genuinely prepare SEF4 without freezing an editorial
+        # handoff sentence or dictating its module/lesson structure.
+        sef11 = SEF11.read_text(encoding="utf-8").lower()
+        for capability in (
+            "[sef4](sef4.md)",
+            "induction",
+            "recurrence",
+            "amortized",
+            "asymptotic",
+        ):
+            with self.subTest(sef11_preparation=capability):
+                self.assertIn(capability, sef11)
         self.assertIn(
             "Prior [SEF4](SEF4.md) study establishes",
             SEF6.read_text(encoding="utf-8"),

@@ -12,7 +12,7 @@
 
 ## Overview
 
-Establish the exact mathematical reasoning needed to study algorithms, data structures, and software engineering without hidden prerequisites. Begin with number sense and elementary algebra, then develop logic, sets, functions, relations, counting, proof, induction, asymptotic reasoning, recurrences, finite graphs, and state models. Learners must not merely recognize notation: they must independently solve, explain, prove or refute claims on unfamiliar examples, and distinguish a finite computation from a mathematical proof.
+Establish the exact mathematical reasoning needed to study algorithms, data structures, and software engineering without hidden prerequisites. Begin with number sense and elementary algebra, then develop logic, sets, functions, relations, proof and induction before using those methods for counting, asymptotic reasoning, recurrences, finite graphs, and state models. Learners must not merely recognize notation: they must independently solve, explain, prove or refute claims on unfamiliar examples, and distinguish a finite computation from a mathematical proof.
 
 **No prior formal mathematics course is required.** SEF2 is the only course prerequisite. An **ungraded entry diagnostic** examines basic arithmetic, fractions, signed values, proportions, equations and input-output tables; it directs individual bridge practice and may not exclude learners or impose a fixed number of attempts. A learner who demonstrates readiness may move ahead without completing redundant practice. Core readiness competencies still must be demonstrated in required evaluation before the modules that depend on them.
 
@@ -102,35 +102,17 @@ The 10–14-week duration is a **provisional planning range**, not a readiness p
 
 #### Lessons
 
-1. **Finite sets** — Define membership, subsets, union, intersection, difference and complement relative to a universe.
-2. **Functions as mappings** — Explain uniqueness of output, injectivity, surjectivity, bijection and inverse conditions.
-3. **Relations** — Test reflexivity, symmetry, antisymmetry and transitivity on finite relations.
-4. **Equivalence classes** — Produce partitions from equivalence relations and identify invalid partitions.
-5. **Order relations** — Distinguish partial and total orders and give incomparable-pair examples.
-6. **Data modeling** — Relate sets, maps, relations and ordering to real program contracts without treating Python containers as proofs.
+1. **Finite sets** — Define membership, subsets, union, intersection, difference and complement relative to a declared universe; test set equalities or refute them with a particular element.
+2. **Finite mappings and their properties** — Distinguish domain, codomain, and actual image/range; inspect a complete finite function table for output uniqueness, repeated images, and missing codomain values to establish or refute injectivity, surjectivity and bijectivity.
+3. **Composition and inverse conditions** — Compose two finite mappings only when their input/output sets are compatible, calculate a result for each declared input, and explain with a collision or uncovered element why a non-bijection cannot have a two-sided inverse.
+4. **Relations and counterexamples** — Classify small finite relations for reflexivity, symmetry, antisymmetry and transitivity, supplying a witnessing pair or triple where a property fails.
+5. **Equivalence classes** — Produce partitions from valid equivalence relations and detect an invalid proposed partition using the properties actually required.
+6. **Order relations** — Distinguish partial and total orders; identify incomparable pairs and explain why a prerequisite relation is not automatically a total order.
+7. **Computing data contracts** — Relate sets, mappings, relations and ordering to stated programming constraints; independently verify small finite tables while distinguishing exhaustive verification of a finite fixture from proof of an unrestricted theorem.
 
-*Optional practice:* Model a small dependency relation and check which properties hold using a hand-derived relation table.
+*Optional practice:* Given two finite function tables with declared domains and codomains, find collisions, missing images and a valid composition; separately analyze a small dependency relation for the required relation properties.
 
-### Module 5 — Combinatorics and Counting
-
-#### Outcomes
-
-- SEF11-O5
-- SEF11-O9
-
-#### Lessons
-
-1. **Sum and product principles** — Select the correct rule for disjoint choices and independent stages.
-2. **Factorials and arrangements** — Count permutations with clearly stated constraints.
-3. **Combinations** — Count unordered selections and distinguish them from ordered pairs.
-4. **Repetition and restrictions** — Account for repeated choices and forbidden configurations.
-5. **Inclusion-exclusion** — Derive counts for two overlapping finite sets.
-6. **Pigeonhole reasoning** — Prove necessary repetitions under finite capacity assumptions.
-7. **Exact checking** — Verify a small count with `itertools` enumeration, without treating enumeration as a universal proof.
-
-*Optional practice:* Contrast five-choose-two (10 unordered choices) with five-times-four (20 ordered choices); trace where double counting occurs.
-
-### Module 6 — Proof, Induction and Elementary Number Theory
+### Module 5 — Proof, Induction and Elementary Number Theory
 
 #### Outcomes
 
@@ -151,6 +133,25 @@ The 10–14-week duration is a **provisional planning range**, not a readiness p
 
 *Optional practice:* Prove the sum of the first `n` odd positive numbers is `n²`; explain why testing ten values alone is insufficient.
 
+### Module 6 — Combinatorics and Counting
+
+#### Outcomes
+
+- SEF11-O5
+- SEF11-O9
+
+#### Lessons
+
+1. **Sum and product principles** — Count disjoint alternatives by addition and successive choices by multiplication when the number of options is fixed for each stage; split into cases when later options depend on an earlier choice, rather than incorrectly assuming probabilistic independence.
+2. **Factorials and arrangements** — Count permutations with clearly stated constraints.
+3. **Combinations** — Count unordered selections and distinguish them from ordered pairs.
+4. **Repetition and restrictions** — Account for repeated choices and forbidden configurations.
+5. **Inclusion-exclusion** — Derive counts for two overlapping finite sets.
+6. **Pigeonhole proofs** — Use the earlier proof methods to establish the capacity contradiction behind the pigeonhole principle; state the number of objects and containers and handle the boundary where no repetition is forced.
+7. **Exact checking** — Verify a small count with `itertools` enumeration, without treating enumeration as a universal proof.
+
+*Optional practice:* Contrast five-choose-two (10 unordered choices) with five-times-four (20 ordered choices); trace where double counting occurs.
+
 ### Module 7 — Asymptotic Growth and Recurrences
 
 #### Outcomes
@@ -166,8 +167,8 @@ The 10–14-week duration is a **provisional planning range**, not a readiness p
 3. **Proof with inequalities** — Supply constants and thresholds for simple asymptotic claims.
 4. **Recursive cost equations** — Translate a shrinking problem into an elementary recurrence with a base case.
 5. **Recurrence solutions** — Reason with substitution, expansion or a recursion tree on simple examples.
-6. **Cost models and assumptions** — Distinguish worst-case, expected and amortized interpretations; do not infer a proof from a timing graph.
-7. **Algorithm handoff** — Explain how [SEF4](SEF4.md) will apply demonstrated quantified reasoning, induction, finite graphs and recurrence bounds to running programs, loop invariants, algorithmic cost models and independently checked implementations; this is preparation, not a new SEF11 assessment.
+6. **Worst-case, expected and amortized claims** — State what input constraints and probability assumptions (if any) each cost statement requires; distinguish worst-case cost of one operation, expected cost under a specified distribution, and a deterministic average bound over an entire sequence. A timing graph is not a mathematical proof.
+7. **Aggregate analysis of a growing buffer** — For a conceptual capacity-one array that doubles when full, count unit insertions and element copies across `n` appends, justify a geometric-sum bound on total work, and distinguish one expensive resize from constant amortized work per append without assuming random inputs. This prepares the correctness and cost analysis of [SEF4](SEF4.md), not a new coding requirement.
 
 *Optional practice:* Expand `T(n)=T(n/2)+1` for powers of two; justify a logarithmic bound and verify several small instances independently.
 
@@ -186,7 +187,7 @@ The 10–14-week duration is a **provisional planning range**, not a readiness p
 3. **Paths and connectivity** — Distinguish walks, paths, cycles, connected components and reachability.
 4. **Directed dependency graphs** — Reason about directions, prerequisites and cycles without requiring a full topological-sort implementation.
 5. **Finite-state models** — Trace states, allowed transitions, initial state, reachable states and terminal/fault states.
-6. **Invariants and reachability** — Prove or refute a simple invariant and identify a misleading finite observation.
+6. **Inductive invariants and reachability** — State the initial-state claim, prove that every allowed transition preserves it and identify a violating transition or counterexample when it does not hold; distinguish this argument for all reachable states from merely observing several successful traces.
 
 *Optional practice:* Trace a tiny finite-state parser or access policy by hand and identify unreachable transitions.
 
@@ -233,9 +234,9 @@ Submit reviewable handwritten, typed, spoken or equivalent accessible reasoning.
 
 - **SEF11-AS2** (required logic, sets, functions and relations)
   - Outcomes: SEF11-O3, SEF11-O4, SEF11-O9
-  - Work: Derive full truth tables for implication and its disjunction form, correctly negate a quantified predicate, compute specified finite-set operations, and classify small relations for reflexivity, symmetry, antisymmetry and transitivity. Construct one equivalence-class partition, one incomparable pair in a partial order and one counterexample to an invalid proposed property.
-  - Criteria: Truth-table rows and quantified negations follow an explicitly stated domain. Set/functional claims and relation-property classifications are correct, with valid counterexamples and independently checked table entries. The learner distinguishes an implication from its converse.
-  - Evidence: Truth tables, quantified reasoning, finite-set/relationship tables, partition and partial-order explanation, independent validation and one corrected misconception.
+  - Work: Derive full truth tables for implication and its disjunction form, correctly negate a quantified predicate, compute specified finite-set operations, and classify small relations for reflexivity, symmetry, antisymmetry and transitivity. Using two small declared finite function tables, determine whether each mapping is injective, surjective or bijective, compute a defined composition, and identify a collision, missing codomain image or incompatible mapping when an asserted property fails. Construct one equivalence-class partition, one incomparable pair in a partial order and one counterexample to an invalid proposed property. Reuse the same reviewable finite tables rather than create another unrelated submission.
+  - Criteria: Truth-table rows and quantified negations follow an explicitly stated domain. The domain and codomain of each function are clear; injectivity is justified by unique images or a specific collision, surjectivity by codomain coverage or a missing image, and finite composition by compatible input/output sets and correct evaluated values. Set and relation-property classifications are correct, with counterexamples and independently checked entries. The learner distinguishes an implication from its converse.
+  - Evidence: Truth tables, quantified reasoning, finite-set/relationship and function-composition tables, a collision or missing-image witness where applicable, partition and partial-order explanation, independent validation and one corrected misconception.
 
 - **SEF11-AS3** (required combinatorics and exact counting)
   - Outcomes: SEF11-O5, SEF11-O9
@@ -251,9 +252,9 @@ Submit reviewable handwritten, typed, spoken or equivalent accessible reasoning.
 
 - **SEF11-AS5** (required growth, recurrence, graph and state reasoning)
   - Outcomes: SEF11-O7, SEF11-O8, SEF11-O6, SEF11-O9
-  - Work: Prove a logarithmic bound for `T(n)=T(n/2)+1` on powers of two with a stated base case. Give a valid Big-O witness for a polynomial bound; separate worst, expected and amortized claims. Prove the handshaking identity for a finite undirected graph; draw and analyze a directed graph with an unreachable vertex and a cycle. Trace a small deterministic state machine and justify a reachable-state invariant, including a deliberately invalid transition.
-  - Criteria: Cost bounds follow valid reasoning rather than measurements; recurrence assumptions, graph definitions and edge counts are correct. Reachability and state changes match the declared model; the invariant proof covers every permitted transition, and faults are not silently accepted.
-  - Evidence: Recurrence derivation, constants/thresholds, graph-degree argument, directed graph and state tables, invalid case, independently checked finite instances and correction record.
+  - Work: Prove a logarithmic bound for `T(n)=T(n/2)+1` on powers of two with a stated base case. Give a valid Big-O witness for a polynomial bound. For a conceptual dynamic array initially holding zero elements with capacity one and doubling whenever full, charge one unit for each append plus one for every element copied during a resize; derive a valid upper bound on total work across `n` appends for `n >= 1`. Explain why one append can cost linear work while the sequence has constant amortized work per append, and why this is not an expected-case probabilistic claim. Prove the handshaking identity for a finite undirected graph; draw and analyze a directed graph with an unreachable vertex and a cycle. Trace a small deterministic state machine and justify a reachable-state invariant, including a deliberately invalid transition.
+  - Criteria: Cost bounds follow valid reasoning rather than measurements; recurrence assumptions and Big-O witnesses are correct. The declared buffer model's total insert/copy cost is bounded by a valid geometric-series or equivalent aggregate argument, and the learner distinguishes worst-case, amortized and distribution-dependent expected claims without conflating them. Graph definitions and edge counts are correct. Reachability and state changes match the declared model; the invariant proof covers the initial state and preservation under every permitted transition, and faults are not silently accepted.
+  - Evidence: Recurrence derivation, constants/thresholds, an append-and-copy cost table and aggregate bound, graph-degree argument, directed graph and state tables, initial/preservation invariant proof, invalid case, independently checked finite instances and correction record.
 
 - **SEF11-AS6** (required integrated discrete computing investigation and defense)
   - Outcomes: SEF11-O1, SEF11-O2, SEF11-O3, SEF11-O4, SEF11-O5, SEF11-O6, SEF11-O7, SEF11-O8, SEF11-O9, SEF11-O10
@@ -266,3 +267,9 @@ Submit reviewable handwritten, typed, spoken or equivalent accessible reasoning.
 All six required assessments must demonstrate SEF11-O1 through SEF11-O10. Optional examples and the **ungraded entry diagnostic** never add hidden pass requirements; an essential missing skill is remediated and reassessed with equivalent unfamiliar examples rather than ignored. Assessment evidence must remain reproducible and reviewable using public material and the learner's accessible chosen format.
 
 Completion of SEF11 establishes the required discrete mathematics preparation for SEF4 and SEF8; work from another course does not automatically satisfy these assessments without an explicit evidence-based equivalence decision. This course remains `draft` until the [readiness requirements](../../spec/status-labels.md) are satisfied.
+
+### Academic review and prior evidence
+
+This competency-derived realignment preserves the existing ten published outcome identities, six required assessment identities, course prerequisite and ungraded/self-paced arithmetic-and-algebra bridge. Proof methods now precede the combinatorial proofs that use them. The existing SEF11-O4/SEF11-O7 expectations are made directly inspectable in SEF11-AS2 (finite functions, composition and counterexamples) and SEF11-AS5 (a bounded aggregate-cost argument), without adding another separate examination, paid dependency or programming prerequisite.
+
+Earlier assessed work remains associated with the **course revision under which it was evaluated**; no previous pass is silently invalidated or treated as evidence for newly explicit examples. A reviewer may recognize evidence of the same published competence under an approved, genuinely assessed equivalence decision, or request an unfamiliar equivalent case when necessary. The current source remains `draft`; restructuring and structural validation do not establish tested or verified educational readiness.
