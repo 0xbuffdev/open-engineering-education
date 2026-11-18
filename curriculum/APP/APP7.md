@@ -113,7 +113,7 @@ The provisional duration is not validated workload evidence.
 
 ## Modules
 
-### Module 1 — Release Engineering, Environment Model and Operational Responsibility
+### Module 1 — Release Need, User Evidence and Operational Responsibility
 
 #### Outcomes
 
@@ -123,30 +123,23 @@ The provisional duration is not validated workload evidence.
 
 #### Lessons
 
-1. **Deployment history and operational purpose** — Trace manual server releases to verified artifacts, staged rollouts and declarative infrastructure without confusing DevOps with one product.
+1. **Historical Release Problems and Accountable Operations** — Trace the change from manual server replacement to versioned artifacts, supervised runtimes, declarative resources and staged changes through one real deployment failure; DevOps is a responsibility model, not a product checklist.
 
-2. **APP5 and APP6 capability handoff** — Reuse the authenticated product, tests, telemetry and SLIs while identifying new release and recovery obligations.
+2. **Carry Forward a Protected APP5 Journey and APP6 Gates** — Reuse the already functioning React/Fastify/PostgreSQL app, verified tenant permissions, private files/jobs, quality checks and task-centered signals; identify the *new* release/restore/ingress obligations.
 
-3. **User journey as operating criterion** — Define which protected business transaction must succeed before and after a deployment.
+3. **Running Topology, Trust Owners and Named Resources** — Map actual proxy, app, database, optional worker, files, ports and administrative access, naming which layer controls credentials, TLS, network, persistence and operator actions.
 
-4. **Architecture context and resource map** — Draw React assets, Fastify service, PostgreSQL, ingress, private files, worker and clients with actual boundaries.
+4. **Release Acceptance, Recovery Scope and Wrong-Target Risks** — Publish measurable authorized/denied task, availability, in-flight, preservation and isolation criteria, mark which goals are locally testable and identify irreversible state and operator error risks.
 
-5. **Threat and shared-responsibility inventory** — Assign accountability for OS, network, TLS, identity, data, secrets and incident decisions.
-
-6. **Availability, safety and recoverability** — Define observable operational acceptance without claiming cloud uptime or verified SLO attainment.
-
-7. **Deployment strategy selection** — Choose a small modular-monolith environment over premature clusters and microservices.
-
-8. **Evidence and revision provenance** — Record platform/tool versions, synthetic tenants, resource ownership, tested boundaries and missing observations.
-
-9. **Cold-start review** — Identify missing startup dependencies, stale state and unverified service assumptions before a first release.
+5. **Bounded Deployment Choice and Evidence Map** — Choose a free locally reproducible modular-monolith topology over premature clusters, and trace each operational acceptance to a distinct exercise, trusted artifact, observation or acknowledged gap.
 
 *Optional practice — release-readiness audit:* Show why passing unit tests alone does not prove safe ingress, restoration or rollback.
 
-### Module 2 — Linux Processes, Service Supervision and State
+### Module 2 — Supervised Runtime, Composed Networking and Persistent State
 
 #### Outcomes
 
+- APP7-O1
 - APP7-O2
 - APP7-O3
 - APP7-O5
@@ -154,25 +147,25 @@ The provisional duration is not validated workload evidence.
 
 #### Lessons
 
-1. **Process and user boundaries** — Inspect UID/GID, working directory, process environment, file ownership and open sockets.
+1. **Process Identity, Ports and Filesystem Authority** — Inspect actual UID/GID, working directory, listening ports, environment and file/volume ownership; demonstrate a denied protected-path access rather than relying on a YAML setting.
 
-2. **Supervision and Graceful Process Termination** — Use systemd, a controlled service runner or suitable process manager and verify restart/stop policy; trace SIGTERM and bounded shutdown through HTTP requests, database connections and worker loops.
+2. **Supervision, Process Restart and Signal Semantics** — Operate a controlled service runner or supported container supervisor, inspect real restart policy and SIGTERM/portable stop, and trace HTTP, DB connection and worker cleanup under a bounded drain.
 
-3. **Startup, liveness and readiness** — Distinguish existence, listening, dependency readiness and end-to-end user-workflow success.
+3. **App, Proxy, Database and Worker Composition** — Bring up the real local multi-service topology with named networks, mounts and process roles; distinguish application process, image/container and persisted database/file data.
 
-4. **Filesystem and volume semantics** — Separate ephemeral app data, temporary files, persisted database and recoverable private uploads.
+4. **Loopback Exposure, Service DNS and Direct-Access Denial** — Verify externally reachable/loopback bindings and that private database, backend or worker endpoints are inaccessible from unintended client networks; test paths, not just network diagrams.
 
-5. **Least privilege at runtime** — Run without unnecessary root capabilities and test a denied write or sensitive path read.
+5. **Started Is Not Ready—Conditional Dependency Health** — Demonstrate why Compose short-form depends_on only orders starts; use a *real* meaningful service_healthy or equivalent readiness gate, and detect a DB-listening but business-unready state.
 
-6. **Resource and connection budgets** — Apply feasible memory/CPU/connection limits and observe service behavior under safe constraints.
+6. **State Persistence Across Replacement and Worker Restart** — Replace/stop app and worker instances, verify actual SQL data, private objects and durable job intent survive, and reject orphan or cross-environment volumes.
 
-7. **Crash-loop controls** — Diagnose invalid environment, failed migrations and restart storms with useful error reporting.
+7. **Bounded Runtime Resources and Crash-Loop Diagnosis** — Apply reasonable CPU/memory/connection/restart budgets, inject bad config or unavailable DB, collect safe diagnostics and prevent a service from being reported ready while unable to transact.
 
-8. **Controlled failure cleanup** — Inspect open connections, timers, volumes and network handles after both successful and failed stop.
+8. **Partial Startup, Teardown and Wrong-Target Protection** — Rehearse failed setup/stop and inspect owned ports, DB sockets, file resources and volumes. Destroy only explicitly named disposable resources, preserving separate restored datasets.
 
 *Optional practice — process incident:* Repair an instance that reports healthy while it cannot commit data or exit cleanly.
 
-### Module 3 — Container Images, Runtime Isolation and Artifact Provenance
+### Module 3 — Minimal Deployable Artifacts and Verified Runtime Identity
 
 #### Outcomes
 
@@ -183,56 +176,21 @@ The provisional duration is not validated workload evidence.
 
 #### Lessons
 
-1. **Image versus running container** — Distinguish immutable filesystem layers, runtime mounts, process identity and persisted data.
+1. **Image Layers, Runtime Process and Mutable Volumes** — Distinguish image/root filesystem, container process and persistent mounts and show a concrete result from replacing only the immutable app image.
 
-2. **Multi-stage build design** — Separate TypeScript compilation/development tools from a minimal production-runtime stage.
+2. **Source/Build Inputs and Minimal Multistage Output** — Reuse APP6's lockfile, source revision and reviewed dependencies to produce a small runtime image or equivalently inspectable process bundle without unnecessary compilation tools.
 
-3. **Context control and .dockerignore** — Exclude credentials, build caches, test-only inputs and private files before building.
+3. **Build Context, Base Digests and Secret Exclusion** — Exclude synthetic credentials and private data from source context and layers, identify reviewed base digest and relevant execution scripts, and inspect actual artifact contents.
 
-4. **Base image and dependency provenance** — Pin reviewed versions/digests and identify actual versus assumed supply-chain properties.
+4. **Published Digest versus Moving Release Tag** — Record and compare the tested immutable content digest/hash rather than a floating latest tag; verify actual stage/release artifact identity before a handoff.
 
-5. **Tags versus immutable digests** — Record the tested image digest and why mutable latest tags are unsafe promotion references.
+5. **Nonroot Process, File Ownership and Exit Signals** — Run with least privilege and service-owned writable destinations, prove denied read/write to protected paths and observe startup, log output, bounded shutdown and meaningful health.
 
-6. **Non-root image execution** — Configure an explicit user, service-owned writable path and no unjustified privileged capabilities.
-
-7. **Secrets and build layers** — Test synthetic secret leakage and use safe runtime injection rather than image ARG/ENV secrets.
-
-8. **Runtime health, stdout and shutdown** — Verify process exit, signal forwarding and structured logs under the selected engine.
-
-9. **Image replacement and volumes** — Replace the app image and independently verify intended PostgreSQL and file persistence.
+6. **Actual Replacement and Persistent Business Check** — Replace the built runtime under the declared manager and independently confirm tenant data, relevant file/job states, safe logs and a protected user transaction remain valid.
 
 *Optional practice — image review:* Reduce oversized build contents and repair root-required writes without breaking the user task.
 
-### Module 4 — Composed Application Services and Network Exposure
-
-#### Outcomes
-
-- APP7-O1
-- APP7-O3
-- APP7-O4
-- APP7-O12
-
-#### Lessons
-
-1. **Local composed topology** — Run real proxy, app, database and optional worker as isolated free processes or Compose services.
-
-2. **Ports and bind addresses** — Inspect loopback versus public binds, service DNS and published host ports.
-
-3. **Private database boundaries** — Deny unneeded inbound DB access and prove clients only reach the intended ingress.
-
-4. **Persistent volumes and environment names** — Give staging and release-like instances distinct paths, service identities and database resources.
-
-5. **Process/service readiness order** — Wait on meaningful readiness rather than brittle sleeps or mere successful process creation.
-
-6. **Network failure taxonomy** — Trace DNS, TCP, proxy, TLS and upstream timeout failures to the owning layer.
-
-7. **Worker and job lifetimes** — Demonstrate safe worker restart with durable intent or honest pending outcomes.
-
-8. **Service and data cleanup** — Remove only named disposable resources, preserving a separate backup/restore target.
-
-*Optional practice — isolation defect:* Fix a shared staging database or leaked unpublished backend port and verify the corrected topology.
-
-### Module 5 — TLS, Reverse Proxies, DNS and Forwarded Trust
+### Module 4 — Locally Verified HTTPS and Proxy Trust Boundaries
 
 #### Outcomes
 
@@ -243,27 +201,23 @@ The provisional duration is not validated workload evidence.
 
 #### Lessons
 
-1. **Network-to-origin trace** — Reuse APP1 HTTP/DNS concepts to map client hostname through TLS proxy to local Fastify.
+1. **Hostname, SAN, Issuer and Chain Verification** — Explain and *test* how a named host, certificate SAN, issuer, trust root and expiry determine TLS acceptance for a chosen client, not by bypassing verification.
 
-2. **Certificate chain and hostname verification** — Inspect leaf issuer, SAN and scoped trust root without turning off TLS checks.
+2. **Scoped Local CA versus Public ACME/DNS** — Use an intentionally configured test trust store or temporary local CA; demonstrate wrong-CA/hostname failure and explain why this does not establish public DNS or public CA trust.
 
-3. **Local CA versus public ACME** — Explain trusted public DNS validation and why a local internal CA is only trusted where installed.
+3. **Actual Reverse Proxy to Protected Fastify** — Run Caddy or an equivalent maintained proxy for the same app, verify client→TLS ingress→upstream handling and inspect the actual origin/response boundary.
 
-4. **Caddy or equivalent verified HTTPS** — Operate local HTTPS with an explicitly scoped CA and document cleanup of trust changes.
+4. **Forwarded Header and Original Client Spoof Counterexample** — Inject attacker-chosen Forwarded and X-Forwarded-* values through client and direct-backend attempts, demonstrate what the proxy overwrites/ignores and configure only truly trusted hops for application decisions.
 
-5. **Host routing and HTTPS redirection** — Verify host/SNI match, intended route redirects and response behavior.
+5. **Cookies, Origin, CSRF and Direct Backend Restrictions** — Verify secure session transport, appropriate SameSite/HttpOnly/origin assumptions and API authorization through the proxy and denied bypass, without mistaking CORS for a firewall.
 
-6. **Upstream budgets and errors** — Bound proxy request body, timeout and unavailable-backend response semantics.
+6. **Proxy Body/Timeout and Unready Upstream Failure** — Test bounded request body, unavailable backend and carefully chosen upstream timeout with honest status and no trusted identity from an unverified hop.
 
-7. **Forwarded header authenticity** — Reject attacker-chosen X-Forwarded-Proto/Host/For unless supplied through a trusted ingress.
-
-8. **Cookies, origins and CSRF** — Exercise Secure/HttpOnly/SameSite policies consistent with authenticated local HTTPS.
-
-9. **Certificate expiry and renewal planning** — Distinguish public and local issuance, expiration checks and safe planned rotation.
+7. **Expiry, Trust Cleanup and Authenticity Limits** — Show expiry or intentional certificate replacement behavior, remove temporary client/system test trust and document which local verifications do not establish public PKI readiness.
 
 *Optional practice — HTTPS defect:* Detect an invalid certificate or spoofed forwarded identity and repair the trust boundary.
 
-### Module 6 — Stage/Production-like Environments, Secrets and Access
+### Module 5 — Isolated Environments, Runtime Secrets and Operator Privileges
 
 #### Outcomes
 
@@ -273,25 +227,21 @@ The provisional duration is not validated workload evidence.
 
 #### Lessons
 
-1. **Environment purposes and isolation** — Define test/staging/release-like intent and differences that can affect production behavior.
+1. **Test, Staging and Release-Like Ownership** — Name two independently created free local environments, with distinct data/volumes, service users, ports and configuration scopes rather than mere filename prefixes.
 
-2. **Build-time and runtime configuration** — Prevent private credentials and service secrets being compiled into React bundles or images.
+2. **Build-Time versus Runtime Secrets and Client Artifacts** — Demonstrate that private DB/session/release credentials do not enter frontend JavaScript bundles, image build layers, checked-in source or client-facing responses.
 
-3. **Configuration schema and fail-closed startup** — Reject missing, contradictory or unsafe environment parameters before receiving traffic.
+3. **Fail-Closed Configuration and Effective Role** — Reject missing/unsafe configuration before traffic; independently verify configured runtime identity, actual DB privilege and tenant/role isolation rather than trust an env var string.
 
-4. **Separate tenant and database identity** — Ensure each local stage has independent roles, data/volume paths and keys.
+4. **Scoped Injection and Safe Rotation** — Inject only fabricated credentials through a suitable local runtime secret mechanism, rotate a session/DB credential with documented cutover and revocation and verify service continuity or explicit fail-closed behavior.
 
-5. **Scoped secret injection** — Supply synthetic tokens or passwords through controlled runtime interfaces without plaintext commits.
+5. **Release Approval, Restore Authority and State Exposure** — Distinguish ordinary code/tests, deploy operator, secret custodian and restore permissions; inspect logs/IaC plan/state and artifacts for synthetic secrets and unjustified administrative power.
 
-6. **Credential rotation** — Rotate a test DB/session identity with overlap/revocation and verify service access continuity.
-
-7. **Operator authorization** — Assign release, secrets and restoration privileges to separate roles with reviewable actions.
-
-8. **Audit and sensitive output checks** — Inspect logs, IaC plans and artifacts for leaked secrets and unnecessary personal data.
+6. **Two-Environment Negative Verification** — Attempt cross-env DB/file/credential access and unintended direct backend entry, inspect denied access and safely test environment cleanup without deleting the other instance.
 
 *Optional practice — environment leak:* Repair an implicit development-secret fallback during release-like startup.
 
-### Module 7 — Infrastructure as Code, State Protection and Drift
+### Module 6 — Applied Infrastructure as Code, Drift and Destructive-State Protection
 
 #### Outcomes
 
@@ -302,27 +252,23 @@ The provisional duration is not validated workload evidence.
 
 #### Lessons
 
-1. **Desired and actual resource state** — Explain declarative resource graphs, remote ownership and the limits of configuration as truth.
+1. **Actual Resources, Desired Configuration and State** — Explain provider/controller ownership and actual service-relevant resource identities; a stand-alone example local_file unrelated to the deployed topology is **not** sufficient deployment IaC.
 
-2. **OpenTofu or equivalent applied local provider** — Select a free local provider or controller that genuinely creates and inspects real resources.
+2. **Versioned OpenTofu/Equivalent with Pinned Provider** — Use a compatible free local resource controller/provider that actually creates, configures or replaces a named deployed resource; pin binary/provider versions and distinguish a plan from an applied effect.
 
-3. **Plan review and controlled apply** — Read resource-add/change/destroy consequences before applying to explicitly approved test targets.
+3. **Two Independently Isolated Namespaces and Named Plans** — Parameterize state path, service, port, data and resources for both environments, inspect an approved add/change/destroy plan and execute actual resource creation.
 
-4. **Two isolated environment instances** — Parameterize state, ports and resource names and prove independent creation.
+4. **Idempotence and Observable Drift** — Run unchanged plan/re-apply to verify effective no-op, deliberately modify an owned real resource and demonstrate refresh/drift detection and a justified reconciliation.
 
-5. **Idempotent repeated reconciliation** — Show no unintended changes on an unchanged re-plan and re-apply.
+5. **Protect State, Locks, Secrets and Destructive Targets** — Control local/remote state file permissions and locking, avoid leaking secret values in saved plans/state, and deny mistaken replacement of another environment, database volume or retained backup.
 
-6. **Deliberate drift and refresh** — Mutate a local resource, detect drift and choose a justified correction.
+6. **Change Approval, Replacement and Actual Inventory** — Review a real release-affecting resource update, check actual postapply network/port/config state and prove failed/unsafe plan leaves protected resources unchanged.
 
-7. **State sensitivity and locking** — Protect file permissions, secrets, shared state concurrency and disposal of review artifacts.
-
-8. **Guard destructive replacement** — Reject unsafe planned deletion of a persistent volume or restoring into the wrong target.
-
-9. **Local infrastructure teardown** — Destroy only the selected disposable resources and verify backup and other environment remain intact.
+7. **Selective Teardown and Reprovisioning** — Destroy and recreate only the designated disposable environment, verify absence/presence of actual resources and ensure the other environment/restore target remains intact.
 
 *Optional practice — drift decision:* Review a stale plan and explain why it must be regenerated after resource or state changes.
 
-### Module 8 — Trusted CI-to-CD Artifact Promotion and Release Audit
+### Module 7 — Quality-to-Delivery Promotion and Immutable Release Decisions
 
 #### Outcomes
 
@@ -334,27 +280,21 @@ The provisional duration is not validated workload evidence.
 
 #### Lessons
 
-1. **CI versus CD ownership** — Reuse APP6 validation while separating environment targeting, approval and release credential authority.
+1. **Trusted Quality Gate versus Protected Release Authority** — Reuse APP6 check results as evidence but give separate control to artifact selection, destination credentials, approval, environment lock and rollback.
 
-2. **Build once and promote** — Use exactly the reviewed digest/hash across stage and release environments.
+2. **Build Once, Inspect and Promote by Exact Digest** — Record source revision, tested image/hash, approved dependencies and schema state; promote the identical verified artifact stage→release-like without rebuilding a moving tag.
 
-3. **Release pipeline graph** — Sequence quality gates, artifact verification, stage smoke, approvals and release checks.
+3. **Pipeline Ordering, Approval and Concurrency** — Design gate→artifact→staging smoke→human/defined approval→locked release→smoke and fail closed on skipped/failed/missing approval or simultaneous incompatible changes.
 
-4. **Untrusted contribution isolation** — Verify an untrusted PR cannot access deployment keys or privileged workflow events.
+4. **Untrusted PR/Actions/Caches versus Deployment Privilege** — Test a local fake untrusted contribution/wrong digest/poisoned artifact case and review provider-specific OIDC, privileged event and environment controls honestly—local simulation is **not** hosted enforcement.
 
-5. **Approval and concurrency policies** — Enforce release ownership and prevent overlapping destructive environment changes.
+5. **Real Protected User and Forbidden-Action Smoke** — Issue local HTTPS/independent HTTP normal and denied requests before/after promotion, checking actual DB/job state and release-correlated readiness rather than only /health.
 
-6. **Protected secrets and OIDC boundaries** — Explain hosted ephemeral identities honestly and exercise only locally verifiable controls.
-
-7. **Smoke tests and denial cases** — Run actual authorized and forbidden requests before and after promotion.
-
-8. **Manifest and release identity** — Record source SHA, artifact digest, config, migration state, decision actor and outcome.
-
-9. **Rollback approval and artifact availability** — Verify access to a previously known-good immutable artifact and compatible data.
+6. **Release Manifest, Recovery Candidate and Version Trace** — Record actor, approval, immutable source/digest, config, DB migration, observed traffic selection and a known-good recovery artifact whose compatibility has actually been checked.
 
 *Optional practice — wrong-artifact incident:* Reject a floating tag, changed digest or skipped approval with documented failing evidence.
 
-### Module 9 — Traffic Shifts, Health Signals and Bad-Release Recovery
+### Module 8 — Traffic Switching, Stateful Compatibility and Safe Release Repair
 
 #### Outcomes
 
@@ -366,88 +306,60 @@ The provisional duration is not validated workload evidence.
 
 #### Lessons
 
-1. **Deployment versus feature release** — Separate installed candidate, enabled feature and actual traffic shift decisions.
+1. **Deployment Versus User Feature Exposure** — Separate installed candidate, enablement, approved routing and actual user requests; choose a workable staged, blue/green or small rolling-like pattern for the local topology.
 
-2. **Rolling, blue-green and canary tradeoffs** — Compare spare capacity, state compatibility, failure blast radius and local testability.
+2. **Actual Old and New Versions behind a Controlled Selector** — Operate two different app versions concurrently and inspect which handles each request, without requiring a Kubernetes cluster or public internet traffic.
 
-3. **Running old and new versions** — Keep two local versions and a controlled proxy/route selection.
+3. **Health, Business Readiness and In-Flight Drain** — Reject new traffic to unready instances, let bounded in-flight work complete or fail transparently, and verify actual prior/new backend availability.
 
-4. **Readiness and draining** — Stop sending new requests to unready instances and handle bounded in-flight work.
+4. **Expand Schema without Breaking Existing Writers** — Apply a compatible DB/API schema addition before requiring it and test old/new read/write clients against actual PostgreSQL rows, not a hypothetical migration description.
 
-5. **User-centered smoke checks** — Verify login/authorized mutation/denial rather than trusting only /health.
+5. **Restartable, Bounded Backfill with Integrity Check** — Demonstrate real partial and resumed progress with transaction/resource limits and independent row counts, including a deliberately interrupted operation.
 
-6. **Release-correlated SLI observations** — Compare errors, latency and job state by release version using APP6 telemetry.
+6. **Mixed-Version Writes, Contracts and Retained Fields** — Exercise both running service versions under a real old/new transaction/client matrix, prove no dropped field or inconsistent job/file ownership, and delay contraction until all older readers/writers are gone.
 
-7. **Guarded traffic-shift criteria** — Declare success thresholds, responder and rollback/forward-repair triggers in advance.
+7. **Release-Specific Signals and Traffic-Shift Decision** — Compare authorized user journey, denied action, errors, in-flight jobs and latency by immutable release identity, with an explicit stop/rollback criterion.
 
-8. **Defective candidate drill** — Inject a route, config or incompatible response regression and observe real client symptoms.
+8. **Defective Candidate and Real Controlled Traffic Exposure** — Inject a bad response/permission/config/DB compatibility defect, route bounded test traffic, observe actual failure and stop promotion rather than claim a green health probe means safe rollout.
 
-9. **Observed rollback or forward repair** — Execute a safe previous-version switch or compatible fix and verify business state.
+9. **Safe Rollback versus Forward Repair after State Change** — Execute a switch to a known-good *compatible* artifact or a verified forward fix; demonstrate that a code rollback does not undo committed writes, published files or sent jobs.
+
+10. **Post-Release Audit and State Reconciliation** — Inspect persisted row invariants, pending jobs/private objects, old/new consumers, release manifest and actual live route after the decision, recording unresolved effects.
+
+11. **Security and Availability under Partial Shift** — Recheck tenant/role denial, proxy and secret boundaries during old/new overlap, and report measured local downtime/availability as an experiment, not production SLO evidence.
 
 *Optional practice — unready-canary defect:* Repair a traffic switch that routes users to an instance with no database access.
 
-### Module 10 — Stateful Releases and Database Schema Compatibility
-
-#### Outcomes
-
-- APP7-O8
-- APP7-O9
-- APP7-O10
-- APP7-O13
-
-#### Lessons
-
-1. **Old/new app/DB compatibility table** — Test previous and current clients/services against actual schema revisions.
-
-2. **Expand-before-contract principle** — Add compatible columns/fields and phase deprecation without losing readers/writers.
-
-3. **Backfill planning** — Bound transaction size, idempotence, lock/IO effects and restartable partial progress.
-
-4. **Mixed-version writes** — Demonstrate old and new services safely writing during an intended rollout window.
-
-5. **Contract and client compatibility tests** — Verify prior API consumers before dropping a field or changing required semantics.
-
-6. **Rollback and irreversible effects** — Trace committed writes, queue actions, private files and delivered notifications that code rollback cannot undo.
-
-7. **Forward repair and pause strategy** — Choose safe migration repair or traffic stop when old code cannot read revised data.
-
-8. **Migration audit and drift** — Record schema revision, backfill counts, affected constraints and data integrity without private records.
-
-*Optional practice — incompatible deployment:* Seed a schema change that breaks an old writer, detect it and correct staging.
-
-### Module 11 — Real PostgreSQL Backup, Restore and Recovery Objectives
+### Module 9 — PostgreSQL Backup, Separate Restore and Honest Recovery Scope
 
 #### Outcomes
 
 - APP7-O3
 - APP7-O5
+- APP7-O9
 - APP7-O10
 - APP7-O11
 - APP7-O13
 
 #### Lessons
 
-1. **Choose recovery point and time goals** — Define measured local RPO/RTO objectives for a synthetic protected user workflow.
+1. **Recovery Goals, Real Snapshot Point and Scope** — Define test RPO/RTO targets before work, identify actual backup snapshot/recoverable state and prove retention target names; a guessed last commit time is not a measured recovery point.
 
-2. **Logical dump versus physical backup** — Explain pg_dump, base backup and WAL archiving differences using PostgreSQL's supported methods.
+2. **Logical Consistency, Tool Versions and Global Roles** — Use supported pg_dump/pg_restore and a truly consistent synthetic snapshot; document that pg_dump does not include cluster-global roles/tablespaces/configuration, which need separate approved reconstruction or pg_dumpall --globals-only.
 
-3. **Consistent actual backup** — Take a real dump from an active disposable PostgreSQL dataset and retain version/manifest information.
+3. **Create, Protect and Independently Verify a Real Backup** — Back up an active disposable source, record exit/warnings, scope, hash, tool/server versions, storage isolation and permissions; a checksum alone does not prove restorable data or confidentiality.
 
-4. **Backup scope and security** — Preserve backup independently from the primary, restrict access, record checksum and describe encryption/retention.
+4. **Loss Only in a Named Disposable Target** — Prove database identity, data-owner role and resource names before a simulated loss; never destroy the live source, other staging environment or retained backup.
 
-5. **Simulated data loss only in test targets** — Verify isolated database and destructive command scope before any drop/corruption experiment.
+5. **Restore into a Distinct Clean PostgreSQL Instance** — Rebuild globals/roles/permissions explicitly as appropriate, restore to a **separate** named empty target, detect failed/ignored errors and independently check actual schema, constraints and tenant rows.
 
-6. **Restore into a named separate instance** — Restore with supported PostgreSQL tooling and verify actual completion/status.
+6. **Restore Authenticated Task and Non-DB Gaps** — Run real authenticated allowed/denied client actions after restoration and inspect absent/mismatched private files, durable worker intent, external notifications and role/config dependencies.
 
-7. **Data, authorization and job/file validation** — Inspect relational constraints, tenant isolation, task completion and missing non-DB resources after restore.
+7. **Observed RPO/RTO and PITR Limitations** — Time the complete restore plus validation and compare recovered source markers/commits with defined goals; distinguish local logical-dump recovery from WAL archiving, physical backup or true point-in-time restoration.
 
-8. **Measure actual restoration** — Compute latest recoverable commit and observed outage, distinguishing goals from achieved local numbers.
+8. **Recovery Runbook, Repeatable Cleanup and Audit** — Publish explicit capture/restore/check/cleanup steps, source/target/backup safeguards, missing-data report and test cadence, without claiming automatic production continuity.
 
-9. **Point-in-time recovery limits** — Explain that a logical dump cannot prove WAL-based PITR, and what archival/continuity evidence is needed.
-
-10. **Operational runbook and rehearsal** — Write backup/restore/check/cleanup steps, wrong-target safeguards and a future re-test cadence.
-
-### Module 12 — Operational Monitoring, Incident Response and Handoff
+### Module 10 — Operational Incident, Release Telemetry and Verified Recovery
 
 #### Outcomes
 
@@ -458,25 +370,21 @@ The provisional duration is not validated workload evidence.
 
 #### Lessons
 
-1. **Monitoring as a release decision input** — Translate APP6 user-focused SLIs into pre/post deployment operational gates.
+1. **Release/User Outcome Correlation and Incident Roles** — Reuse APP6 signals, but bind real deployed version, TLS/proxy, request/job and DB observations to one affected authenticated user task and named responder/communication roles.
 
-2. **Release metadata correlation** — Connect source/digest, API config, DB migration, request and job errors without privacy leaks.
+2. **A Distinct Actual Deployment Fault** — Seed a *new* local TLS expiry/trust, proxy configuration, credential rotation, ingress or readiness defect not identical to AS4's bad app release; observe actual impact before mitigation.
 
-3. **Misleading green health** — Reproduce /health success when protected business work fails and design a more meaningful readiness signal.
+3. **Evidence, Competing Causes and Safe Containment** — Collect redacted version/route/request/DB/credential timeline, distinguish cause from symptom and decide a bounded route stop, config repair, credential revocation or compatible rollback.
 
-4. **Incident severity and responder roles** — Assign decision, diagnosis, communication and documentation ownership for a local exercise.
+4. **Recovered User, Tenant, Worker and File State** — After repair, exercise permitted and forbidden HTTPS/API actions, actual committed database data, pending worker and private file/tenant isolation; green health alone is insufficient.
 
-5. **Containment and change freeze** — Decide safe traffic stop, secret rotation, configuration switch or restore to protect users/data.
+5. **Actual Recovery Timings and Misleading Monitors** — Record elapsed detection, containment and verified restoration intervals with environment and telemetry gaps, no fictitious production user history or universally achieved availability.
 
-6. **Actual controlled incident** — Break the deployed TLS/proxy/secret/release path and record observed user impact.
-
-7. **Recovery verification** — Check authenticated and forbidden requests, durable records, background jobs and old/new compatibility afterward.
-
-8. **Blameless timeline and handoff** — Publish evidence, causal hypotheses, completed recovery and runbook changes, not invented production history.
+6. **Reviewed Runbook and Handoff to Architecture** — Update an actionable operational procedure and release/monitoring safeguards based on the observed failure; distinguish APP8's capacity/distribution design from APP7 running-service operations.
 
 *Optional practice — bad signal diagnosis:* Identify alert noise versus a real rollout regression and justify mitigation steps.
 
-### Module 13 — Hosting Choices, Shared Responsibility, Capacity and Cost
+### Module 11 — Hosting Models, Responsibility and Cost Sensitivity
 
 #### Outcomes
 
@@ -487,25 +395,19 @@ The provisional duration is not validated workload evidence.
 
 #### Lessons
 
-1. **Self-managed VM, containers and managed compute** — Compare portability, control, patch responsibility and scaling boundaries.
+1. **Choose Two Feasible Models for the Same Workflow** — Compare self-managed VM/container and one managed compute/database/storage option on patching, recovery, TLS/identity, vendor risk and operational ownership.
 
-2. **Managed PostgreSQL and object storage** — Evaluate backups, access, recovery guarantees and provider versus application duties.
+2. **Units, Evidence and Service Responsibility Matrix** — State sample monthly requests, concurrency, allocated compute-hours, DB/storage size, backups, transfer, logging retention and realistic performance/availability assumptions with sourced or explicitly hypothetical rates.
 
-3. **Networking and edge services** — Compare DNS, load balancing, TLS, CDN, private networks and per-byte egress risks.
+3. **Monthly Compute, Persistent Data and Egress Formula** — Calculate instance-hour, storage/backup, operations, network egress and telemetry costs for both models, including where charges differ with idle capacity or data restoration.
 
-4. **Realistic workload assumptions** — Specify concurrency, monthly requests, data growth, retention, backup and service uptime goals.
+4. **Sensitivity, Failure Exposure and Budget Guards** — Vary traffic/data/egress and backup-retention assumptions, identify dominant cost/risk changes and justify a proportional alert/limit strategy.
 
-5. **Total Resource Costs, Egress and Logging** — Calculate instance-hours, allocated disk, backup bytes and requests from disclosed rates; include network transfer, storage operations, metrics retention and data restore costs.
-
-6. **Scale strategy and failure modes** — Discuss vertical/horizontal changes, cold starts and dependency bottlenecks without APP8 deep modeling.
-
-7. **Responsibility and vendor lock-in** — Allocate IAM, OS patching, certificates, recovery, secret management and exit costs.
-
-8. **Sensitivity and cost guardrails** — Change traffic/storage/egress assumptions and compare alternatives and budget alert triggers.
+5. **Decide Operability and Future APP8 Questions** — Defend a lower-complexity reference deployment under the declared constraints and identify what higher scale, queueing, replicas or distributed reliability APP8 would need to assess.
 
 *Optional practice — economical deployment decision:* Reject an unjustified complex stack and defend a simpler reliable design.
 
-### Module 14 — Integrated Deployed Product and Independent Operational Defense
+### Module 12 — One Deployed Product and Independent Operational Defense
 
 #### Outcomes
 
@@ -528,37 +430,29 @@ The provisional duration is not validated workload evidence.
 
 #### Lessons
 
-1. **Choose a bounded APP5 product** — Reuse authenticated React/Fastify/PostgreSQL source and APP6's trusted quality tests and signals.
+1. **One Product, Release Contract and Accepted Evidence Index** — Reuse the same APP5 deployed source evaluated in APP7-AS1–AS6; map architecture, environment, role, TLS, release, restore and cost decisions to prior independently accepted evidence.
 
-2. **Publish deployment/secret/backup contract** — State topology, trust, environment names, resource IDs, recovery objectives and rollback decision policy.
+2. **Integrated Real Run, Trust and Immutable Promotion** — Confirm actual stage/release-like running services, least-privilege process, verified local HTTPS, applied IaC and protected digest promotion, linking earlier accepted observations rather than redoing unrelated reports.
 
-3. **Build artifact and private local services** — Package source-provenance image/process, run least privilege and preserve only intended durable data.
+3. **Failed Release, Backup and User Recovery Recheck** — Verify real mixed-version change, bad-release repair and separate PostgreSQL restore plus denied/user data/file/job outcomes under explicit evidence scope and prior accepted AS4–AS6 traces.
 
-4. **Configure verified TLS ingress** — Connect a scoped local CA reverse proxy, verify hostname and deny untrusted forwarded identity.
+4. **New Unfamiliar Bounded Operational Fault and Regression** — Diagnose and repair assessor-supplied wrong digest, TLS trust, approval, drift, migration, credential or restore fault and recheck earlier permissions, data integrity and active service behavior.
 
-5. **Apply IaC to two isolated environments** — Reproduce stage/release-like real local resources with reviewed plans and drift evidence.
-
-6. **Promote approved immutable artifact** — Use one digest with separate gate/approval and meaningful protected user task smoke test.
-
-7. **Stage compatible stateful change** — Validate old/new services, schema/data change and in-flight/job consistency.
-
-8. **Seed, detect and recover a bad release** — Trigger actual release failure and execute safe rollback or forward repair.
-
-9. **Back up and restore PostgreSQL** — Induce only disposable loss, restore independently and measure RPO/RTO and object/job coverage gaps.
-
-10. **Compare provider and cost alternatives** — Make workload-based budget, responsibility/security and sensitivity choices.
-
-11. **Independent unfamiliar operational change** — Repair an unseen TLS, credential, release or restoration defect and defend evidence and limitations.
+5. **Fresh Local Reproduction and Technical Defense** — Recreate setup/start/test/stop using pinned free provisioned local artifacts, one evidence index and accessible explanation of actual versus assumed hosted/cloud capabilities and APP8 boundaries.
 
 ## Completion requirements
 
-All **sixteen APP7 outcomes** must be demonstrated through
-the **seven required summative assessments**. The same evolving
-deployed APP5 product may satisfy multiple requirements when the
-claimed user actions, release transitions, restored records and
-operational evidence can be examined independently. Formative
-lesson investigations and optional paid provider exercises are
-not additional graduation gates.
+All **sixteen APP7 outcomes** require **seven independently
+decidable summative assessments** on **one evolving deployed APP5
+product**, with separate artifact/process (AS1), verified HTTPS
+and environment security (AS2), actually applied IaC (AS3),
+immutable promotion/stateful traffic recovery (AS4), real separate
+database restore (AS5), a *distinct* deployment incident and
+cost/responsibility analysis (AS6), and an unfamiliar independent
+operational defense (AS7). Previously **accepted evidence may be
+referenced**, not resubmitted as seven independent deployments.
+Formative lesson work and optional hosted/provider study do not
+create additional completion gates.
 
 | Required assessment | Required outcome coverage | Principal evidence |
 | --- | --- | --- |
@@ -652,45 +546,45 @@ not additional graduation gates.
 
 - **APP7-AS1** (required deployment artifact, service lifecycle and isolation)
   - Outcomes: APP7-O1, APP7-O2, APP7-O3, APP7-O5, APP7-O6, APP7-O12
-  - Work: Package a reproducible APP5/APP6 app using a multi-stage container image or equivalently inspectable managed process. Verify source/artifact digest, non-root runtime, bounded mutable paths, private network and durable PostgreSQL state during replacement; inject a failed boot, denied file access and graceful shutdown with active work.
-  - Criteria: The tested artifact is reproducible from recorded local inputs; no synthetic secrets or unnecessary build-only tools are shipped. Safe start/exit/readiness, least privilege, resource cleanup and intended persistent data survival are independently observed, while container-engine limitations are disclosed.
+  - Work: Start **one real locally running APP5/APP6 deployment** from a pinned source/build: use a multi-stage image or equally inspectable managed process, verified immutable digest, nonroot runtime, scoped writable paths and a composed proxy/app/PostgreSQL/worker reference. Observe actual ports, container/process identity, private backend/DB denial, durable state across app replacement, and meaningful `service_healthy`/equivalent readiness (not just Compose startup ordering). Inject failed config/start, wrong file permission and a bounded shutdown with an active request/job; inspect cleanup.
+  - Criteria: A reviewer actually launches and inspects the named services, confirms the tested artifact digest and toolchain/source inputs, nonroot privileges and **real denied path and network access**, and verifies durable records survive app replacement. Readiness is checked with a real business dependency and fails for a listening-but-unready backend; conditional health behavior follows the selected Compose/runner version. Failed/partial startup, active-request drain and targeted cleanup are observed, not asserted from a Dockerfile.
   - Evidence: Versioned manifest/container or process configuration, digest, source/toolchain record, startup/shutdown/network/permission test logs, persistent data observations and clean-checkout recipe.
 
 - **APP7-AS2** (required https ingress, environment and credential safety)
   - Outcomes: APP7-O3, APP7-O4, APP7-O5, APP7-O11, APP7-O12
-  - Work: Configure stage and release-like isolated deployments behind a controlled reverse proxy with real locally verified HTTPS. Test hostname and trust root, untrusted forwarded headers, direct-backend exposure, cookie/credential assumptions, missing synthetic secrets and safe rotation; demonstrate appropriate CA trust cleanup.
-  - Criteria: An actual client validates TLS without insecure bypass; local CA is not misrepresented as public trust. Spoofed identity, unintended backend/DB exposure and cross-environment access are rejected; secrets do not appear in source, image layers, static assets, IaC state or public logs.
+  - Work: On the **same locally running system**, establish two independently isolated stage/release-like environments with a real client-verified local CA HTTPS proxy. Probe correct SAN/hostname/chain, wrong hostname/untrusted CA and trusted proxy versus attacker-controlled `Forwarded`/`X-Forwarded-*`, direct backend/DB access, authenticated cookies/CSRF as relevant and protected resource/tenant denial. Rotate a synthetic session/DB secret, show missing-secret fail-closed behavior and inspect frontend bundle, image/plan/state and logs for leakage; remove any temporary trust changes.
+  - Criteria: A real client accepts the intended local hostname **without insecure TLS bypass**, rejects wrong name/root, and protected API/auth state is not spoofed by caller headers or bypass routes. Both environments use distinct data/roles/volumes/secrets with independently observed denial; local CA never counts as public trust. Secrets are absent from exposed artifacts and test logs; if a declarative state or plan would contain synthetic secrets, the course requires secured/redacted handling or explicit redesign rather than assuming a `sensitive` annotation removes storage.
   - Evidence: Local TLS/proxy/environment configuration, positive/negative HTTPS and header traces, network and session tests, rotation record, scoped CA/trust cleanup and residual-risk explanation.
 
 - **APP7-AS3** (required declarative infrastructure, drift and protected state)
   - Outcomes: APP7-O1, APP7-O5, APP7-O6, APP7-O7, APP7-O12
-  - Work: Apply open-source IaC with an actual local provider or equivalent declarative resource controller, creating two isolated and named local deployment environments. Capture plan/apply/replan, introduce a controlled manual resource drift, reconcile it, reject a potentially destructive persistent-state change and clean only the disposable target.
-  - Criteria: Real named resources are created, observed and recreated; a diagram or non-applied plan is insufficient. Repeated unchanged configuration is effectively idempotent, drift is observed, resource/state access is protected, and destructive actions require real review and target confirmation.
+  - Work: Use a versioned free OpenTofu/local provider or equivalent declarative controller to **actually create or configure deployment-relevant resources** for two isolated environments—service/process, ports, network, files/volumes or equivalent runtime-owned targets—rather than merely create an unrelated sample `local_file`. Record plan/apply and inspect the actual affected running resource, show repeated no-op reconciliation, then cause a real bounded drift and re-plan/reconcile. Review and deny a wrong-environment/durable-volume deletion, check state locking/permissions, and destroy/reprovision only a disposable target.
+  - Criteria: Named real running-service resources are created and changed by an **actual apply**, not a plan or diagram, while the other environment's application/data and restore target remain untouched. A genuine manually changed resource is detected against state and safely reconciled; unchanged configuration is effectively idempotent under pinned tools/provider. Privileged state/plans are protected, approval and destructive target guards are inspectable, and the teardown proves selected scope without assuming a provider simulates cloud behavior it has not implemented.
   - Evidence: Versioned IaC and local dependency instructions, plan/apply and inventory, repeat/no-op/drift logs, protected state/approval rationale and teardown evidence.
 
 - **APP7-AS4** (required approved artifact promotion, release rollout and stateful compatibility)
   - Outcomes: APP7-O2, APP7-O5, APP7-O7, APP7-O8, APP7-O9, APP7-O11, APP7-O12
-  - Work: Extend APP6 CI with locally runnable promotion, approval, immutable artifact verification and smoke gates. Deploy two versioned services behind controlled traffic selection, implement a staged PostgreSQL expand/backfill/contract-compatible change, seed a defective candidate and actually execute a rollback or verified forward repair.
-  - Criteria: Untrusted contributions, incorrect digest, failed gates or missing approval cannot promote; the same tested artifact is used in both environments. Old/new readers/writers and authenticated/denied users remain safe as documented, release readiness is measured, and rollback does not falsely undo committed database/file/job effects.
+  - Work: Extend existing APP6 checks into an independently approved **local CD promotion** of the same content-addressed tested artifact stage→release, with wrong-digest, skipped-gate, untrusted-contributor and missing-approval denial. Run two actual app versions under a controlled traffic selector and an **applied PostgreSQL expand/backfill/contract-compatible** migration. Interrupt/restart a bounded backfill and verify old/new read/write clients and real rows while both versions run. Inject a defective version, shift limited traffic, observe protected user/denied requests, in-flight work and release-specific signals, then execute a **real safe switch back or verified forward repair** that accounts for committed data/files/jobs.
+  - Criteria: Both environments run the **same reviewed digest** when promoted, and source/gate/approval record and operator privileges correspond to actual locally enforced decisions; hosted-only OIDC/environment permissions are explicitly labeled untested if not exercised. The mixed-version client/data matrix and interrupted resumed backfill show independent database truth, and contraction does not break a still-running old writer. Bad-release traffic actually fails, is stopped/redirected and recovered without leaking identities, dropping committed data or claiming a code revert reverses external effects. Health checks alone do not prove safe user work.
   - Evidence: Versioned CI-to-CD workflow and release manifest, digest and permission model, old/new compatibility matrix and SQL migration, smoke/negative tests, traffic-shift timeline, failure, rollback/repair and data checks.
 
 - **APP7-AS5** (required consistent backup, independent restore and measured recovery)
   - Outcomes: APP7-O3, APP7-O5, APP7-O9, APP7-O10, APP7-O11, APP7-O13
-  - Work: Define numerical local recovery goals, take and protect a real consistent PostgreSQL backup from live synthetic records, induce data loss only in a verified disposable environment, restore into a separately named database and re-connect a compatible application. Verify constraints, tenant ownership, private file/job consistency and the actual protected user task; report measured recovery time and latest recoverable commit.
-  - Criteria: Backup passes a real independent restore and authorized/denied checks, not just a creation command. Restore targets cannot affect shared data; RPO/RTO goals and observed local values are distinguished, and a logical dump is not falsely represented as WAL/PITR or a complete object-store backup.
+  - Work: Define **beforehand** a numerical synthetic recovery point and time objective for the already running APP7 product. Create a real consistent `pg_dump`/supported archive from populated PostgreSQL, capture version/warnings, SHA-256 and access/snapshot scope, then restore into a **separately named clean disposable database instance**, never onto the original source or an unrelated environment. Deliberately verify the presence/absence of cluster-global **roles, tablespaces and parameter privileges** (`pg_dump` alone excludes them), reconstruct needed globals safely, and independently check constraints, two-tenant authorization and an authenticated user workflow. Inspect private files, job state and external effects outside dump scope; measure **observed** complete restore/validation time and last recoverable data marker and distinguish logical snapshot from WAL/PITR.
+  - Criteria: The restore runs successfully in an independently verified target with correct version, role/privilege/extension dependencies, row constraints and authorized/denied HTTP behavior; a dump command/checksum alone is insufficient. Accidental source or other-environment destruction is prevented and separate retained backup remains protected. RPO/RTO observations cite real recoverable records, timings and scope, not guessed final commits or hypothetical production availability. Object/worker/global-setting exclusions and difference between a consistent logical dump, physical backup and true point-in-time recovery are documented.
   - Evidence: Backup artifact/checksum, scope and retention notes, disposable loss/restore transcript, DB and user-journey tests, timings, non-DB gaps and recovery runbook.
 
 - **APP7-AS6** (required deployment incident, shared responsibility and cost review)
   - Outcomes: APP7-O1, APP7-O4, APP7-O8, APP7-O11, APP7-O12, APP7-O13, APP7-O14, APP7-O15
-  - Work: Cause a controlled TLS, proxy, secret or release defect in a running local deployment and use version-correlated APP6 telemetry to detect affected user tasks. Contain, repair or roll back, verify security/business state and document a responder timeline. Compare two feasible hosting models and build an illustrative monthly cost with compute, DB, backup, storage, egress, logging and varied workload assumptions.
-  - Criteria: The incident genuinely impacts the local running service and recovery is demonstrated and recorded, with no fabricated real-user history. After recovery TLS, proxy, authorization and durable business outcomes are tested. Provider responsibilities and cost estimates use declared units, formulas and sensitivity rather than invented real-time quotes.
+  - Work: Cause a **new** actual deployment-specific TLS/proxy trust, secret rotation, ingress, readiness or environment failure distinct from AS4's bad application release and AS5's restore exercise. Observe a real protected user-task impact in the running local release, correlate version/TLS/network/DB/job data using APP6 privacy-safe signals, compare at least two possible causes, contain and correct the defect, then verify local HTTPS, authorized/forbidden actions and persistent state with measured response/recovery intervals. Separately compare **two feasible** hosting/provider responsibility models and compute a transparent illustrative monthly budget for compute, DB, storage/backup, ingress/egress, logging and sensitivity with disclosed units/rates/assumptions.
+  - Criteria: The independent incident is reproducibly observed before repair and the remedy demonstrably restores the deployed protected task and denies forbidden traffic, rather than recycling AS4/AS5 logs or presenting a narrative-only drill. Redacted timeline distinguishes measured impact/recovery from inference/missing telemetry and updates an operational runbook. Provider obligations and cost alternatives follow actual assumed units, volume/rate arithmetic and sensitivity; unverifiable prices are explicitly illustrative, not fabricated live quotations.
   - Evidence: Observed incident/telemetry/recovery trace, updated runbook and security/DB checks, hosting option diagram, shared responsibility and budget/sensitivity worksheet.
 
 - **APP7-AS7** (required integrated deployed product and independent operational defense)
   - Outcomes: APP7-O1, APP7-O2, APP7-O3, APP7-O4, APP7-O5, APP7-O6, APP7-O7, APP7-O8, APP7-O9, APP7-O10, APP7-O11, APP7-O12, APP7-O13, APP7-O14, APP7-O15, APP7-O16
-  - Work: Deliver and reproduce one operational APP5 product using APP6 trusted quality checks, verified locally scoped HTTPS, least-privilege deployable artifacts, isolated staging and release-like environments, applied declarative resources, approved digest promotion, stateful compatible releases, observability, a real bad-release recovery and an independently tested PostgreSQL restoration. Explain a provider/cost decision and respond to an unfamiliar bounded deployment or recovery defect.
-  - Criteria: A reviewer using documented free, locally provisioned tools reproduces actual normal, denied, TLS, stateful release, drift, failure, restored-data and security checks, without a paid account or public domain. Promotion trust, data integrity and operations remain valid under the unfamiliar change; unsupported cloud/production reliability claims are identified honestly.
-  - Evidence: Versioned deployment/release/IaC/TLS/backup source, signed-off review decisions and digests, clean local setup, synthetic users/DB, negative and normal tests, bad-release and restore timelines with recovery metrics, cost models and accessible independent technical defense.
+  - Work: Deliver **one cumulative deployed APP5 application** with APP6 quality gates, content-addressed least-privilege runtime, correctly verified local HTTPS, two isolated environments, real applied service-relevant IaC, explicit digest approval/promotion, two-version compatible stateful rollout, an observed bad-release recovery, a **separate actual PostgreSQL backup/restore** and a distinct incident and provider/cost defense. **Reference independently accepted APP7-AS1–AS6 observations** rather than rebuilding seven demonstrations or pasting duplicate reports. Independently investigate and repair an unfamiliar bounded TLS, wrong artifact, drift, approval, migration, permission or restoration fault, then run targeted regression from a clean pinned free local setup.
+  - Criteria: An assessor can reproduce actual named running resources, verified TLS and denial, artifact/environment isolation, chosen promotion decision, real old/new writes, recovered data and user task with only the documented free local dependencies. **AS7 cannot excuse missing/failing AS1–AS6 competence.** The new fault has observed before/after correction and preserves earlier data, auth, release, restore and operational invariants. Public CA, hosted pipeline privileges, production-scale availability and PITR assurances remain honestly unclaimed unless separately actually demonstrated.
+  - Evidence: One versioned deployable source, pinned local toolchain/provider and reproducible start/stop instructions; an **outcome-to-previously-accepted-AS1–AS6 evidence index**, digests and targeted independent TLS/IaC/release/restore observations, unfamiliar-fault regression, actual protected user/DB/file/job verification, cost assumptions and reviewable accessible operational defense.
 
 ### Completion decision and historical revision protection
 
@@ -711,17 +605,18 @@ scope/RPO/RTO, verification transcripts, technical
 defense and reviewer decision under
 [OEE Evidence Rules](../../spec/evidence-rules.md).
 
-APP7 retains its code and title but replaces the legacy
-nine-week checkpoint/lab contract and APP3 + APP6
-prerequisites with an outcome-driven OEE `v0.2.0`
-**draft** requiring APP5 + APP6 directly. APP3
-remains required transitively. Historical learner
-records remain pinned to their actual prior course
-revision; they cannot be silently interpreted as
-passing these new outcomes. APP8/APP9 and APP10–APP16 now publish their own
-outcome-driven `v0.2.0` drafts, not legacy migrations.
-OEE Workspace, content/book mappings and 0xNAND consumer pins must
-be reconciled deliberately rather than auto-upgraded.
+APP7 remains an OEE `v0.2.0` **draft** with
+the **already published** APP5 + APP6 direct prerequisites;
+APP3 remains in their transitive closure. The old
+nine-week checkpoint format and APP3 + APP6 direct
+prerequisites are historical, not changes pending in
+this reassessment. APP8/APP9 and electives already
+have published draft curricula. This editorial review
+does **not** establish learner-`tested`, independently
+`verified` or accredited status, rewrite another
+course's graduation requirements, or automatically
+reclassify historical learner evidence or change
+OEE Workspace/content/0xNAND revision pins.
 
 ### Public non-mandatory study references
 
