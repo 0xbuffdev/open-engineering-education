@@ -39,7 +39,7 @@ The central assessed implementation is **one bounded Rust concurrent queue, work
 
 ## Modules
 
-### Module 1 — Concurrency Semantics, Invariants and Execution Histories
+### Module 1 — Concurrent Contracts, Histories and Causal Reasoning
 
 #### Outcomes
 
@@ -49,63 +49,55 @@ The central assessed implementation is **one bounded Rust concurrent queue, work
 
 #### Lessons
 
-1. **Concurrency as a semantic problem** — Take SYS10's scheduling and context-switch account as prior knowledge and distinguish overlapping operations from actual multicore execution. Give two legal interleavings for the same instruction-independent workload and predict which user-visible outcomes must agree.
-2. **Histories and operation boundaries** — Define invocation, response, in-flight operation and completion in a bounded concurrent history; distinguish a concurrent implementation's permitted orderings from one sequential reference specification.
-3. **Safety versus liveness** — State an invariant that must never be violated and a progress property that must eventually hold under explicit scheduling, resource and failure assumptions; give a counterexample showing why one does not imply the other.
-4. **Data races and logical races** — Distinguish unsynchronized conflicting non-atomic memory access from an incorrect check-then-act transaction protected by individually sound mutex operations; identify what safe Rust forbids and what it does not prove.
-5. **Atomicity and linearization intuition** — Describe an operation that should appear to take effect at one instant between call and return; locate a possible linearization point for a simple locked counter and exhibit a history that cannot be explained by the claimed contract.
-6. **Schedules, events and causal order** — Produce a small event graph with program-order, lock and message handoff edges; distinguish observed wall-clock interleaving, a legal schedule and evidence of an ordering guarantee.
-7. **Adversarial transfer examples** — Review lost updates, duplicate job IDs, incorrectly published state and a missing wakeup as different errors; predict the shortest schedule that violates each contract rather than relying on a flaky stress run.
-8. **Assumptions and counterexample oracles** — Write the initial state, permitted transitions, work budget, scheduler assumptions and independent expected outputs for one two-thread state machine. Specify which counterexample can be hand-checked without an actual concurrent runtime.
+1. **Concurrency and observable contracts** — Extend SYS10 scheduler reasoning to user-space overlapping operations versus physical parallelism. Trace legal interleavings and predict which outputs a stated sequential API must preserve; do not infer ordering from wall-clock timestamps.
+2. **Safety, liveness and progress assumptions** — Write an invariant and a progress claim under explicit fairness, resource and failure assumptions. Contrast a safe but stuck system with a live but incorrect one; one bounded stress test proves neither universal property.
+3. **Concurrent histories and sequential reference** — Identify invocation, response, pending operations and state transitions in a small queue or counter. Derive expected outcomes independently and reject a concrete history inconsistent with the public sequential contract.
+4. **Data races versus higher-level logical races** — Distinguish undefined conflicting non-atomic access from a legal Rust check-then-act, lost update or duplicate job whose individual locks are correct. Use models or safe code rather than requiring executed undefined behavior.
+5. **Happens-before and linearization intuition** — Draw program-order, locking and message-transfer edges; identify a candidate effect point between call and response. Give a counterexample disproving the point instead of equating a diagnostic log order with a guarantee.
+6. **Minimal counterexamples and explicit oracles** — For one bounded two-thread state machine, publish initial state, admissible transitions and an independently solved failing schedule before running a fixture; state which premises are model assumptions and not observed host events.
 
-*Optional formative feedback:* Hand-enumerate three event schedules for a two-thread reservation ledger. Check a safety invariant and identify which progress claim needs a fairness assumption.
+*Optional formative feedback:* Derive two legal and one impossible operation history, with the safety property and the fairness assumption identified.
 
-### Module 2 — Rust Thread Ownership, Shared State and Failure
+### Module 2 — Rust Threads, Ownership and Failure Boundaries
 
 #### Outcomes
 
+- SYS3-O1
 - SYS3-O2
+- SYS3-O4
 - SYS3-O5
-- SYS3-O1
-- SYS3-O4
 
 #### Lessons
 
-1. **From SYS2 helper threads to concurrent APIs** — Revisit SYS2's one-purpose helper threads used to drain child pipes, then extend to genuinely concurrent shared-state operations. Do not repeat Rust ownership syntax or require an async runtime as hidden preparation.
-2. **Thread spawn, scope and join** — Contrast scoped threads borrowing stack data with owned spawned threads that need Send+'static captures as appropriate; track join results and distinguish thread panic from an ordinary successful return.
-3. **Send and Sync contracts** — Classify example types such as owned Vec, Rc, Arc, RefCell and Mutex under Send/Sync bounds without claiming that Arc<T> alone makes an unsynchronized T shareable. State what a safe type boundary prevents and what protocol correctness still requires.
-4. **Arc ownership and closure capture** — Move or clone Arc handles deliberately into worker closures and explain reference-count ownership, cleanup and cycles; use a diagram to distinguish handle aliases from mutable access to the referent.
-5. **Interior mutability across threads** — Compare RefCell's runtime borrow checks with Mutex-protected state; explain why unsafe sharing or unbounded global mutable state is not needed to implement the assessed component.
-6. **Panic and poisoning policy** — Handle JoinHandle panics and Mutex poisoning with an explicit application decision; poisoning is advisory and recovery demands invariant review, not unconditional unwrap or treating poisoning as a soundness guarantee.
-7. **Thread lifecycle and bounded resources** — Track owned thread handles through start, normal completion, cancellation and panic. Define thread count and memory budget and explain why Rust dropping a JoinHandle detaches instead of automatically canceling or joining its task.
-8. **Structured termination without async dependencies** — Design a lexical or owner-managed shutdown contract in which every accepted task reaches a declared completed/canceled state and all owned workers have a terminating and joined path; distinguish this protocol from guarantees of an arbitrary scheduler.
+1. **Scoped, spawned and joined threads** — Contrast scoped borrowed workers with moved spawned captures requiring Send and relevant lifetime bounds. Trace join, panic and handle drop: dropping JoinHandle detaches, not automatically cancels or joins.
+2. **Send, Sync, Arc and safe shared ownership** — Explain why Arc, Rc, RefCell and Mutex have different thread-sharing conditions. Trace captured owners and synchronized mutation; show why Arc alone does not turn an unsynchronized inner value into a valid shared-state protocol.
+3. **Interior mutability and correct protocols** — Compare single-thread RefCell runtime checks with Mutex-protected cross-thread state. Diagnose a compiler or runtime rejection and a separate legal Rust implementation that nonetheless loses a logical update.
+4. **Panic, poisoning and invariant recovery** — Trace a worker panic while owning an in-flight job or mutex guard. Treat poison as advisory; state when to reestablish invariants, mark work failed or refuse further work, and report join errors rather than blindly unwrapping.
+5. **Bounded lifecycle and shutdown ownership** — Set finite thread/task limits and trace normal, canceled and panicked workers to an observable completion or failure and join. Identify an unjoined detached worker and explain why arbitrary scheduler overload prevents real-time completion promises.
 
-*Optional formative feedback:* Diagnose one Send/Sync compile rejection and one legal-but-deadlocking safe Rust example; give a corrected design without hiding failure behind unchecked thread detachment.
+*Optional formative feedback:* Contrast a Send/Sync compilation failure with a valid Rust deadlock, and show an explicit shutdown/poison response.
 
-### Module 3 — Mutex, RwLock, Condvar and Synchronization Protocols
+### Module 3 — Locks, Condition Variables and Synchronization Invariants
 
 #### Outcomes
 
+- SYS3-O1
 - SYS3-O3
 - SYS3-O4
 - SYS3-O5
-- SYS3-O1
 
 #### Lessons
 
-1. **Critical sections and invariant ownership** — Specify exactly which fields one Mutex protects, when the invariant must hold, and what data may be inspected only under the guard. Compare atomic update of a field with an atomic transaction involving multiple fields.
-2. **Lock scope and dependency ordering** — Calculate a wait-for graph for nested locks and establish a consistent global order; identify when callbacks, formatting, blocking I/O or channel sends while holding a guard introduce hidden dependencies.
-3. **Panic-safe state transitions** — Trace a worker panic inside a critical section and decide whether to recover, reject further operations or rebuild state. Separate poisoned-lock detection from actual verification of state validity.
-4. **Reader-writer tradeoffs** — Contrast read-heavy snapshots and update-heavy workloads; define what a protected RwLock state exposes and avoid assuming writer fairness, recursive locking or a particular OS scheduling policy.
-5. **Condition-variable predicate discipline** — Use a guarded predicate and re-check it in a loop after wait/wait_while. Explain spurious wakeups and why inspecting a predicate outside the shared Mutex can lose notifications.
-6. **No lost wakeup by construction** — Hand-trace consumer checks, mutex release-and-sleep, producer state update and notify; derive how a condition variable's atomic unlock/wait behavior avoids a check-then-sleep race under the correct guarded-predicate protocol.
-7. **Timeout waiting is not a contract by itself** — Use a monotonic deadline and repeated predicate checks with remaining-duration accounting. Describe how timeout return, spurious wakeups and scheduling delays can coexist without promising a hard real-time bound.
-8. **Semaphores and permit accounting** — Model an explicit counting-semaphore/permit protocol or review a documented implementation, showing total permits plus in-use equals the configured limit and why cancellation/panic must return permits. A separate third-party semaphore crate is not mandatory.
-9. **Choosing the primitive and negative evidence** — Defend a Mutex, RwLock, Condvar, bounded channel or atomic approach for a concrete invariant; supply a wrong-version schedule that violates safety, liveness or resource bounds.
+1. **Mutex state and transaction invariants** — Specify all state fields protected by a guard and a whole-operation invariant. Counterexample: two individually locked steps still allow a duplicate claim if the transaction is split across critical sections.
+2. **Lock order and hidden blocking** — Draw an AB/BA wait-for graph, impose a safe lock order or eliminate nested locks, and inspect callbacks, I/O and bounded-channel sends under guards as potential hidden waits.
+3. **RwLock and semaphore-style permit accounting** — Choose a read/write or finite-permit protocol where useful. Prove permits-in-use plus available equals the configured maximum and handle panic/cancel cleanup; never assume implementation-independent writer fairness.
+4. **Condvar predicates and wakeup correctness** — Use a mutex-guarded predicate loop with spurious wakeups; compare atomic unlock/wait and synchronized state change with a broken check-then-sleep history. Trace the missing wakeup and correction.
+5. **Timeout waits and close notification** — Use an elapsed-time/monotonic deadline and recheck the guarded condition after every wake. Distinguish scheduler delays, legitimate timeout and closure; ensure waiting senders and receivers are notified on shutdown.
+6. **Primitive choice and independent rejection cases** — Defend a Mutex, RwLock, Condvar, bounded channel or atomic state transition for one stated invariant. Construct a failing history for a wrong primitive or lock scope and identify what progress remains unproved.
 
-*Optional formative feedback:* Write predicate-based pseudocode for a bounded queue's not-empty/not-full conditions and challenge a version that sends a notification without synchronized state change.
+*Optional formative feedback:* Hand-check a capacity-one producer/consumer predicate and a lost-wakeup or leaked-permit counterexample.
 
-### Module 4 — Progress, Deadlock, Starvation and Cancellation
+### Module 4 — Progress, Deadlock and Controlled Shutdown
 
 #### Outcomes
 
@@ -116,69 +108,57 @@ The central assessed implementation is **one bounded Rust concurrent queue, work
 
 #### Lessons
 
-1. **The four Coffman conditions** — Identify mutual exclusion, hold-and-wait, no preemption and circular wait in a supplied lock graph; distinguish sufficient diagnosis of a deadlock pattern from a claim that every stalled program has a deadlock.
-2. **Deadlock, livelock and slow progress** — Use a bounded timeline to distinguish cyclic waiting, active retry without useful work, priority-induced delay and ordinary high load; define the additional observation needed when symptoms alone are ambiguous.
-3. **Starvation and fairness assumptions** — Construct a reader/writer or job-admission history where one participant never progresses despite work elsewhere. Explain why a successful finite test cannot establish starvation freedom or fairness for every schedule.
-4. **Priority inversion and scheduling effects** — Trace a low-priority guard holder preempted by medium-priority CPU work while high-priority work waits; discuss priority inheritance/ceiling as conditional OS mechanisms rather than universal Rust standard-library guarantees.
-5. **Blocking versus lock-free versus wait-free** — Compare mutex blocking, non-blocking retry and bounded-step per-operation progress definitions; distinguish an atomic operation being lock-free on some target from a whole algorithm making lock-free progress.
-6. **Cancellation points and ownership** — Define which work may be abandoned, completed or returned to the caller on shutdown; preserve owned task IDs and avoid silently discarding accepted work when a cancellation flag changes.
-7. **Panic and partial completion** — Trace a worker failure after dequeue but before acknowledgement; specify an explicit at-most-once, at-least-once or exactly-once-within-scope policy, and reject promises not supported by task outcome evidence.
-8. **Shutdown ordering and wake-all** — Sequence admission closure, wakeup of sleepers, in-flight resolution, final accounting and thread joining so blocked producers/consumers can terminate; include a counterexample where an otherwise correct worker waits forever after closure.
-9. **Finite fault-injection boundaries** — Bound wall-clock test time and worker/thread counts; explain why a timeout is evidence of nontermination in a chosen run, not automatically a proof of deadlock in all schedules.
+1. **Deadlock, livelock and stalled service** — Distinguish cyclic waiting, active retry without progress, starvation and slow load through a concrete schedule and wait-for graph; a timeout alone is not a proof that deadlock is the cause.
+2. **Fairness, priority inversion and progress levels** — Trace starvation or priority inversion under stated scheduler assumptions, then contrast blocking, lock-free system progress and wait-free per-operation bounds. Priority inheritance is conditional OS policy, not a Rust Mutex promise.
+3. **Cancellation and accepted-job identity** — Track admission, queue, running, completion and explicit cancellation/failure across a worker panic after dequeue. State the precise in-memory delivery assumptions; never imply durable exactly-once processing.
+4. **Close, wakeup and cooperative termination** — Order admission closure, wake-all, draining or cancellation, final work accounting and joining. Derive a failing schedule where a blocked sender/receiver never notices close or an accepted job vanishes.
+5. **Bounded failure tests and reasoning limits** — Use finite thread/time limits and controlled fault hooks to separate observed hang from verified cyclic dependency. Explain what a bounded model, timeout and stress run can and cannot establish.
 
-*Optional formative feedback:* Analyze a three-lock wait-for graph and a canceled worker-pool trace. Give a repair and predict how its safety and liveness properties differ.
+*Optional formative feedback:* Trace a blocked producer and panicking worker through closure, ensuring every accepted job has one declared state.
 
-### Module 5 — Atomic Operations, Happens-Before and Memory Models
+### Module 5 — Atomic Memory Ordering and Protocol Reasoning
 
 #### Outcomes
 
+- SYS3-O1
 - SYS3-O5
 - SYS3-O6
 - SYS3-O7
-- SYS3-O1
 
 #### Lessons
 
-1. **Atomicity at the variable boundary** — Use AtomicBool or AtomicUsize load/store/swap/fetch_add with declared legal orderings; calculate a counter trace and explain why a single atomic field cannot automatically protect an unrelated multi-field invariant.
-2. **Program order and synchronization edges** — Draw a two-thread event graph separating per-thread sequenced-before, synchronizes-with and derived happens-before relationships. Identify which cross-thread observation is required to establish visibility.
-3. **Relaxed order and atomic counters** — Justify relaxed fetch_add for a count whose value does not publish unrelated non-atomic payload; distinguish coherent modification order of one atomic object from inter-object ordering or fairness.
-4. **Release/acquire publication** — Reason about a producer writing payload under a valid ownership/access discipline, publishing a flag with Release and consumer observing the corresponding flag with Acquire. Derive the visibility edge and explain why Relaxed alone cannot justify the payload observation.
-5. **Sequential consistency and total order** — Analyze a two-location store-buffering litmus test and distinguish the additional total order on SeqCst operations from stronger claims about all non-SeqCst or non-atomic operations.
-6. **Read-modify-write and compare exchange** — Model compare_exchange and compare_exchange_weak loops with explicit success/failure outcomes. Identify valid success/failure order choices, why Release/AcqRel are not failure orderings, and why failed CAS does not publish new state.
-7. **Acquire-release transitions and failure paths** — Check what changes when a successful RMW uses Acquire, Release or AcqRel, and how a CAS retry reads state when it fails. Justify the weakest ordering adequate for a supplied invariant rather than using SeqCst as an unexplained incantation.
-8. **Atomic versus non-atomic conflicts** — Classify conflicting accesses under the Rust/C++-style memory model and explain why undefined data-race behavior is not a license to assert a predictable stale read. Use safe Rust or supplied litmus tables for required experiments.
-9. **Ordering does not imply uniqueness** — Show a check-then-act case using only SeqCst loads/stores that still creates duplicate work; identify the RMW or lock-guarded transaction needed to make the business operation atomic.
-10. **Linearization points for atomic protocols** — For a bounded once-flag or claim-once counter, identify the successful CAS/RMW that defines one conceptual effect and test failures/retries. Treat complex lock-free queues and memory reclamation as analysis topics, not mandatory unsafe implementations.
-11. **ABA and reclamation hazards** — Trace A→B→A reuse and show why matching a pointer or version does not prove identity; distinguish the logical ABA problem from memory-reclamation safety. Do not require students to construct a raw-pointer queue without a proven reclamation design.
-12. **Litmus tests, models and observation** — Derive allowed/forbidden outcomes from specified atomic orderings using documentation or a trustworthy model; run small optional repetitions, but explain why seeing no forbidden outcome on a machine cannot prove language-level correctness.
+1. **Atomic state, modification order and Relaxed** — Trace AtomicBool/AtomicUsize loads, stores and RMW under declared legal orderings. Explain when Relaxed safely counts an isolated quantity and why it does not publish unrelated state or make a multi-field transaction atomic.
+2. **Release/acquire and happens-before** — Build a correctly owned publication example with sequenced-before and synchronizes-with edges; derive exactly when an Acquire observation of a Release write makes earlier payload changes visible.
+3. **SeqCst and weak-memory litmus histories** — Independently solve a two-location store-buffering case for Relaxed versus SeqCst under a specified memory model; explain the SeqCst total order without treating it as total ordering of every non-atomic event.
+4. **Compare-exchange and failure ordering** — Trace successful and failed CAS/RMW including compare_exchange_weak spurious failure and retry. Reject Release/AcqRel as failure orderings and justify valid success/failure pairs rather than defaulting blindly to SeqCst.
+5. **All-atomic operations can still violate logic** — Demonstrate a safe SeqCst check-then-act that duplicates work despite atomic variables. Repair it with a justified RMW or guarded state transition and hand-check an adversarial interleaving.
+6. **Linearization, ABA and reclamation boundaries** — Identify a claim-once CAS/RMW linearization point and a legal retry failure. Analyze A→B→A reuse and distinguish logical identity, memory reclamation and progress assumptions; do not require unsafe lock-free structures.
+7. **Data-race UB versus legal weak outcomes** — Classify a conflicting non-atomic access as undefined behavior, not a predictable stale read. Use safe atomics, source reasoning or bounded modeled tables rather than executing undefined behavior to prove a point.
+8. **Independent models and observation limits** — Prepare permitted/forbidden outcomes and synchronization graphs before observing optional model-checker or repeated hardware tests. State limited explored states and why an unobserved weak outcome is not language-level impossibility.
 
-*Optional formative feedback:* Solve a release/acquire message-passing graph and an invalid CAS-failure-order example; give an allowed history, a forbidden inference and a corrected implementation using only safe atomics.
+*Optional formative feedback:* Solve release/acquire publication and a CAS failure pair, providing one invalid ordering and the relevant visibility graph.
 
-### Module 6 — Bounded Queues, Channels and Worker Ownership
+### Module 6 — Bounded Multi-Producer/Consumer Components
 
 #### Outcomes
 
+- SYS3-O1
 - SYS3-O3
 - SYS3-O8
 - SYS3-O9
-- SYS3-O1
 
 #### Lessons
 
-1. **Message passing versus shared mutation** — Specify who owns a job before enqueue, while queued, during processing and after completion; contrast explicit move-based handoff with sharing a mutable job list under a Mutex.
-2. **Channel contracts and API choices** — Contrast unbounded std::sync::mpsc::channel with bounded sync_channel and its zero-capacity rendezvous. Explain that the classic mpsc Receiver is a single-consumer abstraction; cloning senders does not make the receiver a multi-consumer queue.
-3. **Explicit capacity and accounting** — Define a finite queue capacity, worker count and total accepted/in-flight/completed/canceled accounting invariant; distinguish a bounded queue's occupancy cap from the whole service's resource budget.
-4. **Multi-producer, multi-consumer implementation** — Implement or specify a safe Mutex<VecDeque<Job>>+Condvar worker queue, or a documented equivalent bounded MPMC abstraction with the same semantics. A single shared std mpsc receiver behind a lock is not silently represented as parallel receiving.
-5. **Admission and backpressure** — Distinguish blocking, try-send rejection and timeout under full capacity. Define observable caller results and ensure queued work cannot grow through auxiliary unbounded staging buffers.
-6. **Wakeup and close semantics** — Use guarded not-empty/not-full predicates and explicit admission-close state; wake blocked waiters on shutdown and define whether draining or cancellation occurs for already accepted jobs.
-7. **Exactly-once within stated scope** — Assign operation IDs, derive how each accepted job is processed once *or* explicitly canceled under no-process-crash assumptions, and specify what a worker panic does to unfinished tasks. Do not imply durable/distributed exactly-once delivery.
-8. **Worker pool lifecycle** — Track worker startup, panic status, bounded task execution, cancellation and join obligations, including when a blocked producer must become able to return; record failures rather than masking detached threads.
-9. **Async tasks versus OS threads** — Compare cooperative async task scheduling with OS threads without requiring an executor, reactor, Tokio or APP concurrency course; explain why a blocking call inside a cooperative task could stop unrelated progress.
-10. **API contracts and independent oracles** — Publish send/receive/close/error contract and a state-machine transition table before implementation. Use a reference sequential queue and independently computed accepted/completed/canceled sets as correctness oracles.
+1. **Task ownership and sequential specification** — Define task IDs and admitted, queued, running, finished or canceled/failed states; create a reference sequential queue and independently derived identity-accounting oracle before implementing concurrent behavior.
+2. **Channel shape and finite capacity** — Compare unbounded std::sync::mpsc channel, bounded sync_channel and a true MPMC queue, including receiver topology and optional rendezvous behavior. Cloning senders does not make the mpsc receiver multi-consumer.
+3. **Safe bounded MPMC implementation** — Build a safe Mutex<VecDeque<Job>> plus Condvar or documented equivalent with at least two producers and two consumers, finite queue/thread/task budgets and no unbounded auxiliary backlog.
+4. **Full admission, guarded waits and close** — Define full/reject/block/timeout and close/drain/cancel public outcomes. Recheck not-empty/not-full predicates in guarded loops and wake all blocked participants on closure, preserving accepted task identity.
+5. **Panic, completion and delivery limits** — Account explicitly for a worker panicking between dequeue and recorded completion, and for owned worker join. State at-most-once or scoped completion claims only under declared no-process-crash and scheduling assumptions.
+6. **Independent fixtures and negative transitions** — Hand-derive expected capacity-one, simultaneous producer/consumer, duplicate ID, blocked close and panic outcomes, then compare with actual accepted/completed/canceled sets rather than testing against the program's own logs.
 
-*Optional formative feedback:* Hand-run a queue-capacity-two scenario with three producers and two workers, including close during a blocked send; check all task IDs and wakeup paths.
+*Optional formative feedback:* Hand-run capacity-two with three producers and two workers, close while one is blocked and reconcile every job ID.
 
-### Module 7 — Linearizability, Interleaving Tests and Failure Reproduction
+### Module 7 — Linearizability, Schedule Testing and Failure Reproduction
 
 #### Outcomes
 
@@ -187,23 +167,19 @@ The central assessed implementation is **one bounded Rust concurrent queue, work
 - SYS3-O7
 - SYS3-O9
 - SYS3-O11
-- SYS3-O12
 
 #### Lessons
 
-1. **Sequential reference histories** — Define accepted/rejected admissions and queue completion under a small sequential specification; enumerate allowed output histories so a tester never uses the component's own log as its sole oracle.
-2. **Linearizability of operations** — Identify an operation's invocation/response interval and choose a legal point within it; examine a history where nonoverlapping calls impose real-time order and a claimed implementation violates the reference.
-3. **Histories versus timestamps** — Distinguish logical order, synchronization edges and clock observations; show why log-line ordering, OS thread ID or wall time alone is insufficient proof of a race or linearization point.
-4. **Deterministic schedule construction** — Use barriers or explicit test hooks to force a known counterexample while preserving a valid locking protocol in production; explain why a barrier placed under the wrong lock may manufacture an artificial deadlock.
-5. **State-space exploration** — Enumerate all interleavings of a tiny two-thread, few-step model under declared atomicity and state limits; count explored states and disclose what unsimulated transitions or scheduler behavior remain.
-6. **Randomized stress with seeds** — Design repeated stress runs over differing worker counts, capacities and seeds and retain actual failing histories; describe the limits of stress coverage rather than presenting long runtimes as exhaustive proof.
-7. **Fault injection and panic paths** — Trigger producer closure, consumer panic, duplicate admission, blocked waiter and timer expiry with synthetic bounded fixtures; classify expected failure states without introducing uncontrolled host processes.
-8. **Race and model checker limitations** — Describe what a dynamic race detector or an optional model-checking crate can establish for the observed configuration and why memory-safe Rust can still deadlock or violate application ordering.
-9. **Unseen causal diagnosis** — Reduce a previously unseen failing history to a minimal schedule, identify violated safety/liveness/order property, propose one localized fix and run independent regression plus neighboring unchanged cases.
+1. **Linearizability and real-time precedence** — Check invocation/response intervals against a separate sequential specification: preserve order of non-overlapping calls while choosing a legal order for overlapping ones. Identify an impossible history even when no data race occurs.
+2. **Deterministic schedule hooks** — Use barriers, controlled state steps or safe hooks to produce one known bad event schedule; avoid placing a barrier beneath a guard in a way that manufactures a test-only deadlock.
+3. **Bounded state-space exploration** — Enumerate interleavings of a tiny two-thread model with named atomic steps, permitted states and limits; compare a proof over those states with unexamined OS schedules and larger workloads.
+4. **Seeded stress and injected failures** — Vary capacities, thread counts and seeds under a finite budget; inject producer closure, worker panic, duplicate task or lost notification and preserve minimal failure histories. Duration alone cannot demonstrate exhaustive coverage.
+5. **Distinguish models, clocks and tools** — Separate logical happens-before, wall-clock logs, optional race-detector/model-checker output and independently solved oracles. Report the exact property and environment checked, not a universal deadlock-freedom result.
+6. **Independent correction and regression** — Correct a known bad transition and recheck a previously failing and a previously good history against expected state derived independently, naming the remaining untested schedules.
 
-*Optional formative feedback:* Assess a five-event history against a sequential queue specification and provide a shorter schedule exposing a lost notification or double completion.
+*Optional formative feedback:* Classify a five-event queue history for linearizability and design a safe fixture that exposes its first incorrect transition.
 
-### Module 8 — Contention, Locality and Controlled Concurrency Performance
+### Module 8 — Contention, Locality and Scientific Concurrency Measurement
 
 #### Outcomes
 
@@ -215,18 +191,15 @@ The central assessed implementation is **one bounded Rust concurrent queue, work
 
 #### Lessons
 
-1. **A correctness-first benchmark** — Use the same accepted task set and independent expected final state for all compared variants; never interpret a faster run that skipped work, changed output or hid panics as an optimization.
-2. **Throughput, latency and scaling** — Define completed useful operations per unit time, per-task latency, queue wait, wall time and speedup with meaningful denominators; calculate sequential and parallel efficiency without assuming linear scaling.
-3. **Critical section and contention cost** — Vary worker count, work duration and lock-scope size while holding data and outputs fixed. Predict lock contention, queue wait and context-switch effects, then compare with observed results.
-4. **Coherence and false sharing** — Use a specified cache-line teaching model to explain coherence invalidation and how independent adjacent counters can interfere; separate C++/Rust memory-order correctness from hardware cache-coherence traffic.
-5. **Padded versus adjacent state** — Compare independently mutable per-worker counters with and without documented spacing/padding, checking alignment and equal useful work. Explain why allocator, architecture and compiler decisions may hide any expected timing difference.
-6. **Oversubscription and scheduler noise** — Compare one, hardware-thread-count and deliberately oversubscribed configurations using modest local thread limits; identify scheduling, thermal, frequency and background workload confounders.
-7. **Optional NUMA and hardware counters** — Explain why remote memory access can change performance, but do not require NUMA equipment, root, perf permissions or exotic cores. Use safe local repeated timing and documented model reasoning when such tools are unavailable.
-8. **Repetitions and warranted inference** — Record at least five individual timings per variant, a center and spread and one plausible alternative explanation; declare when effects are inconclusive rather than forcing a speedup narrative.
+1. **Correct useful work and measured quantities** — Verify identical task results and counts across variants before comparing throughput, latency, queue waits, total wall time, speedup or efficiency. Reject a seemingly faster run that drops work or hides panics.
+2. **Lock contention and worker scaling** — Vary worker count and lock scope while holding useful work fixed, within modest thread/CPU limits. Predict waiting and scheduler effects, identify oversubscription and compare actual measured behavior.
+3. **Cache coherence and false-sharing hypotheses** — Compare independent adjacent versus padded counters under a declared cache-line model, checking actual layout and equal work. Explain why timing variation alone does not prove hardware false-sharing interference.
+4. **Repetitions, environment and alternatives** — Record individual trials, center/spread, warmup and toolchain/flags/OS/CPU plus plausible background, frequency, thermal or allocator confounders. NUMA and hardware counters must remain optional.
+5. **Warranted optimization conclusions** — Contrast contention, locality and scheduling explanations with a discriminating intervention; limit conclusions to observed cases and check that an optimization preserves correctness, resource bounds and shutdown.
 
-*Optional formative feedback:* Predict the direction of a lock-hold-time comparison, then formulate two distinct hypotheses that would explain an unexpected result without altering correctness criteria.
+*Optional formative feedback:* Predict lock-scope and padded-counter effects, then propose a falsifier when observations disagree.
 
-### Module 9 — Integrated Concurrency Component and Independent Defense
+### Module 9 — Cumulative Concurrent Component and Independent Defense
 
 #### Outcomes
 
@@ -243,20 +216,16 @@ The central assessed implementation is **one bounded Rust concurrent queue, work
 
 #### Lessons
 
-1. **Select one authentic bounded component** — Choose a safe Rust queue, worker pool or small dispatcher with finite task admission, explicit completion/cancellation semantics and stated numbers of producer/consumer threads. It must actually involve coordinated concurrent ownership, not independent sequential tasks.
-2. **Public behavior and safety invariants** — Specify the API, capacity, close/cancel outcomes, state-transition table, ownership of accepted job IDs, linearization candidates and the circumstances in which each invariant is expected to hold.
-3. **Synchronization design review** — Select a documented Mutex/Condvar, bounded channel and optional atomic flag/counter arrangement justified by the necessary ordering. Explain why the code does not require unsafe lock-free memory reclamation to meet the target.
-4. **Implement and integrate without duplicate submissions** — Reuse the same implementation across the formal correctness evaluation, benchmark and unfamiliar defense, preserving separate checks for different outcomes rather than requiring three independent queue projects.
-5. **Normal, invalid and capacity tests** — Verify multiple producers/consumers, zero/one capacity where supported, malformed input, duplicate job IDs, full queue and close-before/drain-after cases against precomputed expected accepted/completed/canceled sets.
-6. **Cancellation, panic and finite teardown** — Test blocked producers/consumers, worker panic, repeated cancel and shutdown time budget with join obligations; report a bounded fault that cannot guarantee liveness under an unfair scheduler without pretending to have proved otherwise.
-7. **Performance with constrained claims** — Measure the same implementation under varying thread counts and contention patterns, documenting actual work and repeated samples; connect any tuning to a specified mechanism, not an unsupported global claim.
-8. **Unfamiliar schedule and technical defense** — Respond to an unseen adversarial history or modified requirement, reproduce or logically demonstrate the failure, give a minimal invariant-preserving correction and independently check the regression in a reviewable explanation.
+1. **One coherent, bounded public artifact** — Retain the same AS3 safe Rust queue/worker-pool artifact with explicit admission, task IDs, capacity, worker limits, close/cancel and failure policy. Defend its synchronization and progress assumptions rather than implementing another queue.
+2. **Reuse separate correctness and measurement evidence** — Connect AS1 protocol analyses, AS2 atomic reasoning, AS3 executable behavior, AS4 measured comparisons and independent schedule tests to distinct review decisions about the one component; do not duplicate submissions.
+3. **Unseen fault, rival causes and bounded correction** — Predict at least two plausible explanations and a discriminating event sequence for a reviewer-supplied new concurrency defect. Explain a minimal invariant-preserving change or justified refusal before changing the code.
+4. **Independent regression and technical defense** — Re-run the unfamiliar and a previously correct case against independent expected state; disclose untested schedules and crash/fairness limits. Reproduce a clean build and defend authorship and the scope of supported conclusions.
 
-*Optional formative feedback:* Have a reviewer reorder two events in a published test history; predict the required outcome before running the program and distinguish the tested property from unproved progress or fairness claims.
+*Optional formative feedback:* Derive an unfamiliar close/dequeue failure and defend a minimal correction without changing the previously verified public contract.
 
 ## Completion requirements
 
-**The following five summative evaluations are required.** Lesson exercises, optional model-checking experiments and module feedback are formative; no additional completion gates are implied. Evaluators must decide whether the published evidence actually demonstrates **each of SYS3-O1–SYS3-O12**, not merely whether a learner has passed a stress-test command. Reuse one bounded concurrent implementation and its fixtures across AS3, AS4 and AS5 where different work/criteria genuinely require distinct demonstrations.
+**The following five summative evaluations are required.** Lesson exercises, optional model-checking experiments and module feedback are formative; no additional completion gates are implied. Evaluators must decide whether the published evidence actually demonstrates **each of SYS3-O1–SYS3-O12**, not merely whether a learner has passed a stress-test command. Reuse one bounded concurrent implementation and its fixtures across AS3, AS4 and AS5 where different criteria require distinct demonstrations. The unfamiliar defense specifically measures SYS3-O12; prior competencies require their own successful assessments.
 
 - **SYS3-AS1** — Concurrent Safety, Synchronization and Progress Analysis
   - **Outcomes:** SYS3-O1, SYS3-O2, SYS3-O3, SYS3-O4, SYS3-O5.
@@ -273,7 +242,7 @@ The central assessed implementation is **one bounded Rust concurrent queue, work
 - **SYS3-AS3** — Bounded Multi-Producer/Consumer Runtime Component
   - **Outcomes:** SYS3-O3, SYS3-O8, SYS3-O9, SYS3-O11.
   - **Work:** Implement a **safe Rust bounded concurrent job queue, worker pool or dispatcher** with **at least two producers and two consumers/workers** under a documented finite thread/queue/task budget. Specify admission, full capacity, exact task identity, processing, close/cancel, timeout, panic and join behavior. Accept a Mutex/Condvar-based bounded MPMC queue, or an equivalent **documented** abstraction; a standard-library `std::sync::mpsc` single-consumer channel must not be mislabeled as cloned-receiver MPMC. Publish a simple sequential specification and independent normal/invalid/adversarial fixtures.
-  - **Criteria:** A reviewer can identify the protected invariant, waiting predicates and wakeup paths; enforced queue capacity and any auxiliary staging remain within declared limits *during operation*. Every accepted task has a unique accounted state (queued, running, successfully completed or explicitly canceled/failed) under the published failure assumptions; no silently lost/duplicated completion is accepted. Blocked senders/receivers wake or return when admission closes; normal completion/cancellation and injected worker-panic paths are finite in bounded tests and owned workers are joined or an explicitly limited failure is reported. Verify capacity 1, full queue, concurrent producer/consumer interleavings, close while waiting, duplicate IDs, panic and work accounting against independent hand-derived expected states. No application-wide starvation/fairness or durable exactly-once claim is made without evidence.
+  - **Criteria:** A reviewer can identify the protected invariant, waiting predicates and wakeup paths; enforced queue capacity and any auxiliary staging remain within declared limits *during operation*. Every accepted task has a unique accounted state (queued, running, successfully completed or explicitly canceled/failed) under the published failure assumptions; no silently lost/duplicated completion is accepted. An injected **panic after dequeue and before completion** must have an explicit owned-task/failure-accounting policy and a reproducible test of that policy, rather than depending on type checking or a happy-path job count. Blocked senders/receivers wake or return when admission closes; normal completion/cancellation and injected worker-panic paths are finite in bounded tests and owned workers are joined or an explicitly limited failure is reported. Verify capacity 1, full queue, concurrent producer/consumer interleavings, close while waiting, duplicate IDs, panic and work accounting against independent hand-derived expected states. No application-wide starvation/fairness or durable exactly-once claim is made without evidence.
   - **Evidence:** Complete source, stable toolchain/lockfile where applicable, public API and capacity/ownership/state-transition contract, reference oracle, deterministic barrier/schedule or fault harness, bounded stress samples and negative cases, clean reproduction commands and limitations.
 
 - **SYS3-AS4** — Contention, Scheduling and Locality Investigation
@@ -283,9 +252,9 @@ The central assessed implementation is **one bounded Rust concurrent queue, work
   - **Evidence:** Reproducible benchmark harness/commands, identical-work oracle, independent preregistered predictions, raw per-trial timing data, summary tables or plots, relevant calculations, competing-explanation analysis and a constrained performance claim.
 
 - **SYS3-AS5** — Unfamiliar Concurrent Failure Defense
-  - **Outcomes:** SYS3-O1, SYS3-O4, SYS3-O6, SYS3-O9, SYS3-O11, SYS3-O12.
-  - **Work:** Investigate one **previously unseen** bounded concurrency scenario supplied by a reviewer or transparent public-generation rule: for example a lost notification, ABA-flavored logical retry error, ordering mistake, livelock, worker cancellation or incorrect full/close transition. Before changing code, state the intended invariant, two plausible causes and a discriminating event schedule; use hand reasoning and safe test hooks or a compact model to demonstrate the violation. Apply the smallest justified correction or document a bounded refusal when assumptions are insufficient, then independently test affected and unaffected histories.
-  - **Criteria:** The diagnosis identifies a legal counterexample schedule or proved protocol violation, distinguishes actual observations from modeled transitions and rejects unsupported progress claims. The corrected implementation/handoff preserves previously established safety, ownership, boundedness and shutdown criteria for the tested cases; it includes a regression whose expected result is not derived from its own output. The defense recognizes residual untested schedules, unfair execution and any architecture-specific assumptions; no compulsory unsafe code or inaccessible hardware is required.
+  - **Outcomes:** SYS3-O12.
+  - **Work:** Investigate **one previously unseen** bounded concurrency scenario supplied by a reviewer or transparent public-generation rule, such as lost notification, ABA-flavored retry, incorrect ordering, livelock, worker cancellation or full/close transition. Before editing, state the public invariant, two plausible causes and discriminating event history; reproduce or derive the violation with safe hooks, a hand-solved schedule or a bounded model. Apply a minimal justified correction or bounded refusal, then independently check the affected and one previously correct history. This evaluates **O12 unfamiliar causal diagnosis and defense**, not automatic re-award of every distinct outcome covered by AS1–AS4.
+  - **Criteria:** A genuine unfamiliar schedule or protocol violation is reconstructed with explicit state and synchronization edges, and the learner selects evidence distinguishing the competing causes. The correction or justified refusal follows from a checkable invariant, with an independently derived failing-case oracle and a previously correct regression. The learner explains authorship, residual untested schedules, fairness and target-model limitations without universal progress claims. A single optional-kind case does **not** by itself establish O1/O4/O6/O9/O11 anew; those requirements retain separate mandatory AS1–AS4 evidence. No unsafe code or special hardware is required.
   - **Evidence:** Original unfamiliar trace/seed or task, ordered pre-observation predictions, hand-checked state/history, minimal patch or alternative, reproducible negative/positive regression evidence, causal explanation, limits and a written, recorded or live reviewable technical defense.
 
 ### Academic boundaries, safety and independence
@@ -296,7 +265,7 @@ Baseline assessed artifacts use safe Rust, local synthetic jobs, bounded worker 
 
 ### Revision, outcome decisions and course readiness
 
-**SYS3-O1–SYS3-O12** and **SYS3-AS1–SYS3-AS5** preserve their existing identity and substantive competencies. More explicit memory-model litmus, invariant and resource-budget requirements are **material assessment-expectation clarifications** for *this course revision*, not grounds to silently regrade historical learner completions. A decision names source revision, assessment ID, evaluated outcomes, reviewer, evidence and material limitations; independent oracles and clean-checkout reproduction are required wherever code is assessed. Neither repository CI nor an untested outline supports promotion from `draft` to `tested` or `verified`.
+**SYS3-O1–SYS3-O12** and **SYS3-AS1–SYS3-AS5** preserve their existing identity and substantive competencies. The revised learning sequence consolidates redundant task-oracle, thread-lifecycle and capstone instructions without dropping indispensable concurrency competencies. SYS3-AS3 now explicitly examines worker panic after dequeue; SYS3-AS5 evaluates the distinct SYS3-O12 unfamiliar diagnosis instead of overclaiming five unrelated outcomes from a variable case. These are **material assessment-expectation clarifications** for *this course revision*, not grounds to silently regrade historical learner completions. A decision names source revision, assessment ID, evaluated outcomes, reviewer, evidence and material limitations; independent oracles and clean-checkout reproduction are required wherever code is assessed. Neither repository CI nor an untested outline supports promotion from `draft` to `tested` or `verified`.
 
 ## Optional disciplinary references
 
