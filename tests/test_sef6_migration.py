@@ -105,7 +105,7 @@ class SEF6MigrationTests(unittest.TestCase):
         self.assertIn("[SEF6](SEF6.md)", catalog)
         self.assertIn("| 14–18 weeks | SEF3, SEF4, SEF5 |", catalog)
         self.assertIn("All eleven SEF course files use", catalog)
-        self.assertIn("no historical-format SEF course definitions remain", catalog)
+        self.assertIn("OEE `v0.2.0` outcome and summative assessment contracts", catalog)
 
 
 if __name__ == "__main__":

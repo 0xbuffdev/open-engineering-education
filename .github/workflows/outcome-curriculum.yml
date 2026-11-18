@@ -11,6 +11,7 @@ on:
       - 'tests/test_app_catalog.py'
       - 'scripts/check-sef-curriculum.py'
       - 'tests/test_outcome_curriculum.py'
+      - 'tests/test_sys_program_consistency.py'
       - 'tests/test_outcome_diagnostics.py'
       - 'tests/test_dual_format_validation.py'
       - 'tests/test_sef*_migration.py'
@@ -28,6 +29,7 @@ on:
       - 'tests/test_app_catalog.py'
       - 'scripts/check-sef-curriculum.py'
       - 'tests/test_outcome_curriculum.py'
+      - 'tests/test_sys_program_consistency.py'
       - 'tests/test_outcome_diagnostics.py'
       - 'tests/test_dual_format_validation.py'
       - 'tests/test_sef*_migration.py'
@@ -40,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Unit-test outcome and mixed-format validators
+      - name: Unit-test curriculum validators
         run: python3 -m unittest discover -s tests -p 'test_*.py' -v
       - name: Validate all published outcome-driven courses
         run: |

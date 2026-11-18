@@ -42,7 +42,7 @@ SEF10 also requires independent reproduction, meaningful measurement, a responsi
 
 ## Courses
 
-This table is the **authoritative prerequisite-valid study order**, not numerical course-ID order. Stable identifiers are retained for historical compatibility; SEF11 is introduced between foundational programming and proof-intensive algorithms without renumbering SEF4–SEF10.
+This table is the **authoritative prerequisite-valid study order**, not numerical course-ID order. Course identifiers remain stable. SEF11 is studied before proof-intensive algorithms while SEF4–SEF10 retain their published codes.
 
 | Course | Title | Duration | Prerequisite | Kind |
 | --- | --- | --- | --- | --- |
@@ -74,7 +74,7 @@ The catalog gives one prerequisite-valid order. Different branches may proceed c
 
 - **Initial foundations:** SEF1 explains the bit-to-program machine model. SEF2 introduces Python, state, files and programming abstractions. SEF11 adds an ungraded arithmetic/algebra diagnostic and the mathematics needed for independent proof and counting.
 - **Branches after SEF2:** SEF3 develops Linux and shell skills, SEF5 covers Git, software design, verification and review, and SEF11 develops discrete mathematics. Following SEF11, **SEF4 and SEF8 may proceed concurrently**. Algorithms in SEF4 use SEF11; they do not secretly require SEF8 probability or calculus.
-- **C and Unix systems:** SEF6 follows SEF3, SEF4 and SEF5, applying prior programming and algorithm reasoning to C11 memory and failure-safe resource contracts. SEF7 follows SEF3 and SEF6, adding POSIX files, processes, pipes, directories and bounded local-loopback networking. The [SEF7–SYS competency destination map](UNIX-SYS-BOUNDARY.md) describes deeper Rust and systems topics without transferring SEF7 assessment credit.
+- **C and Unix systems:** SEF6 follows SEF3, SEF4 and SEF5, applying prior programming and algorithm reasoning to C11 memory and failure-safe resource contracts. SEF7 follows SEF3 and SEF6, adding POSIX files, processes, pipes, directories and bounded local-loopback networking. Advanced SYS courses develop Rust, kernel, concurrency and multi-client systems skills after the SEF7 C/POSIX foundation. SEF7 remains responsible for its own assessed outcomes.
 - **Professional work:** SEF9 follows SEF5. Learners manage requirements and decisions, review changes, verify proposed AI code, address ethics, rights and privacy, and communicate accessibly. Its [synthetic practice case](../../examples/sef9/README.md) can be completed without a paid assistant, private customer records or a hosted tracker.
 - **Graduation:** SEF10 starts after verified completion of the other ten courses. The learner implements one bounded project and explains relevant transfer from previous study; no second specialist application is required.
 
@@ -86,7 +86,7 @@ The current courses publish **147 learning outcomes and 68 required summative as
 
 ## Course format and readiness
 
-All eleven SEF course files use the outcome-driven OEE `v0.2.0` format and remain `draft`; no historical-format SEF course definitions remain. [RFC 0003](../../rfcs/0003-sef-academic-progression.md) records the adopted placement of SEF11 before algorithms and the ten-prerequisite capstone.
+All eleven SEF course files use OEE `v0.2.0` outcome and summative assessment contracts, and all remain `draft`. [RFC 0003](../../rfcs/0003-sef-academic-progression.md) records the adopted placement of SEF11 before algorithms and the ten-prerequisite capstone.
 
 A `draft` status describes educational readiness, not an incomplete course file or a learner grade. Moving to `tested` or `verified` requires actual learner completions, revisions and independent review evidence under [Status Labels](../../spec/status-labels.md). Formal program conformance is a separate decision under [Conformance](../../spec/conformance.md). Passing source checks or completing an editorial assessment cannot establish learner-tested effectiveness. The [curriculum inventory](../INVENTORY.md) supplies reproducible source-format observations.
 

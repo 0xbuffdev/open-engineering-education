@@ -4,17 +4,17 @@
 
 ## Overview
 
-Systems Engineering is the hardware-near and infrastructure-oriented pathway after **Software Engineering Foundations**. It develops a reliable mental model of actual machine execution and resource behavior; teaches Rust with explicit C/Rust comparison; then examines operating-system internals before building depth in synchronization, networking, crash-durable storage, distributed consistency, performance engineering and production operations. Learners finish with a single reproducible systems project that must withstand controlled failures and an unfamiliar technical challenge.
+Systems Engineering develops the skills needed to explain how computers execute programs and build reliable infrastructure software. Learners study machine execution and memory, program in Rust with explicit C comparisons, and examine operating-system internals. They then construct concurrent components, network services, recoverable storage engines and small replicated systems. Performance investigations and operational design lead to a defended Rust systems capstone.
 
-This program **builds on, and does not re-teach, completed SEF**. SEF1 and SEF6 establish computer and C object-memory foundations; SEF7 assesses single-process POSIX interfaces, pipes, signals, single-peer TCP and one nonblocking loopback connection. SYS1 deepens machine models, SYS2 formally teaches Rust and advanced user-space resource supervision; SYS10 develops kernel scheduling, memory and isolation models before SYS3–SYS9 introduce further specialist engineering judgments. Foundational [SEF7](../SEF/SEF7.md) outcomes remain separately assessed; new SYS courses extend those skills rather than replacing their evidence or granting their completion. The [SEF7–SYS boundary map](../SEF/UNIX-SYS-BOUNDARY.md) gives an optional detailed comparison of SEF7 and later SYS responsibility. **No SEF7 outcome or assessment is transferred** to SYS or automatically awarded through SYS coursework; the map is explanatory, not additional credit or a substitute for either course's evidence.
+SEF supplies the programming foundation. SEF7 covers C/POSIX files, processes, pipes, signals and bounded single-peer loopback networking. SYS1 examines machine execution in greater depth; SYS2 teaches Rust systems programming; SYS10 studies kernel mechanisms. SYS3–SYS8 extend these foundations into specialist work. **No SEF7 outcome or assessment is transferred** to SYS. Each course evaluates its published competencies.
 
-**APP is not a SYS graduation prerequisite.** APP15's optional TypeScript–Rust specialization may use SYS2 competence or equivalent established Rust preparation, but that APP elective is not required here. Each SYS course's direct prerequisites and assessed outcomes are authoritative.
+APP courses are not prerequisites for SYS graduation. APP15 may draw on SYS2's Rust foundation where relevant, but its application specialization is optional for SYS learners.
 
 ## Prerequisites
 
-**Completed [SEF — Software Engineering Foundations](../SEF/README.md)**, including authentic assessed completion of all **SEF1–SEF11** under its published graduation rules. [SEF10](../SEF/SEF10.md) is the SEF capstone and already requires verified predecessor completion; simply attending or beginning SEF10 is **not** sufficient to enter SYS. SYS1 starts after the assessed SEF10 completion decision. Each later SYS course then requires the specific SYS predecessors in the catalog below; courses do not have to be studied in numerical order.
+Entry requires assessed completion of [Software Engineering Foundations](../SEF/README.md), including **SEF1–SEF11** and the [SEF10 capstone](../SEF/SEF10.md). SEF10 checks assessed completion of its predecessors. SYS1 begins after that decision. Each later SYS course has its own prerequisites in the catalog below; course numbers alone do not determine study order.
 
-A **nonprivileged Linux environment** is the reference platform for practical work, together with common open-source C/Rust toolchains and self-created synthetic files and processes. One local computer with modest resources is adequate for most reference tasks. A Linux VM or equivalent isolated environment may be used when available; exact OS, CPU, filesystem and timing assumptions must be recorded where materially relevant. Hardware performance counters, NUMA hosts, public networks, root permissions, real clusters and paid clouds are not required to demonstrate baseline competencies; declared reproducible simulations and controlled local experiments substitute when appropriate.
+Practical work uses nonprivileged Linux, a C compiler, Rust/Cargo and learner-owned synthetic files and processes. A modest single computer is sufficient for the reference exercises. Learners may use a Linux VM and must identify relevant CPU, OS, filesystem and timing assumptions. Real clusters, root privileges, hardware performance counters, public networks and paid clouds are not required. Local experiments and declared models must still meet each course's evidence criteria.
 
 ## Program learning outcomes
 
@@ -33,7 +33,7 @@ By the end of the core program, the learner can:
 
 ## Graduate competence and assessment ownership
 
-The program learning outcomes above are supported by **separate course-level assessments**, not by a single final demonstration. This navigation map identifies where to find the required work and evidence; the full outcome-to-assessment criteria remain authoritative **inside each course file**. One cumulative source artifact may support several assessments when its different competencies are actually reviewed.
+Each capability is assessed in its owning course. The table points to the required work; course definitions contain the acceptance criteria and evidence. A source artifact may be reused for several assessments when reviewers evaluate each claimed competency separately.
 
 | Graduate capability | Primary owner | Required assessed evidence |
 | --- | --- | --- |
@@ -48,7 +48,7 @@ The program learning outcomes above are supported by **separate course-level ass
 | Capacity, SLOs, safe operations and release judgment | [SYS8](SYS8.md) | Architecture, capacity/recovery model, secure lifecycle, independent readiness review and changed-constraint defense (`SYS8-AS1`–`SYS8-AS5`) |
 | Independent cumulative systems integration and graduation defense | [SYS9](SYS9.md) | Separate admission decision, one Rust capstone, failure/capacity work, operator handoff and unfamiliar individual defense (`SYS9-AS1`–`SYS9-AS6`) |
 
-The rows do **not** introduce new prerequisites, assessments, or required submissions. They distinguish the original specialist outcomes from **SYS9's new integration/transfer judgment**, while preventing a completed capstone from being used to claim unassessed predecessor mastery.
+SYS9 evaluates integration and transfer on one cumulative Rust project. Completing it does not establish missing evidence from an earlier course.
 
 ## Program completion standard
 
@@ -61,7 +61,7 @@ A project demo cannot replace missing prerequisite mastery, and attendance, elap
 
 ## Courses
 
-This is the **authoritative prerequisite-valid core course catalog** under OEE `v0.2.0`. The listed order follows actual dependencies rather than identifier numbering: SYS10 intentionally precedes SYS3, and SYS4/SYS5 are parallel choices after SYS3. All ten courses remain educationally `draft`; provisional durations are study estimates, not completion thresholds.
+This table is the current SYS core catalog under OEE `v0.2.0`. It follows prerequisite order: SYS10 comes before SYS3; SYS4 and SYS5 can proceed in parallel after SYS3. All ten courses remain educationally `draft`. Durations estimate study effort and do not replace assessed competence.
 
 | Course | Title | Duration | Prerequisites | Kind | Status |
 | --- | --- | --- | --- | --- | --- |
@@ -96,14 +96,14 @@ Cross-cutting reasoning about security, privacy, accessibility, responsible expe
 
 ## Workload and pacing
 
-The ten provisional durations total approximately **148–192 course-weeks**, or roughly **1,480–2,880 focused hours** at 10–15 hours/week. These are sums of estimated course effort, **not an elapsed-time requirement, guaranteed graduation date or fixed credential threshold**. SYS4 and SYS5 may run in parallel after SYS3. SYS7 may begin after SYS3 and SYS4 without waiting for SYS5 or SYS6; SYS6 requires both SYS4 and SYS5, and SYS8 requires SYS6 and SYS7. Prerequisite-valid parallel study may shorten elapsed calendar time but does not remove any assessed work. Learners may need more time for tooling, mathematical repair, debugging, inaccessible hardware alternatives, project revision and reviewer feedback. Course durations will be recalibrated using genuine learner evidence rather than artificial matching to SEF or APP week counts.
+Adding the published durations gives **148–192 course-weeks**, or approximately **1,480–2,880 focused hours** at 10–15 hours a week. These totals estimate work, not calendar time to graduation. SYS4 and SYS5 can run in parallel after SYS3, and SYS7 can begin after SYS3 and SYS4. SYS6 requires SYS4 and SYS5; SYS8 requires SYS6 and SYS7. Projects, debugging and reviewer feedback may take longer than the estimates. Future revisions should use real learner timing evidence.
 
-The ten courses currently publish **131 stable learning outcomes and 51 required summative assessment contracts**, not 51 separate final projects. A meaningful exercise may support several outcomes when its criteria independently evaluate them. Course files are authoritative for work, criteria and evidence; this catalog does not duplicate individual assessment briefs.
+The ten courses publish **131 learning outcomes and 51 required summative assessments**. Work may reuse an implementation when each outcome receives an independent assessment decision. Individual course files define the actual Work, Criteria and Evidence.
 
 ## Format, readiness and independent study
 
-All ten SYS course sources use the outcome-driven **OEE `v0.2.0` draft format** with stable IDs, module outcome mappings and published summative Work/Criteria/Evidence. Well-formed curriculum source and editorial review are **not** evidence of learner-tested effectiveness, independently established conformance, accreditation, or guaranteed professional competence.
+All ten SYS courses publish `v0.2.0` outcome IDs, module sequences and summative criteria. Source validation checks those contracts; learner-tested effectiveness, formal conformance and professional competence require separate evidence.
 
-Course labels remain **`draft`**. Promotion to `tested` or `verified` requires the learner completions, feedback, revision records and qualified reviewer evidence defined by [Status Labels](../../spec/status-labels.md); conformance is a separate scoped decision under [Conformance](../../spec/conformance.md). Evidence and completion decisions are revision-scoped; subsequent changes to prerequisites, workload or assessment criteria never silently regrade prior work or confer unearned credit.
+All course labels remain **`draft`**. Promotion to `tested` or `verified` follows the learner, feedback and reviewer requirements in [Status Labels](../../spec/status-labels.md). [Conformance](../../spec/conformance.md) is a separate decision. Assessment records identify the applicable source and assessment revision; editing the curriculum cannot automatically change a learner's result.
 
 Every mandatory outcome, assessment and success criterion is published in the course definitions. Any learner may use [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) or a self-controlled environment; no subscription, proprietary grader or hidden paid book is mandatory. Refer to [Course Format](../../spec/course-format.md), [Evidence Rules](../../spec/evidence-rules.md), the editorial [Curriculum Design Guide](../DESIGN-GUIDE.md) and the reproducible [curriculum inventory](../INVENTORY.md).

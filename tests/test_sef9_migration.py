@@ -42,7 +42,7 @@ class SEF9MigrationTests(unittest.TestCase):
                 self.assertIn("**Status:** `draft`", source)
         catalog = CATALOG.read_text(encoding="utf-8")
         self.assertIn("All eleven SEF course files use", catalog)
-        self.assertIn("no historical-format SEF course definitions remain", catalog)
+        self.assertIn("OEE `v0.2.0` outcome and summative assessment contracts", catalog)
 
     def test_twenty_outcomes_mapped_to_eight_required_assessments(self):
         course = COURSE.read_text(encoding="utf-8")

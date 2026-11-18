@@ -263,9 +263,9 @@ Completed SEF and SYS2 provide prior language/object and C/Rust ownership prepar
 
 Baseline assessed artifacts use safe Rust, local synthetic jobs, bounded worker counts and wall-clock safeguards against accidental overload; an ordinary laptop can perform the required reasoning and finite reproducible experiments. Optional model checking, `loom`, platform counters or alternative channel crates are tools—not compulsory hidden prerequisites. If timing or host fairness prevents a strong performance/progress conclusion, report that limitation rather than claim successful universal proof. Diagrams may be expressed as equivalent accessible event tables. Numeric limits and test seeds must be published with each executable task.
 
-### Revision, outcome decisions and course readiness
+### Assessment records and readiness
 
-**SYS3-O1–SYS3-O12** and **SYS3-AS1–SYS3-AS5** preserve their existing identity and substantive competencies. The revised learning sequence consolidates redundant task-oracle, thread-lifecycle and capstone instructions without dropping indispensable concurrency competencies. SYS3-AS3 now explicitly examines worker panic after dequeue; SYS3-AS5 evaluates the distinct SYS3-O12 unfamiliar diagnosis instead of overclaiming five unrelated outcomes from a variable case. These are **material assessment-expectation clarifications** for *this course revision*, not grounds to silently regrade historical learner completions. A decision names source revision, assessment ID, evaluated outcomes, reviewer, evidence and material limitations; independent oracles and clean-checkout reproduction are required wherever code is assessed. Neither repository CI nor an untested outline supports promotion from `draft` to `tested` or `verified`.
+A decision records the source revision, target/thread model, assessed outcomes, expected histories, observed behavior, reviewer and remaining schedule limitations. Executable work must reproduce from a clean checkout. The course remains `draft` until learner testing and qualified review support a status change.
 
 ## Optional disciplinary references
 

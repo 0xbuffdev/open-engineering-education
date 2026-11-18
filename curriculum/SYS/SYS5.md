@@ -20,7 +20,7 @@ SYS5 teaches **single-node persistent storage correctness**: how an executable R
 
 **Execution and access:** Reference environment is stable Rust and Cargo, a nonprivileged local Linux filesystem and learner-owned disposable fixture directories with numeric disk/memory/open-file bounds. Optional free tools can help inspect layouts but no root, raw block device, production database, paid infrastructure, hardware power-cycle, mandatory unsafe Rust or proprietary checker is needed. The baseline can use safe Rust `std::fs` and standard collections, with declared platform-specific sync behavior; a simulated fault-injection adapter and optional isolated subprocess provide reviewable evidence without damaging unrelated data. A public `draft` course does not assert production durability or security certification.
 
-**Effort:** **16–20 weeks** at **10–15 focused hours/week** (160–300 hours) is a provisional estimate covering source study, models, implementation, debug/fault sweeps, measurements, review and revision—not a fixed completion gate. The **fourteen stable learning outcomes and five assessment IDs** are retained. Changes to their evaluation detail are prospective to this source revision; historical learner decisions must remain tied to the applicable course/spec version.
+**Effort:** **16–20 weeks** at **10–15 focused hours/week** (160–300 hours) is a provisional estimate covering source study, models, implementation, debug/fault sweeps, measurements, review and revision—not a fixed completion gate.
 
 ## Learning outcomes
 
@@ -298,9 +298,9 @@ SYS5 teaches **single-node persistent storage correctness**: how an executable R
 
 All destructive tests must be within clearly owned temporary directories, never on personal files, running databases, raw block devices or public systems. Any toolchain and fixture must be available without payment or privileged host access; no real power failure, offline block-device mount or special filesystem privilege is mandatory. Full application-specific encryption, authenticated integrity, resistance to malicious filesystem writers and secure erasure remain **explicitly out of scope**, not properties accidentally provided by CRC, Rust safety, deletion or compaction.
 
-### Assessment revisions, provenance and readiness
+### Assessment records and readiness
 
-Stable learning outcome IDs **SYS5-O1–SYS5-O14** and summative assessment IDs **SYS5-AS1–SYS5-AS5** remain unchanged. The consolidation removes duplicate recovery-oracle, file-order and capstone-integration instruction without removing WAL/manifest/snapshot or measurement competencies. AS2 explicitly distinguishes incomplete final tails from fully present checksum-invalid records, while AS5 now evaluates O14 without overclaiming six unrelated competencies from one optional-kind unseen case. These are **material assessment-clarity changes applying only to this revision**. Preserve historical learner assessments under their applicable course and OEE specification revision; do not retroactively award or withdraw completion through an editorial change. Each evaluation records actual test/failure setup, learner source revision, outcome/assessment IDs, expected vs observed states, reviewer decision and material environmental limitations. A passing CI pipeline or structurally conformant markdown source **does not** establish that this `draft` course has been learner-tested or independently verified.
+Each decision records the source revision, filesystem and sync assumptions, assessed outcomes, expected recovered state, actual results, reviewer and material limitations. AS2 distinguishes incomplete final WAL tails from fully present checksum-invalid records. The course remains `draft` until learner testing and qualified review support a status change.
 
 ## Optional disciplinary references
 
