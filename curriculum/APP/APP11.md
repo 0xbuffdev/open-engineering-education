@@ -359,7 +359,7 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 3. **Count actual retries and lost-ACK uncertain state** — Inject failed dependency after remote commit and count nested attempts; select one retry owner with idempotent reconciliation and finite backoff.
 
-4. **Bulkead/circuit decision from measured isolation** — Run a shared-pool failure and a measured alternate containment (capacity split/stop/circuit), justify complexity and avoid implying a breaker fixes database truth.
+4. **Bulkhead/circuit decision from measured isolation** — Run a shared-pool failure and a measured alternate containment (capacity split/stop/circuit), justify complexity and avoid implying a breaker fixes database truth.
 
 5. **Fail closed for security, degrade only optional work** — Show a user task that can lose optional analytics but not entitlement or durable mutation, with truthful HTTP/worker statuses and accessible pending state.
 
