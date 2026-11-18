@@ -229,7 +229,16 @@ class SEF10GraduationIntegrationTests(unittest.TestCase):
             "| [SEF10](SEF10.md) | Software Engineering Foundations Capstone | 10–14 weeks | SEF1–SEF9, SEF11 |",
             catalog,
         )
-        self.assertIn("before starting sef10, verify actual prior completion evidence", catalog.lower())
+        # The learner-facing README may be edited for clarity; keep the
+        # pre-entry evidence obligation, not one frozen sentence.
+        self.assertRegex(
+            catalog.lower(), r"before (?:starting|entering).{0,40}sef10"
+        )
+        self.assertRegex(
+            catalog.lower(), r"(?:verify|verifies).{0,90}assessed completion"
+        )
+        self.assertIn("sef1–sef9 and sef11", catalog.lower())
+        self.assertIn("course revision", catalog.lower())
 
     def test_review_and_release_rubric_protect_technical_and_professional_claims(self):
         source, _, _, completion = parts()
