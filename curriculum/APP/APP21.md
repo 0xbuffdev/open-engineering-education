@@ -93,7 +93,7 @@ incorporated into an assessment.
 
 ## Modules
 
-### Module 1 — Node.js as a Runtime, Not Just a Script Runner
+### Module 1 — Node.js Host Mechanisms and a Safe Local Service Boundary
 
 #### Outcomes
 
@@ -102,23 +102,17 @@ incorporated into an assessment.
 
 #### Lessons
 
-1. **Course Orientation and the Origins of Server-Side JavaScript** — Situate Node.js as a server-side JavaScript runtime; explain its event-driven motivation and where its application-runtime responsibilities differ from APP18's language and npm tooling.
+1. **Purpose, History and Host Responsibilities** — Situate Node's event-driven server-side origins through the actual task of running a local service. Identify what APP18 already proved about ECMAScript/modules and what this course must newly demonstrate about Node I/O, processes and HTTP.
 
-2. **Language, Engine, Runtime and Operating System** — Separate ECMAScript, the V8 engine, Node-provided interfaces, libuv and OS services without claiming all asynchronous work uses the same worker pool.
+2. **Language, V8, Node, libuv and Operating Systems** — Trace one module/callback from synchronous JavaScript through Node host facilities to supported OS I/O; classify work by owner instead of claiming every asynchronous call uses a background thread.
 
-3. **Node's Execution Paths** — Trace a module through parsing/execution, synchronous call stacks, event-loop callbacks and OS-backed I/O; identify the point where application code regains control.
+3. **Concurrency versus CPU Parallelism** — Distinguish overlapped I/O from JS callback execution and from real worker-thread/process parallelism on a bounded supplied task; choose an appropriate model without requiring a production worker pool.
 
-4. **JavaScript Single Thread and Concurrency Models** — Distinguish a primary JavaScript thread, asynchronous I/O, worker threads, processes and OS threads; state which mechanisms actually run JavaScript concurrently.
-
-5. **Runtime API Survey** — Locate `node:fs`, `node:http`, `node:stream`, `node:events`, `node:process` and `node:test`, noting that APIs and guarantees are version-specific.
-
-6. **Web Protocol Knowledge at the Point of Use** — Review only the minimum HTTP request/status/header/message behavior needed to implement local service primitives; deeper DNS/TLS and network-to-pixels reasoning remain in APP1.
-
-7. **Safe Loopback Environment** — Record a supported Node version and OS, use a high unprivileged port or ephemeral port on `127.0.0.1`, and explain the difference between local loopback and public exposure.
+4. **Safe Local Reference Runtime and Built-ins** — Record a maintained Node/OS baseline, locate necessary node: built-ins, run a minimal disposable service on 127.0.0.1 with an ephemeral port, and explain why a loopback test is not public service security.
 
 *Optional practice — Host Boundary Audit:* Classify a mixed JavaScript/Node example by language, runtime or OS ownership; test one host-only assumption and explain its implications.
 
-### Module 2 — Process, Modules, Configuration and Startup
+### Module 2 — Process Configuration, Modules and Resource Ownership
 
 #### Outcomes
 
@@ -129,23 +123,19 @@ incorporated into an assessment.
 
 #### Lessons
 
-1. **Built-in Modules and ESM Boundaries** — Import Node built-ins with the `node:` prefix, distinguish standard JavaScript modules from runtime-dependent functionality, and reuse APP18's ESM skills without reteaching syntax.
+1. **ESM and Runtime-Specific Exports** — Use APP18's existing ESM knowledge to organize node: imports, public functions and an isolated service entry; identify host-provided interfaces rather than recapping generic JavaScript syntax.
 
-2. **Arguments and Environment Variables** — Parse bounded CLI options and optional environment settings, apply defaults explicitly, and distinguish configuration validation from untrusted request-data validation.
+2. **Configuration, Paths and Reproducible Startup** — Validate bounded CLI/environment inputs, the declared Node runtime and cwd versus import.meta.url path assumptions before listening; use synthetic rather than real credentials.
 
-3. **Package Manifest and Runtime Policy** — Declare a reproducible package/run command and supported runtime range, identify which development-only npm knowledge comes from APP18 and which settings affect runtime service behavior.
+3. **Startup Failure and Honest Exit Status** — Reproduce invalid port/fixture/configuration startup and inspect safe failure output, process exit semantics and how a later clean restart differs from swallowing the error.
 
-4. **Working Directories and Filesystem URLs** — Reason about `process.cwd()`, `import.meta.url` and local file paths; avoid depending on an accidental launch directory.
+4. **EventEmitter, Active Handles and Disposal** — Trace an event listener/error event and an open timer/socket/file handle that keeps the process alive; remove only owned listeners and close resources without assuming every callback is a Promise.
 
-5. **Startup Validation and Exit Status** — Fail fast on invalid port, missing required local fixture or contradictory configuration; emit safe actionable error context and an appropriate process exit status.
-
-6. **Resource Handles and Liveness** — Explain why active sockets, timers, workers and file handles can keep a process running; identify which resources must be closed for a clean exit.
-
-7. **EventEmitter Basics and Error Events** — Subscribe and unsubscribe safely, understand listener lifetime, recognize unhandled `error` event consequences, and avoid treating every event as a promise.
+5. **Clean Local Module/Process Handoff** — From a fresh local copy execute the documented start/stop and basic test command, record version/OS and investigate one accidental open handle or environment-coupled startup.
 
 *Optional practice — Startup Incident:* Reproduce a misconfigured startup and a lingering-handle case, then repair configuration or cleanup without hiding the symptom.
 
-### Module 3 — Event Loop, Scheduling and Nonblocking Work
+### Module 3 — Event Loop Scheduling and Bounded Nonblocking Work
 
 #### Outcomes
 
@@ -156,25 +146,21 @@ incorporated into an assessment.
 
 #### Lessons
 
-1. **Synchronous Execution and Blocking** — Show how a CPU-heavy callback blocks other JS callbacks even while the program uses asynchronous APIs elsewhere.
+1. **Blocking JavaScript versus Overlapped I/O** — Contrast a bounded CPU loop and nonblocking file I/O while another local callback awaits service; predict which activity can make progress rather than equating Promise syntax with parallel execution.
 
-2. **libuv and Event Loop Phases** — Explain timers, pending callbacks, poll, check and close callbacks as a conceptual model; distinguish documentation guarantees from incidental measurements and version changes.
+2. **libuv Phases and Versioned Callback Order** — Explain poll/check/timer and other relevant phases conceptually, including the Node 20/libuv timer scheduling change, and mark observations dependent on OS, entry phase and runtime release.
 
-3. **Promise Jobs and Node Scheduling** — Compare promise microtasks, `queueMicrotask`, `process.nextTick`, `setImmediate` and timers, including ESM/context-dependent ordering and starvation risks.
+3. **Promise Jobs, nextTick and Starvation** — Compare Node's process.nextTick, queueMicrotask, promises, immediates and timers in controlled CommonJS/ESM or supplied contexts; reproduce an unfair or starving loop with an explicit bound.
 
-4. **Timer Thresholds, Not Deadlines** — Demonstrate why a requested delay is a minimum scheduling threshold rather than an exact wall-clock execution promise.
+4. **Time Thresholds and I/O Ordering Evidence** — Show why timers are scheduling thresholds rather than deadlines; compare a bounded filesystem callback/immediate scenario and separate guaranteed order from incidental observed sequencing.
 
-5. **Callbacks and Promise-Based Node APIs** — Use `fs/promises` for local operations and recognize callback-based Node APIs without conflating asynchronous completion with parallel CPU computation.
+5. **Event-Loop Delay and Causal Repair** — Measure delay under reproducible blocked and corrected local conditions with a declared methodology; explain variance rather than interpreting an isolated timing as production throughput.
 
-6. **I/O Event Ordering Investigation** — Predict and record callback order in controlled filesystem/I/O scenarios; qualify which outcomes depend on OS, Node version, event-loop iteration and initialization phase.
-
-7. **Event Loop Delay and Starvation** — Create a safe bounded blocking fixture, measure observed scheduling delay and repair a pathological busy loop without pretending every latency change is a server throughput guarantee.
-
-8. **Choosing a Concurrency Mechanism** — Explain when cooperative async I/O, worker threads or multiple processes are appropriate; note that worker threads are not mandatory for the APP21 exit service.
+6. **Choose Async I/O, Workers or Processes** — Defend when cooperative I/O, a worker thread or independent process would be appropriate for an unfamiliar workload; demonstrate an explicit limitation instead of forcing a parallel implementation.
 
 *Optional practice — Scheduling Diagnosis:* Investigate a supplied log trace containing a misleading ordering assumption and propose a corrected, reproducible explanation.
 
-### Module 4 — Filesystem I/O, Paths and Failure Policies
+### Module 4 — Filesystem I/O, Safe Paths and Failure Isolation
 
 #### Outcomes
 
@@ -185,23 +171,21 @@ incorporated into an assessment.
 
 #### Lessons
 
-1. **Files, Descriptors and Async Operations** — Open, read, write and close a disposable local file with Node promise APIs; explain file descriptors, buffers and lifecycle ownership.
+1. **Owned Async File Handles and Blocking Contrast** — Open/read/write/close synthetic local files with fs/promises, trace error and resource ownership, and show why a sync request-handler file operation can block unrelated callbacks.
 
-2. **Sync versus Async Filesystem Calls** — Compare synchronous and promise APIs in the context of a request-handling loop, demonstrating how blocking file work affects unrelated tasks.
+2. **Missing Files, Permissions and Error Evidence** — Distinguish expected missing paths, permission/path faults, programming errors and late I/O failures; preserve diagnostic causes privately without disclosing real absolute paths or keys to HTTP clients.
 
-3. **Errors and Context Preservation** — Classify missing files, permissions, conflicting paths and other I/O failures; preserve safe error codes and causes without leaking sensitive absolute paths to clients.
+3. **Path Resolution, Symlinks and Trust Limits** — Use an allowlisted logical file ID or tightly constrained trusted fixture tree; show why prefix/path normalization alone fails with traversal, encoded paths, symlinks or TOCTOU, without claiming a robust hostile-filesystem sandbox.
 
-4. **Filesystem Paths, Symlinks and TOCTOU** — Parse only intended relative file identifiers, reject traversal, apply explicit allowlists, and reason about why simple string-prefix path checks are unsafe; describe links and race conditions in hostile directories; keep learner fixtures in disposable trusted trees rather than claiming a naive path check is a sandbox.
+4. **Write Completion, Rename and Crash Durability** — Investigate temporary output files and rename/write behavior; distinguish successful promise resolution from a durable crash-safe transaction, filesystem-specific atomicity and unsupported guarantees.
 
-5. **Atomicity and Durable Writes** — Distinguish write completion from crash durability, temporary-file/rename patterns and whether a given filesystem provides the needed guarantees.
+5. **Abort Semantics and Partial-File Cleanup** — Test a supported AbortSignal boundary; explain that fs.readFile cancellation can stop its buffering without undoing individual underlying OS operations, and define actual partial-file/handle cleanup.
 
-6. **Abort Signals and Resource Disposal** — Inspect an API's actual AbortSignal support, explain that cancellation can be best-effort and cannot necessarily roll back completed I/O.
-
-7. **Bounded File Operations** — Impose fixture size and count limits, avoid unbounded `readFile` for large arbitrary files, and pick streaming when appropriate.
+6. **Bounded Work and Stream Selection** — Limit identifier count, file size, read concurrency and buffered bytes, and select a stream rather than unbounded readFile when the actual data volume requires it.
 
 *Optional practice — I/O Failure Injection:* Reproduce an invalid-path or missing-file error with a local fixture, verify cleanup and test that no other files are touched.
 
-### Module 5 — Buffers, Encodings and Data Interpretation
+### Module 5 — Buffers, Encodings and Byte-Safe Data Contracts
 
 #### Outcomes
 
@@ -211,19 +195,17 @@ incorporated into an assessment.
 
 #### Lessons
 
-1. **Bytes versus JavaScript Strings** — Explain Buffer as a byte sequence and why UTF-8 bytes, UTF-16 JS string code units and user-visible characters differ.
+1. **Bytes, Code Units and Serialized Meaning** — Compare Buffer byte sequences, UTF-8 bytes, JS UTF-16 code units and displayed text, using a real Unicode input to expose faulty length/offset assumptions.
 
-2. **Creating and Slicing Buffers** — Use explicit encodings, byte lengths and bounded allocations; distinguish view-like slicing and copying as appropriate to the active API.
+2. **Allocation, Views and Explicit Copying** — Allocate bounded buffers, measure byteLength and demonstrate when subarray/slice shares backing memory versus an independent copy; avoid leaking uninitialized or stale shared bytes.
 
-3. **Multibyte Encoding and Protocol Boundaries** — Demonstrate decoding a split UTF-8 sequence with an incremental decoder rather than arbitrarily converting each chunk to a string; recognize when a file or HTTP body is bytes versus a declared text or JSON representation; validate encoding and stated media type rather than trust it.
+3. **Chunked Unicode Decode and Representation** — Split a multibyte UTF-8 sequence across chunks, reproduce corrupt per-chunk decoding, then repair it with a streaming TextDecoder/StringDecoder according to documented encoding assumptions.
 
-4. **Network and Disk Payload Size** — Measure bytes actually received, enforce byte-based limits and explain why character counts and Content-Length alone cannot prove request-body safety.
-
-5. **JSON and Error Semantics** — Parse a bounded JSON payload, distinguish malformed syntax from valid JSON with an unacceptable domain shape, and serialize explicit response contracts.
+4. **Body-Byte Budget and Parsed Data Contracts** — Count actually received bytes rather than trusting Content-Length or character length, then distinguish bounded JSON syntax failures, correctly parsed but invalid domain shapes and expected response serialization.
 
 *Optional practice — Encoding Defect:* Repair a chunk-splitting or truncation bug with a fixture containing multibyte characters and a reproducible byte-count check.
 
-### Module 6 — Streams, Backpressure and Pipelines
+### Module 6 — Streams, Backpressure and Error Propagation
 
 #### Outcomes
 
@@ -234,23 +216,21 @@ incorporated into an assessment.
 
 #### Lessons
 
-1. **Readable, Writable, Duplex and Transform Streams** — Identify major Node stream abstractions and show where filesystem and HTTP messages expose readable/writable interfaces.
+1. **Stream Directions, Completion and Ownership** — Use Readable/Writable/Transform interfaces to trace data, end/finish/close/error and explicit ownership; distinguish successful completion from premature destruction.
 
-2. **Chunks, End and Destroy** — Distinguish stream data, completion and error/close states; explain what resource cleanup a consumer or producer must own.
+2. **Backpressure and High-Water Boundaries** — Predict write() false/drain behavior and highWaterMark buffering; show that backpressure limits *flow*, not the total permitted HTTP body or file payload.
 
-3. **Backpressure and High-Water Marks** — Explain internal buffering, producer/consumer speed mismatch, `write()` returning false and waiting for `drain` without treating highWaterMark as a hard total-size limit.
+3. **Pipeline, Abort and Failed Stream Cleanup** — Use node:stream/promises pipeline for bounded local input/transformation/output, trigger early termination, and inspect promise rejection and owned resource cleanup without promising rollback.
 
-4. **Pipelines and Error Propagation** — Use `node:stream/promises` pipeline for safe local copying/transformation, inspecting failure and cleanup behavior.
+4. **Async Iteration and Bounded Record Processing** — Use for-await and a simple incremental transform without accumulating unbounded data; preserve byte/record boundaries and explain early-exit effects.
 
-5. **Async Iteration of Streams** — Use `for await` with bounded work, explain cancellation and early exit consequences, and avoid unintentionally accumulating all chunks.
+5. **Slow Consumer and Memory Pressure Diagnosis** — Feed a synthetic slow writable, compare bounded in-flight/buffer behavior with an implementation ignoring backpressure, and explain where producer/consumer work must pause.
 
-6. **Transforming Data Safely** — Apply a simple line or record transform to synthetic data while handling chunk boundaries and explicit encoding assumptions.
-
-7. **Slow Consumer and Failure Injection** — Simulate a bounded slow writable target or rejected stream; inspect buffer growth and demonstrate propagation to the controlling promise.
+6. **Prove a Corrected Stream Boundary** — Demonstrate output integrity for split Unicode and an injected failure before/after a causal repair; record the stream lifecycle, error policy, partial output disposition and resource state.
 
 *Optional practice — Backpressure Repair:* Diagnose a stream-copy implementation that ignores backpressure or drops an error; repair and retest using controlled local inputs.
 
-### Module 7 — HTTP/1.1 Server and Request/Response Lifecycles
+### Module 7 — HTTP/1.1 Protocol and the Framework-Free Service
 
 #### Outcomes
 
@@ -261,25 +241,21 @@ incorporated into an assessment.
 
 #### Lessons
 
-1. **Request Method, Target and Headers** — Explain HTTP/1.1 request messages, response status and headers, request-target parsing, and why framework-style routing does not happen automatically.
+1. **HTTP Host Entry, Message and Local Listener** — Map method, request-target, headers, status and response lifecycle to node:http; implement createServer on 127.0.0.1 ephemeral port and test a real local client. Review protocol concepts only when needed, not APP1's entire Web course.
 
-2. **Building a Loopback HTTP Server** — Implement `node:http` `createServer`, listen on an ephemeral port at `127.0.0.1`, and close the server under explicit test ownership.
+2. **Exact Routing, Methods and Valid Targets** — Parse requests with a known local URL base, allowlist bounded methods/paths, classify 404 versus 405 and validate route identifiers rather than treat URL parsing as authorization.
 
-3. **Routing by Exact Path and Method** — Use `URL` with a known local base, match a bounded path/method table, and distinguish missing routes from method-not-allowed cases.
+3. **Status, HEAD, No-Body and Response Finality** — Set deliberate status/content-type and finish once; compare GET with HEAD and 204/304-style no-body cases and inspect headersSent/writableEnded behavior before reporting a late failure.
 
-4. **Response Headers, Body and End** — Set correct response status and media type, end responses exactly once, and inspect behavior for HEAD and no-body response cases.
+4. **Incremental Request Bytes and Domain Validation** — Read request chunks against actual byte limits and explicit media-type/JSON-shape rules; distinguish a malformed body, an unacceptable domain value and incomplete/truncated client input.
 
-5. **Reading a Request Body Incrementally** — Consume request body chunks with an explicit byte limit; distinguish transfer framing, declared length and actual received bytes.
+5. **Connections, Disconnections and Late Results** — Investigate HTTP keep-alive, an aborted client or a handler failing after headers were sent; define when a public response can still be sent and when only cleanup/logging is possible.
 
-6. **Validation and Structured Failure Responses** — Separate malformed JSON, invalid domain input, unsupported methods/media type and internal failures into predictable response categories.
-
-7. **Connection Reuse and Early Disconnect** — Observe persistent HTTP/1.1 connections, a disconnected client and already-sent response headers; do not attempt to send a new error body after a response has completed.
-
-8. **Raw HTTP Service versus Framework API** — Document which repetitive routing/validation/error concerns APP3 Fastify will later help organize, without turning this course into an API framework tutorial.
+6. **Public Contract versus Future Framework Policy** — Publish a minimal read-only and bounded processing route with normal/negative fixtures; explain precisely which richer routing, validation, auth and framework lifecycle competencies are deferred to APP3.
 
 *Optional practice — HTTP Trace:* Use a local Node client or equivalent tool to inspect a response sequence and repair an incorrect status, header or lifecycle handling issue.
 
-### Module 8 — HTTP Security, Trust and Resource Limits
+### Module 8 — HTTP Trust Boundaries and Resource Protection
 
 #### Outcomes
 
@@ -290,52 +266,21 @@ incorporated into an assessment.
 
 #### Lessons
 
-1. **Trust Boundary for Untrusted Clients** — Threat-model request methods, targets, headers, body content and connection concurrency even when the exercise runs only on loopback.
+1. **Threat Model, Safe Exposure and Bounded Work** — Name untrusted request targets, method/header/body data, concurrent clients and local configuration; make loopback-only binding observable while acknowledging loopback does not prove immunity to hostile local clients or DNS rebinding.
 
-2. **Bounded Request Bodies and Uploads** — Reject oversized incoming streams by actual bytes, handle partial/chunked arrivals and ensure the error path does not keep buffering forever.
+2. **Body Limits, Slow Arrival and HTTP Timeouts** — Reject actual excessive bytes and cap in-flight requests; compare headersTimeout, requestTimeout, socket/keep-alive settings with an application body limit. Examine a slow/chunked input and record version-dependent server behavior.
 
-3. **Method, Content-Type and Shape Policies** — Accept only explicitly documented methods/media types, validate parsed JSON and reject ambiguous or inconsistent inputs.
+3. **Method, Content-Type and Parser Contracts** — Use explicit accepted methods, media types and runtime JSON/domain validation; ensure failures are consistent and do not continue buffering indefinitely after rejection.
 
-4. **Path Traversal and Unsafe File Serving** — Demonstrate how decoded paths, separators and untrusted identifiers can lead outside a content root; use a bounded allowlist or no file serving in the core assessment.
+4. **Path Safety, Host/Proxy Headers and Authorization Limits** — Demonstrate a safe logical identifier/allowlist, reject traversal or untrusted URL paths, and avoid treating Host, X-Forwarded-* or caller-supplied identity as authoritative; APP3 owns authentication/authorization.
 
-5. **Safe Errors and Output Encoding** — Return stable public errors without stack traces, environment variables, filesystem paths or secrets; use explicit content types to avoid ambiguous browser interpretation.
+5. **Response Errors, MIME Types and Secret-Free Output** — Map observed client versus internal faults to stable statuses and data, avoid executable or ambiguous output MIME types, and protect stacks, configuration, keys and body contents from public responses/logs.
 
-6. **Timeouts, Slow Clients and Response Limits** — Investigate Node server header/request/connection timeout settings with a documented version and enforce an application-level body limit rather than relying on defaults alone.
-
-7. **Authentication and Authorization Boundary** — Explain why a loopback demo is not an authenticated Internet API. Introduce the need for authenticated identity and authorization without requiring APP3's full framework implementation.
-
-8. **Trust of Proxies and Deployment Boundaries** — Recognize that forwarded headers and external TLS termination require a trusted proxy/deployment model; do not trust client-supplied origin or proxy headers as authoritative.
+6. **Negative Client and Resource Matrix** — From a local client, test oversized/chunked body, wrong method/type, malformed JSON, disconnected socket, slow client and denied path, recording actual byte count, final resource disposition and tested/untested safeguards.
 
 *Optional practice — Negative-Path Attack Fixture:* Inject malformed JSON, oversize input, wrong media type and an unauthorized-looking request; verify controlled behavior and clearly state protections not implemented.
 
-### Module 9 — Errors, Timeouts, Cancellation and Cleanup
-
-#### Outcomes
-
-- APP21-O3
-- APP21-O5
-- APP21-O8
-- APP21-O9
-
-#### Lessons
-
-1. **Error Taxonomy by Boundary** — Classify programmer exceptions, rejected promises, filesystem codes, aborted requests, stream errors and expected bad inputs.
-
-2. **HTTP Response State and Error Mapping** — Map controlled client faults to stable status categories while preserving internal error context for local diagnostics; avoid always returning 500 or 200.
-
-3. **Timeout Ownership and Deadlines** — Explain API-specific timeout behavior and why a timer expiration does not itself cancel an unrelated Promise, socket or file operation.
-
-4. **AbortSignal Propagation** — Use AbortController only with supported consumers, distinguish an abort request from proof that I/O stopped or external side effects were undone.
-
-5. **Stream and Socket Teardown** — Demonstrate pipeline failure and request/response close handling; avoid double-send/double-close bugs and swallowed cleanup exceptions.
-
-6. **Unhandled Rejection and Fatal Error Policy** — Diagnose unhandled failures, distinguish recoverable request errors from process corruption and justify fail/exit behavior under a declared Node baseline.
-
-7. **Cleanup with Finally and Ownership** — Use `finally` and idempotent cleanup for file handles, timers, connections and test fixtures, including the case where setup only partially succeeded.
-
-*Optional practice — Cancellation Incident:* Inject a timeout and a late failure in a local operation, trace state transitions and prove the system does not leak its owned resources.
-
-### Module 10 — Startup, Health, Shutdown and Operational Behavior
+### Module 9 — Service Failure, Cancellation and Graceful Lifecycle
 
 #### Outcomes
 
@@ -346,23 +291,27 @@ incorporated into an assessment.
 
 #### Lessons
 
-1. **Service State Model** — Define startup, ready, draining, stopped and failed states; distinguish an open listening socket from readiness for the stated function.
+1. **Boundary-Specific Errors and Stable HTTP Mapping** — Classify programmer errors, runtime I/O/stream failures, invalid client requests, shutdown races and internal faults; send safe HTTP statuses only while a response remains writable.
 
-2. **Configuration Validation Before Listen** — Check required data and environment settings before accepting traffic, and select safe local defaults for experimental service exposure.
+2. **Timeouts, Abort Ownership and Real Cancellation Limits** — Define application deadlines and supported AbortSignal consumers; demonstrate that setting a timer or aborting a Promise does not guarantee reversal of filesystem/server work already completed.
 
-3. **Health and Readiness Endpoints** — Implement a bounded status endpoint that avoids disclosing secrets and clearly states what it checks and what it cannot establish.
+3. **Idempotent Cleanup Across Partial Initialization** — Use finally and explicit ownership to dispose file handles, pending timers, connections, pipelines and listeners, including partially initialized and already-closed states; avoid double-send and double-close defects.
 
-4. **Process Signals and Platform Variations** — Investigate supported SIGINT/SIGTERM handling, Windows/Unix differences and signal behavior; provide an explicit programmatic shutdown path for portable testing.
+4. **Fatal/Unrecoverable Failure Policy** — Distinguish a handled request failure from unhandled EventEmitter error, rejection and process-corrupting exception; justify controlled fail/exit policy rather than uncaught-error recovery magic.
 
-5. **Graceful HTTP Shutdown** — Stop accepting new connections, allow bounded in-flight requests to finish, define a forced-stop deadline and record the behavior of existing keep-alive connections for the declared Node version.
+5. **Startup, Readiness and Secret-Safe Configuration** — Define starting, ready, draining, stopped and failed; implement a bounded health/readiness status that checks declared service capability without exposing secrets or claiming general availability.
 
-6. **Restart and Error Recovery** — Inject a startup failure or crashing handler, demonstrate controlled request-level errors when safe and document when a fresh process is required.
+6. **Signals and Portable Programmatic Shutdown** — Observe SIGINT/SIGTERM behavior only where supported by the recorded Node/OS; provide a direct controlled shutdown function so tests are not platform- or shell-specific.
 
-7. **Configuration and Secret Hygiene** — Use fabricated environment values; distinguish required configuration from sensitive material and prevent leakage into responses/logs.
+7. **Graceful Drain, Keep-Alive and Active Requests** — Stop accepting new work, bound existing work/keep-alive handling, verify graceful completion or defined interruption and document exactly what server.close/closeIdleConnections behavior means in the declared Node version.
 
-*Optional practice — In-Flight Shutdown:* Begin a controlled local request, initiate shutdown and record whether it completes, fails deliberately or meets the stated deadline.
+8. **Injected Shutdown, Restart and Resource Leak** — Trigger shutdown during a controlled in-flight request and a late I/O failure, record actual success/rejection/status behavior, bounded forced-stop policy and clean restart with no unexplained open handles.
 
-### Module 11 — Testing, Observability and Resource Diagnosis
+9. **Lifecycle Invariant and Regression Review** — Trace one request through start/ready/respond/drain/stop, prove no stale response or sensitive log after closure, and recheck failure/cleanup invariants after a bounded lifecycle change.
+
+*Optional practice — Cancellation Incident:* Inject a timeout and a late failure in a local operation, trace state transitions and prove the system does not leak its owned resources.
+
+### Module 10 — Testing, Observability and Resource Diagnosis
 
 #### Outcomes
 
@@ -375,25 +324,21 @@ incorporated into an assessment.
 
 #### Lessons
 
-1. **Node Built-in Test Runner and Assertions** — Use `node:test` and strict assertions to test pure adapters, error mapping and lifecycle helpers; maintain the tests independently from main-service entry.
+1. **Independent Unit and Local HTTP Test Harness** — Use node:test with strict assertions, ephemeral-port server setup/teardown and an independent local client; separate pure domain behavior from actual node:http/stream integration.
 
-2. **Ephemeral-Port Integration Fixtures** — Create and close a loopback server from test setup, issue local HTTP client requests, and prevent port collisions and hanging handles.
+2. **Adversarial HTTP, Stream and Shutdown Cases** — Create deterministic normal/negative tests for 204/HEAD, errors, wrong media, chunked/oversize payloads, canceled streams, late I/O, partial responses and in-flight shutdown, not just screenshots or successful localhost GETs.
 
-3. **Protocol and Input-Failure Matrix** — Test valid JSON, malformed JSON, invalid methods, wrong content types, oversized/chunked bodies, missing paths, aborted requests and double-response hazards.
+3. **Minimal Structured Logging and Correlation** — Correlate a synthetic request ID with route class, status, duration and error code while omitting secrets, unredacted payloads, complete untrusted URLs and sensitive absolute paths.
 
-4. **Stream, Error and Shutdown Tests** — Inject a broken readable/writable, cancellation and an in-flight shutdown; assert cleanup, failure propagation and consistent response state.
+4. **CPU/Memory/Event-Loop Observability** — Use monotonic timing, a supported loop-delay observation and bounded process memory/CPU readings; distinguish an actual measurement from a universal capacity/security claim.
 
-5. **Structured Logging and Correlation** — Record synthetic request IDs, method, route class, duration and error code without logging bodies, secrets or full untrusted request data.
+5. **Controlled Local Overload/Blocking Experiment** — Compare a constrained baseline to a deliberately blocking or slow-consumer fixture under limits on client concurrency, duration and machine resources; preserve fairness and finish without hanging connections.
 
-6. **Latency and Event-Loop Diagnostics** — Use monotonic timing and a supported event-loop delay metric; qualify clock noise, small samples, concurrent workload and CPU/event-loop contention.
-
-7. **Memory, CPU and Active Handles** — Observe process memory/CPU metrics in a safe small local workload and explain why a single metric does not reveal heap leaks or production capacity.
-
-8. **Bounded Load Investigation** — Run a small local-only load test with concurrency/time limits, compare a baseline and a deliberately blocking handler, and identify backpressure or event-loop starvation evidence.
+6. **Unfamiliar Incident and Causal Correction** — Given ambiguous traces for slow disk, a blocked JS callback, stalled client or forgotten handle, state a testable hypothesis, demonstrate a targeted repair and rerun focused functional and resource regressions.
 
 *Optional practice — Incident Analysis:* Given fixture logs and measured traces, distinguish a slow client, slow disk, blocking callback and unhandled error, then defend one verified change.
 
-### Module 12 — Integrated Framework-Free Service and Engineering Defense
+### Module 11 — One Reproducible Node HTTP Service and Defense
 
 #### Outcomes
 
@@ -412,33 +357,29 @@ incorporated into an assessment.
 
 #### Lessons
 
-1. **Define the Local Service Problem** — Select a bounded synthetic task queue, local note processor or inventory-report endpoint with clear success/failure behavior and no required database/framework.
+1. **One Domain, Service Contract and Evidence Plan** — Select a bounded synthetic local task, publish permitted routes, input/output/byte/time policies and failure states, and plan to reuse **the same** evolving source and accepted APP21-AS1–AS4 evidence.
 
-2. **Publish Routes, Limits and Acceptance Criteria** — Document allowed methods/paths, input JSON shape, response statuses, maximum body bytes, concurrency policy, health checks and safe error shapes.
+2. **Integrate Runtime, Streams and Trusted Boundaries** — Build a cohesive framework-free service with separable domain, filesystem/stream, HTTP and lifecycle modules; preserve safe paths and error/cleanup semantics without importing a framework or database.
 
-3. **Separate Domain Logic from Runtime Adapters** — Keep pure input/rule computations distinct from HTTP, filesystem and process entry points so behavior can be verified without opening a socket.
+3. **Acceptance, Performance and Lifecycle Recheck** — Execute normal and negative client/service tests, verified bounded stream pressure, request correlation and graceful in-flight shutdown; link earlier accepted tests/traces instead of replaying all assessments as separate projects.
 
-4. **Add Bounded I/O and Stream Processing** — Implement at least one real Node async filesystem or stream operation, including a controlled failure path and a declared resource bound.
+4. **Unfamiliar Bounded Change and Regression Evidence** — Accept a changed route, byte limit, failure policy or cancellation condition from an assessor, reproduce the resulting defect and verify a focused correction and earlier invariants.
 
-5. **Wire a Raw HTTP Server** — Integrate a framework-free `node:http` service on loopback with explicit parsing, validation, response lifecycle and representative HEAD/unsupported-method policies.
-
-6. **Diagnose Scheduling or Backpressure** — Reproduce a small event-loop delay, stream pressure or unintended serial/parallel work defect and document a verified repair.
-
-7. **Test Bad Clients and Runtime Failures** — Run malformed, oversized, aborted and unusual method requests, late I/O failures, startup invalid configuration and controlled service shutdown.
-
-8. **Produce Safe Operational Evidence** — Capture structured local logs, basic request count/latency samples, health/readiness observations and an in-flight shutdown trace without personal data.
-
-9. **Clean Reproduction and Unfamiliar Change** — From a fresh local checkout, execute documented test/start/stop commands; implement a bounded new route/failure requirement and defend changes with regression evidence.
+5. **Clean Reproduction and Technical Defense** — Provide a fresh-checkout offline-capable start/test/stop path, a compact outcomes-to-evidence index, actually measured limits and a reviewable defense of Node-host versus framework/production responsibilities.
 
 ## Completion requirements
 
-All **twelve required outcomes** are evaluated by the **five
-required summative assessments** below. A single evolving
-Node.js codebase can supply evidence to several assessments
-when independent evaluation remains possible. Learners do
-not need five unrelated HTTP servers. Lesson investigations,
-sample fixtures and non-summative debugging exercises
-are formative preparation, not hidden completion gates.
+All **twelve outcomes** must be demonstrated through **five
+independently decidable required summative assessments**.
+The assessments can develop and inspect **one evolving Node.js
+codebase**, including focused non-HTTP experiments during
+APP21-AS1/AS2 and the eventual local HTTP service.
+APP21-AS5 integrates earlier accepted evidence, introduces
+an unfamiliar bounded requirement and independently verifies
+the final service; it does **not** require five unrelated
+servers or duplicate test reports. Previously accepted
+evidence may be referenced, and optional module practice
+does not create extra completion gates.
 
 | Required assessment | Required outcome coverage | Principal evidence |
 | --- | --- | --- |
@@ -474,18 +415,24 @@ are formative preparation, not hidden completion gates.
   interpolating untrusted paths or commands, and use safe
   response/error messages. Body size is not safely bounded
   by checking `Content-Length` alone.
-- Stream backpressure controls **flow**, not an absolute
-  payload length by itself. Handle slow consumers, errors,
-  aborted requests and early stream termination by the
-  stated resource ownership policy. A timeout or abort
-  signal does not automatically reverse completed file
-  changes or guarantee a task's underlying work stopped.
-- HTTP server and process lifecycle claims must cover
-  startup failure, readiness, active requests, drain and
-  shutdown under a declared runtime. Do not assume a
-  response can be sent after headers have been committed,
-  that close always waits forever, or that OS signals are
-  identical on every platform.
+- Stream backpressure controls **flow**, not a hard total
+  payload size. Handle slow clients, errors and early stream
+  termination under an explicit byte/concurrency/handle
+  budget. A timeout/AbortSignal cannot guarantee that an
+  underlying operating-system request or completed file
+  effect was rolled back; Node's fs.readFile abort can
+  terminate buffering without canceling individual OS
+  read requests. Verify actual cleanup rather than assume it.
+- HTTP server lifecycle claims must cover startup
+  failure, readiness, active requests, drain and shutdown
+  under a **declared Node/OS release**. Distinguish
+  `headersTimeout`, `requestTimeout`, idle/socket/
+  keep-alive timeouts and an application byte/work limit;
+  no configured timeout replaces all others. Test
+  `server.close()` with real active/keep-alive requests,
+  qualify release-specific idle connection behavior,
+  and never send a second response after headers/end.
+  Use programmatic shutdown when signals are unavailable.
 - Distinguish testable local **runtime correctness** from
   production security and availability. APP21 does not
   certify authentication, authorization, public TLS,
@@ -507,33 +454,33 @@ are formative preparation, not hidden completion gates.
 
 - **APP21-AS1** (required node runtime and scheduling investigation)
   - Outcomes: APP21-O1, APP21-O2, APP21-O3, APP21-O4, APP21-O11
-  - Work: Investigate a supplied JavaScript/Node fixture that mixes synchronous computation, Node host APIs, promise reactions, `process.nextTick`, timers, `setImmediate` and local filesystem I/O. Separate language-defined behavior from Node runtime and OS mechanisms, record actual version/OS, predict only defensible ordering, introduce a bounded blocking callback and analyze event-loop response. Repair one scheduling/starvation defect while maintaining stated behavior. Demonstrate a reproducible startup/configuration error and explain the relevant resource ownership.
-  - Criteria: The learner accurately separates V8/ECMAScript, libuv, OS and Node facilities; distinguishes I/O overlap from parallel JavaScript execution; qualifies ESM and timing-dependent callback order rather than asserting a universal timer sequence. Trace and event-loop delay observations match a documented environment, the bounded defect is reproduced and repaired, and the process exits cleanly after tests without hidden active handles.
+  - Work: On a supplied **local** fixture or the initial stage of the same service, investigate synchronous JS, a Node built-in, Promise jobs, `process.nextTick`, timers, `setImmediate` and filesystem completion. Record Node/OS and execution context (including ESM), distinguish ECMAScript from Node/libuv/OS, and **predict only guaranteed order** before observing a real trace. Reproduce a bounded blocking/starvation defect, measure its effect on another callback, repair it without losing required behavior, then demonstrate one invalid startup configuration and an owned-handle cleanup path.
+  - Criteria: JS, V8, Node, libuv and OS responsibilities are described accurately, with **async I/O overlap distinguished from JavaScript CPU parallelism**. Node 20/libuv and ESM/CJS/phase-dependent timer/nextTick ordering is appropriately version-qualified, not memorized as a fixed universal sequence. An actual local callback-delay observation supports the seeded defect and correction. Configuration failure and clean resource exit are demonstrated without reliance on arbitrary sleep-time assertions.
   - Evidence: Versioned local fixture and startup commands, prediction-versus-observation table, timestamped/annotated ordering trace, event-loop delay evidence with limitations, before/after regression tests and mechanism-based rationale.
 
 - **APP21-AS2** (required asynchronous file, byte and stream boundary)
   - Outcomes: APP21-O2, APP21-O3, APP21-O5, APP21-O7, APP21-O8, APP21-O11
-  - Work: Build a local, bounded file-processing adapter that reads a synthetic text/record input asynchronously, handles non-ASCII bytes correctly across arbitrary chunk boundaries, and transforms or copies it to a slow local target using a backpressure-aware stream/pipeline. Validate file identifiers or use a fixed allowlist, enforce explicit total-byte limits and distinguish expected missing/invalid files from operational failures. Inject a stream failure, early abort and a slow consumer; demonstrate cleanup without building a Web server.
-  - Criteria: Outputs are byte-correct and repeatable, including split multibyte characters; no unbounded accumulation or path traversal reaches unrelated files; the source/target pipeline respects writable backpressure and propagates failures. After a controlled abort or write failure owned handles are closed, partial artifacts follow a documented cleanup policy, and no unsupported claim is made that abortion undoes already-committed filesystem effects.
+  - Work: Extend the evolving Node source with a **local bounded** file-processing adapter: stream synthetic records to a slow target with a proper pressure-aware pipeline, safely decode a UTF-8 code point split across arbitrary chunks, and verify expected output bytes independently. Enforce an allowlisted file identifier/contained trusted fixture and a real byte/concurrency budget, inject missing file and rejected stream/early abort cases and record handle and partial-output cleanup. Demonstrate why a naive prefix check, declared length or highWaterMark alone does not establish containment or total-size safety; no HTTP server is necessary for this stage.
+  - Criteria: Independent byte-level expectations match output, including multibyte split cases, and input identifiers do not reach unrelated files in the tested threat model. The pipeline actually responds to slow-consumer backpressure, enforces a **separate total-byte bound**, propagates failure and closes its owned handles. Abort and failed writes follow the documented partial-file disposition without claiming OS I/O or already written data was reversed. A naive path-prefix test or unbounded read-all does not pass.
   - Evidence: Synthetic files and expected checksums/outputs, modular source, run/test commands, byte/stream/backpressure observations, invalid path/size/abort tests, recorded failure propagation and resource-cleanup evidence.
 
-- **APP21-AS3** (required framework-free http contract and security review)
+- **APP21-AS3** (required framework-free HTTP contract and security review)
   - Outcomes: APP21-O6, APP21-O7, APP21-O8, APP21-O11
-  - Work: Implement a minimal `node:http` loopback service supporting at least one read-only route and one bounded JSON-processing route, with declared methods, exact path matching, media type, status codes, response body shape, size limits and a controlled error mapping. Use a local Node client to test valid requests, wrong methods/content types, malformed JSON, oversized/chunked bodies, unsupported paths, disconnected clients and a late handler failure. Demonstrate why the service is not inherently authenticated or safe for public deployment.
-  - Criteria: The actual route/method behavior matches a published request/response contract; bodies are limited by observed bytes, not trusted Content-Length alone, and oversized processing ceases according to documented policy. Unknown input is validated, malformed requests receive consistent nonsecret errors, no response is double-sent after headers are committed, and connection aborts do not create unhandled failures. No third-party framework or database is required.
+  - Work: On the **same evolving source**, implement node:http with one read-only and one bounded JSON-processing route, exact URL path/method rules, suitable media types and a real byte-counted request limit. Using a local client, test GET/HEAD or another declared bodyless response, supported and unsupported methods, invalid content type, malformed/incorrect-shaped JSON, oversized content with and without a Content-Length claim, slow/chunked arrival, disconnected clients, and late failure **before and after headers are committed**. Demonstrate that binding only to loopback is a scope constraint, not authentication/authorization or proof of DNS-rebinding resistance.
+  - Criteria: Actual status, headers and body/no-body semantics match the declared contract and HTTP/1.1 lifecycle; count **received** bytes and terminate oversized/incomplete work without unbounded buffering. Wrong type, unknown shape and failure paths receive controlled nonsecret responses while the socket remains writable; after response commitment, no double-send attempt occurs and the connection/failure is safely closed or logged. Node version and header/request/socket timeout assumptions are disclosed rather than presented as total resource protection. No framework, live backend, database or real identity service is required.
   - Evidence: Runnable framework-free server and local client, route/response contract, negative-path matrix with status/body/header observations, validated request-size counters, failed-and-repaired tests, exposure/threat boundary notes.
 
 - **APP21-AS4** (required service lifecycle, cancellation and observability drill)
   - Outcomes: APP21-O2, APP21-O4, APP21-O7, APP21-O8, APP21-O9, APP21-O10, APP21-O11
-  - Work: Extend a disposable local Node service with documented configuration/startup validation, readiness and health semantics, structured privacy-aware diagnostic logs, bounded in-flight work, explicit timeout/abort policies and controlled shutdown. Inject one invalid startup configuration, one slow or aborted request, one late filesystem/stream failure and a shutdown during a request. Demonstrate a successful clean restart and qualified local latency/event-loop/resource measurements.
-  - Criteria: Start/ready/drain/stop transitions are observable and justified; unsafe configuration fails before listen; shutdown bounds new/in-flight work under the declared Node/OS version and does not leave timers/sockets/test handles hanging. Timeouts do not masquerade as automatic cancellation; errors preserve internal diagnostic context while exposing stable safe client responses; logs contain no secrets or unredacted payloads. Measurements record method and environment and do not claim production capacity from a local experiment.
+  - Work: Add an explicit starting/ready/draining/stopped/failed lifecycle to the same local service, with validated startup settings, no-secret health/status response, safe request IDs, bounded concurrency and documented header/request/socket/keep-alive timeouts versus own application limits. Inject an invalid start, slow/aborted client, late stream/I/O failure and shutdown **with a live in-flight request**; observe active versus idle keep-alive behavior under a pinned Node version, bounded drain/force-stop, restart and controlled process/handle cleanup. Use platform-supported signals if relevant but supply **a programmatic shutdown test path**. Compare local event-loop delay, latency and resource samples under disclosed conditions, without production-availability claims.
+  - Criteria: State transitions and effective readiness checks are inspectable, invalid configuration prevents listening, and in-flight/keep-alive shutdown traces match **the documented Node/OS release**, without mistaking server.close() for an unlimited wait or a forced guaranteed safe shutdown. Deadlines and AbortSignals have explicit owners, cleanup is idempotent, and deliberately rejected operations preserve privacy-aware diagnostics without leaking source paths, bodies or credentials. Local measurement method, variance and resource budget are disclosed; no broad production availability/capacity claim is inferred.
   - Evidence: Configuration/health contract, state diagram and signal or programmatic shutdown log, synthetic failure injection and clean restart results, local structured request correlation records, bounded latency/resource samples and test/limitation notes.
 
-- **APP21-AS5** (required local http service engineering defense)
+- **APP21-AS5** (required local HTTP service engineering defense)
   - Outcomes: APP21-O1, APP21-O2, APP21-O3, APP21-O4, APP21-O5, APP21-O6, APP21-O7, APP21-O8, APP21-O9, APP21-O10, APP21-O11, APP21-O12
-  - Work: Build or extend a cohesive framework-free HTTP/1.1 service that accepts bounded synthetic requests, validates data, performs a genuine nonblocking Node file/stream operation, handles expected and unexpected errors deliberately, records safe diagnostic signals, provides a constrained readiness status and supports controlled shutdown. Reuse qualifying APP21-AS1–AS4 artifacts rather than creating unrelated projects. From a clean checkout, demonstrate both successful and failed requests, a controlled failure/repair trace, a concurrency or backpressure analysis and a bounded unfamiliar change such as a new route, input limit or failure-policy requirement. Defend how the service uses runtime primitives and which responsibilities belong in later APP3 framework engineering.
-  - Criteria: A reviewer can reproduce the service locally without privileged ports, paid services, TypeScript, React, a database or a framework. Published request/response, input, byte-limit, async, error, shutdown and logging requirements have matching tests and honest negative evidence. The implementation owns and closes local resources, has no unexplained connection or unhandled rejection, avoids sensitive error disclosure, and records actual runtime/OS boundaries. The unfamiliar change satisfies stated criteria without breaking previous cases; the learner explains event-loop/stream behavior, resource limitations and what security/operability guarantees are not provided.
-  - Evidence: Version-controlled source and local synthetic fixtures, reproducible `node --test`/start/stop commands, route and acceptance matrix, normal/adverse integration logs, bounded workload results, before/after defect/change evidence, error/shutdown traces, README and a written/recorded/accessible technical defense.
+  - Work: Finish **the one cumulative locally served Node HTTP component** begun in APP21-AS1–AS4. Integrate separately owned runtime/domain, filesystem/stream, HTTP, security and lifecycle behavior, plus repeatable tests and meaningful resource evidence. Reference **previously evaluated** source, traces and client matrices instead of building five servers or copying every log again. Independently reproduce from a clean local checkout and fix a new unfamiliar but bounded route, byte/time/cancellation or error-lifecycle requirement, proving regression behavior and defending why a raw Node mechanism—not a framework/auth/database/deployment feature—is the appropriate course boundary.
+  - Criteria: Clean local startup, test and stop work with maintained free Node built-ins and synthetic data; every required limit, byte/stream/HTTP/timeout, secure output, shutdown and diagnostics claim is supported by actual tests and version-qualified observations. An unknown change is diagnosed and repaired with no regression to prior accepted capabilities; a passing AS5 cannot excuse a missing AS1–AS4 competency. Unhandled errors, unsafe public data exposure, unbounded work and unclosed handles block completion even when disclosed. The learner explains what APP3/APP7 must add for production auth/framework/deployment without pretending this local service is production-ready.
+  - Evidence: **One** versioned source/fixture package with a clean start/test/stop guide, concise references to independently accepted APP21-AS1–AS4 evidence, a fresh unfamiliar change and targeted before/after tests, material combined HTTP/stream/shutdown observations, explicit unsupported claims and a reviewable written, recorded or equivalently accessible technical defense.
 
 ### Completion decision and revision safety
 
@@ -554,15 +501,16 @@ assessment and outcome IDs, environment, meaningful
 observations, failure analysis and limitations under
 [OEE Evidence Rules](../../spec/evidence-rules.md).
 
-APP21 enters the active catalog as an outcome-driven
-OEE `v0.2.0` **draft**, not learner-tested or verified.
-The previous APP18 curriculum and legacy APP3/APP9
-course evidence retain their historical identities;
-adding a required core course does not silently
-upgrade old completion evidence. APP3 will separately
-build on APP19, APP21 and APP4 to teach typed
-framework API engineering; its assessment and
-prerequisites are not rewritten by this PR.
+APP21 remains an outcome-driven OEE `v0.2.0` **draft**,
+not learner-tested, independently verified or accredited
+by structural validation. The APP catalog **already
+contains** the required APP3 and APP9 course definitions:
+APP3 explicitly builds on APP19, APP21 and APP4 for
+typed framework/API engineering. This course does not
+change the prerequisite graph, change APP3's published
+assessments or retroactively reinterpret prior APP18,
+APP21 or other learner records, which remain tied to
+their actually evaluated course/specification revisions.
 
 ### Public non-mandatory study references
 
