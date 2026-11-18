@@ -18,7 +18,7 @@ A **nonprivileged, local C11-capable toolchain**, Make, and a terminal are the r
 
 C11 does not require that plain `char` be signed, that a byte contain exactly eight bits, that all pointer addresses be stable, or that undefined behavior produce a useful diagnostic. Treat each of those distinctions as part of the engineering model. **Do not intentionally dereference an invalid pointer, overflow a signed integer, or execute other undefined operations to prove what the C standard says.** A contained teaching fixture with an available diagnostic report is sufficient to investigate such a defect; when running fault demonstrations locally, isolate the disposable process and record the limits of its tools. All substantive programming assessments require corrected, defined-behavior implementations.
 
-The same core C11 subject areas are now arranged into **thirteen instructional modules**, moving toolchain diagnostics and language-level semantics before extensive memory ownership and separating dynamic arrays, linked lists, hash maps and integrated-library work. The **same seven required summative assessments** combine the existing capabilities; each module is not an extra assessed assignment. Buffer, parsing and data-structure implementations, fault-injection fixtures and review evidence may be reused, rather than rebuilt for every assessment. There is no universal checkpoint/lab quota, separate mandatory final lab, paid tool, external network, production data, privileged operation or hidden grader.
+The C11 teaching sequence is organized by independently necessary exit competencies: defined C operations and representations; separate translation units with reproducible diagnosis; bounded pointer and language-semantic reasoning; failure-safe allocation and API ownership; portable text records; explicit-length binary framing; owned dynamic arrays; owned linked lists; collision-safe hash maps; and one integrated library. The **same seven required summative assessments** combine these capabilities; module and lesson counts are not quotas, and the modules are not extra assessed assignments. Buffer, parsing and data-structure implementations, fault-injection fixtures and review evidence may be reused, rather than rebuilt for every assessment. There is no universal checkpoint/lab quota, separate mandatory final lab, paid tool, external network, production data, privileged operation or hidden grader.
 
 **Planning estimate:** 14–18 weeks at approximately 10–15 focused hours per week, approximately 140–270 focused hours before individual remediation or reassessment. This is a provisional instructional allocation, **not** an empirically validated duration or a mastery claim: reading C source, tracing pointer/lifetime invariants, handling allocation failures, practicing diagnostic interpretation and building a reusable three-structure library justify a substantially larger range than the old eight weeks. Learners may need additional time; assessment criteria, not elapsed weeks, decide mastery. The course remains `draft` pending real learner and reviewer evidence.
 
@@ -47,32 +47,7 @@ For optional public technical reference, use the [WG14 C11 working-draft informa
 
 ## Modules
 
-### Module 1 — C Programs, Types and Control Flow
-
-#### Outcomes
-
-- SEF6-O1
-- SEF6-O2
-- SEF6-O8
-- SEF6-O10
-
-#### Lessons
-
-1. **Course purpose and C11 scope** — Connect prior SEF2 Python programs and SEF4 invariants to explicit C representations and manually managed resources; distinguish learning C11 from using POSIX extensions.
-2. **The smallest compiled program** — Read headers, a main function, return status, declarations, statements and a reproducible compile/run command using a C11-capable compiler.
-3. **Variables, expressions and initialization** — Distinguish declaration, definition, initialization, assignment, automatic storage and an indeterminate uninitialized value.
-4. **Fundamental scalar types** — Inspect integer, floating, character and _Bool types, the sizeof operator, alignment needs and when actual properties depend on the implementation.
-5. **Control and boolean conditions** — Predict if/else, switch, for, while, do/while, break and continue under stated loop invariants and termination assumptions.
-6. **Integer and character literals** — Interpret decimal, octal, hexadecimal, integer suffixes, escapes, character encodings and correct printf format types.
-7. **Arrays versus scalars** — Declare fixed arrays and bound loops before introducing pointer arithmetic; prevent invalid indexing even in demonstration code.
-8. **Standard input/output basics** — Use printf, puts, getchar or fgets in small supported cases, checking return status and distinguishing a failed read from valid input.
-9. **Compile warnings and diagnostic claims** — Enable language-standard and warning flags; categorize a diagnostic versus a C language guarantee.
-10. **Portability baseline** — Record compiler, standard mode, platform, CHAR_BIT, limits and the effects of assuming an eight-bit C byte.
-11. **First defined-behavior repair** — Identify a harmless assertion failure caused by a missing bounds precondition and correct the program without intentionally executing UB.
-
-*Optional practice:* Build a disposable small program that prints its environment and type sizes, rejects an invalid index and records exact compile/run commands.
-
-### Module 2 — Object Representation, Integer Conversions and Checked Arithmetic
+### Module 1 — C11 Execution, Representations and Checked Values
 
 #### Outcomes
 
@@ -83,116 +58,74 @@ For optional public technical reference, use the [WG14 C11 working-draft informa
 
 #### Lessons
 
-1. **Bits, bytes and storage units** — Explain that sizeof(char) is one C byte, CHAR_BIT gives its bit width, and an octet is an explicitly eight-bit protocol unit, not automatically a C byte.
-2. **Signed and unsigned ranges** — Read limits.h and test the actual plain-char signedness without assuming two's complement or that char has a fixed signedness.
-3. **Integer promotions and usual conversions** — Predict types and values after promotions, comparisons between signed and unsigned operands, integer division and explicit casts.
-4. **Unsigned modular arithmetic** — Derive the modulus from actual type width; distinguish mathematically defined unsigned wrap from a safe policy for size calculations.
-5. **Signed overflow and boundary arithmetic** — Reject overflow before evaluating an addition or multiplication; do not run invalid signed arithmetic to observe a supposedly reliable result.
-6. **Shift, divide and conversion constraints** — Check nonzero denominators, shift counts and signed shift preconditions; state which out-of-range integer conversions are implementation-defined.
-7. **Byte-wise object inspection** — Explain why unsigned char may inspect object representation and why padding bytes or raw struct bytes are not a portable serialization format.
-8. **Format and variadic function contracts** — Use matching printf conversions including %zu and %td, and convert object pointers to void * for %p; distinguish format mismatch UB from unusual output.
-9. **Numeric text conversion** — Use strtol, end pointers, errno and range checks to reject empty, trailing, too-large or disallowed signed input; declare whitespace policy explicitly.
-10. **Character classification** — Pass EOF or values representable as unsigned char to ctype character functions; avoid feeding negative plain-char values directly.
-11. **Independent arithmetic oracle** — Compare a few explicit hand-derived input classes and a separately reasoned range-check model with corrected C output, not a copied expression.
+1. **Why C makes representation observable** — Connect prior Python program behavior and SEF4 algorithm invariants to C11 objects, storage and explicit constraints; explain why C source is not a direct map of physical memory, and distinguish ISO C from the later POSIX work in SEF7.
+2. **A defined and reproducible first program** — Compile and run a small `main` with a C11-capable compiler; document declarations, return status, compiler mode and program output rather than treating an executable name as a language guarantee.
+3. **Variables, initialization and expression values** — Trace declarations, initialized automatic objects, assignments and arithmetic; explain why an uninitialized indeterminate object is not a safe value to print or inspect as an arbitrary type.
+4. **Fundamental types and a C byte** — Inspect `sizeof`, `_Bool`, integer, floating and character types alongside `CHAR_BIT`; distinguish the minimum C11 constraints and implementation properties from an assumed eight-bit octet.
+5. **Literals and controlled branching** — Interpret decimal/octal/hex literals, integer suffixes, character escapes, `if`/`switch` and bounded loops, showing why a missing branch or failed loop variant changes the program contract.
+6. **Limits, signedness and usual conversions** — Use `limits.h`, `sizeof` and independently derived examples to predict integer promotions, signed/unsigned comparisons, integer division and out-of-range conversion behavior without assuming the sign representation.
+7. **Unsigned wrap and checked signed arithmetic** — Derive unsigned modular reduction from the actual type range while rejecting signed overflow before performing the invalid operation; give a valid size or operand boundary counterexample.
+8. **Division, shifts and evaluation-order hazards** — Check zero divisors, the exceptional signed minimum divided by -1, shift counts/operands and unsequenced side effects, classifying each unsafe expression without executing it.
+9. **Defined, unspecified, implementation-defined and undefined** — Classify an actual example of each C11 category, distinguishing a machine observation, a compiler warning and a standard-mandated result.
+10. **Object bytes versus portable values** — Read an initialized object representation through an `unsigned char` view, explain padding and nonportable raw-object serialization, and distinguish a C byte from an external eight-bit protocol octet.
+11. **Formats, character classification and parsed integers** — Match `printf` conversion types including `%zu`, `%td` and `%p` with correct pointer conversion; use `strtol`, end-pointer, `errno` and unsigned-char/EOF rules for `ctype.h` under explicit whitespace and range policy.
+12. **A checked arithmetic and parsing regression** — Compare hand-derived limits, signed/unsigned values and valid/invalid decimal strings against the actual implementation; repair a defined failure and document why no result from running UB is required.
 
-*Optional practice:* Predict a boundary addition, a mixed signed/unsigned comparison and a strtol failure before running safe C11 checks.
+*Optional practice:* Predict the output of a safe `UINT_MAX + 1u` program and identify which similar signed expression cannot be evaluated to obtain a portable observation.
 
-### Module 3 — Functions, Interfaces and Translation Units
+### Module 2 — Translation Units, Build Reproduction and Fault Diagnosis
 
 #### Outcomes
 
 - SEF6-O3
 - SEF6-O8
-- SEF6-O12
-
-#### Lessons
-
-1. **Function declarations and definitions** — Specify return and parameter types, prototypes, argument evaluation and call-by-value behavior.
-2. **Scope, linkage and storage duration** — Separate automatic, static, block, file and external symbols, including object lifetime and visibility.
-3. **The header contract** — Write include guards, consistent prototypes and public data-type declarations while leaving private implementation decisions in source files.
-4. **Separate C translation units** — Use one interface header, two implementation units and a client; avoid multiple external definitions and mismatched declarations.
-5. **Preprocessing versus compilation** — Explain macro expansion, header inclusion, preprocessing diagnostics and proper single-evaluation choices.
-6. **Object files, linking and loading** — Interpret an unresolved symbol separately from a syntax/type error, and describe implementation-dependent executable/loading steps.
-7. **Make dependency graphs** — Write bounded build, test and clean targets with correct source/header dependencies and no command that deletes outside the project.
-8. **Function result and output contracts** — Distinguish return status from output pointers, specify initialized outputs on success and failure and how callers retain ownership.
-9. **Static storage versus allocation ownership** — Explain why storage duration differs from what an API may borrow, return or mutate.
-10. **Build regression on an unfamiliar change** — Predict a header change's dependency impact, seed a non-UB compile/link error and verify a repaired clean build.
-
-*Optional practice:* Prepare a multi-file local fixture with one deliberate missing-symbol error, preserve the failing diagnostic and repair it.
-
-### Module 4 — Compiler Diagnostics, Debugging and Defined Test Fixtures
-
-#### Outcomes
-
-- SEF6-O8
 - SEF6-O9
-- SEF6-O10
+- SEF6-O12
 - SEF6-O15
 
 #### Lessons
 
-1. **Toolchain contract and reproducible builds** — Record C11 mode, warnings, debug symbols, optimization flags, supported architectures and compiler versions.
-2. **Build-stage troubleshooting** — Distinguish preprocessing, compile-time, linking and run-time failures from the evidence each tool can supply.
-3. **Asserted preconditions and safe failure** — Introduce a deliberately incorrect but defined result or rejected input to obtain a reproducible failure without executing undefined operations.
-4. **Debugger basics** — Inspect supported breakpoints, step-over/into, locals and stack traces using a controlled failing assertion or trace.
-5. **Warnings are not semantic proof** — Explain why warning-free code can still be incorrect and an unrecognized extension or compiler warning does not establish a standard guarantee.
-6. **Sanitizer coverage and caveats** — Explain AddressSanitizer, UndefinedBehaviorSanitizer and leak diagnostics where available, their runtime dependencies and unexercised-path limitations.
-7. **Analyzing supplied unsafe traces** — Use an instructor-provided crash or sanitizer transcript to locate potential invalid lifetime, bounds or arithmetic without reproducing uncontrolled UB.
-8. **Diagnosis and repair log** — Document hypotheses, exact tool configuration, observed evidence, suspected line, bounded repair and a reliable regression check.
-9. **Portability of investigation** — Use a free source-level review and deterministic tests when no optional debugger or sanitizer works on the learner's toolchain.
+1. **Function calls and explicit contracts** — Distinguish declarations from definitions, parameter passing by value from pointer-mediated mutation and a successful return from an initialized out-parameter contract.
+2. **Scope, linkage and storage duration** — Trace block, file and external names, `static` linkage and automatic/static lifetimes, without conflating source visibility with ownership or memory segment placement.
+3. **Header and interface stability** — Publish compatible prototypes, include guards and shared type declarations, reserving implementation state for source files instead of multiplying external definitions.
+4. **Separate compilation and the build graph** — Compile a header/client/two-source example into object files and link it, explaining macro processing, compilation, link resolution and implementation-specific loading as distinct steps.
+5. **Safe Make targets** — Define real source/header dependencies and bounded `build`/`test`/`clean` targets that operate only on a declared project output tree; show how a header change affects correct rebuilding.
+6. **Compiler diagnostics versus language proof** — Enable actual supported standard/warning/debug options, distinguish implementation extensions from C11, and explain why warning-free compilation does not certify defined behavior.
+7. **Failures at the correct phase** — Reproduce an invalid declaration and missing external symbol in disposable fixtures, separately record the compile/link failure and correct the first source-level cause.
+8. **Defined-behavior debugging** — Diagnose a wrong result or failed assertion using recorded hypotheses, a reproducible input and optional breakpoint/stack inspection; avoid intentionally executing an invalid pointer access just to obtain a crash.
+9. **Sanitizers and supplied unsafe traces** — Interpret available AddressSanitizer/UndefinedBehaviorSanitizer/leak diagnostics or genuinely supplied reports; name actual flags, paths and limits, never claiming that an unexecuted tool ran.
+10. **A durable diagnostic regression** — Isolate one error in a minimal source revision, implement a bounded fix, rerun source/compiled tests and state what the evidence cannot establish about all possible inputs.
 
-*Optional practice:* Reproduce a harmless failing assertion and a missing-link-symbol error, then explain why neither demonstrates absence of memory defects.
+*Optional practice:* Compare an unresolved linker symbol with a function that compiles but returns the wrong value; record the two distinct repairs and the test evidence.
 
-### Module 5 — Pointers, Arrays, Strings and Object Bounds
-
-#### Outcomes
-
-- SEF6-O4
-- SEF6-O10
-- SEF6-O12
-
-#### Lessons
-
-1. **Addresses and pointer values** — Relate object identity and lifetime to & and *, null pointers and correctly typed pointer declarations.
-2. **Pointer arguments and mutation** — Trace what a pointer parameter can modify versus a passed scalar value, and specify whether a referent is borrowed or owned.
-3. **Array indexing and decay** — Distinguish an array object from a pointer parameter, and show when sizeof an array is not sizeof a pointer.
-4. **Valid pointer arithmetic** — Work within one actual array object, explain one-past formation without dereference, and compare/difference only permitted related pointers.
-5. **Pointer provenance and lifetime** — Explain why a pointer becomes unusable after referent lifetime ends even if a numerical address still looks familiar.
-6. **Const-qualified contracts** — Distinguish a pointer to const data from a const pointer and explain promises/limitations without mistaking const for universal memory safety.
-7. **C strings and terminators** — Use character arrays, bounds, strlen and standard string routines only after establishing valid NUL termination and sufficient storage.
-8. **Safe copies and formatting** — Compare explicit-length copying with bounded snprintf and interpret truncation/error status rather than assuming strncpy always gives a string.
-9. **Memory overlap and byte views** — Distinguish memcpy and memmove preconditions and explain unsigned-char object representation access.
-10. **Null, empty and one-element cases** — Define each pointer/length combination and avoid treating null plus zero length as automatically valid for every library call.
-11. **Pointer diagrams and proof of access** — Document expected element indices, ownership and termination on a new four-element array without relying on stable printed addresses.
-
-*Optional practice:* Predict the pointer and object values before and after a supported in-array update; create a one-past pointer without dereferencing it.
-
-### Module 6 — Defined, Unspecified, Implementation-Defined and Undefined C Behavior
+### Module 3 — Pointers, Arrays, Strings and C Semantic Boundaries
 
 #### Outcomes
 
-- SEF6-O2
 - SEF6-O4
 - SEF6-O9
 - SEF6-O10
+- SEF6-O12
+- SEF6-O15
 
 #### Lessons
 
-1. **Four categories of C semantics** — Distinguish defined, implementation-defined, unspecified and undefined behavior using documented concrete examples.
-2. **Evaluation order and side effects** — Explain unsequenced updates and why source reading order is not an evaluation-order guarantee.
-3. **Integer traps and conversions** — Review signed overflow, shifts, divisions, usual arithmetic conversions and implementation-defined narrowing.
-4. **Object initialization and representation** — Distinguish uninitialized reads, padding, signed representations and safe unsigned-char inspection.
-5. **Pointer bounds and lifetime** — Diagnose out-of-bounds access, misaligned conversions, freed objects and comparisons outside allowed array relationships.
-6. **Aliasing and effective type** — Explain incompatible lvalue accesses and why a permitted character-byte inspection does not authorize arbitrary type punning.
-7. **Strings, variadic calls and formats** — Spot unterminated-string traversal, mismatched printf conversions and dangerous assumptions about pointer formatting.
-8. **Memory diagnostics versus language reasoning** — Explain why an absence of crashes or sanitizer warnings on a finite run cannot prove defined C behavior.
-9. **Portable versus platform-specific features** — Identify GNU/POSIX additions or compiler extensions as such, with C11 alternatives where the assessed work permits them.
-10. **Source review of an unsafe fixture** — Use a supplied trace and precise source rule to diagnose a potential violation without intentionally invoking invalid operations.
-11. **Corrected contract case** — Replace a flawed expression or bounds check with a defined implementation and verify normal, boundary and failure behavior.
+1. **Object identity, pointer types and null** — Draw initialized scalar objects, addresses and correctly typed pointers; distinguish a pointer value from the lifetime and suitability of the object to which it may refer.
+2. **Pointer parameters and visible mutations** — Trace an integer passed by value versus a pointer to a writable integer and state who may mutate the referent and which result the caller actually observes.
+3. **Array object, pointer parameter and `sizeof`** — Demonstrate array-to-pointer conversion in expression contexts, preserve the distinction from the complete array type, and predict `sizeof` results inside and outside a function parameter.
+4. **In-bounds indexing and one-past formation** — Establish the array object and valid range before pointer arithmetic, form a legal one-past value but never dereference it, and reject an out-of-bounds access *without executing it*.
+5. **Related-pointer differences and invalid comparisons** — Use `ptrdiff_t` only for related array elements where the distance is representable; do not infer stable absolute addresses or define order comparisons of unrelated objects.
+6. **Lifetime and stale pointer values** — Explain why the lifetime ending makes referring pointers unusable even if a printed address is numerically familiar; analyze an unsafe trace or source snippet instead of dereferencing after free.
+7. **`const`, borrowing and aliasing** — Distinguish pointer-to-const from const-pointer declarations and a borrowed reference from an owning allocation, without treating `const` as universal memory safety.
+8. **Effective type, alignment and permitted byte access** — Analyze why incompatible type-punning and misaligned accesses may be invalid while `unsigned char` may inspect object representations; avoid unsupported union tricks.
+9. **Unsequenced side effects and semantic categories** — Diagnose an expression with unspecified evaluation order or unsequenced modification, separating C11 standard constraints from an optimizer's observed code path.
+10. **Strings require storage and terminators** — Model a NUL-terminated character array, `strlen` and permitted standard string operations, distinguishing a text string from a general byte buffer with embedded NULs.
+11. **Copying, overlap and bounded formatting** — Check `memcpy` versus `memmove` preconditions and `snprintf` size/return/truncation behavior; do not assume `strncpy` always produces a terminator.
+12. **A trace with unfamiliar boundary values** — Predict scalar, array and caller-visible values, four-element pointer relations and empty/invalid string policy, then compare real defined observations and a safe failure/repair regression.
 
-*Optional practice:* Classify examples of signed wrap, unsigned wrap, one-past formation, out-of-range dereference and unsequenced side effects before reviewing safe corrections.
+*Optional practice:* Diagram four array elements and a one-past pointer; predict which accesses or comparisons are permitted before compiling a safe trace.
 
-### Module 7 — Storage Duration, Allocation, Reallocation and Cleanup
+### Module 4 — Object Lifetimes, Allocation and Public Ownership Contracts
 
 #### Outcomes
 
@@ -204,70 +137,46 @@ For optional public technical reference, use the [WG14 C11 working-draft informa
 
 #### Lessons
 
-1. **Automatic and static object lifetimes** — Compare stack-like automatic storage, static duration and dynamically allocated objects without equating physical memory segments with language guarantees.
-2. **Heap allocation and ownership** — Use malloc and free, checked allocation size and single-owner responsibility; distinguish a pointer value from the allocation's lifetime.
-3. **Zero-size allocation policy** — Declare a deterministic application policy for zero requested elements rather than depending on differing malloc(0) or realloc(p,0) results.
-4. **Size arithmetic before evaluation** — Check size_t multiplication, addition and capacity doubling before computing a byte count or calling allocation routines.
-5. **Growth and realloc failure** — Use a temporary return pointer and preserve the original allocation and data when a positive-size realloc fails; discard all old aliases after successful reallocation.
-6. **Borrowed pointers and alias invalidation** — Explain which clients may retain an element pointer and how append/growth or delete can invalidate it even when numerical addresses appear unchanged.
-7. **Allocation-failure injection** — Wrap or inject an allocator with deterministic failure on a chosen positive-size request rather than exhausting real memory.
-8. **Error-state postconditions** — Specify initialized outputs, valid size/capacity, no leaked ownership and deterministic return statuses after each failing operation.
-9. **Single-exit or structured cleanup** — Choose clear resource-release paths, avoid double-free, and make repeated destruction behavior explicit under its documented preconditions.
-10. **Comparing C and Python lifetimes** — Trace referent ownership, identity and garbage collection versus explicit free without equating Python names with raw C pointers.
-11. **Buffer failure regression** — Verify empty/one/growth cases, failed realloc state, invalid operation policy and independently derived integer sequences.
+1. **Lifetime is not a machine memory region** — Distinguish automatic, static and allocated object lifetimes, without claiming the C standard promises a concrete “stack” or “heap” virtual address layout.
+2. **API state, ownership and borrowing** — Specify uninitialized, valid-empty, populated and disposed states, who allocates/frees and who may borrow or mutate each resource.
+3. **A heap-backed buffer's invariants** — Define pointer, size and capacity coherently, with explicit empty/zero-capacity and repeated-destruction policies and no unexplained uninitialized outputs.
+4. **Allocation sizes before arithmetic** — Check `size_t` addition/multiplication/doubling against declared limits before evaluating byte counts; reject a requested capacity that cannot be represented.
+5. **Zero-size allocation policy** — Handle requests for zero elements without relying on implementation-dependent `malloc(0)` or `realloc(p,0)` behavior or accidentally treating a zero-byte allocation as a usable array.
+6. **Growth with `realloc` and preserved state** — Hold `realloc` output in a temporary pointer, keep the original valid allocation and elements on positive-size failure, and update the owner atomically only on actual success.
+7. **Old aliases and post-`realloc` invalidation** — Explain why references to the original allocation cannot be used after a successful `realloc` call, even when the allocator returns the same numerical address.
+8. **Explicit failure contracts and output state** — Specify error kinds, initialized output parameters, preserved sizes/links/data and who owns each temporary allocation after any operation fails.
+9. **Deterministic allocator fault injection** — Inject failure on a chosen positive-size `malloc`/`realloc` request using a documented local interface, not an attempt to exhaust memory or hide the production allocation path.
+10. **Cleanup under partial initialization** — Track acquired memory/streams and release exactly once along a defined failure path; verify destroy/reinitialize preconditions without double-free.
+11. **Borrowed element and mutation invalidation** — Compare internal address borrowing with copying an element, and state exactly when append, remove or reallocation invalidates a client's view.
+12. **Independent buffer state-model regression** — Derive empty, singleton, growth and failed-growth output/invariant expectations independently; compare with real C results and repair a seeded owner or cleanup defect.
+13. **C versus Python object lifetime** — Compare the manually controlled C release/alias contracts with Python-managed references and possible logical alias bugs; do not claim either language automatically proves full application correctness.
 
-*Optional practice:* Adapt the SEF4 dynamic-array model into a C buffer, then inject one failed expansion and show preserved prior contents and owner state.
+*Optional practice:* Predict the size, pointer ownership and data values after a simulated failed growth, including which aliases would be invalid if a later growth succeeds.
 
-### Module 8 — Structures, Layout and C Standard-Library I/O
+### Module 5 — C Structs, Standard I/O and Bounded Text Records
 
 #### Outcomes
 
 - SEF6-O6
 - SEF6-O7
-- SEF6-O10
-- SEF6-O12
-
-#### Lessons
-
-1. **Structures and member lifetime** — Declare struct fields, member access, nested ownership, padding and alignment without assuming in-memory bytes form a portable record.
-2. **Pointers to structures** — Use -> correctly, explain self-referential node records and show why list nodes need a clear allocation and free policy.
-3. **Unions, bit-fields and layout** — Discuss valid representation assumptions and implementation dependence without suggesting arbitrary union reinterpreting is portable.
-4. **Standard streams and status** — Use FILE *, fopen, fclose, fgets, fputs and fread/fwrite only with checked results; distinguish EOF from an I/O error via feof/ferror.
-5. **Line boundaries with fgets** — Detect overflow or truncation, handle final lines without newline and choose a clear maximum permitted record length.
-6. **Numeric fields** — Use strtol with errno, end pointer, sign/range checks, and an explicit delimiter/whitespace rule.
-7. **Text encodings and characters** — Declare encoding and NUL/line-ending policies, avoid silent locale assumptions and keep text parsing separate from raw bytes.
-8. **Serialization as an external contract** — Specify fields, delimiters, maximum lengths and error behavior; reject raw fwrite(struct) as a portable interchange format.
-9. **Resource cleanup on I/O failure** — Check full reads/writes, close streams and avoid partially publishing a record after malformed input.
-10. **Independent schema fixtures** — Hand-derive expected valid, truncated, duplicate and malformed cases rather than copying a parser's own output.
-
-*Optional practice:* Read synthetic short lines and distinguish a complete final record from a truncated fgets fragment without writing outside the fixture tree.
-
-### Module 9 — Resource Ownership and Public C API Contracts
-
-#### Outcomes
-
-- SEF6-O5
-- SEF6-O11
 - SEF6-O12
 - SEF6-O15
 
 #### Lessons
 
-1. **Contract vocabulary** — Define ownership, borrowing, aliasing, mutation authority, lifetime and initialized output expectations.
-2. **Initial and final states** — Distinguish uninitialized, valid-empty, valid-populated and destroyed objects; say which operations accept which states.
-3. **Header-level function contracts** — Document input/output pointers, lengths, return/error statuses and all failure postconditions in a client-visible header.
-4. **Single and borrowed owners** — Specify ownership transfer, copy versus borrow, who frees a returned value and when a borrowed view becomes invalid.
-5. **Capacity and buffer contracts** — Model size <= capacity, positive growth, checked multiplication and either preserve-on-failure or an explicitly documented alternative.
-6. **Opaque versus exposed representation** — Compare a public struct layout with an opaque handle, acknowledging different static-allocation and ABI trade-offs.
-7. **Cleanup on partial initialization** — Track acquired allocations and files in reverse order, and ensure an error leaves the object in a documented usable or destroyable state.
-8. **Error propagation** — Return distinguishable invalid-input, out-of-memory and not-found statuses rather than swallowing errors or guessing errno from unrelated calls.
-9. **Dependency-injected allocators** — Separate real malloc/realloc/free from a narrowly scoped failure simulator without hiding production allocator behavior.
-10. **Ownership review with client code** — Review an unfamiliar caller that inserts, retrieves and deletes an element, and identify stale borrows or double-free paths.
-11. **Contract test design** — Combine independently modeled state transitions, fault injection and negative cases with a real compiled client.
+1. **Structures, nodes and member representation** — Model `struct` members, alignment and padding, nested ownership and a self-referential node pointer without treating raw memory layout as a public text or binary schema.
+2. **Unions and bit-fields have constraints** — Explain what selected union/bit-field declarations actually promise under C11 and why their implementation-sensitive representation is not a portable encoding.
+3. **Checked `FILE *` lifetime** — Use `fopen`, `fclose`, `fgets`, `fputs` and `fread`/`fwrite` with declared ownership and real return-value checks; separate clean EOF from I/O error with `feof`/`ferror`.
+4. **A declared line-record schema** — State integer ID, bounded name, delimiter, maximum line length, encoding assumptions and whether a final record may omit a newline.
+5. **Truncated `fgets` fragments** — Recognize when a line exceeds the input buffer; reject or explicitly drain an overlong record instead of accepting the first fragment as a complete message.
+6. **Numeric and character field validation** — Use `strtol`, `errno`, end-pointer, width/range and full-consumption checks, with correct `ctype.h` preconditions and a deterministic whitespace/duplicate-ID policy.
+7. **Invalid, empty and duplicate records** — Distinguish EOF, an empty valid file, malformed fields, duplicate keys, disallowed embedded NUL and failed reads, returning observable statuses without merging bad data.
+8. **Portable text writing and cleanup** — Serialize by documented fields rather than `fwrite(struct)` bytes; detect failed writes, close resources, and avoid publishing partial or unowned state after a rejected record.
+9. **Independent text fixtures and round-trip limits** — Hand-derive normal, truncated, delimiter, final-line, duplicate and I/O-fault examples; verify that encoder/decoder mutual agreement alone cannot establish a correct external schema.
 
-*Optional practice:* Draft a compact ownership/borrow/error table for a generic container API and trace the client-visible result of a failed append.
+*Optional practice:* Feed an overlong line and a final line without newline into the same bounded text parser; predict two different outcomes according to the published policy.
 
-### Module 10 — Bounded Text and Binary Parsers
+### Module 6 — Explicit-Length Binary Framing and Parser Safety
 
 #### Outcomes
 
@@ -279,21 +188,17 @@ For optional public technical reference, use the [WG14 C11 working-draft informa
 
 #### Lessons
 
-1. **Input is untrusted and bounded** — Publish an explicit schema, encoding or byte model, maximum supported record and incomplete/trailing-data policies.
-2. **Text records and fgets** — Detect newline and overlong fragments, distinguish clean EOF from input error, and allow/reject a final unterminated line by policy.
-3. **Numeric fields and duplicates** — Use validated strtol conversions, check duplicate IDs and distinguish malformed records from legitimately empty data.
-4. **Output state on parse failure** — Keep produced records either fully valid and owned or entirely rolled back, without partially published state or leaked resources.
-5. **Binary framing independent of host structs** — Define explicit field lengths and byte order rather than memcpy-ing C struct padding or relying on native endianness.
-6. **C bytes versus octets** — Explain that an octet-specific external format requires eight-bit units; for a portable C11 teaching fixture, define framing in C unsigned-char units and document the compatibility limit.
-7. **Pointer and remaining-length discipline** — Check remaining length before access, subtract only under established bounds, and preclude size_t overflow in advertised payload arithmetic.
-8. **Embedded NUL and string functions** — Use explicit buffer lengths on arbitrary binary data and never call strlen on untrusted nonterminated bytes.
-9. **Oversized and trailing data** — Reject or document missing headers, invalid lengths, exact-boundary payloads, oversized frames and trailing bytes.
-10. **Allocation failures and cleanup** — Inject allocation failure in parsed-record construction and verify status, ownership and preserved previous output.
-11. **Independent parser oracles** — Hand-encode byte arrays and error cases; verify round trips separately without letting encoder and decoder mutually validate the same wrong format.
+1. **An external byte-count framing contract** — Specify header, lengths, maximum payload and trailing-data policy in `unsigned char` units; distinguish native C bytes from a separately required eight-bit-octet interchange format.
+2. **Pointer-plus-length preconditions** — Treat the input as `(const unsigned char *, size_t)`, check accepted null/empty combinations and establish remaining count before any buffer access.
+3. **Safe incremental framing checks** — Verify header presence, advertised length and truncation with subtraction only under established bounds; avoid forming an overflowing `offset + length` expression.
+4. **Binary data is not a C string** — Preserve embedded NULs and binary length exactly, never apply `strlen`/text splitting to untrusted nonterminated input, and reject platform-dependent raw-struct framing.
+5. **Cleanly owned result and fault rollback** — Declare who allocates decoded records, keep output fully initialized on rejection, and inject a positive-size allocation failure without leaking partial objects.
+6. **Independent valid and adversarial frame tests** — Hand-construct empty, exact-boundary, truncated, oversized, trailing-byte and malformed header examples and compare expected statuses/bytes independently of any matching encoder.
+7. **Portability and representation defense** — Explain native endianness, `CHAR_BIT`, padding and framing-unit assumptions; demonstrate what a round trip actually proves and one new reviewer-supplied fault's bounded repair.
 
-*Optional practice:* Design an explicit-length framed message on disposable unsigned-char arrays and hand-check both a correct and truncated input before reading it in C.
+*Optional practice:* Given a short purported frame and its advertised payload length, calculate the bytes remaining and predict rejection before calling the C parser.
 
-### Module 11 — Owned Integer Dynamic Arrays and Linked Lists
+### Module 7 — Owned Dynamic Arrays and Failure-Atomic Operations
 
 #### Outcomes
 
@@ -304,21 +209,39 @@ For optional public technical reference, use the [WG14 C11 working-draft informa
 
 #### Lessons
 
-1. **Reuse the earlier buffer** — Adapt the already-assessed SEF6-AS3 heap-backed buffer into the integer vector in SEF6-AS6; do not build another unrelated array solely to satisfy module structure.
-2. **Vector representation invariant** — Enforce zero <= size <= capacity and a valid allocation/empty-state policy before and after append, read and delete.
-3. **Vector growth and fault handling** — Guard addition, multiplication and doubling, inject malloc/realloc failures and preserve the documented state.
-4. **Indexing and pointer invalidation** — Document index boundaries and how reallocation affects clients holding addresses into storage.
-5. **Singly linked-list node model** — Define next pointers, head/tail, count, empty and one-element policies and consistent node ownership.
-6. **List insert and remove** — Trace head/middle/tail insertions, deletion and pointer rewiring without orphaning or double-freeing nodes.
-7. **List failure atomicity** — Inject a failed node allocation and show previous links, counts and ownership remain valid.
-8. **Lifecycle and cleanup** — Define initialization/destroy/repeated-use preconditions; release every owned node once with a bounded loop.
-9. **API equivalence and limits** — Compare vector indexing, list traversal and insertion complexity under actual representation assumptions from SEF4.
-10. **Independent state-model oracles** — Compare seeded operation traces with a separate small reference model and deliberately corrupt a link/count check in a contained test.
-11. **Reusable C test harness** — Keep allocation stub, fixture reset, check macros and error outputs inspectable without a proprietary unit-test framework.
+1. **Reuse the assessed buffer as a vector** — Extend the same AS3 buffer to the AS6 integer dynamic-array API rather than independently implementing another growing array to satisfy a lesson count.
+2. **Invariants and explicit empty state** — Enforce `0 <= size <= capacity`, initialized output/status policies and an understood pointer state after construction and disposal.
+3. **Append, read, remove and index limits** — Implement only defined in-range operations, reject invalid indices before access, and explain the array-shift consequences of removal.
+4. **Checked geometric growth** — Justify a capacity policy, validate size/doubling/element byte counts before allocation, and preserve the original state on injected `realloc` failure.
+5. **Stable logical values versus unstable borrows** — Explain how growth invalidates a retained element pointer, even if the same numeric address is observed, and choose a safe external API.
+6. **Independent state-model and fault testing** — Compare seeded insert/read/remove/growth transitions to a separately derived reference, with empty/one/failure cases and invariant assertions after every operation.
+7. **Amortized versus single-step cost** — Transfer SEF4's geometric-growth argument to explicit C memory copying, distinguishing aggregate cost, one expensive append, allocation implementation limits and measured timings.
 
-*Optional practice:* Implement a linked-list deletion after a failed node allocation and compare the preserved node chain against an independently drawn expected list.
+*Optional practice:* Predict vector contents and owner state after two appends and a deliberately failed third growth, then compare against the real source contract.
 
-### Module 12 — Hash Maps, Collisions and Adversarial Allocation Tests
+### Module 8 — Owned Singly Linked Lists and Link Integrity
+
+#### Outcomes
+
+- SEF6-O4
+- SEF6-O5
+- SEF6-O12
+- SEF6-O13
+- SEF6-O15
+
+#### Lessons
+
+1. **Nodes, link identity and list invariants** — Define the singly linked node layout, head/tail/count rules, empty and one-node states and a single owner for each allocated node.
+2. **Insertion that preserves reachability** — Trace head, middle and tail insertion, the ordering of `next` rewrites and the invariant that every live node remains reachable once from the head.
+3. **Removal without leaks or stale uses** — Rewire predecessors, update head/tail/count and release exactly the removed node, documenting borrowed-pointer invalidation and empty-list errors.
+4. **Allocation failure before structural commitment** — Inject a failed new-node allocation and prove that previously reachable links, count and payloads remain unchanged.
+5. **Destruction and partial cleanup** — Traverse and free each owned node exactly once, recording when repeated disposal or reinitialization is allowed by the API.
+6. **Independent sequence and reachability oracle** — Model insert/remove operations with an unrelated simple sequence, compare state after duplicate, empty and singleton transitions and detect one faulty link update.
+7. **Vector versus list workload trade-offs** — Contrast indexed access, ordered traversal and insertion costs based on actual representation and lifetime/borrow contracts rather than assuming lists are always faster.
+
+*Optional practice:* Draw a three-node chain, remove its head and tail in two independent trials, and predict how the last node remains reachable.
+
+### Module 9 — Hash Maps, Key Ownership and Collision-Safe Updates
 
 #### Outcomes
 
@@ -329,21 +252,19 @@ For optional public technical reference, use the [WG14 C11 working-draft informa
 
 #### Lessons
 
-1. **Hash-map contract** — Choose key/value representation and copy-or-borrow semantics, define duplicate-key, not-found and deletion behavior.
-2. **Hashing and comparison** — Specify the hash domain, equality function and dependence on encoding or length; avoid conflating identical hash with identical keys.
-3. **Bucket representation** — Choose separate chaining or open addressing and explain allocation ownership, tombstones or chain traversal as appropriate.
-4. **Collision-heavy fixtures** — Use deliberately colliding keys, distinguish collision from duplicate and independently verify all still-reachable entries.
-5. **Load factor and resize policy** — Specify threshold and resizing or a justified bounded fixed capacity; guard byte counts and rehash failure behavior.
-6. **Insert, update and remove** — Maintain key/value ownership and state invariants through duplicate, replacement, deletion and empty/one-element transitions.
-7. **No partial commit on failed growth** — Inject a failure during entry creation or rehash, then prove previous data remain valid and retrievable under the declared policy.
-8. **Reference models and metamorphic checks** — Compare a small separate map model, insertion-order-independent lookup and repeated retrieval after collision/deletion.
-9. **Cross-container failure semantics** — Check that vector, list and map return compatible documented status values without making their internal policies falsely identical.
-10. **Algorithmic cost** — Explain average expected behavior only with actual hash/distribution assumptions and worst-case collision paths without relying on timing alone.
-11. **Unfamiliar reviewer challenge** — Predict an adversarial duplicate/collision/failure sequence and record a source-located repair.
+1. **Public key and value contract** — Define key encoding, equality, ownership or copying policy, missing lookup, duplicate update/reject and deletion results before choosing buckets.
+2. **Hash function versus equality** — Show with known colliding keys why equal hashes do not mean equal keys, and avoid treating a chosen table capacity as a universal collision guarantee.
+3. **Chain or probe representation** — Choose separate chaining or open addressing, declaring how tombstones, buckets and allocated entries are owned and traversed.
+4. **Collision and duplicate behavior** — Verify insertion, lookup, update and removal across same-bucket distinct keys and repeated identical keys with independently expected results.
+5. **Load factor, capacity and cost model** — Distinguish expected lookup complexity under stated hash/input assumptions from worst-case collision paths; document resizing threshold or a justified fixed capacity.
+6. **Overflow-safe growth and rehash** — Check allocation size before evaluation, publish resized bucket state only after verified success and preserve all preexisting entries on injected failure.
+7. **Lifecycle and failure postconditions** — Guarantee each key/value allocation has one release path, retain the old map on failed insert/resize, and make empty/duplicate/deletion results distinguishable.
+8. **Independent map oracle and adversarial fixtures** — Use a separately modeled key/value set to compare collisions, reinsertion, deletion, duplicate order, forced allocator faults and one corrected bug.
+9. **Cross-container contract consistency** — Compare the map's status/borrow rules with vector and list without claiming their representations or failure semantics must be identical.
 
-*Optional practice:* Hand-design a key set with collisions, then reason about a failed resize before exercising the tested implementation.
+*Optional practice:* Derive the expected keys after a colliding update, deletion and injected failed resize, then show which public map invariant each operation preserves.
 
-### Module 13 — Integrated C11 Data-Structure Library and Engineering Defense
+### Module 10 — Integrated C11 Library, Reproduction and Technical Defense
 
 #### Outcomes
 
@@ -359,36 +280,34 @@ For optional public technical reference, use the [WG14 C11 working-draft informa
 
 #### Lessons
 
-1. **Library boundaries and public headers** — Organize previously assessed vector, linked-list and hash-map sources and verify matching declarations and ownership contracts.
-2. **No duplicate implementations** — Reuse and refine the SEF6-AS3, AS4 and AS6 components, fixtures and evidence in one library, rather than rebuilding separate grading projects.
-3. **Build and test from a clean tree** — Document compiler mode, warning policy, Make targets, include paths, generated outputs and a clean rule bounded to owned directories.
-4. **Cross-structure client** — Create a small synthetic-data client using at least two structures with explicit normal, boundary and error contracts.
-5. **Independent acceptance oracles** — Include hand-derived expectations, seeded model tests and compiler/test logs for actual public APIs, not merely a passing mock.
-6. **Failure matrix** — Exercise empty/one/growth, duplicate keys, collisions, malformed records, invalid pointers under documented preconditions and injected allocation failures.
-7. **Diagnostics and portability** — Record supported warnings/sanitizer/debugger results or honestly labeled supplied traces, including what was not exercised.
-8. **C/Python ownership comparison** — Explain manual lifetimes, realloc invalidation, aliasing and cleanup versus Python-managed object references, without implying Python cannot have logical aliasing defects.
-9. **Reviewer clean-room reproduction** — Ask an independent reviewer to build and run normal/failure scenarios, inspect one ownership contract and request an unfamiliar input variant.
-10. **Design defense and release limits** — Present a capability-to-evidence map, one corrected defect, changed design trade-off, compiler/architecture assumptions and remaining risks.
+1. **One coherent library, not repeated projects** — Assemble the same assessed AS3 buffer, AS4 parser and AS6 vector/list/map code into clear public headers and implementation units; reuse previous evidence where the published criterion is genuinely met.
+2. **Build from a clean disposable checkout** — Document compiler standard, flags, dependencies, Make targets and safe cleaning, verify a real compiled client and report toolchain assumptions rather than requiring hosted infrastructure.
+3. **A cross-structure contract-driven client** — Compose at least two structures around a synthetic record workload, preserving documented error/status, owner and data-lifetime rules.
+4. **Independent normal and failure evidence** — Test zero/one/growth, duplicate/collision, bounded parser rejection and forced positive-size allocation failures with independently expected state and output results.
+5. **Diagnose one unfamiliar fault** — Start with a genuinely observed failure or labeled supplied diagnostic, isolate a source line and causal mechanism, repair it safely and retain a regression for the exact contract violation.
+6. **C/Python lifetime and design comparison** — Explain C object lifetime, borrow invalidation and manual cleanup versus Python reference-managed objects, without falsely equating memory management with all application correctness.
+7. **Independent reviewer reproduction** — Provide a complete README, fixtures and accessible source/ownership map for a real reviewer to build and exercise normal and error cases and challenge one additional valid scenario.
+8. **Evidence matrix and limits of the defense** — Map the original seven assessments and all sixteen outcomes to actual artifacts, discuss a design alternative and a remaining tool/platform limitation, and distinguish warning/sanitizer observations from proofs.
 
-*Optional practice:* Prepare a reviewer checklist and reuse the same library across all seven assessments, recording why warning-free and sanitizer-clean runs alone are insufficient.
+*Optional practice:* Have a peer follow the clean-start instructions with no optional sanitizer and present one unfamiliar allocator-failure trace for an independently predicted result.
 
 ## Completion requirements
 
 ### Teaching sequence and existing assessment alignment
 
-The table below clarifies **where the original seven assessments draw their taught capabilities**. It is not a new grading contract or an instruction to submit thirteen separate labs. The assessment Work, Criteria and Evidence sections below remain authoritative and unchanged.
+The table identifies where **existing published assessments** obtain their first substantive instructional preparation, not a new grading contract or one mandatory lab per module. The original Work, Criteria and Evidence requirements below are unchanged.
 
 | Existing assessment | Primary teaching stages | Existing inspectable mastery |
 | --- | --- | --- |
-| `SEF6-AS1` | Modules 1–2 and 6 | C11 representations, integer conversions, checked arithmetic, implementation-dependent assumptions, and safe numeric parsing |
-| `SEF6-AS2` | Modules 3–5 | Translation units, Make, linked source, pointer/array diagrams and within-object arithmetic |
-| `SEF6-AS3` | Modules 5, 7 and 9 | Dynamic buffer ownership, `realloc` failure postconditions, checked growth and deterministic allocation faults |
-| `SEF6-AS4` | Modules 8–10 | C struct/text representation, bounded `fgets` and `strtol` policy, explicit-length framed parsing and error cleanup |
-| `SEF6-AS5` | Modules 2, 4 and 6 | Compile/link/runtime diagnostic distinction, C11 behavior classification and source-located repair without requiring uncontrolled UB |
-| `SEF6-AS6` | Modules 9, 11 and 12 | Owned vector/list/map contracts, collisions, duplicate policies and independent fault-injection models |
-| `SEF6-AS7` | Module 13 using prior assessed evidence | One multi-file library, client, reproducible build, normal/failing paths, independent reviewer and C/Python ownership defense |
+| `SEF6-AS1` | Module 1 | C11 representations, integer conversions, checked arithmetic, implementation-specific observations and safe `strtol` validation |
+| `SEF6-AS2` | Modules 2–3 | Translation units, Make, compiler/link diagnostics, pointer/array diagrams and defined in-object arithmetic |
+| `SEF6-AS3` | Modules 3–4 | Lifetimes, owned dynamic buffer, `realloc` failure, checked capacity and deterministic injected allocation faults |
+| `SEF6-AS4` | Modules 5–6 | Struct/text serialization, bounded `fgets`, valid `strtol` fields and separately framed binary parsing with defined output and cleanup |
+| `SEF6-AS5` | Modules 1–3 and 4 | Source-level C11 behavioral classification and genuinely observed compile/link/runtime diagnosis or supplied unsafe traces |
+| `SEF6-AS6` | Modules 4 and 7–9 | Owned vector, list and map contracts with independently checked state changes, collisions, duplicates, growth and injected faults |
+| `SEF6-AS7` | Module 10, reusing prior work | One multi-file C11 library and client, actual build/negative evidence, independent review and C/Python ownership defense |
 
-When a lesson prepares an AS3 buffer that later serves as the AS6 vector, the same inspected source revision can support both outcomes where the **published** criteria are actually met. C11 standard-library foundations here feed SEF7's POSIX interfaces; neither POSIX sockets nor Rust are silently added as SEF6 obligations.
+The earlier assessed AS3 buffer is reused as the AS6 vector where its tested public contract meets that criterion. SEF4 owns algorithm choices and invariants; this course introduces their C11 storage and allocation-failure consequences. SEF7 owns POSIX descriptors, processes, signals and sockets rather than adding them to the C11 assessments.
 
 ### Assessment environment and review
 
@@ -444,7 +363,7 @@ A required outcome passes only through the **published assessment criteria and i
 
 ### Completion decision
 
-All **seven required assessments** must pass their published criteria and collectively demonstrate SEF6-O1 through SEF6-O16. Earlier assessed code, diagnostics and test fixtures can be reused and improved in the integrated library; a learner need not repeat an identical lab in every module or implement three independent libraries. The thirteen learning modules and optional practices are preparation, not hidden summative gates.
+All **seven required assessments** must pass their published criteria and collectively demonstrate SEF6-O1 through SEF6-O16. Earlier assessed code, diagnostics and test fixtures can be reused and improved in the integrated library; a learner need not repeat an identical lab in every module or implement three independent libraries. The instructional modules and optional practices are preparation, not hidden summative gates.
 
 Reviewers record the decisions and enough inspectable evidence to justify each demonstrated capability. Uncorrected bounds, ownership, arithmetic, parsing, compilation or reproducibility failures block the relevant assessment. A student who cannot access a particular debugger or sanitizer must provide truthful, reviewable substitute diagnostics and run the applicable independent tests; unavailable tooling is not proof of a clean report. The course remains `draft` until the separate learner and reviewer evidence requirements in [Status Labels](../../spec/status-labels.md) are satisfied.
 
@@ -456,7 +375,9 @@ This course-level amendment implements the SEF6 workload and library-depth follo
 | --- | --- | --- |
 | `SEF6-O1`–`SEF6-O16` | **Same 16 IDs and exactly unchanged descriptions** | Previously demonstrated competencies retain their exact meanings |
 | `SEF6-AS1`–`SEF6-AS7` | **Same 7 published Work, Criteria, Evidence and review conditions** | Previously assessed evidence remains attributable to its source revision; no silent reinterpretation |
-| Nine condensed instruction modules, 8-week planning estimate | Thirteen sequenced modules, provisional 14–18 weeks | Instructional presentation changes without adding or removing any completion requirement |
+| Nine initial instruction modules, 8-week planning estimate | Later expanded to 13 modules (now consolidated into competency-owned stages); provisional 14–18 weeks | Instructional presentation changes do not add or remove a completion requirement |
 | Dynamic buffer and one combined final data-structure module | Incremental vector, list, hash-map and library integration stages | Reuse the same implementation and review evidence; no second assessed library or hidden per-module quota |
+
+**Subsequent competency-first review:** The earlier 13-module/138-lesson expansion repeated language arithmetic/UB claims, separate diagnostic setups, resource/ownership contracts and text parsing across different modules, including nine identical eleven-lesson module lengths. This revision consolidates those mechanisms and grants distinct ownership to explicit-length binary frames, dynamic arrays, linked lists and hash maps based on their actual invariants—not a target count. All existing sixteen outcome definitions and seven summative Work/Criteria/Evidence contracts remain unchanged; historical student evidence stays pinned to its assessed revision. No new mandatory system interface, independent application or readiness status is inferred from restructuring.
 
 The old completion remains associated with the old revision and is neither revoked nor automatically regraded by a teaching-sequence change. No independent new outcome or additional assessment has been introduced. Learner readiness remains `draft`, with the estimated duration calibrated only after measured student/reviewer work. No change is made to SEF3/SEF4/SEF5 prerequisite codes, SEF7's POSIX scope, repository-wide OEE specification requirements, or a paid/hosted tooling obligation.

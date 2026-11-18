@@ -57,23 +57,37 @@ class SEF6MigrationTests(unittest.TestCase):
             covered.update(re.findall(r"SEF6-O\d+", refs.group(1)))
         self.assertEqual(covered, outcomes)
 
-    def test_thirteen_sequential_modules_and_teaching_topics_remain(self):
+    def test_modules_have_real_outcome_ownership_not_fixed_counts(self):
         course = COURSE.read_text(encoding="utf-8")
+        learning = course.split("\n## Learning outcomes\n", 1)[1].split(
+            "\n## Modules\n", 1
+        )[0]
+        known = set(re.findall(r"(?m)^- \*\*(SEF6-O\d+):\*\*", learning))
         modules = course.split("\n## Modules\n", 1)[1].split(
             "\n## Completion requirements\n", 1
         )[0]
         headers = list(re.finditer(r"(?m)^### Module (\d+) — ", modules))
-        self.assertEqual([int(m.group(1)) for m in headers], list(range(1, 14)))
+        self.assertTrue(headers)
+        self.assertEqual(
+            [int(header.group(1)) for header in headers],
+            list(range(1, len(headers) + 1)),
+        )
+        covered = set()
         for index, header in enumerate(headers):
             end = headers[index + 1].start() if index + 1 < len(headers) else len(modules)
             block = modules[header.start():end]
             self.assertEqual(block.count("#### Outcomes"), 1)
             self.assertEqual(block.count("#### Lessons"), 1)
             module_refs, lessons = block.split("#### Lessons", 1)
-            self.assertRegex(module_refs, r"(?m)^- SEF6-O\d+")
+            refs = re.findall(r"(?m)^- (SEF6-O\d+)$", module_refs)
+            self.assertTrue(refs)
+            self.assertEqual(len(refs), len(set(refs)))
+            self.assertTrue(set(refs).issubset(known))
+            covered.update(refs)
             numbers = [int(n) for n in re.findall(r"(?m)^(\d+)\. ", lessons)]
-            self.assertGreater(len(numbers), 0)
+            self.assertTrue(numbers)
             self.assertEqual(numbers, list(range(1, len(numbers) + 1)))
+        self.assertEqual(covered, known)
 
     def test_source_authority_and_memory_safety_contract_retained(self):
         course = COURSE.read_text(encoding="utf-8")
