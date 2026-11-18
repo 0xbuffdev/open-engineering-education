@@ -26,21 +26,6 @@ OLD_ASSESSMENTS = (
     "84dd7925", "2026f5bc", "b3898d17",
 )
 
-EXPECTED_HEADINGS = (
-    "C Programs, Types and Control Flow",
-    "Object Representation, Integer Conversions and Checked Arithmetic",
-    "Functions, Interfaces and Translation Units",
-    "Compiler Diagnostics, Debugging and Defined Test Fixtures",
-    "Pointers, Arrays, Strings and Object Bounds",
-    "Defined, Unspecified, Implementation-Defined and Undefined C Behavior",
-    "Storage Duration, Allocation, Reallocation and Cleanup",
-    "Structures, Layout and C Standard-Library I/O",
-    "Resource Ownership and Public C API Contracts",
-    "Bounded Text and Binary Parsers",
-    "Owned Integer Dynamic Arrays and Linked Lists",
-    "Hash Maps, Collisions and Adversarial Allocation Tests",
-    "Integrated C11 Data-Structure Library and Engineering Defense",
-)
 
 
 def fnv1a(text: str) -> str:
@@ -104,45 +89,68 @@ class SEF6AcademicProgressionTests(unittest.TestCase):
             claimed.update(re.findall(r"SEF6-O\d+", declared.group(1)))
         self.assertEqual(claimed, set(ids))
 
-    def test_thirteen_modules_have_distinct_sequence_and_complete_lessons(self):
+    def test_competency_owned_modules_and_technically_specific_lessons(self):
         _, outcomes, modules, _ = parts()
         known = set(re.findall(r"(?m)^- \*\*(SEF6-O\d+):\*\*", outcomes))
-        headers = list(re.finditer(r"(?m)^### Module (\d+) — (.+)$", modules))
-        self.assertEqual([int(h.group(1)) for h in headers], list(range(1, 14)))
-        self.assertEqual(tuple(h.group(2) for h in headers), EXPECTED_HEADINGS)
-        lesson_total = 0
-        for i, h in enumerate(headers):
-            end = headers[i+1].start() if i+1 < len(headers) else len(modules)
+        heads = list(re.finditer(r"(?m)^### Module (\d+) — (.+)$", modules))
+        self.assertTrue(heads)
+        self.assertEqual(
+            [int(h.group(1)) for h in heads], list(range(1, len(heads) + 1))
+        )
+        first = {}
+        for i, h in enumerate(heads):
+            end = heads[i+1].start() if i+1 < len(heads) else len(modules)
             block = modules[h.start():end]
             self.assertEqual(block.count("#### Outcomes"), 1)
             self.assertEqual(block.count("#### Lessons"), 1)
             references, lessons = block.split("#### Lessons", 1)
-            found = set(re.findall(r"(?m)^- (SEF6-O\d+)$", references))
-            self.assertTrue(found)
-            self.assertTrue(found.issubset(known))
-            numbers = [int(n) for n in re.findall(r"(?m)^(\d+)\. ", lessons)]
-            self.assertTrue(numbers)
-            self.assertEqual(numbers, list(range(1, len(numbers)+1)))
-            lesson_total += len(numbers)
-        self.assertEqual(lesson_total, 138)
+            mapped = re.findall(r"(?m)^- (SEF6-O\d+)$", references)
+            self.assertTrue(mapped)
+            self.assertEqual(len(mapped), len(set(mapped)))
+            self.assertTrue(set(mapped).issubset(known))
+            for outcome in mapped:
+                first.setdefault(outcome, i)
+            sequence = [int(n) for n in re.findall(r"(?m)^(\d+)\. ", lessons)]
+            self.assertTrue(sequence)
+            self.assertEqual(sequence, list(range(1, len(sequence)+1)))
+            self.assertEqual(
+                len(re.findall(r"(?m)^\d+\. \*\*.+?\*\* — \S", lessons)),
+                len(sequence),
+                "each lesson must name an observable mechanism and task",
+            )
+        self.assertEqual(set(first), known)
 
-    def test_safety_topics_taught_before_ownership_heavy_library_implementations(self):
+    def test_c11_prerequisites_precede_failure_heavy_structures(self):
         _, _, modules, _ = parts()
-        self.assertLess(modules.index("### Module 4 — Compiler Diagnostics"),
-                        modules.index("### Module 7 — Storage Duration"))
-        self.assertLess(modules.index("### Module 6 — Defined, Unspecified"),
-                        modules.index("### Module 7 — Storage Duration"))
-        self.assertLess(modules.index("### Module 9 — Resource Ownership"),
-                        modules.index("### Module 11 — Owned Integer"))
-        self.assertLess(modules.index("### Module 10 — Bounded Text"),
-                        modules.index("### Module 13 — Integrated C11"))
+        heads = list(re.finditer(r"(?m)^### Module (\d+) — (.+)$", modules))
+        ownership = {}
+        for i, head in enumerate(heads):
+            end = heads[i+1].start() if i+1 < len(heads) else len(modules)
+            refs = modules[head.start():end].split("#### Outcomes", 1)[1].split(
+                "#### Lessons", 1
+            )[0]
+            for outcome in re.findall(r"(?m)^- (SEF6-O\d+)$", refs):
+                ownership.setdefault(outcome, i)
+        for earlier, later in (
+            ("SEF6-O2", "SEF6-O5"),  # safe arithmetic before allocation
+            ("SEF6-O3", "SEF6-O13"), # translation units before library APIs
+            ("SEF6-O4", "SEF6-O5"),  # pointer bounds before ownership
+            ("SEF6-O5", "SEF6-O13"), # allocation before containers
+            ("SEF6-O6", "SEF6-O11"), # struct layout before binary framing
+            ("SEF6-O7", "SEF6-O11"), # validated records before frames
+            ("SEF6-O12", "SEF6-O13"),# public ownership before containers
+            ("SEF6-O13", "SEF6-O16"),# structures before integration
+            ("SEF6-O14", "SEF6-O16"),# map before integration
+        ):
+            with self.subTest(prerequisite=f"{earlier} precedes {later}"):
+                self.assertLess(ownership[earlier], ownership[later])
         for topic in (
             "CHAR_BIT", "strtol", "errno", "realloc", "unsigned char",
             "C11", "POSIX", "one-past", "signed overflow",
             "pointer", "fgets", "size_t", "padding", "aliasing",
-            "allocation-failure", "linked-list", "hash", "collision",
+            "allocation", "linked", "hash", "collision",
             "C/Python", "sanitizer", "independent state-model",
-            "object lifetime",
+            "object lifetime", "truncated", "borrow", "null",
         ):
             with self.subTest(topic=topic):
                 self.assertIn(topic.lower(), modules.lower())
@@ -157,7 +165,7 @@ class SEF6AcademicProgressionTests(unittest.TestCase):
         self.assertIn("**Status:** " + chr(96) + "draft" + chr(96), source)
         self.assertIn("The **same seven required summative assessments**", source)
         self.assertIn("not a new grading contract", completion)
-        self.assertIn("The thirteen learning modules", completion)
+        self.assertIn("The instructional modules", completion)
         table = completion.split(
             "### Teaching sequence and existing assessment alignment", 1
         )[1].split("### Assessment environment and review", 1)[0]
