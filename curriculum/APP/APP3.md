@@ -25,9 +25,9 @@ and duplicate requests, integrate bounded asynchronous/dependency
 work, publish versioned consumer contracts, diagnose failures,
 and defend an integrated typed service.
 
-This revises the legacy APP3 course while retaining its identity
-and important content. Direct prerequisites are deliberately
-**APP19, APP21 and APP4**, not APP1. [APP19](APP19.md) already
+This core course retains its established direct prerequisites
+**APP19, APP21 and APP4**, and assesses the distinctive
+framework/application responsibilities beyond those foundations. [APP19](APP19.md) already
 teaches TypeScript contracts and runtime type limits.
 [APP21](APP21.md) teaches the raw Node HTTP/stream/process
 runtime and general fault boundaries; it is not repeated as
@@ -143,7 +143,7 @@ can provide evidence throughout the course.
 
 ## Modules
 
-### Module 1 — Service Requirements, Boundaries and Reference Environment
+### Module 1 — Service Problem, Trust and Local Reference Environment
 
 #### Outcomes
 
@@ -154,21 +154,19 @@ can provide evidence throughout the course.
 
 #### Lessons
 
-1. **Backend Framework Scope and Verifiable API Contracts** — Situate API services between browser clients, domain decisions, persistent records and external dependencies; identify what APP19, APP21 and APP4 already teach; derive actors, user actions, resources, invariants, observable successes, failures, privacy assumptions and consumption requirements from a synthetic stakeholder brief.
+1. **A Bounded Framework-Service Problem** — From a fictional two-tenant reservation/inventory brief, identify actors, domain invariants, acceptance/denial, operational failures and client-visible HTTP behavior. Situate modern HTTP frameworks briefly at the point of use; reuse APP19, APP21 and APP4 competence instead of reteaching it.
 
-2. **HTTP and Domain Terminology** — Review rather than reteach APP21 request/response handling; distinguish transport semantics, application policy, authorization and database state.
+2. **Compatible Fastify/PostgreSQL/TypeScript Toolchain** — Pin and record compatible maintained framework/runtime/driver/schema/session dependencies and a free local reproducible lockfile; distinguish pre-provisioning from offline assessed execution.
 
-3. **Reference Stack and Version Baseline** — Record maintained Node, TypeScript, Fastify and PostgreSQL versions plus free locally available dependencies, scripts, lockfile and unprivileged test setup.
+3. **Independent Client and Synthetic Tenants** — Establish disposable database, two tenant fixtures, safe fake identities and a separate real HTTP consumer. Distinguish client assertions from server-held principal and tenant facts.
 
-4. **Independent Consumer and Controlled Fixture** — Provide a local API test client and synthetic users/tenants; separate initial free dependency provisioning from repeatable offline assessment execution.
+4. **Actual Trust and Threat Boundary** — Map input/body/header/cookie, verified identity, domain state and upstream dependency to the check that owns each; name concrete unsafe assumptions to challenge later.
 
-5. **Threat and Trust Inventory** — List untrusted URL/path/body/header/cookie inputs, validated principals, server-side secrets, database roles and which component owns each check.
-
-6. **Requirements Traceability Matrix** — Map example requirements to API operations, errors, security policies and tests, marking unsupported or unknown claims honestly.
+5. **Requirements-to-Test Trace** — Map accepted, invalid, forbidden, conflict, replay and partial-failure cases to an endpoint, independent expected state and concrete evidence; explicitly mark synthetic stakeholder assumptions.
 
 *Optional practice — Bounded API Design Review:* Inspect a tempting overfeatured service brief, choose a coherent vertical slice and document deferred needs without omitting required negative cases.
 
-### Module 2 — Fastify Architecture, Plugins and Request Lifecycle
+### Module 2 — Fastify Plugin Encapsulation, Hooks and Service Lifecycle
 
 #### Outcomes
 
@@ -179,25 +177,21 @@ can provide evidence throughout the course.
 
 #### Lessons
 
-1. **Framework Value beyond Node HTTP** — Compare APP21 raw node:http responsibilities with framework routing, validation, serialization, plugin composition and lifecycle hooks.
+1. **Why Fastify beyond Raw Node HTTP** — Reuse APP21's HTTP runtime knowledge, demonstrate a real framework advantage in route/schema/plugin/lifecycle scope and explain what remains portable.
 
-2. **Create the Typed Reference Service** — Configure a modular Fastify instance separately from process listen/start, use a supported TypeScript setup and verify a local inject/integration request.
+2. **Typed Factory, Injector and Resource Ownership** — Create a Fastify app factory separate from listen, wire bounded dependencies, run inject and a real loopback client, and own ready/close/DB pool cleanup.
 
-3. **Route Registration and Method Boundaries** — Implement typed route handlers for explicit methods and paths, handling unsupported operations with deliberate status/Allow policy where applicable.
+3. **Actual Hook Order and Authorization Placement** — Trace installed-version route matching/parsing/schema/preValidation/preHandler/onSend/onResponse behavior and locate principal verification plus per-object authorization without claiming schema shape validation is a security policy.
 
-4. **Fastify Lifecycle Sequence** — Trace route matching, parsing, validation, preHandler authentication/authorization, handler, serialization and onResponse behavior using the installed release docs.
+4. **Plugin Encapsulation and Registration Fault** — Demonstrate scoped plugin/decorator dependencies, reproduce a missing or unexpectedly shared capability and verify a corrected hook/plugin trace.
 
-5. **Plugins, Encapsulation and Scope** — Demonstrate local plugin context, decorator scope and registration order; diagnose a capability unintentionally exposed or unavailable to a child plugin.
+5. **Replies, Errors and Double-Send Limits** — Test early reply, thrown/rejected failures and schema serialization errors; prevent second sends after response commitment and preserve safe diagnostic causes.
 
-6. **Hooks and Middleware Responsibilities** — Select hooks for cross-cutting work without mistaking a framework's lifecycle for all Express-style middleware or bypassing route security.
-
-7. **Errors and Reply Ownership** — Handle thrown/rejected errors, response-sent state, duplicate replies and early failures without assuming every error hook sees the same normalized payload.
-
-8. **Boot, Close and Test Isolation** — Make factory/create, ready and close operations explicit so integration tests do not open unmanaged sockets or leave active database handles.
+6. **Startup, Ready and Test Teardown** — Show invalid configuration before listen, independent repeated test instances and a clean bounded close path with no leaked sockets or database clients.
 
 *Optional practice — Plugin Boundary Fault:* Repair an encapsulation or hook-order defect and explain it with a request trace rather than a vocabulary-only answer.
 
-### Module 3 — HTTP Resource and Consumer Contract Design
+### Module 3 — HTTP Operations, Pagination and Consumer Contracts
 
 #### Outcomes
 
@@ -208,25 +202,21 @@ can provide evidence throughout the course.
 
 #### Lessons
 
-1. **Resource Identity and HTTP Methods** — Design clear paths and stable identifiers; compare GET, HEAD, POST, PUT, PATCH and DELETE by documented behavior, safe/idempotent semantics and method-specific preconditions.
+1. **Resource and HTTP Method Contracts** — Use concrete resource actions and stable IDs to distinguish safe/idempotent HTTP method semantics from business deduplication; inspect actual side effects through a separate client.
 
-2. **Statuses and Response Semantics** — Use correct success, accepted, no-content, validation, missing, forbidden, unauthorized, conflict and dependency-failure responses without returning generic success for every result.
+2. **Status, No-Body and Error Meaning** — Verify created/accepted/no-content, bad-input, unauthorized, forbidden, missing, conflict and upstream failures with actual HTTP headers and correct no-body/HEAD behavior.
 
-3. **Content Negotiation and Encoding** — Validate expected Content-Type and Accept choices, structured JSON bodies and correct no-body responses, avoiding undocumented serialization assumptions.
+3. **Media Types, Public Response and Safe Problem Shapes** — Define JSON Content-Type/Accept, response field and status commitments; if claiming RFC 9457 check required fields and application/problem+json rather than mislabeling any error JSON.
 
-4. **Filters, Pagination and Order** — Publish bounds, stable cursors or offset/limit rules, consistent ordering, filter allowlists and total-count limitations where applicable.
+4. **Deterministic Filtering and Pagination** — Validate filter allowlists and bounded pages, stable sort tie-breakers and cursor semantics under changing data; do not repeat APP4 SQL grammar.
 
-5. **Conditional Reads and Write Preconditions** — Introduce ETag/If-Match or revision-token alternatives for a concrete stale-write or cache-use scenario; do not falsely promise automatic concurrency safety.
+5. **Optimistic Preconditions and Client Conflicts** — Test one ETag/If-Match or explicit revision-token stale write and distinguish observable precondition policy from actual Postgres transaction protection.
 
-6. **Error and Retry Contracts** — Design stable error codes and expose safe details using a documented problem-details shape or justified project alternative; distinguish machine action from internal diagnostics.
-
-7. **API Examples and Negative Paths** — Define valid, missing, malformed, conflicting and unauthorized example requests for an independently runnable consumer.
-
-8. **API Contract Change Review** — Change a field/operation while marking affected clients, compatibility expectations, status semantics and required migration evidence.
+6. **Consumer Compatibility from One Changed Contract** — Exercise independent old/new consumers with valid and malformed requests; identify what changed and carry the decision into later OpenAPI evolution rather than assuming compatibility.
 
 *Optional practice — HTTP Ambiguity Audit:* Find an underspecified DELETE, pagination tie or invalid method response, then revise the contract and independent tests.
 
-### Module 4 — Runtime Schemas, Validation and Safe Error Handling
+### Module 4 — Runtime Schemas, Serialization and Safe Failure
 
 #### Outcomes
 
@@ -236,25 +226,21 @@ can provide evidence throughout the course.
 
 #### Lessons
 
-1. **Untrusted Input Is Not a TypeScript Type** — Accept external input as unknown, distinguish runtime schema validation from static inference and verify that a cast cannot enforce a trust boundary.
+1. **Static Types versus Actual Runtime Trust** — Demonstrate one cast accepted by TypeScript but invalid for a real JSON request; separate shape checking, domain invariants, identity and property authorization.
 
-2. **Fastify Request Schema Surfaces** — Declare supported schema rules for params, query, body and headers, with explicit additional-field and coercion policies on the pinned framework release.
+2. **Request Schema, Coercion and Unknown Fields** — Check actual Fastify params/query/body/headers schema behavior under the installed Ajv configuration, including coerced values and additional-property handling.
 
-3. **Response Serialization Contracts** — Define public response schemas to prevent accidental internal-property disclosure and test actual serialized output, not just declared TypeScript interfaces.
+3. **Response Serialization and Confidential Property Tests** — Define a deliberately narrow public schema and inspect real serialized fields, comparing route internals with actual client output on normal and error paths.
 
-4. **Schema Compilation and Security** — Treat JSON Schemas as reviewed application code; never compile arbitrary attacker-supplied schemas or confuse generated validators with a safely sandboxed interpreter.
+4. **Reviewed Schema Compilation and Unsafe Inputs** — Explain that Fastify validation/serialization code generation treats schemas as trusted code; reject attacker-provided schemas and defer DB/async authorization checks to appropriate hooks or service logic.
 
-5. **Synchronous Shape versus Async Domain Checks** — Perform shape validation before authorization/domain/database checks; keep database/network lookups outside inappropriate synchronous validator execution.
+5. **Shape Validation versus Async Authorization** — Place database-backed membership and domain lookups after safe parsing/shape checks; reproduce a counterexample where valid shape passes but forbidden ownership must still fail.
 
-6. **Canonical Inputs and Limits** — Check media type, body bytes, accepted properties, Unicode and numeric ranges, identifiers and pagination bounds before applying domain rules.
-
-7. **Structured Problem Details** — Use stable error taxonomy, status alignment and safe RFC 9457-like problem responses when suitable; never leak stack traces, SQL text or personal data.
-
-8. **Unexpected and Duplicate Failure Paths** — Inject malformed JSON, validation failure, thrown domain error and serialization failure; confirm exactly one deliberate client response and preserved internal cause.
+6. **Real Validation, Serialization and Error Failure Matrix** — Inject malformed, ambiguous/coerced and unknown fields, oversized content, serialization failure and domain errors; show correct status, privacy and once-only reply behavior.
 
 *Optional practice — Schema/Type Drift:* Produce a counterexample where a declared inferred type and actual validator behavior differ, then fix both evidence and code.
 
-### Module 5 — Domain Rules, Application Services and Dependency Boundaries
+### Module 5 — Domain Rules and Application Service Boundaries
 
 #### Outcomes
 
@@ -265,23 +251,19 @@ can provide evidence throughout the course.
 
 #### Lessons
 
-1. **Domain versus HTTP Responsibilities** — Keep business invariants independent of route handlers and status codes; define a narrow application operation for a transaction-like use case.
+1. **A Framework-Free Domain Invariant** — Define a real reservation/inventory invariant and test it with synthetic data without importing Fastify or PostgreSQL.
 
-2. **Domain Entities, Value Objects and Invariants** — Choose explicit identity/quantity/state representations and test invariants without importing Fastify or a database adapter.
+2. **Domain Identity, State and Valid Change** — Represent identity and quantities with meaningful constraints and failure cases rather than repeat APP4 normalization; check actual domain state transitions.
 
-3. **Application Orchestration** — Coordinate authorization, domain decisions and repositories through an application use-case boundary without scattering rule checks among hooks.
+3. **Application Authorization and Transaction Orchestration** — Place authoritative permission and domain decisions in a coherent use case and explicitly own the transactional unit, rather than scattering rules among hooks and repositories.
 
-4. **Adapter Interfaces and Composition Roots** — Provide testable persistence/clock/identity/external-service ports, wire production-like local implementations and state ownership clearly.
+4. **Adapter Ports, Composition and Trust** — Bind real PostgreSQL/clock/dispatcher interfaces to one app factory; compare a helpful fake with real DB/HTTP tests it cannot replace.
 
-5. **Error Translation across Layers** — Distinguish domain conflicts, invalid commands, unauthorized intent and infrastructure failures before mapping to HTTP responses.
-
-6. **Test Doubles and False Confidence** — Use simple fakes for domain logic and real database or HTTP integration tests for assumptions that mocks cannot prove.
-
-7. **Refactor a Coupled Route** — Move a rule-heavy handler into domain/application/adapters without changing supported status/error/transaction behavior.
+5. **Change a Coupled Route without Changing its Contract** — Repair a route with business logic in the wrong layer and prove unchanged role permissions, result status, rollback and public fields with independent tests.
 
 *Optional practice — Refactor Review:* Add a new business constraint and demonstrate one place where the rule belongs plus a regression that catches bypass.
 
-### Module 6 — Authentication, Sessions and Credential Safety
+### Module 6 — Real Authentication and Session Lifecycle
 
 #### Outcomes
 
@@ -292,25 +274,21 @@ can provide evidence throughout the course.
 
 #### Lessons
 
-1. **Authentication versus Authorization** — Distinguish identity proof from permission to access a specific resource and from data-layer role enforcement.
+1. **Verified Identity Is Not Authorization** — Distinguish a cryptographically or store-verified principal from client-supplied identity or tenant labels and from permission to access particular resources.
 
-2. **Identity and Session Trust Model** — Choose a bounded local credential/session design, explain principal provenance, login/logout lifecycle, expiry and token/session compromise assumptions.
+2. **Credible Local Credential and Session Policy** — Choose a maintained opaque session or verified token method with expiry, revocation and local test isolation; no made-up user-id header or homemade authentication protocol.
 
-3. **Password Handling with Established Primitives** — Explain salt, slow password KDF, parameter choice, secure entropy and safe verification; use a supported reviewed implementation, not a homemade password algorithm.
+3. **Safe Secret Storage and Verification** — Use a reviewed password KDF and entropy when password sign-in is in scope; verify credentials without plaintext reusable secrets, and document appropriate parameters.
 
-4. **Cookie and Token Trade-offs** — Distinguish opaque session identifiers and signed/verified bearer tokens, secure cookie attributes, revocation limitations and storage risks.
+4. **Cookie/Token, CSRF and Rotation Boundaries** — Inspect bearer versus cookie transport, Secure/HttpOnly/SameSite, fixation/rotation and TLS/CSRF assumptions, without asserting loopback HTTP is deployment-grade.
 
-5. **Local HTTPS and Deployment Caveat** — Test on controlled loopback with synthetic credentials and explain Secure/HttpOnly/SameSite and TLS requirements for actual public deployment.
+5. **Expired, Revoked and Forged Credential Evidence** — Attempt forged, expired and revoked logins plus session fixation/replay; keep tokens out of URL/logs and explain whether result demonstrates authentication or merely handler success.
 
-6. **Credential and Session Leakage** — Keep secret values out of URLs/logs/errors; inspect session fixation, rotation and deliberate logout/expiry failure behavior.
-
-7. **Brute-Force and Enumeration Mitigation** — Use proportionate login error behavior and local attempt limits while disclosing limitations of a single-process demo.
-
-8. **Auth Hook and Principal Injection** — Verify session once at a carefully placed boundary, construct a trusted principal context and ensure route-level authorization still executes.
+6. **Trusted Principal, Hook Placement and Login Abuse** — Build principal context only after verification, bound login attempts and enumeration, invoke authorization on actual objects and test logout/stale-session denial under a declared local threat model.
 
 *Optional practice — Authentication Failure:* Inject expired/revoked or forged session data and show denial plus appropriately sanitized diagnostic evidence.
 
-### Module 7 — Authorization, Tenant Isolation and Property-Level Safety
+### Module 7 — Action, Object, Property and Tenant Authorization
 
 #### Outcomes
 
@@ -322,25 +300,21 @@ can provide evidence throughout the course.
 
 #### Lessons
 
-1. **Authority to Act, Object and Field** — Separate permission for a route/action, a particular object ID and each returned/writable property; refer to relevant OWASP object/property/function risk classes.
+1. **Actions, Objects, Properties and Principals** — Separate function permission, object ownership and allowed read/write properties, using current OWASP API risk classes only to select concrete attacks.
 
-2. **Policy Matrix by Role, Tenant and Operation** — Publish owner/admin/member/guest access across two synthetic tenants, methods and resources, including denied updates and hidden fields.
+2. **Two-Tenant Role/Action/Field Matrix** — Publish actual permissions and exceptions for owners, members, guests and elevated roles across methods and resource fields, with denied-write state expectations.
 
-3. **Trusted Tenant Resolution** — Bind tenant scope to authenticated claims plus authoritative database membership, never trust arbitrary client-supplied tenant IDs as proof of permission.
+3. **Membership from Authoritative Data** — Derive tenant scope from a verified principal and persisted membership, not a request header/context variable, and identify scoped trusted admin exceptions.
 
-4. **Repository and SQL Scope** — Apply ownership checks at a trustworthy data-access boundary and use database permissions/RLS as defense in depth where configured.
+4. **Repository Scope and Defense-in-Depth RLS** — Test scoped queries and application policy with real PostgreSQL rows, while acknowledging APP4 RLS protects an additional boundary but is not sufficient alone.
 
-5. **Prevent IDOR and BOLA** — Test guessed identifiers, cross-tenant list/detail reads, nested resource writes and enumeration-resistant error policies.
+5. **BOLA/IDOR and Function-Level Access Negatives** — Probe guessed and nested IDs, list/detail/bulk enumeration and unauthorized operations using independent requests and inspect unchanged authoritative data.
 
-6. **Prevent Mass Assignment and Data Exposure** — Allowlist writable fields and project response data; show why accepting `role: admin` or returning password/session columns violates property-level policy.
-
-7. **Privilege Escalation via Background Work** — Preserve principal/tenant authority in queued operations, re-evaluate permissions or fail safely when context expires.
-
-8. **Global Admin and Service Accounts** — Separate deliberately elevated maintenance operations from ordinary tenant actors and verify audit boundaries and exemptions.
+6. **Mass Assignment, Response Projection and Delayed Authority** — Attempt forbidden input updates and leaked output columns, then challenge a queued task with stale authority; keep privileged service accounts out of ordinary tenant paths.
 
 *Optional practice — Cross-Tenant Attack Fixture:* Reproduce a local unauthorized request that initially succeeds, then fix the policy and verify all negative matrix entries.
 
-### Module 8 — PostgreSQL Integration, Transactions and Concurrency
+### Module 8 — Database Integration, Invariants and Concurrent Requests
 
 #### Outcomes
 
@@ -351,25 +325,21 @@ can provide evidence throughout the course.
 
 #### Lessons
 
-1. **From APP4 SQL to Service Persistence** — Reuse APP4's SQL/constraints/isolation/migrations knowledge to implement application-specific repositories, without re-teaching relational normalization.
+1. **Real PostgreSQL Integration, Not Another SQL Introduction** — Reuse APP4's tested schema, constraints and transaction model inside Fastify repositories with documented driver versions and pool ownership.
 
-2. **Database Adapter and Parameter Binding** — Use a compatible pre-provisioned PostgreSQL driver with bound values, proper connection lifecycle and validated dynamic identifier allowlists.
+2. **Bound Values, Connections and Trusted Identifiers** — Exercise a bound query, connection lifecycle and strict dynamic identifier allowlist; distinguish client-generated strings from server-controlled SQL.
 
-3. **Service Transaction Ownership** — Define one application operation's transaction begin/commit/rollback and ensure all participating writes use the correct scoped connection.
+3. **One Transaction Connection across Service Layers** — Deliberately run part of a multi-row operation on the wrong connection, observe an incomplete rollback and repair use-case/transaction scope.
 
-4. **Atomic Domain Change** — Demonstrate two related writes and an invariant protected by constraints or transactionally checked state under malformed and failed cases.
+4. **Independent Database Invariant Checks** — Verify real two-row domain changes before/after an intentional failure, including constraint enforcement and no unauthorized tenant row changes.
 
-5. **Revision-Controlled Concurrent Writes** — Use a version column or conditional update to reject stale writes and map conflicts to an independently specified HTTP response; run two controlled API requests against real local PostgreSQL sessions, inspect the interleaving and verify no silent lost update or double-spend.
+5. **Two HTTP Requests and Revision Conflict** — Coordinate an actual pair of PostgreSQL-backed requests to reproduce a stale revision/contention result, apply conditional update/constraint/isolation control, inspect final state and HTTP conflict responses.
 
-6. **Isolation and Full Transaction Retry** — Choose PostgreSQL isolation/locking appropriately, handle recognized serialization/deadlock failures with bounded retry of the complete unit, and avoid retrying non-idempotent side effects.
-
-7. **Schema Migrations with Two Client Versions** — Apply a staged schema change with existing API consumers, preserve compatibility claims and keep migration ownership distinct from handler code.
-
-8. **Resource and Cleanup Boundaries** — Release clients/connections on errors, aborts and shutdown without promising all interrupted DB work is automatically canceled.
+6. **Retry the Whole Safe Transaction** — Handle real retryable serialization/deadlock failure with bounded full-unit retry and fresh state without replaying unrelated external effects; relate migration/cleanup to established APP4 competence.
 
 *Optional practice — Transaction Leak:* Repair a repository method that uses a different connection mid-transaction and prove rollback/commit integrity with real database evidence.
 
-### Module 9 — Idempotency, Asynchronous Work and Partial Failure
+### Module 9 — Idempotency, Durable Work and Partial Failure
 
 #### Outcomes
 
@@ -380,25 +350,21 @@ can provide evidence throughout the course.
 
 #### Lessons
 
-1. **HTTP Method Idempotence versus Business Deduplication** — Explain why PUT/DELETE semantics do not automatically deduplicate all effects, and why POST requests need explicit replay policy when a use case demands it.
+1. **Business Replay versus HTTP Method Idempotence** — Define why safe/idempotent methods and idempotency keys solve different problems for a real charge/reservation-like local side effect.
 
-2. **Idempotency-Key Storage Contract** — Define key scope by principal/tenant/operation, request fingerprint, expiration, duplicate-in-flight behavior and durable result interpretation.
+2. **Key Scope, Fingerprints and Conflicting Replays** — Specify tenant/principal/operation scope, request fingerprint, expiry and duplicate-in-flight semantics with synthetic fixture outcomes.
 
-3. **Atomic Dedup and Business Change** — Record an idempotency reservation and associated domain mutation transactionally where the chosen design permits; test repeated and conflicting payloads.
+3. **Atomic Idempotency State with the Domain Write** — Use actual database records to show key reservation, business mutation and replay state commit or roll back together across two concurrent requests.
 
-4. **Background Task Lifetime** — Contrast Node in-process queues with durable database-backed work, crashes and restart behavior; never label an ephemeral promise queue a durable job system.
+4. **Ephemeral Work versus Restart-Persistent Jobs** — Crash a local in-process queue and contrast it with a durable database record; explain state that can or cannot be recovered on restart.
 
-5. **Outbox and Reliable Dispatch Boundary** — Introduce a small transactionally recorded outbox entry and idempotent worker consumer or an equivalent justified durable design; explain at-least-once rather than exactly-once guarantees.
+5. **Outbox/Worker at Least Once and Failure Boundaries** — Demonstrate transactionally recorded dispatch intent, bounded retries/poison handling and idempotent consumer processing, explicitly rejecting exactly-once external execution.
 
-6. **Retry, Backoff and Dead Letters** — Classify transient and permanent failures, bounded retry/attempt limits, poison work and manual replay constraints.
-
-7. **Partial Failures across Database and External Calls** — Trace a committed DB change followed by a failed notification and defend the chosen recovery or compensation path; avoid holding a transaction open during arbitrary network I/O.
-
-8. **Cancellation, Deadlines and Service Shutdown** — Own timers/workers/abort signals and state what work remains pending or can be replayed after a service stop.
+6. **Commit then Failure, Uncertain Results and Shutdown** — Inject a failed external call after DB commit, lost response or service stop; inspect persisted work and define safe replay/compensation rather than assuming rollback spans the network.
 
 *Optional practice — Duplicate Request Drill:* Replay concurrent identical and conflicting requests and a simulated dispatcher restart, verifying each business invariant and documented status/result.
 
-### Module 10 — Outbound Services, Resilience and Dependency Trust
+### Module 10 — Outbound Dependencies, SSRF and Failure Budgets
 
 #### Outcomes
 
@@ -410,23 +376,19 @@ can provide evidence throughout the course.
 
 #### Lessons
 
-1. **Outbound API as Untrusted Dependency** — Define a typed adapter for a local synthetic external service with clear data and error shapes, version expectations and failure scope.
+1. **Untrusted Synthetic Upstream behind an Adapter** — Use a locally controlled external fixture with checked data shape and error classification; avoid real third-party accounts or remote test targets.
 
-2. **Target URL and SSRF Controls** — Reject client-controlled internal URLs/hosts/protocols; use fixed or allowlisted outbound destinations and explain DNS/redirect and metadata-service risks.
+2. **SSRF and Redirect/DNS Trust Boundaries** — Use an allowlisted scheme/host/target, reject redirects to unapproved destinations, and explain why simple string-prefix checking fails against DNS rebinding, IP changes and internal endpoints.
 
-3. **Response Size, Timeouts and Abort** — Bound local test traffic, enforce actual bytes and declared deadlines, and distinguish an aborted client request from proven cancellation of a remote operation.
+3. **Real Body, Time and Concurrency Limits** — Bound actual response bytes, deadline and in-flight resources, distinguishing AbortSignal from the guaranteed cancellation of an already executed remote mutation.
 
-4. **Dependency Errors and Information Leakage** — Classify 4xx/5xx, network failure, invalid JSON, latency and contradictory data; ensure client responses do not expose upstream credentials or internals.
+4. **Invalid Dependency Data and Safe Public Errors** — Compare 4xx/5xx, malformed shape, network rejection and secret-bearing upstream error, disclosing only stable safe client codes.
 
-5. **Retry Eligibility and Budgets** — Choose safe idempotent retries and bounded attempt limits; avoid amplifying overloaded services or repeating uncertain mutations blindly.
-
-6. **Overload and Circuit-Breaker Reasoning** — Explain what a circuit breaker/bulkhead can and cannot guarantee, with optional local fault injection rather than mandatory infrastructure complexity.
-
-7. **Consumer of Third-Party Data** — Validate external response contracts, restrict unexpected properties and apply least authority rather than trusting a well-known partner API.
+5. **Bounded Retry and Overload Choice** — Choose retry/backoff only for justified eligible work with total budget and a small circuit/bulkhead alternative where evidence warrants; reject uncertain write replay.
 
 *Optional practice — External Failure:* Simulate malformed responses, slow dependency, redirect to an unapproved target or repeated 503s and verify controlled behavior and clean logs.
 
-### Module 11 — API Documentation, Contract Evolution and Compatibility
+### Module 11 — OpenAPI, Compatibility and Independent Consumers
 
 #### Outcomes
 
@@ -438,25 +400,19 @@ can provide evidence throughout the course.
 
 #### Lessons
 
-1. **OpenAPI as a Consumer Interface** — Publish machine-readable operations, statuses, media types, security schemes and representative examples with a free local validation tool.
+1. **A Portable Executable OpenAPI Contract** — Generate/maintain a machine-readable operation/response/security/error contract that matches actual Fastify schema and status behavior.
 
-2. **Schema-to-Implementation Alignment** — Choose one verified source-of-truth strategy for request/response schemas, documenting limitations of code-first and schema-first generation.
+2. **A Verified Single Contract Authority** — Choose schema-first or generated code-first, expose a discrepancy where TypeScript/schema/OpenAPI disagree and correct it against real consumer evidence.
 
-3. **Compatibility of Requests and Responses** — Analyze adding an optional field, changing required fields or response types, enum evolution and field removal for actual existing consumers.
+3. **Old/New Consumers and Compatibility Decision** — Run old/revised clients for changed required/optional response fields, pagination/enum expansion and identify a real incompatibility rather than assuming all additions are safe.
 
-4. **Semantic Error Compatibility** — Retain stable machine-readable problem codes and status contracts or explicitly describe a breaking change and migration path.
+4. **Security, Errors and Precondition Compatibility** — Test changed authentication/field exposure, RFC 9457 media/status and an optimistic precondition or deprecation policy under an explicitly bounded support decision.
 
-5. **Authentication and Tenant Contract Documentation** — Document protected operations and authorization outcomes without exposing session internals or claiming docs alone enforce policy.
-
-6. **Pagination and Conditional Consumer Tests** — Provide an old and new client for a changed listing/query, including cursor/ordering and conflict response handling.
-
-7. **Deprecation and Versioning Strategy** — Choose endpoint/representation versioning or a compatible evolution approach and publish intended support/rejection windows without assuming perpetual compatibility.
-
-8. **Local Contract Verification** — Compare documented examples against actual independently issued HTTP requests and a schema/contract checker, including malformed/forbidden cases.
+5. **Independent HTTP Contract Regression** — Compare documented examples and security schemas against actually sent success/denied/invalid/conflict requests, with a failing-before/passing-after correction.
 
 *Optional practice — API Revision Review:* Apply a bounded requirements change and identify one breaking consumer consequence caught by a failing test.
 
-### Module 12 — Configuration, Health, Lifecycle and Observability
+### Module 12 — Configuration, Readiness, Shutdown and Diagnostics
 
 #### Outcomes
 
@@ -467,92 +423,58 @@ can provide evidence throughout the course.
 
 #### Lessons
 
-1. **Configuration before Listening** — Check known server settings, database connection targets, secrets and safe local defaults before exposing a socket.
+1. **Validated Startup and Trustworthy Readiness** — Reject missing/untrusted configuration before listen and make health/readiness report actual local dependency conditions without secrets.
 
-2. **Readiness, Liveness and Dependency States** — Define what a local /health and /ready check actually observes and what a green response cannot guarantee.
+2. **Bounded In-Flight Shutdown and Pool Ownership** — Close Fastify and DB/dispatcher resources with measured in-flight request behavior and a forced-stop limit; compare planned and observed lifecycle.
 
-3. **Structured Request Correlation** — Generate or validate bounded request IDs, record a trace through route, application, database and job paths without logging raw tokens/bodies.
+3. **Safe Request/DB/Job Correlation** — Generate scoped bounded request IDs and trace a real HTTP/transaction/dispatch failure without storing tokens, personal payloads or raw SQL secrets.
 
-4. **Logs, Metrics and Traces** — Select a small request/error/latency/dependency metric set and show how structured logs and traces can point to—but not prove—a root cause.
+4. **Actual Local Cancellation and Cleanup** — Trigger shutdown/abort during an in-flight DB job and verify a safe policy for remaining work, sockets and connections under the documented Fastify/Node release.
 
-5. **Privacy and Sampling Boundaries** — Redact or avoid personally identifying data and credentials, bound log volume and disclose missing trace spans and synthetic observations.
-
-6. **Framework Shutdown and Resource Cleanup** — Stop new requests, drain bounded in-flight work and release database pools, timers and local dispatchers under the recorded Node/Fastify baseline.
-
-7. **Configuration and Dependency Failure Injection** — Test a missing secret/test DB, pool exhaustion or unavailable local dependency and prove startup/readiness/failure policy.
-
-8. **Local Operational Troubleshooting** — Read an incident timeline and identify request IDs, retries, database conflicts and affected endpoints without inventing unavailable telemetry.
+5. **Dependency Failure and Evidence-Based Incident** — Inject unavailable DB/upstream or invalid config, observe actual readiness and correlation, identify known missing telemetry and repair a supported cause, not a fabricated production incident.
 
 *Optional practice — Health and Shutdown Audit:* Find a green-but-broken readiness check or connection leak and verify a corrected bounded test.
 
-### Module 13 — API Security Engineering and Abuse Cases
-
-#### Outcomes
-
-- APP3-O4
-- APP3-O6
-- APP3-O7
-- APP3-O10
-- APP3-O13
-- APP3-O14
-
-#### Lessons
-
-1. **Risk-Led API Threat Modeling** — Map actors, entry points, assets, resource ownership and misuse paths to representative current OWASP API Security categories.
-
-2. **Broken Object, Property and Function Authorization** — Drive negative tests of role elevation, tenant/object ID guessing, extra writable fields and leaking responses, distinguishing authentication from each access decision.
-
-3. **SQL and Structured Input Injection** — Use bound query values, allowlisted identifiers and reviewed schema construction; demonstrate local injection failures without attacking external systems.
-
-4. **CORS, Cookies and CSRF** — Explain that CORS constrains browsers rather than authorizes API callers, and design local CSRF and cookie-policy tests appropriate to the chosen authentication mode.
-
-5. **Resource Consumption and Abuse Boundaries** — Enforce body, pagination, concurrency, login and background job limits with meaningful errors; avoid claiming a single-process rate limiter protects a distributed service.
-
-6. **Response Data and API Inventory** — Check unexpected verbose errors, overbroad serialization, undocumented endpoints, deprecated versions and secret-bearing logs.
-
-7. **Third-Party Package and Supply-Chain Review** — Inspect lockfile provenance, framework/plugin compatibility and unsafe install scripts; record accepted risk and update/rollback policy.
-
-8. **Security Regression and Limits** — Maintain a published attack/defense matrix for the local service and clearly distinguish verified cases from production pentest or external certification.
-
-*Optional practice — Authorization Bypass Repair:* Inject two synthetic security defects and prove remediation with independent HTTP and persistence evidence.
-
-### Module 14 — Testing, Contract Verification and Incident Investigation
+### Module 13 — Adversarial API Verification, Tests and Incident Analysis
 
 #### Outcomes
 
 - APP3-O3
 - APP3-O4
 - APP3-O5
+- APP3-O6
 - APP3-O7
 - APP3-O8
 - APP3-O9
-- APP3-O11
+- APP3-O10
+- APP3-O12
+- APP3-O13
 - APP3-O14
 - APP3-O15
 
 #### Lessons
 
-1. **Pure Domain Unit Tests** — Verify rule invariants with representative normal, invalid and boundary inputs without a running network service.
+1. **Threat-to-Test Matrix instead of Repeating Security Theory** — Choose concrete broken object/property/function authorization, authentication, SQL/schema injection, SSRF, unsafe upstream and resource-exhaustion risks based on the actual app; use prior modules' mitigations rather than reteach their introductory examples.
 
-2. **Fastify Injection and HTTP Integration** — Exercise real request lifecycle, validation/hooks/auth/error serialization and response status through an isolated Fastify app factory.
+2. **Pure Domain, Fastify Inject and Real HTTP Layers** — Test domain invariants and request hook/schema responses separately from an independently issued local HTTP client and explain what mocks cannot verify.
 
-3. **PostgreSQL Integration Fixtures** — Use disposable local DB/schema, reset data safely and test constraints, rollback and transaction connection scope against the real driver.
+3. **Real DB Tenant, Concurrency and Idempotency Cases** — Inspect disposable PostgreSQL states under two-client conflict, forbidden property update and duplicate replay, with independent expected rows and no fake repository-only conclusion.
 
-4. **Auth and Tenant Security Matrix** — Cover invalid/expired sessions, cross-tenant list/detail/write, forbidden properties, role changes and server-side principal derivation.
+4. **Cookie/CSRF, Input and Response Exposure Regression** — Attempt forged/expired sessions, mass assignment, parser coercion, unsafe response properties and cookie-mode CSRF where the chosen scheme applies; CORS is not server authorization.
 
-5. **Concurrency and Replay Tests** — Trigger two-client data races, duplicate idempotency keys, DB serialization conflicts and queued-job redelivery with deterministic coordination.
+5. **SSRF, Dependency and Resource-Budget Probes** — Challenge outbound URL/redirect policy, actual body/page/worker bounds, dependency timeout and package/plugin compatibility using local bounded synthetic traffic.
 
-6. **Contract and Consumer Tests** — Use independent HTTP clients and schema checking to distinguish framework-handler success from actual published API compatibility.
+6. **Independent Old/New API and Background-Work Tests** — Check actual contract versions and error media along with committed-before-notified, duplicate delivery and worker restart paths; do not claim passing injection tests prove the public client.
 
-7. **Fault Injection and Cleanup Tests** — Inject dependency timeouts, malformed remote data, crashes in a local dispatcher, invalid configuration and interrupted requests.
+7. **Request-to-Database Incident Timeline** — Correlate safe synthetic request, principal, DB transaction and job identifiers, reason from observed failure events and state which causal links are uncertain or absent.
 
-8. **Service Incident Timeline** — Build an evidence-based request/dependency log timeline, distinguish symptom/root cause and propose a testable fix and a bounded recovery procedure.
+8. **Two New Cross-Layer Defects and Causal Repair** — Seed and repair two distinct failures not identical to prior AS2–AS5 exercises, for example schema evolution leaking a private field and a retry/durable-work race; require failing-before/passing-after HTTP and persisted-state evidence.
 
-9. **Reproducibility and Review Integrity** — Start from pinned local artifacts, run tests on unprivileged loopback with synthetic data, disclose flaky timings and avoid private or invented measurements.
+9. **Risk, Regression and Independent Technical Judgment** — Verify affected auth, consumer, transaction and cleanup cases after repair, disclose untested threats, production limits and actual reviewer-observable results rather than submit a checklist.
 
 *Optional practice — Security/Incident Review:* Fix a selected failure and show failing-before/passing-after evidence in multiple relevant test layers.
 
-### Module 15 — Integrated Typed API Service and Independent Defense
+### Module 14 — One Integrated Typed Service and Independent Defense
 
 #### Outcomes
 
@@ -575,35 +497,31 @@ can provide evidence throughout the course.
 
 #### Lessons
 
-1. **Choose a Small Multi-Tenant Domain** — Select fictional reservations, inventory, document access or similar product with genuine ownership and transaction invariants, not excessive microservices.
+1. **One Cumulative Domain and Evidence Contract** — Use the same bounded two-tenant Fastify/TypeScript/Postgres service from APP3-AS1–AS6, name authentic requirements, role policy and public contracts, and link previously accepted judgments instead of creating seven services.
 
-2. **Publish Requirements, Roles and API Contract** — Define synthetic users/tenants, role-action-property matrix, domain transitions, API schemas, error taxonomy and independent consumer cases.
+2. **Integrate Identity, Transactions and Durable Recovery** — Verify trusted sessions, exact object/property/tenant authorization, scoped domain invariants, replay/outbox and safe outbound dependencies together without weakening layer contracts.
 
-3. **Build the Framework and Domain Boundaries** — Wire versioned Fastify/TypeScript routes, validated schema and serialization, service/domain interfaces and PostgreSQL adapters.
+3. **Independent Clients, Failure and Operating Readiness** — Exercise old/new clients, actual database state, negative security cases, redacted correlation and in-flight shutdown against known local fixtures.
 
-4. **Implement Real Local Identity and Authorization** — Demonstrate a credible local authentication/session boundary, ownership checks on every relevant access, and denial of unsafe properties or actions.
+4. **New Bounded Incident, Permission or Data Change** — Reproduce and repair an assessor-supplied unfamiliar route, field, tenant-rule, transaction or worker failure with explicitly tested impacted consumers and prior acceptance cases.
 
-5. **Enforce Transactions and Replay Behavior** — Implement one conflicting concurrent operation plus idempotency/async work that remains truthful under duplicate or partial failure.
-
-6. **Verify External Failures and Safe Responses** — Simulate outbound delay/bad response, missing DB or job failure and confirm bounded retry, redacted problem responses and correct recovery.
-
-7. **Publish and Compare API Versions** — Generate/check a portable OpenAPI contract and validate an independent old/new consumer under one changed field or status condition.
-
-8. **Demonstrate Operability and Threat Mitigation** — Run startup/readiness/shutdown checks, correlate an injected incident and execute cross-tenant/resource-exhaustion negative tests.
-
-9. **Reproduce from a Clean Local Checkout** — Use documented free local artifacts, fake credentials, a disposable database and clients to replay success, errors, concurrency, job and cleanup evidence.
-
-10. **Unfamiliar Change and Technical Defense** — Respond to a new permission, route rule or data invariant; assess impact across layers, implement, retest and defend portable API versus framework-specific decisions.
+5. **Fresh Local Reproduction and Engineering Defense** — Build/test/start/stop using pinned free local artifacts and disposable data, cite accepted evidence, show targeted new changes and defend framework/domain/Node/PostgreSQL/production boundaries.
 
 ## Completion requirements
 
-**All sixteen required APP3 outcomes** must be demonstrated
-through the **seven required summative assessments** below.
-One evolving application can satisfy several assessments
-when each required outcome is independently reviewable.
-Seven unrelated backend projects are **not** required.
-Lesson-level tests, investigations and formative exercises
-are preparation, not hidden independent graduation gates.
+All **sixteen APP3 outcomes** must be established through
+**seven independently decidable summative assessments**.
+Use **one evolving local Fastify/TypeScript/PostgreSQL service**:
+AS1 proves framework/consumer contracts; AS2 authenticates
+and authorizes; AS3 proves real transaction/replay behavior;
+AS4 checks independent clients and untrusted dependencies;
+AS5 verifies durable work and service failures; AS6 audits
+**new cross-layer security/incident defects**; and AS7
+integrates the accepted work with an unfamiliar bounded
+requirement and independent defense. Previously accepted
+evidence may be **referenced** rather than resubmitted.
+Seven separate applications and compulsory formative
+module checklists are not required.
 
 | Required assessment | Required outcome coverage | Principal evidence |
 | --- | --- | --- |
@@ -612,8 +530,8 @@ are preparation, not hidden independent graduation gates.
 | `APP3-AS3` — Transactional Service Invariant and Idempotent Replay | APP3-O5, APP3-O7, APP3-O8, APP3-O9, APP3-O13, APP3-O14 | Real local PostgreSQL migration/schema fixtures, versioned service/repository source, concurrent request interleaving table, transaction and idempotency policies, before/after state checks, redelivery/outbox or equivalent design evidence and regression tests |
 | `APP3-AS4` — Versioned API Contract, Independent Consumer and Dependency Boundary | APP3-O1, APP3-O3, APP3-O4, APP3-O10, APP3-O11, APP3-O13, APP3-O14 | OpenAPI and validation output, old/new consumer source with normal/negative tests, compatibility matrix and migration note, mocked/local upstream failure and SSRF tests, documented problem/error codes and transport-boundary rationale |
 | `APP3-AS5` — Background Work, Fault Handling and Operability Drill | APP3-O2, APP3-O8, APP3-O9, APP3-O10, APP3-O12, APP3-O14, APP3-O15 | Job/outbox fixtures, failure timeline and redacted logs, configuration and state machine, tests for retry/duplicate/shutdown/dependency outage, bounded timing/health observations, repair diff and limitations report |
-| `APP3-AS6` — Security, Concurrency and Service Incident Regression Review | APP3-O3, APP3-O4, APP3-O5, APP3-O6, APP3-O7, APP3-O8, APP3-O9, APP3-O12, APP3-O13, APP3-O14, APP3-O15 | Threat-and-test matrix, synthetic fixtures, observed exploit/failure steps, layered tests and database-state comparisons, sanitized causal incident notes, corrected code, compatibility checks and remaining-risk statement |
-| `APP3-AS7` — Integrated Typed API Service and Independent Engineering Defense | APP3-O1, APP3-O2, APP3-O3, APP3-O4, APP3-O5, APP3-O6, APP3-O7, APP3-O8, APP3-O9, APP3-O10, APP3-O11, APP3-O12, APP3-O13, APP3-O14, APP3-O15, APP3-O16 | Versioned service source, manifest/lockfile and local prerequisite recipe, SQL migrations/seeds and disposable DB setup, API/OpenAPI requirements and role matrix, independent clients, negative/normal/concurrency/replay/incident test logs, sanitized request correlation, clean-checkout and repair/change records, and accessible written/recorded/live technical defense |
+| `APP3-AS6` — Security, Concurrency and Service Incident Regression Review | APP3-O3, APP3-O4, APP3-O5, APP3-O6, APP3-O7, APP3-O8, APP3-O9, APP3-O12, APP3-O13, APP3-O14, APP3-O15 | Independent new cross-layer attack/incident matrix, real failing-before/passing-after HTTP and DB state, targeted layered regression, sanitized causal observations and residual-risk disclosure |
+| `APP3-AS7` — Integrated Typed API Service and Independent Engineering Defense | APP3-O1, APP3-O2, APP3-O3, APP3-O4, APP3-O5, APP3-O6, APP3-O7, APP3-O8, APP3-O9, APP3-O10, APP3-O11, APP3-O12, APP3-O13, APP3-O14, APP3-O15, APP3-O16 | One versioned service with pinned local tools and synthetic DB, a references-first AS1–AS6 evidence index, independently reproducible unfamiliar change and regressions, clean checkout and technical defense |
 
 ### Shared local execution, integrity and safety boundaries
 
@@ -685,45 +603,45 @@ are preparation, not hidden independent graduation gates.
 
 - **APP3-AS1** (required requirements-to-http contract and framework lifecycle)
   - Outcomes: APP3-O1, APP3-O2, APP3-O3, APP3-O4, APP3-O5, APP3-O11
-  - Work: From a bounded synthetic domain brief, derive user/consumer requirements and build a small Fastify/TypeScript service slice with route/handler/plugin layering, versioned JSON request/response schemas and stable error categories. Publish an independently runnable HTTP client and an initial OpenAPI description with success, invalid, missing and conflict cases. Demonstrate one lifecycle/hook or encapsulation defect and repair it while preserving a portable contract.
-  - Criteria: Route behavior matches documented HTTP method/status/media/serialization semantics, client-facing data is validated at runtime (not only TypeScript) and no unsafe internal field is serialized. The domain rule can be unit tested without a Fastify import. An independent consumer can reproduce normal and malformed requests; the framework lifecycle and plugin scoping are explained against actual traces. Requirements map to verifiable behavior, not invented stakeholder observations.
+  - Work: Begin **one cumulative Fastify/TypeScript service** from a synthetic user/tenant/consumer brief, with accepted and denied business states, free pinned toolchain and an independent local HTTP consumer. Implement a typed route/plugin/schema boundary and public response contract. Reproduce and repair a real plugin encapsulation or hook-order defect; verify actual OpenAPI examples, no-body/errors and independently testable domain logic without depending on Fastify.
+  - Criteria: An independent issued request matches declared methods, media/status, public response shape and negative cases; neither TypeScript types nor request schema shape checks are misrepresented as domain authorization. The plugin/hook fault is reproduced and corrected under the recorded Fastify release, with no double reply or internal-property leakage. Requirements trace to evidence rather than invented stakeholder research.
   - Evidence: Requirements/role/use-case table, typed service and schema source, Fastify/version/lockfile details, route/lifecycle diagram, OpenAPI/examples, consumer test results, before/after defect and architectural explanation.
 
 - **APP3-AS2** (required credential, object and tenant authorization security audit)
   - Outcomes: APP3-O4, APP3-O5, APP3-O6, APP3-O7, APP3-O12, APP3-O13, APP3-O14
-  - Work: Implement synthetic local authentication using maintained credential/session facilities with expiry/revocation policy and no production credentials. Add a server-side authorization layer for two tenants and multiple roles, verifying read, list, create, update, delete and property-level restrictions. Inject forged/expired credentials, guessed resource IDs, cross-tenant requests, unauthorized role changes and sensitive response fields. Show that the application's principal and tenant are not trusted merely because a request supplied an ID, cookie or a hidden UI claim.
-  - Criteria: Authentication and authorization are distinct and independently tested. Real signed/opaque session verification and expiry/revocation match the documented local threat model; cross-tenant and role/field escalation attempts fail at server-side boundaries for all relevant methods, including negative writes and overbroad response serialization. Database RLS is recognized as defense in depth rather than the sole application policy, and CORS/client hiding is not accepted as authorization. Secrets and private material are absent from logs/evidence. Public-production security omissions are explicitly acknowledged.
+  - Work: Extend **the same service** with reviewed credential/session verification using fabricated users, expiry and revocation. Establish trusted principals and authoritative tenant membership; enforce action, object, **read/write property**, and tenant authorization over two synthetic tenants with contrasting roles. Test forged/expired/revoked sessions, guessed nested IDs, cross-tenant list/detail/create/update/delete, unauthorized role/owner field assignment and unsafe response projection using independent HTTP clients and real persistent state.
+  - Criteria: Authentication is independently verified before using a principal, and authorization is checked for every required object/action/property, including denial paths and privileged exemptions. Each rejected mutation leaves authoritative database state unchanged and private fields never appear in public serialized results. A caller-chosen header or tenant label, client guard, CORS setting or RLS bypass-role test does not qualify as proof; local credential, cookie/CSRF and public TLS limitations are explicit.
   - Evidence: Synthetic account/session fixture, role-tenant-method-field access matrix, HTTP negative and positive tests with effective principal and safe status/error outputs, credential-lifecycle observations, data state checks and threat/remaining-risk rationale.
 
 - **APP3-AS3** (required transactional service invariant and idempotent replay)
   - Outcomes: APP3-O5, APP3-O7, APP3-O8, APP3-O9, APP3-O13, APP3-O14
-  - Work: Implement a domain operation requiring at least two related PostgreSQL changes, enforce a database-backed business invariant and reproduce two concurrent requests with a controlled conflict. Design a scoped idempotency-key or equivalent replay policy for one side-effecting endpoint; inject duplicate same-key submissions, key reuse with different payloads, serialization/transaction failure and a post-commit lost-response scenario. Propose or demonstrate a bounded durable outbox/worker approach for dependent background work with explicit at-least-once delivery and retry behavior.
-  - Criteria: No partial commit or unprotected cross-tenant mutation violates the domain invariant, including concurrent requests. The application uses a correctly scoped transaction connection and rollback/commit decisions; recognized serialization failures trigger bounded full-unit retry where safe. Same-key duplicates follow a documented deterministic/accepted-outcome policy, mismatched payloads are rejected, and network uncertainty does not lead to indiscriminate repeat effects. A durable outbox is not misdescribed as exactly-once external delivery. Failure cases inspect real database state, not only mocked repository returns.
+  - Work: Extend **the same source** with a real local PostgreSQL multi-write transaction and correct connection scope. Coordinate **two actual API requests** through independent DB sessions, reproducing stale write/invariant contention and verifying a corrected database/HTTP result. Implement tenant/principal/operation-scoped idempotency with a request fingerprint and duplicate-in-flight policy. Inject two same-key requests, conflicting payloads, a **post-commit lost response**, a bounded retry and a real transactionally durable outbox/worker intent or rigorously justified equivalent. Inspect replay, redelivery and restart behavior without promising exactly-once remote effects.
+  - Criteria: Real DB rows and the two-client trace show that conflict and rollback preserve the invariant. All related work uses an owned scoped transaction connection; safe full-unit serialization retries cannot repeat non-idempotent external effects. Concurrent replay under the same key is handled deterministically, mismatched payloads are rejected, post-commit uncertainty is reconciled, and durable work is demonstrably restart-observable under its declared assumptions. At-least-once dispatch is not mislabeled exactly-once.
   - Evidence: Real local PostgreSQL migration/schema fixtures, versioned service/repository source, concurrent request interleaving table, transaction and idempotency policies, before/after state checks, redelivery/outbox or equivalent design evidence and regression tests.
 
 - **APP3-AS4** (required versioned api contract, independent consumer and dependency boundary)
   - Outcomes: APP3-O1, APP3-O3, APP3-O4, APP3-O10, APP3-O11, APP3-O13, APP3-O14
-  - Work: Publish a machine-readable OpenAPI contract and executable examples for a route family, then apply a bounded version change or field/status evolution. Run at least two independent local consumers (old and revised behavior) and classify compatible and breaking cases. Add one local synthetic outbound dependency whose URL is fixed/allowlisted, response validated and failure bounded; test timeout, invalid upstream shape, 429/5xx or rejected transport and an unsafe redirect/target scenario. Explain how structured problem details and retry policy support consumers without exposing internal secrets.
-  - Criteria: OpenAPI/request/response examples match observed framework behavior including authentication, errors, pagination and changed fields. Tests identify a real incompatibility before correction, preserve supported consumers or clearly document an unavoidable break, and do not assume TypeScript interfaces enforce external JSON. Outbound calls have controlled destinations, response/body/time limits and justified retry eligibility; SSRF/redirect or secret leakage paths are rejected in the local fixture. No unsafe replay of a non-idempotent remote mutation is claimed safe.
+  - Work: Publish executable OpenAPI and real examples for the **evolving service**, then apply one versioned field/status/operation change and run **independent old and revised clients** with normal, forbidden, invalid, conditional and pagination cases. Add a synthetic local outbound dependency with fixed/allowlisted destination, checked responses and actual byte/time budgets. Inject timeout, 429/5xx, malformed upstream shape, rejected transport and disallowed redirect or target pivot; verify bounded retries. If declaring RFC 9457 problems, inspect required shape and `application/problem+json` rather than label arbitrary JSON conformant.
+  - Criteria: Machine-readable docs and actual serialized HTTP agree on methods, statuses, auth, public fields, preconditions and error media. The old/new test exposes a real compatibility issue that is repaired or deliberately declared breaking. Untrusted upstream payload, location, redirect and headers are controlled; response size/deadline and side-effect retry eligibility are bounded, secrets never leak and an allowlist based only on URL prefix is not accepted as SSRF protection.
   - Evidence: OpenAPI and validation output, old/new consumer source with normal/negative tests, compatibility matrix and migration note, mocked/local upstream failure and SSRF tests, documented problem/error codes and transport-boundary rationale.
 
 - **APP3-AS5** (required background work, fault handling and operability drill)
   - Outcomes: APP3-O2, APP3-O8, APP3-O9, APP3-O10, APP3-O12, APP3-O14, APP3-O15
-  - Work: Extend the local service with a bounded background/dispatch workflow, structured request/job correlation, valid configuration and clear liveness/readiness signals. Inject a failed external call after the database commit, an exhausted retry/dead-letter condition, a lost or duplicated job acknowledgement, a missing dependency on startup, an in-flight request during shutdown and an unrelated request that must still complete safely. Capture a causal incident timeline and repair at least one root cause, with an explicit account of nonrecoverable observations.
-  - Criteria: The policy distinguishes durable queued work from in-process tasks, documents retry and poison-message handling, and prevents silent successful responses when required work is not accepted. The service fails fast on bad configuration, reports readiness and health based on actual local checks, drains or rejects bounded work on shutdown, and releases DB and other resources. Logging is correlated and sanitized; failure and recovery are demonstrated with reproducible fixture evidence rather than claims of production high availability. Corrective code has meaningful regression coverage.
+  - Work: Extend **the same service** with a real durable/outbox or appropriately qualified background workflow, safe request/job correlation, honest health/readiness, bounded outgoing timeouts and in-flight shutdown. Inject a database-committed but dependency-failed operation, duplicate/redelivered job, lost acknowledgement, exhausted retry, missing startup dependency and shutdown with an active HTTP request and queued work. Reproduce a specific lifecycle/failure defect and use sanitized HTTP/DB/job observations to test a causal repair and restart.
+  - Criteria: Post-commit failures preserve committed DB truth and pending/recoverable work according to an explicit policy; in-process tasks are not misrepresented as durable, nor at-least-once work as exactly-once. Invalid settings fail before unsafe listen, readiness reflects observed dependencies, bounded drain/stop owns HTTP, DB and worker resources, and correlation avoids personal/secret payloads. A local timeline supports the proposed cause and corrected regression without fictitious production-availability claims.
   - Evidence: Job/outbox fixtures, failure timeline and redacted logs, configuration and state machine, tests for retry/duplicate/shutdown/dependency outage, bounded timing/health observations, repair diff and limitations report.
 
 - **APP3-AS6** (required security, concurrency and service incident regression review)
   - Outcomes: APP3-O3, APP3-O4, APP3-O5, APP3-O6, APP3-O7, APP3-O8, APP3-O9, APP3-O12, APP3-O13, APP3-O14, APP3-O15
-  - Work: Audit a supplied or evolving API with deliberate flaws in object/property authorization, request schema/canonicalization, rate/resource bounds, transaction connection scope, dependency handling and diagnostic output. Select applicable OWASP API risks; construct independent normal/denied/concurrent/oversized fixture requests and a controlled production-style incident trace; repair at least two meaningful defects without weakening documented contracts. Verify via domain unit tests, framework HTTP injection, real PostgreSQL integration, consumer contract checks and negative-path/security regression tests.
-  - Criteria: The audit identifies verifiable trust boundaries, not merely an OWASP checklist label. Each fixed defect has failing-before/passing-after tests, captures database/object/role evidence as applicable and avoids dangerous handling of synthetic credentials or raw stack/error leakage. Body/page/work limits, CSRF/cookie/CORS policy and multi-tenant property exposure are evaluated against the actual chosen design. The incident diagnosis states what logs/tests support and where evidence is missing; a green test count alone is insufficient.
+  - Work: Perform an **independent adversarial cross-layer audit** of the already assessed service rather than copying AS2/AS3/AS4 results. Select **two newly seeded distinct defects** that arise from interaction between mechanisms—for example a response-property exposure after an API schema evolution and an inconsistent transaction/idempotency/outbox retry after dependency failure. Use current OWASP API object/property/function authorization and relevant injection, CSRF/cookie, SSRF, unsafe upstream and resource-exhaustion risks to build a targeted matrix. Reproduce failure through independent HTTP requests and **real PostgreSQL state** where applicable, repair both root causes and run relevant domain, Fastify, contract, DB and fault regressions.
+  - Criteria: At least two **new cross-layer failure cases**, not simply earlier successful AS2–AS5 traces, have failing-before/passing-after evidence and checked authoritative state. Repaired security boundaries prevent forbidden object/property exposure, invalid work and unsafe retries without breaking legitimate consumers; reproducible diagnostics distinguish facts from hypotheses and missing telemetry. A single green count, generic OWASP checklist or local scripted test is not claimed to certify production security.
   - Evidence: Threat-and-test matrix, synthetic fixtures, observed exploit/failure steps, layered tests and database-state comparisons, sanitized causal incident notes, corrected code, compatibility checks and remaining-risk statement.
 
 - **APP3-AS7** (required integrated typed api service and independent engineering defense)
   - Outcomes: APP3-O1, APP3-O2, APP3-O3, APP3-O4, APP3-O5, APP3-O6, APP3-O7, APP3-O8, APP3-O9, APP3-O10, APP3-O11, APP3-O12, APP3-O13, APP3-O14, APP3-O15, APP3-O16
-  - Work: Deliver one cohesive independently reproducible Fastify/TypeScript and PostgreSQL service for a bounded synthetic multi-tenant domain, integrating requirements traceability, typed request/response schema and portable HTTP contract, actual authentication and server-side object/property/tenant authorization, domain-adapter boundaries, transactional concurrency safety, idempotency and justified background work, safe dependency handling, versioned OpenAPI, observability, fault and shutdown policy. Reuse qualifying components from APP3-AS1–AS6 rather than build unrelated servers. Handle an unfamiliar bounded permission or business-rule change or incident, retest the relevant layers and defend why each mechanism belongs to the framework, the domain, Node or database.
-  - Criteria: A reviewer can provision the documented free local dependencies, start disposable PostgreSQL and the loopback API using synthetic users, execute reproducible positive and negative clients, observe a real transaction race and denial of cross-tenant/property access, and verify cleanup without paid hosting, a React app or live identity provider. The old/new contract and error behavior are accurate; duplicate and partial-failure cases preserve stated invariants and do not overclaim exactly-once external delivery. The unfamiliar change produces inspectable working code and regression tests. The learner independently defends boundary, privacy, transaction, retry and operations trade-offs and states verified versus unsupported production guarantees.
-  - Evidence: Versioned service source, manifest/lockfile and local prerequisite recipe, SQL migrations/seeds and disposable DB setup, API/OpenAPI requirements and role matrix, independent clients, negative/normal/concurrency/replay/incident test logs, sanitized request correlation, clean-checkout and repair/change records, and accessible written/recorded/live technical defense.
+  - Work: Deliver **one coherent cumulative Fastify/TypeScript/PostgreSQL service** integrating prior approved AS1–AS6 contracts and evidence. Show authentic sessions, server-side tenant/object/property policy, actual concurrent transaction/replay behavior, bounded outbound dependencies, versioned clients, correlated fault observations and ready/drain/stop conditions. **Reference earlier accepted** tests and artifacts instead of rebuilding seven apps or duplicating reports. Respond to an unfamiliar but bounded permission, data invariant, API change or incident, reproduce and correct it, retest impacted layers and defend the framework/domain/Node/PostgreSQL distinctions from a clean synthetic local checkout.
+  - Criteria: A reviewer can reproduce the free local service, actual old/new clients, disposable Postgres state, denied access, concurrency/replay, real failure/shutdown, safe response and unfamiliar change. Each material fault has observed before/after correction, and **AS7 cannot excuse missing or failed AS1–AS6 evidence**. Unsafe session data, tenant/property exposure, duplicate business effects, unresolved resource leaks or irreproducible required source block passing. No untested exactly-once, global security or production uptime guarantee is asserted.
+  - Evidence: One versioned local source/fixture bundle with pinned dependency/DB prerequisites and clean run/test/stop steps; an **outcome-to-accepted-AS1–AS6 evidence index** instead of copied logs; independent changed API/security/transaction/incident observations, unfamiliar change diff and targeted regressions, material caveats and a reviewable written, recorded or equivalent technical defense.
 
 ### Completion decision and revision safety
 
@@ -745,17 +663,17 @@ technical defense, observations, limitations and
 decision provenance in accordance with
 [OEE Evidence Rules](../../spec/evidence-rules.md).
 
-This course replaces APP3's legacy course-format
-assessment contract and direct APP1 prerequisite with
-a new OEE `v0.2.0` **draft**. Earlier APP3 completions
-remain attached to their prior course revision and
-cannot silently satisfy these new outcomes. APP3 is
-not automatically `tested` or `verified` simply
-because repository validators and CI pass.
-APP5–APP9 and all APP electives now publish their own separately
-migrated `v0.2.0` drafts. Downstream OEE Workspace,
-content/resource and 0xNAND source/evidence pins still require
-deliberate revision review; they are not automatically upgraded.
+APP3 remains an OEE `v0.2.0` **draft** with
+the established APP19/APP21/APP4 direct prerequisites
+and seven independent summative decisions. The earlier
+APP1 prerequisite change is already reflected in the
+published catalog, which also includes APP5–APP9 and
+the electives. This editorial reassessment does not
+promote the course to `tested` or `verified`, change
+downstream course acceptance, or retroactively certify
+earlier learner work. Historical source/spec decisions
+and OEE Workspace/content/0xNAND revision pins require
+explicit review rather than automatic substitution.
 
 ### Public non-mandatory study references
 
