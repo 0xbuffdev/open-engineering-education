@@ -69,23 +69,37 @@ class SEF9MigrationTests(unittest.TestCase):
             covered.update(refs)
         self.assertEqual(covered, defined)
 
-    def test_twelve_modules_retain_teaching_with_outcome_references(self):
+    def test_competency_owned_modules_map_all_outcomes_without_a_fixed_quota(self):
         source = COURSE.read_text(encoding="utf-8")
+        learning = source.split("\n## Learning outcomes\n", 1)[1].split(
+            "\n## Modules\n", 1
+        )[0]
+        known = set(re.findall(r"(?m)^- \*\*(SEF9-O\d+):\*\*", learning))
         content = source.split("\n## Modules\n", 1)[1].split(
             "\n## Completion requirements\n", 1
         )[0]
         modules = list(re.finditer(r"(?m)^### Module (\d+) — ", content))
-        self.assertEqual([int(m.group(1)) for m in modules], list(range(1, 13)))
+        self.assertTrue(modules)
+        self.assertEqual(
+            [int(m.group(1)) for m in modules],
+            list(range(1, len(modules) + 1)),
+        )
+        covered = set()
         for index, module in enumerate(modules):
             stop = modules[index + 1].start() if index + 1 < len(modules) else len(content)
             block = content[module.start():stop]
             self.assertEqual(block.count("#### Outcomes"), 1)
             self.assertEqual(block.count("#### Lessons"), 1)
             mapped, lessons = block.split("#### Lessons", 1)
-            self.assertRegex(mapped, r"(?m)^- SEF9-O\d+")
+            ids = re.findall(r"(?m)^- (SEF9-O\d+)$", mapped)
+            self.assertTrue(ids)
+            self.assertEqual(len(ids), len(set(ids)))
+            self.assertTrue(set(ids).issubset(known))
+            covered.update(ids)
             numbers = [int(n) for n in re.findall(r"(?m)^(\d+)\. ", lessons)]
             self.assertTrue(numbers)
             self.assertEqual(numbers, list(range(1, len(numbers) + 1)))
+        self.assertEqual(covered, known)
 
     def test_prerequisite_and_human_ai_trust_requirements_remain(self):
         text = COURSE.read_text(encoding="utf-8")

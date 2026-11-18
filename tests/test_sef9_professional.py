@@ -28,20 +28,6 @@ PRIOR_ASSESSMENTS = (
     "450a473a", "de6d4cb3", "26e47dad",
 )
 
-EXPECTED_MODULES = (
-    "From Need to Work Item",
-    "Professional Ethics, Duty of Care and Honest Escalation",
-    "Planning & Tracking Work",
-    "Recording Decisions",
-    "Software Licensing, Copyright and Provenance",
-    "Privacy, Confidentiality and Data Stewardship",
-    "Accessible Communication and Inclusive Engineering Handoffs",
-    "Code Review as Practice",
-    "Working with AI Assistants",
-    "Verifying & Governing AI-Generated Work",
-    "Trust Boundaries in AI-Assisted Work",
-    "Feature Delivery Workflow",
-)
 
 
 def checksum(text: str) -> str:
@@ -112,27 +98,83 @@ class SEF9ProfessionalTests(unittest.TestCase):
         for i in range(17, 21):
             self.assertRegex(blocks[-1], rf"(?m)^  - Outcomes: .*SEF9-O{i}")
 
-    def test_twelve_ordered_teaching_modules_have_outcomes_and_lessons(self):
+    def test_teaching_order_matches_genuine_professional_dependencies(self):
         _, learning, modules, _ = sections()
         known = set(re.findall(r"(?m)^- \*\*(SEF9-O\d+):\*\*", learning))
         heads = list(re.finditer(r"(?m)^### Module (\d+) — (.+)$", modules))
-        self.assertEqual([int(m.group(1)) for m in heads], list(range(1, 13)))
-        self.assertEqual(tuple(m.group(2) for m in heads), EXPECTED_MODULES)
-        count = 0
+        self.assertTrue(heads)
+        self.assertEqual(
+            [int(m.group(1)) for m in heads],
+            list(range(1, len(heads) + 1)),
+        )
+        first = {}
         for i, head in enumerate(heads):
-            stop = heads[i+1].start() if i+1 < len(heads) else len(modules)
-            block = modules[head.start():stop]
-            self.assertEqual(block.count("#### Outcomes"), 1)
-            self.assertEqual(block.count("#### Lessons"), 1)
-            refs, lessons = block.split("#### Lessons", 1)
-            linked = set(re.findall(r"(?m)^- (SEF9-O\d+)$", refs))
-            self.assertTrue(linked)
-            self.assertTrue(linked.issubset(known))
-            nums = [int(m) for m in re.findall(r"(?m)^(\d+)\. ", lessons)]
-            self.assertTrue(nums)
-            self.assertEqual(nums, list(range(1, len(nums)+1)))
-            count += len(nums)
-        self.assertEqual(count, 88)
+            end = heads[i+1].start() if i+1 < len(heads) else len(modules)
+            content = modules[head.start():end]
+            self.assertEqual(content.count("#### Outcomes"), 1)
+            self.assertEqual(content.count("#### Lessons"), 1)
+            refs, lessons = content.split("#### Lessons", 1)
+            mapped = re.findall(r"(?m)^- (SEF9-O\d+)$", refs)
+            self.assertTrue(mapped)
+            self.assertEqual(len(mapped), len(set(mapped)))
+            self.assertTrue(set(mapped).issubset(known))
+            for ref in mapped:
+                first.setdefault(ref, i)
+            numbers = [int(n) for n in re.findall(r"(?m)^(\d+)\. ", lessons)]
+            self.assertTrue(numbers)
+            self.assertEqual(numbers, list(range(1, len(numbers) + 1)))
+            self.assertEqual(
+                len(re.findall(r"(?m)^\d+\. \*\*.+?\*\* — \S", lessons)),
+                len(numbers),
+                "each lesson needs a substantive, observable objective",
+            )
+        self.assertEqual(set(first), known)
+        for earlier, later in (
+            ("SEF9-O1", "SEF9-O3"),   # requirements before issue planning
+            ("SEF9-O2", "SEF9-O3"),   # acceptance before work-item decomposition
+            ("SEF9-O3", "SEF9-O14"),  # traceable work before feature delivery
+            ("SEF9-O5", "SEF9-O14"),  # decision history before integration
+            ("SEF9-O17", "SEF9-O14"), # ethics before release
+            ("SEF9-O18", "SEF9-O14"), # rights before release
+            ("SEF9-O19", "SEF9-O14"), # privacy before release
+            ("SEF9-O20", "SEF9-O14"), # accessibility before release
+            ("SEF9-O6", "SEF9-O10"),  # evidence-based review before AI audit
+            ("SEF9-O8", "SEF9-O10"),  # assistant scope before verified proposal
+            ("SEF9-O12", "SEF9-O10"), # instruction authority before adopting code
+            ("SEF9-O13", "SEF9-O10"), # permissions before implementation
+            ("SEF9-O10", "SEF9-O14"), # verified repair before final delivery
+            ("SEF9-O9", "SEF9-O14"),  # genuine proposal before final delivery
+        ):
+            with self.subTest(preparation=f"{earlier} before {later}"):
+                self.assertLess(first[earlier], first[later])
+
+    def test_non_ai_duties_and_ai_authorization_are_independently_taught(self):
+        _, _, modules, _ = sections()
+        for requirement in (
+            "without AI", "foreseeable harm", "escalation",
+            "copyright", "SPDX", "redistribution", "quarantine",
+            "data map", "retention", "redacted", "accessibility",
+            "non-color-only", "independent reviewer",
+            "untrusted", "prompt injection", "least privilege",
+            "authentic", "recorded", "unknown", "without assistant",
+            "predeclared", "unassisted", "model", "permission",
+        ):
+            with self.subTest(requirement=requirement):
+                self.assertIn(requirement.lower(), modules.lower())
+        # Trust authority and permissions must be addressed before an
+        # assistant's proposal is evaluated as if it were executable truth.
+        self.assertLess(
+            modules.index("**Trusted task directions versus repository content**"),
+            modules.index("**Real versus recorded assistant evidence**"),
+        )
+        self.assertLess(
+            modules.index("**Least privilege and unapproved change detection**"),
+            modules.index("**Tests before trusting a proposed diff**"),
+        )
+        self.assertLess(
+            modules.index("**Tests before trusting a proposed diff**"),
+            modules.index("**A real seeded proposal and truthful setup**"),
+        )
 
     def test_new_assessment_is_professional_and_does_not_add_another_project(self):
         source, _, _, completion = sections()
