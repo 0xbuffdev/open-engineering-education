@@ -15,11 +15,11 @@
 
 **Design, secure, measure and operate the HTTP delivery boundary around an actual application without transferring business authorization from the origin to an untrusted edge.** This optional specialization is not a requirement of APP9 or core graduation. [APP3](APP3.md) already teaches service identity, tenant authorization and database correctness; [APP7](APP7.md) already teaches basic HTTPS/reverse-proxy deployments. APP14 develops advanced intermediary correctness, shared-cache isolation, admission fairness and recovery, not another introductory API or cloud provisioning course.
 
-Start with one protected local APP3 service backed by PostgreSQL, a public static asset route and a replaceable gateway such as Caddy, Nginx, Envoy or a similarly auditable implementation. Reproduce all mandatory behavior on a free local container/process environment, including two separate synthetic tenants, direct-origin negative requests and one real state-changing operation. CDN providers, DNS global points of presence, edge workers, multiple regions and managed WAFs are *comparison topics*, never required purchases or prerequisites. Distinguish local emulator/simulation evidence from actual global distributed behavior.
+Start with one APP3/PostgreSQL backend, an authenticated protected write, public mutable response, immutable asset and **a local gateway plus real shared-cache layer**. Nginx OSS with `proxy_cache` is one free route. Caddy/Envoy or another reverse proxy remains valid **when paired with a documented, observed free shared cache**; don't assume it has native caching merely because it sets Cache-Control headers. Use two synthetic tenants, independently controlled origin requests, verified local TLS, disposable processes and bounded workload. Paid CDN/edge workers, global DNS, multiple regions and managed WAF are *comparison topics*, not prerequisites. Local data never prove globally deployed performance.
 
 Trust is hop-specific: do not accept client-supplied `Forwarded`, `X-Forwarded-For`, role or tenant headers as authenticated facts; re-establish TLS peer identity and maintain server-side authorization. Apply RFC 9111 shared-cache rules with extra conservative protection for personalized content, and observe actual origin mutations before claiming cache freshness or failed-write safety. Rate limits cannot replace authorization and may be unfair when client identities are ambiguous. Read-only stale fallbacks do not prove current state, and proxy health checks do not establish database consistency. Operate only owned or disposable local test systems; do not load-test or attack third-party services.
 
-Seventeen observable outcomes are developed in thirteen deliberately varied modules and evaluated through seven cumulative mandatory summative assessments. The source remains `draft`: machine checks alone do not certify pedagogy or production readiness.
+**Instructional sufficiency:** All 17 outcomes use 13 conceptually distinct modules and seven independent summative assessments. Every new edge protocol, trust or cache mechanism needs a worked HTTP/identity model, a running observed example, a falsifying malicious or failed variant, corrective feedback and real system evidence before independent judgment. Require **an actual free shared-cache implementation** such as Nginx OSS `proxy_cache` or another documented component, not a reverse proxy returning cache headers without real storage. RFC 9111 permits certain Authorization-bearing responses in shared caches under special directives; this course deliberately excludes **all personalized tenant responses** regardless of permissive directives and proves the exclusion with a second account. Fewer lessons do not mean fewer competencies, and `draft` source CI cannot establish learner mastery or production readiness.
 
 ## Learning outcomes
 
@@ -56,19 +56,15 @@ Seventeen observable outcomes are developed in thirteen deliberately varied modu
 
 #### Lessons
 
-1. **Gateway role and evolution** — Contrast reverse proxies, API gateways, CDNs and programmable edge services with application server responsibilities.
+1. **Intermediary history and independent authority** — Compare the evolution of reverse proxies, shared caches/CDNs and programmable edge using one real user task; show why none can substitute for origin-side object/tenant authorization.
 
-2. **One protected user journey** — Select an APP3 service with synthetic tenants, safe public assets and a mutation that must remain authorized.
+2. **One authorized mutable task and public representations** — Select an APP3/PostgreSQL protected read/write, a public versioned asset and a mutable public GET; introduce two synthetic tenants and one committed-but-uncertain mutation.
 
-3. **Flow and trust diagram** — Trace client, DNS, TLS, gateway, cache, upstream and database ownership across hop boundaries.
+3. **Actual trust and resource flow at every hop** — Trace TLS peer, gateway, **real cache**, origin, database, authenticated account and untrusted forwarded claims; predict what a cache HIT cannot prove about the server.
 
-4. **Threat and failure assumptions** — Enumerate host spoofing, credential replay, cache leaks, origin bypass and request amplification.
+4. **Threat model with falsifiable negative cases** — Identify path/authority confusion, cache deception and poisoning, direct-origin bypass, forged proxy metadata, post-commit reply loss and resource exhaustion, assigning independent HTTP/SQL oracles.
 
-5. **Edge placement decisions** — Compare gateway-only, CDN-plus-gateway and optional worker paths without introducing unneeded infrastructure.
-
-6. **Local evidence baseline** — Version an APP7-like container/process deployment and capture origin-only latency and negative authorization.
-
-7. **Developer and operator needs** — State deploy, diagnose and rollback needs with explicit availability and privacy limits.
+5. **Pinned free reference and origin-only baseline** — Run local origin/gateway with inspectable releases and trusted HTTPS, measure authorized/denied traffic and local workload, and explicitly exclude global CDN claims.
 
 *Optional practice — architecture review:* Identify a falsely trusted edge header and correct the origin-owned authority model.
 
@@ -83,21 +79,21 @@ Seventeen observable outcomes are developed in thirteen deliberately varied modu
 
 #### Lessons
 
-1. **Request-target forms** — Explain absolute, origin and authority request targets and their consequences for route matching.
+1. **Request-target forms and authority interpretation** — Trace origin-form, absolute-form, CONNECT authority-form and HTTP/2 :authority translation through actual gateway/origin requests, rejecting a mismatched Host.
 
-2. **Path normalization** — Test percent encoding, dot segments, doubled separators and case handling before backend path resolution.
+2. **Path normalization, suffix confusion and private routes** — Vary percent-encoding, dot segments, slashes and file-like suffixes at the gateway and backend, then prove a private resource is never misclassified or shared-cached.
 
-3. **Host and authority enforcement** — Reject conflicting Host, scheme and authority inputs including misdirected virtual hosts.
+3. **Host, SNI and authority disagreement** — Challenge Host, :authority, TLS name and forwarded scheme in a controlled client; show explicit rejection rather than a wrong virtual host, and explain 421 as applicable.
 
-4. **Method and status correctness** — Preserve safe methods, mutation expectations, 404, 405, 413, 429, 502 and 503 distinctions.
+4. **Method, 4xx/5xx and protected mutation semantics** — Distinguish GET/HEAD, safe/error methods, 404/405/413/429/502/503 and a committed protected POST, with correct refusals and no unexpected replay.
 
-5. **Hop-by-hop metadata** — Remove Connection-nominated and other hop-by-hop headers and avoid trusting client-provided routing fields.
+5. **RFC 9112 framing and hop-by-hop removal** — Remove Connection-nominated headers; test conflicting Content-Length/Transfer-Encoding and gateway/origin interpretation on a disposable lab, rejecting ambiguity to prevent hidden request desynchronization.
 
-6. **Body and header budgets** — Set explicit size, field count and request duration limits with controlled error behavior.
+6. **Finite request and parser resource budgets** — Enforce size, count, header/body read time and upstream allocation limits, observing oversized and slow request handling without backend resource leak.
 
-7. **Upstream selection** — Route two service paths and one public asset class while proving forbidden routes remain inaccessible.
+7. **Routed API, public assets and safe origins** — Route two API paths and public assets while verifying normalized identity, private/admin route denial and real direct-origin SQL authorization independent of edge path rules.
 
-8. **Desynchronization threat** — Explain conflicting message length/framing and why intermediary/backend parsing disagreement is dangerous.
+8. **Differential gateway/origin request interpretation** — For safe and malformed locally owned fixtures, compare method/target/body observed at each hop and prove no unintended second request or unauthorized database side effect.
 
 *Optional practice — hostile request probe:* Produce raw valid and invalid requests and compare observed gateway and origin interpretation.
 
@@ -113,21 +109,21 @@ Seventeen observable outcomes are developed in thirteen deliberately varied modu
 
 #### Lessons
 
-1. **Certificate identity** — Trace certificate trust, SAN hostname matching, renewal and the actual peer each hop authenticates.
+1. **Certificate chain, SAN and individual TLS peer** — Test valid and invalid local certificate/hostname chains, explaining what the browser actually authenticates and what the gateway must authenticate upstream.
 
-2. **HTTPS termination modes** — Compare gateway termination with encrypted re-encryption and documented upstream verification.
+2. **Termination, re-encryption and backend identity** — Compare verified HTTPS upstream with protected same-host transport, recording TLS validation and the risk of a publicly reachable cleartext origin.
 
-3. **Trusted proxy configuration** — Strip untrusted Forwarded and X-Forwarded-* metadata before constructing an authenticated hop chain.
+3. **Trusted proxy allowlist, not client-sent identity** — Use documented proxy trust settings and forged Forwarded/X-Forwarded-* values to show only configured peers can contribute trusted metadata, never object authorization.
 
-4. **Client address ambiguity** — Distinguish socket peer, proxy asserted IP and verified principal for abuse and audit decisions.
+4. **Client source IP, NAT and verified principal** — Contrast socket peer, trusted proxy address and authenticated user in a NAT/two-account trace; make clear that IP-based fairness is not an identity proof.
 
-5. **Origin network restriction** — Demonstrate that an origin cannot rely on a gateway header alone to block bypass traffic.
+5. **Direct-origin bypass and server-held denial** — Attempt direct-origin forged tenant/role and protected field access on a local disposable network, inspecting independent PostgreSQL rows even if gateway controls are bypassed.
 
-6. **mTLS use cases** — Evaluate mutually authenticated upstreams while distinguishing machine identity from end-user permissions.
+6. **Optional mutual TLS and service versus user** — Explain optional mTLS trust and machine/key rotation from a local fixture without making mTLS mandatory; prove a verified service cannot bypass app user policy.
 
-7. **Redirects and HSTS** — Test HTTPS redirect and browser policy only where the local hostname and certificate support claims.
+7. **Redirect and HSTS without host injection** — Test an owned HTTPS hostname, invalid Host redirect and actual HSTS limitations, avoiding claims about public preload/long-term browser policies not tested.
 
-8. **Secrets and certificates in logs** — Redact key material, tokens and sensitive URL components from gateway and upstream diagnostics.
+8. **Protect secrets in proxy and origin evidence** — Inspect sanitized errors and traces for Cookie, bearer, full private query and key bytes, verifying diagnostic provenance without leaking protected source.
 
 *Optional practice — forged-proxy rehearsal:* Send contradictory address and scheme headers and verify server authority remains unchanged.
 
@@ -143,19 +139,19 @@ Seventeen observable outcomes are developed in thirteen deliberately varied modu
 
 #### Lessons
 
-1. **Gateway credential roles** — Contrast gateway access control, bearer verification, opaque session introspection and backend decisions.
+1. **Gateway credential check versus origin authority** — Compare accepted edge session/JWT and server-side per-object/action/property/tenant checks, including a forbidden write by a valid user.
 
-2. **Principal propagation** — Pass minimal authenticated identity through a documented trusted path without accepting arbitrary headers.
+2. **Minimal verified principal across a trusted hop** — Strip attacker-supplied X-User/X-Tenant and use a verifiable trusted channel or application-owned session; prove raw client identity headers cannot grant authority.
 
-3. **Audience and expiry** — Verify token audience, expiry, issuer and key-rotation decisions at the appropriate responsibility boundary.
+3. **Issuer, audience, expiry and key/permission freshness** — Exercise an expired or wrong-audience credential and stale credential-cache case; distinguish token verification from current dynamic object rights.
 
-4. **Dynamic revocation** — Show how cached identity or session state can outlive a revoked account and choose bounded revalidation.
+4. **Revocation versus cached authentication response** — Revoke a test account and compare edge/direct-origin paths, including stale cached state, then choose bounded revalidation and privacy-safe denial.
 
-5. **Origin role and tenant rules** — Run two synthetic tenants and reject cross-object and forbidden-field requests directly at origin.
+5. **Actual server-side tenant and property decision** — Run two independent synthetic accounts against APP3 APIs, inspecting direct HTTP and PostgreSQL after unauthorized object and write-property attempts.
 
-6. **Preflight and CORS** — Test browser-origin policy as a client exposure control rather than a substitute for authentication.
+6. **CORS, preflight and cookie CSRF are separate** — Demonstrate browser preflight and a controlled cross-site credentialed mutation; distinguish CORS exposure from real CSRF/session authorization.
 
-7. **Error shape and privacy** — Keep 401/403 responses distinguishable without returning secrets, internal routes or sensitive policy detail.
+7. **Understandable 401/403 without secret disclosure** — Preserve correct refusal and accessible error behavior without leaking private routes, tokens or caching role-dependent denial across users.
 
 *Optional practice — direct-origin attack:* Bypass the configured gateway in an isolated local lab and prove backend permission checks still reject.
 
@@ -170,21 +166,21 @@ Seventeen observable outcomes are developed in thirteen deliberately varied modu
 
 #### Lessons
 
-1. **Cache storage versus reuse** — Distinguish private and shared caches, freshness, validation and stored representation eligibility.
+1. **Real shared cache storage and reuse** — Use Nginx OSS proxy_cache or another **real free shared-cache layer**, observe HIT/MISS/Age and origin SQL/revision; Caddy reverse_proxy alone is not evidence of response caching.
 
-2. **RFC 9111 authorization rules** — Verify shared caches cannot reuse authenticated responses absent explicit permitted directives and safe design.
+2. **RFC 9111 authenticated-response shared-cache exceptions** — Work through public, s-maxage and must-revalidate directives for responses to Authorization requests, then enforce stricter *no personalized response in shared cache* policy with real two-user evidence.
 
-3. **Cache-Control directives** — Exercise private, no-store, max-age, s-maxage and revalidation under precise representative requests.
+3. **Freshness arithmetic and private/no-store handling** — Calculate current Age and s-maxage/max-age, test private, no-store and explicit revalidation against actual cache state rather than treating a response header as proof of implementation.
 
-4. **Validators and 304** — Generate ETag or Last-Modified and prove conditional revalidation against a changed and unchanged representation.
+4. **Strong/weak ETag, 304 and correct object** — Test changed/unchanged resource and a wrong validator/variant counterexample, proving the origin-provided current public representation is the one validated.
 
-5. **Cache keys and Vary** — Include necessary host, path, query and representation-varying headers while avoiding accidental personalized reuse.
+5. **Vary, canonical key and unkeyed input poisoning** — Compare host/path/query, language/encoding and an unkeyed reflected header, then prevent a shared public response or redirect from being poisoned.
 
-6. **Cookie and session hazards** — Explain why a public directive on a response containing private data can leak across principals.
+6. **Cookies, private responses and cache deception** — Request a private tenant resource with static-looking suffix under two principals; show the cache cannot store/serve protected body, ETag, redirect or 4xx even with a mistaken public origin directive.
 
-7. **Partial content boundaries** — Inspect 206, Range and strong validators without incorrectly assembling unrelated byte ranges.
+7. **Range 206, If-Range and byte identity** — Test actual static file partial response, strong validator and content range, confirming a revalidated different object cannot be assembled from stale segments.
 
-8. **Stale response controls** — Model stale-while-revalidate and stale-if-error only on safely eligible representations with bounded age.
+8. **RFC 5861 bounded public stale and forbidden private stale** — Calculate stale-while-revalidate and stale-if-error bounds on safe public content, reject stale permission/private user data and show an actual controlled origin-outage difference.
 
 *Optional practice — cache-state trace:* Record MISS, HIT, validation and stale decisions against origin truth and explain mismatches.
 
@@ -199,19 +195,19 @@ Seventeen observable outcomes are developed in thirteen deliberately varied modu
 
 #### Lessons
 
-1. **Freshness budgets** — Assign public asset and mutable API freshness according to the cost of stale state.
+1. **Public and private content freshness consequences** — Use actual server revision and customer task to choose public asset/mutable content staleness and exclude dynamic tenant/permission state from shared cache.
 
-2. **Content-addressed assets** — Use hashed filenames and immutable retention with explicit HTML entrypoint update policy.
+2. **Hashed assets, retained chunks and new mutable HTML** — Open an old app tab after new deployment; find a missing lazy bundle or stale HTML and verify versioned immutable asset retention and safe entry-page policy.
 
-3. **Purge ownership** — Constrain purge operations to trusted deployers and scope keys or tags to the intended representation.
+3. **Privileged purge and precise cache key** — Exercise operator-only purge or version-key invalidation, deny untrusted purge and confirm correct host/variant entry is evicted rather than a different tenant.
 
-4. **Mutation and invalidation race** — Show a committed database mutation and concurrent reader, then bound the permitted stale interval.
+4. **Mutation, cache refill and purge timing race** — Commit a real SQL update while a public response is filling cache; show the classic purge-before-fill stale race and choose a valid versioned-key/guarded policy.
 
-5. **Cross-tenant leak scenario** — Swap test principals and vary request headers to prove authorization-dependent responses never share keys.
+5. **Two-tenant cache poisoning and private-data isolation** — Vary principal, path aliases, spoofed headers and query, then inspect actual cache/HIT/SQL to prove no other tenant's authorized body or stale permission can appear.
 
-6. **Content negotiation** — Exercise language, encoding and media variants without mixing incompatible cached representations.
+6. **Content encoding/language and ETag variant** — Test gzip/plain and two languages with Vary and actual bytes; detect a mismatched encoding, 304 or locale cache-key regression.
 
-7. **Error caching policy** — Explain when 404/5xx or maintenance pages may be cached and how to prevent persistent outage masking.
+7. **Maintenance, error cache and recovery boundary** — Trigger local 404/503 and restore origin; demonstrate denied/private/error body is not cached into persistent false success or prolonged outage.
 
 *Optional practice — stale asset recovery:* Deliberately publish a mismatched HTML-to-JavaScript release and repair via versioned asset rollout.
 
@@ -226,21 +222,21 @@ Seventeen observable outcomes are developed in thirteen deliberately varied modu
 
 #### Lessons
 
-1. **Resource accounting** — Distinguish request rate, concurrent requests, body bytes and expensive origin operations.
+1. **Measure rate, concurrency, body and SQL work** — Compare actual upstream active requests, bytes and completed operations under safe and abusive synthetic traffic instead of using 429 count alone.
 
-2. **Token and leaky buckets** — Calculate burst allowance and sustained service rate using a reproducible time-controlled workload.
+2. **Token bucket numerical trace and edge burst** — Calculate concrete refill/burst recurrence, contrast fixed window boundary and test actual enforced rate with the provided time-controlled fixture.
 
-3. **Principal selection** — Compare verified account, API key, route, network and anonymous bucket choices with NAT fairness caveats.
+3. **Authenticated principal versus spoofable IP** — Use two users behind one synthetic NAT and a forged X-Forwarded-For, choosing fair identity and independently finite anonymous/in-flight admission.
 
-4. **Policy composition** — Apply separate global, per-route and per-tenant budgets to preserve scarce upstream capacity.
+4. **Per-route, per-tenant and global protection** — Layer resource/CPU/body and request concurrency budgets; prove noisy tenant cannot starve another's legitimate completed work while service capacity remains finite.
 
-5. **429 versus 503** — Distinguish policy refusal from service overload and publish coherent retry guidance where supportable.
+5. **429/503 and finite retry guidance** — Differentiate business quota from upstream overload, check Retry-After as appropriate and ensure clients cannot amplify retries of uncertain committed writes.
 
-6. **Distributed limit coordination** — Explain local counter skew, coordinated stores and degraded availability without claiming global exactness.
+6. **Independent limiter counters versus global claim** — Run two local gateway processes or a clearly labeled counter simulation, show local limits are not globally exact and defend coordination/failure costs.
 
-7. **Cost-based abuse** — Exercise large payloads, costly queries, open-ended concurrency and replay-safe mutation denial.
+7. **Payload-cost abuse and correct POST handling** — Probe locally bounded expensive SQL, oversized bodies and slow tasks; verify permitted SQL effects and origin resource bounds, including replay-safe state-changing requests.
 
-8. **Fail-open or fail-closed** — Choose and test limiter-store failure behavior according to feature risk and operability.
+8. **Limiter storage outage, refusal and fairness recovery** — Interrupt a test limiter component and document feature-specific fail-open/closed behavior without accidentally granting tenant rights or unlimited resources.
 
 *Optional practice — fairness test:* Generate two identities and one noisy client, then inspect false denials and bypass attempts.
 
@@ -255,19 +251,19 @@ Seventeen observable outcomes are developed in thirteen deliberately varied modu
 
 #### Lessons
 
-1. **HTTP versions and multiplexing** — Distinguish transport semantics of HTTP/1.1, HTTP/2 and HTTP/3 from application authorization.
+1. **HTTP/1.1, HTTP/2 and optional HTTP/3 negotiation** — Explain application/proxy/upstream protocol conversions with actual observed HTTP/1.1/2 where supported; HTTP/3/QUIC stays optional and not falsely claimed.
 
-2. **Head-of-line and queuing** — Compare upstream connection budgets, request scheduling and response latency under contention.
+2. **Multiplexing cannot overcome origin pool limits** — Measure upstream concurrency/DB occupancy under identical client request mix, contrasting head-of-line/connections and actual origin capacity.
 
-3. **Compression eligibility** — Check content type, secret-adjacent compression risks and actual transfer size before enabling transforms.
+3. **Public compression, CPU/bytes and secret risk** — Measure gzip/Brotli where available against real static payload, cache encoding variants and private secret-adjacent reflected-content risks.
 
-4. **Range and resume** — Verify byte-range, content length, validator and unsupported range response behavior for safe files.
+4. **Range and resumed static bytes** — Test real If-Range/Content-Range and validators before/after asset revision, showing exact bytes and safe unsupported behavior.
 
-5. **Streaming and buffering** — Measure first-byte versus total duration when an intermediary buffers an SSE or chunked response.
+5. **Streaming response and buffer-caused delay** — Run actual bounded local event/chunk stream with buffering on/off, measure first-byte versus total completion and show false latency claims when the proxy coalesces output.
 
-6. **Realtime boundary** — Reuse APP12-like streaming semantics only as optional probe; the elective assesses gateway delivery, not APP12 mastery.
+6. **Gateway streaming probe versus APP12 specialist skills** — Test stream/upgrade forwarding as an optional local probe without mandating APP12's SSE/WebSocket state synchronization or a paid transport.
 
-7. **Timeouts during streaming** — Separate connect, header, idle and total budgets without prematurely killing valid bounded streams.
+7. **Connection, header, idle and total budgets** — Separate timeout phases on a slow but valid finite stream and a stalled upstream, ensuring bounded client resources without premature good-stream rejection.
 
 *Optional practice — delivery regression:* Compare identical traffic with and without compression/buffering and explain observed correctness trade-offs.
 
@@ -282,19 +278,19 @@ Seventeen observable outcomes are developed in thirteen deliberately varied modu
 
 #### Lessons
 
-1. **Measurement question** — Define client-perceived latency and upstream resource measures before choosing a gateway optimization.
+1. **Eligible user task and end-to-end outcome** — Define successful authorized operation, wrong/private cache, rejected and timed-out populations before measuring gateway speed.
 
-2. **Trace parentage** — Correlate request identifiers and span contexts while treating client-provided traces as untrusted input.
+2. **Trace IDs without trusted client baggage** — Correlate controlled client/gateway/origin requests and note wall-clock offsets; a caller's traceparent/tenant string cannot grant authority or create a safe raw label.
 
-3. **Cache attribution** — Split hit ratio, miss latency, origin compute, response bytes and backend database timings.
+3. **Actual HIT/MISS, SQL work and cache efficacy** — Measure public cache reuse, conditional revalidation, origin timing, bytes and a deliberately faster wrong-private response that must fail.
 
-4. **Load experiment design** — Pin hardware/processes, warmup, concurrency, payload mix and confidence limits for repeatability.
+4. **Matched traffic and generator saturation** — Pin process/data/warmup and tenant/payload mix, account for client-generator limits, queue and denied/failed operations rather than success-only p95.
 
-5. **Tail and uncertainty** — Report p50/p95/p99 only with meaningful sample count and describe sampling or clock uncertainty.
+5. **Sample count, per-hop timing and percentile validity** — Compute p50/p95 with explicit sample/error denominator, respecting monotonic per-hop durations instead of subtracting unsynchronized host timestamps.
 
-6. **Observer and privacy cost** — Redact identifiers and bounded logs; quantify telemetry volume and performance overhead.
+6. **Trace/log volume, cardinality and privacy** — Limit labels, bytes and CPU costs, scrub secrets/tenant IDs and compare observability overhead under load.
 
-7. **Egress and CDN fees** — Compare measured byte/request counts with hypothetical price tables, clearly labeling assumptions.
+7. **Edge cost model tied to observed data** — Build labeled local byte/request/CPU input and hypothetical CDN/egress/region charges; never call one-host timing a measured global CDN response.
 
 *Optional practice — before-and-after:* Reject an apparently faster cache when its results contain a stale or cross-user error.
 
@@ -310,21 +306,21 @@ Seventeen observable outcomes are developed in thirteen deliberately varied modu
 
 #### Lessons
 
-1. **End-to-end deadline** — Allocate upstream, gateway and client budgets without multiplying hidden retries.
+1. **Request deadlines and one end-to-end budget** — Trace client/gateway/origin/DB time and bound total retries, with a failure case where nested retries multiply attempts.
 
-2. **Safe write retries** — Require stable idempotency or explicit uncertainty handling for state-changing requests.
+2. **Lost response after true committed mutation** — Commit through actual PostgreSQL then drop HTTP response; use server-recognized idempotency or authoritative reconciliation and never retry an unsafe POST blindly.
 
-3. **Circuit and queue policies** — Bound pending work and explain open, half-open, rejected and recovering states.
+3. **Limited queues and optional circuit policy** — Simulate open/half-open/closed when a breaker is justified; compare a simpler finite in-flight/denial policy and check actual protected task outcome.
 
-4. **Health versus readiness** — Separate process liveness, dependency reachability and actual authorized request success.
+4. **Healthy gateway does not equal healthy business task** — Show green proxy /health while SQL or session auth fails; verify one legitimate and one denied request before claiming readiness.
 
-5. **Origin outage experiment** — Stop the origin during concurrent reads and writes and record what clients can trust.
+5. **Actual stopped origin, public stale and protected refusal** — Stop the origin, compare eligible public stale-if-error with private tenant or uncertain write, inspecting real cache and SQL state.
 
-6. **Failure of limiter or cache** — Analyze degraded dependency policy and ensure it does not silently grant origin permissions.
+6. **Failed limiter/cache dependencies without privilege expansion** — Shut down or fault a local component, choose bounded fail policy and independently prove tenant authorization and resource limits remain intact.
 
-7. **Multi-origin fallbacks** — Explain why healthy routing targets do not guarantee consistent mutable state or global availability.
+7. **Multiple processes, same data authority and inconsistency** — Compare two local upstreams with shared PostgreSQL or intentionally divergent fixture; explain why healthy routing does not establish coherent mutable data.
 
-8. **Reconnection and retry storms** — Exercise deterministic jitter and admission budgets after a synchronized recovery.
+8. **Restart and coordinated retry-storm containment** — Resume origin with bounded simultaneous clients, measure retries/queue, choose jitter/admission and preserve authorized committed work.
 
 *Optional practice — retry amplification:* Repair a gateway that retries a POST after an unknown committed database outcome.
 
@@ -340,21 +336,19 @@ Seventeen observable outcomes are developed in thirteen deliberately varied modu
 
 #### Lessons
 
-1. **Configuration as reviewed code** — Version routes, cache policies, limits and certificates with safe defaults and no secret literals.
+1. **Versioned gateway policy with secure defaults** — Track route, TLS peers, real cache, limiter and stale config with reproducible source and explicit no-secret deny-by-default controls.
 
-2. **Local staging promotion** — Recreate isolated configurations and check their provenance before serving synthetic test traffic.
+2. **Isolated staging source, digest and endpoint identity** — Start old/new local config and trusted CA with actual source/version provenance and accepted/denied policy checks before traffic change.
 
-3. **Change diff and dry run** — Compare intended routes, cache keys, identities and limit budgets before enabling a new version.
+3. **Negative review of route, key and trust diffs** — Compare path normalization, auth headers, private cache exclusions and limiter failure behavior, anticipating a seeded leaking configuration.
 
-4. **Canary and kill switch** — Scope a policy rollout to one test path and provide a bounded immediate reversal.
+4. **Scoped canary and tested kill switch** — Deploy one bounded synthetic route/cohort and fail back safely, distinguishing reversible proxy config from existing cached bodies and committed SQL.
 
-5. **Negative-path acceptance** — Re-run wrong tenant, forged header, private-cache and unauthorized purge tests on every release.
+5. **Recheck hostile cache, header, route and origin paths** — Use genuine tenant-negative, spoofed forwarded, static-like private suffix, unauthorized purge and real origin SQL cases at every policy change.
 
-6. **Observable rollback** — Induce a bad route or cache policy, identify the revision and verify restored correct responses.
+6. **Real bad policy, rollback and poisoned cache purge** — Introduce wrong routing or caching, reproduce an observable leak/stale response, revert and independently purge or forward-repair leftover corrupted cache state.
 
-7. **Incident timeline** — Preserve sanitized correlated gateway and origin records, limitations and observed recovery timing.
-
-8. **Forward repair** — Explain when purged caches, changed keys or client-stored assets prevent rollback alone.
+7. **Redacted operator runbook and complete repair oracle** — Document exact config version, disable/cache purge, origin SQL/tenant negative checks and measured recovery/remaining risk without secret-bearing logs.
 
 *Optional practice — unfamiliar failure:* Investigate a reviewer-injected route bypass or cache poisoning pattern without relying on the original author.
 
@@ -370,23 +364,23 @@ Seventeen observable outcomes are developed in thirteen deliberately varied modu
 
 #### Lessons
 
-1. **When edge code is justified** — Compare declarative routing and application logic with a small user-facing edge transformation.
+1. **When worker logic beats declarative config** — Compare routing/cache headers with a bounded transform/use case and document why a no-worker choice may be superior.
 
-2. **Runtime constraints** — Trace isolate, memory, CPU, storage, secrets and network limitations of representative edge workers.
+2. **Edge runtime CPU, storage and vendor assumptions** — Explain isolated workers, execution limits, secret access and billing from named docs; a local mock cannot prove real provider isolation.
 
-3. **Authorization at execution sites** — Show why a worker cannot safely make final object permission decisions from stale headers.
+3. **Worker identity cannot confer object permissions** — Challenge a supposed edge-authorized tenant header, requiring current APP3 action/object/property check on every protected origin operation.
 
-4. **Geo placement and residency** — Distinguish geolocation hints, data residency requirements and measured endpoint proximity.
+4. **Geolocation is not data-residency compliance** — Reason through geography-derived routing with explicit model jurisdiction assumptions rather than equating user IP with lawful storage location.
 
-5. **Multi-region mutable truth** — Explain invalidation, revision ownership and eventual propagation without promising linearizable reads.
+5. **Two-region stale public cache and mutable truth** — Trace hypothetical POP invalidation differences against one authoritative revision; do not mislabel eventual propagation as tested globally linearizable data.
 
-6. **Vendor and outage risk** — Evaluate proprietary APIs, configuration portability, origin fallback and provider incidents.
+6. **Cost, portability and provider-failure comparison** — Estimate CDN/edge versus local proxy on illustrated egress, requests, runbooks, dependencies and outage recovery; keep provider-specific unknowns visible.
 
-7. **Local emulation honesty** — Label simulated edge execution and never claim globally distributed timing from one host.
+7. **Unsupported global claims and revisit trigger** — Distinguish measured one-host latency from modeled POP time, regional compliance, managed WAF and global reliability; define evidence that would justify deployment later.
 
 *Optional practice — placement decision:* Reject an edge feature whose measured benefit does not exceed its complexity and security cost.
 
-### Module 13 — Integrated Gateway, Negative Tests and Defense
+### Module 13 — One Tested Gateway and Independent Unfamiliar Incident Defense
 
 #### Outcomes
 
@@ -410,79 +404,69 @@ Seventeen observable outcomes are developed in thirteen deliberately varied modu
 
 #### Lessons
 
-1. **Defensible deployment brief** — State a realistic public asset, private tenant API and replay-sensitive mutation contract.
+1. **One existing gateway, origin and accepted assessment index** — Reuse one APP3/PostgreSQL service plus real shared cache and **reference separately accepted APP14-AS1–AS6** config, SQL, traffic and security evidence rather than rebuild six projects.
 
-2. **Reproducible gateway source** — Build a local gateway in front of a real APP3 origin with verified APP7 deployment controls.
+2. **Reproduce protected routes, TLS identity and cache behavior** — Start clean free pinned proxy/cache/backend; observe public HIT/MISS/304/Vary, actual private-user exclusion, forged metadata and independent origin SQL denial.
 
-3. **Routing and identity proof** — Submit valid/forged requests at both gateway and direct origin to show trust and authorization.
+3. **Recheck fair admission, stream, unknown commit and recovery** — Run representative accepted/denied quota, buffering, post-commit lost response and bad policy recovery from previously evaluated evidence without merely trusting health dashboards.
 
-4. **Safe public cache proof** — Trace fresh, stale, conditional and invalidated representations without mixing tenant responses.
+4. **Unseen bounded gateway/security/performance fault** — Receive an assessor-supplied previously unfamiliar path normalization, private cache, poisoned key, forwarded-trust, limiter, streaming, retry or deployment defect and predict client plus authoritative origin failure.
 
-5. **Controlled rate fairness** — Exercise limits for multiple identities and inspect failure status, bounds and resource use.
+5. **Independent before/after causal correction** — Prove the new defect from independent real HTTP/cache/SQL outcomes, fix or safely contain it, and rerun only relevant prior authorization, resource and safe rollback regressions.
 
-6. **Delivery comparison** — Measure asset and streaming response behavior under fixed compression and buffer settings.
-
-7. **Outage and retry experiment** — Interrupt the origin, lose a write response and prove bounded retries and committed effect.
-
-8. **Rollback practice** — Introduce an unsafe route or cache configuration and recover with independent verification.
-
-9. **Local versus global claims** — Defend where CDN, multi-region, worker and paid-cloud behavior remains hypothetical.
-
-10. **Unfamiliar incident defense** — Diagnose a bounded injected cache, trust, rate or retry defect, reproduce and explain its repair.
-
-11. **Technical retrospective** — Present checked-in configuration, threat matrix, raw results, trade-offs and remaining risks.
+6. **Personally defended, accessible architecture decision** — Explain source/config and third-party contributions, actual versus modeled global/energy/cost claims, privacy, recovery and why simpler local gateway or CDN placement is justified.
 
 ## Completion requirements
 
-All **APP14-O1–APP14-O17** must be demonstrated across **seven required summative assessments**. One integrated local origin/gateway application may supply evidence throughout. Module practice and formative probes are instructional, not additional unpublished graduation gates.
+All **APP14-O1–APP14-O17** require **seven independently decidable assessments** on one running gateway/cache/APP3 origin. AS1 owns correct routing and trust, AS2 measured RFC 9111 shared-cache behavior plus tenant safety, AS3 fair bounded admission, AS4 HTTP delivery and honest latency, AS5 uncertain commits and policy recovery, AS6 geographic/economic alternatives, and AS7 a fresh assessor-supplied bounded incident. Accepted AS1–AS6 evidence may be referenced, not duplicated as six new projects; AS7 cannot waive prior failed work. This **elective does not affect APP9 graduation**. Other exercises are formative.
 
 - **APP14-AS1** — Controlled Routing, Proxy Trust and Origin Authorization
   - **Outcomes:** APP14-O1, APP14-O2, APP14-O3, APP14-O4, APP14-O12, APP14-O16.
-  - **Work:** Implement local gateway routes for public assets, two service endpoints and two synthetic tenants; attack ambiguous paths, forwarded metadata, direct-origin access and forbidden objects.
-  - **Criteria:** Correct routing and explicit failure statuses; no spoofed principal or proxy address grants authority; direct origin independently rejects unauthorized action, object, property and tenant requests; errors expose no secrets.
+  - **Work:** Implement a genuine local APP3/PostgreSQL backend and gateway with verified local TLS, safe static and two protected API routes. Send both direct-origin and proxied legitimate/forged requests testing path percent/dot/suffix confusion, Host/SNI/:authority, X-Forwarded-* and claimed user/tenant, invalid methods, hop-by-hop fields and controlled ambiguous Content-Length/Transfer-Encoding framing. Check actual backend SQL after unauthorized reads/writes.
+  - **Criteria:** A reviewer observes faithful or rejected method/path/authority at both hops with no unintended second request or privileged route, and a valid TLS hostname/upstream trust. Untrusted forwarded/client identity cannot alter application rights or limiter identity, and a direct-origin bypass fails real APP3 object/action/property/tenant authorization. Real independent HTTP/SQL denial and redacted traces—not an edge 2xx or CORS setting—prove safety.
   - **Evidence:** Versioned proxy/origin source, route map, test inputs, TLS/forwarding traces, rejected request/SQL results and redacted operator transcript.
 
 - **APP14-AS2** — RFC-Correct Caching, Invalidation and Private Data Defense
   - **Outcomes:** APP14-O5, APP14-O6, APP14-O8, APP14-O12, APP14-O15, APP14-O16.
-  - **Work:** Implement one public mutable representation, one versioned asset, one authenticated personalized endpoint and a controlled invalidation/revalidation schedule.
-  - **Criteria:** Show correct MISS/HIT, 304 and Vary behavior; stale bounds match published policy; no authenticated representation crosses test identities; unsafe directives and purge permissions are rejected.
+  - **Work:** Configure **actual free shared-cache storage** (for example OSS Nginx proxy_cache) for one mutable public GET and hashed static asset, and explicitly bypass all authenticated/personal responses. Measure MISS/HIT, Age, Vary language/encoding, ETag/Last-Modified and true 304/200 after a real origin revision, invalidation and bounded public stale-if-error. Demonstrate RFC 9111 Authorization-bearing storage exceptions in an isolated explanatory trace while still prohibiting personalized reuse. Inject concurrent purge/fill, unkeyed hostile header, static-looking private suffix and two-account cookie/bearer changes.
+  - **Criteria:** The cache actually stores/reuses public responses and independent origin state supports its measured validation/freshness/invalidation, with correct key, representation, partial/range and stale bounds. A header-only proxy or a fabricated HIT fails. No personalized tenant body, private error, redirect, validator or revoked data enters shared reuse even if a dangerous origin directive would permit storage under HTTP caching rules; cache deception/poisoning and unauthorized purge must fail.
   - **Evidence:** Cache configuration and keys, request/response headers, origin revisions, tests for concurrent mutation and user switching, captured state transitions and corrected regression.
 
 - **APP14-AS3** — Fair Admission, Gateway Security and Resource Bounds
   - **Outcomes:** APP14-O3, APP14-O4, APP14-O7, APP14-O10, APP14-O12, APP14-O16.
-  - **Work:** Configure per-principal/route rate, concurrency and body budgets; run mixed normal, burst, malicious and uncertain-client traces including limiter failure.
-  - **Criteria:** Excessive work is bounded with coherent refusal; two identities remain isolated within declared fairness limitations; bypass and unauthorized origin mutation fail; no unbounded retry amplification.
+  - **Work:** Use an actual gateway to enforce finite request/route/tenant/principal rate, body and concurrent expensive-origin limits; drive two legitimate synthetic identities sharing one source IP, anonymous/forged forwarding and a noisy tenant under controlled clock/burst. Calculate and exercise a token-bucket schedule, 429 versus 503 and Retry-After when valid, trigger limiter failure and one uncertain committed POST; count accepted, rejected, completed SQL, queue age, resource and retry attempts.
+  - **Criteria:** Actual upstream CPU/queue/SQL and refusal data show finite resource use and fair progress for a second tenant, not merely lower successful-request latency. A spoofed X-Forwarded-For does not grant free budget and per-process limits aren't misrepresented as globally exact. Limiter/cache failure does not grant app permissions or unbounded origin work, and gateway retries do not duplicate committed mutations.
   - **Evidence:** Traffic generator, timed fixtures, resource and response distribution, policy decisions, unauthorized tests, failure mode traces and explicit fairness limitations.
 
 - **APP14-AS4** — Correct Delivery and Measured Edge/Origin Attribution
   - **Outcomes:** APP14-O5, APP14-O8, APP14-O9, APP14-O13, APP14-O14, APP14-O15.
-  - **Work:** Compare public asset, range and streaming API delivery with and without compression, buffering and safe caching; evaluate an edge-worker or CDN alternative without requiring deployment.
-  - **Criteria:** Report repeatable client/edge/origin p50/tail timing and byte counts; preserve range and stream semantics; justify optimization only where measured gain coexists with correct caching and identity.
+  - **Work:** With pinned local gateway, true public cache and APP3 origin, compare warmed/cold immutable/mutable asset delivery, safe Range/If-Range, compression and Vary variants, streaming with and without proxy buffering, eligible cache HIT/MISS and client/gateway/origin/SQL latency. Record negotiated HTTP version where supported, repeat counts, missing/timeouts and monotonic duration limitations. Evaluate hypothetical CDN/edge placement with separately labeled price/geography assumptions.
+  - **Criteria:** Independent byte/Content-Range/validator and first-byte-versus-completion traces preserve actual authorized task and correct cache representation while comparing CPU, bandwidth and supported p50/p95. Compression or caching private/wrong assets cannot qualify as improvement. Do not subtract unsynchronized clocks, omit failed/denied samples or claim a local gateway tests POP, HTTP/3 or global geography it did not.
   - **Evidence:** Pinned workload scripts, environment table, network traces, sample sizes, latency/byte measurements, privacy-safe spans and cost/placement decision.
 
 - **APP14-AS5** — Outage Containment, Change Control and Recoverable Rollback
   - **Outcomes:** APP14-O2, APP14-O3, APP14-O10, APP14-O11, APP14-O12, APP14-O15, APP14-O16.
-  - **Work:** Introduce bad route/cache policy, stopped origin, unknown-commit mutation response and simulated rollouts on an isolated disposable environment.
-  - **Criteria:** Demonstrate bounded deadlines, no unintended duplicate writes, identified bad revision, verified rollback or forward repair and no relaxed authorization during recovery.
+  - **Work:** Version a real gateway policy, stage a bounded synthetic canary, introduce an actual bad route, proxy trust or private cache configuration and a stopped local APP3 origin. Execute a genuine PostgreSQL write whose committed response is lost before gateway confirmation, a limited public stale GET and a synchronized reconnect/retry wave. Observe actual active config, cache contents, user/denied paths, SQL commits and finite timeouts; repair via rollback, **poisoned cache purge** or safe forward fix.
+  - **Criteria:** The reviewer reproduces bad policy and independently observes its correction with real client, cache and PostgreSQL evidence; config rollback by itself is not falsely assumed to remove a previously poisoned shared entry or undo committed effects. Uncertain POSTs are not blindly retried, stale tenant/permission information is not served and origin health alone doesn't declare business success. Redacted operator runbook states meaningful recovery and limitations.
   - **Evidence:** Config revisions, rollout and fault schedule, origin database truth, logs/metrics, rejected negative paths, incident timeline and tested operator runbook.
 
 - **APP14-AS6** — Global/Edge Economics and Architecture Defense
   - **Outcomes:** APP14-O1, APP14-O9, APP14-O10, APP14-O13, APP14-O14, APP14-O15.
-  - **Work:** Publish an engineering decision comparing local gateway, CDN and edge worker paths and analyze geographic data/routing claims with a realistic resource budget.
-  - **Criteria:** Choose based on user task and measured local inputs; distinguish model from observed external behavior; explain consistency, egress, regional regulation and paid/managed operational uncertainty.
+  - **Work:** Model no-CDN local gateway, managed CDN and optional edge worker against **actual** task-complete local gateway/cache/request/byte/resource measurements and stated hypothetical traffic, region, privacy, vendor lock-in, egress cost and incident burden. Compare when a single free local cache wins and when public geographic delivery might justify new complexity.
+  - **Criteria:** Pricing/traffic/geography are labeled sourced assumptions or illustrative sensitivity, not fabricated measured POP latency or legal compliance. The decision preserves origin-held object authorization and mutable data consistency, includes failure/privacy/operating costs, gives a concrete revisit threshold and does not require paying for a cloud or worker.
   - **Evidence:** Topology and alternatives matrix, sample input measurements, budget assumptions, threat/security review, constraints and reasoned decision.
 
 - **APP14-AS7** — Integrated Gateway Service and Independent Unfamiliar Defense
   - **Outcomes:** APP14-O1, APP14-O2, APP14-O3, APP14-O4, APP14-O5, APP14-O6, APP14-O7, APP14-O8, APP14-O9, APP14-O10, APP14-O11, APP14-O12, APP14-O13, APP14-O14, APP14-O15, APP14-O16, APP14-O17.
-  - **Work:** Rebuild, demonstrate and defend one complete gateway-plus-origin slice; accept an unknown bounded route, identity, cache, limit, stream or failure defect, diagnose and correct or safely contain it.
-  - **Criteria:** Clean reproduction with no paid provider; all core negative tests pass; observed origin SQL truth, cache/privacy, admission and rollback evidence match stated outcomes; review explains unresolved hazards.
-  - **Evidence:** Source and environment lock, runnable test harness, sanitized traces and SQL observations, two-identity fault matrix, before/after change, timing measurements, reviewed runbook and accessible technical defense.
+  - **Work:** Provide **one evolving APP3/PostgreSQL gateway with actual free shared-cache layer** and reference individually accepted APP14-AS1–AS6 judgments rather than recreate all their projects. Reproduce a few representative safe origin/tenant HTTP, real HIT/304/Vary, bounded fairness, streaming and unknown-commit/recoverable policy cases. Accept an **unseen bounded** hostile path/Host/forwarded identity, private cache poisoning/deception, unauthorized purge, limiter, buffered stream, stale revocation, unsafe retry or bad deployment case; predict and obtain independent before-fix HTTP/cache/SQL facts, repair and rerun targeted prior regressions.
+  - **Criteria:** All APP14-AS1–AS6 remain separately passed; AS7 cannot excuse a missing gate or make this elective compulsory for core graduation. The genuinely unfamiliar failure is reproduced and corrected using actual origin SQL, cache keys/bodies and client observations, preserving trust, privacy, durable business state, bounded work and correct protocol handling. A fresh reviewer can run free local artifacts and the learner personally defends source, trade-offs, accessibility, unsupported global claims and residual risk.
+  - **Evidence:** One pinned real proxy/cache and APP3 source, references-first accepted APP14-AS1–AS6 outcomes/evidence index, synthetic tenant/source and SQL fixtures, independent HTTP/cached response/rate/stream/rollback logs, assessor's unfamiliar bounded prompt, observed failing-before/passing-after cache/SQL/client checks and accessible documented/written/live defense.
 
 ### Shared academic and operational boundaries
 
-- **Local, free, reproducible:** The assessed gateway, two tenant identities, controlled traffic, origin/database state, TLS trust configuration and faults must be observable on disposable local infrastructure. Paid CDN/WAF vendors, cloud accounts, public domains, multi-region deployment and production load tests are optional and never required.
+- **Local, free, reproducible:** The assessed gateway, **actual free shared cache**, two tenant identities, controlled traffic, origin/database state, TLS trust configuration and faults run on disposable local infrastructure. A plain reverse proxy without response storage cannot pass HIT/MISS, conditional revalidation or purge evidence; a separate observed compatible cache is valid. Paid CDN/WAF vendors, cloud accounts, public domains, multiple regions and production load tests are optional.
 - **Existing competence, deeper application:** Use APP3 server-held role/object/tenant/field checks and APP7 deploy/TLS basics rather than re-teaching them. A gateway may authenticate a session but cannot independently grant a backend operation. A passed edge token check never proves tenant/object authorization.
-- **HTTP truth over slogans:** Cite the applicable version of HTTP caching and message standards in project reasoning. Differentiate `private`, `no-store`, conditional `304`, `Vary`, authorized shared reuse and stale extensions. Never intentionally cache personal responses in a shared store for convenience or claim that a TTL alone prevents a privacy leak.
+- **HTTP truth over slogans:** Use RFC 9110/9111/9112 and RFC 5861 where applicable, distinguishing actual cached storage/conditional `304`/`Vary`/`Age`/stale rules from merely configured headers. `public`, `s-maxage` and `must-revalidate` can permit certain shared reuse of Authorization-bearing responses within RFC 9111 constraints, but **deliberately bypass shared caching for all personalized responses** even if an origin sets an unsafe permissive directive. Independently test cache deception/poisoning, canonical path/host identity, wrong tenant and server permission revocation; TTL alone cannot prove safety.
 - **Reproducible adversarial evidence:** Include malformed routes, forged trusted metadata, cross-tenant cache/permission attempts, ambiguous client address, burst fairness, lost response after a committed write, origin outage, invalid policy deployment and recovery. Retain independent origin SQL observations; avoid treating proxy `2xx` alone as final business truth.
 - **Bounded measurements:** Describe workload, versions, actual system topology, sample counts, CPU and network budgets, warmup, clocks, observed tails and sources of error. Local results do not demonstrate global geographic latency, physical CDN behavior or external SLA.
 - **Safe operation and privacy:** Use disposable synthetic identities; avoid attacking unaffiliated infrastructure. Limit resource consumption, redact authentication material, log only necessary identifiers, and document safe rollback and forward-repair paths.
