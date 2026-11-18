@@ -260,7 +260,7 @@ class SEFProgramConsistencyTests(unittest.TestCase):
     def test_umbrella_catalog_numbers_follow_actual_live_program_rows(self):
         overview = text(PROGRAMS)
         counts = {"SEF": (11, 0), "APP": (14, 7),
-                  "SYS": (10, 0), "AI": (16, 0), "SEC": (9, 0)}
+                  "SYS": (10, 0), "AI": (16, 1), "SEC": (9, 0)}
         for code, (core, elective) in counts.items():
             catalog = text(ROOT / "curriculum" / code / "README.md")
             if code == "APP":
@@ -274,6 +274,20 @@ class SEFProgramConsistencyTests(unittest.TestCase):
                     (current_core, current_elective), (core, elective)
                 )
                 self.assertIn("| \x60APP\x60 | Application Engineering | 14 core, 7 electives |", overview)
+            elif code == "AI":
+                entries = [
+                    line for line in catalog.splitlines()
+                    if re.match(r"^\| \[AI\d+\]\(AI\d+\.md\) \|", line)
+                ]
+                current_core = sum("Elective ·" not in line for line in entries)
+                current_elective = sum("Elective ·" in line for line in entries)
+                self.assertEqual(
+                    (current_core, current_elective), (core, elective)
+                )
+                self.assertIn(
+                    "| `AI` | AI Engineering | 16 staged core, 1 elective (integration only; program incomplete) |",
+                    overview,
+                )
             else:
                 current = re.findall(
                     rf"(?m)^\| \[{code}\d+\]\({code}\d+\.md\) \|",
@@ -286,7 +300,7 @@ class SEFProgramConsistencyTests(unittest.TestCase):
         )
         expected_core = sum(core for core, _ in counts.values())
         expected_electives = sum(electives for _, electives in counts.values())
-        self.assertEqual((expected_core, expected_electives), (60, 7))
+        self.assertEqual((expected_core, expected_electives), (60, 8))
         self.assertIn(
             f"| **Total** | **Five programs** | "
             f"**{expected_core} core, {expected_electives} electives** |",
