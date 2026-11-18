@@ -29,7 +29,7 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 **Measured alternatives, not novelty:** Compare a working module-based design against a service/worker boundary in the same product with matched workloads, actual failure recovery, old/new contract tests, database invariants and operating costs. Count added process supervision, schema compatibility, dispatch/inbox storage, tracing, monitoring and human incident burden. A justified **no-extraction** decision can be superior; however, a concrete independently owned-process communication exercise is still required to demonstrate the boundary and failure competence.
 
-**Duration and evidence:** The 14–18-week estimate and weekly workload are provisional, not learner-verified. Fourteen progressively deeper modules feed **seven outcome-mapped required summative assessments**; module investigations are formative. One evolving service and controlled local participant can provide evidence for all seven, with authentic independent verification of failures, repairs and unfamiliar bounded changes. No commercial platform, cloud subscription, paid queue, public domain or production data is a required assessment dependency.
+**Instructional sufficiency, duration and evidence:** Keep the 14–18-week estimate and weekly workload **provisional**, not learner-verified. The fourteen distinct mechanisms remain teachable: domain ownership needs a worked invariant, PostgreSQL transaction/outbox needs an actual dual-write counterexample, inbox needs separate transactionally protected duplicate evidence, saga needs legal transitions and **failed compensation**, projections need an actually sufficient rebuild source, and extraction needs a running process plus matched alternatives. A new backend mechanism requires an explanation, a worked trace, independent operation/failure and useful feedback **before** summative judgment; neither a heading nor a passing assessment mapping establishes depth. Fourteen organically distinct modules feed **seven independently decidable summative assessments** on one evolving service plus a controlled separate local participant; formative experiments are not hidden gates. No commercial platform, cloud subscription, paid queue, public domain or production data is required.
 
 ## Learning outcomes
 
@@ -63,21 +63,17 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 #### Lessons
 
-1. **From correct API to resilient evolving backend** — Explain how APP3's typed service and APP6 quality evidence become the input to new domain ownership and coordination decisions, not an occasion to repeat HTTP fundamentals.
+1. **From foundational API to an evolving domain contract** — Use actual APP3 and APP6 assessed service/source and tests to compare a once-correct HTTP endpoint with a change that crosses transactional, tenant and event boundaries. Explain the historical attraction and added complexity of independent services without a new protocol survey.
 
-2. **Historical drivers of architectural change** — Contrast tightly coupled applications, modular monoliths, service-oriented systems and event-driven integration as contingent responses to scale, organization and change.
+2. **One bounded business process and observable failure contract** — Choose an authenticated multi-step synthetic reservation/fulfilment-like workflow, distinct authoritative owners and one genuinely committed local participant or external fixture; specify which user action counts as complete.
 
-3. **Business workflow and failure contract** — Select a bounded multi-step workflow with actual tenant/resource access, committed state and one delayed or externally simulated effect.
+3. **Strong invariants, durable facts and irreversible decisions** — Write an invariant, permitted eventual lag, irreversible pivot, privacy boundary and reachable failure state, then apply them to an example where HTTP timeout follows a committed database mutation.
 
-4. **Invariants, authority and reversibility** — Write what must never occur, what may converge later, which actions commit irreversibly and how users learn an outcome.
+4. **Measure real coupling and ownership before adding services** — Inspect actual imports, direct cross-module SQL, API consumers, change hotspots and shared resource pools, and demonstrate one defensible module seam plus an unwanted dependency.
 
-5. **Coupling map and change hotspots** — Inspect imports, shared tables, cross-module calls, runtime ownership and actual prior changes to identify costly seams.
+5. **Compare module, durable worker and separate participant** — Use the same task to reason through in-process calls, database outbox/worker and independently committed local HTTP participant; identify genuine state/process ownership and when a broker or cluster solves no demonstrated problem.
 
-6. **Operations and data ownership inventory** — Identify principal data owners, worker/process lifetimes, production responsibility and boundaries where a local prototype cannot claim cloud proof.
-
-7. **Problem-specific options and explicit non-goals** — Compare simple in-process calls, PostgreSQL jobs, local process APIs and more elaborate brokers or clusters against real needs.
-
-8. **Measurable risk and architecture hypothesis** — Record security, data, latency, incident, maintenance and cost criteria with evidence that could disconfirm a proposed split.
+6. **Falsifiable quality-attribute and cost hypothesis** — Predict one failure/consistency improvement and one new latency/operational cost of extracting a boundary, with competing explanations, data/tenant scale, real trace requirements and a no-extraction exit option.
 
 *Optional practice — false-complexity decision:* Reject a fashionable service extraction without a justified data, failure or team ownership benefit.
 
@@ -92,23 +88,21 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 #### Lessons
 
-1. **Bounded contexts and domain language** — Recognize meaningful domain terms, state transitions, responsible actors and noninterchangeable policy concepts.
+1. **Domain language, ownership and inconsistent terminology** — Extract real commands/events/entities from the chosen task, test whether two use cases give an overloaded term different meanings, and allocate actual policy/transaction ownership without asserting every noun is an aggregate.
 
-2. **Aggregates and invariant ownership** — Choose units where consistency should be strongly enforced; compare an oversized aggregate with an under-protected transaction.
+2. **Aggregate invariant and worked concurrency counterexample** — Model a scarce resource, reserved quantity or entitlement under two concurrent transactions and compare oversize aggregate locks versus a leaky undersized invariant; justify one atomic scope.
 
-3. **Application/use-case versus transport responsibilities** — Keep domain decisions out of Fastify route boilerplate and prevent route parsing from becoming business truth.
+3. **Application policy versus HTTP framing** — Separate untrusted Fastify decoding and route errors from application decisions and domain state transitions, then run the same use case through a non-HTTP fixture to verify transport independence.
 
-4. **Dependency direction and interfaces** — Define narrow type/runtime ports for repositories, time, outbound work and policy rather than repository-dependent domain code.
+4. **Ports, dependency direction and integration failure seams** — Define narrow TypeScript interfaces for storage/time/outbound requests and test an alternate adapter, preserving runtime schema and explicit failure semantics rather than pretending interfaces enforce external trust.
 
-5. **Modules with explicit public surfaces** — Prevent accidental imports of internal files and direct cross-module table access; make allowed dependency direction executable.
+5. **Public module surface and prohibited cross-owner writes** — Enforce a dependency/import rule and actual PostgreSQL role/adapter ownership where possible; demonstrate a seeded direct private-table write caught before the final integrated test.
 
-6. **TypeScript types and runtime contracts** — Separate compile-time architectural checks from runtime validation and message/API schema guarantees.
+6. **Compile-time shape, runtime schema and schema evolution** — Show a TypeScript-compatible unsafe message or JSON payload, validate it at the real API/event boundary and record version semantics for old/new consumers.
 
-7. **Ownership and transactional seams** — Identify where two operations legitimately share one PostgreSQL transaction and where independent ownership makes coupling dangerous.
+7. **Characterization-first modular refactor** — Start with externally observed authorized/denied Fastify, SQL and async outcomes, move a tangled use case behind a module boundary, and prove the refactor did not change committed facts or error/role semantics.
 
-8. **Module refactoring without a behavior change** — Extract a tangled use case behind ports while preserving old external HTTP behavior, authorization and DB effects.
-
-9. **Architecture fitness and reviewer tests** — Write import/dependency rules, consumer contract tests and a behavioral regression matrix that fails on a seeded boundary breach.
+8. **Fitness gate with a real failing dependency violation** — Combine static import checks, actual adapter/contract tests and a seeded broken boundary, report what architecture tests cannot prove about runtime process failure and explain reviewer feedback.
 
 ### Module 3 — Transactional Consistency, Races and Authority
 
@@ -121,19 +115,19 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 #### Lessons
 
-1. **PostgreSQL as source of transaction truth** — Reuse APP4's constraints, isolation and locking in an applied domain flow; distinguish single-DB atomicity from external calls.
+1. **One PostgreSQL transaction and its authority limits** — Reuse APP4 transaction/isolation evidence on the selected business effect; draw which SQL rows and outbox intents can commit together versus independently committed or externally visible actions.
 
-2. **Transaction scope and connection ownership** — Ensure repository calls and persisted intent use the same actual transaction context where atomicity is required.
+2. **Transaction-bound repository and intent write** — Use one real driver/connection transaction for domain + event intent, intentionally separate a repository's connection and observe the partial-commit bug before correcting ownership.
 
-3. **Transactional Concurrency and Idempotency Races** — Verify lost-update protection under two independent connections and mismatched revision responses; use actual DB uniqueness/locking under parallel duplicate requests, not a process-local Set as the only guard.
+3. **Two-session business race and atomic deduplication** — Coordinate real independent PostgreSQL connections with barriers to prove constraint/version protection and atomically scoped idempotency; a process-local map cannot arbitrate two workers or a service restart.
 
-4. **Isolation anomalies and explicit tests** — Reproduce a relevant read/write skew or conflict using actual SQL while acknowledging selected isolation-mode behavior.
+4. **Isolation anomalies and conflicting writes in the actual backend** — Reproduce one actual read/write anomaly or serialization conflict with declared isolation mode, inspect SQL effects and distinguish safe retry conditions from repeating an irreversible external call.
 
-5. **Commit order versus event order** — Distinguish business aggregate version, database commit order, created timestamps and globally ordered events.
+5. **Commit sequence, aggregate version and event timestamp** — Trace two concurrent commits and queued events, demonstrate why created_at and dispatch order do not establish global or even aggregate business order, and specify the intended version rule.
 
-6. **Long transactions and lock contention** — Inspect lock waits, deadlocks and pool starvation and choose a bounded transaction duration before adding distributed machinery.
+6. **Lock waits, short transactions and load feedback** — Measure lock wait and pool occupation while a transaction performs slow work, then keep external calls outside protected SQL commit scope without losing durable intent.
 
-7. **Failure between commit and external effect** — Reproduce why an external HTTP message cannot be committed atomically with a PostgreSQL transaction by ordinary application code.
+7. **Dual write and uncertain external side effect** — Inject database rollback/HTTP send ambiguity and a crash between local commit and publish, identify the inconsistent outcomes and the narrow problem a transactional outbox solves.
 
 *Optional practice — concurrent reservation bug:* Repair a double-claim or stale-state flow and verify one durable allowed outcome using independent SQL.
 
@@ -149,21 +143,21 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 #### Lessons
 
-1. **The dual-write failure matrix** — Enumerate successful DB/failing publish, failing DB/successful publish, process death and ambiguous acknowledgement outcomes.
+1. **Dual-write failure states with genuinely observed outcomes** — Create a domain-commit/send failure matrix including rollback, crash before publish, send with lost ACK and replay, and show which SQL and consumer facts exist at each stage.
 
-2. **Commit domain state with outbox intent** — Write domain change and event intent in one PostgreSQL transaction and verify rollback removes both.
+2. **Same-transaction domain fact and outbox event** — Insert a versioned domain mutation and event intent on the same PostgreSQL connection transaction; verify both commit or roll back under a real injected constraint/throw.
 
-3. **Event envelope and aggregate identity** — Include stable event ID, aggregate ID/version, tenant, occurrence time, schema revision and safe correlation metadata.
+3. **Stable event IDs, owners, versions and minimal payloads** — Design event ID, aggregate key/version, event type/schema, tenant/safe actor scope and trace correlation without copying credentials or treating a caller-provided tenant as trusted authority.
 
-4. **Outbox polling and row claims** — Use safe DB row-claim techniques with bounded batch and lease/recovery policy appropriate to the reference runner.
+4. **Claimed batches, SKIP LOCKED and lease failure semantics** — Implement a bounded PostgreSQL dispatcher with actual row claims or an explicit single-worker alternative; explain that SKIP LOCKED provides an **inconsistent queue-like view**, not global FIFO or a guarantee that a claimed row is delivered, and test competing worker claims.
 
-5. **Dispatch acknowledgement window** — Reproduce crash after send/before marking acknowledged and explain why retransmission may occur.
+5. **Send, uncertain acknowledgement and duplicate publishing** — Crash a worker after local consumer receipt but before marking the event sent, then inspect durable pending intent and possible duplicate delivery; distinguish a relay attempt from observed externally durable completion.
 
-6. **Ordering boundaries and writer concurrency** — Preserve per-aggregate order where required, and disclose where timestamps or multiple dispatchers cannot promise total order.
+6. **Concurrent writers and per-aggregate ordering proof** — Use two writers and dispatchers to test an aggregate-version gap, with explicit claim/scheduling rule and consumer buffering/reconciliation; never assert created timestamps or SKIP LOCKED alone preserve key order.
 
-7. **Retention, cleanup and dead letters** — Specify archive/prune conditions, unresolved delivery records and recovery procedures without silently dropping pending business work.
+7. **Outbox retention without destroying recovery history** — Design max age, bounded attempts, poison quarantine and archive/replay source ownership; distinguish a prunable dispatch outbox from an authoritative event log needed for a future full projection rebuild.
 
-8. **Observing stuck outbox state** — Expose privacy-safe backlog age, attempts, last failure and a testable alert/reconciliation action.
+8. **Age, retries, orphaned claims and safe operator replay** — Measure pending age and attempt state with sanitized operation IDs, introduce a stuck claimed event and demonstrate recovery without double committed effects or silent deletion.
 
 *Optional practice — outbox crash drill:* Kill the dispatcher at a controlled point, restart and confirm committed intent is eventually handled without duplicate business effects.
 
@@ -179,21 +173,21 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 #### Lessons
 
-1. **Command versus event semantics** — Differentiate request to act, committed domain fact and integration notification with versioned ownership.
+1. **Command request versus committed event fact** — Compare a command asking another owner to act with a versioned domain event recording what **already** committed, then test an invalid command that must not appear as a completed fact.
 
-2. **Schema validation on message entry** — Treat message body, tenant claims, provenance and event schema version as untrusted runtime data.
+2. **Validate envelope and verify message authority** — Treat id, tenant, claimed actor, schema and payload as untrusted at receipt; require a trusted producer/boundary contract and re-evaluate owner policy rather than believe an event header.
 
-3. **Idempotent inbox and dedup scope** — Atomically reserve a processed event/command identity with permitted effect, avoiding per-process memory-only flags.
+3. **Atomic inbox key, fingerprint and business effect** — Use a durable inbox key scoped to consumer, tenant, event and optionally payload fingerprint **in the same local DB transaction as the protected effect**; reject same-key-different-payload ambiguity.
 
-4. **Concurrent consumer claims** — Reproduce two workers racing the same ID and verify a single durable intended effect.
+4. **Two consumer races, rollback and recovery** — Schedule parallel worker reads of the same event, force a transaction rollback after the inbox check, and inspect one completed effect and safe redelivery with actual unique constraints.
 
-5. **Retry and acknowledgement uncertainty** — Model success followed by lost ACK, poison body, transient downstream error and backoff ceilings.
+5. **ACK loss, transient retry and poison handling** — Reproduce effect committed/ack lost, transient failure and permanently invalid envelope as different states; use finite retries and meaningful quarantine rather than count successful handler calls.
 
-6. **Event ordering and stale revisions** — Reject, buffer or reconcile out-of-order aggregate versions according to an explicit local invariant.
+6. **Aggregate version gaps and scoped ordering** — Deliver duplicate and out-of-order events, choose buffer/rebuild/refetch or rejection under an explicit per-key version invariant, and explain why global order and memory-only cursors are inadequate.
 
-7. **Backward/forward compatible event evolution** — Make additive fields and old/new reader interpretation testable; identify breaking schema and deprecation conditions.
+7. **Old/new reader, schema compatibility and contract break** — Test an additive/defaulted field and a breaking rename or changed semantics with independent old/new consumers; note schema compatibility tooling does not prove behavioral authorization or all historical replay.
 
-8. **Replay and audit privacy** — Replay permitted synthetic data while preventing stale personal claims, tenant impersonation and unbounded historical retention.
+8. **Replay scope, privacy expiry and dedup retention** — Reprocess synthetic historical events through a controlled consumer, guard deleted/private data and retention, and prevent expired dedup records from resurrecting an already committed effect.
 
 *Optional practice — duplicate delivery repair:* Break a consumer with an acknowledgement race, repair it and show real DB invariants after repeated deliveries.
 
@@ -209,21 +203,21 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 #### Lessons
 
-1. **When one transaction is insufficient** — Select a workflow with independently owned state or simulated external commit and explain why a single local transaction is not a truthful model.
+1. **Separately committed owners and why compensation is required** — Run a bounded two-owner workflow with a genuinely independent transaction or locally recorded irreversible fixture; distinguish it from a sequence of mocks within one rolled-back DB transaction.
 
-2. **Business workflow state machine** — Define pending, reserved, confirmed, compensating, compensated, failed, uncertain and manual-review states with legal transitions.
+2. **Durable saga states and allowed transitions** — Define reserve, pending, confirmed, compensating, compensated, failed, uncertain and manual-attention states with a clear legal transition table and user-visible truth.
 
-3. **Choreography versus orchestration** — Compare event-driven peer progression and a durable coordinator, including ownership, observability and coupling.
+3. **Choreography or orchestration chosen by evidence** — Trace the same two-step workflow under a message-choreographed versus durable coordinator design, compare misplaced ownership/coupling and pick one implementable local model.
 
-4. **Local commits and durable progress** — Write each participant's local state and progress before issuing the next independently owned step.
+4. **Local commit before cross-owner message and recovery** — Record each participant's local transaction/workflow progress and outbox intent before the next action; stop a process midstep and recover from durable state, not memory.
 
-5. **Compensable, pivot and retryable steps** — Identify exactly what can be undone by a new operation, what is irreversible and when forward completion is required.
+5. **Reversibility, pivot and compensation as a new action** — Work through a reservation/fulfillment step that is reversible versus irreversible; issue a compensating operation, preserve audit trail and avoid calling it rollback of earlier commits.
 
-6. **Timeout and outcome ambiguity** — Distinguish no response, known rejection, committed-but-lost-ack and user-visible pending states without fabricated global atomicity.
+6. **Timeout, ambiguous remote outcome and no blind compensation** — Lose the result of a committed participant, then choose authoritative status reconciliation before retry or compensating; verify a late success cannot be overwritten by an outdated action.
 
-7. **Concurrent workflows and semantic locks** — Protect the same resource from incompatible parallel reservations and stale compensation of newer work.
+7. **Concurrent sagas, semantic locks and stale compensation** — Schedule two reservation workflows and delayed compensation of the first; use actual version/ownership checks to protect the second's legitimate result.
 
-8. **Compensation failure and reconciliation** — Inject failure of the compensation itself and record unresolved state, retry/runbook and escalation instead of claiming rollback.
+8. **Compensation failure, retries and manual reconciliation** — Fail the compensating action itself, demonstrate bounded retry and terminal manual-review record with operator evidence, and distinguish an unresolved partial effect from a successful transaction.
 
 *Optional practice — saga fault matrix:* Exercise good flow, failed step, duplicated event, timeout and failed compensation with traceable participant state.
 
@@ -239,21 +233,21 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 #### Lessons
 
-1. **Read models and owned write state** — Define authoritative domain records versus derived denormalized views and identify queries that may tolerate staleness.
+1. **One authoritative write source versus derived read state** — Model a business write and the denormalized projection it informs; show which queries can tolerate delay and which authorization/business mutations must consult authoritative state.
 
-2. **Projection schema and version ownership** — Design a rebuildable PostgreSQL read table with event ID/aggregate versions and appropriate tenant filtering.
+2. **Projection schema, event cursor and tenant safety** — Design materialized read rows with aggregate versions, source offsets, schema and tenant filter, then independently test a previous-tenant read after a permission change.
 
-3. **Projection lag and observed limits** — Introduce controlled delivery delay and measure currentness while labeling local simulated lag honestly.
+3. **Actual measured delivery lag versus invented replication** — Pause a controlled local projector, measure event-to-view delay and explicitly label it **application projection delay**, not PostgreSQL streaming replication or guaranteed convergence.
 
-4. **Duplicate and out-of-order projection updates** — Test exactly what happens under replay and delayed updates, avoiding stale overwrite of a newer projection.
+4. **Duplicate/older update and gap detection** — Deliver version 3 before 2 and replay 2 twice, show a prevented stale overwrite and what a detectable gap means for a currently displayed summary.
 
-5. **Rebuild from authoritative history** — Reconstruct a projection from a bounded event log or snapshot with valid provenance and no duplicate side effects.
+5. **Full rebuild requires retained authoritative history** — Compare a safe snapshot+subsequent retained event log with a pruned delivery outbox; implement a truly replayable rebuild or reconstruct from the current authoritative database, disclosing when missing history prevents exact recovery.
 
-6. **Gap detection and repair** — Compare authoritative aggregate counts/versions and projection records and create an inspectable reconciliation path.
+6. **Projection drift, reconciliation and missing events** — Create an omitted/double event, compare version/row counts and actual underlying authority, rebuild safely and report a user-relevant stale interval rather than only log a warning.
 
-7. **Privacy and authorization in read models** — Verify old tenant permission, deleted/private fields and cache/access changes cannot expose unauthorized derived data.
+7. **Read-model secret/property and current-permission denial** — Exercise a removed role, sensitive field, deleted record and cross-tenant key after projection/permission changes, ensuring derived data never substitutes for current authorization.
 
-8. **Read-your-writes and user contract** — Choose when to await, poll, show pending, read authoritative source or reject a stale view instead of promising immediate consistency.
+8. **Read-your-writes and truthful pending/reconciled UI** — Use a controlled delayed view and actual primary result to choose wait, authoritative read or eventual UI status with an independent before/after user state check.
 
 *Optional practice — lagged-order workflow:* Repair a user screen reporting completion while only an out-of-date projection exists.
 
@@ -269,21 +263,21 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 #### Lessons
 
-1. **Module versus process ownership** — Compare same-process imports, separate workers and locally running HTTP services by latency, deployment and failure costs.
+1. **In-process module versus real lifecycle isolation** — Compare one domain operation through same-process calls, a separately restartable worker and local HTTP service, recording actual commit, error and operational overhead.
 
-2. **Synchronous contract and deadline semantics** — Declare request/response schema, timeout, idempotency and error handling across a process boundary.
+2. **Process contract, deadline and lost-response semantics** — Define runtime-validated HTTP or durable command contract, finite request deadline, ambiguity after timeout and idempotent status/reconciliation, then test a partial response.
 
-3. **Consumer-driven compatibility testing** — Exercise old/new producers and consumers independently, including unknown fields, renamed statuses and absent data.
+3. **Old/new independent consumer compatibility** — Run two differently versioned consumers against the same published schema with missing/defaulted fields and changed statuses, capturing an actual break and a repaired compatibility rule.
 
-4. **Service identity and boundary authentication** — Distinguish verified end-user identity from trusted service identity and reject forwarded user headers from untrusted clients.
+4. **Real service identity versus delegated end-user rights** — Show a trusted local service credential and a user-scoped authorization decision as distinct things; send forged forwarded identity via direct HTTP and verify denied DB effect.
 
-5. **Process restart and network failures** — Demonstrate controlled connection refusal, partial response and DNS/port timeout under two local processes.
+5. **Restart, refusal, partial response and bounded wait** — Actually stop the separate participant during a protected request and compare connection refusal, failure-after-send and retry behavior, avoiding false claims of network partitions on one host.
 
-6. **Cross-process tracing and correlation** — Propagate safe correlation and causal event IDs while avoiding raw tokens and unrestricted baggage.
+6. **Causal correlation and safe trace propagation** — Propagate operation IDs and whitelisted context across two independently running processes, test clock/order limitations and exclude raw tokens and user-provided trust baggage.
 
-7. **Data ownership without shared writes** — Prohibit independent services writing each other's authoritative tables and test a seeded ownership violation.
+7. **Separate write ownership and controlled violations** — Prohibit one participant modifying the other's authoritative table directly, demonstrate an import/SQL role violation caught by independent permission/invariant tests.
 
-8. **When extraction fails the cost test** — Benchmark and explain a modular monolith with clear modules against a local process split, considering complexity and constraints.
+8. **Measured extraction premium and justified no split** — Compare the same task in a modular monolith versus the local split under matched accepted/failed traffic, source/ops burden, privacy and restart; explicitly allow retaining the monolith as the final design.
 
 *Optional practice — contract-break investigation:* Repair an independently restarted service that silently changed a required contract or trust assumption.
 
@@ -299,21 +293,21 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 #### Lessons
 
-1. **Choose durable local queue semantics** — Apply a PostgreSQL outbox/jobs implementation or a justified local open-source queue, not a paid broker requirement.
+1. **Durable job transport choice from measured needs** — Use the existing Postgres outbox/jobs or a free local worker rather than import a broker tutorial; name durable acceptance, ordering scope and priority policy for the chosen domain step.
 
-2. **Claim, visibility timeout and heartbeats** — Explain leases/claims/worker process ownership and repeatable recovery when a worker dies mid-task.
+2. **Claim ownership, lease expiry and lost worker ACK** — Demonstrate real claim/lease or a well-scoped single-worker alternative, kill the worker during an effect and recover without claiming lease expiration prevents duplicate processing.
 
-3. **Bounded concurrency and downstream capacity** — Set worker and DB pool limits; measure throughput, job age and external provider pressure without assuming more workers always help.
+3. **Worker limits against DB/remote pool budgets** — Vary bounded local concurrency and tenant load to measure committed work, queue age and pool wait; choose an observed safe limit rather than maximizing workers.
 
-4. **Backpressure and rejection policy** — Define what can be deferred or refused, with truthful API/user outcome and finite memory/database growth.
+4. **Admission, backlog age and truthful refusal** — Set finite queue count/age/resources, distinguish refused uncommitted requests from accepted durable intent, and show status remains correct after an overload burst.
 
-5. **Retry backoff, jitter and budget** — Set attempt caps, timeouts and actor ownership, avoiding multiplicative retries across HTTP, worker and dependency.
+5. **Retry ownership, jitter and no amplification** — Trace attempted HTTP/API/worker/outbound requests on failure, remove duplicate retry owners and cap budget/jitter and interaction deadlines.
 
-6. **Poison messages and terminal action** — Quarantine malformed/permanently denied messages and provide auditable retry, remediation or cancellation choices.
+6. **Poison records, expiry and operator repair** — Quarantine a permanently invalid event or revoked tenant scope, show finite attempts and independently reviewable dead-letter/manual replay decision.
 
-7. **Per-tenant fairness and quotas** — Prevent one synthetic tenant's jobs from starving others while preserving correct tenant ownership.
+7. **Fairness under tenant skew and security boundaries** — Demonstrate a noisy tenant starving another's protected jobs, then enforce fair bounded capacity without letting a different tenant inspect another's jobs.
 
-8. **Eventual completion and user status** — Report accepted, pending, failed, reconciled and completed outcomes from authoritative records rather than optimistic promises.
+8. **Completed versus accepted with authoritative status** — Show actual domain/workflow state for accepted, processing, failed, reconciled and completed operations; a 202 or queue receipt is not evidence that business work finished.
 
 *Optional practice — stalled-work failure:* Kill a worker during processing, restart/reclaim a safe lease and show no unintended duplicate business action.
 
@@ -329,21 +323,21 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 #### Lessons
 
-1. **Identity and trust graph** — Map human principal, tenant, service actor, process identity and the authority needed for each business step.
+1. **Verified identity/authority graph across all owners** — Map real human principal, service actor, tenant/resource and domain action at HTTP, event, projection and worker handoff; distinguish identity propagation from policy authority.
 
-2. **Authorization at every execution boundary** — Enforce object/action/property rules in HTTP, worker, event consumer and projection read, not once on the entry API only.
+2. **Independent authorization at actual execution point** — Prove an authorized API request cannot grant a consumer future privilege after role revocation; check action/object/read-write-property policy at each meaningful owner.
 
-3. **Forwarded claim integrity** — Test forged tenant IDs, request headers, message envelopes and expired tokens across process/message transitions.
+3. **Forged tenant envelope and stale principal** — Inject client-crafted headers and a future/old event claiming a different tenant; verify consumers validate trusted origin and current ownership rather than read an untrusted string.
 
-4. **Tenant-scoped deduplication and cache keys** — Prevent same event/request ID collisions, shared read models and retry state from bridging tenants.
+4. **Inbox, projection and retry keys with tenant scope** — Collide two tenants' identical event IDs and expired dedup keys, showing independent state and no cross-tenant de-duplication or cached/private query leak.
 
-5. **Narrow DB roles and private state** — Use local scoped SQL roles, secrets and least-privilege access where feasible, and verify denied cross-owner writes.
+5. **DB roles, event stores and least-privilege negative proof** — Configure scoped local database roles/paths for independently writing owners, attempt a forbidden table mutation and check real denied SQL effects.
 
-6. **Noisy neighbor and abuse resource controls** — Apply tenant-aware queue quotas, bounded payload sizes and backpressure with explicit fairness trade-offs.
+6. **Noisy-neighbor quotas and payload-based resource abuse** — Send oversized/rapid synthetic tenant jobs, enforce meaningful body, memory, queue, concurrency and attempt budgets while preserving permitted work.
 
-7. **PII minimization in events and logs** — Prefer opaque identifiers and explicit retention, avoiding copying account details through every event or trace.
+7. **Minimal event metadata, private attributes and retention** — Compare a dangerous payload copied into all events/logs with opaque identifiers and retention limits, verify private properties remain inaccessible under replay and operator inspection.
 
-8. **Security negative test matrix** — Run cross-tenant direct API, event spoof, projection read and job-status authorization attacks against synthetic services.
+8. **Independent attack matrix with unchanged business facts** — Run direct API, forged envelope, wrong tenant event/projection, expired actor and job-status attacks, examining SQL/workflow state and safe redacted traces before/after correction.
 
 *Optional practice — forged event drill:* Repair a consumer that trusts tenant identity from a producer message without independent authorization context.
 
@@ -359,21 +353,21 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 #### Lessons
 
-1. **Dependency graph and shared resource pools** — Locate fan-out, DB/pool, worker queues and critical versus optional paths that could propagate failure.
+1. **Critical/optional dependency fan-out and shared pools** — Build actual call/queue/DB resource graph and reproduce optional dependency latency exhausting critical capacity, unlike the APP8 general case by observing outbox/saga progress.
 
-2. **End-to-end deadline and cancellation** — Allocate time across service and DB hops; explain why canceling a request cannot undo a committed external effect.
+2. **End-to-end time budget with independent commits** — Allocate request, queue, participant and SQL deadlines in a sample trace; show canceling the caller cannot undo a committed later workflow step.
 
-3. **Retry storm and ambiguous success** — Observe increased traffic after injected dependency failure and choose one bounded retry owner and dedup rules.
+3. **Count actual retries and lost-ACK uncertain state** — Inject failed dependency after remote commit and count nested attempts; select one retry owner with idempotent reconciliation and finite backoff.
 
-4. **Bulkhead and circuit-breaker decisions** — Measure when separate resource pools or circuit state solve an actual blast-radius problem, avoiding ritual complexity.
+4. **Bulkhead/circuit decision from measured isolation** — Run a shared-pool failure and a measured alternate containment (capacity split/stop/circuit), justify complexity and avoid implying a breaker fixes database truth.
 
-5. **Graceful degraded product contract** — Protect business/security invariants while shedding optional work with truthful response and accessible pending status.
+5. **Fail closed for security, degrade only optional work** — Show a user task that can lose optional analytics but not entitlement or durable mutation, with truthful HTTP/worker statuses and accessible pending state.
 
-6. **Recovery ramp and backlog drain** — Limit replay bursts against a recovering dependency and measure pending/failed/reconciled workflows.
+6. **Controlled ramp-up with pending saga/outbox records** — Recover a slow dependency under bounded replay/admission, measure queue age/attempts and ensure old unresolved compensations do not corrupt newer work.
 
-7. **Reconciliation after incomplete compensation** — Compare coordinator/participant records and execute a documented safe operator action.
+7. **Reconcile conflicting local owners and failed compensation** — Compare actual owner/participant records and execute a safe operator action, recording which effects cannot be reversed and which unknown outcomes remain.
 
-8. **Negative-path operational evidence** — Correlate real local HTTP failures, worker state, database facts and user-visible outcomes under a fixed fault scenario.
+8. **Causal incident exercise with independent SQL truth** — Inject one new partial failure and construct sanitized request/worker/event/SQL timeline with competing explanations, then verify repair and unchanged tenant permissions.
 
 *Optional practice — cascading outage:* Show a slow optional service exhausting a shared pool, then measure verified containment and legitimate denied requests.
 
@@ -390,21 +384,21 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 #### Lessons
 
-1. **Choose the evolving responsibility** — Select one real module or data ownership boundary and specify measured reason, present consumers and rollback risk.
+1. **Business pressure and evolving responsibility boundary** — Identify one change hotspot with real old consumers, owned records and a measured cost/consistency risk; explain why remaining internal is also an acceptable architecture outcome.
 
-2. **Branch by abstraction and strangler approach** — Introduce a versioned switch/adapter so old and candidate implementations can coexist without immediate global cutover.
+2. **Branch by abstraction, controlled strangler and switches** — Introduce a small versioned adapter before a second implementation, test routing and health without deploying two production microservices.
 
-3. **Consumer compatibility matrix** — Test old/new HTTP clients, event schemas, database migrations and worker versions with a running synthetic workflow.
+3. **Old/new API, event, inbox and DB contract matrix** — Run actual old/current consumers of HTTP and event envelopes with changed status/field semantics, including replay of retained events and a documented incompatible case.
 
-4. **Expand, backfill, validate, contract** — Stage additive schema changes and bounded backfill; verify how older consumers continue to function.
+4. **Expandable schema and resumable source data migration** — Apply additive tables/fields, bounded backfill with interrupted resume and actual SQL row checks, then delay contraction until real old readers/writers leave.
 
-5. **Shadow execution and side-effect safety** — Compare old/new read-only or otherwise safe candidate behavior without duplicating writes, emails or payments.
+5. **Read-only shadow without duplicate business writes** — Route a permitted side-effect-free alternate read through the candidate and compare results, proving the shadow does not repeat payments/jobs or leak private data.
 
-6. **Data ownership and dual-write trap** — Explain why copying writes into two independent stores can diverge; design safe migration/backfill/monitoring.
+6. **Owner transition, divergent writes and repair rule** — Model two state owners, replay/backfill lag and divergent writes, refusing unsafe unchecked dual writes and naming an authoritative repair source.
 
-7. **Traffic/feature cutover and observation** — Shift a bounded local request or worker route under health/permission/data correctness checks and recorded approval.
+7. **Controlled route cutover and observed old-user behavior** — Switch limited local traffic/workers under a recorded operator decision, measure permitted/denied task, late events and state reconciliation rather than only /health.
 
-8. **Rollback versus forward repair after pivot** — Demonstrate previous version compatibility, irreversible writes and when rollback must be refused for safe forward repair.
+8. **Compatible rollback or forward fix after pivot** — Inject a contract/data cutover defect, check real committed state and old/new consumers, execute safe reversal only where valid and demonstrate forward repair when irreversible work occurred.
 
 *Optional practice — contract migration drill:* Seed an old-consumer break or stale projection during cutover, detect it and repair without losing legitimate state.
 
@@ -419,25 +413,23 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 #### Lessons
 
-1. **Architecture fitness as evidence** — Define coupling change, runtime latency, resource usage, failure isolation and consumer compatibility indicators linked to requirements.
+1. **Quality-attribute fitness as measured contract** — Define change-cost, failure blast radius, security/privacy, operation success and version-compatibility measures for an actual backend workflow, not a generic architecture score.
 
-2. **Representative workload and fault conditions** — Use APP6 measurement discipline for matching traffic/data, version, CPU/network and error counting without APP8 scale re-teaching.
+2. **Matched workload, owner count and failure profiles** — Reuse APP6 test discipline for same payload/tenants/CPU/version, local process/network effects, error/timeout counting and limited samples; avoid pretending local loopback equals WAN.
 
-3. **Compare monolith and separated boundary** — Measure local successful/failed user task, p95 where sample permits, serialization/pool work and new failure modes.
+3. **Business completion versus extra process latency** — Compare true completed authorized task and failure states between internal module and local split, measure serialisation, pool/queue cost and useful throughput with uncertainty.
 
-4. **Observability and workflow correlation** — Inspect consistent operation/workflow/event IDs and state transitions without high-cardinality metrics or leaked identity.
+4. **Durable age, stuck compensation and trace visibility** — Link sanitized causal operation/event IDs, outbox/inbox backlog, workflow owner state and stuck compensation with actual operator action; avoid raw tenant IDs and high-cardinality telemetry labels.
 
-5. **Backlog age, compensation and health** — Monitor outbox age, worker attempts, unprocessed inbox and unresolved compensation rather than treating process up as business success.
+5. **Process, data, delivery and incident cost units** — Estimate explicit CPU/instance-hours, DB/pool, disk/retention, event delivery, monitoring and operator burden for both architectures; disclose source of any price assumptions.
 
-6. **Total operating and migration cost** — Include process/service overhead, trace/log storage, DB connections, deployment coordination, incident/runbook and development time.
+6. **Traffic and failure sensitivity with no-split case** — Vary tenant skew, load, payload retention, failure rates and review/upgrade cost, naming the threshold where the monolith wins or separation becomes justified.
 
-7. **Economic and privacy sensitivity** — Vary traffic, tenant skew, broker/provider expense and data retention to explain which architectural option could win.
-
-8. **Decision record, rejected options and exit triggers** — Write an ADR explaining why to preserve the modular monolith or extract a boundary, and what future evidence changes the choice.
+7. **Reviewable decision record and revisit trigger** — Record measured trade-off, failed hypotheses, model limits, personally defensible source, chosen extraction/no-extraction and a concrete future evidence threshold.
 
 *Optional practice — no-benefit extraction:* Identify a service split that slows users and increases incidents despite satisfying a fashionable architecture diagram.
 
-### Module 14 — Integrated Advanced Backend and Independent Technical Defense
+### Module 14 — One Evolving Backend and Independent Architecture Defense
 
 #### Outcomes
 
@@ -460,31 +452,21 @@ This is an **optional advanced APP specialization**. It does not form part of AP
 
 #### Lessons
 
-1. **Select an authentic multi-step backend workflow** — Start from a credible APP3/APP6 service with real PostgreSQL, two synthetic tenants and a defensible changed requirement.
+1. **One existing backend and accepted evidence map** — Use one functioning APP3/APP6-based service and **reference** independently accepted APP11-AS1–AS6 judgments, capturing authoritative SQL ownership, module policy, event/replay and fault evidence rather than building seven standalone systems.
 
-2. **Publish domain and security model** — Document aggregate boundaries, authoritative owner, allowed transitions, identity and event/data privacy constraints.
+2. **Reproduce durable cross-owner behavior with real state** — From a clean locally provisioned setup, exercise a protected domain mutation through same-transaction outbox, independent consumer/inbox, delayed projection and separately committed saga action, including an actual interrupted worker.
 
-3. **Refactor modules behind testable contracts** — Preserve public API and database invariants while enforcing import boundaries and describing an alternate service split.
+3. **Preserve tenants, compatible contracts and recovery** — Recheck previously accepted action/object/property/tenant permission, backlog/compensation limits, old/new consumer and read-rebuild tests, choosing the smallest legitimate regression after the cumulative integration.
 
-4. **Implement transaction-to-event safety** — Commit business state and outbox record atomically, dispatch to a controlled independent consumer and inject an acknowledgement crash.
+4. **Assessor supplies unfamiliar cross-owner fault** — Accept a new bounded outbox-ACK loss, event gap, stale permission, compensating race, contract change or worker saturation, predict the user/SQL failure and construct an independent before-fix oracle.
 
-5. **Handle duplicated and ordered work** — Use inbox/idempotency, replay and version checks, actual parallel PostgreSQL operations and a poison-event policy.
+5. **Correct mechanism and independently verify committed truth** — Repair the selected causal issue or perform justified safe reconciliation, rerun affected HTTP/SQL/worker tests and compare matched observations; reject a false exactly-once or production-distribution claim.
 
-6. **Coordinate failure and compensation** — Execute a bounded two-owner multi-step workflow including a failed pivot/retry/compensation and an unresolved branch.
-
-7. **Rebuild and protect read projections** — Reconcile a lagged projection and verify protected reads/tenant boundaries without relying on derived state for authoritative action.
-
-8. **Control resources and process failure** — Enforce retry/backpressure/deadlines, stop/restart worker/process and prove optional dependency failure does not corrupt business state.
-
-9. **Stage a compatible architecture evolution** — Use a safe adapter/feature switch, old/new client/event/database tests, a read-only shadow or safe equivalent and a rollback/repair rule.
-
-10. **Measure alternatives and operational consequences** — Compare at least two credible boundaries with matched evidence, costs, unresolved risks and a reason to reject extra complexity.
-
-11. **Unfamiliar bounded incident and independent defense** — Respond to a new cross-tenant message, duplicate/out-of-order event, transaction race, compensation failure, migration fault or overload condition with reproducible evidence.
+6. **Accessible technical defense and justified architecture choice** — Explain the personally owned source, accepted AS1–AS6 artifacts, alternative monolith/process design, actual limits, cost and rejected extra infrastructure through an equivalent written/recorded/live review.
 
 ## Completion requirements
 
-All **APP11-O1–APP11-O16** must be demonstrated through the **seven required summative assessments** listed below. The learner may submit one evolving backend and controlled local participant, reusing inspectable earlier evidence when it addresses distinct requirements. Formative lesson investigations, reading choices and elective-adjacent optional infrastructure do not create hidden graduation gates.
+All **APP11-O1–APP11-O16** require **seven independently decidable summative assessments** on one evolving backend and controlled separately committed local participant. AS1 tests authoritative modules/real concurrency; AS2 actual outbox/inbox/derived state and crash recovery; AS3 compensable *and noncompensable* multi-owner workflows; AS4 tenant/resource trust under worker overload; AS5 observed old/new compatibility and safe extraction; AS6 causal incident economics; AS7 an independently reproduced **previously unseen bounded failure**. Accepted AS1–AS6 artifacts can be cited by reference, not duplicated across seven projects. Formative lessons, optional tools and this elective never add an APP9 graduation gate.
 
 | Required assessment | Required outcome coverage | Principal evidence |
 | --- | --- | --- |
@@ -516,45 +498,45 @@ All **APP11-O1–APP11-O16** must be demonstrated through the **seven required s
 
 - **APP11-AS1** (required domain boundary refactoring and transactional invariants)
   - Outcomes: APP11-O1, APP11-O2, APP11-O3, APP11-O8, APP11-O15
-  - Work: From a real APP3/APP6-style authenticated TypeScript/Fastify/PostgreSQL service, document a tangled domain workflow with at least two plausible ownership seams. Refactor one vertical use case into stable domain/application/persistence modules, preserve existing HTTP contracts and independently verify a meaningful aggregate invariant under actual concurrent PostgreSQL connections. Seed a forbidden internal import, cross-module write or lost-update case and demonstrate a failing architecture/contract/SQL test before repair.
-  - Criteria: The refactor preserves normal/denied browser-independent API results while reducing a defined coupling or ownership problem; new interfaces do not merely rename files. One authoritative transaction protects the declared invariant, independent concurrent SQL sessions reveal conflict semantics and seeded boundary tests fail before repair. Two alternatives and an explicit no-split argument are reviewed against actual change costs. No claim is made that TypeScript types validate untrusted runtime inputs or that an aggregate automatically spans unrelated remote commits.
+  - Work: Using the existing APP3/APP6 authenticated Fastify/PostgreSQL service, choose a real domain change with two plausible context boundaries and a specific consistency/coupling problem. Characterize the normal/forbidden API and actual SQL before refactor, implement an owner-respecting aggregate/module public interface, and enforce a failing-before/passing-after import/**direct cross-owner DB write** architecture rule. Schedule **two independent PostgreSQL connections** racing a business invariant and compare an in-process-only guard with actual constraint/version/transaction protection. Defend a no-extraction alternative and independent fault review.
+  - Criteria: Before/after behavior is checked with real signed-in/denied HTTP and independently inspected SQL rows; new modules enforce actual dependency/ownership rather than rename files. A genuine concurrent schedule preserves the authoritative invariant with declared isolation/lock/retry semantics; no inferred SQL atomicity across separate remote commits. An actual injected cross-module import/write fails the appropriate enforcement, and two viable alternatives are judged against measured change, privacy and operating costs. Prior APP3/APP4 basics need not be reimplemented as extra assessments.
   - Evidence: Domain and change hypothesis, architecture dependency diagram and module contracts, source diff, complete signed-in/forbidden API regression suite, independent concurrent DB logs and constraints, fitness-rule failure/pass, ADR and limitations.
 
 - **APP11-AS2** (required atomic outbox, inbox idempotency and replayable handoff)
   - Outcomes: APP11-O3, APP11-O4, APP11-O5, APP11-O7, APP11-O9, APP11-O13, APP11-O15
-  - Work: Implement a real PostgreSQL transaction that commits a business mutation and bounded outbox event intent together, then dispatch to a separately inspectable local consumer/worker with durable inbox/dedup and protected read projection or equivalent derived state. Cause DB rollback, publisher crash after delivery/before ACK, racing duplicate deliveries, delayed and out-of-order aggregate versions, malformed/poison envelopes, process restart and projection rebuild. Prove the correct durable state under each condition using independent DB queries.
-  - Criteria: A rolled-back domain transaction cannot publish a valid associated event, while a committed but undelivered event remains recoverable. Duplicate messages or concurrent consumers cause at most the one intended durable business effect within the tested scope, with no false end-to-end exactly-once claim. Replays and out-of-order events cannot silently overwrite a newer derived view; eventually consistent results are labeled with lag and checked against authoritative records. Delivery bounds, error status, retention and recovery are testable with free local tooling.
+  - Work: Write one protected domain mutation and **versioned outbox intent in the same real PostgreSQL transaction**; verify rollback cannot leave a publishable event. Run an actual separately controlled dispatcher and consumer with **consumer/tenant/event-scoped durable inbox + business effect in one local consumer transaction**, and a derived projection. Inject committed-pending-before-dispatch, **sent/received-before-relay-ACK crash**, racing same-event/different-fingerprint consumers, duplicate/out-of-order aggregate versions, a permanently invalid/poison payload, restart and a genuine projection rebuild from **retained authoritative history or current owned-state resnapshot**. Test row claiming and explicitly justify ordering; PostgreSQL SKIP LOCKED is a queue convenience, **not FIFO or complete business-history proof**.
+  - Criteria: Independent SQL and actual process/consumer observations prove same-transaction domain+intent or neither, durable pending recovery and **possible repeated dispatch** after lost acknowledgement. The inbox and protected consumer effect atomically enforce the tested dedup scope, including different-tenant/same-ID and same-key-different-payload cases, without claiming exactly-once remote delivery. Out-of-order versions cannot silently overwrite newer projections, and a genuine rebuild is possible from a declared complete source; a pruned outbox is not silently treated as an append-only event log. Backlog/claim/poison retry and privacy limits are bounded and observable.
   - Evidence: Outbox/inbox schemas and SQL transaction, event envelope/contracts and dispatcher/worker code, failure injection scripts, version/order/idempotency/poison tests and DB before/after records, projection rebuild and privacy-safe state/correlation logs.
 
 - **APP11-AS3** (required multi-step coordination, compensation and failure recovery)
   - Outcomes: APP11-O3, APP11-O5, APP11-O6, APP11-O9, APP11-O11, APP11-O13, APP11-O15
-  - Work: Build a bounded two-owner local workflow with separately committed state or an actual controlled HTTP external fixture, using a durable state machine and either explicit coordinator or well-justified event choreography. Exercise success, timeout with uncertain outcome, duplicate steps, failed dependent action, compensation attempt, compensation failure and safe operator reconciliation. Mark irreversible pivot and user-visible pending/terminal states; preserve independent transaction boundaries and verify owner/tenant access.
-  - Criteria: At least two independently observable state or side-effect owners and their actual local interactions are exercised; a single mocked function returning a sequence is insufficient. The workflow never claims atomic rollback across already committed participants; compensation creates a new auditable operation and its failure remains recoverable/visible. Idempotent retries and business locks/versions prevent double-claims and stale compensations. Results reconcile to authoritative records after restart or explicit manual intervention without disclosing confidential state.
+  - Work: Implement a **durably recorded two-owner** local business workflow using a second actual PostgreSQL transaction authority or real stateful HTTP participant with independently verifiable effects. Demonstrate success, duplicate command, timeout **after remote commit with lost response**, legitimate concurrent workflow and stale compensation attempt, a failed following step, compensating transaction, *failed compensation* and explicit operator reconciliation. Record legal state transitions, owner/tenant permissions, reversible actions, **irreversible pivot**, bounded retry decisions and truthful user accepted/pending/uncertain/completed state, checking authoritative records after process restart.
+  - Criteria: The two participants truly commit independently—sequencing mocked functions inside one SQL transaction cannot pass. Unknown remote outcome is checked before blind repeat/compensation, local durable state supports restart and cross-workflow semantic locking/version guard blocks stale compensation. Compensating work is an auditable **new** action that can fail; irreversible effects are not reported undone, and failed compensation remains an honest bounded manual/retry state. Independent HTTP/SQL records establish end-user authorization and final durable facts.
   - Evidence: Workflow state diagram and transition policy, separately observed local participants and DBs/fixtures, complete fault/compensation matrix, real traces and SQL effects, user-facing status examples, operator reconciliation runbook and unsupported-guarantee notes.
 
 - **APP11-AS4** (required cross-boundary tenant trust and bounded resource safety)
   - Outcomes: APP11-O5, APP11-O7, APP11-O8, APP11-O9, APP11-O10, APP11-O11, APP11-O15
-  - Work: On a locally composed modular backend plus worker or bounded HTTP service boundary, trace verified principal/tenant permissions through normal API, message, projection and background job paths. Seed attacks using forged tenant headers/envelopes, same dedup ID across tenants, unauthorized projection reads, stale permission and a noisy-neighbor message burst; control worker concurrency, tenant quotas, payload limits and a slow local dependency. Demonstrate how the corrected design keeps protected operations available and blocks prohibited data effects.
-  - Criteria: Identity and authority are rechecked at each ownership boundary rather than trusted because a caller previously authenticated; privileged service identity is not confused with end-user permissions. Cross-tenant reads/writes/status projections and dedup collisions are denied by independently observed HTTP/message/DB outcomes. Queue, retry and worker limits remain bounded under the declared burst and failure; protected user/business state remains correct and failures are reported honestly. Traces/secrets/PII are appropriately redacted.
+  - Work: On the running two-owner backend, trace verified human and **separate service** identity through HTTP, outbox/inbox, worker, derived projection and job-status queries. Inject actual forged tenant/role headers and envelopes, expired or revoked user permissions, same message ID in two tenants, forbidden read/write properties and a tenant-skew burst against a slow local dependency. Verify real protected DB and message state, introduce bounded payload/queue/claim/worker/pool and retry budgets, and recheck legitimate other-tenant progress under overload and after recovery.
+  - Criteria: Each authoritative execution owner independently checks permitted action/object/read-write property and current tenant scope; a locally trusted service credential does not grant unverified end-user permission. Forged headers/events, replayed dedup IDs and stale projections do not leak or alter another tenant's source/inbox/projection, as demonstrated by actual denied HTTP/message and unchanged PostgreSQL facts. Overload limits produce measured finite pending/denied/committed results without silent loss or unbounded retries; telemetry carries no sensitive attributes.
   - Evidence: Trust-boundary and access matrix, tenant/worker identities and limits, adversarial synthetic HTTP/envelope scripts, DB row/queue/error/timing evidence, before/after authorization and contention tests and remaining risks.
 
 - **APP11-AS5** (required incremental backend extraction and versioned contract compatibility)
   - Outcomes: APP11-O1, APP11-O2, APP11-O5, APP11-O7, APP11-O8, APP11-O12, APP11-O14
-  - Work: Choose one measurable change/ownership pressure in a modular backend; compare an internal module/adapter evolution with a separate bounded service/process alternative. Implement a versioned abstraction, old/new HTTP/event consumers, a compatible staged schema/backfill or projection change, safe read-only shadow/differential checks and an actual local feature/route cutover. Seed an old-consumer break or out-of-date event/read-model defect, then demonstrate a safe rollback or defensible forward repair preserving committed data and private access.
-  - Criteria: A real alternate implementation or process boundary runs; an architecture drawing alone cannot satisfy the evolution exercise. Both old/new consumer behaviors and domain invariants are verified using independent contract, DB and tenant-negative tests. Shadow operation does not duplicate irreversible side effects, the migration uses explicit data ownership and avoids unchecked dual writes, and rollback is refused when a committed data change makes old code unsafe. Reversibility, added operational burden and exit triggers are recorded honestly.
+  - Work: Starting from one proven modular backend and measured ownership/change pressure, implement a versioned adapter and a **real separate locally restartable participant/worker** for one bounded contract, compare its task cost to an internal-module alternative and run independent old/current HTTP/event/worker clients. Stage an actually applied compatible PostgreSQL schema/projection change with **interrupted and resumed backfill** where needed, safely **shadow only side-effect-free reads** (or justify and evidence an equivalent safe comparison), then switch limited local requests. Inject an old-consumer break or projected stale result and demonstrate a compatible rollback or **forward repair** when committed effects cannot safely be reversed.
+  - Criteria: The alternate process contract actually runs and fails under controlled isolation; the chosen final architecture may remain a modular monolith, but no purely theoretical drawing satisfies cross-process competence. Tests independently exercise old/new consumer and replay/tenant/SQL behavior, with actual previous and current database rows, an observed compatibility fault and safe staged backfill. No shadow duplicate writes, unchecked dual write or tenant-scope bypass; a code rollback is never claimed to reverse already committed owner transactions or irreversible compensating/pivot actions. The extraction decision includes attributable costs and future reconsideration threshold.
   - Evidence: ADR and business trigger, old/new sequence and contract matrix, adapter/feature-switch code, migration/backfill and safe shadow evidence, controlled failure/release choice, SQL/user security invariants, operational cost/limits and reproducible test recipe.
 
 - **APP11-AS6** (required architecture failure, observability and economic decision)
   - Outcomes: APP11-O1, APP11-O8, APP11-O9, APP11-O11, APP11-O13, APP11-O14
-  - Work: Run a matched bounded workload and fault experiment against one complex protected use case using a modular-monolith baseline and a plausible separated/local-process or async variant. Inject a slow/unavailable dependency, retry amplification or stuck outbox/compensation, correlate user errors/latency with actual request, DB, worker and workflow state, and implement a justified containment or operational reconciliation. Compare end-to-end task success, p95 or justified distribution, queue/inbox backlog, failure blast radius, complexity and illustrative monthly resource/maintenance cost across options.
-  - Criteria: Measurements record environment, data/tenant mix, errors/timeouts, versions, samples and test bias; process split is not presumed superior. Fault scenarios are actually run against learner-owned local systems and observable end-to-end business state, and no unavailable cloud/multi-region property is asserted. A bounded mitigation preserves authorization and transactional correctness and its effect is inspectable. Resource and operating cost estimates have explicit units and sensitivity; a rational no-extraction/less-complex choice may pass.
+  - Work: Using **the same evolving system**, run matched low-resource and bounded burst scenarios for monolith/module versus local process boundary with real synthetic tenant mix, SQL and queue/worker work, measuring **eligible completed authorized business tasks**, timeouts/rejections, latency distribution/sample count and resource/pool limits. Inject a *new* dependency or stuck outbox/compensation problem distinct from the earlier AS2/AS3 fault replay, collect sanitized cross-process causal HTTP/SQL/event/inbox/workflow evidence, compare competing root causes, apply one justified mitigation or operator reconciliation and remeasure. Price alternatives with explicit illustrative compute/DB/worker/telemetry/incident/maintenance units and sensitivity.
+  - Criteria: A newly introduced fault is actually observed and repaired before/after, not just a reused screenshot/trace from other assessments. Useful completed business effects, failed/queued work, sample variance and process overhead are visible, and external/multi-region reliability is not inferred from loopback. The repair preserves cross-tenant authorization, committed facts and bounded retry; safe no-split decisions may be preferable. Quantitative operating costs and uncertainty are explicit without fabricated live hosted rates or unsupported uptime claims.
   - Evidence: Reproducible workload/fault scripts and profiles, real HTTP/SQL/worker traces with safe correlation, before/after outcomes, incident/reconciliation timeline, component/owner cost comparison, architecture fitness rubric, ADR and limitations.
 
 - **APP11-AS7** (required integrated architecture and independent boundary defense)
   - Outcomes: APP11-O1, APP11-O2, APP11-O3, APP11-O4, APP11-O5, APP11-O6, APP11-O7, APP11-O8, APP11-O9, APP11-O10, APP11-O11, APP11-O12, APP11-O13, APP11-O14, APP11-O15, APP11-O16
-  - Work: Deliver one coherent local advanced backend evolution from a correctly tested APP3/APP6 Fastify/PostgreSQL service. Demonstrate published domain and transaction ownership, contract-protected modules, actual outbox/inbox handoff, durable step coordination with genuine partial failure/compensation and read-model reconciliation, negative tenant/work-queue tests, fault isolation, compatibility-safe incremental evolution and a measured reason to retain or add process boundaries. Reuse qualifying AS1–AS6 evidence. A reviewer introduces an unfamiliar but bounded race, duplicate/order, stale projection, forged tenant event, compensation failure, contract migration or dependency incident and observes a specific correction or safe diagnosis with maintained security/business invariants.
-  - Criteria: From a clean documented free local environment, the reviewer can execute and inspect real HTTP, independent SQL transactions, safe synthetic events, actual worker/process interruptions, owner state, negative tenant tests, contract evolution and matched user-task observations without mandatory paid broker/cloud/Kubernetes/SYS elective. Every claimed effect and recovery is verifiable at authoritative data boundaries rather than by curated log messages alone; compensation, event ordering and exactly-once guarantees are qualified. The unfamiliar challenge is aligned to disclosed public outcomes and the learner demonstrates technically reasoned repair or safe remediation, rejected alternatives and unresolved operating cost/limits through an accessible defense.
-  - Evidence: Source and environment revisions, bounded synthetic two-tenant database/queue/HTTP fixture, architecture/ADR/security and contract map, replay/compensation/repair fault transcripts, SQL and API normal/negative results, deployment and resource metrics, cost/maintenance analysis and independent written/recorded/live defense.
+  - Work: Present **one** actual APP3/APP6-based backend evolving through APP11, and **reference independently accepted APP11-AS1–AS6 evidence** instead of building separate projects or resubmitting each entire log/diagram. From a clean documented free local environment demonstrate representative authorized and forbidden HTTP, real independent PostgreSQL transaction/claim, independently running consumer, duplicate/lost-ACK outbox/inbox, durable two-owner saga with failed compensation handling, reconstructible projection, compatible old/new client route, and bounded process failure. An assessor supplies a **previously unseen but public-scope** aggregate race, duplicate/out-of-order event, forged tenant permission, state gap, compensation failure, consumer migration or overload scenario. Predict failure, obtain an independent before-fix authoritative oracle, apply a narrowly causal fix or safe reconciliation, rerun targeted prior regressions and defend whether extracting another service would improve the product.
+  - Criteria: All APP11-AS1–AS6 judgments remain **separately passing**; APP11-AS7 cannot substitute for missing evidence or make this elective an APP9 prerequisite. Clean local setup and genuine process/SQL failures permit independent review; a rehearsal of a known previous fault cannot pass as unfamiliar transfer. Corrected behavior is shown with actual before/after SQL/HTTP/worker and tenant-denied facts, not curated traces alone; local process isolation never implies distributed partition tolerance, globally ordered events or exactly-once remote effects. One optional small participant is sufficient and a monolith-first final choice may prevail under measured costs.
+  - Evidence: One versioned APP3/APP6 source and pinned free local fixture, **outcome-to-previously-accepted-APP11-AS1–AS6 evidence index**, selected independently inspected SQL/HTTP/consumer/replay/compensation and security tests, actual incident/contract/architecture decision, new unseen assessor scenario and before/after targeted regressions, real-versus-simulated guarantees/cost limits and accessible written/recorded/live technical defense.
 
 ### Completion, academic status and historical revision
 
@@ -562,7 +544,7 @@ APP11 completion requires acceptable independently inspectable decisions for `AP
 
 Retain OEE/course revision, relevant outcome and assessment IDs, source/artifact identities, local environment, contracts and synthetic fixture identities, actual failure and independent SQL evidence, race/duplicate/compensation and security negatives, matched measurements, ADR/rollback decision, accessible technical defense, limitations and reviewer decision under [OEE Evidence Rules](../../spec/evidence-rules.md).
 
-APP11 retains its code, title, `course` type, **optional `elective`** status and the approved direct prerequisites **APP3 + APP4 + APP6**. It replaces the legacy nine-week checkpoint and final-lab contract with outcome-driven OEE `v0.2.0` **draft** outcomes and assessments. Historical APP11 completions and learner evidence remain tied to their original revision, not silently reinterpreted as meeting new requirements. APP9 and all required core courses remain unchanged; APP12–APP16 now publish their own separately migrated outcome-driven elective drafts, subject to independent academic and learner review. Any OEE Workspace, content/resource or 0xNAND version/evidence pin changes require separate downstream review, not automatic conversion.
+APP11 remains an OEE `v0.2.0` **draft** `course`, **optional `elective`**, with already approved APP3 + APP4 + APP6 direct prerequisites. The nine-week checkpoint/final-lab format is a **past migration**, not a new requirement introduced by this review. APP9's thirteen-course graduation closure and all other core/elective publications remain unchanged. Historical learner decisions are bound to their actual assessed source revision; any OEE Workspace, content/resource or 0xNAND source/evidence pin updates need distinct reviewed work. This source edit does **not** certify learner-`tested`, independently `verified` or production-ready status.
 
 This draft's software structural CI does not certify independent learner testing, public educational conformance, genuine public-cloud fault tolerance or production readiness.
 
