@@ -260,7 +260,7 @@ class SEFProgramConsistencyTests(unittest.TestCase):
     def test_umbrella_catalog_numbers_follow_actual_live_program_rows(self):
         overview = text(PROGRAMS)
         counts = {"SEF": (11, 0), "APP": (14, 7),
-                  "SYS": (10, 0), "AI": (16, 3), "SEC": (9, 0)}
+                  "SYS": (10, 0), "AI": (16, 4), "SEC": (9, 0)}
         for code, (core, elective) in counts.items():
             catalog = text(ROOT / "curriculum" / code / "README.md")
             if code == "APP":
@@ -285,7 +285,7 @@ class SEFProgramConsistencyTests(unittest.TestCase):
                     (current_core, current_elective), (core, elective)
                 )
                 self.assertIn(
-                    "| `AI` | AI Engineering | 16 staged core, 3 electives (integration only; program incomplete) |",
+                    "| `AI` | AI Engineering | 16 staged core, 4 electives (integration only; cutover incomplete) |",
                     overview,
                 )
             else:
@@ -300,7 +300,7 @@ class SEFProgramConsistencyTests(unittest.TestCase):
         )
         expected_core = sum(core for core, _ in counts.values())
         expected_electives = sum(electives for _, electives in counts.values())
-        self.assertEqual((expected_core, expected_electives), (60, 10))
+        self.assertEqual((expected_core, expected_electives), (60, 11))
         self.assertIn(
             f"| **Total** | **Five programs** | "
             f"**{expected_core} core, {expected_electives} electives** |",
