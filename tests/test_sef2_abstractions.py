@@ -52,15 +52,40 @@ class SEF2AbstractionTests(unittest.TestCase):
         modules = source.split("\n## Modules\n", 1)[1].split(
             "\n## Completion requirements\n", 1)[0]
         heads = list(re.finditer(r"(?m)^### Module (\d+) — (.+)$", modules))
-        self.assertEqual([int(m.group(1)) for m in heads], list(range(1, 14)))
+        # The curriculum derives module count from competencies: never lock a quota.
+        self.assertTrue(heads)
+        self.assertEqual(
+            [int(m.group(1)) for m in heads],
+            list(range(1, len(heads) + 1)),
+        )
+        first_instruction = {}
         for i, head in enumerate(heads):
             next_pos = heads[i + 1].start() if i + 1 < len(heads) else len(modules)
             chunk = modules[head.start():next_pos]
             self.assertEqual(chunk.count("#### Outcomes"), 1)
             self.assertEqual(chunk.count("#### Lessons"), 1)
+            outcomes_part = chunk.split("#### Outcomes", 1)[1].split("#### Lessons", 1)[0]
+            assigned = re.findall(r"(?m)^- (SEF2-O\d+)$", outcomes_part)
+            self.assertTrue(assigned, "every module must identify a needed outcome")
+            for outcome in assigned:
+                first_instruction.setdefault(outcome, i)
             numbers = [int(x) for x in re.findall(r"(?m)^(\d+)\. ", chunk)]
             self.assertTrue(numbers)
             self.assertEqual(numbers, list(range(1, len(numbers) + 1)))
+
+        # Check actual preparatory dependencies, not a cosmetic module count.
+        # A learner must encounter the mechanism before its integrated use.
+        for earlier, later in (
+            ("SEF2-O2", "SEF2-O10"),   # running Python before a CLI
+            ("SEF2-O5", "SEF2-O6"),    # collections before nested aliasing
+            ("SEF2-O6", "SEF2-O11"),   # references before class invariants
+            ("SEF2-O10", "SEF2-O11"),  # working CLI before object refactoring
+            ("SEF2-O11", "SEF2-O12"),  # objects before typed domain APIs
+        ):
+            with self.subTest(preparation=f"{earlier} before {later}"):
+                self.assertIn(earlier, first_instruction)
+                self.assertIn(later, first_instruction)
+                self.assertLess(first_instruction[earlier], first_instruction[later])
         required_examples = (
             "__init__", "self", "class attributes", "composition",
             "encapsulation", "instance", "Task | None", "runtime",
@@ -94,10 +119,12 @@ class SEF2AbstractionTests(unittest.TestCase):
     def test_revision_preserves_old_evidence_without_auto_equivalence(self):
         source = COURSE.read_text(encoding="utf-8")
         revision = source.split("### Revision history and evidence compatibility", 1)[1]
+        # Retain revision-scoped evidence without requiring a particular
+        # typography variant or frozen narrative wording.
         for term in (
-            "SEF2-O1–O10", "SEF2-O11", "SEF2-O12",
-            "SEF2-AS1–AS5", "SEF2-AS6", "original course revision",
-            "not automatically", "draft",
+            "SEF2-O1", "O10", "SEF2-O11", "SEF2-O12",
+            "SEF2-AS1", "AS5", "SEF2-AS6",
+            "original course revision", "not automatically", "draft",
         ):
             self.assertIn(term, revision)
 
