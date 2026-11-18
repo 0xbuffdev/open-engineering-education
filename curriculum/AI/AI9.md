@@ -178,7 +178,7 @@
 2. **Adversarial discriminator and generator losses** — Derive G1's finite real/fake logistic discriminator and non-saturating generator losses, keeping their parameter ownership and gradient directions separate.
 3. **Alternating optimization in a tiny 1D GAN** — Train or inspect a CPU-only synthetic one-dimensional adversarial generator/discriminator with measured instability and explicitly declared real/fake source distributions.
 4. **Mode collapse, saturation and unearned evidence** — Demonstrate a constant-output or narrow-support generator and show why cherry-picked samples or a discriminator loss by itself cannot establish distribution coverage.
-5. **Invertibility and Jacobian change of variables** — Derive F0's y=2z+1 density, support and log-Jacobian, rejecting a zero-scale noninvertible transformation and a missing density correction.
+5. **Invertibility and Jacobian change of variables** — Derive G1's y=2z+1 density, support and log-Jacobian, rejecting a zero-scale noninvertible transformation and a missing density correction.
 6. **Coupling/flow architecture reasoning** — Explain a simple affine coupling or compositional invertible transform with tractable inverse/log determinant and derive its shape and computational limitations.
 7. **Fair objective-family comparison** — Compare the toy flow's exact density, VAE's ELBO and GAN's sample-only diagnostics on what each *actually estimates*; do not report incompatible metrics as an ordered universal leaderboard.
 
