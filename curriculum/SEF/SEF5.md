@@ -20,7 +20,7 @@ The reference environment is Python 3.11 or later, the Python standard library, 
 
 A local branch, reviewable diff and written review can demonstrate the relevant collaboration outcomes without contacting an external service. For CI, the required behavior is a reproducible quality-gate contract and a documented least-privilege workflow; learners may demonstrate failed and passing gates locally and have an independent reviewer inspect their CI configuration without publishing secrets or running an online pipeline. Actual hosted job logs are welcome as additional evidence, not a hidden gate.
 
-The nine-module instructional sequence extends the earlier seven-module progression with distinct design-analysis and software-quality/review stages. Seven summative assessments evaluate connected skills; verified code, fixtures and review material may be reused rather than recreated for each module. A fixed quiz/lab pair, hosted CI service, or final lab beyond the published assessments is not required. All examples, test repositories, credentials, logs, and input records must be synthetic or owned by the learner. The course remains `draft`; the revised 10–12-week workload estimate is provisional and subject to learner validation. The design investigation extends the existing tested CLI and code-review evidence; no independent second project or paid design tool is required.
+Instruction follows the engineering competencies needed to change a working application safely: reversible Git history, independent testing and diagnosis, proportionate component and API contracts, reproducible quality gates, accessible design review, and independent handoff. Seven summative assessments evaluate connected skills, reusing verified code, fixtures and reviewer evidence across stages. The course has no predetermined module or lesson count, fixed quiz/lab pair, hosted CI gate, or additional final project. All examples, test repositories, credentials, logs, and input records must be synthetic or owned by the learner. The course remains `draft`; the revised 10–12-week workload estimate is provisional and subject to learner validation. The design investigation extends the existing tested CLI and code-review evidence; no independent second project or paid design tool is required.
 
 ## Learning outcomes
 
@@ -42,7 +42,7 @@ The nine-module instructional sequence extends the earlier seven-module progress
 
 ## Modules
 
-### Module 1 — Version Control & Collaboration
+### Module 1 — Git Change Control and Reversible Collaboration
 
 #### Outcomes
 
@@ -52,145 +52,88 @@ The nine-module instructional sequence extends the earlier seven-module progress
 
 #### Lessons
 
-1. Course introduction: Software Engineering Practice
-2. Repositories and commits
-3. History and diffs
-4. Branches
-5. Merging
-6. Merge conflicts
-7. Remotes and pull requests
-8. Staged versus working-tree changes
-9. Reverting published changes versus rewriting history
-10. Generated files, ignore rules and secret hygiene
+1. **From working code to safe engineering changes** — Reuse the SEF2 CLI and distinguish executable behavior from the source revision, independent test evidence and change intent another maintainer must understand.
+2. **Working tree, staging index and commits** — Predict untracked, ignored, unstaged, staged and committed content in a disposable local repository, then inspect the exact staged diff before committing.
+3. **Selective staging and secret hygiene** — Correct an accidental generated-file stage while retaining an unrelated edit; demonstrate ignore rules and why a secret must never enter committed test history.
+4. **History, diffs and reviewable boundaries** — Connect one focused source change and its tests to a specific revision, distinguishing a minimal change from distracting unrelated formatting.
+5. **Branches and merging** — Create concurrent local branches and an integration branch, comparing common ancestry and how changes combine without requiring a hosted repository.
+6. **Conflict resolution from a behavior contract** — Reproduce overlapping functional changes, preserve the warranted behavior from both sides, and rerun independently expected tests after resolution.
+7. **Reverting versus rewriting shared history** — Demonstrate a non-destructive revert, compare selective restore and reset effects on working/index state, and explain why rewriting published history may discard collaborators' work.
+8. **Simulated pull request with honest evidence** — Produce a local diff, test summary and risk/review note, marking local simulation as distinct from a genuine hosted PR or independent reviewer action.
 
-*Optional practice:* Use a throwaway local Git repository to compare staged, unstaged, ignored, and committed changes; practice a conflict resolution and a non-destructive revert without a remote account.
+*Optional practice:* Restore a disposable repository from an incorrect staging decision, then resolve a second unfamiliar merge conflict without losing another intended edit.
 
-### Module 2 — Testing & Debugging
+### Module 2 — Independent Tests, Causal Debugging and Determinism
 
 #### Outcomes
 
 - SEF5-O3
 - SEF5-O4
+- SEF5-O7
+- SEF5-O12
 
 #### Lessons
 
-1. Assertions
-2. Unit tests with Python unittest and optional pytest
-3. Choosing test cases
-4. Reproducing failures
-5. Debugging by evidence
-6. Unit and integration testing responsibilities
-7. Parameterized cases, fixtures and isolation
-8. Regression cases for previously observed defects
-9. Tests at component boundaries — Distinguish a test double used to isolate a dependency from a subprocess test that actually exercises the production wiring; explain how an unrealistic mock may let a defect escape.
+1. **Expected behavior as an independent oracle** — Derive results from the public task-manager contract rather than repeating implementation logic or testing only that a function was called.
+2. **Unit versus real integration evidence** — Exercise a domain function with `unittest` and independently run the CLI subprocess against actual file persistence, explaining why mocked calls cannot prove the real adapter works.
+3. **Useful input partitions** — Select accepted, empty, missing, malformed, duplicate-ID and storage-failure cases based on behavior and failure contracts, not a per-method test-count quota.
+4. **Reproduce a pre-fix defect** — Introduce a bounded malformed-record or duplicate-ID bug and preserve an exact failing input, expected/actual output, exit status and persisted state.
+5. **Hypotheses and causal repair** — Distinguish two possible causes through a discriminating experiment, repair the actual issue and retain a regression that would fail on the original revision.
+6. **Isolated mutable fixtures** — Use fresh temporary directories and independently constructed state so a prior run's files or global values cannot make a broken test pass.
+7. **Clock, randomness and iteration order** — Inject a controlled clock, seed any generated data and specify deterministic ordering only where the public behavior promises it.
+8. **Diagnose a flaky test, not just repeat it** — Reproduce two distinct clock/order instabilities under controlled conditions; distinguish a misleading test assertion from a genuine application defect.
+9. **Repeated-run limitations** — Perform the already-required repeated-suite exercise, record real results and explain why 20 passing runs cannot prove the absence of every intermittent failure.
+10. **Tests must still reject incorrect software** — Seed a real state-transition bug after fixing test determinism and verify that an integration assertion fails for the expected behavioral reason.
 
-*Optional practice:* Create a small failure fixture for a function and a CLI entry point, then compare the evidence each test layer can observe.
+*Optional practice:* Compare one isolated test-double pass with a deliberately failing real subprocess persistence test and explain what the fake did not observe.
 
-### Module 3 — Maintainable Software
+### Module 3 — Responsibilities, Contracts and Behavior-Preserving Refactoring
 
 #### Outcomes
 
 - SEF5-O5
 - SEF5-O6
-- SEF5-O10
-
-#### Lessons
-
-1. Code smells
-2. Refactoring
-3. Style guides
-4. Logging
-5. Code review
-6. Reading unfamiliar code
-7. Module boundaries and dependency direction
-8. Behavior-preserving refactoring strategies
-9. User-facing documentation and review evidence
-10. Cohesion, coupling and information hiding — Identify modules with mixed unrelated responsibilities, leaked storage details, hidden global state and circular imports.
-11. Interfaces and compatibility — Compare a public return/error/side-effect contract with a private implementation detail and a type annotation, which alone cannot validate runtime inputs.
-
-*Optional practice:* Inspect a small change for coupling, logging, interface drift, and unnecessary churn; write a review comment describing an actionable correction.
-
-### Module 4 — Design Boundaries, Dependencies and Contracts
-
-#### Outcomes
-
-- SEF5-O5
 - SEF5-O10
 - SEF5-O13
 - SEF5-O14
 
 #### Lessons
 
-1. **Responsibilities before files and classes** — Identify the distinct reasons the task-manager command parser, domain rules and JSON persistence may need to change; distinguish a meaningful component from a folder containing arbitrary code.
-2. **Cohesion and coupling** — Trace a change's blast radius, internal responsibilities, shared mutable state and imports; explain high cohesion/low coupling as useful design tendencies, not numerical guarantees.
-3. **Information hiding and encapsulation** — Keep storage representation and CLI parsing private to their owners; explain which domain operations are intentionally public and why language visibility conventions are not security enforcement.
-4. **Dependency direction** — Draw an inspectable text/table/diagram map of actual imports and calls; distinguish a domain module that imports `argparse` or `json` from a command/persistence adapter that depends on domain rules, and detect cycles.
-5. **Function-first and object-first alternatives** — Compare a small functional module with composed objects from SEF2; avoid mechanical inheritance trees and overgeneralized factories when simple functions serve the contract.
-6. **Contracts and invariants** — State parameter/return types, preconditions, postconditions, valid state transitions, externally visible errors, side effects and mutation ownership; runtime validation must be shown rather than inferred from annotations.
-7. **Dependency substitution and test seams** — Pass an explicit storage boundary or callable to domain logic, exercise a simple in-memory test double, then check the real file adapter end-to-end to avoid a misleading isolated pass.
-8. **API and data compatibility** — Preserve a documented command/exit-code/data-format contract; explain when a breaking API or serialized-schema change needs a new version or an explicit migration policy.
-9. **Characterization before change** — Capture representative normal, boundary, malformed and persistence-failure behavior before altering internals; keep defect fixes separate from unrelated refactors.
-10. **A bounded change-impact exercise** — Given a new read-only query or adjusted validation rule, predict affected components, implement one focused change and verify the actual blast radius against the original map.
+1. **Map the existing CLI before changing it** — Inspect real parser, domain and persistence calls/imports, then describe each component's responsibility in an accessible text dependency table.
+2. **Cohesion, coupling and actual change pressure** — Identify unrelated responsibilities, shared state or unnecessary propagation through source evidence; avoid judging maintainability by number of files or classes.
+3. **Information hiding and dependency direction** — Detect domain logic unnecessarily coupled to argument parsing or JSON representation; distinguish one useful interface from a circular or needlessly abstract dependency.
+4. **Functions, objects and proportionate composition** — Compare a direct function-oriented design with a narrow composed-object alternative without adding inheritance or patterns merely for style.
+5. **Explicit API and trust-boundary contracts** — Specify valid/invalid inputs, preconditions, invariants, return values, exceptions, error messages, side effects and mutation ownership, distinguishing runtime checks from mere type annotations.
+6. **Storage and CLI compatibility** — Trace data from the command through validation and persistent JSON, stating the error/exit/file format guarantees and when an intentional breaking change needs a version or migration decision.
+7. **Characterization tests before an edit** — Capture known-good ordinary and failing CLI outputs/bytes before changing internals; isolate independently justified bug corrections from unrelated structural refactors.
+8. **A real replaceable dependency seam** — Exercise a small in-memory test double or fake adapter for isolated domain behavior but verify the production file adapter with a real subprocess and a malformed-state fixture; explain how a fake-only pass can conceal broken wiring.
+9. **Focused refactoring and blast-radius evidence** — Make one bounded design improvement, compare the actual changed modules to the expected dependency map, and reject an abstraction that adds no demonstrated value.
+10. **Diagnostic logging and documentation** — Record useful fault context without disclosing credentials, internal private paths or sensitive data; provide reviewed module interface notes and a meaningful failure example.
+11. **Defend the design trade-off** — Compare the chosen boundary with the viable simpler design, citing actual behavior, side-effect and compatibility evidence rather than a generic “clean code” claim.
 
-*Optional practice:* On the existing task manager, compare domain code that reads JSON directly with a variant accepting a narrow storage interface. Trace one malformed input across each boundary and state which explanation is supported by actual tests, not only a class diagram.
+*Optional practice:* Demonstrate a direct-JSON versus narrow-storage-boundary alternative on the same malformed record and document which failure each actual test catches.
 
-### Module 5 — Testing Strategy & Reliability
-
-#### Outcomes
-
-- SEF5-O3
-- SEF5-O7
-- SEF5-O4
-
-#### Lessons
-
-1. Equivalence classes and boundary values
-2. State-based testing and invariants
-3. Unit, integration and end-to-end test selection
-4. Property-based testing principles
-5. Flaky tests, time and randomness
-6. Testing negative paths and side effects
-
-*Optional practice:* Compare a clock-dependent test and a test using an injected fixed clock, then isolate temporary directories and seed any generated data.
-
-### Module 6 — Continuous Integration & Build Reproducibility
+### Module 4 — Reproducible Quality Gates and CI Trust Boundaries
 
 #### Outcomes
 
 - SEF5-O8
 - SEF5-O9
-
-#### Lessons
-
-1. Dependency lockfiles and isolated environments
-2. Formatter, linter and static type checks
-3. CI workflows, stages and failure gates
-4. Secrets, permissions and untrusted CI input
-5. Clean-checkout builds and release artifacts
-
-*Optional practice:* Create a local `quality` command that runs tests and a deterministic syntax or formatting check; inspect a minimal, read-only CI workflow without giving it real credentials.
-
-### Module 7 — Code Maintenance, Documentation & Handoff
-
-#### Outcomes
-
-- SEF5-O5
-- SEF5-O6
-- SEF5-O10
 - SEF5-O12
 
 #### Lessons
 
-1. Contracts, coupling and interface stability
-2. Logging, error context and sensitive data
-3. Small reversible changes and meaningful commit history
-4. Peer review and actionable feedback
-5. README setup and contributor guidance
-6. Dependency upgrades and technical-debt decisions
+1. **Define a bounded quality claim** — Select specific required tests and a deterministic syntax, format or static check, stating which failure classes they can observe and what remains unproven.
+2. **One local quality entry point** — Implement a versioned `quality` command whose final status reflects every required stage, not a trailing successful echo or a skipped failure.
+3. **Clean checkout and dependency control** — Reproduce supported Python/tool versions and setup from a fresh local copy using standard-library tools or documented pinned optional dependencies.
+4. **Separate failing revisions** — Inject a test assertion failure and a source/static-check violation independently; verify both yield red local results before documenting the corrected green gate.
+5. **Least-privilege CI workflow** — Supply inspectable workflow configuration that matches the local gate and limits token permissions, without claiming a hosted job executed without actual logs.
+6. **Untrusted contributions and secret boundaries** — Distinguish code under review from trusted automation and reject running an untrusted `pull_request_target` checkout with repository secrets or write credentials.
+7. **Repeatable handoff evidence** — Record the exact commands, environment, checks, status and remaining platform limits so another reviewer can independently reproduce the quality-gate claim.
 
-*Optional practice:* Ask a reviewer to follow a README in a disposable checkout; improve one missing instruction and explain a bounded change's risk.
+*Optional practice:* Alternate which of the two required checks fails, demonstrating that the versioned quality command returns nonzero in both situations.
 
-### Module 8 — Software Quality, Change Evidence and Accessible Review
+### Module 5 — Quality, Accessible Review and Maintainer Handoff
 
 #### Outcomes
 
@@ -203,22 +146,22 @@ The nine-module instructional sequence extends the earlier seven-module progress
 
 #### Lessons
 
-1. **Quality is multidimensional** — Distinguish functional correctness from maintainability, readability, security, reliability, portability and usable documentation; identify which risks matter for this bounded CLI.
-2. **Evidence versus metrics theater** — Interpret dependency counts, changed files, test results and simple complexity indicators as contextual signals; reject claims that any single metric or green check proves quality.
-3. **Maintainability in an actual change** — Compare a before/after responsibility map and change diff; document one reduction in unnecessary propagation or one justified trade-off without requiring that every number improve.
-4. **Review a design decision** — Compare at least two credible choices (for example, direct JSON access versus a narrow persistence boundary), evaluate simplicity, change cost and failure risk, and document why a choice fits present scope.
-5. **Review severity and actionable comments** — Identify correctness, contract, security and maintainability risks; give file/function context, observable evidence, impact and an attainable suggested resolution rather than merely saying code is bad.
-6. **Accessible written review** — Prepare navigable plain-text or semantic Markdown notes using descriptive headings, named source locations and file paths, explicit expected/observed behavior and meaningful descriptions for optional diagrams or screenshots; do not convey an essential requirement only by color or image.
-7. **Collaborative review and independent reproduction** — Ask a real reviewer to follow a clean-start walkthrough or independently inspect a supplied accessible source/diff; retain independent reproduction notes, reviewer questions, resolution, differing interpretations and any limits. Simulated platform PRs must be labeled simulated.
-8. **Compatibility, regression and rollback reasoning** — Explain impact on CLI errors, exit statuses, storage, consumers and release notes; use focused commits, contract tests and a credible reversible change plan.
-9. **Communicating uncertainty** — State exactly what tests, code inspection and reviewer exercises established, and what they did not; retain an honest limitation list without inventing user study data or code-review approval.
+1. **Quality is multidimensional** — Relate correctness, maintainability, reliability, error clarity, portability, security and accessible documentation to this actual CLI without reducing quality to a score.
+2. **Review source changes and architecture together** — Examine a focused diff against the current responsibility map, API compatibility and independently observed test evidence; identify unneeded churn.
+3. **Compare credible design alternatives** — Evaluate a simple direct implementation and a narrow abstraction against real change cost, failure risk and maintainability instead of maximizing indirection.
+4. **Actionable review findings and resolution** — Specify file/function, reproducible expected/actual behavior, risk severity and suggested correction; document the author's evidence-backed response.
+5. **Safe documentation and logging** — Prepare setup, CLI usage, test commands and representative errors in a clean-start README without leaking credentials, unredacted environments or real user data.
+6. **Accessible structured evidence** — Write navigable semantic Markdown/plain text with clear headings, named source locations and textual alternatives for optional figures; never make a screenshot or color the sole source of essential information.
+7. **Actual versus simulated reviewer evidence** — Distinguish local mock PR notes from real independent reproduction; arrange the real independent reviewer handoff required by the published assessments and report what they actually did.
+8. **Compatibility, rollback and honest limitations** — Explain the effects of an interface/error/storage change on users and downstream code, a credible reversible plan and the limits of metrics, automated tests and reviewers.
 
-*Optional practice:* Produce a short screen-reader-navigable Markdown review of a tiny storage-interface change, with a dependency table, one reproducible risk, one suggested alternative and evidence from real CLI tests. A diagram, hosted review platform or accessibility audit service is not required.
+*Optional practice:* Submit an accessible design review for one small storage-seam change with an observed failing fixture, a proposed alternative and a genuine review question.
 
-### Module 9 — Tested CLI Application
+### Module 6 — Integrated CLI Delivery and Independent Defense
 
 #### Outcomes
 
+- SEF5-O1
 - SEF5-O3
 - SEF5-O4
 - SEF5-O5
@@ -235,16 +178,15 @@ The nine-module instructional sequence extends the earlier seven-module progress
 
 #### Lessons
 
-1. CLI behavior and versioned project contract
-2. Unit, integration and subprocess-based tests
-3. Logging, configuration and safe persistence
-4. Reproducible local quality checks and CI workflow
-5. Reviewable changes and clean-start handoff
-6. Responsibility and dependency audit of the finished application
-7. Public module contracts and production-adapter validation
-8. Accessible design review and evidence-based trade-off defense
+1. **Reuse one previously assessed application** — Version the same SEF2-derived CLI and its actual Git, design, tests and quality evidence, documenting at least the public operations required by the existing assessment.
+2. **Prove the public behavior across processes** — Test normal, invalid, empty, malformed and failing persistence cases against independent output/exit/byte oracles.
+3. **Close design and regression gaps** — Recheck actual component responsibility, runtime validation, adapter boundaries, test isolation and a meaningful seeded defect rejected by both appropriate tests.
+4. **Reproduce real quality gates** — Execute the clean-checkout local gate, retain both intentionally red and corrected green evidence and label unexecuted hosted CI as a reviewed configuration only.
+5. **Review and respond without harming unrelated work** — Present focused history/diff and accessible feedback, verify material corrections and preserve unrelated files and an existing valid stored record.
+6. **Independent review and unfamiliar change** — Have a real reviewer run the documented setup, record actual observations, and defend or revise the bounded implementation under an unfamiliar challenge.
+7. **Version, risks and technical defense** — Explain compatibility, effective release version, engineering trade-offs, what verification establishes and residual limitations without claiming automated checks prove production readiness.
 
-*Optional practice:* Draft a release checklist covering CLI operations, failure and persistence cases, logging, test isolation, quality gates, and reviewer evidence.
+*Optional practice:* Map the same seven required assessment decisions to evidence in the final CLI and ask another learner to predict one changed command's behavior before executing it.
 
 ## Completion requirements
 
@@ -320,5 +262,7 @@ This focused academic revision implements the SEF5 requirements in [accepted RFC
 | Code review and documentation taught, but no separate accessible evidence-based quality outcome | New `SEF5-O15`, evaluated by `SEF5-AS7` | Requires an accessible, actionable review and proportionate quality assessment |
 
 Two new modules and expanded formative lessons introduce these capabilities in a deliberate order. The learner **reuses the existing application**, its tests and independent reviewer where appropriate; the seventh assessment requires new demonstrable evidence, not a duplicate capstone. The provisional duration changes from 8 to 10–12 weeks pending learner calibration. Historical completions are not automatically revoked or converted to fulfillment of `O13`–`O15`; prior artifacts may be recognized only against actual reviewable evidence. No global OEE course-format rule, fixed activity quota, paid service, professional software license, or status promotion is introduced.
+
+**Subsequent competency-derived instructional review:** The earlier nine-module architecture repeated testing, design, API review and documentation responsibilities across disconnected teaching blocks. This revision consolidates those mechanisms into a prerequisite-valid progression while retaining all fifteen current outcome definitions and all seven summative Work/Criteria/Evidence contracts unchanged. It introduces no additional assessment or second application; historical learner evidence remains revision-scoped, and textual restructuring does not establish a higher readiness status.
 
 For optional open reference reading, see the [ACM software-engineering knowledge-area guidance](https://csed.acm.org/wp-content/uploads/2023/09/SE-Version-Gamma.pdf) on coupling/cohesion and interface contracts, and [Google's public engineering review guide](https://google.github.io/eng-practices/review/reviewer/looking-for.html) for design, functionality, maintainability and constructive feedback. These resources supplement but do not replace the assessment requirements defined here.

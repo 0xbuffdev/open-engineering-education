@@ -57,25 +57,35 @@ class SEF5MigrationTests(unittest.TestCase):
             covered.update(re.findall(r"SEF5-O\d+", references.group(1)))
         self.assertEqual(covered, outcomes)
 
-    def test_all_nine_modules_have_outcomes_and_ordered_lessons(self):
+    def test_modules_have_covered_outcomes_and_sequential_lessons(self):
         text = COURSE.read_text(encoding="utf-8")
         modules = text.split("\n## Modules\n", 1)[1].split(
             "\n## Completion requirements\n", 1
         )[0]
         matches = list(re.finditer(r"(?m)^### Module (\d+) — ", modules))
-        self.assertEqual([int(m.group(1)) for m in matches], list(range(1, 10)))
+        self.assertTrue(matches)
+        # Competency determines the module count, never an old editorial shape.
+        self.assertEqual(
+            [int(match.group(1)) for match in matches],
+            list(range(1, len(matches) + 1)),
+        )
+        covered = set()
         for i, match in enumerate(matches):
             next_index = matches[i + 1].start() if i + 1 < len(matches) else len(modules)
             chunk = modules[match.start():next_index]
             self.assertEqual(chunk.count("#### Outcomes"), 1)
             self.assertEqual(chunk.count("#### Lessons"), 1)
             outcome_segment, lesson_segment = chunk.split("#### Lessons", 1)
-            self.assertRegex(outcome_segment, r"(?m)^- SEF5-O\d+")
+            mapped = re.findall(r"(?m)^- (SEF5-O\d+)$", outcome_segment)
+            self.assertTrue(mapped)
+            self.assertEqual(len(mapped), len(set(mapped)))
+            covered.update(mapped)
             lesson_numbers = [
                 int(x) for x in re.findall(r"(?m)^(\d+)\. ", lesson_segment)
             ]
             self.assertTrue(lesson_numbers)
             self.assertEqual(lesson_numbers, list(range(1, len(lesson_numbers) + 1)))
+        self.assertEqual(covered, {f"SEF5-O{i}" for i in range(1, 16)})
 
     def test_version_scope_and_offline_review_boundaries(self):
         text = COURSE.read_text(encoding="utf-8")

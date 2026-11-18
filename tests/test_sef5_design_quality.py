@@ -73,34 +73,69 @@ class SEF5DesignQualityTests(unittest.TestCase):
         self.assertIn("real subprocess/persistence integration tests", new)
         self.assertIn("accessible Markdown or plain-text design review", new)
 
-    def test_nine_modules_have_coherent_order_and_valid_outcome_references(self):
+    def test_modules_derive_from_real_competency_prerequisites(self):
         _, learning, modules, _ = sections()
         known = set(re.findall(r"(?m)^- \*\*(SEF5-O\d+):\*\*", learning))
         heads = list(re.finditer(r"(?m)^### Module (\d+) — (.+)$", modules))
-        self.assertEqual([int(h.group(1)) for h in heads], list(range(1, 10)))
+        self.assertTrue(heads)
+        self.assertEqual(
+            [int(h.group(1)) for h in heads],
+            list(range(1, len(heads) + 1)),
+        )
+        first = {}
         for index, head in enumerate(heads):
             end = heads[index + 1].start() if index + 1 < len(heads) else len(modules)
             block = modules[head.start():end]
             self.assertEqual(block.count("#### Outcomes"), 1)
             self.assertEqual(block.count("#### Lessons"), 1)
             refs, lessons = block.split("#### Lessons", 1)
-            outcome_refs = set(re.findall(r"(?m)^- (SEF5-O\d+)$", refs))
-            self.assertTrue(outcome_refs)
-            self.assertTrue(outcome_refs.issubset(known))
-            ordinals = [int(x) for x in re.findall(r"(?m)^(\d+)\. ", lessons)]
+            assigned = re.findall(r"(?m)^- (SEF5-O\d+)$", refs)
+            self.assertTrue(assigned)
+            self.assertEqual(len(assigned), len(set(assigned)))
+            self.assertTrue(set(assigned).issubset(known))
+            for outcome in assigned:
+                first.setdefault(outcome, index)
+            ordinals = [int(v) for v in re.findall(r"(?m)^(\d+)\. ", lessons)]
             self.assertTrue(ordinals)
             self.assertEqual(ordinals, list(range(1, len(ordinals) + 1)))
-        self.assertIn("Module 4 — Design Boundaries, Dependencies and Contracts", modules)
-        self.assertIn("Module 8 — Software Quality, Change Evidence and Accessible Review", modules)
-        self.assertIn("Module 9 — Tested CLI Application", modules)
-        for term in (
-            "cohesion", "coupling", "information hiding", "dependency direction",
-            "preconditions", "side effects", "runtime validation", "API",
-            "compatibility", "accessible written review", "source locations",
-            "independent reproduction", "test double", "CLI",
+            self.assertEqual(
+                len(re.findall(r"(?m)^\d+\. \*\*[^*]+\*\* — ", lessons)),
+                len(ordinals),
+                "lessons must name a distinct teachable objective and mechanism",
+            )
+        self.assertEqual(set(first), known)
+
+        # Test pedagogical dependencies, not a fixed module quota or title.
+        for prerequisite, application in (
+            ("SEF5-O1", "SEF5-O5"),   # Git change history before refactoring
+            ("SEF5-O3", "SEF5-O5"),   # characterization before refactoring
+            ("SEF5-O3", "SEF5-O8"),   # tests before the CI gate
+            ("SEF5-O5", "SEF5-O8"),   # working app before gate/release
+            ("SEF5-O13", "SEF5-O15"), # design analysis before quality review
+            ("SEF5-O14", "SEF5-O15"), # API evidence before quality review
+            ("SEF5-O15", "SEF5-O11"), # accessible review before final handoff
         ):
-            with self.subTest(term=term):
-                self.assertIn(term.lower(), modules.lower())
+            with self.subTest(dependency=f"{prerequisite}->{application}"):
+                self.assertLess(first[prerequisite], first[application])
+
+        for mechanism in (
+            "cohesion", "coupling", "information hiding",
+            "dependency direction", "preconditions", "side effects",
+            "runtime", "compatibility", "accessible",
+            "source locations", "independent", "subprocess",
+            "test double", "CLI", "revert", "clock",
+        ):
+            with self.subTest(mechanism=mechanism):
+                self.assertIn(mechanism.lower(), modules.lower())
+
+    def test_review_and_ci_are_not_mislabeled_as_real_execution(self):
+        source, _, modules, completion = sections()
+        self.assertIn("simulated", modules.lower())
+        self.assertIn("real independent reviewer", modules.lower())
+        self.assertIn("pull_request_target", modules)
+        self.assertIn("clean checkout", source.lower())
+        self.assertIn("no paid account", completion.lower())
+        self.assertIn("independent reviewer", completion.lower())
 
     def test_no_duplicated_capstone_or_hidden_paid_platform_gate(self):
         source, _, _, completion = sections()
