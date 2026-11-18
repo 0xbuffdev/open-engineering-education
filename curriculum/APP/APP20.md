@@ -114,33 +114,26 @@ summative assessment below explicitly includes their evidence.
 
 ## Modules
 
-### Module 1 — React in the Application Engineering Pathway
+### Module 1 — React as a Browser UI Runtime and Reproducible Toolchain
 
 #### Outcomes
 
 - APP20-O1
 - APP20-O2
-- APP20-O15
 
 #### Lessons
 
-1. **Course Orientation and React's Role** — Locate React in the history of interactive UIs and explain why the component model addresses coordination and change, not replacement of Internet, HTML/CSS, JavaScript or browser mechanics.
+1. **From DOM Manipulation to Declarative React** — Starting from APP2 browser interaction competence, briefly situate React's component approach historically and explain what it owns versus JavaScript, native HTML/CSS, React DOM, browser event behavior and a backend.
 
-2. **Browser Foundations and React Runtime Boundaries** — Review native DOM/events, form semantics, user journeys, fetch failure, client history and focus management; identify React-specific decisions to learn here; distinguish React's declarative model and state update APIs, the browser renderer `react-dom`, JSX transformation and actual DOM APIs.
+2. **React, React DOM and Development Tooling** — Choose supported mutually compatible React, React DOM, TypeScript and free local build/test releases; record exact package/lockfile provenance and explain Node's build-time role versus JavaScript executed by the browser.
 
-3. **Choose and Record the Reference Toolchain** — Prepare an explicitly versioned open-source React/TypeScript project using a simple local build tool such as Vite, or an equivalent compatible toolchain; document React and React DOM versions.
+3. **A Root, Real Build and Safe Local Fixture** — Mount a typed root in a known DOM element, reproduce a missing-root or mismatched-renderer defect and inspect real browser output from a local served build rather than relying on type checking alone.
 
-4. **Developer Tool versus Browser Runtime** — Trace what Node/npm do during development/build versus what a delivered bundle executes in a browser; APP21 server implementation is not a prerequisite.
-
-5. **A Minimal Root and Clean Bootstrap** — Render a typed root into a known DOM container, detect missing mounts and verify output with a local server, without a proprietary deployment target.
-
-6. **React Frameworks versus React Library** — Explain why production-scale React apps may use integrated frameworks; justify using a small client-only project for mechanism study and reserve full-stack server frameworks for later courses.
-
-7. **Deprecations and Supported APIs** — Avoid relying on deprecated Create React App or accidental experimental API behavior; compare the current official React API contract with installed package versions.
+4. **Library versus Full-Stack Framework Responsibility** — Compare the chosen small client-only application with SSR, hydration, pre-rendering and framework-integrated approaches conceptually; justify the present boundary without requiring APP21, APP3, a hosted framework or deprecated Create React App.
 
 *Optional practice — Setup Failure:* Diagnose incompatible renderer/dependency versions, failed JSX compilation or wrong browser import assumptions, then reproduce from a clean copy.
 
-### Module 2 — JSX, Typed Components and Composition Contracts
+### Module 2 — JSX, Typed Components and Intentional Composition
 
 #### Outcomes
 
@@ -151,25 +144,19 @@ summative assessment below explicitly includes their evidence.
 
 #### Lessons
 
-1. **JSX as JavaScript Syntax** — Trace compilation to React elements and distinguish JSX expressions from HTML source strings or a template engine that can execute injected markup.
+1. **JSX, React Elements and Executable Browser Output** — Trace a JSX expression into React elements and final DOM output, distinguishing JavaScript expression evaluation, JSX text escaping and HTML string injection.
 
-2. **Function Components and Naming** — Build reusable component functions with accurate names, explicit inputs and consistent return shapes rather than calling components as ordinary imperative functions.
+2. **Function Components, Typed Props and One-Way Ownership** — Build correctly invoked typed function components with meaningful required/optional props, event callbacks and readonly parent-owned data; rely on APP19 typing rather than repeat its language course.
 
-3. **Typed Props and Children** — Create type-safe required/optional props, callback signatures and composable children with justified React type definitions, without repeating the entire APP19 type system.
+3. **Children, Composition and Semantic HTML** — Use children and cohesive components to share actual structure without overbuilding a configurable UI library; preserve native links, buttons, labels and fieldset behavior from APP17/APP2.
 
-4. **Props, Data Direction and Ownership** — Follow one-way data flow through a component tree and explain why a child should not mutate parent-owned props.
+4. **Conditional UI and Meaningful Empty States** — Render intentionally defined empty, failed, pending and result variants, handling null and falsy values accurately rather than accidentally displaying a count or contradictory text.
 
-5. **Conditional Rendering** — Use readable branching, `null` and explicit status variants; avoid accidentally rendering numerical or falsey sentinel values as misleading UI.
-
-6. **List Rendering and Stable Keys** — Map bounded data to elements with genuine stable identities and test addition/removal/reordering; do not use random or index keys where identity matters.
-
-7. **Component Composition and Slots** — Compare children, composition helpers and small feature components with overly generic configurable abstractions; favor accessible native controls where available.
-
-8. **Safe Text and Intentional HTML** — Demonstrate React's normal escaping of rendered strings and define a narrow, reviewed policy for any genuinely necessary `dangerouslySetInnerHTML` case.
+5. **Safe Text, Attributes and Explicit HTML Trust** — Compare React's default text escaping with dangerouslySetInnerHTML; prove why user-controlled URLs, attributes and rendered trusted markup need separate context-sensitive validation and security decisions.
 
 *Optional practice — Component Contract Review:* Refactor a monolithic static/reactive view into typed composable parts and verify its semantics and invalid-prop boundaries.
 
-### Module 3 — Render, Commit, Identity and Reconciliation
+### Module 3 — Render, Commit, Keys and State Identity
 
 #### Outcomes
 
@@ -180,23 +167,19 @@ summative assessment below explicitly includes their evidence.
 
 #### Lessons
 
-1. **Render and Commit as Conceptual Phases** — Explain rendering as React calculating UI output and commit as applying necessary DOM changes; distinguish later browser paint from React's own commit.
+1. **Render, Commit and Browser Paint** — Predict React's render calculation and commit update without equating either with actual browser paint or assuming a single synchronous render.
 
-2. **Pure Render Logic** — Reproduce a bug from mutating external variables or making a network call while rendering and repair it without assuming renders run exactly once.
+2. **Pure Render and React-Owned DOM** — Reproduce a render-time mutation/side effect or manual React-owned DOM change and show the resulting corruption or repeated behavior, then repair it with correct ownership.
 
-3. **Position, Keys and Component State Identity** — Trace which component identity preserves state across parent rerenders and which type/position changes cause reset; demonstrate resetting a form by changing a key deliberately versus accidentally resetting every row with unstable identity.
+3. **Keyed Identity, Reorder and Form Preservation** — Use stable domain keys and type/position identity to reproduce lost/reassigned input state on insert/reorder and demonstrate intentional key-controlled reset, not random or list-index identity.
 
-4. **Reordering, Controlled Tests and DOM Observations** — Observe list reorder with stable versus index keys and explain visible wrong-value/focus consequences without depending on private Fiber details.
+4. **Layout Changes, Component Position and Controlled Tests** — Move a subtree or change its type/key, predict which state and focus survives, then verify actual DOM behavior without relying on undocumented Fiber internals.
 
-5. **Development Strict Mode Checks** — Inspect development-only render purity and effect setup/cleanup stress behavior; avoid claiming every extra observation occurs in production.
-
-6. **React Element Identity versus DOM Mutation** — Explain why a React element value is a description and why directly mutating React-owned DOM can be overwritten on a subsequent commit.
-
-7. **State Preservation across Dynamic Layout** — Move a subtree and evaluate whether intended draft, focus or selection state should survive; document the chosen identity mechanism.
+5. **Development Strict Mode Purity versus Production Semantics** — Observe development purity and setup/cleanup probes on a recorded React version, separate them from production guarantees and design an idempotent check that does not depend on a fixed render count.
 
 *Optional practice — Identity Diagnosis:* Repair a list whose typed rows swap internal input values after reordering and provide a small regression demonstration.
 
-### Module 4 — State Snapshots, Events, Updates and Derived Data
+### Module 4 — Render Snapshots, User Events and Correct State Updates
 
 #### Outcomes
 
@@ -206,25 +189,21 @@ summative assessment below explicitly includes their evidence.
 
 #### Lessons
 
-1. **State as a Render Snapshot** — Explain why an event handler observes the state captured by its render and why a setter requests a future render rather than mutating a local variable.
+1. **Event Handlers and Snapshot Semantics** — Explain which state each React event handler sees, preserve native event defaults and distinguish an intentional user action from a reactive synchronization process.
 
-2. **Event Handlers and React Event Props** — Apply React-supported handlers to native controls, preserve default actions intentionally, and distinguish React event callbacks from manual DOM listeners.
+2. **Queued Updaters, Batching and Immutable Changes** — Diagnose a repeated-increment or array/object mutation defect; repair with functional updaters and immutable structural changes without assuming immediate setter results.
 
-3. **Functional State Updaters** — Repair repeated incremental updates by deriving the next state from the queued previous value; inspect outcomes under batching.
+3. **Derived Values Instead of Redundant Effects** — Compute filtered/aggregated displays from props and state during render, correcting an effect-driven duplicate that becomes stale or triggers avoidable updates.
 
-4. **Immutable Object and Array Updates** — Copy just the state path that changes, avoid mutating prior snapshots and distinguish deep identity changes from shallow spreads.
+4. **Discriminated Transitions and Invalid States** — Represent actual UI phases with a tagged state model and a tested transition table rather than contradictory loading/success/error booleans.
 
-5. **Derived State during Render** — Compute filtered lists, labels and summaries directly during render when possible instead of syncing redundant state through an Effect.
+5. **Ownership, Local Reset and User Intent** — Demonstrate a component identity or route change that intentionally resets one region while preserving unrelated drafts, selection or keyboard focus.
 
-6. **Avoid Contradictory Booleans** — Use a discriminated UI status for mutually exclusive workflows; do not store simultaneously impossible loading, success and failure flags.
-
-7. **Event Actions versus Reactive Synchronization** — Put a user-initiated request or message in the event that knows its intent, not an Effect that later guesses why state changed.
-
-8. **State Lifetime and Reset** — Reset a scoped feature intentionally on identity or navigation changes while preserving unrelated drafts and accessible focus.
+6. **State Repair under Unfamiliar Event Order** — Apply an unseen bounded sequence of events, predict the resulting render snapshot, reproduce the failure and verify a minimal correction with a behavior test.
 
 *Optional practice — Stale Snapshot Repair:* Reproduce an incorrect double update or state mutation, write a behavior test, then fix it without introducing a spurious Effect.
 
-### Module 5 — Accessible React Forms and Submission Lifecycles
+### Module 5 — React Forms, Submission and Accessible Recovery
 
 #### Outcomes
 
@@ -236,82 +215,55 @@ summative assessment below explicitly includes their evidence.
 
 #### Lessons
 
-1. **Native Form Semantics in React** — Reuse APP17/APP2 label, fieldset, input type, keyboard and submit behavior; avoid custom controls when native ones satisfy the task.
+1. **Native Form Semantics with Deliberate React Control** — Reuse APP17/APP2 form semantics and compare controlled value/onChange with defaultValue/refs/FormData; justify the source of truth for a real task rather than default to one method.
 
-2. **Controlled and Uncontrolled Inputs** — Choose `value`/`onChange`, `defaultValue`, refs and native FormData by desired source of truth and performance, rather than declaring one approach universally superior.
+2. **Different Field Kinds and Actual Validation** — Model text, checkbox, select and file inputs without treating FileList as ordinary controlled text. Combine native validity with explicit runtime domain checks; a TypeScript type is not input validation.
 
-3. **Text, Checkbox, Select and File Semantics** — Model multiple input kinds accurately, including immutable FileList constraints and when a form control cannot be treated as a controlled text input.
+3. **Pending, Duplicate and Uncertain Submission** — Use a bounded submission state machine to avoid accidental duplicate clicks and preserve draft content on recoverable errors; distinguish UI disablement from server idempotency or undoing an uncertain write.
 
-4. **Validation at Form and Domain Boundaries** — Combine relevant native constraints with explicit runtime domain rules; TypeScript does not make user input or remote data trusted.
+4. **Field Errors, Status and Focus** — Associate labels/error messages/status text with real form controls; test keyboard navigation, appropriate focus movement and nonduplicated live announcements after React rerenders.
 
-5. **Pending, Success and Recoverable Errors** — Represent submission status honestly, keep draft input after recoverable failures and avoid disabling every control indefinitely.
+5. **React Form APIs and Supported-Version Decisions** — Compare standard event submission with installed-release supported action/form helpers when beneficial, without requiring an unverified experimental API or a framework server.
 
-6. **Duplicate Submission and Uncertain Outcomes** — Handle repeated submit clicks and late responses; distinguish UI suppression from true server-side idempotence or exactly-once guarantees.
-
-7. **Accessible Errors and Focus Recovery** — Associate field errors and status messages with controls, move focus when justified and verify useful announcements without flooding live regions.
-
-8. **React Version-Specific Form APIs** — Inspect whether the installed maintained React version supports action-based form mechanisms; compare with standard event submission without making unverified new APIs mandatory.
+6. **An Adversarial Form Recovery** — Inject invalid domain input, late failure, route change or unmounted form and verify that meaningful draft/state and accessible recovery policies remain coherent.
 
 *Optional practice — Form Defect:* Fix a lost draft, stale validation message or inadvertent repeated submit, then verify keyboard and negative-path behavior.
 
-### Module 6 — Hooks Rules, Effects and Synchronization
-
-#### Outcomes
-
-- APP20-O4
-- APP20-O6
-- APP20-O7
-- APP20-O9
-- APP20-O14
-
-#### Lessons
-
-1. **Rules of Hooks and Component Boundaries** — Use Hooks at the top level of React components or custom Hooks, not in loops, conditions, callbacks or arbitrary utilities; show a negative static/lint case.
-
-2. **Distinguish Render, Event and Effect Logic** — Classify calculations, user-intent actions and external system synchronization, refactoring an unnecessary `useEffect` into render or event logic.
-
-3. **Effect Setup and Dependency Correctness** — Use `useEffect` to synchronize external subscriptions or APIs; list reactive dependencies honestly rather than suppress lint to force a desired lifetime.
-
-4. **Cleanup and Identity Changes** — Subscribe and unsubscribe correctly on dependency change/unmount; implement idempotent cleanup of event listeners, timers and local mock connections.
-
-5. **Strict Mode Development Stress Test** — Demonstrate setup-cleanup-setup behavior under a selected React development configuration; ensure repeated setup cannot create duplicate live subscriptions.
-
-6. **Effects and Fetch Race Ownership** — When teaching a minimal effect-based fetch, abort or ignore obsolete results and test late completions; explain why mature data routing/caching solutions can be preferable.
-
-7. **Effect Timing and Layout Effects** — Contrast `useEffect` and `useLayoutEffect` when a justified DOM measurement requires a pre-paint adjustment, noting visual and performance costs.
-
-8. **Custom Hook as Shared Behavior** — Extract reusable stateful behavior while preserving Rules of Hooks, dependency correctness and independent hook instance state.
-
-*Optional practice — Effect Bug:* Repair a stale closure, subscription leak or dependency-suppression defect with a reproducible Strict Mode test and documented cleanup.
-
-### Module 7 — Refs, Imperative Escape Hatches and Non-React Integration
+### Module 6 — Hooks, Refs and Owned External Synchronization
 
 #### Outcomes
 
 - APP20-O3
+- APP20-O4
 - APP20-O6
 - APP20-O7
+- APP20-O9
 - APP20-O13
+- APP20-O14
 
 #### Lessons
 
-1. **Ref Identity and Mutable Handles** — Distinguish `useRef` stable holder values from state-triggered rendering; do not mutate refs during render to smuggle visible state changes.
+1. **Rules of Hooks, Identity and Negative Cases** — Use state/effect/custom Hooks only at valid React component or custom Hook top levels; demonstrate one conditional-Hook/lint failure and correct rule adherence under changing props.
 
-2. **Focus and Selection after Updates** — Apply refs to native focus or selection behavior with correct timing and preserve APP2's keyboard interaction requirements.
+2. **Render Calculations, Events and True Effects** — Classify pure derivation, user-triggered work and external subscription or DOM integration; replace an unnecessary Effect with render/event logic and justify remaining synchronization.
 
-3. **Managing Timers and Abort Controllers** — Own cancellable work using refs or effect-local resources as appropriate and document who releases each resource.
+3. **Reactive Dependencies and Strict Mode Setup/Cleanup** — Synchronize a mock external resource with truthful dependencies, demonstrate development setup-cleanup-setup probes and prove that current subscriptions do not leak or duplicate.
 
-4. **Interacting with a Non-React Widget** — Wrap a small mock map/chart/editor in a bounded adapter, describe its create/update/destroy protocol and keep React-owned DOM separate.
+4. **Refs versus Render State and Focus Timing** — Use stable mutable refs for appropriate handles or DOM focus instead of UI data, distinguish when useLayoutEffect is justified for pre-paint measurement and qualify blocking/render implications.
 
-5. **Version-Aware Ref Passing** — Use ref patterns supported by the selected React release, distinguishing React 19 ref-as-prop behavior from legacy forwarding APIs when reviewing older code.
+5. **One Non-React Widget with Create/Update/Destroy** — Integrate a small supplied external widget, prove its instance is not recreated on every render, preserve React-owned DOM and dispose on prop change/unmount.
 
-6. **React Portal Semantics** — Create a dialog-like overlay using a portal when justified; inspect event ancestry, focus trapping and stacking without assuming portal placement alone ensures accessibility.
+6. **Portals, DOM Placement and Interaction Semantics** — Use a justified overlay/portal, inspect React event ancestry versus DOM placement and demonstrate focus/keyboard behavior rather than assuming portal insertion makes a modal accessible.
 
-7. **Synchronizing a Third-Party Instance** — Avoid reinitializing a widget on every render; update it through a justified Effect and tear it down cleanly.
+7. **Cancellable Work and Stale-Effect Ownership** — Use an Effect only when it actually owns a request/subscription, abort or ignore outdated completions on dependency/identity change and explain why abort does not guarantee server rollback.
 
-*Optional practice — Integration Leak:* Reproduce duplicate widget creation, stale focus or a lingering external callback, then repair with verified lifecycle evidence.
+8. **A Small Custom Hook and Independent Instances** — Extract reusable behavior without sharing accidental global state, preserve dependency correctness, and test two separate component instances and cleanup.
 
-### Module 8 — React Feature Architecture and State Ownership
+9. **Synchronization Defect and Verified Repair** — Reproduce a stale closure, lingering widget or duplicate subscription; show failing-before/passing-after component behavior under the selected strict/development configuration and honest production limits.
+
+*Optional practice — Effect Bug:* Repair a stale closure, subscription leak or dependency-suppression defect with a reproducible Strict Mode test and documented cleanup.
+
+### Module 7 — Feature Boundaries, Reducers and Shared State
 
 #### Outcomes
 
@@ -323,27 +275,21 @@ summative assessment below explicitly includes their evidence.
 
 #### Lessons
 
-1. **Local State versus Shared State** — Choose nearest component ownership for a draft, selection or modal; lift state only when more than one participant truly needs synchronization.
+1. **Local, Lifted and Shared State Responsibility** — Assign a draft, selection and user identity to the nearest justified owners; compare explicit props with lifted state and reject unjustified global mutable state.
 
-2. **Component and Feature Boundaries** — Decompose a user task into cohesive domain, view and data-adapter layers, avoiding a single global feature component or excessive prop drilling.
+2. **Feature Components and Pure Reducer Transitions** — Separate one feature's domain, view and transport contracts; use a reducer for a real multi-action transition problem and test illegal transitions independently.
 
-3. **Custom Hooks for Behavior, not Presentation** — Package repeated app behavior with an explicit API and testable dependencies while retaining clear DOM/UI ownership.
+3. **Context Scope, Re-Renders and Explicit Dependencies** — Use Context for a real scoped theme/service/identity dependency, diagnose wide-provider invalidation and compare a simpler local prop or smaller provider boundary.
 
-4. **Reducers for Complex Transition Logic** — Use `useReducer` for a justified multi-event state machine and test transitions as pure functions.
+4. **Custom Hooks and External Store Ownership** — Define one reusable feature Hook or provided external-store adapter, explain useSyncExternalStore only if an actual external source exists and avoid mandatory Redux/Zustand.
 
-5. **Context for Dependency Distribution** — Use `createContext`/`useContext` to distribute an appropriate stable service/theme or scoped user identity; avoid treating context as free global cache infrastructure.
+5. **State Immutability and Boundary Validation** — Validate incoming unknown data before trusted feature state, and trace why mutating a shared nested record causes consumer inconsistency despite TypeScript checks.
 
-6. **Context Changes and Render Scope** — Explain how provider value changes affect consumers and when splitting contexts or placing providers locally reduces unnecessary coupling.
-
-7. **External Stores and Integration** — Recognize `useSyncExternalStore` as a version-aware integration tool for an actual external store; no Redux/Zustand or other specific library is required.
-
-8. **Immutable Domain State and Validation** — Preserve type-safe state transitions and runtime data validation across component boundaries without introducing brittle casts.
-
-9. **Maintainability and Change Cost** — Implement a bounded new feature in one component tree and justify whether reuse reduced or increased coupling and test burden.
+6. **Change-Cost Comparison and Architecture Defense** — Implement a small unfamiliar requirement twice conceptually or with scoped alternatives; demonstrate the chosen ownership's effect on coupling, testing and independent feature instances.
 
 *Optional practice — Architecture Review:* Compare a broad context and an intentional feature-local reducer, make a defensible choice and test independent feature instances.
 
-### Module 9 — React Data Integration, Loading and Mutation Recovery
+### Module 8 — React Async Data, Cache and Mutation Correctness
 
 #### Outcomes
 
@@ -355,25 +301,21 @@ summative assessment below explicitly includes their evidence.
 
 #### Lessons
 
-1. **From APP2 Fetch to React Data Lifetimes** — Reuse Fetch/HTTP response correctness, async races, typed input validation and identity-scoped caches; focus here on React ownership and render synchronization.
+1. **React Ownership of an APP2 Transport Boundary** — Use APP2's established Fetch/HTTP status and response contracts as an injected local adapter; show what React newly owns about render lifetime, pending state and identity changes.
 
-2. **Validated Transport and Typed Domain Models** — Keep raw response parsing external to presentational components and return a checked result/typed error rather than asserting unknown JSON.
+2. **Runtime-Validated Responses and Distinct UI Outcomes** — Decode unknown data before typed domain use, including successful no-body, malformed JSON, HTTP errors versus network rejection, forbidden, empty and recoverable states.
 
-3. **Pending, Empty, Forbidden, Error and Success UI** — Render distinct status variants with appropriate accessible announcements, route behavior and recovery actions.
+3. **Late Results, Identity Changes and Unmounted Views** — Use controlled promise settlement to reproduce a stale response after prop/route/user change, then prove an obsolete result cannot overwrite current content even when abort is late.
 
-4. **Race Safety Across Prop and Identity Changes** — Demonstrate stale request completion after a key/user/route change; abort/ignore obsolete responses and prove no incorrect user data appears.
+4. **Cache Invalidation and Sensitive Scope** — Define key, freshness, eviction and user-identity partitioning for a bounded local cache, including logout; defend when a compatible declarative library/router loader would be safer than hand-coded Effect caching.
 
-5. **Cache Keys, Freshness and Eviction** — Choose a bounded local cache policy, invalidation scope and identity separation; explain the limits of handwritten effect-based caching.
+5. **Mutation, Optimism and Uncertain Commit** — Integrate a local synthetic mutation, explicit pending/rollback or reconciliation behavior, and a no-blind-retry rule for a side effect that may already have completed.
 
-6. **Mutation State and Optimistic Presentation** — Apply a mutation with known recovery, visible pending status and rollback/uncertainty policy; do not reissue non-idempotent mutations blindly.
-
-7. **Server-State Libraries and Router Loaders** — Compare a small hand-authored adapter to optional open-source declarative data fetching or router data APIs; no named library beyond React is a mandatory educational gate.
-
-8. **Request Cancellation Limitations** — Explain that abort may stop browser-side work but not reverse already completed server mutations; keep feedback truthful after uncertain network outcomes.
+6. **React-Specific Race/Recovery Regression** — Use deterministic injected transport, independent rendered DOM observations and an unfamiliar failure to verify request ownership, state transition and correct focus/status output.
 
 *Optional practice — Async Race:* Fix a user-switch stale-data leak under deterministic deferred responses and document a regression for the changed component identity.
 
-### Module 10 — React Routing, Navigation and User Context
+### Module 9 — React Navigation, URL Contracts and Route Ownership
 
 #### Outcomes
 
@@ -384,25 +326,21 @@ summative assessment below explicitly includes their evidence.
 
 #### Lessons
 
-1. **Browser Routing versus React Rendering** — Explain that URL/History behavior remains a browser contract while React is responsible for route-driven component composition and state ownership.
+1. **Router Choice and Host URL Responsibilities** — Choose a compatible free router or minimal adapter, distinguishing APP2's native URL/History promises from route-composed React components.
 
-2. **Choose a Documented Router Strategy** — Use a compatible open-source React router (for example a documented React Router release) or an equivalent small adapter for a bounded client-only app; no full-stack framework or vendor account is required.
+2. **Route Layouts, Identity and Search Parameters** — Use nested layout where justified, parse/validate path/search/hash and decide which provider/form/cache state persists or resets after navigation.
 
-3. **Nested Routes, Layouts and State Lifetime** — Decide which layout/content persists as routes change and when feature state resets; test identity and keyed boundaries.
+3. **Direct Link, Browser History and Native Link Behavior** — Verify actual direct URL reload under the supplied local static server, Back/Forward navigation and normal anchor/modifier behavior, not just a simulated router click.
 
-4. **Navigation with Deep Links** — Support direct route loads with local server fallback, Back/Forward, meaningful links and correct handling of unrecognized routes.
+4. **Focus, Title, Scroll and Failure Recovery** — Define intentional keyboard focus, title, scroll restoration and error/empty/forbidden state transitions for a route change without inventing a universal focus-reset law.
 
-5. **Route Params and Search Inputs** — Parse and validate untrusted parameters, separate navigation intent from accepted domain input and avoid constructing unsafe links.
+5. **Navigation, Request Ownership and Authorization Display** — Cancel/ignore stale route loads, clear identity-scoped content on logout and explain why hidden routes or client guards do not enforce backend authorization.
 
-6. **Focus, Title and Announcements** — Implement intentional document title and focus strategy after route changes, including errors/empty states and keyboard-only traversal.
-
-7. **Route-Aware Requests and Cleanup** — Abort/ignore obsolete route data, prevent old identity-state flashes and verify cleanup when moving between pages.
-
-8. **Authorization Display versus Actual Policy** — Present forbidden/unauthenticated states honestly while stating that client-side route guards cannot enforce server permissions.
+6. **A Real Direct-Load or History Defect** — Reproduce and repair a broken deep link, stale loader, lost draft or focus transfer with an actual browser/host observation and targeted regression.
 
 *Optional practice — Navigation Failure:* Repair a direct-link reload, stale loader or lost focus and verify with real browser history interactions.
 
-### Module 11 — React Error Boundaries, Suspense and Scheduling
+### Module 10 — React Render Errors, Suspense and Update Priorities
 
 #### Outcomes
 
@@ -414,25 +352,21 @@ summative assessment below explicitly includes their evidence.
 
 #### Lessons
 
-1. **Rendering Errors and Recovery Boundaries** — Place an error boundary around a meaningful feature region to prevent a localized render failure from blanking unrelated UI; show a safe fallback and reset path.
+1. **Eligible Render Errors and Boundary Scope** — Place a genuine rendering error boundary and fallback/reset around a feature and explain which React rendering-phase failures it can contain.
 
-2. **What Error Boundaries Do Not Catch** — Demonstrate that ordinary event-handler errors, asynchronous callbacks and server-side rendering failures require appropriate separate handling; qualify version-specific transition exceptions.
+2. **Event, Async and Streaming Failure Distinctions** — Contrast an event-handler throw, rejected event/effect Promise and a supported React transition exception with a render failure; apply appropriate handling instead of promising that one boundary catches everything.
 
-3. **Loading Fallbacks versus Error Fallbacks** — Differentiate pending input/data, an unexpected render failure and a recoverable request rejection; use honest user-visible statuses.
+3. **Suspense for Supported Resources and Lazy Components** — Exercise a lazy-loaded React component with a real fallback; explain how a supported suspending resource can activate Suspense while arbitrary fetch inside an Effect cannot.
 
-4. **Suspense Contract and Scope** — Explain Suspense boundaries for React-supported suspending resources, lazy components or compatible frameworks; do not claim arbitrary async work in an Effect automatically suspends.
+4. **Fallible Loading UI and Independent Error UI** — Keep pending loading, render exception, forbidden HTTP/data error and malformed response visibly distinguishable, including accessible focus/status recovery.
 
-5. **Lazy Loaded Components** — Load a feature component lazily with React's supported mechanism and a focused Suspense fallback, with testable local chunk delivery.
+5. **Transitions, Deferred Values and Responsiveness** — Use startTransition/useTransition or useDeferredValue for one real nonurgent update where installed React supports it; compare an immediate-input path and reject false claims of CPU threads or automatic network cancellation.
 
-6. **Transitions and Responsiveness** — Use version-supported `startTransition`/`useTransition` for a justified nonurgent update; explain that transitions are scheduler hints, not threads or automatic network prioritization.
-
-7. **Urgent Input versus Deferred Views** — Compare an immediately updated input with a heavy derived view, including when `useDeferredValue` is justified and when simpler work reduction is preferable.
-
-8. **React Version-Specific Async Actions** — Inspect documented installed-release capabilities such as action state/optimistic helpers where available; classify optional enhancements separately from required stable React guarantees.
+6. **Version-Aware Optional Features and Boundary Tests** — Inspect the pinned version's supported actions/optimistic/suspending APIs as optional design alternatives, then test one genuinely unsupported assumption or incorrect catch/fallback pairing.
 
 *Optional practice — Boundary Diagnosis:* Inject a render failure, an async rejection and a slow UI update; assign correct handling to boundary, event/error policy or transition and verify actual output.
 
-### Module 12 — Accessibility, Browser Security and Privacy in React
+### Module 11 — React-Specific Accessibility, Security and Human Evaluation
 
 #### Outcomes
 
@@ -445,27 +379,21 @@ summative assessment below explicitly includes their evidence.
 
 #### Lessons
 
-1. **Semantic Components versus Styled Divs** — Review the native link/button/form semantics inherited from APP17/APP2 and check they survive component abstraction.
+1. **Native Semantics across Composition and Portals** — Verify native controls, label names, dialog/overlay keyboard behavior and focus return through React component/portal replacement instead of re-teaching APP17 label syntax.
 
-2. **Focus, Portals and Dynamic Updates** — Audit focus restoration on dialog close, route update or error reset; check that a portal alone does not create a valid modal focus pattern.
+2. **Pending, Error and Route-Change Announcements** — Test real dynamic status and error descriptions with visible and keyboard observations, and disclose what assistive-technology behavior was actually tested rather than inferred.
 
-3. **Status Announcements and Pending States** — Associate dynamic error/status messages and progress with accessible names and live regions without duplicate/late announcements.
+3. **Rendered Strings, HTML Sinks and User-Controlled URLs** — Prove React escapes text and why dangerouslySetInnerHTML, injected attributes or unvalidated href/src still require context-appropriate review; do not generalize text escaping to arbitrary DOM/script/URL contexts.
 
-4. **Keyboard and Reflow Regression** — Test component controls under keyboard-only, zoom/reflow, reduced motion and longer text in the actual React-rendered app.
+4. **Identity Privacy and Browser Security Boundaries** — Test a synthetic user switch for stale cached DOM/network values, sanitize diagnostics, avoid secrets in storage and explain why CORS and client-only guards cannot guarantee server authorization.
 
-5. **Safe Default Escaping and Dangerous HTML** — Explain normal React text rendering and why dangerous HTML insertion requires a trusted, context-appropriate sanitization/design policy.
+5. **Dynamic Reflow, Focus Visibility and User Preference Checks** — Recheck relevant WCAG 2.2 AA keyboard/focus/Focus Not Obscured, 320 CSS px reflow with exceptions and separate 200% text resizing; stress RTL/long text and reduced motion through real React state changes.
 
-6. **Trusted Attributes, Links and URLs** — Validate navigation targets and externally derived URLs; avoid unsafe patterns or user-controlled script destinations.
-
-7. **Credentials and Identity-Sensitive State** — Prevent storing personal secrets in test fixtures/logs, wipe user-scoped caches on identity changes and explain why CORS or hidden buttons are not server authorization.
-
-8. **Error and Telemetry Privacy** — Use stable nonsecret error labels and synthetic request IDs; avoid logging raw responses or sensitive payloads during diagnostics.
-
-9. **Usability Evidence and Provenance** — Evaluate a provided task with honest synthetic, peer or participant observations; document consent and limits when any real-person testing occurs.
+6. **Honest Usability Task and Repair Evidence** — Apply a repeatable task/failure rubric, explicitly distinguish synthetic persona or peer walkthrough from consenting participant evidence, repair one confusing outcome, and disclose untested scenarios without claiming WCAG certification.
 
 *Optional practice — Trust and Accessibility Repair:* Repair a markup sink, persistent user-data flash or lost modal focus and collect clear negative-path evidence.
 
-### Module 13 — React Testing, Debugging and Performance Decisions
+### Module 12 — Behavioral Testing, React Profiling and Optimization Limits
 
 #### Outcomes
 
@@ -480,29 +408,21 @@ summative assessment below explicitly includes their evidence.
 
 #### Lessons
 
-1. **Behavior-Focused Component Testing** — Test rendered output and real user actions with a maintained open-source React-compatible test library or equivalent environment, avoiding assertions about internal hook implementation.
+1. **Behavior-First Component, Reducer and Hook Tests** — Test visible component outputs and actual user interactions with a maintained free compatible runner; check reducer transitions and public Hook behavior rather than implementation-specific hook invocation counts.
 
-2. **Reducer and Custom Hook Unit Tests** — Test pure state transitions and exposed feature contracts with invalid events and boundary inputs.
+2. **Controlled Async, Strict Mode and Error Boundary Regressions** — Inject deferred request/race/identity changes, effect setup/teardown and real render/event errors with independent assertions; do not use arbitrary sleeps or development-only duplicate invocation as correctness criteria.
 
-3. **Integration Tests with Controlled Data** — Inject deterministic HTTP/async results, including network failures, malformed payloads, late completions and identity changes without brittle timer sleeps.
+3. **Real Browser Route, Keyboard and Security Observations** — Verify direct-link reload, Back/Forward, focus/dialog status and unsafe-string handling in a local browser as distinct from jsdom/mocked component tests; report any inaccessible AT contexts.
 
-4. **Development Strict Mode and Cleanup Tests** — Verify a mounted/unmounted component cleans up external subscriptions and side effects without taking development-only double-invocation as a user-visible invariant.
+4. **React Profiler and a User-Visible Bottleneck** — Record React/React DOM/browser/toolchain/build versions, device, fixture and comparable repeated render/interaction traces; connect a suspected slow update to real user work rather than counting rerenders alone.
 
-5. **Error Boundary and Route Tests** — Trigger actual render failures, deep-link reloads, Back/Forward navigation and fallback recovery with appropriate test infrastructure.
+5. **Memoization, React Compiler and Measured Alternatives** — Compare memo/useMemo/useCallback, context splitting and simpler workload reduction only for an observed bottleneck; React Compiler 1.0+ may automatically memoize in configured builds, so verify **whether it actually ran** rather than claiming manual memoization is always necessary.
 
-6. **Keyboard and Screen Reader Evidence** — Document real keyboard focus/announcements; use automated checks as a supplement and disclose whether actual assistive-technology inspection was conducted.
-
-7. **React DevTools and Profiler Evidence** — Capture bounded component render costs and causes, record version/build conditions and avoid equating all re-renders with performance problems.
-
-8. **Memoization and Stable Identity** — Evaluate `memo`, `useMemo`, `useCallback` and context splitting only where a measured issue warrants it; explain semantic correctness independent of caching.
-
-9. **React Compiler and Automatic Optimizations** — Describe version-conditioned compiler support and its limits; do not demand manual memoization or compiler enablement without verifying toolchain behavior.
-
-10. **Reproducible Load and Interaction Experiment** — Record device/browser/throttling and before/after traces, then rerun functional, async and accessible user-task checks.
+6. **Before/After Correctness, Accessibility and Trade-off Defense** — Inspect variation and test whether the improvement preserves data, focus, navigation and failure recovery. Explain conceptual CSR/SSR/hydration/RSC ownership without requiring full-stack implementation.
 
 *Optional practice — Performance Repair:* Fix a measured unnecessary render or expensive operation and defend the change with trace, correctness and accessibility evidence.
 
-### Module 14 — React Application Integration, Delivery and Defense
+### Module 13 — One Integrated React Application and Independent Defense
 
 #### Outcomes
 
@@ -525,34 +445,28 @@ summative assessment below explicitly includes their evidence.
 
 #### Lessons
 
-1. **Choose a Bounded React Product Slice** — Define an accessible multi-view, user-task-driven React feature such as a local request dashboard or library catalog with synthetic data, explicit privacy and recovery requirements.
+1. **One Task, Source and Accepted Evidence** — Choose a bounded synthetic multi-view React browser task and integrate the **same evolving project** evaluated in APP20-AS1–AS5; publish acceptance/error/privacy criteria and reference previous accepted evidence rather than build six unrelated apps.
 
-2. **Publish Requirements and Component Boundaries** — State task acceptance, component/route responsibilities, data contracts, permissions presentation and testable failure behavior before choosing state libraries.
+2. **Compose State, Effects, Forms, Data and Navigation** — Complete coherent typed component identity, form recovery, properly synchronized external resources, validated async transport, user-safe caching and real route/focus behavior under an explicitly pinned compatible React/browser/toolchain.
 
-3. **Plan and Build the Reference Project** — Configure compatible React, React DOM and TypeScript versions, review dependency and lockfile provenance and produce a clean local build without deprecated scaffolding.
+3. **Security, Boundary and Performance Regression** — Verify genuine render error versus async/event failure handling, supported Suspense fallback, safe untrusted content/identity changes, accessibility and repeatable measured optimization; link previously accepted AS1–AS5 results where still valid.
 
-4. **Explain Rendering Strategy Alternatives** — Compare client rendering, SSR, hydration, pre-rendering and server components conceptually and identify when a framework is appropriate; do not claim these all occur in the required client-only project.
+4. **Unfamiliar Feature, Broken Assumption and Repair** — Address one new bounded React-specific feature or defect involving keys, state reset, render/effect cleanup, async navigation or a bad input; reproduce, correct and independently retest earlier contracts.
 
-5. **Integrate State, Forms and Reusable Components** — Build a stable key-aware component hierarchy with typed props, appropriate local/shared state and accessible form/recovery flows.
-
-6. **Integrate Route and Data Workflows** — Implement local multi-route navigation, reliable async fixture-backed data, identity-safe cache handling, errors and retry status.
-
-7. **Exercise Suspense, Boundary and External Synchronization** — Use a justified lazy/Suspense loading boundary, one appropriate render error boundary and correctly cleaned-up Effect; trace distinct error categories.
-
-8. **Verify Security, Accessibility and Usability** — Use a reviewed negative-path matrix for unsafe content, wrong identity, keyboard/focus and task comprehension, preserving honest evidence provenance.
-
-9. **Measure and Improve a Real Bottleneck** — Capture repeatable component/perceived interaction measurements, apply one justified optimization and verify unaffected functional/accessibility behavior.
-
-10. **Reproduce and Defend an Unfamiliar Change** — Start from a clean checkout, apply a bounded new feature or defect fix, demonstrate regression safety and defend the chosen React mechanisms and remaining limitations.
+5. **Fresh Checkout, Toolchain and Technical Defense** — Build/serve/test in a documented free local offline-capable environment, provide one source/evidence index and defend React versus browser/framework/server boundaries, supported-version caveats, uncertainty and observed limits.
 
 ## Completion requirements
 
-**All sixteen APP20 learning outcomes** must be demonstrated
-through the **six required summative assessments** below.
-Their artifacts can form one evolving React application; six
-separate products are not required. Lesson investigations,
-exploration and formative feedback are preparation rather
-than extra independent graduation requirements.
+All **sixteen APP20 learning outcomes** require authentic evidence
+through **six independently decidable summative assessments**.
+APP20-AS1–AS5 inspect different rendering, state, synchronization,
+network/navigation, boundary and performance competencies using
+**one evolving local React project**; APP20-AS6 integrates their
+accepted results with an unfamiliar bounded change and defense.
+A reviewer may **reference already evaluated evidence** instead
+of requiring six separate applications, duplicate traces or
+a new project for each lesson. Formative investigations remain
+optional preparation, not hidden completion gates.
 
 | Required assessment | Required outcome coverage | Principal evidence |
 | --- | --- | --- |
@@ -585,13 +499,14 @@ than extra independent graduation requirements.
   implementation internals, specific scheduling timings,
   automatic compiler optimizations and development-only
   Strict Mode diagnostics are not universal runtime promises.
-- Keep render pure and put external synchronization in
-  appropriately cleaned-up Effects. Do not suppress actual
-  dependencies to force behavior, claim timers/abort undo
-  past mutations, or treat an Effect-created promise as
-  automatically triggering Suspense. Explicit event and
-  async error handling is required where rendering error
-  boundaries do not apply.
+- Keep render pure. Calculate derived values **during render**
+  and handle user intentions **in events** where appropriate;
+  use appropriately cleaned-up Effects only for actual external
+  synchronization with truthful dependencies. An arbitrary
+  Effect-created Promise does not activate Suspense, and
+  rendering error boundaries do not catch ordinary event
+  handlers or every async failure. Abort/transition mechanisms
+  never guarantee already-completed server work is undone.
 - Validate untrusted JSON before constructing typed domain
   values. Inspect success, empty, malformed, forbidden,
   failed, aborted, stale and identity-changed outcomes as
@@ -605,12 +520,15 @@ than extra independent graduation requirements.
   checks supplement but do not replace suitable manual
   inspection; disclose exactly what assistive-technology
   evidence was actually gathered.
-- Performance investigations use documented browser,
-  hardware, data volume, development/production build,
-  compiler behavior and repeat measurement conditions.
-  Profiler output and caching hints support limited
-  engineering arguments, not an unsupported guarantee
-  of global speedup or safety.
+- Performance investigations record browser/hardware,
+  workload, React/React DOM/build and test versions,
+  development/production configuration, whether React
+  Compiler 1.0+ is **actually enabled and functioning**,
+  and repeated trace variability. Do not count every
+  re-render as a defect or present manual memoization as
+  mandatory when automatic compiler optimization may
+  already apply. Neither one Profiler trace nor a compiler
+  configuration file proves user-visible speedup.
 - Use synthetic users and sanitized local data. Never
   upload real secrets, private participant responses,
   cookies or production traffic into source, logs or
@@ -629,39 +547,39 @@ than extra independent graduation requirements.
 
 - **APP20-AS1** (required component, render and identity investigation)
   - Outcomes: APP20-O1, APP20-O2, APP20-O3, APP20-O4, APP20-O12, APP20-O13
-  - Work: Given an accessible static APP2-style task view, build a small typed React/React DOM project from a documented local toolchain. Refactor repeated markup into coherent props/children components, then reproduce and repair a keyed-list or position-dependent state-reset defect. Demonstrate pure rendering, correct React text escaping of supplied untrusted strings, intentional element semantics, and explain the render/commit boundary using actual browser output without relying on React internal implementation details.
+  - Work: Begin **the one cumulative React project** from a small accessible APP2-style task view and a recorded compatible React/React DOM/TypeScript build. Establish typed props, children and semantic native controls, reproduce and repair a real key/position identity bug where rows swap draft/focus or unexpectedly reset, and compare actual browser render/commit output. Use safe React text rendering for a synthetic hostile string and separately check an externally controlled link/attribute context; explain why escaping an ordinary text child does not authorize arbitrary HTML/URL insertion.
   - Criteria: The clean checkout builds and renders under the recorded React/React DOM/compiler versions; public props and children types are sound; native control semantics and keyboard access remain usable. A stable-key and a deliberate-reset scenario behave correctly under add/remove/reorder, and a prior erroneous state/DOM association is reproduced and fixed. The learner distinguishes React element description, render and commit, and shows why untrusted text does not require unsafe `innerHTML` insertion.
   - Evidence: Versioned source/manifest/lockfile or local fixture provenance, compiler/build/test commands, component API notes, before/after key/identity trace and regression test, keyboard observation and concise design rationale.
 
 - **APP20-AS2** (required state, forms, hooks and effect lifecycle)
   - Outcomes: APP20-O3, APP20-O4, APP20-O5, APP20-O6, APP20-O7, APP20-O8, APP20-O13, APP20-O14
-  - Work: Implement a typed multi-state form or editable workflow with deliberate controlled/uncontrolled choices, a reducer or justified local-state alternative, accessible pending/invalid/success/recovery views and an external mock subscription or non-React widget requiring an Effect/ref. Reproduce and repair stale state, an unnecessary Effect, duplicated subscription under development Strict Mode or a lost focus/draft fault, and verify correctly bounded setup/cleanup on dependency changes and unmount.
-  - Criteria: Submission behavior follows a published transition matrix; keyboard, focus, field labels/errors and recovery are usable; stale closures, mutation and duplicate listener bugs are prevented with correct state ownership. Hooks follow their rules and dependencies are not falsified to suppress warnings. An effect actually synchronizes with an external system, survives Strict Mode's development checks without duplicate active subscriptions, and disposes only resources it owns. A successful type check alone does not substitute for runtime input and cleanup tests.
+  - Work: Extend **the same project** with a real multi-state form/editable feature, a chosen controlled/uncontrolled input policy and a meaningful reducer or justified local state. Repair a stale render snapshot, redundant Effect or lost draft/focus case. Use a documented external mock subscription or bounded non-React widget to exercise genuine Effect/ref ownership; show correct dependencies, setup/cleanup on prop change/unmount, and React development Strict Mode's setup-cleanup check without falsely asserting a fixed number of production executions. Test accessibility and both an invalid domain input and aborted/late completion path.
+  - Criteria: Actual user action and form state follow the declared transition table with recoverable draft values, accessible errors and no unhandled duplicate submission. Stale snapshots/illegal transitions are repaired without DOM mutation or disabled dependency lint. The external adapter/ref is initialized/updated/disposed under explicit ownership, leaving **at most the intended active instance** after development Strict Mode checks and none after unmount. Native event and form semantics are preserved; TS-only validation or a development render-count assertion is insufficient.
   - Evidence: Feature source, transition table, accessibility observations, deterministic normal/error tests, Strict Mode subscription/teardown logs, before/after defect evidence and a short state/effect ownership explanation.
 
-- **APP20-AS3** (required react data, navigation and race recovery)
+- **APP20-AS3** (required React data, navigation and race recovery)
   - Outcomes: APP20-O6, APP20-O8, APP20-O9, APP20-O10, APP20-O12, APP20-O13, APP20-O14
-  - Work: Integrate synthetic HTTP-like data through an injected adapter or supplied free local fixture service into a multi-view React feature. Verify loading, empty, forbidden, conflict, malformed, network-rejected, timeout/abort and success outcomes; validate unknown data at runtime, not by assertion. Add two route-like views through a documented compatible open-source client router or equivalent adapter, test deep links, Back/Forward, title/focus behavior and identity-scoped cache/late-response safety. Demonstrate an uncertain mutation without blindly replaying it.
-  - Criteria: Correctly distinguishes HTTP error Responses from rejected fetch, and validates data shapes before presenting domain values. Obsolete results never overwrite a newer route or identity, even if abort is late; private prior-user data does not flash during context changes. Route behavior and focus/title transitions match stated policy, including refresh fallback, and retry/optimistic actions preserve honest uncertainty. No learner-built Node server, database or authenticated cloud service is needed.
+  - Work: Extend **the one React app** with a supplied/injected deterministic Fetch-compatible transport, runtime decoding and two real client routes. Test success/**204 no-body**, empty, 4xx/5xx fulfilled HTTP error, forbidden/conflict, malformed JSON, network rejection, abort and deliberately out-of-order responses. Prove a late result cannot expose former-user data or overwrite the latest route even where abort does not cancel underlying work; demonstrate cache invalidation and an uncertain mutation's explicit retry/rollback policy. Test **direct-link reload under the real local host**, Back/Forward, title/focus/scroll and route identity/teardown, not merely a mocked router navigation. No backend framework, identity service or cloud endpoint may be imposed.
+  - Criteria: 204/no-body and HTTP status are handled without unsafe JSON assumptions, checked payloads do not silently become trusted TypeScript values and obsolete results never overwrite a changed route or identity. Data is cleared/partitioned at user switch; an uncertain write is not blindly replayed. Real direct-load/History behavior, focus/title/scroll, navigation cleanup and the chosen server's rewrite/fallback limitations match observed browser evidence; client guards are not called authorization.
   - Evidence: Route and request contracts, synthetic fixture/adapter and response matrix, verified component integration tests with controlled promise order, focus/history observations, negative identity-cache tests, and a documented recovery/abort policy.
 
 - **APP20-AS4** (required boundaries, accessibility and security failure audit)
   - Outcomes: APP20-O2, APP20-O5, APP20-O7, APP20-O10, APP20-O11, APP20-O12, APP20-O13, APP20-O14
-  - Work: Audit a representative React feature with an intentional rendering exception, a separate event-handler or async failure, a lazy-loaded/Suspense component and a focus-sensitive overlay or route transition. Implement meaningful React rendering error isolation, distinguish nonboundary failures, and repair accessible status/focus and unsafe DOM/data handling. Use scoped WCAG 2.2/accessibility criteria, manual keyboard inspection, free automated checks where available, and feasible screen-reader review or a transparent untested disclaimer.
-  - Criteria: The error boundary contains an eligible render error without falsely claiming to catch all event/async exceptions; the lazy component shows an appropriate Suspense fallback rather than relying on an arbitrary useEffect promise. Fault and recovery states are named, nonsecret and testable. Overlay/route interactions preserve keyboard and focus behavior, dynamic status is meaningful, untrusted text/links and identity-scoped data do not leak into unsafe UI, and evidence distinguishes tested criteria from unverified accessibility claims.
+  - Work: Audit **the cumulative app** with (1) an actual eligible render failure and React error-boundary/reset behavior, (2) a distinct event-handler or ordinary async rejection that must be handled separately, and (3) a **genuinely supported Suspense trigger**, such as a lazy component, not a Promise started in an Effect. Add an overlay or route transition where focus/keyboard/status fails, then repair it and a context-sensitive unsafe HTML/URL or stale-identity presentation flaw. Scope WCAG 2.2 reflow/focus/announcements and actual assistive-tech evidence honestly; no fictitious participant testing or blanket conformance claim.
+  - Criteria: Test evidence distinguishes **render/error-boundary, independent event/async failure and true Suspense fallback** with appropriate reset/recovery. The overlay/route is keyboard-operable with meaningful accessible name/status and intentional focus; applicable WCAG 2.2 reflow near 320 CSS px, separate 200% text resize and Focus Not Obscured are checked at realistic dynamic states. Unsafe HTML/URL contexts are prevented, identity-scoped data does not leak, and automated/keyboard/actual screen-reader observations are clearly differentiated without unsupported site-wide conformance claims.
   - Evidence: Failure scenario matrix, rendered fallback/async regression tests, accessibility/keyboard-focus evidence and environment, safe rendering/privacy negative cases, a repaired defect history and explicitly bounded conformance observations.
 
-- **APP20-AS5** (required react feature architecture and performance decision)
+- **APP20-AS5** (required React feature architecture and performance decision)
   - Outcomes: APP20-O3, APP20-O4, APP20-O6, APP20-O7, APP20-O8, APP20-O10, APP20-O13, APP20-O14, APP20-O15
-  - Work: Refactor or extend an existing typed React feature with justified component, reducer/context, custom Hook and ref boundaries, rejecting unnecessary global state and manual memoization. Investigate a measurable rendering or interaction problem with a declared browser/device/build workload and React Profiler or equivalent traces; apply one defensible optimization, compare repeated baseline and changed runs, and test that navigation, async recovery, keyboard usability and correctness remain intact. Explain how client rendering differs conceptually from SSR/hydration and what additional framework/server capability would be required, without implementing a production SSR service.
-  - Criteria: State ownership and public API choices reduce or justify coupling; component identity and Effects remain correct under changed props/route conditions. An actual measured bottleneck—not simple render count or a single synthetic score—supports the optimization, and observed variance, React/compiler versions and possible automatic optimization are disclosed. No caching hint is treated as a semantic guarantee; functional/negative/accessibility regression tests still pass. The learner correctly identifies which rendering strategies are outside this client-only course.
+  - Work: Restructure **the evolving app** around justified component/reducer/context, custom Hook and ref ownership, compare a simpler baseline against a genuine change and test independent consumers. Identify **one user-visible measured bottleneck** under a recorded React/React DOM/browser/device/build/fixture; investigate a specific render or interaction cause with React Profiler or equivalent trace and repeated observations. Compare a proportionate fix with unnecessary memo/useMemo/useCallback, context splitting or compiler-assisted optimization. If React Compiler is used, demonstrate actual configured output; otherwise state that it is absent. Rerun functional, stale-data, keyboard/focus and error-path tests. Defend the client-rendering versus SSR/hydration/RSC responsibilities without implementing a production server framework.
+  - Criteria: Reusable boundaries improve or justifiably preserve change/test cost without hiding invalid shared state, Effects or uncontrolled refs. Measurements identify an actual user-visible problem, comparable environment and variance; render count alone is not a pass. The learner discloses the **real compiler setting and observed effect**, not an assumed React release optimization; manual memoization is optional when no measurement warrants it. The optimization preserves function, identity, async and accessible user paths, and the broader client/server rendering alternatives are explained correctly.
   - Evidence: Before/after component/feature diagram, code diff and transition/contract tests, profiling environment and repeated trace summary, measured trade-offs, post-change keyboard/recovery checks and an architectural reflection.
 
-- **APP20-AS6** (required integrated react application and independent engineering defense)
+- **APP20-AS6** (required integrated React application and independent engineering defense)
   - Outcomes: APP20-O1, APP20-O2, APP20-O3, APP20-O4, APP20-O5, APP20-O6, APP20-O7, APP20-O8, APP20-O9, APP20-O10, APP20-O11, APP20-O12, APP20-O13, APP20-O14, APP20-O15, APP20-O16
-  - Work: Deliver one cohesive, versioned React/TypeScript browser application solving a bounded user problem, with composable typed components, stable identity, explicit state and form contracts, correctly owned Effect/ref work, multiple navigable views, runtime-validated asynchronous data from free local fixtures, usable errors/empty/loading/forbidden/retry states, intentional render/Suspense boundaries, accessible keyboard/focus behavior, safe identity/data handling and measurable interaction diagnosis. Reuse qualifying prior assessments rather than creating six unrelated applications. Prove clean-checkout build/run/test behavior, demonstrate a controlled failure and repair, accept an unfamiliar bounded user requirement or bug, and defend React-specific decisions without making APP3, a server framework, cloud deployment or elective technology prerequisites.
-  - Criteria: A reviewer with the recorded compatible open-source local toolchain can reproduce the app, fixture data, tests and at least one failure/recovery exercise without hidden paid/vendor access. Published task acceptance and negative paths are visibly met; validation, stale-data protection, focus/navigation and render boundary policies function as described. React mechanisms (render/commit, keyed identity, snapshots, Effects, refs, data loading and error handling) are explained accurately, with bounded security and performance claims. The unfamiliar change preserves prior correctness and accessibility; limitations, untested contexts and dependency/version risks are explicit.
-  - Evidence: Version-controlled source, dependency/version/lockfile and offline fixture instructions, acceptance and state/route matrices, independent component/integration/browser tests, security/focus/a11y failure evidence, profiler measurements, clean-reproduction and change log, and a written/recorded/otherwise accessible technical defense.
+  - Work: Complete **the single cumulative React app** already judged through APP20-AS1–AS5. Integrate the accepted component, state, Effect/ref, form, data/route, error/Suspense, security, accessibility and performance behavior using source/fixtures and **references to previously accepted evidence**. Accept an unfamiliar but bounded changed identity, keyboard/focus, route, key/state, effect cleanup or async failure requirement, reproduce a defect and independently repair it without regressing earlier contracts. Verify a free local clean-checkout build, run and tests, then defend React-specific ownership and limits without adding a backend, paid framework or cloud requirement.
+  - Criteria: A reviewer can reproduce the local app and observed behavior using documented compatible free tooling and synthetic fixtures, including real browser navigation, errors, correctly owned external resources and accessible user actions. The unknown change is repaired with explicit before/after evidence and no regression to previously accepted invariants. **AS6 integration cannot excuse a missing or failed APP20-AS1–AS5 decision.** Unsafe data exposure, inaccessible required action or unrepeatable build/flow blocks completion. The learner explains React guarantees versus DOM/TypeScript/APP3 server responsibilities and observed version/measurement limits.
+  - Evidence: One versioned source/fixture bundle, recorded React/React DOM/TypeScript and build/test compatibility, local clean-start instructions, **an outcomes-to-prior-accepted-AS1–AS5 evidence index** instead of copied logs, unfamiliar-change source/regression trace, only necessary new integrated checks, explicit untested risks and a reviewable written, recorded or accessible technical defense.
 
 ### Completion decision, status and revision safety
 
@@ -681,16 +599,16 @@ IDs, source/evidence locations, environment and test
 conditions, uncertainty and documented limitations
 under [OEE Evidence Rules](../../spec/evidence-rules.md).
 
-APP20 is introduced as an OEE `v0.2.0` **draft**
-course, not a learner-tested or independently verified
-course. Adding it to the program core expands the
-APP9 prerequisite closure but does not retroactively
-change historical learner completions or certify
-earlier evidence. APP2's framework-neutral browser
-assessment contract remains distinct and unchanged.
-The eventual APP3, APP5 and APP9 migrations will
-address their own integration and production
-assessment obligations separately.
+APP20 remains an OEE `v0.2.0` **draft**,
+not learner-tested, independently verified or
+accredited by a source-only curriculum review.
+APP2 remains the distinct framework-neutral prerequisite;
+the APP catalog **already includes** APP3, APP5 and APP9
+with their own published integration and graduation
+assessment contracts. This reassessment neither changes
+those course outcomes nor automatically upgrades
+historical learner completions, which remain tied to
+their actual evaluated course/specification revisions.
 
 ### Public non-mandatory study references
 
