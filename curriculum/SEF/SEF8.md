@@ -12,13 +12,13 @@
 
 ## Overview
 
-Study algebraic functions, exponentials, logarithms and limits, then linear algebra, probability and statistics, derivatives, elementary integration, floating-point behavior, numerical methods and introductory optimization. Develop independently checkable mathematical arguments before comparing them with Python calculations, and distinguish exact results, numerical estimates and uncertain statistical claims.
+Use mathematics to explain and verify small numerical programs and to evaluate what their computed results can legitimately claim. Begin with domains, functions and limits; build dimensionally valid linear algebra; model probability before making statistical inferences; derive calculus results before numerically approximating them; then investigate floating-point errors and bounded gradient descent. Work from independently checkable derivations to Python computations, distinguishing exact identities, numerical approximations, statistical uncertainty and the limitations of finite evidence.
 
 **SEF11 is the prerequisite**, providing arithmetic and algebraic fluency, logic, counting, proof, recurrence and graph reasoning for the numerical topics in this course. No separate entrance diagnostic is required here; mathematics support is available through formative review without an additional admission gate. SEF4 may proceed in parallel with SEF8 after SEF11, but both retain their own completion requirements.
 
 Use Python 3.11+ and its standard library (`fractions`, `math`, `statistics`, `itertools`, `random`, `unittest`) alongside reviewable paper or accessible digital derivations. Paid books, proprietary assessment, NumPy, network services and other scientific packages are **not** required. Document calculation domains, platforms, actual commands, seeds, numeric tolerances and independent expected values.
 
-The 12–14-week duration is provisional pending learner calibration. The six required assessments below are outcome-based; their identifiers are intentionally nonconsecutive and do not imply missing exams. There is no mandatory quiz/lab quota per module.
+The 12–14-week duration is provisional pending actual learner and reviewer calibration. Module and lesson boundaries follow distinct mathematical competencies and their prerequisites, not a preferred count. The six required assessments below measure those existing outcomes and may reuse earlier inspected calculations and code; their identifiers are intentionally nonconsecutive and do not imply missing exams. There is no mandatory quiz/lab quota per module or another hidden integrated project.
 
 ## Learning outcomes
 
@@ -40,7 +40,7 @@ The 12–14-week duration is provisional pending learner calibration. The six re
 
 ## Modules
 
-### Module 1 — Algebra, Functions and Limits
+### Module 1 — Functions, Domains and Limits for Numerical Reasoning
 
 #### Outcomes
 
@@ -49,143 +49,131 @@ The 12–14-week duration is provisional pending learner calibration. The six re
 
 #### Lessons
 
-1. **Function domains** — Evaluate domain, range, polynomial and rational functions, including excluded denominator values
-2. **Algebraic manipulation** — Factor elementary polynomials and solve equations with substitution checks
-3. **Coordinates and slopes** — Interpret elementary function graphs, secants and rates of change
-4. **Exponential functions** — Apply exponent laws and explain exponential growth with stated domains
-5. **Logarithms** — Use the inverse relation with exponentials, logarithm laws and positive arguments
-6. **Function composition** — Compute composed functions and explain undefined intermediate expressions
-7. **Limits and continuity** — Distinguish a limiting value from a finite sample or function value at a point
-8. **Exact and approximate checking** — Verify independently derived examples with rational arithmetic and justified rounding
+1. **What a numerical claim means** — Connect familiar SEF11 functions and arithmetic to real engineering uses such as rates, uncertainty and finite-precision calculations; distinguish an exact mathematical model from a Python result before assuming they agree.
+2. **Domains and excluded inputs** — Evaluate polynomial and rational functions on declared domains, identify zero denominators, and give a counterexample when a function or composition is used outside its valid inputs.
+3. **Algebraic equations and function composition** — Factor and solve simple equations with independent substitution checks; trace both stages of a composed function and reject an undefined intermediate value.
+4. **Exponential growth and logarithms** — Apply exponent laws and inverse logarithm relationships with correct positive-argument restrictions, and distinguish a mathematical inverse from blindly reversing floating-point code.
+5. **Graphs, secants and rates** — Calculate coordinates and finite secant slopes for a simple function; explain what the observed rate tells us and why a rate measured over an interval is not automatically a derivative at a point.
+6. **Limits, continuity and algebraic justification** — Establish elementary polynomial/rational limits using a stated domain and algebra rather than just tables; distinguish the limit at a point from the value assigned at that point.
+7. **Independent exact and approximate checks** — Use `fractions.Fraction` and selected `math` functions to compare hand-derived values with finite calculations, documenting invalid inputs and why rounded agreement does not prove a limiting claim.
 
-*Optional practice:* Predict a domain error and explain why a numerical table is not a proof of a limit.
+*Optional practice:* Derive a small rational-function limit by simplifying on a punctured domain and independently check several nearby values without presenting the table as a proof.
 
-### Module 2 — Vectors & Matrices
-
-#### Outcomes
-
-- SEF8-O6
-- SEF8-O7
-
-#### Lessons
-
-1. Vectors
-2. Norms and distance
-3. Dot products
-4. Angles and orthogonality
-5. Matrices
-6. Matrix multiplication
-7. Linear systems
-8. Linear independence, span and basis
-9. Matrix transformations and composition
-10. Solutions of linear systems and singular cases
-
-*Optional practice:* Draw vectors and a matrix transformation, then test dimensions and a singular example with small exact numbers.
-
-### Module 3 — Linear Algebra for Computation
+### Module 2 — Linear Algebra, Systems and Transformations
 
 #### Outcomes
 
 - SEF8-O6
 - SEF8-O7
+- SEF8-O3
+- SEF8-O18
 
 #### Lessons
 
-1. Vector spaces and linear independence
-2. Basis, rank and null space
-3. Matrix transformations and compositions
-4. Eigenvectors and eigenvalues as introductory concepts
-5. Numerical linear-system accuracy
+1. **Finite vectors and geometric meaning** — Represent a vector as an ordered list of coordinates in a declared space, perform componentwise addition and reject mismatched dimensions.
+2. **Norms, distances and dot products** — Derive the Euclidean norm and dot product with independent numeric examples, distinguishing zero dot product/orthogonality from zero-length vectors.
+3. **Matrices and valid multiplication** — State shape rules, calculate matrix-vector and rectangular matrix products, and detect ragged arrays or incompatible shapes before computing.
+4. **Linear transformations and composition** — Interpret a matrix as a transformation of finite vectors, compare two transformations and show why reversing multiplication order can change the outcome.
+5. **Elimination and unique solutions** — Work through a small nonsingular linear system using reversible row operations and independently verify the proposed solution in the original equations.
+6. **Span, independence and basis** — Identify linearly dependent columns and construct a small basis by explicit linear-combination reasoning, not by counting coordinates alone.
+7. **Rank and nonzero null vectors** — Find rank deficiency and a witness for the homogeneous null space, distinguishing a singular coefficient matrix from a necessarily inconsistent system.
+8. **Inconsistent versus underdetermined systems** — Compare two systems with the same singular coefficient matrix but different right-hand sides; identify no solution versus infinitely many and reject a false unique-solution claim.
+9. **Simple eigenpairs and substitution** — Verify an eigenvector and eigenvalue for a small diagonal matrix by direct multiplication; identify why a zero vector is not an eigenvector.
+10. **Exact versus approximate linear-system checks** — Use small `fractions.Fraction` examples and labeled float approximations to show how rounding or input perturbation can affect a computed answer; state a justified tolerance rather than assuming numerical agreement proves uniqueness.
 
-*Optional practice:* Investigate null vectors of a rank-deficient matrix and compare exact rational calculations with rounded floats.
+*Optional practice:* For a singular 2×2 matrix, exhibit a nonzero null vector, one consistent right-hand side and one inconsistent right-hand side, and independently check each claim.
 
-### Module 4 — Probability & Statistics
+### Module 3 — Probability, Random Variables and Descriptive Statistics
 
 #### Outcomes
 
 - SEF8-O8
 - SEF8-O9
 - SEF8-O14
+- SEF8-O3
 
 #### Lessons
 
-1. Probability basics
-2. Conditional probability
-3. Independence
-4. Bayes' theorem
-5. Distributions
-6. Expected value and variance
-7. Descriptive statistics
-8. Random variables and conditional distributions
-9. Sampling variability and bias
-10. Confidence intervals and uncertainty statements
+1. **A finite probabilistic model** — Define events and an explicit sample space, calculate normalized probabilities with nonnegative weights, and separate an assumed model from observed frequencies.
+2. **Conditional probability and impossible conditions** — Compute conditional event probabilities from a finite table, check the denominator and report conditioning on a zero-probability event as undefined rather than zero.
+3. **Independence and dependent evidence** — Test the independence identity using actual values and show why assuming independence without support changes a computed posterior.
+4. **Bayes' rule and base rates** — Derive a posterior from prevalence, sensitivity and false-positive rates using a joint-probability table, then challenge a tempting base-rate fallacy.
+5. **Discrete random variables and distributions** — Construct a probability mass function on finite outcomes, validate support and total mass, and distinguish an outcome from the probability assigned to it.
+6. **Expectation, variance and spread** — Derive a mean and population variance from a finite distribution; distinguish variability in outcomes from uncertainty about an estimated parameter.
+7. **Descriptive data versus sampling estimators** — Compute the mean, population variance and sample variance of a small actual list using the correct denominator, checking against `statistics` and handling empty/one-element cases.
+8. **Reproducible two-stage simulation** — Model a conditional synthetic test using explicit draws, a seed and a recorded contingency table; compare empirical frequencies with analytic probabilities without demanding exact equality across random trials.
 
-*Optional practice:* Count a conditional-probability table by hand and compare its ratios with a seeded synthetic simulation.
+*Optional practice:* Independently derive the expected positive-test posterior for a low-prevalence condition and reproduce the table using a fixed-seed Python simulation.
 
-### Module 5 — Statistical Inference & Experimental Reasoning
+### Module 4 — Sampling Uncertainty and Responsible Statistical Inference
 
 #### Outcomes
 
 - SEF8-O9
 - SEF8-O10
 - SEF8-O14
+- SEF8-O18
 
 #### Lessons
 
-1. Sampling, bias and variability
-2. Estimators and standard errors
-3. Confidence intervals and interpretation
-4. Hypothesis tests and p-values
-5. Correlation versus causation
-6. Basic experimental design and reproducibility
+1. **Population, sample, estimand and selection** — Distinguish what a population parameter means from a sample estimate, identify selection bias and explain why a large biased sample does not automatically solve the problem.
+2. **Sampling variation and standard errors** — Derive the plug-in standard error of a Bernoulli sample proportion from its stated independent-trials model, separating standard deviation of observations from uncertainty in the estimator.
+3. **An explicitly approximate 95% proportion interval** — Compute the elementary normal/Wald interval using a supplied approximate critical value of 1.96; state its assumptions and distinguish it from a guaranteed or exact interval.
+4. **Coverage and boundary failures** — Simulate repeated independent samples and count how often a declared interval procedure covers the known probability; investigate extreme proportions or tiny samples where the normal approximation can be misleading.
+5. **Hypothesis tests and p-value meaning** — Under a precisely specified null model, interpret a p-value as tail probability for a statistic at least as extreme, not as the probability that the null is true.
+6. **Dependence, confounding and causal limits** — Compare an observational association with a justified causal statement, identify a selection or confounding mechanism and explain what randomization can and cannot establish in a bounded experiment.
+7. **An inspectable inference report** — State the estimand, sampling process, approximation, seed, known bias, observed counts, interval/p-value interpretation and limits in an unfamiliar synthetic case with independent review.
 
-*Optional practice:* Repeat a seeded Bernoulli experiment under a second seed and explain why observed coverage fluctuates.
+*Optional practice:* Compute the 60-of-100 Bernoulli estimate and its explicitly approximate interval, then vary the sampling scheme to show why a correct formula does not repair biased selection.
 
-### Module 6 — Differentiation, Integration and Numerical Gradients
+### Module 5 — Analytic Calculus and Continuous Accumulation
 
 #### Outcomes
 
 - SEF8-O19
 - SEF8-O20
 - SEF8-O11
-- SEF8-O12
-- SEF8-O15
 - SEF8-O3
 
 #### Lessons
 
-1. **Rates and derivatives** — Connect secant slopes, tangent slopes and the limit definition of derivative
-2. **Derivative rules** — Differentiate polynomials and simple exponentials and justify a chain-rule computation
-3. **Partial derivatives** — Compute a function's partial derivatives with other variables held fixed
-4. **Gradients** — Derive and interpret the gradient of a two-variable function
-5. **Accumulation and Riemann sums** — Interpret definite integrals as limits of sums, including signed accumulation
-6. **Antiderivatives and the fundamental theorem** — Evaluate an elementary definite integral and check by differentiation
-7. **Continuous probability** — Explain why interval probability is an integral of a nonnegative density
-8. **Finite differences** — Compare forward and central derivative approximations with analytic results
-9. **Truncation and rounding** — Diagnose invalid step sizes, finite precision and cancellation
+1. **Derivative as a limiting rate** — Connect the earlier secant slopes to a difference quotient and elementary limit; explain why finite observations support but do not prove the tangent slope.
+2. **Derivative rules and justified substitutions** — Differentiate elementary polynomials and exponential functions and check answers with explicit analytic identities and valid domains.
+3. **Chain rule and composed functions** — Derive the derivative of a meaningful composition, distinguish inner and outer changes, and locate an error in a plausible but incorrect chain-rule step.
+4. **Partial derivatives and gradients** — Hold the other variable constant when differentiating a two-variable function, compute a gradient and interpret its components as local rates in the input directions.
+5. **Directional change and gradient meaning** — Use a small two-variable example to connect a gradient with a first-order change and a steepest-ascent direction in Euclidean coordinates, not a blanket claim of global optimization.
+6. **Riemann sums and signed accumulation** — Form and interpret finite rectangles, compare signed and unsigned contributions and explain why a definite integral represents the limit of sums under appropriate assumptions.
+7. **Antiderivatives and a definite integral** — Verify an elementary antiderivative by differentiation and use the fundamental theorem to evaluate a simple bounded integral independently.
+8. **Continuous probability density** — Define a nonnegative density with unit total area, calculate interval probability by integration, and explain why density at a point is not the probability of that exact point.
 
-*Optional practice:* By hand compute f'(2)=7 for f(x)=x²+3x and integral 0 to 1 of 2x = 1; compare with numerical estimates.
+*Optional practice:* Derive the derivative and integral of simple polynomials by hand, then identify what a finite-difference or finite-sum check can validate without replacing the proof.
 
-### Module 7 — Numerical Methods & Optimization Foundations
+### Module 6 — Floating-Point Reliability, Numerical Gradients and Optimization
 
 #### Outcomes
 
+- SEF8-O3
 - SEF8-O11
 - SEF8-O12
 - SEF8-O15
 - SEF8-O16
+- SEF8-O18
 
 #### Lessons
 
-1. Floating-point error and representation
-2. Truncation versus rounding error
-3. Numerical derivatives and step-size trade-offs
-4. Gradient descent and learning-rate behavior
-5. Stopping criteria and convergence limitations
+1. **Binary floating-point is approximate** — Explain why many decimal fractions cannot be represented exactly in a finite binary format; compare `Fraction` with `float` and reject invalid or nonfinite numerical inputs.
+2. **Rounding, cancellation and safe comparisons** — Diagnose subtractive cancellation, failed exact-equality expectations and scale-sensitive tolerances, stating when relative and absolute thresholds are justified.
+3. **Forward finite differences** — Derive a difference quotient for a known analytic derivative, specify `h > 0` and compare approximation error over meaningful positive steps.
+4. **Central differences and truncation behavior** — Derive the symmetric formula and compare the leading truncation behavior with forward differences for sufficiently smooth functions, without claiming that the smallest representable step is always best.
+5. **Rounding-versus-step-size trade-off** — Observe decreasing truncation error followed by cancellation/roundoff deterioration where applicable, recording actual numeric ranges and invalid-step behavior without inventing a universal optimal step.
+6. **Gradient components and numerical checks** — Approximate partial derivatives by varying one coordinate at a time, compare with a hand-derived analytic gradient, and account for function domains and independently justified tolerances.
+7. **Gradient descent as a state recurrence** — Define the objective, gradient, positive learning rate, update rule and initial state for a bounded one-variable quadratic, deriving the first updates by hand before execution.
+8. **Convergence, oscillation and divergence** — Analyze the update multiplier for a simple quadratic, show why a stable rate approaches the minimizer, a boundary rate oscillates and an excessive rate diverges; relate the claim to the actual initial condition.
+9. **Stop contracts and honest failure reporting** — Enforce finite iteration budgets, nonfinite/invalid-input rejection and explicit convergence or nonconvergence status; reproduce one defect and defend why a green numeric test does not prove global convergence.
 
-*Optional practice:* Trace gradient descent updates by hand and compare a stable step size with a deliberately unstable one.
+*Optional practice:* Compare a hand-derived two-step descent trace with actual runs at stable, oscillating and diverging learning rates, recording why each stopped.
 
-### Module 8 — Numerical Computing Notebook
+### Module 7 — Integrated Numerical Work and Independent Defense
 
 #### Outcomes
 
@@ -207,14 +195,14 @@ The 12–14-week duration is provisional pending learner calibration. The six re
 
 #### Lessons
 
-1. Notebook or small-library structure and independent mathematical oracles
-2. Exact rational arithmetic and elementary function-table checks
-3. Algebraic functions, calculus and linear-algebra exercises
-4. Bayesian probability, simulated sampling and labeled uncertainty
-5. Differentiation, integration, numerical error and bounded optimization
-6. Clean-start documentation, tests and independent mathematical defense
+1. **Reuse existing derivations and code** — Gather the six published assessment artifacts into one navigable offline numerical notebook or small standard-library package without creating another independent project.
+2. **Independent exact and approximate oracles** — Link function/domain, matrix/system, probability, calculus and descent claims to hand calculations or separately derived references, labeling every numerical tolerance.
+3. **Invalid-input and failure contracts** — Reproduce singular/ragged matrix, impossible conditioning, empty sample, invalid derivative step, nonfinite value and nonconvergent optimization behavior with meaningful errors.
+4. **Seeded experiments and uncertainty records** — Preserve actual random seeds, sample counts, stated estimands, assumptions, interval/coverage observations and known limitations instead of claiming simulated frequencies equal exact probabilities.
+5. **Clean-start and accessible mathematical communication** — Document Python version, standard-library commands, input fixtures, proofs, tables and optional diagrams with an equally accessible text explanation and outcome-to-evidence map.
+6. **Independent unfamiliar challenge and defense** — Give an independent reviewer one bounded new normal and failing case, record the actual reproduced results, diagnose a discrepancy and defend what the mathematics, tests and finite measurements can legitimately establish.
 
-*Optional practice:* Outline a lightweight Python numerical notebook with reference cases, explicit tolerances and a reproducible test harness.
+*Optional practice:* Ask a reviewer to change a matrix, a sampling assumption or a learning rate, predict the impact analytically and then compare it with actual standard-library results.
 
 ## Completion requirements
 
