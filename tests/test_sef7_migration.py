@@ -60,23 +60,37 @@ class SEF7MigrationTests(unittest.TestCase):
             covered.update(refs)
         self.assertEqual(covered, defined)
 
-    def test_eleven_modules_have_stable_outcomes_and_ordered_lessons(self):
+    def test_competency_modules_own_all_existing_outcomes_without_quota(self):
         text = COURSE.read_text(encoding="utf-8")
+        learning = text.split("\n## Learning outcomes\n", 1)[1].split(
+            "\n## Modules\n", 1
+        )[0]
+        known = set(re.findall(r"(?m)^- \*\*(SEF7-O\d+):\*\*", learning))
         modules = text.split("\n## Modules\n", 1)[1].split(
             "\n## Completion requirements\n", 1
         )[0]
-        headings = list(re.finditer(r"(?m)^### Module (\d+) — ", modules))
-        self.assertEqual([int(m.group(1)) for m in headings], list(range(1, 12)))
-        for index, heading in enumerate(headings):
-            stop = headings[index + 1].start() if index + 1 < len(headings) else len(modules)
-            body = modules[heading.start():stop]
-            self.assertEqual(body.count("#### Outcomes"), 1)
-            self.assertEqual(body.count("#### Lessons"), 1)
-            mapped, lessons = body.split("#### Lessons", 1)
-            self.assertRegex(mapped, r"(?m)^- SEF7-O\d+")
-            indexes = [int(x) for x in re.findall(r"(?m)^(\d+)\. ", lessons)]
+        heads = list(re.finditer(r"(?m)^### Module (\d+) — ", modules))
+        self.assertTrue(heads)
+        self.assertEqual(
+            [int(m.group(1)) for m in heads],
+            list(range(1, len(heads) + 1)),
+        )
+        covered = set()
+        for index, head in enumerate(heads):
+            end = heads[index + 1].start() if index + 1 < len(heads) else len(modules)
+            section = modules[head.start():end]
+            self.assertEqual(section.count("#### Outcomes"), 1)
+            self.assertEqual(section.count("#### Lessons"), 1)
+            mapping, lessons = section.split("#### Lessons", 1)
+            refs = re.findall(r"(?m)^- (SEF7-O\d+)$", mapping)
+            self.assertTrue(refs)
+            self.assertEqual(len(refs), len(set(refs)))
+            self.assertTrue(set(refs).issubset(known))
+            covered.update(refs)
+            indexes = [int(n) for n in re.findall(r"(?m)^(\d+)\. ", lessons)]
             self.assertTrue(indexes)
             self.assertEqual(indexes, list(range(1, len(indexes) + 1)))
+        self.assertEqual(covered, known)
 
     def test_course_identity_and_system_boundaries_are_preserved(self):
         course = COURSE.read_text(encoding="utf-8")
