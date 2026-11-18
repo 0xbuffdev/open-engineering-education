@@ -66,11 +66,11 @@ The seven modules below are **cumulative project stages**, not another course se
 
 #### Outcomes
 
-- - APP9-O1
-- - APP9-O2
-- - APP9-O3
-- - APP9-O9
-- - APP9-O15
+- APP9-O1
+- APP9-O2
+- APP9-O3
+- APP9-O9
+- APP9-O15
 
 #### Lessons
 
@@ -92,14 +92,14 @@ The seven modules below are **cumulative project stages**, not another course se
 
 #### Outcomes
 
-- - APP9-O3
-- - APP9-O4
-- - APP9-O6
-- - APP9-O7
-- - APP9-O8
-- - APP9-O9
-- - APP9-O14
-- - APP9-O15
+- APP9-O3
+- APP9-O4
+- APP9-O6
+- APP9-O7
+- APP9-O8
+- APP9-O9
+- APP9-O14
+- APP9-O15
 
 #### Lessons
 
@@ -119,12 +119,12 @@ The seven modules below are **cumulative project stages**, not another course se
 
 #### Outcomes
 
-- - APP9-O4
-- - APP9-O5
-- - APP9-O6
-- - APP9-O7
-- - APP9-O8
-- - APP9-O9
+- APP9-O4
+- APP9-O5
+- APP9-O6
+- APP9-O7
+- APP9-O8
+- APP9-O9
 
 #### Lessons
 
@@ -148,13 +148,13 @@ The seven modules below are **cumulative project stages**, not another course se
 
 #### Outcomes
 
-- - APP9-O5
-- - APP9-O6
-- - APP9-O7
-- - APP9-O8
-- - APP9-O9
-- - APP9-O10
-- - APP9-O15
+- APP9-O5
+- APP9-O6
+- APP9-O7
+- APP9-O8
+- APP9-O9
+- APP9-O10
+- APP9-O15
 
 #### Lessons
 
@@ -174,11 +174,11 @@ The seven modules below are **cumulative project stages**, not another course se
 
 #### Outcomes
 
-- - APP9-O9
-- - APP9-O10
-- - APP9-O11
-- - APP9-O12
-- - APP9-O15
+- APP9-O9
+- APP9-O10
+- APP9-O11
+- APP9-O12
+- APP9-O15
 
 #### Lessons
 
@@ -200,14 +200,14 @@ The seven modules below are **cumulative project stages**, not another course se
 
 #### Outcomes
 
-- - APP9-O1
-- - APP9-O2
-- - APP9-O3
-- - APP9-O4
-- - APP9-O12
-- - APP9-O13
-- - APP9-O14
-- - APP9-O15
+- APP9-O1
+- APP9-O2
+- APP9-O3
+- APP9-O4
+- APP9-O12
+- APP9-O13
+- APP9-O14
+- APP9-O15
 
 #### Lessons
 
@@ -229,22 +229,22 @@ The seven modules below are **cumulative project stages**, not another course se
 
 #### Outcomes
 
-- - APP9-O1
-- - APP9-O2
-- - APP9-O3
-- - APP9-O4
-- - APP9-O5
-- - APP9-O6
-- - APP9-O7
-- - APP9-O8
-- - APP9-O9
-- - APP9-O10
-- - APP9-O11
-- - APP9-O12
-- - APP9-O13
-- - APP9-O14
-- - APP9-O15
-- - APP9-O16
+- APP9-O1
+- APP9-O2
+- APP9-O3
+- APP9-O4
+- APP9-O5
+- APP9-O6
+- APP9-O7
+- APP9-O8
+- APP9-O9
+- APP9-O10
+- APP9-O11
+- APP9-O12
+- APP9-O13
+- APP9-O14
+- APP9-O15
+- APP9-O16
 
 #### Lessons
 
