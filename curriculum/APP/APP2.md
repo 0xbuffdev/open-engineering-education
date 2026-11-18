@@ -105,7 +105,7 @@ other module activities are formative.
 
 ## Modules
 
-### Module 1 — Course Orientation, Browser App Boundaries and User Tasks
+### Module 1 — User Tasks, Browser Capabilities and Interaction Contracts
 
 #### Outcomes
 
@@ -115,21 +115,17 @@ other module activities are formative.
 
 #### Lessons
 
-1. **Browser Application Scope and Prior Foundations** — Explain how static documents gained scriptable DOM and application-like behavior; situate browser apps among progressive enhancement, client-rendered and traditional navigation models; identify which prerequisites supply Web mechanisms, semantic markup/CSS and TypeScript contracts; list capabilities APP2 applies rather than re-teaches.
+1. **A Browser Task and Its Host Boundary** — Given a realistic but fictional user request, distinguish APP17 semantic HTML/CSS and APP18/APP19 JavaScript/TypeScript preparation from browser-owned DOM/events, storage, Fetch and History capabilities. Situate browser interactivity briefly in its historical evolution while defining a concrete user task and the client/server trust boundary.
 
-2. **The browser as a constrained application host** — Describe Window, Document, DOM, events, storage, fetch and history as host APIs with security, lifecycle and support constraints.
+2. **Observable State, Failure and Acceptance Criteria** — Map relevant idle, editing, loading, empty, success, rejected, forbidden, stale and recovery transitions to observable actions and accessible acceptance tests; discard irrelevant template states rather than require every possible label.
 
-3. **Problems, users and tasks** — Convert a fictional service request into a defined primary user task, expected result, business boundary and observable success without invented field research.
+3. **Assumptions, User Research and Data Provenance** — Distinguish synthetic personas, supplied stakeholder requirements, consenting participant observations and independent research; explain what each can and cannot prove, and minimize any recorded personal data.
 
-4. **State inventory and failure inventory** — Enumerate idle, editing, loading, success, empty, invalid, forbidden, failed, stale and recovery states appropriate to the actual workflow.
-
-5. **Acceptance criteria and risk** — Write testable examples for keyboard access, correct results, invalid input, privacy, network failure and navigation while separating functional from nonfunctional criteria.
-
-6. **Data provenance and ethical evaluation** — Distinguish synthetic personas and supplied stakeholder briefs from interviews, usability observations and real user evidence; minimize any collected feedback.
+4. **An Initial Task-Based Walkthrough** — Apply a repeatable task/expected-outcome rubric to a supplied interface, expose a misleading happy path, confusing recovery instruction or inaccessible flow, and record honest limitations before implementation.
 
 *Optional practice — task-mapping review:* Inspect a misleading happy-path-only interface specification and identify absent error, focus and authorization outcome cases.
 
-### Module 2 — DOM Ownership, Safe Content and Structured Updates
+### Module 2 — DOM Ownership, Safe Rendering and Predictable Updates
 
 #### Outcomes
 
@@ -140,23 +136,19 @@ other module activities are formative.
 
 #### Lessons
 
-1. **DOM trees, references and mutations** — Inspect elements, text, attributes and event targets; distinguish DOM state from visual CSS rendering and JavaScript object state.
+1. **From Parsed DOM to Owned Mutations** — Select stable elements with querySelector, construct nodes, append or replaceChildren and handle missing targets; distinguish DOM properties, rendered CSS and application state without repeating APP1 parsing theory.
 
-2. **Selectors and element construction** — Use querySelector, createElement, append, replaceChildren and textContent with explicit missing-target handling and stable ownership.
+2. **Untrusted Data and Context-Safe Rendering** — Demonstrate why textContent or text nodes are appropriate for untrusted **ordinary text**, not a universal sanitizer for script/style contents or dangerous URL/attribute contexts. Validate URLs and attribute semantics separately and reject unsafe innerHTML interpolation.
 
-3. **Safe rendering of external values** — Demonstrate why textContent is safer for untrusted text than innerHTML; distinguish intentional trusted markup from unsafe string interpolation.
+3. **Properties, Attributes and Live Control State** — Contrast input.value, checked and serialized attributes; inspect when live input state diverges from authored markup and must not be reset by rerenders.
 
-4. **Properties, attributes and live values** — Compare input.value, checked and DOM attributes as relevant; distinguish property state from serialized HTML.
+4. **Scoped Rerendering and User-Intent Preservation** — Update only necessary regions, preserve selection, draft values, focus and accessible names, and explain when DOM replacement invalidates owned element references.
 
-5. **Incremental updates and preservation** — Update the smallest necessary region while preserving input selection, user-entered values, focus and unrelated content.
-
-6. **Conditional structures and empty states** — Render meaningful loading, empty, failure and successful content with semantically appropriate elements and accessible descriptions.
-
-7. **Component boundary without frameworks** — Organize a typed render/update/destroy interface using plain functions or classes; avoid assuming a virtual DOM or React lifecycle.
+5. **Meaningful Loading, Empty, Failed and Result Content** — Render semantic content for actual request/state outcomes, including appropriate status/focus information, without smuggling component framework lifecycles into simple DOM code.
 
 *Optional practice — DOM security defect:* Replace an unsafe dynamic HTML insertion with safe DOM construction and assert both displayed content and absence of injected executable elements.
 
-### Module 3 — Events, Interaction and Lifecycle Cleanup
+### Module 3 — Events, Native Interaction and Resource Lifetime
 
 #### Outcomes
 
@@ -171,21 +163,17 @@ other module activities are formative.
 
 2. **Event delegation and dynamic nodes** — Attach delegated handlers to a stable parent, interpret event.target/currentTarget and choose closest/contains checks.
 
-3. **Default actions and prevention** — Use preventDefault only where replacing native behavior is justified; explain link, form and keyboard default semantics.
+3. **Default Actions, Pointer and Keyboard Parity** — Preserve link/form/button native behaviors, Enter/Space and pointer/touch activation; use preventDefault only with an equivalent justified action, not as a blanket interception mechanism.
 
-4. **Keyboard and pointer parity** — Keep native buttons and links where possible; test click, Enter, Space, touch and pointer behavior without inventing custom keyboard rules.
+4. **Focus Through Dynamic UI Changes** — Trace document.activeElement, focus order, disclosure/dialog activation and the suitable destination for focus after a component is dismissed or replaced; do not impose a universal focus jump on every change.
 
-5. **Focus moves and focus restoration** — Explain document.activeElement, focus order and programmatic focus; restore focus after disclosure/dialog dismissal or routed updates when appropriate.
+5. **Listener Ownership, AbortSignal and Stale Nodes** — Reproduce duplicate delegated listeners or a removed-node reference; repair with correctly owned removal/AbortSignal and disposal, and prove two component instances do not share accidental handlers.
 
-6. **Listeners and AbortSignal cleanup** — Add/remove event listeners intentionally, use listener signals where supported, and prevent duplicated callbacks after remount.
-
-7. **DOM replacement and stale references** — Demonstrate a handler or selector referencing removed elements, then fix ownership and teardown rather than masking exceptions.
-
-8. **Custom events and event contracts** — Use CustomEvent for a justified boundary, define payload shape and avoid accidental propagation or global event-bus coupling.
+6. **Custom Event Contracts Where Justified** — Demonstrate a bounded CustomEvent payload and propagation policy between components, then compare it with a simpler direct callback; do not require a global event bus when local events suffice.
 
 *Optional practice — interaction repair:* Reproduce a duplicate-action or lost-focus bug, provide failing test evidence and demonstrate a corrected listener lifecycle.
 
-### Module 4 — Browser Scheduling and Rendering Work
+### Module 4 — Main-Thread Scheduling and Lifecycle Constraints
 
 #### Outcomes
 
@@ -195,23 +183,19 @@ other module activities are formative.
 
 #### Lessons
 
-1. **Synchronous scripts and responsiveness** — Reproduce a bounded main-thread task that delays pointer/keyboard responses; distinguish a long task from slow network transfer.
+1. **Tasks, Microtasks and Interaction Delays** — Reproduce a bounded long synchronous task and compare promise jobs, event tasks and host scheduling opportunities using a browser trace. Apply APP18 scheduling knowledge without claiming a universal rendering/frame sequence.
 
-2. **Tasks, microtasks and browser hosts** — Compare promises, queueMicrotask, timers and event dispatch with APP18 language foundations, identifying behavior dependent on the browser host.
+2. **Animation Frames and Layout Read/Write Effects** — Use requestAnimationFrame for a justified visual update and inspect forced-layout patterns and the effect of grouping reads/writes; recognize that rAF is not a fixed-rate timer.
 
-3. **Rendering opportunities and animation frames** — Use requestAnimationFrame for visual update scheduling when appropriate and explain why it is not a guaranteed fixed-interval timer.
+3. **Debouncing and Preserving the Last Intent** — Use bounded debounce/throttle semantics for a real search/resize interaction and demonstrate that the final user input is not silently discarded. Correctness tests must not depend on fragile arbitrary sleep durations.
 
-4. **Reading layout and writing style** — Trace style/layout invalidation and forced synchronous layout patterns, and explain how batching measurements and updates can reduce avoidable work.
+4. **Hidden Documents and Scheduled Work** — Explain tab visibility/background timer limitations and check the lifecycle of a hidden/suspended interface; do not treat background timers as durable application jobs.
 
-5. **Timers, throttling and debouncing** — Apply bounded rate controls to search or resize interactions without losing the final user request and without using sleeps for correctness tests.
-
-6. **Visibility and inactive pages** — Account for visibility and background scheduling limitations; avoid relying on hidden-tab timers as a durable operation queue.
-
-7. **Cleanup of pending work** — Cancel owned timers, animation frames, listeners or pending requests on navigation/teardown; distinguish stop-notification from rollback of completed actions.
+5. **Cancel and Discard Owned Work** — Cancel owned frames/timers/listeners/requests during teardown, distinguish cancellation signals from already-completed work or server rollback, and reproduce a repeated-mount cleanup failure.
 
 *Optional practice — scheduling trace:* Predict an interaction trace, collect actual browser observations, repair one ordering or responsiveness fault and state unproven timing assumptions.
 
-### Module 5 — Interactive Forms, Validation and User Recovery
+### Module 5 — Dynamic Forms, Domain Validation and Recovery
 
 #### Outcomes
 
@@ -222,23 +206,19 @@ other module activities are formative.
 
 #### Lessons
 
-1. **Native form semantics in a dynamic app** — Reuse APP17 labels, fieldsets, required constraints and submit behavior; add justifiable JavaScript interactions without replacing robust native semantics.
+1. **Native Forms Meet Validated Domain Input** — Apply APP17 accessible labels, fieldsets and native constraints, then use actual browser validity APIs and JavaScript domain validation for missing, malformed, range and business-rule cases. TypeScript annotations are not runtime checks.
 
-2. **Input parsing and explicit domain constraints** — Separate blank, malformed, out-of-range and business-rule-invalid fields; avoid using TypeScript types as input validation.
+2. **Submission, Pending and Duplicate-Action Policy** — Transition explicitly between editing, pending, success and failed submission; prevent unsupported duplicate actions without leaving an inaccessible, indefinitely disabled form.
 
-3. **Constraint Validation API** — Use checkValidity, validity states and controlled custom messages while acknowledging cross-browser message presentation differences.
+3. **Accessible Field Errors and Clear Status** — Associate per-field guidance and error messages with controls, signal important state transitions proportionately and demonstrate sensible focus/keyboard recovery without overstating guaranteed screen-reader announcements.
 
-4. **Submission and pending-state policy** — Prevent accidental duplicate submissions where required without trapping users in an indefinitely disabled UI.
+4. **Conditional Steps, Draft Values and User Recovery** — Preserve meaningful input across multi-step forms, validation errors and local retry, and state precisely whether drafts are in memory, deliberately persisted or not retained.
 
-5. **Accessible field feedback** — Associate error text with controls, provide concise actionable guidance, place focus appropriately and avoid excessive live announcements.
-
-6. **Multi-step and draft forms** — Preserve entered values across conditional steps and recoverable failures while stating whether data is only in memory or stored.
-
-7. **Progressive enhancement and server boundaries** — Explain native fallback and why JavaScript/client validation cannot replace server checks or prove authorization.
+5. **Progressive Enhancement and the Server Trust Boundary** — Justify any custom client-side form behavior against robust native fallback; explain that client checks, displayed success and a hidden control cannot validate server authorization or guarantee an accepted write.
 
 *Optional practice — form audit:* Inject missing and invalid values and repair a misleading success banner, hidden error or lost in-progress input.
 
-### Module 6 — Typed Components and State Machines without React
+### Module 6 — Framework-Independent Components and Typed State Transitions
 
 #### Outcomes
 
@@ -249,23 +229,21 @@ other module activities are formative.
 
 #### Lessons
 
-1. **TypeScript in a browser project** — Build TypeScript to browser-executable JS using documented local tooling, ES modules and browser-compatible imports; distinguish tsc checking from runtime validation.
+1. **Browser-Executable TypeScript and Component Ownership** — Produce browser-compatible JavaScript from documented APP19 tooling and define a minimal typed render/update/dispose contract; distinguish compiler diagnostics from actual DOM and runtime validation.
 
-2. **Component input and output contracts** — Define typed function or class inputs, DOM ownership, output events and teardown responsibility without a framework registry.
+2. **Discriminated States from Domain Requirements** — Model only relevant idle/editing/loading/success/empty/error/forbidden variants with state-specific data instead of contradictory flags; align each state with visible/accessible output.
 
-3. **Discriminated UI state models** — Represent idle/loading/success/empty/error/forbidden variants with state-specific data instead of contradictory booleans.
+3. **Action and Completion Transitions** — Build an explicit transition table for user actions, asynchronous results, cancellations and navigation, with invalid transitions rejected or ignored according to a documented policy.
 
-4. **Events as transitions** — Write an explicit transition table for user actions, async completion, cancellation and navigation, and identify invalid transitions.
+4. **Single Source of Truth and Derived DOM** — Identify canonical application state versus temporary DOM-owned control state, and repair a stale duplicate that would overwrite current user intent.
 
-5. **State versus DOM duplication** — Choose canonical application state and derived views; avoid storing stale duplicate state simultaneously in a model and uncontrolled DOM properties.
+5. **Untrusted Fixture to Typed View Model** — Validate an unknown JSON-like fixture against the actual domain contract before presentation; demonstrate a malformed counterexample not protected by erased TypeScript types.
 
-6. **External data as unknown** — Validate a local JSON fixture and reject malformed shapes before converting them into typed view models.
-
-7. **Shared state and accidental coupling** — Create two component instances and verify no unintentional singleton state, listener or cache cross-contamination.
+6. **Two Instances and Independent Teardown** — Exercise multiple component instances to prove isolated state, handlers and caches, including a remount/cancel scenario; avoid hiding accidental singleton behavior.
 
 *Optional practice — state refactor:* Turn an ad-hoc conditional UI into a typed transition-driven component and demonstrate corrected invalid-state behavior.
 
-### Module 7 — Fetch, HTTP Failure and Browser Trust Boundaries
+### Module 7 — Browser Fetch, Response Contracts and Origin Limits
 
 #### Outcomes
 
@@ -275,23 +253,21 @@ other module activities are formative.
 
 #### Lessons
 
-1. **Fetch versus server responses** — Explain Request, Response and response-body decoding, distinguishing network rejection from resolved 404/403/500 responses.
+1. **Fetch Fulfillment and HTTP Status Contracts** — Handle Request/Response and status/ok semantics, explicitly distinguishing a fulfilled 404/500 from network rejection and handling 204/no-body without blindly calling response.json; define domain error cases separately from HTTP status.
 
-2. **HTTP Request and Response Contracts** — Use suitable methods, headers and JSON encoding with explicit media-type expectations and observable acceptance criteria; classify success, no-content, authentication-required, forbidden, conflict, rate-limited and server failure results without equating an HTTP 200 with a correct domain response.
+2. **Decode and Validate Untrusted Bodies** — Check appropriate media type and decode fallibility, reject wrong/missing/invalid JSON shapes as unknown and present errors through safe ordinary-text sinks rather than executable HTML.
 
-3. **AbortController and request lifetime** — Abort a superseded fetch where appropriate, distinguish aborting consumption from undoing server side effects and test race behavior explicitly.
+3. **Abort Controllers, Body Consumption and Side Effects** — Reproduce abort before and after response headers but before a body is consumed; distinguish rejected consumption, stale-result suppression and the fact that an abort cannot be assumed to undo a server mutation.
 
-4. **Same-origin and CORS** — Explain browser-enforced origin restrictions, preflight, CORS response headers and why CORS is not an authentication or authorization mechanism.
+4. **Same-Origin, Preflight and CORS's Actual Scope** — Contrast browser origin enforcement, credentialed cross-origin conditions, preflight and response readability with the separate server authorization decision; CORS is not an API access-control system.
 
-5. **Credentials, cookies and CSRF limits** — Reason about fetch credentials mode, cookie attributes and cross-site request threats without asking learners to implement a full identity provider.
+5. **Cookies, Credentials and Cross-Site Request Risks** — Inspect fetch credential modes and relevant cookie/SameSite assumptions with a synthetic fixture; identify why some cross-site requests can still be sent and why CSRF authorization belongs to the server.
 
-6. **Response validation** — Parse unknown JSON, reject wrong shapes and report errors without showing untrusted HTML; connect APP19 type/runtime boundaries to real browser input.
-
-7. **Fixture service and deterministic transports** — Use supplied free local HTTP response fixtures, a service stub or an injected fetch adapter; no APP21 server authoring or cloud API is a prerequisite.
+6. **Deterministic Local HTTP and Injected Transport Fixtures** — Provide reproducible local success/204/4xx/5xx/malformed/offline responses or a deterministic injected fetch-compatible adapter; require real browser DOM observations separately without forcing a learner-written Node backend.
 
 *Optional practice — network matrix:* Simulate 200/204/400/401/403/404/409/500, malformed JSON, aborted fetch and offline cases; compare the visible UI to its documented failure policy.
 
-### Module 8 — Asynchronous Views, Cache Policies and Mutation Recovery
+### Module 8 — Async View Consistency, Cache Ownership and Mutation Safety
 
 #### Outcomes
 
@@ -303,25 +279,21 @@ other module activities are formative.
 
 #### Lessons
 
-1. **Explicit loading, empty, success and error states** — Show differences between no results, an unrequested resource, a genuine network error, and forbidden access.
+1. **Explicit Remote and Local View State** — Separate remote authoritative records from local selection/draft state; represent unrequested, empty, pending, failed, forbidden and resolved results truthfully, not by one overloaded boolean.
 
-2. **Latest-request-wins and request identity** — Introduce request IDs or lifecycle tokens to prevent an earlier response overwriting newer user intent, even if abort is unsupported or late.
+2. **Late Completion and Latest-Intent Protection** — Reproduce out-of-order responses with controlled deferred operations and show an identity/version guard preventing old results from overwriting a newer query or a changed user.
 
-3. **Separation of server and local UI state** — Explain which data belongs to the remote authority and which is an ephemeral selection, draft or display preference.
+3. **Cache Keys, Freshness and Identity Isolation** — Define cache key, expiration/invalidation and memory limits; reject permanently valid responses and clear or partition identity-scoped data at sign-out/authorization change.
 
-4. **Cache lifetime and freshness** — Define key, invalidation, stale/fresh and eviction policies for a small in-memory cache; avoid treating cache entries as permanently valid.
+4. **Optimistic Changes, Conflict and Rollback** — Use optimistic updates only where domain policy supports them; demonstrate a failed mutation, visible rollback/reconciliation and a preserved user draft.
 
-5. **Confidential-data cache rules** — Clear or isolate identity-scoped results after authorization changes and never persist sensitive API responses by accident.
+5. **Retries, Idempotency and Uncertain Results** — Classify retriable reads versus uncertain side-effecting writes, use bounded retry/backoff where justified and avoid automatic replay of a potentially committed mutation.
 
-6. **Optimistic updates and rollback** — Only use an optimistic UI when invariants, failure recovery, duplicate actions and conflict reconciliation are explicitly defined.
-
-7. **Idempotent retry and unsafe replay** — Distinguish safe reading/retrying from retrying side-effecting mutations that may already have succeeded; represent uncertain outcomes truthfully.
-
-8. **Partial results and pagination** — Handle empty pages, partial success, cursor or offset mismatches and merged page state with stable keys.
+6. **Paginated and Partial Data Recovery** — Represent cursor/offset and partial-success cases with stable IDs and deterministic merging; diagnose duplicates or missing records on a fixture where page contents change.
 
 *Optional practice — race and cache defect:* Reproduce a stale authorized result or duplicate mutation, repair it and write a deterministic regression test without network sleep timing.
 
-### Module 9 — Navigation, Browser History and Recovery of Context
+### Module 9 — History, URLs, Deep Links and Accessible Navigation
 
 #### Outcomes
 
@@ -332,23 +304,19 @@ other module activities are formative.
 
 #### Lessons
 
-1. **Navigation models and server fallback** — Distinguish ordinary links/full navigations from client-rendered route handling, and explain why a direct deep link needs a working server/static-host fallback.
+1. **Route Inputs and Direct-Link Hosting** — Use URL APIs to validate pathname/search/hash inputs, choose ordinary native navigation where possible, and verify a real direct-link static-host fallback or explicit route strategy instead of assuming every static server rewrites paths.
 
-2. **URL anatomy and route input safety** — Parse query, hash and pathname with URL APIs, validate route parameters and avoid trusting unstructured URL strings.
+2. **History Entries, popstate and Initial State** — Use pushState/replaceState and Back/Forward correctly, noting that calling them does **not** fire popstate; include initial/null history state and content restoration in a deterministic route trace.
 
-3. **History API and browser Back/Forward** — Use pushState/replaceState with state restoration and popstate handling; note that pushState does not itself trigger popstate.
+3. **Native Anchors and Interception Boundaries** — Preserve modifier-click, copying links, context menus and normal anchor defaults, intercepting only safe same-origin navigations that the application actually owns.
 
-4. **Link semantics and interception rules** — Preserve modifier-click, context menu, copy-link and normal anchor behavior rather than hijack every navigation event.
+4. **Focus, Title, Scroll and Draft Context** — Define appropriate title/heading/focus/scroll behavior for routes and browser history, protecting relevant drafts and keyboard continuity without moving focus by arbitrary blanket rules.
 
-5. **Focus, headings and document titles** — Update document title and focus intentionally on a client navigation, and verify screen-reader/keyboard awareness without inventing a universal focus rule.
-
-6. **Scroll restoration and interaction continuity** — Plan scroll position, pending requests and draft-form state for backward and forward navigation.
-
-7. **Route change and resource cleanup** — Cancel or ignore stale requests, dispose old listeners and avoid unauthorized content flashes on a changed route.
+5. **Route Teardown and Reproducible Navigation Failures** — Demonstrate direct-load, Back/Forward or stale-request failure, dispose route-owned listeners and in-flight work, repair the cause and recheck that restricted data cannot flash on route changes.
 
 *Optional practice — deep-link incident:* Demonstrate a failure when loading a route directly or pressing Back, fix the environment/routing policy and record keyboard behavior.
 
-### Module 10 — Browser Security, Persistence and Privacy
+### Module 10 — Browser Security, Storage and User-Identity Boundaries
 
 #### Outcomes
 
@@ -359,28 +327,23 @@ other module activities are formative.
 
 #### Lessons
 
-1. **Threat models for a browser feature** — Identify attacker-controlled content, URLs, storage, responses, third-party scripts, credentials and cache visibility at a user-task boundary.
+1. **Trust Model and Context-Sensitive DOM XSS** — Identify attacker-controlled URL, response and stored values, test a safe synthetic injection/unsafe HTML-sink counterexample, and explain why textContent is appropriate only for ordinary text (not executable script/style content or unchecked URL destinations).
 
-2. **DOM XSS and safe injection** — Reproduce a synthetic HTML-injection defect without executing real harmful code, then replace dangerous sinks with DOM construction/text content.
+2. **Same-Origin, CORS, CSRF and Authorization** — Contrast browser read restrictions and cross-site request abilities with authoritative server access control, token/cookie protections and CSRF defenses; never treat a hidden button or CORS header as proof of authorization.
 
-3. **Same-origin and CORS revisited** — Distinguish same-origin policy and CORS visibility restrictions from server authentication, authorization and deliberate content-sharing policy.
+3. **Storage and Credential Lifetime** — Compare in-memory state, sessionStorage, localStorage and IndexedDB by retention and threat properties; avoid persisting secrets or private responses without an explicit justified policy, and understand XSS exposure.
 
-4. **Tokens, cookies and storage choices** — Explain risks of localStorage/sessionStorage and in-memory state for sensitive tokens; choose not to store secrets where unnecessary.
+4. **CSP as Defense in Depth** — Explain a restrictive Content Security Policy, safe script practices and why CSP does not substitute for correct output handling, runtime data validation or server authorization.
 
-5. **Browser storage APIs and lifecycle** — Compare ephemeral in-memory state, local/session storage and IndexedDB at conceptual depth with retention and data-clear expectations; advanced offline architecture is elective.
-
-6. **Cross-Site Requests and User Intent** — Explain why a browser can send some cross-site requests even if scripts cannot read responses and when CSRF protections belong to the server.
-
-7. **CSP and defense in depth** — Describe a restrictive Content Security Policy, its interaction with script execution and why it is not a substitute for encoding/validation.
-
-8. **Sensitive-state transitions** — Handle sign-out and forbidden responses by clearing identity-scoped views and caches, never displaying data solely because a hidden button exists.
+5. **Sign-Out, Cache Separation and Negative Authorization Paths** — Test sign-out/forbidden flows and stale memory/storage/cache/rendered content under two synthetic identities; verify that cross-identity data is not exposed after transition.
 
 *Optional practice — security and privacy test:* Repair untrusted text rendering or an identity-scoped stale-cache leak, and state server-side protections that APP2 cannot prove.
 
-### Module 11 — Accessibility and Inclusive Dynamic Interaction
+### Module 11 — Inclusive Dynamic Accessibility and User-Task Evaluation
 
 #### Outcomes
 
+- APP2-O1
 - APP2-O3
 - APP2-O5
 - APP2-O9
@@ -389,54 +352,23 @@ other module activities are formative.
 
 #### Lessons
 
-1. **Native semantics before ARIA** — Reuse APP17 semantic controls; distinguish adding appropriate ARIA from overriding built-in behavior with incorrect roles.
+1. **Native Semantics and Chosen Interactive Patterns** — Apply APP17's native semantic controls and inspect justified dialog/disclosure or composite behavior from WAI-ARIA APG; do not replace built-in interactions with ARIA role labels that lack keyboard functionality.
 
-2. **Keyboard operation and focus order** — Audit sequential focus, Enter/Space activation, visible focus, escape/cancel behavior and focus return after UI updates.
+2. **Keyboard Journey, Visibility and Focus Ownership** — Trace Enter/Space/Escape/tab behavior, focus order and restoration after modal/route changes, distinguishing hidden, inert and disabled elements; test WCAG 2.2 Focus Not Obscured (Minimum) where applicable.
 
-3. **Dialog, disclosure and composite patterns** — Use a justified accessible interaction pattern with defined keyboard navigation, modal focus containment and disclosure labeling.
+3. **Accessible Names, Field Errors and Async Status** — Inspect real name/description/role/state relationships and appropriate status/live announcements for loading, validation and results; distinguish manual/automated indications from confirmed assistive-technology behavior.
 
-4. **Accessible names, descriptions and status** — Expose meaningful dynamic button names, instructions, error descriptions and status messages with proportionate live-region semantics.
+4. **Reflow, Text Zoom and Dynamic State Stress** — Inspect interactive failure/success/dialog states near 320 CSS pixels for reflow (with genuine two-dimensional exceptions), and separately test 200% text resize/zoom, sticky focus obstruction and touch/keyboard operation; do not repeat APP17 introductory CSS instruction.
 
-5. **State, visibility and accessibility tree** — Inspect how hidden, inert, disabled and offscreen elements differ for focus and assistive technologies.
+5. **Localization, Long Text, Bidirectionality and Motion** — Use suitable Intl number/date formatting in a real workflow, stress long and RTL strings without corrupting data meaning, and respect reduced-motion/contrast preferences with understandable non-animated state changes.
 
-6. **Zoom, reflow and multiple inputs** — Validate interaction at representative viewport/zoom conditions with touch and keyboard, avoiding offscreen error banners or obscured focus.
+6. **A Scoped WCAG and Assistive-Technology Audit** — Select relevant WCAG 2.2 AA checks and WAI-ARIA patterns, compare automated warnings, keyboard inspection and feasible actual screen-reader observations; label untested assistive technologies and never infer site-wide conformance.
 
-7. **WCAG 2.2 application review** — Select relevant published success criteria for the actual widget and disclose any criterion not tested rather than claim whole-site certification.
-
-8. **Automated and manual evidence** — Combine automated checks, keyboard-only inspection and feasible screen-reader observations; clearly disclose when actual assistive-technology testing was not performed.
+7. **Repeatable Usability Task, Guidance and Provenance** — Have a supplied synthetic/consenting participant or clearly labeled reviewer attempt a defined task and failure recovery; record observed comprehension and input-mode difficulties, improve one message or transition and limit claims to the evidence actually collected.
 
 *Optional practice — accessibility defect triage:* Repair a focus trap, missing error announcement or inaccessible async status and show the before/after behavior in the same environment.
 
-### Module 12 — Human-Centered Evaluation, Localization and Feedback
-
-#### Outcomes
-
-- APP2-O1
-- APP2-O5
-- APP2-O11
-- APP2-O12
-
-#### Lessons
-
-1. **From user job to usable flow** — Establish the intended user action, context, success signal and recoverable failure path rather than treating polished visual styling as usability.
-
-2. **Task-based usability inspection** — Write a repeatable task and observation rubric covering confusion, error recovery, discoverability and completion; separate observed behavior from speculation.
-
-3. **Feedback provenance and consent** — Explain when synthetic walkthroughs, accessibility heuristics, peer testing and real-user studies provide different strengths; use consent and minimal data collection for real participants.
-
-4. **Useful guidance and error language** — Write plain, specific error and recovery messages and test whether a learner can interpret the next action.
-
-5. **Input, language and locale variability** — Use appropriate Intl facilities for dates/numbers/display, avoid guessing user locale from one value and keep domain storage semantics clear.
-
-6. **Long strings, bidi and writing direction** — Test representative translated/long strings and right-to-left content, including focus and logical CSS behavior without duplicating APP17's layout curriculum.
-
-7. **Reduced motion and user preferences** — Honor `prefers-reduced-motion` and related user settings; ensure essential state changes remain understandable without animation.
-
-8. **Assistive and low-bandwidth scenarios** — Inspect a constrained device/network/keyboard-only workflow and record usability evidence and explicitly unverified contexts.
-
-*Optional practice — user-task improvement:* Use documented synthetic or consenting participant observations to correct one confusing state transition; explain limitations of the evaluation method.
-
-### Module 13 — Browser Performance, Testing and Independent Frontend Defense
+### Module 12 — Measured Interaction, Regression Testing and Independent Defense
 
 #### Outcomes
 
@@ -457,31 +389,33 @@ other module activities are formative.
 
 #### Lessons
 
-1. **Instrumentation and reproducibility** — Record browser/runtime, throttling setup, cache state, fixture sizes, devtools trace inputs and repeated trials before drawing performance conclusions.
+1. **Reproducible Browser Performance Conditions** — Choose a user-visible slow interaction/load and record browser, device, throttle, warm/cold cache and bounded fixture size; inspect relevant long tasks, layout shifts or load/interaction observations without inventing a universal performance threshold.
 
-2. **Loading and rendering metrics at course depth** — Observe resource loading, long tasks, layout shifts or interaction delay as applicable; connect symptoms to actual user-facing effects.
+2. **Root-Cause Trace and Bounded Correction** — Use actual DevTools/Performance observation to attribute a DOM update, layout read/write, retained handler or oversized response bottleneck, make a narrow correction and report repeated before/after measurements and variance.
 
-3. **Measure one real bottleneck** — Investigate a DOM update, unnecessary event listener, costly layout read/write or oversized request; show before/after traces and variance.
+3. **Correctness and Accessibility after Optimization** — Verify that measured improvements do not lose user input, violate async authority, remove focus visibility, break reduced-motion behavior or create confusing status announcements.
 
-4. **Prevent accessibility regressions** — Repeat keyboard, focus and reduced-motion checks after an optimization, showing it did not trade usable behavior for a better synthetic score.
+4. **Deterministic State, Transport and Real Browser Tests** — Combine pure state transition tests and controlled HTTP responses with at least one real local-browser DOM/keyboard/history integration observation; do not claim a stub alone proves all browser host behavior.
 
-5. **Deterministic component and fetch tests** — Test pure state transitions, DOM actions and injected transport fixtures separately from an actual local-browser integration test.
+5. **Negative-Path and Lifetime Regression Matrix** — Inspect invalid forms, HTTP error/204, malformed body, aborted/late response, forbidden identity, Back/Forward restoration, unsafe text and remount cleanup, linking already accepted evidence instead of redoing every full assessment.
 
-6. **Negative-path integration matrix** — Assert invalid form inputs, HTTP errors, network reject, late responses, abort, forbidden, history traversal, and cleanup without relying only on happy-path screenshots.
+6. **One Cumulative Framework-Neutral User Flow** — Integrate the same semantic APP17 source and APP19-typed components, validation, route, local data adapter, accessible form, measured interaction and secure identity handling into **one** coherent browser app from APP2-AS1–AS5.
 
-7. **Complete a cohesive user task** — Integrate framework-free typed components, form and route behavior, resilient data fetching, safe rendering and accessible feedback into one bounded local application.
-
-8. **Fresh checkout and unfamiliar change** — Reproduce the browser app on a free local server, verify build/test commands, handle a previously unseen change or defect and defend implementation boundaries and remaining limitations.
+7. **Unfamiliar Change, Clean Build and Technical Defense** — Respond to a bounded changed user need, browser failure, unsafe DOM value or race scenario, reproduce and repair it without regressions, then build/serve/test from a clean local checkout and defend choices and declared limits.
 
 ## Completion requirements
 
-All **fourteen required course outcomes** must be demonstrated
-through the **six required summative assessments** listed here.
-A learner can progressively improve the same scoped browser
-application rather than build six unrelated frontends.
-Formative module exercises and exploratory experiments are
-not independent completion gates merely because they appear
-in the module sequence.
+All **fourteen required course outcomes** must be demonstrated in
+**six independently decidable summative assessments**, normally
+using **one evolving locally served browser application**.
+APP2-AS1–AS5 each assess a distinguishable interaction,
+state/transport, accessibility/security or performance
+competence; APP2-AS6 integrates their accepted work with
+an unfamiliar bounded change and independent defense.
+Previously accepted source, fixtures and test observations
+may be **referenced** rather than rebuilt or resubmitted as
+six unrelated applications. Optional formative investigations
+do not create extra completion decisions.
 
 | Required assessment | Required outcome coverage | Principal evidence |
 | --- | --- | --- |
@@ -499,36 +433,45 @@ in the module sequence.
   and tool versions, build/start/test commands and local origin.
   Serve local pages on loopback rather than relying on
   `file://` restrictions or a paid/public deployment.
-- Use a synthetic documented dataset. Demonstrate HTTP and
-  async failure behavior with a **provided local fixture
-  service** or an injected Fetch-compatible adapter; do not
-  make writing APP21 or APP3 backend service code a hidden
-  prerequisite. An independently testable mock alone can
-  establish many state transitions, while a bounded local
-  browser/integration test checks actual DOM behavior.
+- Use a synthetic dataset and **supplied local fixture responses**
+  or a deterministic injected Fetch-compatible adapter: creating
+  APP21/APP3 backend source is not a hidden prerequisite.
+  For actual browser host behavior, include independent local
+  browser inspection: isolated mocks do **not** alone establish
+  focus, History, CORS or real network-layer semantics.
+  A direct-link strategy must actually work with the chosen
+  local static server rather than assume an unconfigured
+  history-fallback rewrite.
 - Use semantic APP17 HTML/CSS and browser-compatible
   JavaScript output from TypeScript without a React,
   component framework or paid bundler dependency. Do not
   falsely claim types exist at runtime. Validate actual
   response payloads before the internal model.
-- At minimum, inspect happy, empty, malformed, forbidden,
-  transient failure, abort and out-of-order completion
-  cases as appropriate to the implemented workflow.
-  Distinguish a fulfilled HTTP error `Response` from
-  a rejected network operation and do not blindly retry
-  a non-idempotent mutation after an uncertain outcome.
+- Evaluate success, **204/no-body**, empty, malformed,
+  unauthorized/forbidden, transient HTTP failures, rejected
+  network operations, abort **including after headers but
+  before body consumption**, and late completion where
+  applicable. An HTTP 4xx/5xx response commonly **fulfills**
+  `fetch()` with `ok=false`; it is not a transport rejection.
+  Abort does not guarantee reversal of server actions.
+  Never replay uncertain non-idempotent writes automatically.
 - Preserve native semantics, keyboard and focus behavior,
-  accessible error/status presentation and navigability
-  across success and failure states. Report which WCAG
-  criteria or assistive technologies were actually
-  inspected, with limitations, rather than offering
-  unsupported whole-site conformance claims.
-- Never paste secrets, session cookies, authorization
-  tokens or personal data into source, browser logs,
-  local fixtures, network captures or review evidence.
-  Browser storage, CORS and hidden UI controls are not
-  server-side authorization safeguards. Untrusted text
-  must not enter executable HTML sinks.
+  real accessible error/status presentation and route
+  navigability through failure and success. Where relevant,
+  check **reflow near 320 CSS pixels** (with legitimate
+  two-dimensional exceptions), **200% text resize separately**,
+  dynamic names/status and **WCAG 2.2 AA Focus Not Obscured
+  (Minimum)**. Report actually inspected assistive technologies
+  and criteria; never claim whole-site WCAG conformance from
+  a limited review.
+- Do not expose secrets, cookies, tokens or personal data
+  in code, fixtures, local logs or assessment material.
+  CORS, browser storage and hidden UI controls cannot
+  substitute for server authorization. Display untrusted
+  **ordinary text** using safe DOM text nodes/`textContent`,
+  but do **not** treat textContent inside script/style
+  elements or unvalidated URL/attribute assignments as
+  universally safe; apply context-specific restrictions.
 - A provided synthetic persona/task, peer inspection,
   heuristic evaluation and actual participant usability
   observations are different kinds of evidence. Label
@@ -551,41 +494,41 @@ in the module sequence.
 
 ### Required summative assessments
 
-- **APP2-AS1** (required user-task requirements and framework-neutral dom interaction)
+- **APP2-AS1** (required user-task requirements and framework-neutral DOM interaction)
   - Outcomes: APP2-O1, APP2-O2, APP2-O3, APP2-O4, APP2-O6
-  - Work: Given a fictional user task and accessible APP17-style static document, publish acceptance criteria and a state/interaction map, then add typed framework-neutral DOM behavior with event delegation or clearly owned handlers. Use safe text rendering for supplied synthetic untrusted values, preserve keyboard and native default behavior, and demonstrate disposal/cleanup after a controlled navigation or DOM replacement. Trace one browser task/microtask/rendering timing example with appropriately qualified predictions.
+  - Work: Begin **the same cumulative app** with an explicit fictional user task, accepted/rejected states and honest source assumptions, starting from APP17-style semantic markup. Add APP19-typed DOM update behavior and intentional event delegation/handler ownership; preserve keyboard defaults and focus through a real component replacement. Display synthetic hostile **ordinary text** through suitable safe DOM nodes, and separately validate any user-controlled destination URL/attribute rather than asserting all textContent uses or assignments are safe. Trace one task/microtask/visual-update case with qualified browser observations and verify cleanup after unmount.
   - Criteria: The user/task brief identifies normal, invalid and recovery paths without inventing genuine interview evidence; the UI meets all published action, state and focus criteria and does not use an unsafe HTML injection sink for untrusted content. Event behavior distinguishes target/currentTarget and default actions, does not duplicate listeners on reinitialization, and supports keyboard input. Timing claims are consistent with documented browser observations rather than assumed exact frame ordering.
   - Evidence: Requirements/task table, typed DOM component source, synthetic fixtures, event/timing and focus traces, before/after cleanup test, security-negative test for untrusted text, and a concise mechanism-based rationale.
 
 - **APP2-AS2** (required accessible form and typed state-transition investigation)
   - Outcomes: APP2-O1, APP2-O3, APP2-O5, APP2-O6, APP2-O11, APP2-O12
-  - Work: Implement a multi-state, accessible form workflow with native HTML semantics, explicit typed state transitions and correct validation of runtime values. Document idle/editing/invalid/pending/success/failure/retry behavior, preserve draft input through recoverable errors, give field-specific accessible guidance and test keyboard navigation, status announcement and focus movement. Provide a task-based usability check using synthetic or ethically obtained observations, clearly labeling the provenance.
+  - Work: Extend **the same app** with a native semantic form and a justified typed transition model for editing, invalid, pending, accepted, failed and retry paths. Validate actual runtime input against specific domain rules; preserve drafts across failure, prevent conflicting duplicate actions without trapping keyboard users, and expose actionable per-field guidance plus proportionate accessible status/focus behavior. Perform one repeatable task-based usability walkthrough with explicitly labeled synthetic, peer or consenting participant evidence; no real user data submission is required.
   - Criteria: The declared transition table has no reachable contradictory states or unhandled submission path, valid input produces expected results, and invalid input does not falsely show success or erase values. Keyboard-only operation and semantic label/error association work; live announcements are proportionate and nonduplicative; source types do not substitute for runtime validation. Feedback is disclosed accurately as synthetic/peer/observed, without exaggerated user research or accessibility certification claims.
   - Evidence: Form HTML/TypeScript component, state diagram, acceptance and invalid-input matrix, keyboard/focus/error recordings or equivalent annotated observations, regression tests, and a short task-evaluation limitations note.
 
 - **APP2-AS3** (required asynchronous data, cache, and navigation recovery)
   - Outcomes: APP2-O6, APP2-O7, APP2-O8, APP2-O9, APP2-O10, APP2-O13
-  - Work: Build a browser data-access boundary with a supplied local fixture HTTP service or independently testable injected fetch adapter, and a browser view with documented route/history behavior. Handle successful, empty, malformed, unauthorized/forbidden, conflict and HTTP 5xx responses, rejected network operations, abort and out-of-order completions; prove a superseded request cannot overwrite current user intent. If a mutation or cache is included, specify invalidation/retry/rollback and identity-scoped cleanup; test direct links and Back/Forward without requiring a learner-written backend framework.
-  - Criteria: Fetch success checks Response.ok/status and validates body shape; HTTP 4xx/5xx fulfillment is not misclassified as a network rejection. Stale responses and late aborts do not leak or re-render private identity-scoped data; mutations are not naively replayed after uncertain failure. Route URLs, Back/Forward, page titles, focus and cleanup match the stated policy. Browser CORS/credential behavior is explained without claiming CORS enforces application authorization.
+  - Work: Extend **the same app** with an injected fetch-compatible transport or supplied local HTTP fixture, explicit route/history behavior, and typed state transitions. Test successful results, **204/no-body**, 4xx/5xx fulfilled error responses, malformed/unknown bodies, rejected transport, abort during body consumption and out-of-order completions; prove an old response cannot overwrite a newer request or switched identity even when abort arrives too late. Test cache ownership/invalidation and a bounded non-idempotent mutation or supplied uncertainty counterexample, with truthful retry/rollback policy. Verify direct-link behavior under the **actual chosen local host**, Back/Forward including initial/null history state, and that `pushState` does not itself dispatch `popstate`; test titles, focus and cleanup. No learner-written backend is required.
+  - Criteria: `Response.ok`/status and response body-handling are interpreted separately (including **not parsing a no-content response as JSON**); HTTP errors are distinguished from transport rejection, and abort signal handling does not imply server-side rollback. Request identity guards prevent stale/mixed-user results; uncertain writes are not replayed blindly. Actual direct navigation and Back/Forward, URL input validation, `popstate` semantics, title/focus/scroll and component teardown match an explicit policy. CORS and credential observations are not misrepresented as authoritative access control.
   - Evidence: Typed transport and state code, locally reproducible fixture/adapter and versioned response scenarios, deterministic race/abort tests, route/history and focus traces, cache invalidation tests, and a failure-policy explanation.
 
 - **APP2-AS4** (required dynamic accessibility, usability and browser security audit)
   - Outcomes: APP2-O1, APP2-O2, APP2-O5, APP2-O9, APP2-O10, APP2-O11, APP2-O12
-  - Work: Audit an interactive browser flow with deliberate defects in focus, status announcement, untrusted DOM rendering, state persistence and at least one localization/zoom issue. Select applicable WCAG 2.2 criteria and published task requirements, perform keyboard/manual inspection plus an automated tool when free and available, and carry out feasible screen-reader inspection or explicitly report an unperformed portion. Repair the defects, explain data/privacy and origin boundaries, and perform a repeatable task-based usability walkthrough with honest observation provenance.
-  - Criteria: A relevant set of real keyboard, focus, error and status scenarios is tested with documented expected behavior and inspected after repair. Unsafe insertion of untrusted strings is removed; no client-only hiding, CORS check or storage choice is claimed as proof of server-side access control. The audit differentiates actual observed assistive-technology evidence from heuristic inference, accounts for RTL/long text or reduced motion where applicable, and offers no unsupported WCAG conformance claim.
+  - Work: Audit **the cumulative app** for demonstrable focus/keyboard, accessible name and status/error, unsafe DOM content, privacy/storage and changed-identity issues. Select applicable WCAG 2.2 criteria: test dynamic failure states and focus visibility/not-obscured, **reflow near 320 CSS pixels with justified exceptions, and 200% text resize as a separate observation**. Challenge a long/RTL/localized or reduced-motion user journey and repair an actual confusing transition. Record any automated, actual assistive-technology and synthetic/consenting user observations separately without inventing interviews or whole-site conformance claims.
+  - Criteria: Real and negative-path keyboard/focus/status behaviors are observed before and after repair. Untrusted text is rendered with **context-appropriate** safe DOM operations; no malicious destination/HTML sink, client-only permission gate, CORS or storage setting is misrepresented as server authorization. Applicable reflow, resize, Focus Not Obscured and dynamic name/status checks are documented without overstating untested screen-reader results. Localized or RTL text does not hide essential controls; reduced motion does not erase status information. Usability evidence is labeled by provenance and limits.
   - Evidence: Audit scope and WCAG-criterion references, test environments, failing/passing examples, DOM/security regression tests, focus/status observations, representative localized/reflowed interaction, usability-task notes and remaining-risk statement.
 
 - **APP2-AS5** (required browser performance and regression diagnosis)
   - Outcomes: APP2-O3, APP2-O4, APP2-O8, APP2-O11, APP2-O13
-  - Work: Reproduce an observable slow loading or interaction path in a locally served framework-free browser application. Capture comparable browser measurements with stated device/browser/throttling and warm/cold-cache conditions, identify a DOM/layout/event/network cause, implement a bounded correction, and rerun both measurements and keyboard/accessibility/async recovery regression tests. Investigate one additional listener leak, stale-state or user-perceived latency defect without requiring deep bundler optimization.
+  - Work: Reproduce a user-visible slow load or interaction **in the same app**, capturing comparable local browser traces under disclosed conditions. Attribute a DOM/layout/event or request cause, apply one justified correction and compare repeated before/after observations with variance and user-task interpretation. Test a distinct retained-listener, stale-state or perceived-delay defect as appropriate, and re-run keyboard/focus/status, async and negative-path regressions instead of pursuing unmeasured optimizations.
   - Criteria: The identified bottleneck is supported by trace or timing evidence rather than an invented universal threshold; repeat measurements disclose variance and browser conditions. The corrected behavior preserves user task completion, accessible focus/status and correct data state; no evidence depends solely on a synthetic audit score. Resource/listener cleanup and repeated interaction paths are testable and there is no unsupported claim of production-wide speedup.
   - Evidence: Fixture and runnable app, before/after profiler trace or bounded observation log, reproducible procedure and timing summaries, identified cause, diff and normal/negative regression tests, and performance/accessibility trade-off rationale.
 
 - **APP2-AS6** (required framework-neutral browser application and technical defense)
   - Outcomes: APP2-O1, APP2-O2, APP2-O3, APP2-O4, APP2-O5, APP2-O6, APP2-O7, APP2-O8, APP2-O9, APP2-O10, APP2-O11, APP2-O12, APP2-O13, APP2-O14
-  - Work: Deliver one cohesive, locally reproducible browser application using semantic APP17-style HTML/CSS, APP19 TypeScript built into browser-compatible JavaScript, framework-independent DOM components, an accessible form and navigation path, and a typed data-access boundary with controlled fixture-backed async state. Reuse suitable AS1–AS5 artifacts rather than producing unrelated apps. Demonstrate meaningful error, empty, loading, success, unauthorized and retry behavior, deliberate focus and history handling, safely rendered untrusted values, measurable interaction performance and a published keyboard/security test matrix. Accept an unfamiliar bounded change or bug report, verify it and independently defend the decisions, limitations and responsibility boundaries.
+  - Work: Deliver **the single evolving local browser app** previously evaluated across APP2-AS1–AS5, with semantic APP17 markup/CSS, APP19-checked TypeScript compiled to browser JavaScript, owned DOM/event components, accessible form/navigation, bounded fixture-driven Fetch, visible state and real safe untrusted content handling. **Reference** accepted prior observation/test artifacts rather than rebuild five new apps. Demonstrate a new unfamiliar but bounded route, focus, identity, request-race or user-task change, diagnose and correct the resulting defect, check impacted regressions and defend the design from a clean, offline-capable build and local host without React, new server coursework or paid tooling.
   - Criteria: A reviewer can build and launch the app from a clean checkout with free local tools and fixture data without React, paid cloud, proprietary accessibility platform, authentication provider or a real backend service. All documented user-task and failure criteria are reproducibly met with tests that include lost focus, malformed/late response, unsafe text, lifecycle cleanup and navigation. The unfamiliar change does not regress stated invariants; the learner accurately explains browser scheduling, TypeScript/runtime validation, Fetch response semantics, CORS/security limits, user feedback provenance and measurement uncertainty.
-  - Evidence: Versioned source, static assets and local fixture recipe, TypeScript build steps, task/acceptance and state-transition matrices, scripted and browser test results, negative request and DOM security evidence, keyboard/focus and usability notes, performance measurements, clean-checkout verification, changed code history and accessible written/recorded/otherwise reviewable defense.
+  - Evidence: A single versioned local app/source and synthetic fixture package, clean TypeScript build/host/test commands, an outcome-to-accepted-AS1–AS5 **evidence index** rather than duplicate logs, the unfamiliar change and targeted before/after regression observations, remaining support/accessibility/measurement limitations and a reviewable written, recorded or otherwise accessible technical defense.
 
 ### Completion decision, readiness and revision safety
 
@@ -606,17 +549,17 @@ defect traces, review decisions, and acknowledged
 limitations according to
 [OEE Evidence Rules](../../spec/evidence-rules.md).
 
-This course is an outcome-driven OEE `v0.2.0`
-**draft**, not verified or learner-tested merely
-because the source validator passes. The revision
-retains APP2's recognizable browser/frontend course
-identity while replacing its obsolete prerequisite
-APP1 with the more precise APP17 + APP19 pair.
-Prior APP2 completions retain their own recorded
-course revision and cannot be silently converted
-into passes under the new outcome/assessment IDs.
-The optional deeper performance course APP10 and
-future React course APP20 remain separate.
+This course remains an outcome-driven OEE `v0.2.0`
+**draft**, not learner-tested or independently
+verified merely because its source validator passes.
+It retains APP17 + APP19 as its direct prerequisites:
+APP1 and APP18 are already met transitively. This
+competency-first review does not reclassify prior
+APP2 learner decisions or assume their equivalence
+to the current source/specification revision.
+APP20 already exists as a separate React core course;
+optional APP10 owns deeper frontend performance
+specialization. Neither is silently required here.
 
 ### Public non-mandatory study references
 
