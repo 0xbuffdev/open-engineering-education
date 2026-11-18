@@ -16,9 +16,9 @@
 
 The reference source is a **public, commit-pinned xv6 RISC-V teaching kernel** or an equivalently readable, version-pinned educational OS. Its small scope is a strength for tracing real kernel source. It is **not Linux**: unmodified xv6 must not be represented as implementing Linux VFS layers, namespaces, cgroup v2, general demand paging/swap, or the optional copy-on-write lab extension. Each lesson and assessed trace therefore distinguishes **(a) observed reference-kernel code and its architectural target, (b) explicitly added teaching extensions or independently specified simulator behavior, and (c) documented modern Linux mechanisms used only for comparison**. An explanatory model is not a measured Linux kernel observation.
 
-**Required path:** Read relevant public kernel source and derive independently checked trace/invariant oracles; implement **one bounded educational scheduler, page-table/physical-frame or replacement subsystem** (or a tightly scoped guest patch) and defend an unfamiliar cross-layer fault. A nonprivileged QEMU guest may provide executable xv6 evidence where supported, but a portable source-grounded simulator plus published kernel source/trace analysis must be able to satisfy the **same learning outcomes and assessment criteria** when a guest cannot run. No learner must compile a Linux kernel, install host kernel modules, run privileged namespaces, manipulate real DMA hardware, use expensive paid cloud hosts or demonstrate a real host crash. Unsafe kernel code is not a prerequisite to complete the simulator route.
+**Required path:** Read relevant public kernel source and derive independently checked trace/invariant oracles; implement **one bounded educational memory subsystem** (frame allocation/ownership, page-table translation or replacement, or a tightly scoped guest patch meeting the same model contract), reason independently about scheduler policies and defend an unfamiliar cross-layer fault. A nonprivileged QEMU guest may provide executable xv6 evidence where supported, but a portable source-grounded simulator plus published kernel source/trace analysis must be able to satisfy the **same learning outcomes and assessment criteria** when a guest cannot run. No learner must compile a Linux kernel, install host kernel modules, run privileged namespaces, manipulate real DMA hardware, use expensive paid cloud hosts or demonstrate a real host crash. Unsafe kernel code is not a prerequisite to complete the simulator route.
 
-**Workload and readiness:** **16–20 weeks** at approximately **10–15 focused hours/week** (160–300 hours) is a provisional allocation for source reading, hand derivations, modeled implementation, failure fixtures, review and revision, not a learning guarantee or completion gate. The five required assessments evaluate separate claims about kernel transitions, scheduling, memory, filesystem/devices and independent subsystem defense, **reusing** source/model artifacts wherever justified. A successful teaching-guest test or structurally valid curriculum is not by itself proof of general Linux correctness or readiness beyond `draft`.
+**Workload and readiness:** **16–20 weeks** at approximately **10–15 focused hours/week** (160–300 hours) is a provisional allocation for source reading, hand derivations, modeled implementation, failure fixtures, review and revision, not a learning guarantee or completion gate. The five required assessments evaluate separate claims about kernel transitions, scheduling, memory, filesystem/devices and independent subsystem defense, **reusing** source/model artifacts wherever justified. Only the scoped memory-model pathway in AS3 requires a new implemented subsystem; AS2 scheduling may be a fully derived hand-worked or reproducible simulation, and AS5 builds on the same AS3 work. A successful teaching-guest test or structurally valid curriculum is not by itself proof of general Linux correctness or readiness beyond `draft`.
 
 ## Learning outcomes
 
@@ -39,7 +39,7 @@ The reference source is a **public, commit-pinned xv6 RISC-V teaching kernel** o
 
 ## Modules
 
-### Module 1 — Kernel Organization, Privilege and the System-Call Boundary
+### Module 1 — Kernel Boundaries, Traps and System Calls
 
 #### Outcomes
 
@@ -49,42 +49,35 @@ The reference source is a **public, commit-pinned xv6 RISC-V teaching kernel** o
 
 #### Lessons
 
-1. **Contract from userspace to kernel** — Use SYS2's already-assessed C/Rust process and descriptor APIs as the starting point. For one call, distinguish its language wrapper and POSIX-facing contract from the chosen kernel's actual implementation and processor privilege transitions.
-2. **Kernel designs and execution domains** — Compare monolithic kernels, microkernels and a small Unix-like teaching kernel at the mechanism level. Explain where drivers, address spaces and privileged execution reside without implying that one organization is inherently safe.
-3. **RISC-V privilege and trap state** — On a declared RISC-V educational target, identify user and supervisor modes, trap vector, saved PC/cause and status fields, and kernel stacks; label machine-mode firmware responsibilities that are not automatically part of the OS.
-4. **System-call argument and result path** — Trace a user wrapper through the architecture-specific trap instruction, trampoline or entry code, register preservation, syscall dispatch, checked arguments and return. Give named source locations and state changes rather than treating the call as an ordinary C function.
-5. **Synchronous exceptions versus interrupts** — Distinguish an explicit system call, invalid memory access, illegal instruction, timer event and device interrupt by trigger, trap cause and permissible response; classify when execution resumes or a process is terminated.
-6. **Safe user-memory access** — Study how kernel code validates and copies from or into user virtual addresses, including bounds, permissions and changed mappings. Reject a caller pointer that happens to be numerically in range but is not valid for the requested operation.
-7. **Kernel API boundaries versus implementation** — Contrast a portable API promise with xv6-specific dispatch and Linux-specific implementation details. Explain why the observed path of one reference version is not an ABI guarantee for every kernel.
-8. **Provenance of a teaching kernel** — Select a pinned public xv6 RISC-V source revision or an equivalent readable educational kernel and document architecture, branch, trace provenance and which optional lab extensions are installed. Name features absent from the selected baseline rather than silently assuming them.
+1. **Userspace contract versus kernel implementation** — Begin with an already assessed SYS2 process/file API, then follow one call to a named kernel implementation. Distinguish ISO C or Rust wrapper behavior, a public syscall contract, the target ISA trap instruction, kernel privilege and internal dispatcher. Correct a trace that treats kernel entry as an ordinary function call.
+2. **Source-pinned OS and execution domains** — Pin the exact xv6 RISC-V source/architecture, or another public educational kernel, before attributing any behavior to it. Identify privileged execution, kernel stack, process address space and firmware responsibility; contrast monolithic versus microkernel organization without projecting Linux details onto the selected source.
+3. **Trap entry, saved state and return** — For a real reference source path, annotate user/supervisor mode, saved PC/cause/status, registers, checked syscall arguments, trapframe/trampoline where present, dispatcher and return. Independently predict one invalid argument or return-state consequence and check it against the cited source.
+4. **Exceptions, interrupts and safe user access** — Classify explicit syscall, protection fault, invalid instruction, timer and device interrupt by initiating event and permitted response. Trace a user-memory copy across a valid and denied mapping, explaining why an in-range numeric pointer cannot replace ownership, access and page checks.
+5. **Limits of an observed kernel trace** — Compare a source-backed educational-kernel transition with a documented Linux example and a supplied hypothetical model. Label which observations are implementation details, ISA requirements or API promises, and identify at least one property a user trace or simulator cannot establish.
 
-*Optional formative feedback:* Trace one call's saved registers, checked user pointer and return value against the supplied source; identify a missing permission check before discussing a repair.
+*Optional formative feedback:* Annotate one successful syscall and one denied user-buffer access with source locations, trap state and an independently reasoned correction to a false assumption.
 
-### Module 2 — Process Ownership, Context Switches and Scheduling Policy
+### Module 2 — Kernel Process Lifecycle, Context Switching and Scheduling
 
 #### Outcomes
 
 - SYS10-O2
 - SYS10-O3
 - SYS10-O4
-- SYS10-O10
 
 #### Lessons
 
-1. **Process versus kernel thread state** — Model process identifiers, user address spaces, kernel stacks, CPU-local state and scheduling state as separate resources. Compare xv6's process model with Linux task/thread abstractions without claiming identical layout or policies.
-2. **Creation, exec and exit internally** — Follow fork/exec/exit/wait as kernel resource and process-table transitions, building on but not retesting SEF7's use of their public APIs. Account for parent/child ownership, exit status, orphans and reaping in the chosen reference.
-3. **Runnable, running, sleeping and zombie** — Define a state machine with permitted transitions and one-to-one resource ownership. Produce a negative trace in which a process is scheduled twice or freed before a waiter can observe its result.
-4. **Kernel context switching** — Show which registers are saved by trap entry versus by a scheduler context switch, how a per-process kernel stack and scheduler context are used, and why changing tasks does not simply mean calling a different function.
-5. **Timer-driven preemption** — Follow a timer interrupt, tick/accounting decision, runnable-state transition and yield/reschedule path. Distinguish timer hardware/firmware behavior from OS scheduling choices on the declared architecture.
-6. **Round-robin with independent metrics** — Calculate waiting time, first-response time, turnaround, and CPU service time for a small fixed workload with arrivals, quantum and blocking. Compare exact hand schedules with simulator output.
-7. **Scheduling policies and trade-offs** — Contrast FIFO, round-robin, priority and multi-level feedback using the same workload. Demonstrate throughput, latency, starvation and response-time differences without asserting an unqualified universal winner.
-8. **Blocking, wakeup and idle execution** — Explain the atomicity needed between releasing a scheduling lock and entering sleep; trace a wakeup race that leaves runnable work blocked. Connect a CPU's idle state to a concrete 'no runnable work' decision.
-9. **Multicore run queues and affinity** — Identify the additional coordination required for concurrent scheduling decisions, CPU affinity, load balancing and cache locality. Keep Linux policy details as comparison, not assumptions about single-queue teaching kernels.
-10. **Progress and priority assumptions** — Distinguish fairness under a specified runnable selection policy from guaranteed bounded response under arbitrary preemption; document what the chosen workload and scheduler model actually establish.
+1. **Kernel-owned process and thread state** — Trace the chosen kernel's process table, user mappings, trapframe, kernel stack and scheduler context through allocation and release, distinguishing these resources from a userspace Child handle. Contrast its process representation with Linux task/thread concepts only where public documentation supports the claim.
+2. **Fork, exec, exit and wait below the API** — Follow source-backed creation, replacement of address-space image, exit status, zombie retention and final reaping; draw a resource ownership ledger for one parent and child. Diagnose a double release or premature free without repeating SEF7's public fork/exec usage.
+3. **Runnable, blocked and terminated state invariants** — Define legal transitions and an atomic run-queue selection obligation for a small kernel scheduling model. Show a counterexample where the same task runs on two CPUs or a blocked task is treated as runnable; disclose whether the reference kernel uses a single or multicore scheduler.
+4. **Trap context versus scheduler context** — Trace what a trap saves and what a kernel context switch saves, including the scheduler stack and per-CPU state on the declared target. Explain why a reschedule is not a plain call between user functions and show when a timer event may trigger preemption.
+5. **Hand-derived policy comparisons** — Calculate waiting time, response time, turnaround and CPU service for a supplied arrival/blocking workload under FIFO and round-robin, and challenge a priority/MLFQ alternative under explicitly documented assumptions. Compare identical workloads using independently solved schedules, not one policy's self-reported statistics.
+6. **Fairness, starvation and preemption limits** — Diagnose a blocked/ready workload with a timer quantum, CPU idling and repeated high-priority arrivals. Distinguish policy fairness from guaranteed bounded completion under adversarial scheduling, resource exhaustion or host preemption; do not label finite simulation runs proof of liveness.
+7. **Wakeups as observable scheduling events** — Connect a blocked-task transition and wake event to the scheduler's ready queue and subsequent service without assuming a Linux wakeup implementation. Predict an observable missed-wakeup symptom; develop its lock/atomicity repair in the next module rather than repeating synchronization protocol here.
 
-*Optional formative feedback:* Compute a hand schedule for two CPU-bound tasks and one sleeping task, then expose a counterexample to a lost-wakeup or starvation claim.
+*Optional formative feedback:* Hand-solve one blocked three-process schedule, then use its state ledger to find a falsely runnable or prematurely reaped process.
 
-### Module 3 — Kernel Execution Context, Locks and Interrupt-Safe Wakeups
+### Module 3 — Kernel Locks, Interrupt Context and Wakeup Safety
 
 #### Outcomes
 
@@ -94,18 +87,15 @@ The reference source is a **public, commit-pinned xv6 RISC-V teaching kernel** o
 
 #### Lessons
 
-1. **Execution context as a restriction** — Differentiate user mode, process-context kernel code, hard interrupt context and deferred work. State which code may sleep, acquire a blocking lock or allocate memory under the selected reference design.
-2. **Spin locks and interrupt state** — Trace lock acquisition, interrupt masking where applicable and release on one CPU; explain why a blocking mutex or unbounded wait is inappropriate in hard interrupt context, while details vary by kernel and execution mode.
-3. **Critical invariants across CPUs** — Protect a run queue or free-page list with a named invariant and lock; identify the precise reads/writes that must be serialized, not just the presence of a lock variable.
-4. **Atomic sleep and wakeup** — Derive a check/lock/sleep/wakeup sequence with no lost-notification gap, including why releasing the lock and becoming non-runnable must form a valid kernel protocol.
-5. **Lock ordering and deadlock paths** — Analyze a two-lock dependency graph around scheduler and page metadata. Repair an AB/BA cycle with an explicit lock order or redesign rather than relying on one successful QEMU run.
-6. **Interrupt versus deferred completion** — Trace when an interrupt acknowledges a device event, schedules deferred processing and wakes a blocked waiter; separate completion handling from work forbidden in interrupt context.
-7. **Per-CPU state and memory ordering limits** — Explain why CPU-local data or disabling local interrupts does not by itself serialize access across cores. Note necessary architecture memory barriers conceptually, reserving user-space atomic litmus and lock-free proof depth for SYS3.
-8. **Failure and race evidence** — Use a bounded teaching trace or supplied kernel source to demonstrate an interrupt/sleep ordering defect and a corrected transition; disclose whether the test ran on multiple emulated CPUs or only a single-CPU model.
+1. **Execution context and permissible operations** — Distinguish process context, a hard interrupt handler, deferred work and ordinary user mode in the pinned kernel or labeled Linux comparison. Identify which operations can sleep, acquire particular locks or allocate memory under the declared implementation; a generic 'kernel code may block' rule is insufficient.
+2. **Spin locks, interrupts and protected invariants** — Derive the critical section needed for a run queue or free-list invariant under one- and multi-CPU assumptions. Trace interrupt masking and spin-lock ownership where implemented and show why disabling local interrupts does not serialize a shared structure across CPUs.
+3. **Atomic sleep/wakeup and the lost-wakeup counterexample** — Construct a check/sleep/wake history with a gap that loses a notification, then specify the reference kernel's lock and state-transition protocol that closes it. Verify the corrected schedule with an independent event history, not a successful guest run alone.
+4. **Lock order, interrupt completion and deadlock** — Analyze an AB/BA dependency and a device interrupt/deferred wakeup crossing that lock boundary. Identify the first illegal waiting or reentrancy transition and repair ordering or ownership; distinguish an interrupt acknowledgement from a blocked process becoming runnable.
+5. **Memory-order and test limitations** — Explain conceptually why compiler and CPU reordering affect kernel lock and device ownership and when a documented architectural barrier is relevant. Use an explicit trace or source annotation rather than inventing a generic barrier recipe; leave Rust user-space atomic litmus and lock-free proofs to SYS3.
 
-*Optional formative feedback:* Hand-check a scheduler wakeup while an interrupt races with a state change; prove the repair under stated lock and scheduling assumptions.
+*Optional formative feedback:* Given a lock/wakeup trace on two CPUs, identify the first unsound state and derive a corrected sequence under explicit interrupt assumptions.
 
-### Module 4 — Page Tables, Fault Handling and Copy-on-Write Lifecycle
+### Module 4 — Kernel Page Tables, Faults and Copy-on-Write
 
 #### Outcomes
 
@@ -116,20 +106,17 @@ The reference source is a **public, commit-pinned xv6 RISC-V teaching kernel** o
 
 #### Lessons
 
-1. **From SYS1's translations to kernel-owned mappings** — Start from SYS1's external TLB/page-table model and identify what an OS must allocate, map, protect and free. Distinguish user versus kernel mapping policy and memory actually backed by a physical frame.
-2. **RISC-V page-table mechanics** — Trace a declared Sv39 virtual address through page-table levels and PTE permission/status bits on a source-pinned teaching kernel; identify user, supervisor, read/write/execute permissions and invalid entries without assuming all possible flags are implemented.
-3. **Address-space creation and teardown** — Follow setup of process user mappings, stack/trampoline/trapframe as applicable, and resource release at exit. Establish that no owned physical frame or page-table page is leaked or freed while still referenced.
-4. **Fault classification and diagnostics** — Differentiate unmapped address, protection fault, invalid instruction, demand-allocation fault and copy-on-write write fault by access type, PTE state and the implementation's policy; never call every fault a TLB miss.
-5. **Zero-fill and demand paging as variations** — Explain lazy allocation through a compact *declared extension/model* and compare with the actual selected kernel revision. Do not assume untouched xv6 includes general Linux demand paging or swap.
-6. **Fork versus copy-on-write** — Trace eager-copy fork and copy-on-write as different designs with shared physical-frame reference counts, read-only mappings and a write-fault copy path. Explicitly identify whether COW is an optional lab extension rather than present in baseline xv6.
-7. **Permission change and TLB invalidation** — Show why changing a PTE or switching a relevant address-space context may require RISC-V architectural synchronization (such as sfence.vma under appropriate assumptions), without treating one hardcoded TLB flush as platform-universal.
-8. **Kernel-to-user copy under faults** — Analyze copyin/copyout across a page boundary, invalid user pointer or partial buffer; identify what is validated and how failed copy is returned without interpreting the pointer as a trustworthy kernel address.
-9. **Independent page-fault oracles** — Hand-derive successful translations and at least three failures for a bounded page-table fixture; distinguish a simulator's declared simplifying assumptions from actual RISC-V and Linux behavior.
-10. **Correctness under repeated faults** — Challenge duplicate mapping, a second COW write, frame exhaustion and process exit during shared-frame ownership. Record an invariant-preserving or bounded-rejection outcome for every case.
+1. **OS ownership behind virtual translation** — Extend SYS1's already assessed page/TLB arithmetic into kernel allocation, page table installation, permissions and teardown. For a selected Sv39 source path, calculate VPN levels, PTE validity and accessible versus forbidden translations; distinguish specified ISA behavior from teaching-kernel choices.
+2. **Process address-space creation and destruction** — Follow kernel source or a declared model for executable mappings, user stack, trapframe/trampoline and free paths where applicable. Draw ownership of page-table pages and mapped frames and identify a leak or stale mapping at process exit.
+3. **Fault delivery and policy** — Trace read/write/execute faults, absent mappings and protection failures from trap through kernel decision and resume/termination. Distinguish hardware fault classification from optional OS handling policies such as lazy allocation; do not claim unmodified xv6 implements Linux demand paging.
+4. **Fork and copy-on-write variants** — Compare eager-copy fork with an explicitly added COW extension or independently specified model; derive read-only sharing, frame reference-count increments, write-fault copy and last-reference free. Identify where baseline source does not implement the lab extension and test a second write, failure-to-allocate and exit.
+5. **Page-table modification and translation synchronization** — Analyze mapping updates, address-space switch and reuse under declared RISC-V assumptions, including when SFENCE.VMA or appropriate cross-hart synchronization is necessary. Explain that speculative/cached translations and permission checks cannot be replaced by a universal 'flush the TLB' slogan.
+6. **User buffer validation and fault oracles** — Work copyin/copyout and a request crossing a page boundary with an invalid user pointer or partial result; state exactly which validation is source-observed. Prepare hand-solved normal, unmapped, protection and stale-translation cases before consulting any simulator.
+7. **Memory protection and model scope** — Contrast a modeled successful translation, a denied access and a kernel-owned frame whose mapping has changed; demonstrate why one cannot authorize the other. Identify which COW, swap or replacement behavior is a teaching extension and what must be tested later in the independent memory subsystem.
 
-*Optional formative feedback:* Derive a parent/child COW reference-count trace and an invalid-store fault; identify exactly which steps are a teaching extension and not an unmodified xv6 guarantee.
+*Optional formative feedback:* Hand-calculate an Sv39 permission failure and a COW shared-frame trace, separating baseline source behavior from a declared lab or simulator extension.
 
-### Module 5 — Physical Frame Allocation, Reclamation and Memory Pressure
+### Module 5 — Physical Frames, Allocation and Reclamation Invariants
 
 #### Outcomes
 
@@ -140,19 +127,16 @@ The reference source is a **public, commit-pinned xv6 RISC-V teaching kernel** o
 
 #### Lessons
 
-1. **Physical versus virtual page ownership** — Distinguish a free physical frame, a page-table mapping to that frame and the kernel allocator's metadata; draw valid ownership/reference states across allocation, mapping and release.
-2. **Free-list allocator invariant** — Specify a bounded physical-frame allocator with unique free/owned membership, legal range/alignment and no duplicate allocation. Trace allocation and deallocation under an independent initial-state fixture.
-3. **Reference counting and shared frames** — Model pinned/shared COW frames, underflow/overflow protection, last-owner reclamation and a failed allocation while existing references remain. Explain that an accurate reference count needs synchronized lifecycle updates.
-4. **Replacement-policy models** — Compare FIFO and clock/second-chance under identical reference strings, tracking frame identities, dirty/accessed bits and accepted eviction decisions. State that this is a *model*, not an unmodified xv6 swap implementation.
-5. **Kernel memory pressure and faults** — Explain reclaim, eviction, swap, working-set pressure and out-of-memory policies using explicitly named Linux or teaching-model assumptions; a VM simulator's simulated OOM is not an observation of host Linux OOM killer policy.
-6. **Mapping changes and stale references** — Connect free/reallocate decisions with page-table invalidation and outstanding readers; show why a freed frame must not be exposed to a second process through a stale mapping.
-7. **Checked resource geometry** — Reject zero-frame pools, invalid frame numbers, impossible page sizes, duplicated free-list entries and capacity arithmetic overflow before mutating model state.
-8. **Concurrent allocator limits** — Apply kernel lock discipline to a free-list transition and model a competing allocation, while leaving comprehensive user-space atomics and concurrent queue formalization to SYS3.
-9. **Independent negative verification** — Derive allocator and replacement outputs by hand, then compare with executable simulation or a small educational-kernel extension; include double-free, exhaustion, reference leak and recovery cases.
+1. **Frame identity, free-list and references** — Model the difference between a physical frame, a page-table entry and allocator metadata. Specify unique free/owned membership and legal reference counts; trace allocation, mapping, sharing and release with a deliberately invalid free.
+2. **Checked allocator operations and failures** — Implement or inspect a bounded frame allocator state machine that rejects out-of-range, double-free, integer-overflow and exhaustion cases without mutating unrelated state. Independently predict post-failure ownership rather than accepting one clean allocator test.
+3. **Shared ownership, COW and safe last-reference free** — Work a reference-counted frame trace that includes last-owner release, underflow, a failed allocation and an outstanding mapping. State who must synchronize updates and why reclaiming a frame before removing or synchronizing mappings violates isolation.
+4. **Replacement and working-set policy models** — Compare FIFO and clock/second-chance traces under a small fixed frame budget, with accessed/dirty state, workload choices and legal victim selection. Mark swap/replacement as an explicitly configured educational model or Linux comparison, not a claim about untouched xv6.
+5. **Pressure, paging and system-level guarantees** — Differentiate page faults, memory pressure, eligible reclamation, writeback and out-of-memory responses under a specified OS model. Analyze a bounded failure/recovery case and avoid attributing a simulator's OOM decision to the host Linux policy.
+6. **Subsystem invariants and independent oracles** — Choose one scoped implementation among allocation/ownership, translation/permissions or replacement, and publish its state-machine contract and implementation-specific invariants. Verify normal and adversarial cases with independent expected state, documenting which mechanisms are only solved by hand or source trace rather than implemented.
 
-*Optional formative feedback:* Use a four-frame model with one shared frame to prove free-list uniqueness and refcount correctness before/after a failed allocation.
+*Optional formative feedback:* Derive a four-frame ownership trace with a shared mapping and failed free; identify the first invariant violation without treating a host OOM event as evidence.
 
-### Module 6 — Open Files, Filesystem Pathways and Crash-Sensitive Buffering
+### Module 6 — Kernel File Objects, Filesystems and Durability Boundaries
 
 #### Outcomes
 
@@ -163,19 +147,16 @@ The reference source is a **public, commit-pinned xv6 RISC-V teaching kernel** o
 
 #### Lessons
 
-1. **Descriptor to kernel file object** — Translate a SYS2 user-space open/read/write example into the kernel-owned descriptor table, shared open-file description, offset, permission and final release path; identify which OS structures implement each guarantee.
-2. **Inodes, directories and path resolution** — Trace a controlled pathname through directory entries, inode lookup and permission checks, distinguishing name identity from opened-object identity. Keep path-race and symlink claims explicitly within the chosen kernel's policy.
-3. **Teaching FS versus Linux VFS** — Show xv6 file-table, inode and buffer-cache paths beside **Linux** VFS objects such as superblock, dentry, inode and struct file. Do not assert that xv6 implements Linux's VFS layering or identical inode/journal semantics.
-4. **System-call read/write to block requests** — Trace an application syscall to kernel file object, filesystem offset/blocks, cache lookup, device queue and return, including short I/O and errors without claiming a return necessarily means durable media state.
-5. **Buffer cache and dirty state** — Identify cache ownership, dirty buffers, eviction rules and writeback lifecycle in a named implementation; distinguish the Linux page cache from an xv6 block buffer cache and from a SYS5 application buffer.
-6. **Filesystem crash consistency** — Study a toy journal/commit record or write-ordering trace and identify a crash between metadata/data stages. Explain the limits of the selected teaching implementation and do not confuse a filesystem journal with SYS5's application-level WAL.
-7. **Open and unlink lifetimes** — Trace a file open while a directory entry is removed, accounting for reference counts, inode reclaim and permission/namespace behavior under the chosen model.
-8. **Durability boundaries** — Distinguish user write completion, library flush, kernel cache, file sync, directory metadata sync, block-device acknowledgment and power-loss assumptions; never promise persistence solely from a successful write.
-9. **Pathway failure fixture** — Independently hand-derive expected states for missing inode, invalid offset, read past EOF, unavailable block or injected writeback failure and compare with one reproducible source/trace model.
+1. **File descriptor to kernel object and lifetime** — Trace a SYS2 user file operation to process fd table, shared open-file description, offsets, permissions and final release in the named teaching source. Compare Linux struct file semantics only as documented and identify a counterexample where a removed pathname is not equivalent to a closed handle.
+2. **Path lookup, inode identity and Linux VFS contrast** — Follow directory lookup and inode references through an open and unlink case. Contrast xv6 file/inode/buffer structures with Linux superblock, dentry, inode and struct file without asserting xv6 has Linux VFS or the same symlink and permission policies.
+3. **Read/write to buffers and block I/O** — Trace a bounded syscall through file position, inode/block mapping, buffer lookup and a device request/return. Show where short read/write, end-of-file, denied access or I/O error changes the observable result rather than treating every operation as one whole message.
+4. **Dirty state, journal and crash ordering** — Analyze a source-supported teaching filesystem log or a declared toy commit/flush sequence with a crash between metadata/data stages. Distinguish block buffer, Linux page cache and application data buffer, and explain why a filesystem journal is not SYS5's application WAL.
+5. **Acknowledgement versus persistence** — Differentiate userspace buffering, OS write acceptance, kernel dirty state, file sync, directory entry persistence and device flush under named assumptions. Reject a claim that ordinary write or a simulated journal commit always proves power-loss durability.
+6. **Independent filesystem failure path** — Build a source-backed state/ownership table for missing inode, open-unlink lifetime and one injected block or writeback failure. Derive expected behavior before consulting a fixture, and explain which recovery semantics depend on actual journal/device guarantees.
 
-*Optional formative feedback:* Follow one byte write from SYS2 File through a named teaching FS and show exactly where Linux VFS comparison is conceptual rather than the same code path.
+*Optional formative feedback:* Trace one byte write through an actual xv6 source path, then mark where a Linux VFS or crash-durability claim would require different evidence.
 
-### Module 7 — Device Registers, Interrupts and Asynchronous I/O
+### Module 7 — Devices, Interrupts and I/O Completion
 
 #### Outcomes
 
@@ -186,18 +167,16 @@ The reference source is a **public, commit-pinned xv6 RISC-V teaching kernel** o
 
 #### Lessons
 
-1. **Polling and interrupt delivery** — Compare busy polling, interrupt notification and asynchronous I/O completion in a bounded device model. Account for CPU work, device state and which participant owns the in-flight request.
-2. **Device registers and MMIO** — Explain control/status registers mapped into CPU address space, ordering and volatile device access conceptually; distinguish MMIO from regular cacheable RAM without writing unsafe host device code.
-3. **Interrupt controller and acknowledge path** — Trace device event, interrupt-controller routing, trap entry, source identification, acknowledgement, deferred handling and wakeup; state which steps vary between xv6's emulated device and Linux drivers.
-4. **Request, queue and completion state** — Specify an I/O request state machine with enqueue, in-flight, completed, failed and canceled states, making duplicate completion and resource reuse invalid under a declared policy.
-5. **DMA and address domains** — Differentiate CPU virtual, physical and device/bus/DMA addresses, and why an IOMMU or mapping API may be necessary; reject the claim that a device can dereference an arbitrary user pointer as a DMA address.
-6. **DMA coherence and memory visibility** — Explain streaming versus coherent mapping assumptions and needed synchronization, including why a CPU cache barrier does not universally replace DMA mapping or ownership transitions. No actual device-DMA operation is required.
-7. **Block device buffering and ordering** — Follow a sample block request through guest driver, emulated device and completion, distinguishing read completion, write acknowledgement, flush/barrier and what the declared storage device promises.
-8. **Safe failure and ordering analysis** — Inject a delayed or duplicate interrupt, failed request, disconnected device or incomplete DMA transfer into a small simulator; identify which waiters remain blocked and how the state machine recovers or refuses further work.
+1. **Polling, interrupts and request ownership** — Compare bounded polling, interrupt notification and deferred completion for a single guest device. Specify queue, in-flight and owned-buffer state; identify why a request may be waiting despite a ready CPU.
+2. **MMIO and interrupt routing** — Trace a named emulated device's control/status access, interrupt-controller route, trap entry, acknowledge and wake-up sequence, separating guest-source behavior from Linux driver variations. Explain why MMIO is not ordinary cacheable RAM and why volatile alone is not a complete synchronization policy.
+3. **DMA and distinct address domains** — Distinguish CPU virtual, physical, guest physical and device DMA/bus addresses, including when IOMMU mappings and buffer-ownership transitions matter. Identify an invalid attempt to hand a raw user pointer directly to hardware, without any real DMA demonstration.
+4. **Device-visible ordering and buffered writes** — Analyze a small queue descriptor or DMA ownership sequence, specifying coherent versus streaming mapping assumptions and appropriate synchronization. Contrast an acknowledged block request with device flush/persistence guarantees; avoid claiming a CPU fence alone solves every DMA visibility problem.
+5. **Cancellation, duplicate completion and recovery** — Construct a request state machine for queued, in-flight, completed, canceled and failed states. Inject one late interrupt, duplicate completion or device error; prove by state/identity checks that a buffer cannot be freed twice or a waiter silently remain blocked.
+6. **Source-grounded device observation and limits** — Compare a reproducible source trace and a synthetic failure fixture for the same bounded completion mechanism. State which events were actually observed and which were inferred, and identify one Linux-specific or physical-device behavior that the simulator cannot establish.
 
-*Optional formative feedback:* Reconcile an I/O-completion interrupt that arrives after cancellation with request identity, ownership, buffer state and a valid single completion report.
+*Optional formative feedback:* Reason through a completion interrupt that races with cancellation; specify a single valid report and surviving ownership of each buffer.
 
-### Module 8 — Permissions, Namespaces, Resource Control and Virtualization
+### Module 8 — Process Isolation, Resource Control and Virtualization
 
 #### Outcomes
 
@@ -208,44 +187,16 @@ The reference source is a **public, commit-pinned xv6 RISC-V teaching kernel** o
 
 #### Lessons
 
-1. **OS protection domains and credentials** — Describe user/kernel separation, process identity, credentials and access-control checks on a named filesystem or syscall path. Analyze an invalid request that crosses an unprivileged boundary and why the kernel must reject it.
-2. **Least privilege and capability reasoning** — Compare a coarse root/user distinction with scoped Linux capabilities, and document how dropping one privilege affects the allowed operation. Keep demonstrations theoretical or nonprivileged where required.
-3. **PID, mount and network namespaces** — Model what identity, filesystem view and network namespace isolation change or do not change in Linux. Explicitly state that unmodified xv6 has no Linux namespace implementation.
-4. **Cgroups and resource accounting** — Explain how a Linux cgroup v2 controller can account for or limit CPU/memory/pids under a declared configuration, and why a controller is not itself an authentication or confinement security boundary.
-5. **Container composition and escape assumptions** — Distinguish namespaces, cgroups, filesystem mounts, seccomp and Linux capabilities as separable pieces; identify how containers share the host kernel and why 'runs inside a container' is not a proof of isolation.
-6. **Virtual machines and hypervisors** — Compare guest kernel, hypervisor and host execution domains; contrast emulated hardware with hardware-assisted virtualization and the independence of guest memory/protection from container namespace mechanisms.
-7. **Nested trust boundaries and IOMMU** — Explain guest virtual versus guest physical and host physical addresses in a simple two-stage translation/IOMMU model. Do not claim that adding a virtual machine automatically secures every device or side channel.
-8. **Threat and denial cases** — Solve a small scenario involving privilege escalation attempts, out-of-range user pointers and resource exhaustion; identify the responsible layer and show the required denied/limited behavior without exploit execution.
-9. **Document exact version and missing features** — Publish a two-column table separating *source-observed xv6* behavior from Linux namespace/cgroup/VFS/hypervisor documentation and explicit simulations; reject translating one platform's API names into equivalence without source evidence.
+1. **Privileges, credentials and denied operations** — Use a named kernel or Linux documentation to trace a user/kernel protection decision, permission/credential state and a rejected operation. Contrast actual xv6 mechanisms with documented Linux credential and capability behavior without running a privileged exploit.
+2. **Namespaces as scoped views, not full security** — Compare PID, mount and network namespace effects on identity and visibility in a stated Linux process example. Identify shared-kernel operations that namespaces alone do not prohibit, and state explicitly that unmodified xv6 does not implement Linux namespaces.
+3. **Cgroup v2 resource policy** — Interpret a declared Linux cgroup v2 CPU/memory/pids example, its accounting/limit response and an overload/denial case. Distinguish resource allocation from authentication and verify which controller behavior the cited Linux documentation actually promises.
+4. **Container boundary composition** — Reason about namespace, mount, capabilities, seccomp and cgroup contributions to a bounded service sandbox. Show one bypassable assumption if only a single mechanism is configured; identify which protections still depend on the shared host kernel.
+5. **Hypervisors and layered address translation** — Contrast guest kernel, hypervisor, host and hardware protections for a toy virtual machine. Trace guest virtual, guest physical and host physical identity in a declared model, and explain why virtualization is not proof of secure device passthrough or side-channel isolation.
+6. **Cross-layer threat and source provenance** — Analyze supplied failed access or resource exhaustion using a comparison table of source-observed teaching-kernel behavior, Linux-documented features and synthetic model states. State exactly which layer should reject the request; do not infer equivalence from similar API names.
 
-*Optional formative feedback:* Given a proposed container sandbox, identify one boundary enforced by namespaces, one by cgroups, and one property that still depends on the shared host kernel.
+*Optional formative feedback:* Given a proposed container or VM sandbox, identify a denied operation, resource-control mechanism and residual shared-kernel or device trust assumption.
 
-### Module 9 — Reproducible Educational-Kernel Investigation and Validation
-
-#### Outcomes
-
-- SYS10-O1
-- SYS10-O4
-- SYS10-O6
-- SYS10-O7
-- SYS10-O8
-- SYS10-O11
-- SYS10-O12
-
-#### Lessons
-
-1. **Select a source-pinned, safe reference** — Use publicly available xv6 RISC-V source and a specified unprivileged QEMU release, or an equivalent reproducible educational kernel source/trace combined with a portable, bounded simulator. Document exact commit, version, architecture and optional applied lab features.
-2. **One coherent subsystem contract** — Select a scheduler/wakeup, physical-page allocator/replacement or translation subsystem with a small public state machine, invariant, input grammar and expected outputs; resist building a whole new OS as an unrelated capstone.
-3. **Source-to-model traceability** — Annotate at least two actual source paths explaining entry to the subsystem and its cleanup/error exit, and map which operations the simulator intentionally omits. Use source excerpts when running a guest is unavailable.
-4. **Independent hand-derived oracles** — Construct normal, boundary and invalid traces and calculate resource/scheduler state independently of the implementation, including a failure transition and recovery or bounded rejection.
-5. **Kernel-specific versus simulated fixtures** — Declare whether each result came from an actual guest run, a fixture or educational model, and explain why a simulated kernel trap does not prove Linux kernel behavior.
-6. **Failure injection without host risk** — Use isolated guest state or synthetic state transitions to test invalid pointers, deadlock/lost wakeup, frame exhaustion and incomplete I/O. Never require root, real-device DMA, raw disk writes or host kernel modifications.
-7. **Accessibility and resource economy** — Provide deterministic text tables/diagrams, limits on CPU/memory/time, fixed inputs and build scripts or public read-only source references; preserve the same outcome contract for users without QEMU-capable hardware.
-8. **Regressions and alternative hypotheses** — Reproduce a deliberately flawed subsystem transition, change the smallest required condition and run a previously correct case alongside the negative test; disclose configurations not explored.
-
-*Optional formative feedback:* Compare a source-level kernel trace with a simulator event timeline, explaining the one missing intermediate state that matters for correctness.
-
-### Module 10 — Integrated OS Mechanism, Cross-Layer Diagnosis and Defense
+### Module 9 — Integrated Educational-Kernel Investigation and Defense
 
 #### Outcomes
 
@@ -262,19 +213,19 @@ The reference source is a **public, commit-pinned xv6 RISC-V teaching kernel** o
 
 #### Lessons
 
-1. **Build on prior verified work** — Reuse the source-pinned subsystem or model implemented for AS2/AS3 rather than demanding an unrelated second kernel extension; add a small interaction with scheduling, page faults, protection or I/O as relevant to the selected design.
-2. **Cross-subsystem causal graph** — Track one bounded operation through trap, runnable/blocking state, memory translation and file/device or permission events as applicable. Label source-grounded and simulated edges and explain what the OS actually guarantees.
-3. **Work and failure invariants** — State a primary safety invariant, one relevant progress/resource policy and a protection denial condition; verify that invalid, duplicate or canceled events do not leave an unrecoverable unowned resource.
-4. **Adversarial case generation** — Accept a reviewer-supplied unseen scheduling, memory, filesystem, device or isolation failure or a public deterministic seed with materially new transitions; explain two competing causes before running the model.
-5. **Minimal fix and regression** — Produce one independently reviewed change to a simulator or educational-kernel subsystem and re-check both a previously correct trace and an independently computed failure oracle.
-6. **Performance and policy trade-offs** — Defend a bounded scheduling quantum, page-policy or buffering trade-off using transparent workload assumptions; distinguish simulated resource costs from host Linux timing or physical hardware observations.
-7. **Reproducible handoff and defense** — Provide build/run commands, source revision, fixture inputs, expected and actual traces, known limits, an accessible narrative and a written, recorded or live technical defense in which the learner answers an unfamiliar variant.
+1. **One source-pinned investigation contract** — Pin the public educational kernel and selected RISC-V/other target, document absent lab extensions and choose a safe nonprivileged guest or reproducible source-backed simulator route. Reference the real syscall, scheduler and memory pathways studied earlier; no second kernel project or invented Linux implementation is required.
+2. **Reuse one implemented memory subsystem** — Extend the already assessed AS3 allocator/translation/replacement implementation with a small, justified interaction with trap, scheduling, protection or I/O. Use AS2's independent scheduling table and AS4's file/device paths as cross-layer evidence where relevant, not as two new full implementations.
+3. **Explicit safety, progress and resource claims** — Write one inspectable state contract with ownership invariants, an appropriate progress or fairness assumption, and a denied-access condition for the chosen interaction. Label source-backed transitions separately from simulator assumptions and demonstrate normal, boundary and fault effects with independently hand-derived oracles.
+4. **Safe reproducible fault injection** — Use isolated synthetic state, declared deterministic seeds or an optional QEMU guest to introduce a lost wakeup, stale mapping, invalid owner, I/O error or denied privilege. Limit memory, time and permissions, and distinguish actual guest execution from a modeled event without risky host-kernel actions.
+5. **Unfamiliar cross-layer differential diagnosis** — For a reviewer-supplied mixed-symptom trace, consider scheduling, memory translation, filesystem, device and isolation hypotheses. For each class, identify a relevant confirming or excluding observation, record predictions before inspection, then select a discriminating test or state why the available evidence is insufficient.
+6. **Minimal correction and previously-correct regression** — Repair the first violated invariant in the implemented model or explain a justified bounded refusal when the safe change cannot be established. Re-run both the unfamiliar failure and previously successful fixtures against independent expected states, not the implementation's own output.
+7. **Handoff, limitations and independent defense** — Reproduce the same source/model artifact from a clean state with published versions, fixture inputs and bounded run commands. Defend why the chosen subsystem, abstraction boundaries, observed failures and tradeoffs justify the claimed conclusions; avoid presenting a synthetic trace as Linux or real-hardware evidence.
 
-*Optional formative feedback:* Reason from a newly supplied trace back to a violated kernel invariant, name a second plausible cause, and propose a discriminating observation before modifying the subsystem.
+*Optional formative feedback:* Explain an unseen cross-layer failure from its earliest invalid event, defend one competing hypothesis, and verify the repair under a documented source/model boundary.
 
 ## Completion requirements
 
-**Five summative assessments are required** and collectively establish **SYS10-O1–SYS10-O14**. Each has public Work/Criteria/Evidence and a separately inspectable decision; reading lists, formative traces, guest setup and optional experiments are not hidden completion gates. The **same one bounded educational subsystem/model** may support AS2's schedule or AS3's allocator/translation evidence and AS5's integration and defense where its behavior genuinely establishes the distinct criteria. No second full OS, Linux kernel patch, live device driver or privileged host environment is required.
+**Five summative assessments are required** and collectively establish **SYS10-O1–SYS10-O14**. Each has public Work/Criteria/Evidence and a separately inspectable decision; reading lists, formative traces, guest setup and optional experiments are not hidden completion gates. The **same one bounded implemented memory subsystem** satisfies AS3's appropriate implementation criteria and is reused in AS5's cross-layer integration. AS2's independently derived scheduler analysis may be performed with hand-worked event schedules or a bounded model; it does not require a second separately implemented kernel subsystem. No second full OS, Linux kernel patch, live device driver or privileged host environment is required.
 
 - **SYS10-AS1** — Kernel Entry, Source Provenance and Protection Trace
   - **Outcomes:** SYS10-O1, SYS10-O2, SYS10-O9, SYS10-O11.
@@ -290,9 +241,9 @@ The reference source is a **public, commit-pinned xv6 RISC-V teaching kernel** o
 
 - **SYS10-AS3** — Page Tables, Frame Ownership and Memory Failure Model
   - **Outcomes:** SYS10-O5, SYS10-O6, SYS10-O10, SYS10-O12.
-  - **Work:** **Implement** a bounded educational virtual-page/physical-frame allocator, translation, reference-counting or page-replacement subsystem (which may be the same reusable code used by AS5). Publish the target architecture, page geometry, PTE/permission model, frame ownership and fault/reclaim policy; independently calculate page/owner states for a valid access, a protection/unmapped fault, an exhaustion/invalid-free case and a fork/COW or mapping-invalidation example. Label demand paging, COW and swap as explicitly added extensions where absent from the reference kernel.
-  - **Criteria:** Allocated frame identity and reference accounting remain valid (no duplicate free-list membership, double free, invalid reuse or unchecked capacity overflow); invalid mapping/permission requests fail predictably and do not corrupt existing state. Exact hand-derived translation/fault/replacement results agree with the model for normal, invalid and recovery cases, including a correctly identified TLB invalidation precondition under the declared architecture. The learner identifies what an xv6 source path actually implements, what is synthetic/extended and how kernel concurrency rules protect relevant allocator state. A simulator is acceptable only with real source-linked reasoning, not as an unlabelled Linux observation.
-  - **Evidence:** Implemented subsystem source and clean build/run commands, public model schema/invariants, independent page tables/free-list/reference fixtures, before/after ownership traces, invalid/fault tests and revision-pinned source-versus-model limitations.
+  - **Work:** **Implement one** publicly specified, bounded educational **memory subsystem**: (a) physical-frame allocation/ownership, (b) page-table translation/permissions, or (c) page-replacement/reclamation with owned-frame state. A tightly scoped educational-guest patch is an alternative implementation. Publish its exact input/state contract, source-pinned OS/target correspondence, chosen invariants and explicit model exclusions. Separately hand-derive *common* memory reasoning for a normal mapped access, an absent/protection fault, an exhausted/invalid release case and one COW/shared-frame or mapping-change/invalidation scenario; the teaching implementation need only execute its **chosen** subsystem, not all alternatives. Identify lazy paging, COW and swap as declared extensions when absent from the pinned kernel.
+  - **Criteria:** **Common verification:** valid/invalid mapping and fault explanations follow a specified architecture/policy; independent page/owner-state oracles distinguish the modeled transition from kernel-source observation; appropriate translation synchronization and lock/concurrency assumptions are named. **Chosen-subsystem correctness:** a frame allocator prevents duplicate membership, invalid free and reference errors; a page-table implementation rejects unmapped/forbidden/invalidated access without corrupting unrelated state; a replacement implementation makes legal victims, dirty-state and ownership transitions without duplicate release, according to its *declared* model. Apply the relevant invariants **only to the selected implementation**, including checked capacity/overflow and independently reasoned invalid/failure cases. An allocator-only submission need not implement TLB replacement; a translator-only submission need not manufacture a freelist, but all must correctly reason through the common page/fault/ownership cases and identify a source-backed correspondence. The student discloses simulation and reference-kernel limitations and does not claim a toy fault is a measured Linux fault.
+  - **Evidence:** One clean-build executable subsystem or scoped educational-guest patch, published schema/invariants, independently solved common memory/fault traces, implementation-specific normal/boundary/invalid fixtures, results and source revision links. Mark which traces were executed in the chosen model versus derived from source or a declared different policy.
 
 - **SYS10-AS4** — Kernel File, Device and I/O Completion Pathway
   - **Outcomes:** SYS10-O7, SYS10-O8, SYS10-O10, SYS10-O11, SYS10-O12.
@@ -301,10 +252,10 @@ The reference source is a **public, commit-pinned xv6 RISC-V teaching kernel** o
   - **Evidence:** Reproducible source references, both annotated cross-layer timelines, state/ownership table and cache boundary notes, synthetic I/O failure inputs with expected versus observed results, Linux comparison and safety limitations.
 
 - **SYS10-AS5** — Integrated Educational OS Mechanism and Unfamiliar Fault Defense
-  - **Outcomes:** SYS10-O1, SYS10-O3, SYS10-O5, SYS10-O6, SYS10-O9, SYS10-O10, SYS10-O11, SYS10-O12, SYS10-O13, SYS10-O14.
-  - **Work:** Reuse the reviewed educational scheduler or memory subsystem from AS2/AS3, extending or explaining **one meaningful interaction with another kernel mechanism** (trap, preemption, page fault, device wakeup or protection). Independently analyze a **previously unseen**, small, source-consistent failure scenario supplied by a reviewer or public reproducible generation rule. Before execution, identify **two plausible causes** and a discriminating event/ownership trace; make one justified correction or bounded refusal and rerun both the challenge and a previously correct case.
-  - **Criteria:** The implementation/source model rebuilds or the supplied source-grounded trace is independently reproducible without paid hardware, privileged host modifications or an entire guest OS rewrite. The cross-layer graph explains a legal event sequence, identifies the first violated safety/progress/protection invariant, distinguishes scheduler, VM, filesystem/device and isolation explanations, and confirms a correction with an independently derived oracle. Review defends ownership, exact environment, source provenance, limits of simulation, fault injection and trade-offs, not just a copied lab result. Earlier assessments need not be reimplemented; demonstrated new understanding and unknown-case transfer are required.
-  - **Evidence:** One reusable subsystem or source-backed extension, pinned versions/commands and fixture seeds, cross-layer state diagram, unseen scenario with pre-observation hypotheses, independently solved expected output, minimal patch or rigorously reasoned alternative, regression trace and a written, recorded or live technical defense.
+  - **Outcomes:** SYS10-O13, SYS10-O14.
+  - **Work:** Reuse the **same AS3 memory subsystem** and source-grounded models from AS1/AS2/AS4, extending it with **one bounded, substantively relevant interaction** with a kernel trap, scheduler, permission or I/O completion pathway. Then analyze a **previously unseen** mixed-symptom case supplied by an independent reviewer or reproducible public generation rule. Before executing the case, classify candidate explanations across **scheduling, virtual memory, filesystem, device and isolation** and specify an observation that supports, excludes or cannot decide each class; identify at least two plausible competing causes and a genuinely discriminating intervention. Implement a justified correction to the chosen model, or give a bounded technical refusal when correctness cannot be established, and recheck a previously correct case. Do not build another complete OS or redo AS1–AS4; those assessments already establish their separate outcomes.
+  - **Criteria:** **Transfer/diagnosis (O13):** a source-consistent differential diagnosis distinguishes the relevant kernel failure classes with causal traces, not superficial vocabulary, and records uncertainty when observations do not separate them. Predictions precede observations; the first relevant violated invariant and an alternative cause are explained. **Engineering defense (O14):** the reused subsystem and scoped interaction have a public ownership/protection/progress contract, independently computed normal/negative oracles, reproducible correction (or justified refusal) and regression evidence. The reviewer can examine authorship, why the solution applies only under declared kernel/ISA assumptions, and the evidence limits of simulations, guest execution or Linux comparisons. An unfamiliar trace of just one mechanism cannot silently re-establish O1, O3, O5, O6, O9, O10, O11 or O12; those outcomes retain required decisions in AS1–AS4.
+  - **Evidence:** One reused implemented memory subsystem with a source/model cross-layer trace; pinned version, build/run or source-reproduction instructions; an unfamiliar case and all five differential categories with pre-observation predictions; chosen discriminator, expected and observed results, patch or bounded refusal, independent regression case, technical trade-offs and a written, recorded or live defense.
 
 ### Scope, safe study and historical evidence
 
