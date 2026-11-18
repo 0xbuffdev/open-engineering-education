@@ -12,13 +12,13 @@
 
 ## Overview
 
-Learn to build and reason about small programs from their behavior rather than memorize Python syntax. Start with the difference between source code, the Python interpreter and execution state. Prepare a terminal-based local workspace, then learn values, conditions, loops, functions, collections, files, errors, and debugging. Introduce user-defined classes, instance state, encapsulation and composition before explaining type annotations, their optional static interpretation, and the difference between a declared type and runtime input validation. Investigate mutation and file-integrity failures before combining these capabilities in a persistent command-line task manager.
+Learn to build and reason about small programs from their behavior rather than memorize Python syntax. Start with the difference between source code, the Python interpreter and execution state. Prepare a terminal-based local workspace, then learn values, conditions, loops, functions, collections, files, errors, and debugging. Investigate aliases and mutable state, debugging, structured-file integrity and safe updates before building a persistent command-line task manager. Then use that same application to evaluate when classes, composition and type annotations improve domain contracts, while distinguishing declared types from required runtime validation.
 
 Python 3.11 or later and its standard library are the reference teaching environment. Use Windows, macOS or Linux, a text editor, and an ordinary terminal; `python`, `python3` or `py` may be the working interpreter command. An alternative equivalent free local Python environment is acceptable if the submitted work remains reproducible. All required work is possible offline with no paid account, service, third-party package, administrator privileges, or real personal data.
 
 This is a `course` in programming foundations, not the larger professional software-engineering capstone. Its six summative evaluations progressively combine skills and may reuse a learner's earlier artifacts, including the same persistent task-manager project for the final abstraction-and-typing investigation. The lesson sequence and optional practice provide preparation; **the required outcomes, assessments and evidence below determine completion**. A fixed number of quizzes, per-module labs or mandatory final lab is not imposed.
 
-The 10–12-week duration is a revised provisional estimate reflecting two new foundational modules and reviewable abstraction/typing work, not measured learner time or a readiness claim. All work should use disposable project directories and fabricated input records.
+The 10–12-week duration is a provisional planning range for programming, investigation, persistent data and object/typing work; it is not calibrated against learner completion time and does not imply educational readiness. All work should use disposable project directories and fabricated input records.
 
 ## Learning outcomes
 
@@ -37,43 +37,25 @@ The 10–12-week duration is a revised provisional estimate reflecting two new f
 
 ## Modules
 
-### Module 1 — Software, Code & Languages
+### Module 1 — Python Execution and a Reproducible Workspace
 
 #### Outcomes
 
 - SEF2-O1
-
-#### Lessons
-
-1. Course introduction: Programming & Computational Thinking
-2. What software is
-3. What coding is
-4. What software engineering is
-5. Programming languages
-6. Source code
-7. Interpreters and compilers
-8. Bytecode and the virtual machine
-
-*Optional practice:* Use a free local CPython interpreter and the `dis` module to compare an execution prediction with a real trace; explain an intentionally introduced syntax error.
-
-### Module 2 — Your Workspace
-
-#### Outcomes
-
 - SEF2-O2
 
 #### Lessons
 
-1. The terminal
-2. Installing Python
-3. Code editors
-4. The Python prompt
-5. Running a file
-6. Your first error
+1. **From a computer to a program** — Reconnect SEF1's stored instructions to a higher-level program, distinguishing a behavior specification, source text, executable instructions, and the software that carries out the translation or execution. Explain what programming changes without conflating coding with the whole engineering process.
+2. **Python language and interpreter implementations** — Distinguish the Python language from CPython and other conforming implementations; trace how CPython compiles source to a code object and interpreter bytecode, then executes it, without calling that bytecode the processor's instruction set.
+3. **A known local interpreter** — Install or select a freely available supported Python 3.11+ interpreter, record implementation and version, and check which executable the shell actually invokes on Windows, macOS, or Linux; distinguish a launcher alias from the interpreter it starts.
+4. **Files, working directories, and commands** — Create an owned project directory and a source file; predict how the current working directory, an explicit script path, and the selected interpreter affect a command's result. Reproduce a clean-start run without assuming a particular editor or shell.
+5. **Interactive exploration versus a script** — Compare an expression evaluated in the Python prompt with the same statement in an edited source file; explain visible output, state that persists only within one process, and why a second invocation starts fresh.
+6. **The first failure is evidence** — Reproduce a missing executable, wrong working directory, invalid Python syntax, or runtime exception in a disposable example; use the actual diagnostic to identify the failed stage and correct it without suppressing the error.
 
-*Optional practice:* Install and select an interpreter, reproduce an invocation from a clean folder, and distinguish a missing interpreter from a script failure.
+*Optional practice:* Give a second learner the exact interpreter, directory and script commands and ask them to reproduce a run and classify one deliberately changed environment or syntax failure.
 
-### Module 3 — Thinking in Programs
+### Module 2 — Values, Names, Expressions and Execution Traces
 
 #### Outcomes
 
@@ -81,16 +63,15 @@ The 10–12-week duration is a revised provisional estimate reflecting two new f
 
 #### Lessons
 
-1. Programs as steps
-2. Values and types
-3. Expressions and arithmetic
-4. Variables and state
-5. Printing output
-6. Tracing execution
+1. **Values, types, and representations** — Evaluate simple integer, floating-point, Boolean, string, and `None` values; distinguish a value, its type, and the textual representation used to display it. Note that a value's representation is not its memory address.
+2. **Names and rebinding** — Predict the effect of assignments and reassignments in a running program; distinguish a name referring to an object from a fixed storage box, anticipating later mutable-object behavior without requiring copying rules yet.
+3. **Expressions, conversions, and failure** — Evaluate operators, precedence, integer division and remainder, comparisons, and explicit type conversions; predict a wrong-type or invalid-operation failure instead of inventing a useful result.
+4. **Output and observation** — Use `print()` and simple formatted output to expose a computation's intermediate values; distinguish an observation from the program's underlying state and from a function's eventual return value.
+5. **Trace before execution** — Construct a stepwise state table for an unfamiliar short script with expressions, assignments and output; check the prediction against a real run and identify the exact statement responsible for any discrepancy.
 
-*Optional practice:* Trace a sequence of assignments and prints by hand; explain why names bind to objects rather than containing copied values.
+*Optional practice:* Change one input or assignment in a short program, predict the new state and output, then verify and explain why the result changed.
 
-### Module 4 — Conditions & Loops
+### Module 3 — Decisions, Repetition and Termination
 
 #### Outcomes
 
@@ -99,105 +80,91 @@ The 10–12-week duration is a revised provisional estimate reflecting two new f
 
 #### Lessons
 
-1. Boolean expressions
-2. If statements
-3. While loops
-4. For loops and ranges
-5. Loop patterns, termination and edge cases
-6. Iterables and iterators — Explain `iter()`, `next()`, exhaustion, and why a for-loop advances an iterator without assuming every iterable is a list.
-7. Iteration helpers — Use `enumerate()` and `zip()`, including unequal lengths and their stopping behavior.
-8. Comprehensions — Express a small transformation clearly and explain when an explicit loop is easier to read or debug.
+1. **Truth values and conditional decisions** — Evaluate comparisons, Boolean operators and Python truthiness in a bounded example; distinguish a Boolean expression from an arbitrary object used in a condition and test both branches.
+2. **Branching with explicit cases** — Choose between `if`, `elif` and `else` cases using a written input contract; trace mutually exclusive paths and demonstrate an unmatched or boundary case.
+3. **While loops and evolving state** — Model a loop as initialization, condition, state update and termination; use an explicit progress argument to diagnose an off-by-one or nonterminating loop without relying on an arbitrary iteration count.
+4. **For loops, ranges and finite iteration** — Predict the values and stopping conditions of `for` loops over `range()` and short iterable examples; distinguish an empty traversal from a failed execution.
+5. **Choosing and testing a repetition strategy** — Compare a condition-driven loop with a finite traversal for a real small task; verify the zero-iteration, first-item, last-item and invalid-input cases and explain which implementation makes termination clearer.
 
-*Optional practice:* Predict loop termination and boundary behavior, including empty input and a zero-iteration case.
+*Optional practice:* Hand-trace a counting loop with a changed bound and correct a deliberately misplaced update that makes the loop behave incorrectly.
 
-### Module 5 — Functions & Decomposition
+### Module 4 — Functions, Scope, Modules and Source Inspection
 
 #### Outcomes
 
+- SEF2-O1
+- SEF2-O3
 - SEF2-O4
 
 #### Lessons
 
-1. Defining functions
-2. Parameters and arguments
-3. Local variables and scope
-4. Return values
-5. Interfaces and decomposition
-6. Modules and imports
-7. Calls and defaults — Distinguish positional/keyword arguments, valid function defaults and the hazard of a shared mutable default.
-8. Modules versus scripts — Explain importing without accidental execution and use a `__main__` entry point appropriately.
+1. **Decompose behavior into functions** — Turn a short external input/output specification into independently understandable operations; distinguish a function's responsibility from its caller and avoid functions whose only purpose is to shorten a file.
+2. **Arguments, parameters and return values** — Define and call functions with positional and keyword arguments; trace parameter binding, returned results and the difference between a returned value and printed output.
+3. **Local scope and state changes** — Predict local name lookup, rebinding and execution across a call; explain when a function needs an explicit argument or return instead of relying on module-level mutable state.
+4. **Interfaces and optional parameters** — Publish clear preconditions and return/error behavior for small functions; use a justified default argument while deferring the shared-mutable-default hazard to the later aliasing lesson.
+5. **Modules, imports and executable entry points** — Separate reusable functions from a command-line entry point; distinguish importing a module from running a file, use a `__main__` guard where appropriate, and verify that importing does not execute the application.
+6. **Inspecting an unfamiliar compiled function** — Use CPython's standard-library `dis` on a small previously unseen function and map instruction roles to source-level state and control flow; record the actual runtime version and explain why opcode names, caches and layouts are implementation-dependent.
+7. **Behavior-preserving decomposition** — Refactor a short script into functions and modules; use independent expected outputs, normal cases and one deliberate error to show behavior was preserved rather than merely changing organization.
 
-*Optional practice:* Refactor a short script into independently testable functions; compare its outputs before and after the refactor. Test an example where a mutable default unexpectedly retains data between calls.
+*Optional practice:* Explain how a two-argument function would behave when one argument changes, then use `dis` to distinguish observed interpreter bytecode from the CPU instructions introduced in SEF1.
 
-### Module 6 — Strings & Collections
+### Module 5 — Text, Collections and Iterable Data
 
 #### Outcomes
 
 - SEF2-O5
-- SEF2-O6
+- SEF2-O3
+- SEF2-O4
 
 #### Lessons
 
-1. Strings
-2. Lists
-3. Dictionaries
-4. Tuples
-5. Sets
-6. Choosing a collection
-7. Slices, membership and iteration — Explain sequence slicing, dictionary membership, insertion-order guarantees and why modifying a collection during iteration needs care.
-8. Equality and hashing — Explain why mutable lists cannot be dictionary keys while immutable hashable tuples may be valid keys, without assuming every tuple is hashable.
+1. **Text as Unicode and domain data** — Select string operations for parsing, slicing, normalizing and formatting text; compare `strip()` and `casefold()` against naïve case comparisons, and avoid equating one Unicode character with one byte.
+2. **Ordered sequences and fixed records** — Use lists and tuples for appropriate ordered data; predict indexing, slicing, membership and empty-input behavior and justify when a fixed record should not be an editable list.
+3. **Mappings and keyed aggregation** — Build dictionaries from unfamiliar records, distinguish a key's presence from its stored value, and verify updates, duplicate-key behavior and the documented iteration-order guarantee.
+4. **Sets, hashability and identity of keys** — Use sets for distinct membership; explain why mutable lists cannot serve as dictionary keys and why a tuple is hashable only if its elements are, rather than declaring all tuples safe keys.
+5. **The iteration protocol** — Trace how `iter()` produces an iterator, how `next()` advances it to exhaustion, and why `for` works with iterables beyond lists; demonstrate how mutation during traversal can invalidate an iteration assumption.
+6. **Iteration helpers and comprehensions** — Use `enumerate()` and `zip()` with explicit stopping behavior for unequal inputs; choose a readable comprehension for a simple transformation and an explicit loop when error handling or state transitions make it clearer.
+7. **Choose a data representation from a contract** — Compare list, dictionary, set and tuple designs for a record-summary task; trace ordered output, case-normalized duplicate names, zero/empty records and predictable rejection of malformed inputs.
 
-*Optional practice:* Try word counting with lists, dictionaries, tuples, and sets; compare what each structure makes easy or difficult. Predict whether a sequence copy preserves nested aliases.
+*Optional practice:* Predict the result of aggregating differently capitalized names, then independently verify the dictionary state and sorted output rather than comparing only a final printout.
 
-### Module 7 — Files & Data
-
-#### Outcomes
-
-- SEF2-O7
-
-#### Lessons
-
-1. Reading files
-2. Writing files
-3. Structured data
-4. Directories and paths
-
-*Optional practice:* Inspect UTF-8 local text, CSV, and JSON files in a disposable directory; compare expected and observed serialized types.
-
-### Module 8 — Errors & Debugging
-
-#### Outcomes
-
-- SEF2-O8
-
-#### Lessons
-
-1. Reading tracebacks
-2. Handling exceptions
-3. Raising exceptions
-4. Validating input
-5. Debugging by evidence
-
-*Optional practice:* Reproduce a traceable failure, fix the cause rather than hiding the exception, and add a regression case.
-
-### Module 9 — Mutation & Function Contracts
+### Module 6 — Aliasing, Mutation and Function Side Effects
 
 #### Outcomes
 
 - SEF2-O6
+- SEF2-O3
 - SEF2-O8
 
 #### Lessons
 
-1. Names, objects, identity and equality
-2. Mutable aliases and shallow copies
-3. Nested collection behavior
-4. Parameters, side effects and returns
-5. Preconditions and assertions
+1. **Names, object identity and equality** — Draw a reference graph for two names and one mutable object; distinguish rebinding, equal values and shared identity before predicting any mutation.
+2. **Mutation and shallow copies** — Trace a list or dictionary update through aliases, then compare slice/shallow copies with the original; identify which nested members remain shared.
+3. **Nested state and ownership choices** — Inspect a nested record in which a change to one group unexpectedly affects another; decide whether fresh structure construction or selective copying establishes the required non-mutation contract, without copying everything automatically.
+4. **Function effects and shared defaults** — Explain mutation across a function call, return and argument boundary; reproduce a shared mutable default that retains state between invocations and replace it with a clear per-call policy.
+5. **Make a non-mutation promise testable** — Compare independently derived before/after reference graphs with observed state; build tests that detect changes to caller-owned data, unrelated nested records and repeated-call behavior.
 
-*Optional practice:* Draw the object-reference graph for a nested-list alias and a shallow copy; test a function's non-mutation promise.
+*Optional practice:* Correct a function that unintentionally mutates a caller's nested list, then challenge it with a second shared nested object.
 
-### Module 10 — Reliable Files & Input
+### Module 7 — Validation, Exceptions, Debugging and Tests
+
+#### Outcomes
+
+- SEF2-O8
+- SEF2-O4
+
+#### Lessons
+
+1. **Syntax, runtime and logic failures** — Distinguish errors caught while parsing, exceptions raised during execution and incorrect results that appear to run successfully; use the failure's actual circumstances, not a guessed cause.
+2. **Read a traceback as causal evidence** — Identify the failing call path, exception type, relevant input and source location; reduce a noisy program to a minimal independently reproducible case.
+3. **Raise, propagate and handle exceptions** — Choose where an error should be reported, transformed or allowed to propagate; avoid `except: pass`, generic catches that hide bugs, and treating every exception as invalid user input.
+4. **Contracts and input validation** — Specify the valid shape and domain of input before processing it; distinguish caller errors, corrupted persisted state and programmer defects, and explain when to raise versus return a result.
+5. **A falsifiable debugging investigation** — Record an observation, propose a causal hypothesis, choose a discriminating experiment, repair the actual cause and show a test that failed before the correction.
+6. **Independent expected results with `unittest`** — Create normal, empty, boundary and malformed cases with oracles not copied from the implementation; isolate fixture state and explain why a green test alone cannot prove a missing behavior.
+
+*Optional practice:* Repair a record parser that silently accepts invalid input and document a minimal negative fixture that would expose a regression.
+
+### Module 8 — Local Files, Structured Records and Safe Updates
 
 #### Outcomes
 
@@ -207,83 +174,82 @@ The 10–12-week duration is a revised provisional estimate reflecting two new f
 
 #### Lessons
 
-1. Text encodings and newlines
-2. CSV and JSON error handling
-3. Exceptions versus result values
-4. Safe file writes and temporary files
-5. Boundary tests and CLI contracts
+1. **File paths and controlled lifetimes** — Read and write local files using `pathlib`, explicit paths and context managers; separate a caller-selected data location from the current directory and keep experiments inside disposable fixtures.
+2. **Encodings, newlines and decoding errors** — Open text explicitly with UTF-8, explain byte-to-text decoding and platform newline differences, and show why malformed bytes must not be silently converted into plausible valid data.
+3. **CSV as a constrained record format** — Use the standard-library `csv` module with `newline=''`, a declared header and row policy; identify quoted separators, missing or extra fields, duplicate records and precise per-record validation.
+4. **JSON shapes and round trips** — Distinguish JSON objects/arrays/numbers/strings/Booleans/null from Python values, define a public schema, and verify deterministic serialization, decoding, type checking and non-ASCII text.
+5. **Validate before modifying a destination** — Parse and validate the entire source before changing any existing valid output; define meaningful error categories and verify that invalid records never trigger an incidental partial overwrite.
+6. **Temporary output and replacement semantics** — Create a safely named temporary file in the destination directory, write and close it, then use `os.replace` under documented platform assumptions; explain that replacement atomicity does not guarantee power-loss durability.
+7. **Fault injection and independent byte evidence** — Simulate malformed CSV/JSON, invalid encoding, missing input and failed write/replace; compare the destination's exact prior and resulting bytes, clean temporary artifacts when feasible and report limitations honestly.
 
-*Optional practice:* Practice rejecting duplicate IDs, malformed records, and failed writes without damaging an existing output file.
+*Optional practice:* Make a CSV-to-JSON conversion that survives a simulated pre-replacement failure without losing the old valid JSON; inspect the bytes and the failure report instead of only testing success.
 
-### Module 11 — Classes, Instances and Domain Abstractions
+### Module 9 — Persistent Command-Line Application
+
+#### Outcomes
+
+- SEF2-O2
+- SEF2-O4
+- SEF2-O5
+- SEF2-O6
+- SEF2-O7
+- SEF2-O8
+- SEF2-O9
+- SEF2-O10
+
+#### Lessons
+
+1. **Define the user's command contract** — Specify `add`, `list`, `update` and `delete`, required identifiers and titles, argument and output conventions, Boolean completion state, help text and distinguishable failure outcomes.
+2. **Separate CLI, domain and persistence responsibilities** — Parse arguments with a documented standard-library approach; keep core state operations independently callable and testable without requiring a command-line subprocess for each small rule.
+3. **Protect stored and in-memory state** — Validate task records and commands, prevent accidental shared-state mutation and duplicate identifiers, and reuse the same controlled temporary-file replacement principles developed for structured records.
+4. **Trace a lifecycle across processes** — Run multiple independent invocations against one disposable task file; predict the persisted JSON after add/update/list/delete and distinguish fresh interpreter memory from cross-process persistence.
+5. **Test errors as seriously as success** — Use `unittest` and subprocess execution with independent expected outputs and storage bytes for unknown commands, missing IDs, malformed stored JSON and a simulated failed write.
+6. **Defend the smallest sufficient implementation** — Reproduce the program from clean state, explain one concrete debugging correction and a trade-off in data representation, and respond to an unfamiliar bounded CLI scenario without adding an unrelated second application.
+
+*Optional practice:* Complete one task's lifecycle in separate processes, then compare the observed JSON with a hand-derived state table and diagnose a failed update.
+
+### Module 10 — Classes, Instances and Coherent Domain Invariants
 
 #### Outcomes
 
 - SEF2-O4
 - SEF2-O6
+- SEF2-O10
 - SEF2-O11
 
 #### Lessons
 
-1. **Why create a class** — Compare plain functions and dictionaries with a small domain object whose data and operations belong together; avoid classes when they add no useful invariant.
-2. **Defining a class and instances** — Explain a class definition, calling a class, the role of `__init__`, the meaning of `self`, and where individual instance state lives.
-3. **Attributes, methods and object identity** — Predict attribute reads/writes, method calls, mutation through an alias and equality versus identity.
-4. **Class versus instance attributes** — Diagnose shared mutable class attributes and build safely independent instance records.
-5. **Initialization and invariants** — Establish nonempty identifiers, a Boolean completion field and valid transitions, rejecting invalid construction and updates.
-6. **Encapsulation in Python** — Explain a public interface, underscore conventions, properties when justified and the fact that Python naming conventions are not enforceable security boundaries.
-7. **Composition before inheritance** — Create one collection object containing task objects; compare delegation and responsibility with an unnecessary inheritance hierarchy.
-8. **Representing and serializing state** — Translate domain objects into plain JSON-compatible values at an explicit boundary; distinguish object identity from persisted identifiers.
-9. **Standard-library alternatives** — Compare a hand-written constructor with `dataclasses.dataclass` and recognize mutable-default hazards; do not mistake generated code for an absence of state contracts.
-10. **Tests of an abstraction** — Verify constructor rejection, independent instances, invalid transitions, alias effects and compositional behavior on previously unseen cases.
+1. **Choose a class only for a real responsibility** — Compare functions plus dictionaries with a domain object whose operations must preserve state invariants; explain why adding a class to every value would not improve the task manager.
+2. **Construct an instance** — Define a `Task` class with `__init__`, `self`, explicit fields and valid initial state; trace how two constructor calls produce independently owned instance attributes.
+3. **Attribute lookup, methods and object identity** — Predict method calls and attribute updates through aliases, distinguishing the identity of an instance from its persisted task identifier and from an equal record.
+4. **Class versus instance state** — Diagnose a shared mutable class attribute and repair it with an appropriate per-instance allocation or explicit shared-state policy.
+5. **Transitions and rejected invalid states** — Encode the domain rule that task IDs/titles are nonempty and completion is Boolean; exercise valid updates, rejected construction and a state transition that must leave other instances untouched.
+6. **Encapsulation and composition as boundaries** — Publish a small usable interface, distinguish underscore conventions from security enforcement, and compose a `TaskCollection` instead of inventing a subclass hierarchy for unrelated tasks.
+7. **Serialize objects deliberately** — Convert domain objects to validated JSON-compatible records and back, keeping object aliasing and file representation separate; test a round trip against a real earlier CLI fixture.
+8. **Proportionate alternatives and independent tests** — Compare a hand-written constructor to a standard-library dataclass and its mutable-default restrictions; verify independent instances, aliased references, invalid transitions and the original CLI behavior before deciding whether the refactor helped.
 
-*Optional practice:* Build a small `Task` and `TaskCollection` pair, predict behavior when two names reference the same task, and demonstrate why a global mutable task list weakens isolation. It is acceptable to retain a function-based CLI and use objects only where they reduce complexity.
+*Optional practice:* Refactor the same task manager from Module 9 rather than creating a second project. Reject a deliberately incorrect shared class-level list while retaining the original persistent-data contract.
 
-### Module 12 — Type Annotations, Contracts and Runtime Behavior
+### Module 11 — Type Annotations, Runtime Trust and an Integrated Defense
 
 #### Outcomes
 
 - SEF2-O4
 - SEF2-O8
-- SEF2-O11
-- SEF2-O12
-
-#### Lessons
-
-1. **Why type annotations exist** — Distinguish documentation and optional static checking from executable validation or automatic conversion.
-2. **Basic parameter and result types** — Annotate `int`, `str`, `bool`, and `None` in function interfaces; distinguish a return value from an exception.
-3. **Typed collections and classes** — Express `list[Task]`, `dict[str, Task]`, `tuple[str, int]` and nested data shapes appropriate to Python 3.11+.
-4. **Optional values and unions** — Use `Task | None` only when absence is meaningful, handle both branches and explain why `None` does not mean an empty task.
-5. **Annotations at runtime** — Inspect annotations with standard-library facilities and demonstrate a wrong-typed argument still reaches an annotated function unless code explicitly validates it.
-6. **Static versus dynamic verification** — Explain the limits of optional external type checkers and why an untyped dependency, `Any`, casts and false assumptions can bypass static guarantees.
-7. **Contracts and exception boundaries** — Validate untrusted CLI/JSON input and object invariants at runtime even if parameters are annotated.
-8. **Typing and tests together** — Use independently checked normal, invalid and optional-value cases; demonstrate how annotations, tests and human review reveal different defects.
-9. **Keeping annotations proportionate** — Preserve simple, readable interfaces without requiring advanced generics, protocols, metaclasses or any particular third-party analysis tool.
-
-*Optional practice:* Annotate a function that finds a task and returns `Task | None`, then pass a wrong runtime type to prove the annotation does not validate input automatically. Compare the corrected explicit validation against a call that fails unexpectedly.
-
-### Module 13 — Command-Line Task Manager
-
-#### Outcomes
-
-- SEF2-O4
-- SEF2-O5
-- SEF2-O7
-- SEF2-O8
-- SEF2-O9
 - SEF2-O10
 - SEF2-O11
 - SEF2-O12
 
 #### Lessons
 
-1. **Command-line interface and arguments** — Define add/list/update/delete behavior and distinguish command parsing from domain operations.
-2. **Tests as independent checks** — Use `unittest`, subprocess execution and expected persistent-state values, not just a green report.
-3. **Logging and messages** — Produce controlled failures and user-facing output with useful exit status.
-4. **Object boundaries** — Represent task records with coherent domain methods when appropriate, preserving a simple, usable CLI.
-5. **Typed interfaces and runtime validation** — Annotate a public domain API while rejecting malformed persisted values and invalid commands explicitly.
-6. **End-to-end reasoning** — Trace an unfamiliar lifecycle over two processes and defend storage, ownership, error and abstraction decisions.
+1. **What an annotation does not do** — Annotate a simple function and observe what happens when it receives a wrong runtime type; distinguish documentation, optional static inspection and actual validation or conversion.
+2. **Types for actual function and collection interfaces** — Use `int`, `str`, `bool`, `None`, `list[Task]` and `dict[str, Task]` where they accurately describe valid input and return contracts; keep annotations proportional to the beginner application.
+3. **Optional results and explicit absent states** — Model a task lookup returning `Task | None` and explain how callers handle both branches, why an empty task is not the same as absence and why an exception is a different result path.
+4. **Annotation inspection and static limitations** — Inspect runtime annotation information and describe what an optional checker can and cannot infer; do not rely on third-party checking, `Any`, a cast or an assertion to validate untrusted data.
+5. **Typed boundaries still need runtime checks** — Validate CLI arguments, decoded JSON, domain invariants and object transitions at their actual trust boundaries; demonstrate a test where annotations alone would accept a bad value.
+6. **Refine and defend the existing task manager** — Add a few meaningful annotations to the Module 9/10 codebase, reproduce earlier CLI and storage tests, correct an unfamiliar class or typing defect, and explain the trade-offs of functions versus class composition and static hints versus observed runtime behavior.
 
-*Optional practice:* Run a CLI through two independent processes, inspect persisted state, and explain one deliberate error path. Compare the same task manager with and without a coherent object boundary; avoid a class hierarchy that adds no value.
+*Optional practice:* A reviewer supplies a malformed persisted task and a missing lookup; predict the annotated API's result and demonstrate the actual runtime checks without installing a static type checker.
 
 ## Completion requirements
 
@@ -355,6 +321,6 @@ The reviewer records the assessment decisions and supporting evidence. Substanti
 | No independently stated class/composition outcome | New `SEF2-O11` evaluated with `SEF2-AS6` | Requires inspectable object-design and state-invariant evidence |
 | No independently stated typing/runtime-boundary outcome | New `SEF2-O12` evaluated with `SEF2-AS6` | Requires accurate annotation, explicit runtime checks and evidence-based reasoning |
 
-This revision retains **SEF2-O1–O10** with exactly their original meaning and keeps the **Work, Criteria, and Evidence of SEF2-AS1–AS5** unchanged. Newly required `SEF2-O11` (classes, object invariants, composition) and `SEF2-O12` (type annotations versus runtime behavior) are evaluated by new `SEF2-AS6`, whose implementation reuses the assessed task manager. The two new modules and their additional formative lessons are not separate mandatory assignments. The nominal duration changes from 8 to 10–12 weeks provisionally.
+An earlier course revision introduced **SEF2-O11** (classes, invariants and composition), **SEF2-O12** (annotations versus runtime behavior) and **SEF2-AS6**, reusing the assessed task manager rather than requiring an unrelated application. **This competency-derived instructional realignment retains all twelve currently published outcomes and all six required assessment contracts.** It reorganizes how learners prepare for and integrate those capabilities, without changing previous assessment decisions or silently granting evidence for a newer requirement.
 
 Historical completions and submitted evidence remain associated with their original course revision. A learner who completed the previous ten-outcome SEF2 contract is not automatically marked as having demonstrated the two new outcomes; an evidence-based reviewer may recognize an already established capability or require the new unfamiliar cases. No prior course completion is deleted or automatically revoked by this revision, and no source modification changes the course's `draft` readiness label. See the [accepted SEF architecture decision](../../rfcs/0003-sef-academic-progression.md) and [Status Labels](../../spec/status-labels.md).
