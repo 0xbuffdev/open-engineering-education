@@ -60,29 +60,29 @@ This is an entry and graduation-verification procedure, **not a ninth APP9 summa
 
 ## Modules
 
-The modules below are **cumulative project work stages**, not a second sequence of lectures that reteaches APP1–APP8 or APP17–APP21. Review the named learning outcomes and corresponding `APP9-AS1`–`APP9-AS8` requirements as the product evolves. Small checks and critique are formative unless explicitly cited as required assessment evidence. Retain useful work across stages rather than rebuilding the same product.
+The seven modules below are **cumulative project stages**, not another course sequence reteaching APP1–APP8 or APP17–APP21. **Instructional sufficiency** requires a clear mechanism and rationale, a worked or observable example, an authentic application, a failure counterexample and actionable feedback **before** an independent assessed decision where a new capstone problem demands them. Prior competence is reused, but product-specific reasoning and unfamiliar transfer are never assumed. Formative stage practice is not a hidden graduation gate. Refer to previously accepted `APP9-AS1`–`APP9-AS8` evidence rather than rebuilding the same product or reports.
 
 ### Module 1 — Charter, Ethical Inquiry and Feasible Scope
 
 #### Outcomes
 
-- APP9-O1
-- APP9-O2
-- APP9-O3
-- APP9-O9
-- APP9-O15
+- - APP9-O1
+- - APP9-O2
+- - APP9-O3
+- - APP9-O9
+- - APP9-O15
 
 #### Lessons
 
-1. **Prior learning, admission evidence and authorship** — Verify all thirteen prerequisite course-completion decisions with authentic revisions and assessed evidence (or approved equivalence), stopping if a prerequisite remains unverified. Then distinguish prior artifacts worth reusing from the new product change the learner must independently design, implement and defend.
+1. **Authentic admission, learner ownership and reuse** — Verify all thirteen genuine predecessor assessment decisions with exact course/spec revisions or approved equivalence before starting. Identify what is prior, third-party, collaborative or AI-assisted and name the *substantial capstone-owned* new user capability, architecture decision or security/operating correction that the learner will personally implement and defend. This entry check is not another APP9 assessment.
 
 2. **Real problem and affected people** — Describe a specific user task, stakeholder constraints and credible provenance; distinguish a supplied brief from observed demand and state whose interests and data are at risk.
 
-3. **Responsible product inquiry** — Choose a falsifiable product assumption and a consented, secondary or explicitly synthetic evaluation method; define risks, sampling limits and what evidence cannot support.
+3. **Ethically valid inquiry and falsifiable question** — Select a consequential user-task assumption and an appropriate consented, secondary or transparently synthetic heuristic method, recording consent/storage boundaries, bias, confounders and what the chosen evidence cannot establish; paid panels and participant access are not required.
 
-4. **Interpreting imperfect evidence** — Analyze findings or a public/synthetic case without claiming real user trials; identify alternatives and record a defensible scope or interaction decision.
+4. **Compare evidence and change a genuine decision** — Interpret actual, sourced or synthetic findings without turning generated personas into user observations; test an alternative explanation, document feedback that could disprove the claim and revise a specific product requirement or scope decision.
 
-5. **Acceptance and failure contracts** — Express prioritized end-to-end user outcomes, authorization/tenant invariants, accessibility and privacy obligations, recovery behavior and measurable acceptance tests.
+5. **Observable normal, denied and recoverable task contracts** — Define prioritized user outcomes, tenant/object/property and database invariants, accessible keyboard/focus, identity switch and pending/uncertain committed state. Set an independently checkable negative case for each significant failure condition.
 
 6. **Constraints, exclusions and milestones** — Bound the smallest coherent product, plan its dependency-aware development, and record unimplemented features and assumptions rather than concealing them.
 
@@ -92,69 +92,69 @@ The modules below are **cumulative project work stages**, not a second sequence 
 
 #### Outcomes
 
-- APP9-O3
-- APP9-O4
-- APP9-O6
-- APP9-O7
-- APP9-O8
-- APP9-O9
-- APP9-O14
-- APP9-O15
+- - APP9-O3
+- - APP9-O4
+- - APP9-O6
+- - APP9-O7
+- - APP9-O8
+- - APP9-O9
+- - APP9-O14
+- - APP9-O15
 
 #### Lessons
 
 1. **One product and its boundaries** — Draw context and component views for browser, typed React client, Node/Fastify service, PostgreSQL and any genuinely required worker or external fixture; justify a modular monolith where sufficient.
 
-2. **User, system and failure sequences** — Trace a protected task from client intent through API and authoritative data changes to UI confirmation, denied access, timeout and recovery; distinguish local feedback from a committed result.
+2. **One task across user, HTTP, database and external effect** — Trace one protected user action from React request through credential proof, server authorization, Fastify validation, PostgreSQL commit and any durable job to truthful UI reconciliation. Work through a denied action and a post-commit lost-response counterexample.
 
-3. **Identity, authorization and privacy** — Specify roles, object/field/tenant authority, session trust, retention/deletion and sensitive-data flow at each cross-process or cache boundary.
+3. **Verified identity, property policy and lifecycle privacy** — Define authorized principal, tenant/resource/action/read-write-property checks and lifetime/retention across HTTP, cached values, private files and worker status where applicable; demonstrate a client-forged tenant claim or revoked-session failure in the design review.
 
 4. **Data model and concurrency contract** — Define entities, keys, relational constraints, transactions, query assumptions and schema compatibility, including two conflicting writers and durable outcomes.
 
 5. **Contract and asynchronous boundaries** — Specify runtime validation, HTTP status/error semantics, replay safety, background intent, status visibility and client reconciliation without promising exactly-once side effects.
 
-6. **Architecture alternatives, review and evidence** — Compare at least two credible designs against correctness, accessibility, risk, operations and cost; map requirements to independent tests, then review a supplied counterexample or trust flaw and correct the choice before implementing.
+6. **Alternatives, challenged trust boundary and feedback** — Compare a modular monolith and an actual feasible alternative on correctness, privacy, access, operational load and cost. Challenge an unverified assumption or attacker-controlled input with a worked trace; change or reject the design based on concrete evidence.
 
 ### Module 3 — Implement the Protected Application Journey
 
 #### Outcomes
 
-- APP9-O4
-- APP9-O5
-- APP9-O6
-- APP9-O7
-- APP9-O8
-- APP9-O9
+- - APP9-O4
+- - APP9-O5
+- - APP9-O6
+- - APP9-O7
+- - APP9-O8
+- - APP9-O9
 
 #### Lessons
 
 1. **Semantic and accessible client skeleton** — Implement responsive HTML/CSS, meaningful navigation, forms, focus and named controls for the selected task; verify keyboard and failure-state access rather than repeating basic HTML instruction.
 
-2. **React state and network lifecycle** — Integrate typed components, navigation, session continuity, validated Fetch responses and explicit pending, empty, invalid, expired, forbidden, conflict and failed states.
+2. **React client state, late identity and accessible failure** — Use typed React state and validated HTTP to make empty/pending/invalid/expired/forbidden/conflict/recovered states observable; reproduce one stale response after route/user change, then verify keyboard/focus and truthful status after repair.
 
-3. **Typed backend and authoritative authorization** — Build real Fastify routes, runtime schema checks and protected sessions; show direct HTTP requests cannot bypass role, tenant, object or field policy.
+3. **Backend contracts with authoritative direct-request denial** — Implement Fastify runtime schemas and actual trusted credentials, apply server-side action, object, read/write-property and tenant authorization, then issue independent guessed-resource/forged-role requests and inspect HTTP *and* PostgreSQL consequences.
 
 4. **Relational schema and durable integrity** — Implement a PostgreSQL schema and versioned migrations with keys and constraints for the product's actual user task; inspect invalid-input rejection and authoritative persisted state using an independent SQL oracle.
 
-5. **Transactional concurrency and replay** — Implement bounded transaction and revision controls; exercise two conflicting writers, duplicate submissions and an uncertain response while checking committed state and invariant preservation.
+5. **Two real writers, one invariant and uncertain replay** — Coordinate actual PostgreSQL-backed simultaneous HTTP operations, verify final committed rows, revision/constraint conflict and idempotent duplicate behavior, then intentionally lose a successful response and reconcile without duplicating the effect.
 
-6. **Durable asynchronous or external effect** — Implement a justified bounded worker or controlled external fixture with persisted intent, replay limits and truthful status; make lost-response recovery and identity scope observable.
+6. **Durable intent, worker restart and real completion** — Connect a justified recorded local external/worker operation to authoritative durable state, simulate a failed dependency or duplicate delivery and prove restart/retry bounds; distinguish HTTP accepted, DB committed, worker pending and actually completed user state.
 
 7. **Privacy-safe auxiliary resources** — Use caching or file workflows only when necessary for the product; demonstrate appropriate authorization, retention and invalidation without making unrelated features graduation requirements.
 
-8. **Integrative failure walkthrough** — Trace the same user action through successful, denied, stale, racing and partially failed conditions; repair incorrect UI claims and preserve state invariants.
+8. **Worked failure across the actual product journey** — Walk one user task through success, permission denial, lost result and partial external failure; compare UI/status with independent HTTP/PostgreSQL/job facts, diagnose why a misleading success or stale result appears and repair it before summative judgment.
 
 ### Module 4 — Independent Quality, Security and Corrective Evidence
 
 #### Outcomes
 
-- APP9-O5
-- APP9-O6
-- APP9-O7
-- APP9-O8
-- APP9-O9
-- APP9-O10
-- APP9-O15
+- - APP9-O5
+- - APP9-O6
+- - APP9-O7
+- - APP9-O8
+- - APP9-O9
+- - APP9-O10
+- - APP9-O15
 
 #### Lessons
 
@@ -162,23 +162,23 @@ The modules below are **cumulative project work stages**, not a second sequence 
 
 2. **Authorization and data-integrity attacks** — Attempt invalid, cross-tenant, cross-role, replayed and concurrent actions through direct client and HTTP paths; inspect both response and authoritative database state.
 
-3. **Browser, accessibility and privacy inspection** — Test keyboard, focus, feedback and reduced-motion/zoom scenarios appropriate to the user task; audit sensitive DOM, logging, storage and data exposure.
+3. **Dynamic accessibility and privacy-state observation** — Test keyboard/focus, relevant zoom/reflow, status announcements and usable error recovery under genuine React state changes. Inspect sensitive DOM, client cache and sanitized logs; distinguish actual assistive-tech checks from untested contexts without claiming WCAG certification.
 
 4. **Deterministic execution and fault controls** — Use declared fixtures, seeds, controlled time, process and network faults, isolated databases and teardown to make failure claims reproducible.
 
 5. **Secure build and CI decisions** — Publish reproducible build steps, dependency review, scoped CI privileges and meaningful fail-closed tests; document where the free local equivalent differs from a hosted provider.
 
-6. **Seeded defect, correction and review** — Introduce a material regression, reproduce it using an independent failing check or causal trace, implement a correction, verify that security and integrity checks still hold, and produce an attributed, maintainer-reviewable change explanation with remaining limitations.
+6. **A material seeded defect with independent repair evidence** — Seed an actual authorization, schema, async state, accessible-error or concurrency flaw. Show a failing external/user/DB oracle before code changes, correct the cause, rerun material negative regressions and explain source attribution, CI limits and untested risk.
 
 ### Module 5 — Release, Observe and Recover the Same Product
 
 #### Outcomes
 
-- APP9-O9
-- APP9-O10
-- APP9-O11
-- APP9-O12
-- APP9-O15
+- - APP9-O9
+- - APP9-O10
+- - APP9-O11
+- - APP9-O12
+- - APP9-O15
 
 #### Lessons
 
@@ -190,9 +190,9 @@ The modules below are **cumulative project work stages**, not a second sequence 
 
 4. **Signals for user-visible service health** — Collect privacy-safe request, data and release observations that distinguish green process health from a broken protected user journey.
 
-5. **Controlled incident and restored service** — Inject a bounded failed release or dependency, diagnose impact, contain it and verify user-task recovery using before/after facts.
+5. **Local running-service incident and stateful recovery** — Inject a real bounded release/proxy/dependency defect in the running service; capture safe browser, HTTP, DB and job observations, discriminate between plausible causes, repair and independently verify authorized/denied user behavior rather than simply seeing a green health response.
 
-6. **Actual PostgreSQL recovery** — Back up real test data, restore into a separate clean instance and check relations, authorization, outstanding work and defensible recovery point/time; a backup command without restoration is insufficient.
+6. **Clean separate PostgreSQL restoration and permission proof** — Restore real populated test data into a separately named clean disposable PostgreSQL instance, account for global roles/privileges missing from a single-database logical dump, inspect actual schema/invariants and allowed/denied task outcomes, measure local recovery time/point and disclose missing private files, worker/external effects and non-PITR limitations.
 
 7. **Operational handoff and limitations** — Publish clear setup, monitoring, release/recovery and shutdown instructions, unsafe assumptions and what the local exercise does not establish about public-cloud production.
 
@@ -200,18 +200,18 @@ The modules below are **cumulative project work stages**, not a second sequence 
 
 #### Outcomes
 
-- APP9-O1
-- APP9-O2
-- APP9-O3
-- APP9-O4
-- APP9-O12
-- APP9-O13
-- APP9-O14
-- APP9-O15
+- - APP9-O1
+- - APP9-O2
+- - APP9-O3
+- - APP9-O4
+- - APP9-O12
+- - APP9-O13
+- - APP9-O14
+- - APP9-O15
 
 #### Lessons
 
-1. **Return to the original product hypothesis** — Compare the promised user task with ethical observations, credible secondary evidence or a labeled synthetic evaluation; state uncertainty before deciding to change the interface.
+1. **Re-evaluate the original task assumption without invented users** — Challenge the initial product assumption with ethically consented observations where actually available, otherwise cited public/secondary sources and labeled synthetic heuristic evaluation. Note selection bias and decide a meaningful revision, justified no-change or responsible further study.
 
 2. **Capacity and correctness hypothesis** — Choose a measured latency, resource, saturation, or failure claim tied to a real task, protected data and an operational constraint rather than benchmark theater.
 
@@ -221,50 +221,44 @@ The modules below are **cumulative project work stages**, not a second sequence 
 
 5. **Compare at least two credible decisions** — Evaluate remove-work/no-change, caching/queue/concurrency or appropriate architectural alternatives against correctness, privacy, availability, cost and maintenance burden.
 
-6. **Implement or defensibly reject a change** — Apply one bounded improvement when supported, otherwise preserve the simpler design with evidence; rerun a matched negative and protected-journey check.
+6. **Measured improvement or defensible no-change decision** — Repair one measured query, task, overload or architectural defect when warranted; if not, explicitly defend preserving the simpler baseline. Repeat comparable observations and ensure real tenant security, data invariants, accessible recovery and supported user tasks remain correct.
 
 7. **Revise, document and hand off** — Revisit acceptance, user guidance, costs, energy/operational implications and original assumptions; identify bias, limitations, unsatisfied requests and next safe iteration.
 
-### Module 7 — Independent Reproduction, Unfamiliar Change and Defense
+### Module 7 — Independent Reproduction, Unfamiliar Challenge and Graduation Defense
 
 #### Outcomes
 
-- APP9-O1
-- APP9-O2
-- APP9-O3
-- APP9-O4
-- APP9-O5
-- APP9-O6
-- APP9-O7
-- APP9-O8
-- APP9-O9
-- APP9-O10
-- APP9-O11
-- APP9-O12
-- APP9-O13
-- APP9-O14
-- APP9-O15
-- APP9-O16
+- - APP9-O1
+- - APP9-O2
+- - APP9-O3
+- - APP9-O4
+- - APP9-O5
+- - APP9-O6
+- - APP9-O7
+- - APP9-O8
+- - APP9-O9
+- - APP9-O10
+- - APP9-O11
+- - APP9-O12
+- - APP9-O13
+- - APP9-O14
+- - APP9-O15
+- - APP9-O16
 
 #### Lessons
 
-1. **Freeze and index reviewable evidence** — Link every required assessment to the actual versioned artifact, evaluated outcomes, source authorship, relevant tests and decisions; do not duplicate submissions without new evidence.
+1. **Accepted prerequisites versus capstone outcomes** — Freeze authentic thirteen-course prior decisions and the **separate** accepted APP9-AS1–AS7 evidence map with actual revision/artifact references; avoid resubmitting or retesting all predecessor courses, or inventing past assessment decisions.
 
-2. **Clean-state product reproduction** — Recreate the entire protected service and synthetic database from a clean checkout with publicly understandable commands and inspectable failure responses.
+2. **Fresh local application, security and operational reproduction** — From a clean documented free fixture, exercise one complete protected React/API/Postgres/async workflow, forbidden direct HTTP and independently inspected restored data, referencing accepted AS3–AS5 traces rather than reproducing seven unrelated projects.
 
-3. **One authentic end-to-end demonstration** — Exercise accessible client navigation, validated API, server-held permissions, concurrent persistence, async uncertainty and data lifecycle for the same user task.
+3. **Assessor-supplied unfamiliar bounded engineering challenge** — Accept a previously unseen role/field, stale UI, retry/concurrency, proxy/dependency or workload constraint from public outcomes. Predict a failure and construct independent before-fix evidence instead of delivering a memorized patch.
 
-4. **Independent safety and correctness challenge** — Respond to a direct HTTP, race, replay, identity-switch or privacy scenario and verify the authoritative state using evidence independent of the implementation.
+4. **Independent correction and regression protection** — Implement or causally diagnose the new issue, produce failing-before/passing-after observed user/HTTP/SQL evidence, and rerun relevant prior invariants, accessible paths, API compatibility and deployment effects without duplicating whole completed assessments.
 
-5. **Operational fault and real restoration** — Reproduce an injected release/dependency incident and independently confirm recovery of actual PostgreSQL data and the protected user journey.
+5. **Authorship, evidence integrity and alternatives** — Defend personal work, third-party/license/AI assistance, actual versus synthetic research, security/privacy/accessibility, operational and cost choices and remaining uncertainty without fictional teamwork or inflated product validation.
 
-6. **Performance and product decisions** — Defend the measured workload, comparative architecture and product evaluation findings without claiming measured effects or stakeholder experience that never occurred.
-
-7. **Unfamiliar bounded change** — Accept a previously unseen requirement or failure within the published core scope; implement or correctly diagnose it, demonstrate the change and protect critical invariants.
-
-8. **Attribution, limits and future obligations** — Explain personal work, reused material, assistance, consent, licensing, unresolved defects, accessibility accommodations and why the release is or is not fit for its defined purpose.
-
-9. **Accessible technical defense** — Provide an inspectable live, recorded, written or equivalent defense of actual reasoning, causal observations, alternatives and limits; satisfy each public assessment criterion, not a presentation-style quota.
+6. **Accessible technical defense and final independent judgment** — Answer critical reviewer questions through live, written, recorded or equivalent accessible evidence under common public criteria; APP9-AS8 cannot excuse missing AS1–AS7 and an earlier course pass cannot substitute for new capstone performance.
 
 ## Completion requirements
 
@@ -342,11 +336,15 @@ if required outcomes and dependency safety are retained.
 
 ### Required assessments and outcome coverage
 
-**All sixteen APP9 outcomes** must be independently
-demonstrated across **APP9-AS1–APP9-AS8**.
-A reference in this table identifies evaluation
-responsibility; actual criteria and inspected
-evidence, not an ID or checkbox, determine mastery.
+All **sixteen APP9 outcomes** require **eight independently
+decidable assessments** on one evolving product.
+`APP9-AS1`–`APP9-AS7` inspect distinct inquiry, design,
+implementation, quality, operations, evidence-based
+architecture and responsible evaluation; `APP9-AS8`
+assesses clean reproduction, **new unfamiliar transfer**
+and technical defense. Previously accepted artifacts
+may be referenced without resubmitting all earlier
+work. A mapped outcome ID is not sufficient evidence.
 
 | Assessment | Required outcome coverage | Principal evidence |
 | --- | --- | --- |
@@ -488,8 +486,8 @@ is not a graduation requirement.
 
 - **APP9-AS3** (required accessible, secure, durable full-stack product)
   - Outcomes: APP9-O3, APP9-O4, APP9-O5, APP9-O6, APP9-O7, APP9-O8, APP9-O9, APP9-O10
-  - Work: Implement a substantive independently contributed product slice linking semantic responsive React through runtime-validated authenticated Fastify/TypeScript services into real PostgreSQL state and an appropriately scoped asynchronous/local simulated external operation. Demonstrate functional roles, tenant/resource/field-level denial, actual valid/invalid client handling, competing write conflict, one transactional invariant, session expiry, duplicate/lost-response replay and meaningful loading/pending/failed/recovered user feedback. An independent client and SQL query must verify security/state claims.
-  - Criteria: The meaningful user task works through actual accessible UI, typed service and committed DB, while direct forbidden HTTP calls cannot read or mutate another user's/tenant's objects or fields. Concurrent requests do not violate modeled invariants, duplicate retry does not repeat a protected side effect and external/async uncertainty is not mislabeled success. Browser focus, keyboard and status/error behavior are tested as actually supported; TypeScript does not substitute for runtime parsing. Clearly documented new learner-owned contributions and attributed reuse are necessary.
+  - Work: Build a **substantive capstone-owned** protected user capability with accessible responsive React, actual trusted-session and runtime-validated Fastify/TypeScript and real PostgreSQL constraints. Use independent direct HTTP and SQL tests for object, action, readable/writable property and tenant authorization; coordinate real two-client writes and a lost-after-commit/duplicate replay without repeating effects. Include a justified durable local job/external fixture and observable completed/accepted/failed/recovered states with old-user responses safely discarded. Cache or file workflows are necessary only where the product uses them.
+  - Criteria: The same authentic user task works in the real browser, service and committed database and has **independent** normal/forbidden/conflict/replay evidence. Forged or revoked identities cannot read or mutate restricted objects/properties/tenant rows; actual DB facts survive two-client races and duplicate/lost responses without duplicate protected effects. UI focus/keyboard/status and late-identity behavior are meaningfully observed; TypeScript types, mock sessions and hidden controls cannot establish server security. The learner explains and attributes personal, reused and AI-assisted contributions.
   - Evidence: Versioned product and local fixture source, browser/accessibility task traces, published runtime APIs and auth matrix, independent normal/negative HTTP tests, SQL schema/migrations and concurrent row checks, async state/replay simulation, observed errors/recovery and contribution attribution.
 
 - **APP9-AS4** (required quality, security, privacy and independent corrective test)
@@ -500,8 +498,8 @@ is not a graduation requirement.
 
 - **APP9-AS5** (required operated deployment, release incident and restored state)
   - Outcomes: APP9-O9, APP9-O10, APP9-O11, APP9-O12, APP9-O15
-  - Work: Deploy the product using free pre-provisionable local APP7-compatible tooling with an inspectable artifact identity, isolated config/DB, verified locally trusted HTTPS, appropriately scoped secrets and quality-to-release approval. Trigger a real controlled bad release or local dependency failure, observe a protected user task and sanitized operating signals, then carry out an actual rollback or safe forward repair with verified DB/job state. Create a real consistent PostgreSQL backup and restore into a separately named disposable database, testing authorization and a complete user task, recording observed recovery point/time and non-DB gaps.
-  - Criteria: A reviewer can reproduce the running deployment and TLS name/CA verification without an insecure bypass or paid account. Artifacts, secrets, release role and DB targets are protected and inspectable. The seeded failure is observable in a running system and mitigation actually restores appropriate user behavior without assuming code rollback reverses committed data. The backup is truly restorable into an isolated target with business invariants intact; measured local RPO/RTO is distinguished from hypothetical production assurance and missing private file/worker state is identified.
+  - Work: Operate the actual APP7-compatible product under a free local named-host HTTPS configuration with verified CA/hostname (no insecure bypass), inspectable source/image digest and protected synthetic secrets/data. Trigger and diagnose a real running-service release/proxy/dependency fault, verify affected protected user/forbidden paths and committed job/data effects, then execute a justified rollback or forward repair. Create a real populated PostgreSQL logical backup and restore into **a separate named clean target**, account for cluster-global role/privilege dependencies outside a single-database dump, inspect restored allowed/denied business tasks and measure local recovery point/time and missing file/worker effects.
+  - Criteria: An independent evaluator can reproduce real local HTTPS validation, artifact identity, access isolation and an observed failed-then-repaired protected task. Safe rollback never claims to undo committed DB or external effects. The restored distinct PostgreSQL target has independently verified schema, role/tenant permissions and actual business data; an archive/checksum without restoration is insufficient. RPO/RTO observations are explicitly local and limited, not global service uptime, full file/worker restoration or WAL point-in-time recovery.
   - Evidence: Versioned deployment/proxy/config/runner, artifact digest/approvals and HTTPS verification, synthetic user/data, release/test logs and causal incident timeline, executed recovery/rollback, backup/restore commands, independent DB/HTTP tests, recovery numbers and operator runbook.
 
 - **APP9-AS6** (required measured architecture, capacity and operational cost decision)
@@ -512,15 +510,15 @@ is not a graduation requirement.
 
 - **APP9-AS7** (required product evaluation, revision and responsible handoff)
   - Outcomes: APP9-O1, APP9-O2, APP9-O3, APP9-O5, APP9-O9, APP9-O14, APP9-O15
-  - Work: Revisit a consequential product assumption on the now functional application through consented low-risk user/stakeholder task review where possible or attributable public/secondary evidence and an honestly labeled structured heuristic evaluation otherwise. Describe actual results and selection bias, update a substantive product requirement/UX behavior/privacy policy or justify explicitly retaining scope, test any change and revise clear user/operator documentation, retained-data rules, known limitations and a factual engineering retrospective.
-  - Criteria: A traceable initial assumption, suitable method and real source observations support a responsible decision; fabricated interviews, unconsented participant data and synthetic feedback presented as real are unacceptable. At least one meaningful acceptance/priority/design decision is reviewed and either implemented/tested or transparently deferred with justification. Relevant accessibility, role/privacy and regression checks are preserved. Collaboration, authorship and project handoff reflect what actually happened, not simulated teamwork.
+  - Work: On the working product, revisit the original user-task hypothesis using genuinely consented low-risk observations where available or attributed public/secondary evidence and a **clearly synthetic** heuristic evaluation otherwise. Evaluate competing interpretations, make a meaningful requirement/UX/privacy/priority revision or defend no change/defer with evidence, and update task acceptance, relevant tests, privacy/retention, user/operator documentation, dependencies/license/AI-assistance provenance and a factual retrospective. Do not fabricate interviews, team reviews or user adoption.
+  - Criteria: A real inspectable initial-to-final decision follows appropriately scoped, consented/cited/simulated evidence with limits and cannot present synthetic users as real participants. Implemented changes receive relevant accessible and tenant-policy regression; a documented justified no-change retains an honest testable consequence. Source authorship, reuse, collaboration, licensing and unresolved public-release rights are accurately disclosed; appearance and assumed demand alone do not pass.
   - Evidence: Initial/final product assumption, consented anonymized or cited secondary evidence with methodology, findings and uncertainty, updated acceptance and decision record, bounded change and regression or no-change defense, privacy/user docs, applicable source/dependency license and assistance attribution, material release-rights uncertainties and retrospective.
 
 - **APP9-AS8** (required independent reproduction, unfamiliar change and graduation defense)
   - Outcomes: APP9-O1, APP9-O2, APP9-O3, APP9-O4, APP9-O5, APP9-O6, APP9-O7, APP9-O8, APP9-O9, APP9-O10, APP9-O11, APP9-O12, APP9-O13, APP9-O14, APP9-O15, APP9-O16
-  - Work: Confirm the pre-entry register of thirteen authentic predecessor-course completion decisions or governed equivalence evidence, without re-assessing those courses. Present a single independently reproducible final product and reference all qualifying APP9-AS1–AS7 artifacts. An assessor or independently documented clean-state procedure must install and run free local dependencies, exercise protected browser/API/SQL/async behavior, verify security negative tests, a faulty deployed release and actual restored database, and inspect reasoned product and architecture choices. Then introduce an **unfamiliar bounded** new authorized field/role, API contract variant, stale-state bug, deployment failure, workload constraint or dependency fault within published outcomes. Implement or correctly diagnose it, show an appropriate failing-before/passing-after test or equivalent causal evidence, and defend authorship, source reuse, design choices, uncertainties and remaining risks in an accessible format.
-  - Criteria: All thirteen predecessor-course completion decisions are revision-linked and authentic; missing or unassessed prerequisite evidence blocks APP9 entry/graduation rather than receiving automatic capstone credit. The software, deployment and evidence can be independently examined without hidden environment state, undocumented manual intervention or required paid services. All eight required APP9 assessment decisions and every actual APP9 outcome have credible observable evidence; an evaluator does not grant credit merely because a course was previously passed or an outcome ID is listed. The unfamiliar scenario preserves protected data, meaningful user experience, old/new contract and rollback safety, and the learner can explain personally contributed code/decisions and attribution. The challenge stays within public outcome classes, feasible local tools and equivalent accessible written/recorded/live defense criteria.
-  - Evidence: Revision-linked thirteen-course pre-entry completion index with safe references to actual assessed decisions, a separate APP9 outcome/evidence index, single versioned source/product, clean-run/fixture transcript, independent browser/API/PostgreSQL/security and deployed recovery traces, assessor's bounded scenario and source/test changes, product/architecture/cost decisions, evidence-limited reflections and accessible recorded/written/live defense.
+  - Work: Verify **thirteen authentic predecessor-course completion decisions**, linked to the actual assessed revisions or governed equivalent evidence, independently of APP9-AS1–AS7. Inspect **one** clean locally reproduced product, reference prior accepted AS1–AS7 rather than rebuild seven systems, and check relevant real React/API/PostgreSQL/async protected and forbidden paths, verified HTTPS/recovery and measured design choices. An assessor supplies a **previously unseen bounded** role/field, stale client, state/concurrency, replay, dependency, deployment or workload challenge from published outcomes. The learner predicts what can fail, establishes an independent before-fix oracle, implements or causally diagnoses and corrects it, runs meaningful regression and defends authorship, genuine/synthetic research, reused/AI-assisted work, alternatives and limits accessibly.
+  - Criteria: All thirteen entry decisions must be independently genuine and revision linked; missing or unassessed prerequisites prevent entry/graduation. **All APP9-AS1–AS7 must already have passing decisions; AS8 cannot excuse any failed assessment or count a past course result as a new APP9 outcome.** The unfamiliar challenge must not be pre-rehearsed or secretly require an elective/paid service and must have independently reproducible failing-before/passing-after observations preserving protected data, accessible user behavior, compatible API and durable state. The learner can explain personally owned implementation and disclose AI/reused material and licenses. Written, recorded, synchronous or equivalent accessible defenses follow the **same published criteria**.
+  - Evidence: Revision-linked authentic thirteen-course entry decisions, a **separate references-first APP9-AS1–AS7 acceptance/evidence index**, one attributed versioned source and clean local fixture, independent browser/HTTP/PostgreSQL and operational recovery observations, assessor's unseen prompt and before/after source/test evidence, measured/synthetic scope limitations and accessible technical defense.
 
 ### Graduation decision, evaluation revision and handoff
 
@@ -552,23 +550,17 @@ protected information, evaluator
 decision and stated limitations under
 [OEE Evidence Rules](../../spec/evidence-rules.md).
 
-APP9 preserves its course code, title,
-`project` type, core classification
-and full 13-preceding-core direct
-prerequisite list. It replaces
-the legacy completion checkpoint and
-final integration lab with an outcome-
-driven OEE `v0.2.0` **draft** project.
-Historical learners and evidence remain
-pinned to their prior assessed course
-revision; no newly authored outcome
-may silently mark earlier learners
-complete or incomplete. APP10–APP16
-remain optional and now publish their
-own outcome-driven `v0.2.0` drafts.
-OEE Workspace, content/resource mappings
-and 0xNAND course-consumer evidence pins
-still require separate reviewed alignment.
+APP9 remains the core OEE `v0.2.0` **draft**
+`project`, preserving its name, classification,
+full list of thirteen prior core course links
+and eight independent summative judgments.
+The earlier legacy checkpoint migration and
+optional APP10–APP16 curricula are already
+reflected in the published catalog. This source
+review does not promote APP9 to `tested` or
+`verified`, reassess earlier completions, impose
+new electives or automatically update OEE Workspace,
+content or 0xNAND source/evidence pins.
 
 The source course remains `draft`
 after green structural CI. Learner
