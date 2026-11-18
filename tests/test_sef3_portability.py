@@ -74,29 +74,68 @@ class SEF3PortabilityTests(unittest.TestCase):
             covered.update(ids)
         self.assertEqual(covered, definitions)
 
-    def test_two_new_modules_are_ordered_and_instructionally_specific(self):
+    def test_course_follows_competency_prerequisites_not_module_quota(self):
         _, _, instruction, _ = parts()
         matches = list(re.finditer(r"(?m)^### Module (\d+) — (.+)$", instruction))
-        self.assertEqual([int(x.group(1)) for x in matches], list(range(1, 14)))
-        self.assertIn("Module 6 — Process Environments", instruction)
-        self.assertIn("Module 12 — POSIX Shell", instruction)
+        self.assertTrue(matches)
+        self.assertEqual(
+            [int(x.group(1)) for x in matches],
+            list(range(1, len(matches) + 1)),
+        )
+        first = {}
         for index, header in enumerate(matches):
             stop = matches[index + 1].start() if index + 1 < len(matches) else len(instruction)
             block = instruction[header.start():stop]
             self.assertEqual(block.count("#### Outcomes"), 1)
             self.assertEqual(block.count("#### Lessons"), 1)
             refs, lessons = block.split("#### Lessons", 1)
-            self.assertRegex(refs, r"(?m)^- SEF3-O\d+")
+            mapped = re.findall(r"(?m)^- (SEF3-O\d+)$", refs)
+            self.assertTrue(mapped, "module must own observable competencies")
+            for outcome in mapped:
+                first.setdefault(outcome, index)
             ordinals = [int(x) for x in re.findall(r"(?m)^(\d+)\. ", lessons)]
             self.assertTrue(ordinals)
             self.assertEqual(ordinals, list(range(1, len(ordinals) + 1)))
+            # A lesson should say what will be predicted, inspected, built,
+            # diagnosed or verified, not merely name a piece of terminology.
+            self.assertEqual(len(re.findall(r"(?m)^\d+\. \*\*[^*]+\*\* — ", lessons)),
+                             len(ordinals))
+
+        for earlier, later in (
+            ("SEF3-O3", "SEF3-O10"),  # command/streams before failure semantics
+            ("SEF3-O1", "SEF3-O9"),   # files/links before safety checks
+            ("SEF3-O2", "SEF3-O9"),   # quoting before odd path batches
+            ("SEF3-O5", "SEF3-O11"), # environment before noninteractive repair
+            ("SEF3-O6", "SEF3-O12"), # reports before integrated toolkit
+            ("SEF3-O7", "SEF3-O13"), # basic scripting before portability
+            ("SEF3-O10", "SEF3-O12"),# error handling before integration
+            ("SEF3-O13", "SEF3-O12"),# evaluated compatibility before defense
+        ):
+            with self.subTest(preparation=f"{earlier} before {later}"):
+                self.assertIn(earlier, first)
+                self.assertIn(later, first)
+                self.assertLess(first[earlier], first[later])
+
         for topic in (
             "export", "BASH_ENV", "env -i", "LC_ALL=C", "subshell",
             "POSIX", "Bash", "GNU", "printf", "pipefail", "set -e",
-            "shebang", "read", "utility", "locale", "symlink",
+            "shebang", "read -r", "utility", "locale", "symlink",
         ):
             with self.subTest(topic=topic):
                 self.assertIn(topic.lower(), instruction.lower())
+
+    def test_posix_issue_8_pipeline_and_utility_boundary_is_accurate(self):
+        source, _, instruction, completion = parts()
+        for contract in (
+            "POSIX.1-2024", "pipefail", "find -print0", "xargs -0",
+            "read -d", "older", "actual",
+        ):
+            with self.subTest(contract=contract):
+                self.assertIn(contract.lower(), source.lower())
+        for contract in ("POSIX.1-2024", "pipefail", "xargs -0"):
+            self.assertIn(contract.lower(), completion.lower())
+        self.assertIn("adversarial", source.lower())
+        self.assertIn("module 10", instruction.lower())
 
     def test_sef3_reuses_toolkit_and_preserves_historical_contract(self):
         source, _, _, completion = parts()
