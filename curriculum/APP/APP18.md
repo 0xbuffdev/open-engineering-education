@@ -77,7 +77,7 @@ included in a required assessment below.
 
 ## Modules
 
-### Module 1 — From SEF Programming to JavaScript
+### Module 1 — ECMAScript, Hosts and First Language Experiments
 
 #### Outcomes
 
@@ -87,21 +87,12 @@ included in a required assessment below.
 
 #### Lessons
 
-1. **Course Orientation and the Web's Programming Language** — Recall prior SEF programming and explain why JavaScript emerged for Web scripting, how general-purpose use expanded, and where APP18 ends before browser/React and backend-service courses.
+1. **JavaScript's Place and First Local Program** — From prior SEF programming, inspect a short ES module with a supported local Node runtime; place JavaScript's browser origins and present-day uses in context while explaining why APP18 is neither browser DOM nor backend engineering.
+2. **Language, Engine and Host Boundaries** — Classify syntax, ECMAScript semantics, engine execution and Node-provided process/filesystem/timer interfaces; contrast a portable expression with a host-only API using actual or supplied evidence.
+3. **From Python Reasoning to JavaScript Semantics** — Translate a bounded, already-understood SEF computation; predict effects of nullish values, truthiness, equality, object aliasing and function binding before running examples rather than relearning general programming from zero.
+4. **First Diagnostics and Reproduction** — Distinguish parse-time syntax errors from executed failures using a stack trace; record runtime/command and minimal fabricated inputs without installing remote packages or exposing secrets.
 
-2. **ECMAScript, Engines, and Hosts** — Separate language syntax/semantics, engine execution, runtime host APIs and surrounding tools; identify an example that works in Node but not without adaptation in a browser.
-
-3. **First Local Program** — Run a small ES module using an installed supported Node runtime; inspect standard output, process exit status and an intentionally triggered stack trace.
-
-4. **From Python Concepts to JavaScript Behavior** — Translate a bounded computation from SEF Python while recording meaningful differences in booleans, nullish values, equality, iterables, mutation and function binding.
-
-5. **Reading Source and Diagnostics** — Use a text editor and runtime diagnostic output to locate syntax and runtime errors; distinguish parser errors from errors in reachable execution paths.
-
-6. **Runtime Readiness and Safe Fixtures** — Record runtime version and execution command, run from an ordinary user account, and use synthetic local data rather than secrets or remote service credentials.
-
-*Optional practice — Investigation: Host or Language?:* Classify representative APIs and predict what happens under another host; independently verify one assumption with documentation and a runnable example.
-
-### Module 2 — Values, Conversion, Numbers, and Strings
+### Module 2 — Values, Equality, Precision and Text
 
 #### Outcomes
 
@@ -110,23 +101,14 @@ included in a required assessment below.
 
 #### Lessons
 
-1. **Primitive Values and Type Inspection** — Distinguish undefined, null, Boolean, Number, BigInt, String and Symbol values; explain `typeof null` as historical behavior and why `typeof` is not a general validation strategy.
+1. **Primitive Values and Bindings** — Distinguish undefined, null, Boolean, Number, BigInt, String and Symbol; inspect typeof's historical null behavior, let/const rebinding and mutation without treating typeof as complete validation.
+2. **Equality, Truthiness and Missing Data** — Predict strict/abstract equality, falsy cases, optional chaining and nullish coalescing; explain where 0, false and empty text are legitimate rather than missing.
+3. **Numeric Representation and Correctness** — Investigate binary floating-point precision, NaN, infinities, signed zero, safe-integer bounds and BigInt compatibility; choose explicit constraints instead of silently rounding identifiers or money.
+4. **Text, UTF-16 and User-Visible Characters** — Compare UTF-16 code units, Unicode code points and grapheme clusters; show how naive string length/indexing can misinterpret user-visible text.
+5. **Parsing and Conversion Boundaries** — Contrast explicit parsing and range checks with implicit numeric/string conversions, relational comparisons and accidental concatenation on realistic malformed input.
+6. **Value-Model Investigation** — Given unseen value fixtures, predict, run, explain and repair at least one precision, coercion or Unicode defect; use version-specific host functionality only when disclosed.
 
-2. **Bindings and Expressions** — Use `const` and `let`, distinguish rebinding from mutating referenced objects, and explain expression evaluation and assignment order.
-
-3. **Equality, Truthiness, and Nullish Defaults** — Predict strict versus loose equality in representative cases; distinguish falsy, missing and intentionally zero/empty values; use `??` and `?.` when their semantics match the requirement.
-
-4. **Number Representation and Precision** — Explain binary floating-point limitations, `NaN`, infinities, safe integers, signed zero and `BigInt`; reject incorrect currency or identifier calculations rather than relying on accidental rounding.
-
-5. **String and Unicode Semantics** — Distinguish code units, code points and grapheme clusters; explain why indexing and simple `length` cannot count user-visible characters in every case.
-
-6. **Conversion and Comparison Boundaries** — Inspect numeric/string conversions, relational comparisons, and accidental concatenation; apply explicit parsing and range checks to an input-processing problem.
-
-7. **Dates, Time Zones, and Localization Limits** — Explain timestamps versus local display, the risk of ambiguous date parsing, and when a host's internationalization facilities are presentation tools rather than business-domain logic.
-
-*Optional practice — Debugging: Surprising Values:* Predict outputs for adversarial value fixtures, run them, explain mismatches and produce a corrected implementation with tests.
-
-### Module 3 — Control Flow, Functions, and Problem Decomposition
+### Module 3 — Control Flow, Abstraction and Functional Reasoning
 
 #### Outcomes
 
@@ -135,23 +117,14 @@ included in a required assessment below.
 
 #### Lessons
 
-1. **Branching and Exhaustive Cases** — Use conditional expressions, `if` and `switch` with deliberate fall-through decisions; handle unexpected cases instead of silently selecting a default.
+1. **Decisions and Unexpected Cases** — Use if, conditional expressions and switch with intentional fall-through and a published invalid-case policy; connect branches to acceptance criteria instead of syntax memorization.
+2. **Iteration and Termination** — Choose bounded for, while and for-of loops; state termination/loop invariants and diagnose off-by-one behavior.
+3. **Functions, Parameters and Result Contracts** — Use declarations, expressions and arrow functions with explicit returns, defaults, rest/destructured parameters as justified; test empty and invalid inputs.
+4. **Higher-Order Transformations** — Pass functions as values; compare map/filter/reduce with a clear loop on the same dataset and defend behavior/readability rather than fashionable chaining.
+5. **Recursion, Stack Depth and Alternatives** — Trace a recursive base case and failure boundary; select iteration when input depth or stack limits make recursion unsuitable.
+6. **Decomposition and Pure Computation** — Separate deterministic domain transformations from logging, input and time; refactor an existing routine and check its unchanged behavior on a new case.
 
-2. **Loops and Termination** — Select `for`, `while` or for-of iteration by data shape; reason about invariants, boundaries, off-by-one errors and termination.
-
-3. **Function Signatures and Parameters** — Distinguish declarations, expressions and arrow functions; implement defaults, rest parameters, destructuring and explicit return values without obscuring contracts.
-
-4. **Higher-Order Functions** — Pass functions as values and use map/filter/reduce where they clarify a transformation; compare against an explicit loop for correctness and readability.
-
-5. **Recursion and Iteration Trade-offs** — Trace the call stack and base case of a recursive task; choose an iterative alternative when depth and resource bounds warrant it.
-
-6. **Pure Functions and Side Effects** — Separate deterministic computations from logging, input, mutable state and time; test pure functions against explicit examples and counterexamples.
-
-7. **Readable Decomposition and Complexity** — Decompose a data transformation into named operations; reason about representative linear, quadratic and lookup costs without optimizing prematurely.
-
-*Optional practice — Change: New Rule, Same Invariants:* Extend an existing function for one changed requirement and verify earlier behavior with regression cases.
-
-### Module 4 — Lexical Scope, Closures, and Call Context
+### Module 4 — Scope, Closures and Function Receivers
 
 #### Outcomes
 
@@ -161,23 +134,13 @@ included in a required assessment below.
 
 #### Lessons
 
-1. **Lexical Environment and Shadowing** — Trace identifier lookup and block/function/module scope; distinguish lexical binding from object property lookup.
+1. **Lexical Binding and Initialization** — Trace block/function/module scope, shadowing and lexical declaration initialization, including the temporal dead zone and historical var behavior in a controlled example.
+2. **Closures and Captured State** — Explain capturing bindings rather than value snapshots; build independent closures and reproduce a shared-state or loop-capture bug with observable feedback.
+3. **Function Calls and this Binding** — Contrast method receiver binding, detached calls, call/apply/bind and arrow lexical this; predict a receiver failure before inspecting actual output.
+4. **References, Parameters and Mutation** — Trace object identity, passed reference values and alias-visible mutation; avoid the incorrect claim that JavaScript arguments are passed by reference.
+5. **Trace-Driven Scope Repair** — Use breakpoints or stacks to identify a closure/receiver/alias error, distinguish observation from speculation, and verify a minimal correction with independent tests.
 
-2. **Initialization and Temporal Dead Zones** — Explain declaration instantiation, `var` versus `let`/`const`, and why using a lexical binding before initialization fails.
-
-3. **Closures and Private State** — Build a closure over state, explain captured bindings versus captured values, and test independent instances with no accidental shared state.
-
-4. **Call Context and `this`** — Distinguish ordinary-function dynamic receiver binding, method calls, explicit `call`/`apply`/`bind`, and lexical `this` in arrows; inspect detached-method failures.
-
-5. **Arguments, References, and Aliasing** — Explain parameter passing of values that may refer to objects; investigate mutation visible through several aliases without claiming pass-by-reference semantics.
-
-6. **Callbacks and Captured Loop Variables** — Reproduce a closure timing or loop-binding defect, repair it, and explain when callback invocation occurs.
-
-7. **Stack Frames and Debugging** — Walk a nested call/closure stack trace, inspect locals and captured variables, and explain why a log statement cannot prove every execution path.
-
-*Optional practice — Closure Review:* Review a small callback-heavy program, write a prediction, run it, and fix one state or receiver bug without masking it.
-
-### Module 5 — Objects, Prototypes, and Classes
+### Module 5 — Objects, Prototypes, Copies and Classes
 
 #### Outcomes
 
@@ -187,23 +150,13 @@ included in a required assessment below.
 
 #### Lessons
 
-1. **Object Shapes and Property Access** — Use computed keys, object literals, optional properties and destructuring; distinguish absent properties from those present with undefined values.
+1. **Object Properties and Absence** — Use literals, computed keys, destructuring and property lookup; distinguish absent own keys from inherited or present-with-undefined values.
+2. **Identity, Mutation and Copy Semantics** — Compare aliases, object spread/shallow copying and a justified independent structured copy; detect nested-reference surprises using before/after observations.
+3. **Prototype Lookup and Enumerability** — Trace own/inherited properties with Object.hasOwn, Object.keys and prototype chains; explain why enumeration and inherited mutable fields affect correct data handling.
+4. **Classes and Delegation** — Explain class constructor/method/private-field mechanics as syntax over prototype-based behavior; compare a small class with composition without insisting on OOP for every task.
+5. **Descriptors, Accessors and Trust** — Observe getter/setter side effects and property descriptors where they change iteration or data access; demonstrate that parsed data and inherited keys cannot be trusted without safe boundary rules.
 
-2. **References and Copying** — Demonstrate shallow spread, nested aliasing and explicit structured data copying; avoid claiming that spread is a deep clone.
-
-3. **Own, Inherited, and Enumerable Properties** — Inspect `Object.hasOwn`, `Object.keys`, descriptors, and prototype-chain lookup; explain consequences for untrusted key iteration.
-
-4. **Prototypes and Delegation** — Trace property lookup through a prototype and demonstrate why shared inherited mutable data can surprise learners.
-
-5. **`class` and Instance Semantics** — Use constructors, methods, private fields where appropriate and composition alternatives; explain how JavaScript classes relate to prototypes.
-
-6. **Getters, Setters, and Descriptors** — Describe property accessors and descriptor flags; avoid unexpected side effects during logging, serialization or iteration.
-
-7. **Data Parsing and Prototype Boundaries** — Test a record with keys such as `__proto__` and distinguish parsing from unsafe merging into application objects; prefer explicit allowlists and safe data structures.
-
-*Optional practice — Object Repair:* Diagnose a bug in copying, method binding, or inherited fields and provide executable regression tests.
-
-### Module 6 — Collections, Iteration, and Structured Data
+### Module 6 — Collections, Iteration and Data Transformation
 
 #### Outcomes
 
@@ -215,23 +168,14 @@ included in a required assessment below.
 
 #### Lessons
 
-1. **Arrays and Representation Invariants** — Distinguish sparse positions from explicit undefined entries, choose indexing and append operations, and trace mutation during traversal.
+1. **Arrays and Mutation Invariants** — Distinguish holes from explicit undefined elements, correct indexing and accumulation, and the effect of changing an array during traversal.
+2. **Ordering, Search and Sorting** — Compare default string sort with explicit comparators, in-place versus copy-producing operations and deterministic handling of equal/duplicate values.
+3. **Maps, Sets and Key Identity** — Choose arrays, plain records, Map or Set by required equality, iteration and uniqueness semantics; validate a surprising key-identity case.
+4. **Iterables and Lazy Production** — Explain iterable/iterator protocols using for-of and a simple supplied generator; use lazy production only where its memory or sequencing effect matters.
+5. **JSON Representation and Limits** — Explain parsing/serialization of structured records, including malformed JSON, unsupported values, cycles, surprising null/missing behavior and date/number representation constraints.
+6. **Bounded Parsing and Aggregation** — Use a safe bounded regular expression only for suitable text and structured parsing for structured data; implement filtering/grouping or aggregation with a published deterministic result and boundary tests.
 
-2. **Search, Sort, and Stable Expectations** — Write an explicit comparator, account for default string ordering and distinguish in-place sorting from non-mutating transformations.
-
-3. **Maps and Sets** — Choose Map/Set versus plain objects and arrays; demonstrate key identity, insertion-order expectations and duplicates.
-
-4. **Iterables, Iterators, and Generators** — Explain iterable and iterator protocols; implement a small generator and reason about lazy production versus eager allocation.
-
-5. **String, JSON, and Data Shapes** — Parse and serialize JSON with explicit representation limits; identify unsupported values, cyclic structures and schema drift.
-
-6. **Regular Expressions and Parsing Trade-offs** — Use bounded regular expressions for a suitable task while recognizing escaping, partial matches and the risk of pathological patterns; choose structured parsing for structured formats.
-
-7. **Data Transformation Contracts** — Define invariants for filtering, grouping, deduplication or aggregation; check missing fields, duplicate keys and deterministic output.
-
-*Optional practice — Dataset Investigation:* Compare an array/object implementation with a Map/Set alternative and explain correctness, complexity and iteration effects on a synthetic fixture.
-
-### Module 7 — Runtime Contracts, Errors, and Defensive Design
+### Module 7 — Trust Boundaries, Runtime Contracts and Failures
 
 #### Outcomes
 
@@ -241,21 +185,13 @@ included in a required assessment below.
 
 #### Lessons
 
-1. **Static Assumptions versus Runtime Data** — Explain that a JavaScript type check is not a complete domain validator; separate untrusted input from the program's validated internal representation.
+1. **Untrusted Data to Valid Domain State** — Design shape, allowed-key, type, range and relationship checks; distinguish absent, null, invalid and out-of-range values before trusting a parsed record.
+2. **Prototype and Dynamic-Execution Hazards** — Show that JSON parsing alone does not cause prototype mutation, but unsafe merging/assignment can; protect domain keys with explicit allowlists or appropriate data structures, and reject eval or executable input.
+3. **Error Classification and Diagnostic Context** — Use throw, try/catch/finally and error causes to separate malformed input, recoverable domain failure and programming defects; redact sensitive details from public diagnostics.
+4. **Partial Batch Policy and Atomic Results** — Choose reject-all, collected errors or declared partial success for a data operation; test which valid state survives a failed member and avoid unsupported transactional claims.
+5. **Contract-Preserving Revision** — Modify an input contract or implementation and verify existing successful and invalid cases, documenting any intentional incompatible change rather than swallowing exceptions.
 
-2. **Shape and Domain Validation** — Implement explicit validation for record shape, length, range, allowed keys and relationships; distinguish missing fields, null, wrong type and out-of-range values.
-
-3. **Error Classification, Causes and Diagnostics** — Use `throw` and `try`/`catch`/`finally` appropriately; distinguish programmer defects, expected invalid input and transient operational failures; preserve diagnostic context and error causes without leaking secrets or raw untrusted payloads into user-facing output.
-
-4. **Safe Data Boundaries** — Avoid `eval`, unchecked dynamic execution and merging arbitrary object keys; apply allowlists to accepted inputs and outputs.
-
-5. **Partial Processing and Atomicity** — Define the behavior when one dataset item fails: reject all, collect structured errors or proceed with documented partial results; test the decision.
-
-6. **Refactoring without Behavioral Drift** — Reorganize code while retaining published input/output semantics, supported error categories and regression coverage.
-
-*Optional practice — Negative-Path Review:* Inject malformed JSON, unexpected fields, invalid numbers and duplicates; demonstrate failures remain controlled and observable.
-
-### Module 8 — Modules, Interfaces, and Reusable Packages
+### Module 8 — ES Modules, Interfaces and Cohesive Design
 
 #### Outcomes
 
@@ -265,23 +201,13 @@ included in a required assessment below.
 
 #### Lessons
 
-1. **ES Modules and Strict Semantics** — Export a small API, import it into a consumer and explain file/module scope, live bindings and strict-mode behavior.
+1. **ES Modules and Live Bindings** — Build an export/import pair, explain strict semantics and module scope, and trace why an imported live binding is not an assignable local variable.
+2. **Module Graphs and Initialization** — Inspect module evaluation and one cyclic dependency/early-access failure; remove an unnecessary cycle while preserving the public result.
+3. **Public Interfaces and Side-Effect Ownership** — Choose minimal cohesive exports, place validation/domain logic behind a predictable API and isolate host-dependent I/O so consumers and tests can run independently.
+4. **Resolution and CommonJS Boundaries** — Investigate Node ESM relative paths, package exports and a limited CommonJS interoperability case; distinguish runtime resolution from ECMAScript-defined module semantics.
+5. **Modular Refactor and Contract Tests** — Split one bounded monolithic program into domain, validation and host-adapter modules; compare observable behavior and consumer tests before and after, with a deliberate misuse case.
 
-2. **Module Evaluation and Cycles** — Trace a simple dependency graph, evaluation order and why cyclic module initialization can be confusing; refactor to avoid unnecessary cycles.
-
-3. **Public API versus Implementation** — Define minimal exports, cohesive module responsibilities and a test seam; keep configuration and side effects outside pure domain logic.
-
-4. **Resolution and Host Differences** — Explain how Node resolves local ESM paths and package export maps, and why imports that work under one host/build setup may not work in another.
-
-5. **CommonJS Interoperability Boundaries** — Recognize legacy `require`/exports and selected ESM/CJS interoperability constraints without requiring a full dual-package publication system.
-
-6. **Dependency Selection and Maintenance** — Distinguish runtime/development dependencies, package scripts and third-party supply-chain risk; prefer built-in tools when they meet requirements.
-
-7. **Refactoring a Monolith** — Split an existing script into source, input validation and CLI adapter modules; compare independent unit tests before/after.
-
-*Optional practice — Interface Review:* Create a separate consumer for a small module and test misuse, missing exports and version-sensitive assumptions.
-
-### Module 9 — Node.js Developer Tooling and Reproduction
+### Module 9 — Node Project Tooling and Offline Reproduction
 
 #### Outcomes
 
@@ -292,21 +218,13 @@ included in a required assessment below.
 
 #### Lessons
 
-1. **Node Runtime Selection** — Choose a documented maintained runtime baseline and distinguish installed runtime, package manager and application execution host without prescribing a particular proprietary installer.
+1. **Supported Runtime and Package Manifest** — Choose and document a maintained Node baseline, ESM package identity, entry points and safe scripts; distinguish Node-host APIs from ECMAScript semantics.
+2. **Dependency and Lockfile Decisions** — Explain zero-dependency built-in facilities versus reviewed local dependencies, version ranges, resolved lockfile behavior and the limits of offline reproducibility.
+3. **Install-Script and Configuration Safety** — Inspect scripts/dependency provenance, synthetic configuration and environment variables; recognize untrusted installation hooks, avoid real secrets and do not require network on assessed execution.
+4. **CLI Execution and Local Tests** — Run an ordinary-user Node module with a defined fixture and built-in test/assertion tools; compare documented exit behavior and command failure modes.
+5. **Independent Clean-State Reproduction** — Recreate setup, scripts and tests from a fresh local copy, record versions and diagnostic evidence, and identify an intentionally missing export or configuration defect.
 
-2. **Package Manifests, Scripts and Reproducible Dependencies** — Create `package.json` with `type: module`, entry points and safe `scripts`; explain how scripts execute in a local working directory; explain version ranges versus resolved versions, package-lock provenance and why clean installation can differ from an unlocked install.
-
-3. **Offline-Ready Fixture Strategy** — Use a built-in-only example or a supplied local package fixture to make required assessment execution reproducible without paid hosting, remote registries or account login.
-
-4. **Install Scripts and Supply-Chain Risk** — Explain that package installation and scripts can execute untrusted code; audit declared scripts and use reviewed local inputs for required demonstrations.
-
-5. **Environment and Configuration** — Separate harmless test fixtures from credentials, avoid committing secrets and compare host environment variables to JavaScript program arguments.
-
-6. **Clean-Checkout Verification** — Document version, setup command, test command, input fixtures and known limitations; test from a fresh directory and explain dependency/tool mismatch symptoms.
-
-*Optional practice — Build Failure:* Investigate a missing module, incorrect package export or lockfile mismatch without rewriting version history to hide the cause.
-
-### Module 10 — Asynchronous JavaScript and Scheduling
+### Module 10 — Promises, Scheduling and Bounded Asynchrony
 
 #### Outcomes
 
@@ -317,25 +235,15 @@ included in a required assessment below.
 
 #### Lessons
 
-1. **Synchronous Call Stacks** — Trace one stack from entry point to return or exception; distinguish language call semantics from host scheduling.
+1. **Call Stacks and Language versus Host Scheduling** — Predict synchronous execution and distinguish ECMAScript promise reaction jobs from browser/Node timer, I/O and task scheduling; avoid asserting universal event-loop phase ordering.
+2. **Promise Settlement and Chains** — Trace pending, fulfilled and rejected promise states, then/catch/finally and propagated results; investigate a returned-versus-forgotten promise bug.
+3. **Async and Await as Structured Promise Use** — Rewrite a chain with async/await while keeping errors and cleanup visible; explain that async functions yield promises rather than synchronous values.
+4. **Sequential, Overlapping and CPU Work** — Compare repeated sequential awaits, controlled overlap and CPU parallelism; promises do not create threads or guarantee completion order.
+5. **Composition, Early Failure and Noncancellation** — Choose Promise.all or allSettled by policy, show that Promise.all rejects early without canceling outstanding work, and distinguish settled-result order from completion order.
+6. **Cancellation, Timeouts and Ownership** — Demonstrate a supported host cancellation signal with a cooperative local fixture; distinguish a timer/race from actual operation cancellation and locate detailed Node I/O cancellation in APP21.
+7. **Deterministic Failure and Scheduling Repair** — Use manually controlled deferred promises to expose swallowed rejections, lost cleanup and unbounded concurrent work; repair with a bounded in-flight policy and deterministic tests rather than sleeps.
 
-2. **Tasks, Microtasks, and Host Facilities** — Use observable examples to distinguish promise reaction jobs from selected host task scheduling; qualify ordering claims that depend on Node/browser APIs.
-
-3. **Promise States and Composition** — Explain pending, fulfilled and rejected states, then/catch/finally behavior, returned promises and chaining errors.
-
-4. **`async` and `await`** — Refactor a promise chain into `async`/`await` while preserving error propagation, returned results and cleanup.
-
-5. **Parallelism versus Concurrency** — Contrast sequential awaits, bounded overlapping operations and CPU parallel execution; avoid claiming promises create threads or guarantee completion order.
-
-6. **`Promise.all`, `allSettled` and Failure Policies** — Select coordination behavior for independent local tasks, identify early rejection versus settled results, and retain failures instead of swallowing them.
-
-7. **Timeouts, Cancellation, and Ownership** — Explain that timeouts and AbortSignal are host/framework facilities rather than automatic promise cancellation; document resource ownership and when deeper service cancellation belongs to APP21.
-
-8. **Uncaught Errors and Unhandled Rejections** — Reproduce and diagnose one sync throw and one async rejection; demonstrate an explicit error boundary and exit policy.
-
-*Optional practice — Event-Order Investigation:* Predict logged steps, execute the fixture, distinguish guaranteed from host-dependent ordering and explain a concurrency bug.
-
-### Module 11 — Testing, Debugging, and Software Evolution
+### Module 11 — Testing, Debugging and Change Reasoning
 
 #### Outcomes
 
@@ -348,23 +256,14 @@ included in a required assessment below.
 
 #### Lessons
 
-1. **Assertions and Test Design** — Use Node's built-in test runner and assertions to organize tests around behavior rather than implementation details.
+1. **Behavioral Tests and Test Doubles** — Use built-in Node test/assertion facilities to inspect exported functions; choose test cases from required behavior, not source-line counts.
+2. **Boundary, Invalid and Invariant Evidence** — Design empty, missing, duplicate, Unicode, numeric, nested-copy and malformed cases and check what an invariant can actually establish.
+3. **Deterministic Async Verification** — Test fulfilled, rejected, out-of-order and abandoned work by controlled promise settlement without relying on arbitrary timing sleeps.
+4. **Debugger-Guided Root Cause Analysis** — Inspect stack traces and variables, form a falsifiable hypothesis, reproduce a seeded defect, repair it and retain failing-before/passing-after evidence.
+5. **Complexity and Measurement Limits** — Use established SEF algorithmic reasoning to justify representative time/space costs; qualify noisy local measurements rather than claiming production benchmarks.
+6. **Compatible Evolution** — Change a module contract for an unfamiliar bounded requirement; distinguish compatible changes from breaking ones and re-run the independently relevant regression cases.
 
-2. **Equivalence Classes and Boundaries** — Choose normal, empty, missing, malformed, duplicated, extreme and Unicode cases; explain why superficial line coverage alone does not prove correctness.
-
-3. **Async Tests and Reproducibility** — Test fulfilled/rejected results and scheduling using deterministic deferred promises and test doubles rather than arbitrary sleeps.
-
-4. **Runtime Diagnostics and Breakpoints** — Read stack traces and use debugger inspection to compare hypotheses with observed state; preserve reproducible steps.
-
-5. **Property-Oriented Checks and Invariants** — Check simple invariants over generated or table-driven inputs and diagnose counterexamples without demanding an external property-testing framework.
-
-6. **Performance and Complexity** — Estimate time/space growth and measure a bounded workload with appropriate noise disclosure; distinguish a microbenchmark from a production claim.
-
-7. **Maintenance and Compatibility** — Apply a scoped new requirement to an existing module, protect public contracts and explain breaking versus backward-compatible changes.
-
-*Optional practice — Defect Investigation:* Reproduce a seeded data-processing or async defect, add a failing test, fix the root cause and explain the regression evidence.
-
-### Module 12 — Integrated JavaScript Engineering and Defense
+### Module 12 — One Modular JavaScript Utility and Technical Defense
 
 #### Outcomes
 
@@ -382,29 +281,23 @@ included in a required assessment below.
 
 #### Lessons
 
-1. **Selecting a Bounded Domain Problem** — Choose a local synthetic-record processor, task scheduler or similar program with deterministic data rules, identifiable users and a clear non-network execution boundary.
-
-2. **Requirements and Acceptance Cases** — Document functional inputs/outputs, malformed records, duplicate behavior, performance bounds, error policy and change acceptance before implementation.
-
-3. **Domain and Host Architecture** — Separate pure computation, stateful orchestration, local input/output and command-line entry points; explain what depends on ECMAScript versus Node.
-
-4. **Incremental Implementation and Verification** — Build a feature slice, write representative negative tests, debug one actual failure and preserve failing-before/passing-after evidence.
-
-5. **Asynchronous Integration** — Add one bounded asynchronous workflow using local/synthetic operations, with specified ordering, rejection propagation and cleanup behavior.
-
-6. **Reproducibility and Security Review** — Verify a fresh checkout with recorded runtime and package steps; inspect dependency scripts, input validation, sensitive data handling and unsupported assumptions.
-
-7. **Unfamiliar Change and Technical Defense** — Handle a new bounded rule or supplied counterexample, verify regressions and defend language semantics, module boundaries, performance and limitations against inspected code.
+1. **One Public Problem and Acceptance Contract** — Choose a bounded synthetic-record utility or equivalent; publish expected outputs, invalid/duplicate policies, resource limits and acceptance cases before altering code.
+2. **Cohesive Modules and Verified Data Rules** — Integrate language-model corrections, validated transformations, objects and explicit error policies into the **same** evolving program assessed in APP18-AS1–AS4, referencing accepted evidence instead of rebuilding independent projects.
+3. **Controlled Asynchronous Work** — Add a small local, bounded asynchronous feature with defined order, rejection and cleanup behavior; explain language versus host guarantees.
+4. **Adversarial Change and Repair** — Take an unfamiliar bounded requirement or counterexample, predict effects, reproduce a failure, make a narrow correction and verify existing invariants.
+5. **Independent Reproduction and Defense** — From a clean local checkout, execute the documented project and tests; present relevant evidence references and defend semantics, modularity, failure cases, performance limits and unresolved uncertainty.
 
 ## Completion requirements
 
 All **eleven required course outcomes** must be demonstrated through
-the **five required summative assessments** below. Each assessment
-has an explicit outcome scope and independent public success
-criteria. A learner may extend the same evolving program across
-assessments; five unrelated applications are **not** required.
-The formative lesson investigations are not separate completion
-checkpoints simply because they are listed.
+**five separately decidable summative assessments**, with one evolving
+modular local JavaScript utility as the principal assessed artifact.
+APP18-AS1 can begin as a supplied diagnostic fixture; APP18-AS2–AS4
+can extend and investigate the same source; APP18-AS5 integrates those
+verified results and requires a new bounded change and defense.
+Reviewers may **reference previously accepted evidence**, not demand
+five unrelated applications, repeated log packets or standalone labs
+for every lesson. Formative exploration never silently gates completion.
 
 | Required assessment | Required outcomes | Principal evidence |
 | --- | --- | --- |
@@ -465,21 +358,21 @@ checkpoints simply because they are listed.
 
 - **APP18-AS3** (required asynchronous scheduling and failure diagnosis)
   - Outcomes: APP18-O4, APP18-O6, APP18-O8, APP18-O10
-  - Work: Inspect a supplied event-ordering example and an asynchronous multi-item processing workflow. Explain call-stack, promise reaction and host scheduling boundaries; reproduce a swallowed rejection or unintended sequential/overlapping work defect; repair it with explicit failure propagation and bounded asynchronous coordination. Show the behavior when one item fails, when results settle in a different order, and when an operation is deliberately abandoned under an identified host mechanism.
-  - Criteria: Scheduling predictions correctly qualify Node-specific behavior; no assumption confuses promise concurrency with CPU threads or promises with automatic cancellation. The repaired workflow has bounded in-flight work, deterministic test control, explicit success/rejection policy and no unhandled rejection in the tested paths; validation errors retain useful context without exposing secrets.
-  - Evidence: Runnable asynchronous fixture, event-order diagram/table, deterministic tests without timing-flaky sleeps, before/after defect reproduction, failure-policy notes and versioned runtime details.
+  - Work: Investigate a supplied event-order example and a small asynchronous data workflow, preferably extending the AS2 utility. Predict synchronous stack order, ECMAScript promise reaction jobs and separately identified Node-host scheduling observations. Reproduce a swallowed rejection, unbounded overlap or unintended sequential-work defect and repair it using a bounded in-flight policy. Test differing settlement order, one failed item, and an abandoned operation using a **documented cooperative host mechanism**. In a separate controlled example, demonstrate that **`Promise.all` early rejection does not cancel other started operations**, and contrast this with `Promise.allSettled` outcome collection.
+  - Criteria: Predictions distinguish language-level promise semantics from Node host facilities; a correct `Promise.all` counterexample shows in-flight work continuing after aggregate rejection, while claiming no automatic cancellation or CPU parallelism. The chosen work/failure policy is explicit, bounded and deterministically reproducible, with no unhandled rejections in assessed paths. A timeout or abandoned result is not falsely described as guaranteed cancellation of underlying work. Errors preserve safe context.
+  - Evidence: Same-module or shared-utility source, annotated order/settlement/failure timeline, controlled deferred-promise tests **without arbitrary sleeps**, before/after failure and bounded-work observations, qualified host-specific cancellation notes and the runtime/version needed to reproduce them.
 
 - **APP18-AS4** (required node tooling, modules, and maintainability review)
   - Outcomes: APP18-O1, APP18-O7, APP18-O9, APP18-O10
-  - Work: Package the reusable component in an ES module project with a precise README, `package.json` scripts, a suitable supplied/generated lockfile when dependencies are used, and reproducible tests. Explain one host/module-resolution boundary, the implications of running dependency install scripts, and a real or seeded module/resolution/version defect. Reproduce the program from a new clean directory using free local tooling; no remote account or network is necessary during the assessment.
+  - Work: Package **the evolving AS2/AS3 utility** as an ES module project with a clear README, `package.json` scripts and appropriate lockfile evidence **only if third-party dependencies are justified**. Explain ECMAScript-versus-Node module resolution, a relevant package `exports` or relative-path boundary, and the risk of dependency install scripts. Reproduce and repair one seeded module/resolution/version problem; verify clean local execution/tests **without a registry fetch** using built-ins or supplied reviewed fixtures.
   - Criteria: Entrypoints and exports behave as documented in a fresh checkout; declared scripts and test command work under the recorded supported runtime; no hidden global dependency or secret is required. Package/dependency decisions, lockfile significance (or justified built-in-only choice), module-resolution diagnostics and recorded command safety are explained accurately.
   - Evidence: Complete project source/manifest, tests and execution log from clean state, relevant lockfile/local fixture or rationale for zero dependencies, version data, a traced module defect and its fix.
 
-- **APP18-AS5** (required modular javascript utility and engineering defense)
+- **APP18-AS5** (required modular JavaScript utility and independent defense)
   - Outcomes: APP18-O1, APP18-O2, APP18-O3, APP18-O4, APP18-O5, APP18-O6, APP18-O7, APP18-O8, APP18-O9, APP18-O10, APP18-O11
-  - Work: Build or extend one substantial but bounded local JavaScript utility that processes synthetic records, exposes at least two cohesive modules, validates untrusted input and performs a controlled asynchronous task. Include a published acceptance-case matrix, normal and malformed input paths, explicit error/result policy, testable output and recorded algorithmic/representation decisions. Reuse qualifying results from APP18-AS2–AS4 rather than producing unrelated duplicate projects. Demonstrate an unfamiliar scoped change or counterexample, complete a clean-checkout reproduction and defend the chosen design in a reviewable format.
+  - Work: Complete **the one cumulative local utility** developed in APP18-AS1–AS4, processing synthetic records through at least two cohesive modules with runtime validation, a documented result/error policy, proportionate tests and a bounded asynchronous operation. Cite qualifying prior accepted evidence instead of resubmitting separate implementations. Handle an **unfamiliar, reasonably scoped rule change or supplied counterexample**, demonstrate a correction and regression result, then independently reproduce and defend the implementation, including its language/host boundary, constraints and technical limitations.
   - Criteria: Every stated required input/output rule is supported by reproducible tests and inspectable output; unsafe data cannot bypass required validation; async errors are handled without silent loss; bounded resource-use decisions match the fixture's needs; documented npm/Node setup works as claimed. The learner can explain a concrete value/scope/prototype or object behavior, the host boundary, a normal/failure trace, complexity, a verified repair and remaining limitations. The unfamiliar change is correctly incorporated without regressing published invariants; unnecessary networking, external accounts, or framework use is not demanded.
-  - Evidence: Version-controlled source and synthetic test data, README with runtime/commands, case-to-test matrix, normal and failure execution logs, meaningful regression test history, clean-checkout reproduction, change/diagnosis evidence, concise technical rationale and written/recorded/accessible defense.
+  - Evidence: A single version-controlled source/fixture package with clean local README commands, an indexed acceptance/outcome map **referencing prior evaluated AS1–AS4 evidence**, the unfamiliar-change counterexample and repair/regression trace, necessary runtime/host observations, material limits and a reviewable written, recorded or accessible defense. No second program or duplicate evidence bundle is required.
 
 ### Completion decision and revision safety
 
@@ -498,13 +391,15 @@ unit-test log alone. Preserve the applicable source revision,
 assessment IDs, evidence locations and review decisions in
 accordance with [OEE Evidence Rules](../../spec/evidence-rules.md).
 
-This course is a `v0.2.0` **draft**, not learner-tested or
-independently educationally verified. Its implementation adds
-one new core capability to the current APP catalog; legacy APP
-courses and historical learner records retain the meanings and
-prerequisites attached to their own recorded revisions.
-The eventual TypeScript, browser, Node backend and capstone
-migrations require separate reviewed course changes.
+This course remains a `v0.2.0` **draft**, not learner-tested
+or independently educationally verified. The APP catalog already
+contains separate TypeScript (APP19), browser (APP2), Node service
+(APP21), React (APP20), backend (APP3) and capstone (APP9) course
+definitions; their distinct competencies remain outside this
+JavaScript language-and-local-tooling course. Historical learner
+decisions remain attributable to the source/specification
+revision under which they were evaluated, without automatic
+equivalence or retroactive completion judgments.
 
 ### Public non-mandatory study references
 
