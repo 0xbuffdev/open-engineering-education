@@ -2,7 +2,7 @@
 
 The Open Engineering Education (OEE) curriculum publishes five engineering programs and their course definitions. It is designed for independent learners, educators, reviewers, and implementations that need a common, publicly inspectable educational contract.
 
-**Current state:** All five programs have published draft course definitions. [SEF](SEF/README.md) now has eleven outcome-driven `v0.2.0` core courses and a cumulative graduation capstone; [APP](APP/README.md) has fourteen outcome-driven `v0.2.0` core courses (including its capstone) and seven optional outcome-driven electives. All of these courses remain `draft` pending real learner and independent reviewer evidence. SYS now has ten outcome-driven `v0.2.0` draft core courses and a cumulative systems graduation capstone; AI1 now publishes an outcome-driven `v0.2.0` draft definition; AI2–AI9 and the SEC courses still use legacy draft outlines. Source format or structural validation does not establish educational effectiveness or formal conformance.
+**Current state:** All five programs have published draft course definitions. [SEF](SEF/README.md) now has eleven outcome-driven `v0.2.0` core courses and a cumulative graduation capstone; [APP](APP/README.md) has fourteen outcome-driven `v0.2.0` core courses (including its capstone) and seven optional outcome-driven electives. All of these courses remain `draft` pending real learner and independent reviewer evidence. SYS now has ten outcome-driven `v0.2.0` draft core courses and a cumulative systems graduation capstone; AI1 publishes an outcome-driven `v0.2.0` draft. AI2–AI9 and the SEC courses currently have draft outlines without complete `v0.2.0` outcome and assessment contracts; they require further academic design. Source format or structural validation does not establish educational effectiveness or formal conformance.
 
 ## Choose a program
 
@@ -34,7 +34,7 @@ The curriculum describes **what must be learned and demonstrated**, not a requir
 
 A course's `draft`, `tested`, or `verified` label describes its **educational readiness evidence**, not its specification-format version. The definitive thresholds and promotion rules belong to [Status Labels](../spec/status-labels.md).
 
-Likewise, a file being present or passing a structural check does not establish `v0.2.0` conformance. Legacy course revisions retain their historical requirements until explicitly migrated; they must not be silently reclassified. Consult the [curriculum inventory](INVENTORY.md) for reproducible, commit-pinned migration and structural reports.
+Likewise, a file being present or passing a structural check does not establish `v0.2.0` conformance. An outline without the current outcome and assessment contract cannot count as a completed `v0.2.0` course. The [curriculum inventory](INVENTORY.md) reports which published sources meet the structural checks and which still need revision; those reports do not establish conformance.
 
 ## Where requirements live
 

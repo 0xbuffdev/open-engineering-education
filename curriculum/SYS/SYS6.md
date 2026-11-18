@@ -282,9 +282,9 @@
 
 Every assessed experiment uses bounded local synthetic clients, controlled process termination, independent fixture directories and nonprivileged loopback sockets, never destructive host network rules, public deployments, real production data or paid infrastructure. Code-only or offline model alternatives can aid understanding, but SYS6-O8/O14 and AS3 require **an actually running three-process educational replica service**. Learners may submit equivalent accessible state tables, event timelines, source excerpts and written rather than live defenses while meeting the identical correctness/evidence rules.
 
-### Revision integrity, provenance and readiness
+### Assessment records and readiness
 
-The published **SYS6-O1–SYS6-O15** and **SYS6-AS1–SYS6-AS6** identities remain stable. Consolidation removes repeated failure schedules, quorum vocabulary, restart oracles and project-handoff tasks without removing essential consensus safety. AS2/AS3 explicitly require **current authority for every strong read**, replicated deterministic dedup retention and safe refusal when snapshot installation or catch-up is unsupported; AS6 evaluates only O15 instead of overclaiming six disparate outcomes from one variable unseen case. These are **material evaluation clarifications applying to this course revision**, not grounds for regrading or re-awarding prior learner work. Each evaluated decision identifies learner/source revision, environment, assessment/outcome IDs, independently expected and actually observed results, qualified reviewer, model assumptions and limitations. This course remains `draft` until authentic learner and independent reviewer evidence supports promotion; CI format checks are not proof of a formally correct consensus implementation.
+Records identify the source revision, replica and filesystem assumptions, evaluated outcomes, independently expected term/log and client histories, actual results and reviewer. Local three-process tests do not establish independent-host failure tolerance. The course remains `draft` until learner testing and qualified review support a status change.
 
 ## Optional disciplinary references
 

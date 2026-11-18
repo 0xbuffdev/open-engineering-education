@@ -1,4 +1,4 @@
-"""Regressions for the SEF7 Unix system interfaces v0.2.0 migration."""
+"""Regressions for the current SEF7 Unix systems outcome contract."""
 
 from __future__ import annotations
 
@@ -8,11 +8,9 @@ import subprocess
 import sys
 import unittest
 
-
 ROOT = Path(__file__).resolve().parents[1]
 COURSE = ROOT / "curriculum" / "SEF" / "SEF7.md"
 CATALOG = ROOT / "curriculum" / "SEF" / "README.md"
-
 
 class SEF7MigrationTests(unittest.TestCase):
     def test_strict_outcome_validator_accepts_course(self):
@@ -23,7 +21,7 @@ class SEF7MigrationTests(unittest.TestCase):
         )
         self.assertEqual(run.returncode, 0, run.stderr or run.stdout)
 
-    def test_mixed_sef_catalog_validator_reports_actual_maturity(self):
+    def test_all_sef_courses_use_current_course_format(self):
         run = subprocess.run(
             [sys.executable, str(ROOT / "scripts/check-sef-curriculum.py")],
             cwd=ROOT, capture_output=True, text=True, check=False,
@@ -33,7 +31,8 @@ class SEF7MigrationTests(unittest.TestCase):
             "**Specification:** `v0.2.0`" in path.read_text(encoding="utf-8")
             for path in COURSE.parent.glob("SEF[0-9]*.md")
         )
-        self.assertIn(f"{migrated} v0.2.0, {11 - migrated} legacy", run.stdout)
+        self.assertEqual(migrated, 11)
+        self.assertIn("11 v0.2.0", run.stdout)
 
     def test_all_fourteen_outcomes_map_to_seven_required_assessments(self):
         text = COURSE.read_text(encoding="utf-8")
@@ -109,10 +108,9 @@ class SEF7MigrationTests(unittest.TestCase):
         catalog = CATALOG.read_text(encoding="utf-8")
         self.assertIn("[SEF7](SEF7.md)", catalog)
         self.assertIn("| 12–16 weeks | SEF3, SEF6 |", catalog)
-        self.assertIn("[SEF7–SYS competency destination map](UNIX-SYS-BOUNDARY.md)", catalog)
+        self.assertIn("SEF7 remains responsible for its own assessed outcomes", catalog)
         self.assertIn("All eleven SEF course files use", catalog)
-        self.assertIn("no historical-format SEF course definitions remain", catalog)
-
+        self.assertIn("OEE `v0.2.0` outcome and summative assessment contracts", catalog)
 
 if __name__ == "__main__":
     unittest.main()

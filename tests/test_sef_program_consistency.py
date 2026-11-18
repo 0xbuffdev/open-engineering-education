@@ -31,7 +31,6 @@ ASSESSMENT_HEADER = re.compile(
     r"(?m)^- \*\*(SEF\d+-AS\d+)\*\* \(required "
 )
 
-
 def expand_codes(value: str) -> list[str]:
     """Read catalog ranges and linked course metadata without ID reordering."""
     value = re.sub(
@@ -56,16 +55,13 @@ def expand_codes(value: str) -> list[str]:
     )
     return re.findall(r"SEF\d+", value)
 
-
 def text(path: Path) -> str:
     return path.read_text(encoding="utf-8")
-
 
 def metadata(source: str, key: str) -> str:
     match = re.search(rf"(?m)^\*\*{re.escape(key)}:\*\* (.+)$", source)
     assert match, f"missing {key} metadata"
     return match.group(1)
-
 
 def rows():
     result = []
@@ -80,7 +76,6 @@ def rows():
         })
     return result
 
-
 def summatives(source: str) -> list[tuple[str, str]]:
     matches = list(ASSESSMENT_HEADER.finditer(source))
     # Each course has a completion block, but most contain additional
@@ -90,7 +85,6 @@ def summatives(source: str) -> list[tuple[str, str]]:
         end = matches[i+1].start() if i+1 < len(matches) else len(source)
         blocks.append((m.group(1), source[m.start():end]))
     return blocks
-
 
 class SEFProgramConsistencyTests(unittest.TestCase):
     def test_all_eleven_published_course_metadata_matches_live_catalog(self):
@@ -283,12 +277,13 @@ class SEFProgramConsistencyTests(unittest.TestCase):
         for topic in (
             "SEF11", "SEF4", "SEF8", "SEF9", "SEF10",
             "may proceed concurrently", "bounded", "professional",
-            "without", "local-loopback", "SEF7–SYS competency destination map",
+            "without", "local-loopback", "C/POSIX foundation",
         ):
             with self.subTest(topic=topic):
                 self.assertIn(topic.lower(), pathway.lower())
         self.assertNotIn("MATH-MIGRATION.md", curriculum)
-        self.assertIn("UNIX-SYS-BOUNDARY.md", curriculum)
+        self.assertNotIn("UNIX-SYS-BOUNDARY.md", curriculum)
+        self.assertFalse((SEF / "UNIX-SYS-BOUNDARY.md").exists())
         self.assertIn("../../spec/status-labels.md", curriculum)
         self.assertIn("../../spec/conformance.md", curriculum)
 
@@ -309,7 +304,7 @@ class SEFProgramConsistencyTests(unittest.TestCase):
                     "other sef academic hardening work proceeds",
                     source.lower(),
                 )
-        self.assertIn("no historical-format sef course definitions remain", summaries["sef"].lower())
+        self.assertIn("all eleven sef course files use oee", summaries["sef"].lower())
         self.assertFalse((SEF / "MATH-MIGRATION.md").exists())
         for course in ("SEF8.md", "SEF11.md"):
             self.assertNotIn("MATH-MIGRATION.md", text(SEF / course))
@@ -357,13 +352,13 @@ class SEFProgramConsistencyTests(unittest.TestCase):
             overview,
         )
 
-    def test_umbrella_migration_claim_matches_ai_and_sef_catalogs(self):
+    def test_umbrella_format_status_matches_ai_and_sef_catalogs(self):
         overview = text(PROGRAMS)
         ai = text(ROOT / "curriculum" / "AI" / "README.md")
         sef = text(CATALOG)
-        self.assertIn("AI1 now publishes", overview)
+        self.assertIn("AI1 publishes", overview)
         self.assertIn("AI2–AI9", overview)
-        self.assertIn("SEC courses still use legacy", overview)
+        self.assertIn("SEC courses currently have draft outlines", overview)
         self.assertIn("AI1 has been substantively migrated", ai)
         self.assertIn("AI2–AI9 remain legacy", ai)
         self.assertIn("eleven required draft courses", overview)
@@ -381,7 +376,6 @@ class SEFProgramConsistencyTests(unittest.TestCase):
         self.assertIn("At least one learner", status_spec)
         self.assertIn("At least two learners", status_spec)
         self.assertIn("not-assessed", text(ROOT / "spec" / "conformance.md"))
-
 
 if __name__ == "__main__":
     unittest.main()
