@@ -74,13 +74,10 @@ course capability.
 
 #### Lessons
 
-1. **Course Orientation** — Trace what this course explains, why it matters, and where its model ends.
-2. **Internet History** — Explain the relationship between packet networking, open protocols, and the Web's development.
-3. **Internet and Web** — Distinguish network infrastructure from applications built on it.
-4. **Web Resources** — Distinguish pages, websites, applications, documents, and referenced resources.
-5. **Client and Server** — Explain request/response responsibility without assuming every server is a web framework.
-6. **Standards and Interoperability** — Relate published protocols and browser variation to compatible delivery.
-7. **The Web Journey** — Sketch a first device-to-visible-page model with identified unknown steps.
+1. **Internet, Web and Historical Context** — Distinguish packet networking from the Web built on top of it; relate open protocol development to their distinct roles.
+2. **Resources, Documents and Websites** — Classify a document, its assets, a website and an application from an unfamiliar navigation without conflating their identities.
+3. **Clients, Servers and Interoperability** — Identify requester, origin, intermediary and standards responsibilities in an exchange, noting browser differences.
+4. **A First Network-to-Pixels Trace** — Sketch the provisional device-to-visible-page journey and mark unobserved steps rather than guessing.
 
 ### Module 2 — Connectivity and Routing
 
@@ -91,16 +88,15 @@ course capability.
 
 #### Lessons
 
-1. **Network Interfaces** — Explain link media and the roles of interfaces on a connected device.
-2. **Local Networks** — Distinguish wireless access, Ethernet, switches, and routers.
-3. **IP Configuration** — Explain host addresses, DHCP, default gateways, and basic NAT.
-4. **Internet Access** — Relate last-mile connections, ISPs, and upstream networks.
-5. **Packets and Frames** — Distinguish link-layer delivery from IP datagrams and packet forwarding.
-6. **IPv4 Addresses** — Interpret addresses, prefixes, and local versus routed destinations.
-7. **IPv6 Addresses** — Interpret basic IPv6 address and prefix structure without assuming IPv4 behavior.
-8. **Routing Decisions** — Read a route and next hop; explain forwarding and hop-limit consequences.
-9. **Network Measurements** — Distinguish latency, bandwidth, throughput, jitter, loss, and their evidence limits.
-10. **Connectivity Failures** — Classify link, gateway, routing, ICMP, and upstream symptoms using safe observations.
+1. **Interfaces, Local Networks and Gateways** — Locate wireless/Ethernet interfaces, switches, local peers and gateways; distinguish link reachability from Internet reachability.
+2. **Host Address Configuration** — Interpret DHCP, host addresses, default gateways and possible NAT without assuming all networks use NAT.
+3. **Internet Access and Upstream Networks** — Trace access-network and ISP responsibilities, stating what a local observation cannot establish.
+4. **Frames and Packets** — Distinguish link-layer framing from IP datagrams and explain what changes across a routed hop.
+5. **IPv4 Addressing and Prefix Decisions** — Use a supplied address and route prefix to predict local versus next-hop delivery.
+6. **IPv6 Addressing and Prefix Decisions** — Interpret IPv6 addresses/prefixes and compare forwarding without copying IPv4 NAT assumptions.
+7. **Routing and Hop Limits** — Trace route selection and next hops; separate forwarding evidence from application success.
+8. **Network Measurements and Their Limits** — Distinguish latency, throughput, bandwidth, jitter and loss without making unsupported causal claims.
+9. **Connectivity Failure Investigation** — Classify link, gateway, routing, ICMP and upstream symptoms; select a safe next observation when evidence is inconclusive.
 
 ### Module 3 — Transport and Connections
 
@@ -129,15 +125,13 @@ course capability.
 
 #### Lessons
 
-1. **Domain Names** — Explain human-readable labels, subdomains, and the DNS namespace.
-2. **DNS Hierarchy** — Distinguish root, top-level domains, and delegated zones.
-3. **Domain Registration** — Trace registrant, registrar, registry, ICANN, renewal, transfer, and expiration roles.
-4. **Nameserver Delegation** — Explain how delegated authority differs from owning a website or hosting it.
-5. **DNS Resolver Behavior and Resolution Tracing** — Distinguish local stub, recursive, and authoritative resolvers; trace referrals, records, caching, and the resulting answer.
-6. **DNS Records** — Interpret A, AAAA, CNAME, NS, and the limited role of MX.
-7. **DNS Caching** — Explain TTLs, positive/negative caching, stale answers, and hosts-file overrides.
-8. **DNS Failures** — Distinguish NXDOMAIN, SERVFAIL, timeout, and local cache effects.
-9. **DNS Observation Limits** — Explain why a local or browser lookup does not prove a public-network query and where DoH/privacy affects visibility.
+1. **DNS Names and Hierarchy** — Explain labels, subdomains, the root, TLDs and delegated zones as a namespace rather than a hosting directory.
+2. **Registration and Delegated Authority** — Trace registrant, registrar, registry and nameserver responsibilities, including expiry; separate ownership from hosting.
+3. **Resource Records and Authorities** — Interpret A, AAAA, CNAME, NS and MX roles, distinguishing authoritative information from cached answers.
+4. **From Stub to Recursive Resolution** — Trace stub, recursive and authoritative roles, referrals and answers; identify an already-cached response.
+5. **Positive, Negative and Local Caching** — Interpret TTLs, negative caches, stale observations and hosts-file overrides through a supplied timeline.
+6. **Failure Evidence and Classification** — Distinguish NXDOMAIN, SERVFAIL and timeouts without inventing hidden resolver behavior.
+7. **DNS Observation and Privacy Limits** — Explain what local/browser resolution, encrypted DNS and synthetic traces do and do not establish.
 
 ### Module 5 — Hosting and Delivery
 
@@ -148,14 +142,12 @@ course capability.
 
 #### Lessons
 
-1. **Web Hosting** — Distinguish hosted files/content, servers, and domain-name services.
-2. **Static and Dynamic** — Compare static resource delivery with dynamically produced responses conceptually.
-3. **Hosting Models** — Compare shared hosting, virtual machines, managed hosting, and serverless at a high level.
-4. **Origin Servers** — Relate a listening HTTP process to an origin and its hosted resources.
-5. **Reverse Proxies** — Explain intermediated requests and origin visibility.
-6. **CDN Edges** — Explain geographically distributed delivery and shared caching boundaries.
-7. **Load Balancing** — Trace requests among origin instances and describe availability limitations.
-8. **Delivery Paths** — Distinguish DNS answers, origin identity, intermediary responses, and the actual serving location.
+1. **Hosting Responsibilities and Content Models** — Compare static/dynamic delivery across shared, VM, managed and serverless hosting; distinguish hosting from naming.
+2. **Origin Servers** — Trace a listening HTTP origin to the resource it serves without assuming a web framework.
+3. **Reverse Proxies and Visibility** — Locate a proxy on the request path and identify which origin details browser inspection cannot prove.
+4. **CDN Edges and Caching** — Explain geographically distributed delivery and when a response may not reach the origin.
+5. **Load Balancing** — Trace instance selection and identify what load balancing alone cannot guarantee about correctness or availability.
+6. **Delivery Path Comparison** — Compare two supplied paths and distinguish DNS answer, origin identity, intermediary response and actual serving location.
 
 ### Module 6 — URLs and Origins
 
@@ -166,15 +158,14 @@ course capability.
 
 #### Lessons
 
-1. **Resource Identifiers** — Explain why addresses identify resources and what a URL does not guarantee.
-2. **URL Components** — Parse scheme, authority, hostname, port, path, query, and fragment.
-3. **Relative URLs** — Resolve paths against a document or declared base URL.
-4. **Encoding and Names** — Explain percent encoding, Unicode domain-name concepts, and ambiguous interpretation.
-5. **Browser Origins** — Derive origins from scheme, host, and port.
-6. **Sites and Domains** — Distinguish registrable sites, subdomains, and origins.
-7. **Navigation Targets** — Predict how redirects, changed paths, and fragment-only navigation affect requests.
+1. **URL Identity and Components** — Parse scheme, authority, host, port, path, query and fragment and explain why a URL does not guarantee availability.
+2. **Relative Reference Resolution** — Resolve references against a declared base; correct a mistaken path-only interpretation.
+3. **Encoding and Internationalized Names** — Identify percent-encoding and Unicode-name interpretation hazards.
+4. **Tuple Origins** — Compare scheme/host/port origin tuples, changing one component at a time.
+5. **Sites versus Origins** — Distinguish registrable-site relationships, subdomains and same-origin comparisons.
+6. **Navigation and Fragment Targets** — Predict request consequences of path, query, redirects and fragments; identify fragment-only nonfetches.
 
-### Module 7 — HTTP Requests and Responses
+### Module 7 — HTTP Semantics, Redirects and Caching
 
 #### Outcomes
 
@@ -183,32 +174,19 @@ course capability.
 
 #### Lessons
 
-1. **HTTP Exchange** — Interpret the application-layer request and response model.
-2. **Message Structure** — Explain request targets, fields, bodies, and representation metadata.
-3. **HTTP Methods, Safety and Idempotence** — Distinguish GET, HEAD, POST, PUT, PATCH, and DELETE semantics; separate protocol method properties from application retry behavior.
-4. **Response Status** — Classify successful, redirected, client-error, and server-error responses.
-5. **Representations** — Interpret Content-Type, negotiation, compression, and body-length constraints.
-6. **Authority and Headers** — Explain the request's target authority and selected headers.
-7. **HTTP Versions** — Distinguish shared HTTP semantics from HTTP/1.1, HTTP/2, and HTTP/3 framing and transport.
+1. **HTTP Exchanges and Message Anatomy** — Interpret request targets, fields, bodies and representation metadata in a supplied exchange.
+2. **Methods, Safety and Idempotence** — Predict GET, HEAD, POST, PUT, PATCH and DELETE intent; distinguish protocol properties from retry guarantees.
+3. **Response Status and Redirect Semantics** — Interpret success, errors and Location redirects, including possible method changes.
+4. **Representations and Negotiation** — Compare Content-Type, negotiation, compression and body constraints for differing representations.
+5. **Target Authority and Intermediary Fields** — Distinguish request authority from untrusted forwarded claims.
+6. **HTTP Versions and Transport** — Compare shared semantics with HTTP/1.1, HTTP/2 and HTTP/3 framing and multiplexing.
+7. **Caches and Storage Scopes** — Separate browser/private and shared HTTP caches from application storage.
+8. **Freshness and Reuse** — Apply Cache-Control, freshness lifetime, no-store and private to a trace.
+9. **Validators and Revalidation** — Trace ETag, Last-Modified, conditional requests and 304 without inventing a response body.
+10. **Variants and Cache Keys** — Interpret Vary and representation selection for requests to one URL.
+11. **What a Waterfall Proves** — Distinguish cache hits, forwarded requests and origin observation; correct an unsupported origin-contact claim.
 
-### Module 8 — HTTP Caching and Redirects
-
-#### Outcomes
-
-- APP1-O7
-
-#### Lessons
-
-1. **Cache Purposes** — Distinguish browser/private caches, shared caches, and origin responses.
-2. **Freshness Controls** — Interpret Cache-Control, freshness lifetime, no-store, and private scope.
-3. **Cache Validators** — Explain ETag and Last-Modified as representation validation mechanisms.
-4. **Conditional Requests** — Trace If-None-Match, If-Modified-Since, and 304 Not Modified decisions.
-5. **Redirect Behavior** — Interpret redirect locations, status codes, and follow-up requests.
-6. **Cache Keys** — Explain Vary, representation differences, and why a URL alone may be insufficient.
-7. **Intermediary Effects** — Distinguish cache hits, proxy behavior, and origin observability.
-8. **Storage Boundaries** — Separate HTTP caching from browser application storage and persistent content.
-
-### Module 9 — HTTPS and TLS
+### Module 8 — HTTPS and TLS
 
 #### Outcomes
 
@@ -225,7 +203,7 @@ course capability.
 6. **Mixed Content** — Explain security warnings, downgrade risks, and secure-context boundaries.
 7. **Trust Failures** — Classify supplied certificate/hostname errors without bypassing browser validation.
 
-### Module 10 — Browser Architecture
+### Module 9 — Browser Architecture
 
 #### Outcomes
 
@@ -242,7 +220,7 @@ course capability.
 6. **Site Isolation** — Explain why browsers isolate potentially untrusted content.
 7. **Browser Inspection** — Relate developer-tool observations to engine behavior without unsupported generalization.
 
-### Module 11 — Navigation and Resource Loading
+### Module 10 — Navigation and Resource Loading
 
 #### Outcomes
 
@@ -252,16 +230,15 @@ course capability.
 
 #### Lessons
 
-1. **Navigation Lifecycle** — Trace address entry, history, navigation decisions, and document commitment.
-2. **Connections and Redirects** — Relate redirects and existing connections to navigation timing.
-3. **Document Streaming** — Explain incremental arrival and discovery of document content.
-4. **Resource Discovery** — Explain how stylesheets, images, fonts, and scripts are requested.
-5. **Preload and Priority** — Describe speculative discovery and relative resource scheduling at a high level.
-6. **Blocking Behavior** — Distinguish parser-blocking scripts, deferred/async loading, and render-blocking stylesheets.
-7. **Readiness Milestones** — Distinguish load events, first paint, and interactive readiness conceptually.
-8. **Network Waterfalls** — Interpret request ordering, reuse, caching, and failure evidence in browser tools.
+1. **Navigation and Connection Reuse** — Trace history decisions, redirects and reused connections; distinguish navigation commitment from prior network steps.
+2. **Incremental Document Streaming** — Explain how arriving bytes can lead to progressive parsing before full response completion.
+3. **Resource Discovery** — Trace stylesheet, script, image and font requests through a supplied document.
+4. **Preload and Priority** — Contrast speculative discovery and observed resource scheduling without presuming one browser algorithm.
+5. **Blocking Behavior** — Distinguish parser-blocking scripts, async/deferred execution and render-blocking styles with a fixture.
+6. **Readiness Milestones** — Compare load events, first paint and interactive readiness without equating them.
+7. **Waterfall Investigation** — Interpret timing, cache, reuse and failure indicators; identify evidence missing from a delay diagnosis.
 
-### Module 12 — HTML and CSS Parsing
+### Module 11 — HTML and CSS Parsing
 
 #### Outcomes
 
@@ -270,16 +247,14 @@ course capability.
 
 #### Lessons
 
-1. **HTML Decoding** — Explain byte/character decoding and tokenization at a conceptual level.
-2. **DOM Construction** — Trace tree building and common parser recovery effects.
-3. **DOM Representation** — Distinguish the DOM from source bytes and rendered boxes.
-4. **CSS Parsing** — Explain declarations, rule parsing, and error recovery.
-5. **Selector Matching** — Trace a simple selector to affected elements.
-6. **Cascade and Inheritance** — Explain why competing style declarations produce specific computed values.
-7. **Computed Styles** — Inspect an element's computed styling and distinguish it from authored CSS.
-8. **Semantics and Accessibility** — Relate meaningful document structure to the accessibility tree without requiring authoring mastery.
+1. **HTML Decoding and Tree Building** — Trace bytes, tokens and DOM construction, including a recoverable malformed-markup case.
+2. **Source, DOM and Accessibility Models** — Compare source bytes, document nodes and accessibility representations without authoring a full interface.
+3. **CSS Parsing and Selector Matching** — Trace a rule through parser recovery and element matching.
+4. **Cascade and Inheritance** — Resolve competing declarations and inheritance to predict displayed values.
+5. **Computed Styles and CSSOM** — Inspect computed values versus authored rules and document nodes.
+6. **Parser and Style Failure Investigation** — Contrast an invalid declaration, unmatched selector and HTML recovery; select a discriminating observation.
 
-### Module 13 — Layout to Pixels
+### Module 12 — Layout to Pixels
 
 #### Outcomes
 
@@ -297,7 +272,7 @@ course capability.
 7. **Incremental Rendering** — Describe what changes can require style, layout, paint, or compositing work.
 8. **Visual Diagnostics** — Identify layout shifts, missing styles, and delayed paint using controlled comparisons.
 
-### Module 14 — Security, State and Privacy
+### Module 13 — Security, State and Privacy
 
 #### Outcomes
 
@@ -307,16 +282,14 @@ course capability.
 
 #### Lessons
 
-1. **Same-Origin Policy** — Explain default cross-origin access restrictions.
-2. **CORS Boundaries** — Explain controlled permission for cross-origin reads, not a way to bypass transport rules.
-3. **Cookies and Sessions** — Distinguish cookie state and conceptual session identifiers.
-4. **Browser Storage** — Compare local storage, HTTP caches, and service-worker-controlled resources.
-5. **Secure Contexts** — Explain mixed content, permission prompts, and trustworthy-context restrictions.
-6. **Web Attack Concepts** — Recognize CSRF, credential handling, and untrusted-content boundaries without implementing backend authentication.
-7. **Privacy and Evidence** — Protect browsing histories, credentials, local data, and observation context.
-8. **Security Diagnostics** — Distinguish TLS, CORS, HTTP, permission, and storage symptoms using available evidence.
+1. **Same-Origin and CORS Decisions** — Classify browser read boundaries without confusing them with transport delivery or bypasses.
+2. **Cookies and Session Identifiers** — Explain cookie scope, transport and conceptual session state without backend implementation.
+3. **Storage versus HTTP Caching** — Contrast local storage, HTTP caches and service-worker-controlled resources.
+4. **Trustworthy Contexts and Permissions** — Apply earlier TLS and mixed-content understanding to secure-context and permission scenarios without repeating TLS.
+5. **Threat and Privacy Boundaries** — Recognize CSRF, untrusted content, credential exposure and sensitive observation data at a foundation level.
+6. **Security Symptom Diagnosis** — Distinguish TLS, CORS, HTTP, storage and permission failures using labeled evidence.
 
-### Module 15 — End-to-End Diagnosis
+### Module 14 — End-to-End Diagnosis
 
 #### Outcomes
 
@@ -332,13 +305,10 @@ course capability.
 
 #### Lessons
 
-1. **The Complete Journey** — Explain how connection, name resolution, transport, HTTP, parsing, and rendering connect.
-2. **Failure Boundaries** — Classify link/routing, DNS, transport, TLS, HTTP, resource, parsing, and visual failures.
-3. **Static-Site Fixtures** — Prepare or inspect a controlled HTML/CSS/image site using an unprivileged local server.
-4. **Evidence Collection** — Record request traces, document/style observations, tool versions, and uncertainty.
-5. **Controlled Failures** — Compare four distinct fault cases and explicit nonfault controls.
-6. **Repair Verification** — Apply narrow safe changes and re-run observations to verify at least two repairs.
-7. **Diagnostic Defense** — Present a reproducible Internet-to-pixels explanation and justified next observations.
+1. **Healthy Navigation and Controls** — Reproduce a static local site and fragment-only navigation; separate loopback evidence from public DNS/TLS claims.
+2. **Layered Fault Investigation** — Classify controlled connection, missing-resource, visual and labeled synthetic failures with evidence provenance.
+3. **Repair and Re-observation** — Repair bounded local faults and verify changed behavior using the same observation conditions.
+4. **Integrated Technical Defense** — Explain the supported network-to-pixels causal chain, uncertainties and safe next inspections.
 
 ## Completion requirements
 
@@ -567,42 +537,8 @@ Recommended self-checks and exercises that do
 - Explain why fragment navigation typically
   does not fetch a new document.
 
-### Completion decision and migration
+### Completion decision
 
-Each assessment is complete only when its
-specified Work, Criteria and Evidence are
-demonstrated. Together the four required
-assessments cover all `APP1-O*` outcomes.
-Passing quizzes, inspecting a fixture without
-interpreting it, or submitting synthetic
-output as live capture is insufficient.
+Each required assessment is complete only when its published Work, Criteria and Evidence are demonstrated. Together `APP1-AS1`–`APP1-AS4` cover all fourteen outcomes. Independent review distinguishes directly observed network/browser behavior from labeled synthetic public DNS/TLS cases; passing quizzes or copying tool output does not establish diagnosis.
 
-This rewrite replaces the former 17 module
-checkpoint/lab pairs and mandatory-by-template
-final lab with evidence selected for the
-course's actual outcomes. It **retains**
-the original technical scope, safe local
-inspection, public DNS/TLS examples, and
-the full end-to-end diagnostic requirement
-(including four fault cases and two repairs).
-The course remains focused on foundations;
-it does not add frontend/backend programming
-as a prerequisite.
-
-The program catalog duration changes from
-`16–18 weeks` to `12–16 weeks` as a
-**provisional workload revision**, not a
-claim of improved efficacy. Learner evidence
-should inform a future estimate. Historical
-course completion records remain bound to
-the requirements in force when they were
-assessed; no automatic equivalence or
-reclassification is implied.
-
-This course remains `draft`. Structural
-validation cannot establish pedagogical
-effectiveness, independently reproduced
-investigations, learner testing or
-`verified` readiness. Consult
-[Evidence Rules](../../spec/evidence-rules.md)
-and [Status Labels](../../spec/status-labels.md).
+Historical completions remain interpretable against their original course and specification revisions; this editorial revision does not automatically re-evaluate learners. The course remains `draft`; structural validation alone cannot establish learner-tested or verified effectiveness. See [Evidence Rules](../../spec/evidence-rules.md) and [Status Labels](../../spec/status-labels.md).
