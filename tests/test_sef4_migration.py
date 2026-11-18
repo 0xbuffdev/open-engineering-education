@@ -58,23 +58,32 @@ class SEF4MigrationTests(unittest.TestCase):
             covered.update(re.findall(r"SEF4-O\d+", reference.group(1)))
         self.assertEqual(covered, outcomes)
 
-    def test_all_nine_modules_reference_stable_outcomes(self):
+    def test_modules_follow_stable_outcomes_without_a_fixed_count(self):
         course = COURSE.read_text(encoding="utf-8")
         modules = course.split("\n## Modules\n", 1)[1].split(
             "\n## Completion requirements\n", 1
         )[0]
         matches = list(re.finditer(r"(?m)^### Module (\d+) — ", modules))
-        self.assertEqual([int(m.group(1)) for m in matches], list(range(1, 10)))
+        self.assertTrue(matches)
+        self.assertEqual(
+            [int(match.group(1)) for match in matches],
+            list(range(1, len(matches) + 1)),
+        )
+        assigned = set()
         for i, module in enumerate(matches):
             next_start = matches[i + 1].start() if i + 1 < len(matches) else len(modules)
             block = modules[module.start():next_start]
             self.assertEqual(block.count("#### Outcomes"), 1)
             self.assertEqual(block.count("#### Lessons"), 1)
             refs, lessons = block.split("#### Lessons", 1)
-            self.assertRegex(refs, r"(?m)^- SEF4-O\d+")
+            outcome_ids = re.findall(r"(?m)^- (SEF4-O\d+)$", refs)
+            self.assertTrue(outcome_ids)
+            self.assertEqual(len(outcome_ids), len(set(outcome_ids)))
+            assigned.update(outcome_ids)
             numbers = [int(x) for x in re.findall(r"(?m)^(\d+)\. ", lessons)]
             self.assertEqual(numbers, list(range(1, len(numbers) + 1)))
-            self.assertGreater(len(numbers), 0)
+            self.assertTrue(numbers)
+        self.assertEqual(assigned, {f"SEF4-O{i}" for i in range(1, 15)})
 
     def test_status_and_program_authority_preserved(self):
         text = COURSE.read_text(encoding="utf-8")

@@ -84,27 +84,62 @@ class SEF4MathAlignmentTests(unittest.TestCase):
             for field in ("Outcomes", "Work", "Criteria", "Evidence"):
                 self.assertRegex(contract, rf"(?m)^  - {field}: \S")
 
-    def test_nine_ordered_modules_teach_proof_before_search_and_sort(self):
+    def test_competency_owned_modules_teach_prerequisites_before_use(self):
         _, learning, modules, _ = content_parts()
         known = set(re.findall(r"(?m)^- \*\*(SEF4-O\d+):\*\*", learning))
         heads = list(re.finditer(r"(?m)^### Module (\d+) — ([^\n]+)$", modules))
-        self.assertEqual([int(h.group(1)) for h in heads], list(range(1, 10)))
-        self.assertEqual(heads[0].group(2), "Mathematical Reasoning for Executable Algorithms")
-        self.assertEqual(heads[3].group(2), "Algorithm Correctness & Cost Arguments")
-        self.assertEqual(heads[4].group(2), "Searching, Sorting & Complexity")
-        self.assertEqual(heads[-1].group(2), "Algorithm Toolkit")
+        # OEE derives module and lesson counts from competencies, not quotas.
+        self.assertTrue(heads)
+        self.assertEqual(
+            [int(h.group(1)) for h in heads],
+            list(range(1, len(heads) + 1)),
+        )
+        first = {}
+        blocks = []
         for i, header in enumerate(heads):
             stop = heads[i+1].start() if i+1 < len(heads) else len(modules)
             block = modules[header.start():stop]
+            blocks.append(block)
             self.assertEqual(block.count("#### Outcomes"), 1)
             self.assertEqual(block.count("#### Lessons"), 1)
             references, lessons = block.split("#### Lessons", 1)
             refs = set(re.findall(r"(?m)^- (SEF4-O\d+)$", references))
             self.assertTrue(refs)
             self.assertTrue(refs.issubset(known))
+            for outcome in refs:
+                first.setdefault(outcome, i)
             sequence = [int(x) for x in re.findall(r"(?m)^(\d+)\. ", lessons)]
             self.assertTrue(sequence)
             self.assertEqual(sequence, list(range(1, len(sequence)+1)))
+            # Each lesson names a substantive observable mechanism and task.
+            self.assertEqual(
+                len(re.findall(r"(?m)^\d+\. \*\*[^*]+\*\* — ", lessons)),
+                len(sequence),
+            )
+        self.assertEqual(set(first), known)
+
+        for predecessor, later in (
+            ("SEF4-O5", "SEF4-O6"),   # proof of loop before sorting
+            ("SEF4-O1", "SEF4-O8"),   # structures before priority queue
+            ("SEF4-O3", "SEF4-O6"),   # recursion before merge/quicksort
+            ("SEF4-O8", "SEF4-O9"),   # heap before Dijkstra
+            ("SEF4-O8", "SEF4-O10"),  # priority-based integration
+            ("SEF4-O9", "SEF4-O13"),  # graph algorithms before application
+            ("SEF4-O10", "SEF4-O13"), # DAG constraints before application
+            ("SEF4-O11", "SEF4-O13"), # DP before toolkit defense
+        ):
+            with self.subTest(preparation=f"{predecessor} before {later}"):
+                self.assertLess(first[predecessor], first[later])
+
+        module_text = modules.lower()
+        for mechanism in (
+            "lower-bound", "half-open", "termination variant",
+            "recurrence", "independent oracles", "worst, expected and amortized",
+            "bst", "collision", "heapify", "bellman",
+            "unreachable", "cycle", "pseudo-polynomial",
+        ):
+            with self.subTest(mechanism=mechanism):
+                self.assertIn(mechanism, module_text)
 
     def test_sef11_transfer_crosswalk_and_proof_method_are_explicit(self):
         source, _, modules, completion = content_parts()
