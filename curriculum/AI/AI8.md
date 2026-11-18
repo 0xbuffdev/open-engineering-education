@@ -310,13 +310,6 @@
 #### Outcomes
 
 - AI8-O1
-- AI8-O3
-- AI8-O9
-- AI8-O10
-- AI8-O11
-- AI8-O16
-- AI8-O17
-- AI8-O18
 - AI8-O19
 - AI8-O20
 - AI8-O21
@@ -410,15 +403,15 @@ All reference cases are small enough for manual derivation and independent stand
   - **Evidence:** Hand-calculated fusion/fallback oracle, paired inputs and revised/invalid joins, actual unimodal/combined comparisons, missingness and permission cases, dimensional/score checks and independently reviewable reasoning.
 
 - **AI8-AS8** (vision metrics, shift, rights and source reproducibility)
-  - **Outcomes:** AI8-O4, AI8-O7, AI8-O10, AI8-O11, AI8-O17, AI8-O19, AI8-O20, AI8-O21.
+  - **Outcomes:** AI8-O4, AI8-O7, AI8-O19, AI8-O20, AI8-O21.
   - **Work:** Run a bounded audit across at least one small spatial evaluation and one image–text query experiment, preserving image/scene/clip and paired IDs, complete metric/annotation conventions and source rights. Demonstrate a grouped-split repair for L1, a restrictive/withdrawn image and caption access test, and a perturbed lighting/occlusion or language/scene mismatch with actual per-slice counts. Recompute a D1/M1 or X1 metric under a changed object/label/missing candidate, and explain the difference between toy AP and COCO methodology. Record actual CPU/model/index costs, uncertain judgments and what the local findings cannot support.
   - **Criteria:** L1 original split leaks both scenes and corrected split does not; unauthorized images/captions/thumbnails are never emitted as allowed results. Spatial and retrieval metrics follow documented ground truth, matching, confidence, qrel and aggregation conventions. Actual experiments are independently reproducible with no secret data, GPU or inflated benchmark; exact toy scores are not sold as production validation, global fairness or physical-world safety.
   - **Evidence:** Dataset/split/provenance manifests, source/annotation/query identities, versioned local code and numeric oracles, actual measured comparisons with subgroup supports, forbidden/deleted sample tests, CPU/memory limits and candid reliability report.
 
 - **AI8-AS9** (integrated visual–language artifact and unfamiliar technical defense)
-  - **Outcomes:** AI8-O1, AI8-O3, AI8-O9, AI8-O10, AI8-O11, AI8-O16, AI8-O17, AI8-O18, AI8-O19, AI8-O20, AI8-O21, AI8-O22.
+  - **Outcomes:** AI8-O1, AI8-O19, AI8-O20, AI8-O21, AI8-O22.
   - **Work:** Consolidate **one** local, source-licensed/synthetic, learner-owned visual/multimodal study reusing authentic evidence from AI8-AS1–AS8; **do not** require eight independent full-scale systems. Select a bounded visual object/scene and its language descriptor task with explicit rights, annotations, grouping and intended population. Implement one meaningful visual/spatial task and one interacting image–text alignment/retrieval/fusion mechanism, an independently derived numeric fixture, a fair baseline/learned comparison, actual metric/CPU resource evidence and a targeted negative/permission test. The assessor supplies an **unfamiliar bounded** modification such as changed crop/box, overlap threshold, mask or ignore label, frame timestamp, caption pairing, contrastive temperature, fusion weight, missing modality, scene split or visibility rule. Predict the specific changed oracle or nonidentifiable outcome *before execution*, implement a verified correction or safe refusal and prove unaffected behavior remains correct. Defend the actual design, measured uncertainty and unearned generalizations in accessible individual text, audio or live review.
-  - **Criteria:** Clean-state source/annotation/model reproduction needs no paid data, GPU, hosted VLM or inaccessible grader, and independently checked geometry, matching, mask, pairing and metric results justify the precise skills claimed. A valid normal/negative/unfamiliar-case set demonstrates a real changed prediction or justified refusal and regression checks. No historical AI8 responsible-AI equivalence, unapproved content release, generative-model mastery, global visual robustness or operational safety certification is inferred. Specialist competencies still require their own substantive AI8-AS1–AS8 outcome evidence even where reused in the integrated artifact.
+  - **Criteria:** Clean-state source/annotation/model reproduction needs no paid data, GPU, hosted VLM or inaccessible grader, and independently checked geometry, matching, mask, pairing and metric results justify the precise skills claimed. A valid normal/negative/unfamiliar-case set demonstrates a real changed prediction or justified refusal and regression checks. No historical AI8 responsible-AI equivalence, unapproved content release, generative-model mastery, global visual robustness or operational safety certification is inferred. Specialist competencies still require their own substantive AI8-AS1–AS8 outcome evidence even where reused in the integrated artifact; the final defense directly evaluates only integration, evaluation, provenance, permission, reproducibility and unfamiliar transfer outcomes.
   - **Evidence:** One coherent versioned source/evidence collection, synthetic images and captions, box/mask/clip annotations, licensing/permissions and split identity logs, independently checkable exact oracles, actual model/baseline/retrieval outputs, failure/changed-case proofs, budget/limitations report and individual technical defense.
 
 ### Required outcome-to-assessment coverage
@@ -427,22 +420,22 @@ All reference cases are small enough for manual derivation and independent stand
 | --- | --- |
 | AI8-O1 | AI8-AS1, AI8-AS9 |
 | AI8-O2 | AI8-AS1 |
-| AI8-O3 | AI8-AS1, AI8-AS3, AI8-AS4, AI8-AS9 |
+| AI8-O3 | AI8-AS1, AI8-AS3, AI8-AS4 |
 | AI8-O4 | AI8-AS1, AI8-AS5, AI8-AS8 |
 | AI8-O5 | AI8-AS2 |
 | AI8-O6 | AI8-AS2 |
 | AI8-O7 | AI8-AS2, AI8-AS5, AI8-AS8 |
 | AI8-O8 | AI8-AS3 |
-| AI8-O9 | AI8-AS3, AI8-AS9 |
-| AI8-O10 | AI8-AS3, AI8-AS8, AI8-AS9 |
-| AI8-O11 | AI8-AS4, AI8-AS8, AI8-AS9 |
+| AI8-O9 | AI8-AS3 |
+| AI8-O10 | AI8-AS3 |
+| AI8-O11 | AI8-AS4 |
 | AI8-O12 | AI8-AS4 |
 | AI8-O13 | AI8-AS5 |
 | AI8-O14 | AI8-AS5 |
 | AI8-O15 | AI8-AS6, AI8-AS7 |
-| AI8-O16 | AI8-AS6, AI8-AS9 |
-| AI8-O17 | AI8-AS6, AI8-AS7, AI8-AS8, AI8-AS9 |
-| AI8-O18 | AI8-AS7, AI8-AS9 |
+| AI8-O16 | AI8-AS6 |
+| AI8-O17 | AI8-AS6, AI8-AS7 |
+| AI8-O18 | AI8-AS7 |
 | AI8-O19 | AI8-AS2, AI8-AS4, AI8-AS7, AI8-AS8, AI8-AS9 |
 | AI8-O20 | AI8-AS8, AI8-AS9 |
 | AI8-O21 | AI8-AS8, AI8-AS9 |
