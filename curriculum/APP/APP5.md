@@ -100,12 +100,14 @@ than invent metrics, participant feedback or
 deployment-grade reliability. All real-person
 feedback requires consent and minimal data capture.
 
-The proposed 14–18-week duration and focused weekly
-hours are planning estimates only. Formative module
-investigations support progressively independent
-practice; **the seven explicitly required assessments**
-below, which may share one evolving vertical slice,
-are the only summative completion requirements.
+The 14–18-week duration and weekly workload remain
+provisional planning estimates; fewer editorial lesson
+entries do not prove lower study effort or learner-tested
+readiness. Each of the **seven explicitly required
+summative assessments** evaluates a distinct cross-layer
+decision using **one evolving full-stack vertical slice**.
+Former module practice remains formative, and prior
+accepted evidence may be referenced rather than copied.
 
 ## Learning outcomes
 
@@ -128,7 +130,7 @@ are the only summative completion requirements.
 
 ## Modules
 
-### Module 1 — Requirements, User Journeys and Cross-Layer Acceptance
+### Module 1 — User Journeys, Requirements and Cross-Layer Acceptance
 
 #### Outcomes
 
@@ -138,23 +140,19 @@ are the only summative completion requirements.
 
 #### Lessons
 
-1. **Course orientation and product scope** — Define full-stack architecture as a coherent user journey across an independently built React frontend and Fastify/PostgreSQL backend; distinguish it from a course teaching their syntax.
+1. **A Full-Stack User Task and Its Historical Context** — Situate integrated browser/server/data development through one synthetic multi-tenant user problem, distinguishing APP20 React and APP3 API competencies from the new requirement that they agree on a single observable journey.
 
-2. **Stakeholder problem and provenance** — Work from a synthetic brief or consented stakeholder observations, marking assumptions and actual user evidence honestly.
+2. **Stakeholder Provenance, Actors and Data Invariants** — Use a supplied or consent-based brief, label actual observations versus assumptions, identify user/tenant roles, resource lifecycle and necessary forbidden actions without inventing participant research.
 
-3. **Actors, boundaries and business invariants** — Identify users, tenants, roles, resources, forbidden actions, cross-layer side effects and where correctness must be enforced.
+3. **Acceptance States and Independent Expected Results** — Specify success, empty, denied, validation, conflict, stale, pending, uncertain and recovery outcomes; define the server/database truth and what a user should observe in each, rather than add template statuses mechanically.
 
-4. **End-to-end success and failure scenarios** — Write observable acceptance cases for signed-in, invalid, denied, empty, conflicting, stale, pending, failed and recovered workflows.
+4. **Proportionate Privacy, Accessibility and Recovery Goals** — Set scoped privacy, task usability, time/size and recovery conditions with locally measurable expectations and honest production/real-user limitations.
 
-5. **Nonfunctional requirements with measures** — Define scoped response/latency, accessibility, privacy, data-retention and local reliability objectives without claiming production service levels.
-
-6. **Requirements-to-evidence traceability** — Map each user action to UI state, HTTP contract, durable record, trust check and test, including the negative paths.
-
-7. **Choose an achievable vertical slice** — Bound the problem to a small multi-tenant workspace, catalog/reservation or document-processing product rather than a distributed microservice estate.
+5. **One Vertical Slice and Requirements-to-Evidence Map** — Choose one achievable document/reservation/workspace workflow; trace an action through interface, HTTP, application policy, transaction, optional file/job and checkable evidence, keeping extra features out of scope.
 
 *Optional practice — requirements review:* Expose a misleading 'works on my machine' success claim and add the missing acceptance and recovery evidence.
 
-### Module 2 — Architecture Views, Responsibilities and Local Composition
+### Module 2 — Application Topology, State Authority and Local Composition
 
 #### Outcomes
 
@@ -165,21 +163,19 @@ are the only summative completion requirements.
 
 #### Lessons
 
-1. **System Boundaries and Architecture Views** — Draw browser, API, PostgreSQL, job runner, file resource and outbound fixture, distinguishing actors from processes and durable state; use level-appropriate context, component, deployment and interaction views without implying every diagram describes separate services.
+1. **Context, Component and Sequence Views of One Application** — Diagram React/browser, Fastify, PostgreSQL, local object/cache fixtures, worker and simulated dependency at the detail each decision needs; do not portray every module as a separate deployable service.
 
-2. **Synchronous request path** — Trace browser event through React, Fetch, authenticated Fastify handler, domain operation and SQL transaction to returned response and UI result.
+2. **Synchronous Write and Read Ownership** — Trace form action to credentialed HTTP, verified principal, domain rule, SQL commit, documented response and reconciled UI, identifying exactly where state becomes authoritative.
 
-3. **Asynchronous side-effect path** — Trace an accepted mutation through durable work record, dispatcher, simulated external dependency, notification/progress and UI refetch.
+3. **Durable Intent and External Effect Boundaries** — Trace database-recorded work through local dispatcher, failure/duplicate event, durable status and browser refetch; distinguish database commit from externally completed work.
 
-4. **Authority and data ownership** — Separate client drafts, cache replicas, authoritative resource rows, identity/session ownership and immutable audit facts.
+4. **One Cohesive Modular Monolith and Tested Wiring** — Choose a bounded local topology with versioned origins/ports, synthetic credentials, config, single source of truth and free pre-provisioned toolchain; explain when distribution is justified without requiring it.
 
-5. **Monolith versus distributed alternatives** — Choose a small modular monolith for the reference project and explain when a separate worker or object store becomes justified.
-
-6. **Composition and configuration** — Wire independent frontend/backend/data components using documented local origins, environment values and ports; eliminate hidden absolute URLs.
+5. **One Ownership/Atomicity Counterexample** — Find a browser-owned permission rule, wrong cache owner or transaction imagined to include an external notification; correct the architecture and demonstrate changed expected evidence.
 
 *Optional practice — boundary trace:* Find a domain check leaking into React or a transaction falsely spanning an external HTTP call and repair the architecture view.
 
-### Module 3 — Client–Service Contract Integration and Failure Mapping
+### Module 3 — React–Fastify Contract and Cross-Layer Failure Translation
 
 #### Outcomes
 
@@ -191,23 +187,21 @@ are the only summative completion requirements.
 
 #### Lessons
 
-1. **Reusing APP20 and APP3 contracts** — Connect an existing typed React feature to an independently tested Fastify API without copying a fake client contract by hand.
+1. **Reuse Typed Contracts without Assuming Runtime Truth** — Connect the APP20 React interface to real APP3 Fastify/SQL behavior using independently verified OpenAPI/schema or generated types with runtime checks; avoid duplicating predecessor syntax lessons.
 
-2. **End-to-end request/response shape** — Compare OpenAPI and actual JSON/headers/status, including runtime validation after TypeScript compilation.
+2. **HTTP Status, Content and User-Facing Meaning** — Inspect actual response status, media, empty/204, conflict 409, precondition 412, authentication 401, authorization 403, 429 and network failure; give truthful accessible recovery rather than blanket error toasts.
 
-3. **Credentialed Fetch and origin policy** — Configure same-origin or cross-origin local fixture behavior deliberately and explain cookies, fetch credentials and CORS visibility rather than treating CORS as identity verification.
+3. **Credentials, Cookies and Browser Origin Boundaries** — Configure documented same-origin or credentialed cross-origin local requests with appropriate CSRF policy; show CORS visibility is not API authorization.
 
-4. **Error categories through presentation** — Map 400, 401, 403, 404, 409, 429, 500 and transport errors into accurate, accessible UI recovery states.
+4. **Data Contract Drift and an Independent Consumer** — Run a separately written HTTP consumer and real browser with conflicting/malformed/omitted fields, distinguishing TypeScript compilation, schema validation and actual UI behavior.
 
-5. **Request IDs and correlation fields** — Carry safe bounded trace/request identifiers across boundaries without logging tokens or assuming browsers can trust a caller-supplied ID.
+5. **Safe Correlation and Uncertain Client Retry** — Carry bounded request correlation without secrets or trusting caller-controlled IDs, and distinguish safely retriable reads from an uncertain post-commit write needing idempotency/reconciliation.
 
-6. **Client retries and safe semantics** — Distinguish read retry, non-idempotent mutation and uncertain server commit after a lost response.
-
-7. **Consumer-driven contract fixtures** — Run an independently written HTTP consumer alongside React integration tests and compare results with the published contract.
+6. **Contract-Driven Failure Repair across Both Sides** — Inject a changed field, unexpected error shape or no-body result, demonstrate the failing client and repair both API response and user state without hiding an unsupported case.
 
 *Optional practice — mismatched-contract repair:* Repair a runtime response missing a required field or returning inconsistent errors, with both client and server regression cases.
 
-### Module 4 — Session Continuity, Authorization and Tenant Isolation
+### Module 4 — Session, Tenant and Resource Identity across the Whole Journey
 
 #### Outcomes
 
@@ -218,80 +212,54 @@ are the only summative completion requirements.
 
 #### Lessons
 
-1. **Authentication continuity across page loads** — Use APP3's verified synthetic session mechanism through login, refresh, navigation, expiry and deliberate logout.
+1. **Verified Session through Reload, Route and Logout** — Use APP3's real local synthetic session to verify browser refresh, navigation, expired/revoked credentials and explicit sign-out; never equate client-held user IDs with verified principals.
 
-2. **Principal and resource ownership** — Resolve the server-side current principal and authoritative tenant membership before every protected list/detail/mutation.
+2. **Direct Resource and Property Denials** — Execute independently issued HTTP list/detail/create/update/delete requests against two tenants, guessed IDs and extra writable/readable properties, inspecting actual unchanged DB rows and serialized output.
 
-3. **Client visibility versus server authority** — Display navigation only when appropriate but test direct forbidden HTTP requests despite hidden buttons or routes.
+3. **Browser Visibility, Drafts and Server Authority** — Make UI navigation and form state reflect authorized data while proving hidden buttons and route guards do not grant/revoke permissions; preserve recoverable nonsecret drafts when appropriate.
 
-4. **Session expiry and interrupted workflows** — Handle an expired/revoked session during an upload, optimistic mutation or progress check without leaking previous user state.
+4. **Authentication/CSRF Model for Mutations and Background Views** — Check the actual selected cookie/bearer mode and server CSRF controls where applicable; enforce server-held role/tenant identity for progress and file resources, not client-asserted claims.
 
-5. **CSRF and cookie boundaries** — Explain SameSite/Secure/HttpOnly trade-offs and verify a proportionate local anti-CSRF policy appropriate to the chosen credential mode.
+5. **Revocation during Pending Work and Old-User Results** — Revoke/expire a session while upload, mutation, fetch or worker/progress poll is pending; ensure late results are discarded and privileged work is reauthorized or fails under an explicit policy.
 
-6. **Resource and field-level authorization** — Reject guessed resource IDs, cross-tenant list/detail writes, unsafe role edits and data fields not visible to the principal.
-
-7. **Caches and async worker identity** — Scope cache keys/job access by authoritative tenant and ensure workers cannot inherit unchecked client-asserted claims.
-
-8. **Logout and identity switching** — Clear or invalidate scoped local state and stop stale updates; prove no prior tenant data flashes after sign-out or user switch.
+6. **Two-Identity UI–API–DB Regression** — Switch two synthetic users/tenants, checking no previous-user cache, rendered result, file handle, status request or unauthorized row appears after logout or re-login.
 
 *Optional practice — multi-tenant audit:* Inject a direct-resource access or stale-cache disclosure and verify the repaired server and UI behavior independently.
 
-### Module 5 — State Ownership, Optimistic Mutations and Conflict Recovery
+### Module 5 — Committed Mutations, Optimistic State and Cross-Layer Invariants
 
 #### Outcomes
 
 - APP5-O1
+- APP5-O2
 - APP5-O5
 - APP5-O6
+- APP5-O11
 - APP5-O14
 
 #### Lessons
 
-1. **Local draft versus confirmed server state** — Model unsubmitted form fields, optimistic UI, pending server state, committed facts and cached views as distinct concepts.
+1. **One Domain Invariant and its Actual Owning State** — Define a reservation, entitlement or document publication rule, contrasting local draft, optimistic prediction, API response and PostgreSQL committed fact, reusing APP4 and APP3 invariants.
 
-2. **Write lifecycle and transition diagrams** — Define pending, conflict, uncertain, retrying, committed and reverted states for one user-facing change.
+2. **User-Visible Mutation State and Recovery Policy** — Model editing, submitting, confirmed, rejected, conflict, uncertain and reconciled transitions, retaining meaningful drafts, focus and accessible status rather than re-teaching React state syntax.
 
-3. **Lost response versus failed write** — Simulate a transaction that commits before its HTTP response disappears and show why retry must not blindly duplicate effects.
+3. **Scoped Transaction and API Result** — Use one real service transaction for related writes and return correct success/conflict/validation semantics; inspect independently expected DB changes under a failed second write.
 
-4. **Conflicting updates and revision tokens** — Use a server-side version/ETag or justified conflict strategy, with meaningful 409/412-type feedback and no silent overwrite.
+4. **Two-Client Race and Stale Revision** — Coordinate two real clients changing the same record with revision/If-Match or justified DB control; verify no unnoticed overwrite and choose an accurate 409/412 or project-specific conflict response.
 
-5. **Optimistic update with explicit rollback** — Show provisional UI success and restore/resolve it on failed validation or conflict, retaining the user's draft safely.
+5. **Lost Response after a Real Commit** — Drop an HTTP response after a committed change, show UI uncertainty and idempotent lookup/replay, and refuse blind retries that could duplicate side effects.
 
-6. **Out-of-order fetches and user intent** — Reproduce a late stale response after a newer edit or tenant switch; prevent it from overwriting authoritative current view.
+6. **Optimistic Rollback and Refetch of Server Truth** — Render provisional success only under an explicit contract; on conflict/rejection/lost response, preserve the user's intent while reverting or reconciling against real committed data.
 
-7. **Read-after-write and consistency windows** — Explain what the user can expect after commit versus delayed cache/job projections, without promising instantly synchronized replicas.
+7. **Cross-Layer Consistency after Cache or Job Delay** — Explain a committed database write with stale cached read or pending external job; state the actual consistency window rather than promise immediate availability across systems.
+
+8. **Schema-to-UI Evolution at the Transaction Boundary** — Trace a changed field or constraint through migration, Fastify response, old/new React consumer, cache and durable status; defer detailed rollout evaluation to M11.
+
+9. **Transaction–File/Notification Separation and Repair** — Reproduce a DB commit followed by failure to publish a file or send external notification; demonstrate retained truth and a compensating/forward-repair plan without claiming distributed atomic rollback.
 
 *Optional practice — conflict scenario:* Run two synthetic clients editing the same resource and repair a misleading final-state message with database evidence.
 
-### Module 6 — Persistence, Transactions and Cross-Layer Invariants
-
-#### Outcomes
-
-- APP5-O2
-- APP5-O5
-- APP5-O6
-- APP5-O9
-- APP5-O13
-
-#### Lessons
-
-1. **From APP4 schema to full-stack workflow** — Trace state transitions through a service repository and SQL transaction without re-teaching normalization.
-
-2. **Choosing a durable business invariant** — Define one meaningful inventory, entitlement or document ownership rule and map checks to domain and database constraints.
-
-3. **Transaction boundary and application result** — Keep all related database writes in one explicit scoped transaction and map failed preconditions to stable API results.
-
-4. **Cross-request concurrency and conflict** — Demonstrate a two-client race and inspect committed rows, constraint rejections and intended user-facing recovery.
-
-5. **Database and external side-effect separation** — Show why a committed DB transaction does not atomically publish a file or send an external notification.
-
-6. **Idempotency and durable workflow intent** — Use a transactionally recorded key/job/outbox state for replay safety when appropriate, and document its limitations.
-
-7. **Schema changes and old client behavior** — Keep a staged migration compatible with defined older consumers until usage and backfill evidence make a contract change safe.
-
-*Optional practice — invariant failure:* Repair a handler that returns success before checking a failed transaction or leaves inconsistent file metadata after rollback.
-
-### Module 7 — Cache Keys, Freshness, Invalidations and Authorization
+### Module 6 — Identity-Safe Cache Ownership and Invalidation
 
 #### Outcomes
 
@@ -302,23 +270,21 @@ are the only summative completion requirements.
 
 #### Lessons
 
-1. **What and where to cache** — Distinguish browser memory, HTTP cache semantics, API-side caches and database queries by ownership, sensitivity and change frequency.
+1. **Which Layer Owns a Cache and Why** — Compare browser memory, HTTP, API-side transient data and authoritative PostgreSQL; select one necessary bounded cache with a meaningful stale-read/privacy problem.
 
-2. **Cache key construction** — Include authoritative tenant/resource identity, query filters and version dimensions; avoid collisions and untrusted key components.
+2. **Tenant, Principal, Resource, Filter and Version Keys** — Construct collision-resistant semantic keys using server-verified scope and relevant query/revision dimensions, and test a cross-user cache-collision counterexample.
 
-3. **Freshness and invalidation model** — Define TTL, explicit invalidation, revision changes, stale-while-revalidate where justified and bounded storage policy.
+3. **Freshness, Eviction and Invalidation after Commit** — Define TTL/eviction and write-after-read invalidation; demonstrate how a database mutation can leave cached list/detail state wrong until an explicit refresh.
 
-4. **Mutation and cache coherence** — Update or invalidate derived list/detail state after a committed write, and explain failure if cache publication races the DB.
+4. **HTTP Validators and Privacy Semantics** — Use ETag/If-None-Match when beneficial and correctly scope Cache-Control, protected responses and conditional reads without mistaking caching headers for authorization.
 
-5. **HTTP validators and conditional responses** — Use ETag/If-None-Match where appropriate without confusing a conditional read with an authorization check.
+5. **Revocation and Identity Switch while a Cache Exists** — Test a private response after logout/role change/tenant switch, preventing stale render or server-side unauthorized retrieval even if a local browser cache survives.
 
-6. **Security and stale permissions** — Prevent caching protected data across users or treating cached permissions as authority after revocation.
-
-7. **Cache stampedes and unavailable cache** — Consider a small controlled request burst and choose a simple fallback strategy; avoid manufacturing distributed-cache requirements.
+6. **Unavailable Cache and Bounded Recovery** — Inject a cache miss/stale response or local cache outage, prove the fallback respects policy and resource budget, and reject unnecessary hosted Redis/distributed stampede machinery.
 
 *Optional practice — cache leak and stale row:* Reproduce a previous user's cached result or a stale post-edit list and verify the fixed key/invalidation policy.
 
-### Module 8 — Files, Object-Style Resources and Publication Safety
+### Module 7 — Private File Resources, Safe Publication and Cleanup
 
 #### Outcomes
 
@@ -329,77 +295,54 @@ are the only summative completion requirements.
 
 #### Lessons
 
-1. **Why files are a separate trust boundary** — Distinguish file bytes, metadata, record ownership and serving authorization; keep synthetic content local.
+1. **Files, Metadata and Nonpublic Ownership** — Separate arbitrary bytes, database metadata, published visibility and tenant/resource membership in one local object-style resource workflow; avoid pretending a file path is a credential.
 
-2. **Staged upload lifecycle** — Design requested/pending/uploaded/validated/available/rejected states and a bounded temporary storage policy.
+2. **Staged Upload and Server Byte/Type Policy** — Model temporary, validated, published, rejected and expired states; generate storage IDs, enforce actual size limits and check appropriate content signatures without trusting filenames or client-supplied MIME.
 
-3. **Client and server size/type checks** — Use server-enforced byte limits, generated storage IDs and content-based inspection as appropriate, not just filename or client MIME trust.
+3. **Safe Content Policy and Isolation Limits** — Use harmless synthetic adversarial content, reject unsupported formats and isolate unpublished bytes; demonstrate local validation cannot certify content malware-free or replicate provider scanning.
 
-4. **Content safety and quarantine** — Explain that a local fixture can validate known byte/file policies but cannot certify malware-free content; quarantine or reject unsupported types.
+4. **Server-Authorized Download and Capability Risks** — Authorize every download against current principal and resource, set safe content/attachment response headers, and discuss signed URL bearer capabilities without requiring cloud storage.
 
-5. **Private access and signed URL semantics** — Implement an authorized local download path; model short-lived scoped capabilities conceptually and explain bearer-style signed URL risks without needing a cloud bucket.
+5. **DB Commit versus Filesystem Publication** — Inject failures before and after metadata commit/file move, document observable temporary state and reconcile via a durable intent or bounded compensating cleanup rather than claim transactionally atomic file operations.
 
-6. **Ownership and metadata consistency** — Bind file records to authenticated tenant/resource and define transaction-plus-file-operation recovery when one side succeeds.
-
-7. **Cleanup of abandoned and rejected uploads** — Enforce expiration/garbage collection on local temporary objects and prove no cross-user access to orphaned artifacts.
+6. **Orphans, Revocation and Recovery Verification** — Expire abandoned uploads, detect orphaned objects and test tenant-switch/revoked download attempts while independently checking physical files, durable records and cleanup.
 
 *Optional practice — file boundary investigation:* Test forged metadata, oversize data, wrong tenant download, stale signed-like token and failed publication; show safe rejection.
 
-### Module 9 — Async Work, Durable Intent and Retry Semantics
+### Module 8 — Durable Job Results and User-Visible Progress Reconciliation
 
 #### Outcomes
 
 - APP5-O5
 - APP5-O6
 - APP5-O9
+- APP5-O10
 - APP5-O11
+- APP5-O14
 
 #### Lessons
 
-1. **Synchronous versus asynchronous user outcomes** — Choose when a request may finish inline and when to acknowledge durable pending work with an honest progress status.
+1. **Synchronous Completion versus Accepted Background Work** — Decide when a real user operation completes inline and when HTTP 202 means only accepted or queued, never a guaranteed completed action; publish an authorized durable status endpoint.
 
-2. **Job state machine and ownership** — Represent queued/running/retryable/completed/permanent-failure states with tenant ownership, attempt counters and timestamps.
+2. **Transactionally Recorded Job Intent and State** — Use APP3's durable outbox/worker foundation and define tenant, idempotency identity, queued/running/retryable/completed/failed state, recorded attempts and no claimed cross-system atomicity.
 
-3. **Database outbox and worker boundary** — Write domain mutation and intent record together, then process separately with bounded local worker using the APP3 foundation.
+3. **Duplicate Delivery, Lost Acknowledgement and Worker Restart** — Reproduce a durable restart, duplicate signal and committed-but-unacknowledged worker action; make the protected business outcome idempotent or explain unsupported external exactly-once claims.
 
-4. **At-least-once and idempotent consumers** — Inject duplicate deliveries, lost acknowledgements and process restart, verifying no unintended duplicate business side effects.
+4. **Safe Retries, Poison Jobs and Shutdown** — Bound attempts, backoff, final failure and work ownership when the worker stops, without silently discarding an already accepted job.
 
-5. **Transient retry and poison jobs** — Define bounded backoff, dead-letter/failed state and manual retry conditions with clear user communication.
+5. **Bounded Polling with Accessible Progress** — Implement bounded interval/backoff/visibility-aware polling with authenticated status reads, appropriate pending/terminal announcements and reliable cleanup on route/logout.
 
-6. **Eventual result and client reconciliation** — Offer an authoritative status endpoint and clear rules for when a UI pending state may be considered complete.
+6. **Optional EventSource and Missed Event Semantics** — For a justified simple SSE alternative, demonstrate supported EventSource connection and Last-Event-ID behavior, but do not require SSE in addition to polling, and do not treat an event ID as an authoritative durable event log.
 
-7. **Shutdown and work ownership** — Stop accepting new work, record in-progress ownership and recover durable uncompleted jobs without asserting all work ran exactly once.
+7. **Stale, Duplicate or Cross-Tenant Progress Counterexample** — Deliver delayed/duplicated/forged or old-identity progress updates and show a newer authoritative job/status query overrides stale presentation; never let unauthorized IDs reveal job metadata.
+
+8. **Reconnect, Reload and User Recovery** — Interrupt the UI or drop events during a true job transition, then reauthenticate/revalidate and refetch actual durable state after reconnect to give accurate completion or failure feedback.
+
+9. **User-Task Completion versus a Notification** — Test that final UI status and accessible controls reflect a committed business result rather than merely a delivered signal, including failure and retry instructions.
 
 *Optional practice — duplicate-delivery scenario:* Restart a disposable local worker after a simulated crash and prove accepted work is neither silently forgotten nor duplicated as a business operation.
 
-### Module 10 — Progress Delivery, Polling and Reconnect Reconciliation
-
-#### Outcomes
-
-- APP5-O5
-- APP5-O9
-- APP5-O10
-- APP5-O11
-
-#### Lessons
-
-1. **Notification versus source of truth** — Explain that UI progress events are hints; authoritative durable job status must determine the recovered state.
-
-2. **Bounded polling design** — Implement interval/backoff/jitter policy, terminal-state stop and visibility/route cleanup without indefinite high-frequency requests.
-
-3. **Simple event stream as an option** — Inspect a small Server-Sent Events stream if useful, distinguishing SSE from a durable queue, authentication channel or general bidirectional realtime platform.
-
-4. **Connection interruption and stale events** — Model reconnect, delayed/duplicated updates and old-job notifications; use monotonic version/status reconciliation where appropriate.
-
-5. **Authentication on progress endpoints** — Require real server-side authorization for polling/subscriptions and avoid leaking tenant job identifiers in unauthenticated streams.
-
-6. **Accessible pending and completed updates** — Present progress, retry and completion with proportionate live-region announcements and task-oriented messaging.
-
-7. **Slow client, tab hidden and teardown** — Bound active timers/connections, clean up on route change or sign-out and resume by refetching actual job state.
-
-*Optional practice — missed-notification test:* Drop a notification or pause polling and prove the client reaches the correct end state after reconnect.
-
-### Module 11 — External Dependencies, Degradation and Recovery
+### Module 9 — Partial Dependency Failure, Degraded States and Retry Budgets
 
 #### Outcomes
 
@@ -410,23 +353,21 @@ are the only summative completion requirements.
 
 #### Lessons
 
-1. **Map dependency failure domains** — Identify failures from browser network, API, database, worker, cache, file and synthetic outbound service independently.
+1. **Real Failure Owners and Cross-Service Uncertainty** — Map browser network, API, DB, cache, files, worker and synthetic upstream failures to the specific state each owns without repeating APP3 outbound connector design.
 
-2. **Deadlines and timeout budgets** — Bound operations and understand why cancellation cannot undo a committed DB change or external side effect.
+2. **Timeout and Total Retry Budget across Layers** — Trace UI, API and worker backoff/retries, reproduce amplification under one slow dependency and assign a bounded retry owner instead of stacking automatic retries.
 
-3. **Downstream response validation** — Validate local simulated external API status/body/content type, restrict outbound targets and avoid unbounded response buffering.
+3. **Committed State and Uncertain External Effects** — Observe database committed data alongside timed-out remote notification or unpublished file; explain why AbortSignal and SQL rollback cannot undo completed external operations.
 
-4. **Retry amplification and overload** — Demonstrate how UI, API and worker retries can multiply requests; select one defensible retry owner and budget.
+4. **Truthful Degraded, Queued and Failed UX** — Choose accurate loading/partial/accepted/failed messaging and focus/keyboard recovery so the user never sees success when the business result is still uncertain.
 
-5. **Truthful degraded states** — Show pending, temporarily unavailable, partial success and failed outcomes without giving users a false completed/safe message.
+5. **Fallback and Safe Feature Limitations** — Decide when cache-served reads, queued intents or unavailable writes are acceptable under a real stated policy, and refuse a fallback that bypasses server authorization.
 
-6. **Fallback and service boundary decisions** — Choose whether cached reads or queued writes remain acceptable under dependency outage and state lost guarantees clearly.
-
-7. **Recovery and reconciliation after restoration** — Reconcile durable job/resource state, refresh UI and verify no unauthorized or duplicate side effects appeared.
+6. **Dependency Restoration, Reconciliation and Evidence** — Restore a synthetic upstream, inspect actual DB/job/file state and the UI's final result, and prove a causal fault repair with bounded measurements and honest missing evidence.
 
 *Optional practice — cascading outage:* Simulate slow outbound dependency and retry storm; document bounded mitigation and what remains unsupported.
 
-### Module 12 — Full-Stack Security, Privacy and Data Lifecycle
+### Module 10 — Full-Stack Privacy, Security and Resource Lifecycle
 
 #### Outcomes
 
@@ -438,23 +379,21 @@ are the only summative completion requirements.
 
 #### Lessons
 
-1. **System-level threat model** — Trace client-input, session, tenant, API, DB, cache, file and job boundaries and list representative attacker actions on synthetic resources.
+1. **Cross-Layer Attack Surface and Actual Risk Ownership** — Map current OWASP object/property/function authorization, session, unsafe input/upload, cache, job status and outbound URL risks onto the same user's journey, without reteaching APP3's isolated controls.
 
-2. **Session and cross-origin policy** — Test credentialed fetch, cookie expiry/rotation and anti-CSRF policy where relevant, distinguishing cross-origin visibility from server authority.
+2. **Cookie, CSRF and Public Exposure Limits** — Challenge chosen credentialed Fetch/SameSite/CSRF behavior with synthetic local requests; distinguish browser CORS, deployed TLS requirements and server authority.
 
-3. **Direct-object access and field exposure** — Issue API calls without using the UI to verify role, tenant and property-level denials across all relevant methods.
+3. **Direct API, File and Progress Access Matrix** — Bypass the React UI and attempt unauthorized list/detail/write, download, status and optional event-stream access; inspect actual HTTP, durable rows and hidden fields across tenants.
 
-4. **Cache and stale authorization** — Simulate revocation and logout while a protected result exists in memory/cache, confirming no cross-identity disclosure.
+4. **Revoked Identity, Cache and Job Leakage** — Expire a session or change role while a protected cache, file and async operation exists; test that no prior-user content or privileged action escapes across the boundary.
 
-5. **File content, URLs and retention** — Restrict upload/download paths, reject unsafe external URL handling and document user-visible file deletion versus actual local cleanup.
+5. **Untrusted Bytes, Unsafe URLs and Retention** — Validate bounded file bytes/metadata, allowlist external request targets, safely dispose orphaned temporary resources and explain what local scanning and deletion do not guarantee.
 
-6. **Privacy-aware observability** — Log request IDs and safe error classifications without raw credentials, unnecessary PII or file contents.
-
-7. **Dependency and artifact provenance** — Pin packages and local fixture versions, document update risks and distinguish a reproducible stack from a production security audit.
+6. **Package Provenance and Secret-Free Diagnostic Evidence** — Record pinned local dependencies and test-fixture provenance, sanitize correlation/logs and document concrete untested threats without claiming a production penetration test.
 
 *Optional practice — trust audit:* Identify one client-only permission check and one leaked output in a local test, repair both at actual enforcement boundaries.
 
-### Module 13 — Compatible Change, Tests and Staged Evolution
+### Module 11 — Compatible Full-Stack Evolution and Independent Tests
 
 #### Outcomes
 
@@ -466,21 +405,21 @@ are the only summative completion requirements.
 
 #### Lessons
 
-1. **Change impact across components** — Map a new field/status/permission through React, API schemas, domain logic, SQL, caches, jobs and tests before implementation.
+1. **One Bounded Business Change and Impact Map** — Trace changed field, role, status or invariant through browser validation, API/OpenAPI, SQL, caches, files, jobs and currently deployed clients, recording which boundaries actually change.
 
-2. **Expand/migrate/contract sequence** — Add backward-compatible schema/API support first, migrate data and clients, then remove obsolete behavior only with declared evidence.
+2. **Expand, Backfill, Verify and Contract** — Apply a staged schema/API/UI change with real existing rows, allow both old/new consumers during the supported period and verify when removal is safe.
 
-3. **Versioned Consumer Checks and Rollout Controls** — Verify the previous client still works within the supported period and a new client exercises the updated contract; use a small local configuration toggle or simulated staged release, stating that production multi-instance deployment is APP7's scope.
+3. **Independent Old/New Consumer and Browser Compatibility** — Run prior/current HTTP clients and a real browser under a deliberately incompatible field/status/permission change, showing one failing-before and repaired path.
 
-4. **Rollback versus forward repair** — Distinguish application code revert from irreversible data/side-effect reversal; rehearse a repair path where rollback is unsafe.
+4. **Data/External-Effect Rollback versus Forward Repair** — Demonstrate why a source rollback may not undo migrations, deleted files or dispatched notifications, and choose a tested restore/reconciliation or forward-repair policy.
 
-5. **Contract, integration and browser test layers** — Choose independent tests for typed payloads, real HTTP/database, protected data, job delivery, navigation and visible user outcomes.
+5. **Independent Test Layers and Failure Oracles** — Combine React interaction, real browser, Fastify HTTP, actual Postgres row/invariant, role/security, worker and contract tests with a separately calculated expected result, not only shared mock assumptions.
 
-6. **Deterministic race and failure controls** — Use explicitly controlled promises, test clocks, barriers, fixture events and isolated DB resets rather than brittle timing sleeps.
+6. **Deterministic Race and Migration Regression** — Coordinate controlled concurrent requests, deferred promises and isolated fixtures without arbitrary sleeps, and check compatibility/authorization after the staged change.
 
 *Optional practice — compatibility break:* Inject a new required field or breaking enum and show which previous consumer fails, then amend staged evolution correctly.
 
-### Module 14 — Evidence-Based End-to-End Investigation and Operability
+### Module 12 — Cross-Layer Incident Diagnosis and Accessible Recovery
 
 #### Outcomes
 
@@ -491,23 +430,21 @@ are the only summative completion requirements.
 
 #### Lessons
 
-1. **Cross-layer correlation and context** — Attach safe request/job correlation identifiers to browser logs, service traces and durable job records without exposing private identities.
+1. **Request, Identity, Transaction and Job Correlation** — Connect sanitized browser events, independent HTTP observations, database state and worker/dependency events using bounded request/job IDs without recording session tokens or personal payloads.
 
-2. **Evidence mapping to outcomes** — Distinguish screenshots, API logs, DB rows, worker events and automated assertions and explain what each can and cannot prove.
+2. **What Each Evidence Layer Can and Cannot Prove** — Compare screenshots, HTTP status, Postgres rows, worker logs and tests, distinguishing measured facts from inferred cause and explicitly recording absent spans.
 
-3. **Workflow latency and critical path** — Measure a bounded journey across render, API, DB and asynchronous waiting while avoiding invalid comparisons between incomparable clocks.
+3. **Critical Path and Comparable Local Latency** — Measure a real task's UI/API/DB/job path under a declared browser/runtime/data fixture; distinguish durations from different clocks, reporting variance and uncertainty.
 
-4. **Dependency health and readiness** — Explain a local service's health versus true readiness to complete a specific workflow, without claiming platform operations certification.
+4. **Inject Failure, Diagnose and Repair the Cause** — Seed one unavailable local dependency or bad state transition, reconstruct a defensible timeline and repair the mechanism, not merely a misleading error label.
 
-5. **Failure injection and causal timeline** — Simulate one unavailable dependency and reconstruct from observed requests, committed state, retry attempts and UI presentation.
+5. **Recover Authoritative State and Accessible User Intent** — Check committed result, duplicate-job/failed-file effects, focus/keyboard and status announcements after recovery; preserve legitimate drafts and prevent previous-user exposure.
 
-6. **Recovery time and user experience** — Measure the observed local recovery and describe how long the user sees pending/error states, qualifying variance and missing observations.
-
-7. **Testing accessibility during failure** — Retest keyboard/focus and status announcements during slow, forbidden, uncertain and recovered flows.
+6. **Reproduce, Recheck and Defend Residual Risk** — Demonstrate failing-before/passing-after user, HTTP, DB and job observations, state limitations and avoid claims of production availability or WCAG certification.
 
 *Optional practice — incident defense:* Repair a discovered misleading pending status or duplicate notification and provide before/after evidence across layers.
 
-### Module 15 — Integrated Vertical Slice and Independent Architecture Defense
+### Module 13 — One Defended Full-Stack Product and Unfamiliar Change
 
 #### Outcomes
 
@@ -530,36 +467,30 @@ are the only summative completion requirements.
 
 #### Lessons
 
-1. **Select the coherent product journey** — Use an accessible multi-tenant React application and authenticated Fastify/PostgreSQL service with a meaningful committed operation and recovery scenario.
+1. **One Bounded Vertical Slice and Accepted Evidence** — Use the same cumulative React–Fastify–PostgreSQL product assessed in APP5-AS1–AS6, with role/contract/ownership maps and links to accepted evidence rather than seven new apps.
 
-2. **Publish cross-layer acceptance and threat models** — Document user tasks, action/role matrix, resource lifecycle, contracts, data ownership, privacy and fault paths before choosing libraries.
+2. **Real Identity, State, Cache and Private Resource Integration** — Integrate user task, protected durable mutation, reliable reconciliation, a justified scoped cache and one safe object-style resource with negative-case authority checks.
 
-3. **Compose free local reference components** — Use compatible pinned React, Fastify, TypeScript, PostgreSQL and local job/file/cache fixtures without a paid external service or microservices requirement.
+3. **Async Status, Failures and Contract/Accessibility Recheck** — Integrate durable job/reconnect behavior, two meaningful partial failures, old/new clients and real browser keyboard/focus/status observations using previously qualified evidence.
 
-4. **Implement authoritative UI/API/database integration** — Build an actual protected request and durable mutation with correct client feedback, denied access and independent DB consistency evidence.
+4. **Assessor-Supplied Change, Diagnosis and Regression** — Handle a new bounded permission, cache invalidation, file lifecycle, stale request, API evolution or incident counterexample, fix the right layer and rerun impacted client/server/data/job tests.
 
-5. **Implement one safe cache or resource workflow** — Include a tenant-aware cache and a locally simulated file/object-style workflow with explicit bounded lifecycle and enforcement.
-
-6. **Complete async work and progress reconciliation** — Integrate a durable intent/job path and bounded polling or simple event notification, recovering missed/duplicate signals from authoritative state.
-
-7. **Inject two independent partial failures** — Simulate a post-commit lost response and a delayed/failed external or worker step; demonstrate truthful UI state and safe final reconciliation.
-
-8. **Execute complete cross-layer test evidence** — Run direct API, DB, negative security, browser E2E, concurrency, compatibility and accessibility checks with clean fixture setup/teardown.
-
-9. **Make and validate a staged compatible change** — Extend one real workflow with a new field, permission or lifecycle variant; verify old/new client and DB compatibility as appropriate.
-
-10. **Clean reproduction and unfamiliar defense** — From a fresh local checkout, run documented commands, respond to an unfamiliar bounded bug/requirement and defend trade-offs, uncertainty and limits.
+5. **Clean Offline-Capable Local Setup and Technical Defense** — Build/start/stop a free loopback reference with synthetic credentials and disposable DB/files, cite accepted evidence, describe true limits and defend trade-offs without requiring APP7 production deployment.
 
 ## Completion requirements
 
-**All sixteen APP5 outcomes** must be established through
-the **seven required summative assessments** below.
-A single evolving application may supply evidence for
-each, where independent observations remain possible;
-seven separate products or hosted cloud services are
-**not required**. Lesson-level practice, exploratory
-models and formative activities are preparation rather
-than hidden additional completion gates.
+All **sixteen APP5 outcomes** require **seven independently
+decidable summative assessments** on **one evolving local
+full-stack product**. AS1 verifies the real journey/contract,
+AS2 session and authoritative mutation state, AS3 private
+cache/file access, AS4 durable progress reconciliation,
+AS5 partial-failure diagnosis, AS6 compatible evolution
+and AS7 an unfamiliar change and independent defense.
+The same codebase, synthetic fixtures and previously
+accepted observations may be **referenced**, but a
+passing AS7 cannot excuse an unproven earlier required
+assessment. Seven separate products, a public cloud or
+compulsory module practice are **not** required.
 
 | Required assessment | Required outcome coverage | Principal evidence |
 | --- | --- | --- |
@@ -652,45 +583,45 @@ than hidden additional completion gates.
 
 - **APP5-AS1** (required requirements, architecture trace and integrated contract)
   - Outcomes: APP5-O1, APP5-O2, APP5-O3, APP5-O6, APP5-O14
-  - Work: Given a bounded multi-tenant user-task brief and prior APP20/APP3 competence, publish verifiable flow/failure acceptance criteria, security/privacy assumptions and a system context, component and sequence trace. Connect a typed React UI to a real local Fastify/PostgreSQL contract for one protected operation; use a separate HTTP client to verify expected normal, invalid, denied, empty and conflicting outcomes and explain which data is authoritative at each boundary.
-  - Criteria: Requirements map to real UI, HTTP, domain, SQL and test observations; the diagrams represent deployed local components honestly and show transaction and external effect limits. The browser and independent client consume the same published contract, validate runtime responses, and display actual method/status/problem distinctions. No API response is treated as successful merely because TypeScript compiles. The learner defends responsibilities and an unimplemented/unknown stakeholder claim without inventing real user testing.
+  - Work: Begin **the one cumulative product** from a synthetic/consenting user-task brief, with acceptance, forbidden, conflict and recovery conditions and an honest browser/API/domain/PostgreSQL/job context/sequence model. Connect React to real Fastify/PostgreSQL on unprivileged loopback for one protected mutation. Verify OpenAPI/request/response/media semantics, runtime decoding, actual committed state and error UI through a separately authored HTTP consumer, not just matching TypeScript types.
+  - Criteria: Observed browser, independent HTTP and real SQL results agree about the same operation and authority boundary; unsupported stakeholder assumptions are labeled. The contract covers no-body, malformed, forbidden and conflict paths correctly, and architecture views distinguish DB commit, cache publication and external effect. The actual user flow preserves semantic keyboard/status behavior rather than passing on a screenshot or simulated handler return.
   - Evidence: Requirements-to-evidence and failure matrices, architecture context/component/sequence views, API/OpenAPI fixtures, code and versioned local setup, UI/HTTP/DB traces, independent consumer tests and rationale.
 
 - **APP5-AS2** (required authenticated workflow, state and cross-tenant integrity)
   - Outcomes: APP5-O3, APP5-O4, APP5-O5, APP5-O6, APP5-O12, APP5-O14
-  - Work: Implement a session-backed multi-tenant React/API workflow with one genuinely durable PostgreSQL mutation and visible pending/committed/conflict/error states. Simulate two users/tenants, revoked/expired sessions, wrong-object IDs, mass-assignment fields, concurrent writes, a response lost after commit and stale requests after identity change. Inspect actual DB records and verify server-side access controls on reads, writes and returned fields, while React clears scoped state and recovers drafts truthfully.
-  - Criteria: Authenticated identity and effective permissions are derived and enforced server-side, not from client tenant hints, hidden buttons or CORS; direct HTTP denial tests and database checks confirm no cross-tenant mutation/disclosure. Browser pending/optimistic results reconcile with committed facts under conflict and lost response; no naive retry duplicates a side effect or reveals a prior user's cache. Expiry, logout and accessibility of error/recovery paths are tested with meaningful messages and preserved input as specified.
+  - Work: Extend **the same product** with APP3's verified synthetic session/tenant authority and a durable multi-row change. Test login, refresh, expiry/revocation and role/tenant switches, guessed resource IDs, forbidden writable/readable properties, two concurrent writes, optimistic conflict and a **response deliberately lost after commit**. Independently inspect actual SQL rows and direct HTTP denials; in React demonstrate current-user state, draft preservation and safe late-response/cache cleanup.
+  - Criteria: Actual verified sessions and server-held membership gate every protected action, resource and property, and denied requests do not modify or reveal another tenant's data. Two-client conflict and lost-response tests prove UI follows authoritative commit and does not blindly replay a non-idempotent operation. After identity switch or revocation, no previous-user result or progress content flashes, and focus/error/recovery remains understandable and keyboard operable.
   - Evidence: Role/action/field matrix, session and two-tenant synthetic fixtures, server/direct HTTP negative tests, DB before/after and controlled concurrency log, React state transition and focus observations, lost-response and identity-switch tests and security trade-off notes.
 
 - **APP5-AS3** (required cache and object-style resource consistency)
   - Outcomes: APP5-O4, APP5-O5, APP5-O7, APP5-O8, APP5-O11, APP5-O12
-  - Work: Implement a bounded tenant-aware client/API caching policy and one local private file/object-style resource lifecycle within the same evolving application. Verify cache keys, freshness/eviction/invalidation after a write, wrong-user isolation and permission revocation; process a synthetic uploaded object through staged metadata/content validation, publication, authorized retrieval and cleanup. Inject an oversize/wrong-type upload, attempted cross-tenant fetch, failed metadata/file step and orphaned resource condition, documenting what a real object store and time-limited signed URL would change.
-  - Criteria: Cached private content cannot be retrieved after identity/permission changes or by another tenant, and committed mutations invalidate relevant stale views according to the published policy. Untrusted filenames, MIME claims and upload bytes are not sufficient security authority; server-side limits, nonpublic ownership, staged publication and cleanup are demonstrated. A simulated file scanner is not falsely claimed to prove malware-free content or production object-store security. Failed metadata/file actions produce inspectably consistent or explicitly recoverable state, not silent data loss.
+  - Work: In **the existing product**, justify one bounded cross-layer cache and one private local object-style file lifecycle. Publish identity/resource/query-aware key and invalidation rules, test a stale committed update plus role/user switch, then stage an actual synthetic upload through server-enforced byte/type policy, generated storage identity, metadata authorization, private download and safe cleanup. Inject fake MIME, unexpected file signature, oversized body, denied tenant download, DB–file publication failure and an orphaned temporary object. Record SQL metadata **and actual local file** state.
+  - Criteria: Cached private data is not disclosed across principals or stale privileges, and committed writes reconcile to the defined freshness policy. File identifiers, content type/byte limits, response/content disposition, server-held ownership and staged publication are independently checked. Temporary/orphan states are disposed or safely recoverable after failure; filename, client MIME, local signature or simulated scanner is never claimed to prove malware safety or provider-level signed URL guarantees.
   - Evidence: Cache/data ownership diagram, policy and invalidation fixtures, private object lifecycle state table, tested access/byte/metadata failures, local files and DB manifests, orphan/cleanup verification and documented security/consistency limitations.
 
 - **APP5-AS4** (required asynchronous commit, idempotent progress and reconnect)
   - Outcomes: APP5-O5, APP5-O6, APP5-O9, APP5-O10, APP5-O11, APP5-O14
-  - Work: Extend the integrated workflow with a transactionally recorded work intent/outbox or an equivalent convincingly durable local queue. Implement an independent bounded dispatcher, per-tenant status endpoint and a user-facing progress mechanism using bounded polling or a simple compatible event stream. Inject duplicate job delivery, missed notification, process restart, an invalid attempt and a response lost after the database commit. Reconnect or refresh the UI and derive truth from authoritative records, not the last notification.
-  - Criteria: Committed intent is replayable after a worker restart, attempts are bounded and duplicated work does not repeat protected business effects. The learner distinguishes at-least-once delivery/notification from exactly-once external execution and can demonstrate an uncertain failure without falsely reporting success. Progress endpoint authorization and UI cleanup prevent cross-tenant leakage and orphaned pollers; terminal states, retries and reconnects are visible and accessible, and status reconciliation is demonstrated after a missed signal.
+  - Work: Extend **the same operation** with a PostgreSQL-committed intent/outbox or genuinely equivalent restart-durable local job, an authorized job-status endpoint, and **one** proportionate client progress mechanism (bounded polling **or** justified SSE). Test the distinction between HTTP **202 accepted** and completed business work, a post-commit lost response, identical/changed-payload replay, duplicate delivery, a worker restart, dropped/delayed/duplicate progress and a logout/tenant switch. Reconnect and **refetch durable authoritative status** rather than trusting the last signal.
+  - Criteria: The status/identity model does not report success until authoritative completion, and accepted/pending work is not silently lost on restart. A bounded idempotent processing policy prevents unintended business duplication while disclosing at-least-once notification/dispatch limitations. Only the currently authorized principal reads job status, orphaned polling/event listeners stop, and a missed signal or stale event cannot overwrite newer committed state. SSE, when used, is not called an exactly-once or durable queue; polling alone remains sufficient.
   - Evidence: Transaction/outbox/work-state model, dispatcher and progress code, HTTP/DB/job logs for duplicates/restart/lost reply, identity authorization matrix, stop/reconnect tests, UI status observations and limitations analysis.
 
 - **APP5-AS5** (required partial failure, correlation and recovery investigation)
   - Outcomes: APP5-O2, APP5-O5, APP5-O9, APP5-O10, APP5-O11, APP5-O12, APP5-O14, APP5-O15
-  - Work: Inject a slow or failed locally simulated outbound dependency and one separate database/cache/worker availability failure during a real user task. Capture sanitized browser correlation, server requests, database state and job/dependency events. Construct a causal timeline, expose an honest degraded/pending/error UI with retry/deadline policy, implement a bounded repair and verify completion or safe failure after dependency restoration. Repeat keyboard/focus checks and compare bounded end-to-end latency/recovery observations.
-  - Criteria: Each observed failure is grounded in reproducible input/state/trace evidence and its owner and recovery obligations are identified; no invented logs or production SLA claims appear. Retried work does not corrupt committed business state or amplify load indefinitely; a fallback never claims completed delivery when only a durable intent exists. Logs protect secrets and scoped identities, the browser preserves user context and accessible error explanation, and an identified fault has a failing-before/passing-after regression.
+  - Work: Inject **two distinct** synthetic cross-layer failures in the previously assessed product: a slow/failed outbound dependency and a separate DB/cache/file/worker-availability or response-loss fault. Trace the browser action, real HTTP, database rows, worker attempts and external fixture with sanitized correlation, observing an accurate pending/failed/degraded interface rather than a false success. Reproduce a bounded retry-amplification or wrong-layer fallback counterexample, repair its cause and verify final state after restoration. Assess real keyboard/focus/status recovery and compare local timing measurements with recorded environment/uncertainty.
+  - Criteria: Two independent fault mechanisms have observed failing-before/passing-after evidence; database and job/file outcomes, user-visible state and retry budgets agree without losing committed work or duplicating external effects. Correlation distinguishes a measured event from inferred causation or absent telemetry. Safe fallback never bypasses tenant policy; secrets are redacted and measured local recovery is not mislabeled production uptime. User input and accessible status/keyboard behavior survive honest recovery.
   - Evidence: Fault-injection configuration, redacted cross-component trace and timing timeline, observed durable rows and retry counts, degraded UI/focus records, root-cause hypothesis and verified repair diff, bounded measurements and uncertainties.
 
 - **APP5-AS6** (required compatible full-stack evolution and verification strategy)
   - Outcomes: APP5-O1, APP5-O3, APP5-O4, APP5-O6, APP5-O7, APP5-O13, APP5-O14, APP5-O15
-  - Work: Apply one bounded change to a live local workflow—such as a new role-limited field, renamed response state or altered persistence invariant—across React components, Fastify schema/contract, domain/persistence, cache keys, work status and relevant tests. Stage an expand/backfill/validate/contract approach, run old and revised independent clients with a disposable migrated database, and demonstrate one deliberately introduced incompatibility caught before a repaired rollout. State whether source/database/file/work changes can be rolled back safely or require forward repair.
-  - Criteria: The change-impact matrix accounts for every touched contract and authorized data boundary; both consumer versions exhibit the declared supported behavior and an incompatible change is observed and corrected or explicitly classified. Real DB schema/content and cache/work status are verified after migration and failure injection. The test plan includes unit, API, DB, security, contract and browser E2E levels without treating a coverage percentage as readiness. Unreversible data or dispatched external effects are not incorrectly labeled safe for automatic rollback.
+  - Work: Apply **one bounded cross-layer change** to the same real user journey—e.g. an owned response field, permission, lifecycle state or SQL invariant—using an explicit impact map through React, Fastify/OpenAPI, PostgreSQL migration, cache keys, private file/job status and tests where affected. Deliberately introduce one old-client/schema incompatibility, run **independent old and revised HTTP consumers and an actual browser**, then stage expand/backfill/validate/contract with real existing data and corrective evidence. Inject a rollback/forward-repair decision where an external effect or schema transformation is not reversible.
+  - Criteria: Old/new supported clients and real Postgres state demonstrate the declared compatibility window, not just a generated-types diff. A failing-before/passing-after regression identifies and corrects or explicitly rejects the breaking case; the migration preserves tenant authorization and correct cache/job presentation. Tests cover real browser, API, SQL, contract, security and targeted asynchronous failures. A source-code revert is not falsely claimed to reverse already dispatched external effects or lost data.
   - Evidence: Cross-layer change-impact/compatibility matrix, versioned migration/app code, old/new consumer and browser fixtures, schema/DB checks, failing-before/passing-after results, staged-release simulation and rollback/forward-repair rationale.
 
 - **APP5-AS7** (required integrated full-stack product and independent engineering defense)
   - Outcomes: APP5-O1, APP5-O2, APP5-O3, APP5-O4, APP5-O5, APP5-O6, APP5-O7, APP5-O8, APP5-O9, APP5-O10, APP5-O11, APP5-O12, APP5-O13, APP5-O14, APP5-O15, APP5-O16
-  - Work: Deliver a complete cohesive local React/TypeScript plus authenticated Fastify/PostgreSQL vertical slice for a real user task and synthetic multi-tenant data. Reuse qualifying AS1–AS6 work rather than produce unrelated apps. Include documented UI/API/data contracts, server-enforced authorization, correct state reconciliation, tenant-scoped cache, a safe local private file resource, transactionally recorded async work and progress reconciliation, independent partial-failure recovery, a compatible change, multiple-layer tests, basic performance/observability evidence and accessible completion/error paths. Execute a fresh-checkout reproduction and respond to an unfamiliar bounded user or incident requirement with evidence-backed design defense.
-  - Criteria: A reviewer can provision the stated free local tools, run the synthetic environment on unprivileged loopback and reproduce normal/invalid/forbidden/concurrent/stale/duplicate/failure/recovery cases without a paid cloud, production secret, public deployment or microservice fabric. Cross-layer authority and database invariants remain correct under tested races and retries; private cache/files/jobs do not cross tenants. The learner accurately distinguishes local demonstrated behavior from unverified production safety/availability, integrates the unfamiliar change while preserving existing contracts and accessibility, and gives a coherent technical defense of each boundary and its alternatives.
-  - Evidence: Versioned repository/configuration/lockfile plus local seed and setup steps; published requirements, diagrams, API/role and state matrices; React/HTTP/PostgreSQL/job/file/cache source and tests; independent browser/API/DB security/failure evidence; correlation and performance traces; compatibility/change log; clean-start reproduction; and accessible written, recorded or live engineering defense.
+  - Work: Finish **the same cumulative React/TypeScript–Fastify–PostgreSQL vertical slice** evaluated across APP5-AS1–AS6, with one scoped cache, a protected local file lifecycle, durable asynchronous work, user-facing status and independently observed security/recovery/compatibility behavior. **Reference previously accepted source/tests/evidence** rather than submit seven separate products or recreate complete logs. Implement an unfamiliar bounded requirement or newly seeded client/API/cache/file/job/permission failure, repair the correct layer and verify impacted previous decisions from a clean free local checkout. Defend state authority, coordination, security and uncertainty.
+  - Criteria: A reviewer can independently start, exercise and stop the entire synthetic local workflow without a paid service, real credentials, hosting or a production infrastructure. Genuine HTTP, database and browser evidence proves authorization, optimistic/concurrent and lost-response correctness, cache/file privacy, durable work/reconnect and accessible error/recovery; new changes do not invalidate earlier accepted cases. **AS7 cannot substitute for a missing AS1–AS6 decision**, and material cross-tenant leaks, duplicate side effects, data loss or irreproducible required behavior block passing. Real production guarantees remain explicitly unverified.
+  - Evidence: **One** versioned code/fixture and compatible free pinned local setup, a concise **outcome-to-accepted-AS1–AS6 evidence index** rather than duplicate reports, independent browser/HTTP/SQL/job/file and security observations, unfamiliar-change diff with targeted before/after regression, accessibility/measurement limits and an accessible technical defense.
 
 ### Completion decision, revision and downstream protection
 
@@ -710,17 +641,17 @@ observed failure and recovery, change analysis,
 accessibility investigations and unsupported claims
 according to [OEE Evidence Rules](../../spec/evidence-rules.md).
 
-APP5 retains its course ID while replacing the legacy
-8-week lab/checkpoint contract and APP2+APP3+APP4 direct
-prerequisites with a new OEE `v0.2.0` **draft**.
-Earlier APP5 learner evidence remains tied to its
-historical revision and is not silently upgraded
-to the new criteria. A green repository parser
-or successful software test does **not** establish
-learner `tested` or `verified` status. APP6–APP9 and all APP electives now have separately
-migrated `v0.2.0` drafts. Pinned OEE Workspace,
-content/resource and 0xNAND consumer updates still
-require explicit revision and evidence review.
+APP5 remains an OEE `v0.2.0` **draft** with
+the already published APP20 + APP3 direct
+prerequisites. APP4 is supplied transitively through
+APP3; the legacy eight-week format and older direct
+requirements are historical, not pending migrations.
+This editorial source reassessment does not grant
+`tested`/`verified` learner-readiness status,
+reassess earlier completions or automatically update
+APP6–APP9, elective, OEE Workspace, content or 0xNAND
+evidence/source pins. Actual evaluated revisions and
+review decisions must be preserved.
 
 ### Public non-mandatory study references
 
