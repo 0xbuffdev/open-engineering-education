@@ -17,7 +17,7 @@ By the end of this program, you will be able to:
 - Model assets, trust boundaries, threats, abuse cases, and security requirements for real software systems.
 - Identify, reproduce safely, remediate, and regression-test web and application security weaknesses, including long-lived WebSocket sessions, messages and confidential server-push events.
 - Investigate native memory-corruption and binary-security risks through bounded coverage-guided input testing, minimized defect reproduction, verified repairs, operating-system protections and safer systems design.
-- Assess and harden networked services, DNS resolution and protective policy, hosts, containers, cloud environments, workload identities, and deployment pipelines; distinguish DNSSEC, encrypted DNS transport and authenticated service identity.
+- Assess and harden networked services, DNS resolution and protective policy, hosts, containers, cloud environments, Kubernetes orchestration RBAC/admission and pod-network policy, workload identities, and deployment pipelines; distinguish source-verified platform policies from actually exercised enforcement.
 - Evaluate enterprise authentication and federation, identity lifecycle, privileged access, resource authorization and effective account/session revocation.
 - Assess and harden endpoint privilege, executable integrity and host configuration; distinguish actual Linux enforcement from authentic Windows platform policy and event evidence, verify sensor coverage and recover from safe configuration drift.
 - Reconcile owned assets and software versions against advisory evidence, distinguish actual affectedness from scanning and severity labels, prioritize active exposure, verify patch or containment effects, and maintain reviewable owner decisions and exceptions.
@@ -41,7 +41,7 @@ Graduation requires two separate, independently reviewable decisions: verified a
 | [SEC3](SEC3.md) | Systems & Binary Security | 10–14 weeks | SEC1 | `course` |
 | [SEC4](SEC4.md) | Network & Infrastructure Security | 12–16 weeks | SEC2 | `course` |
 | [SEC5](SEC5.md) | Applied Cryptography & Secure Protocols | 12–16 weeks | SEC1 | `course` |
-| [SEC6](SEC6.md) | Cloud, Containers & Identity Security | 14–18 weeks | SEC4 | `course` |
+| [SEC6](SEC6.md) | Cloud, Containers & Identity Security | 16–20 weeks | SEC4 | `course` |
 | [SEC7](SEC7.md) | Detection, Incident Response & Threat Hunting | 12–16 weeks | SEC6 | `course` |
 | [SEC8](SEC8.md) | AI Security & Authorized Red Teaming | 12–16 weeks | SEC7 | `course` |
 | [SEC10](SEC10.md) | Enterprise Identity & Access Security | 14–18 weeks | SEC4 | `course` |
