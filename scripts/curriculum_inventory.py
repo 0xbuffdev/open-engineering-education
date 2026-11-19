@@ -65,12 +65,24 @@ def prerequisites(raw: str) -> tuple[list[str], list[str]]:
 
 
 def declared_counts(root: Path) -> dict[str, int | None]:
+    """Read published course totals from the current overview catalog table."""
     index = root / "curriculum" / "README.md"
     text = index.read_text(encoding="utf-8") if index.exists() else ""
-    counts: dict[str, int | None] = {}
-    for program in PROGRAMS:
-        match = re.search(rf"^\|\s*`?{program}`?\s*\|[^\n]*\|\s*([^|]+)\|\s*\[{program}/\]", text, re.MULTILINE)
-        counts[program] = sum(map(int, re.findall(r"\d+", match.group(1)))) if match else None
+    counts: dict[str, int | None] = {program: None for program in PROGRAMS}
+    for line in text.splitlines():
+        if not line.startswith("|"):
+            continue
+        cells = [cell.strip() for cell in line.strip("|").split("|")]
+        if len(cells) < 4:
+            continue
+        program = cells[0].strip("`")
+        if program not in counts:
+            continue
+        if not re.search(rf"\\]\\({program}/(?:README\\.md)?\\)", cells[3]):
+            continue
+        amounts = [int(n) for n in re.findall(r"\\d+", cells[2])]
+        if amounts:
+            counts[program] = sum(amounts)
     return counts
 
 

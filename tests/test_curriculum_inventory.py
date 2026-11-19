@@ -73,6 +73,16 @@ class InventoryTests(unittest.TestCase):
     def report(self, prs=None):
         return inventory.build_inventory(self.root, SHA, prs)
 
+    def test_published_overview_counts_match_source_courses(self):
+        counts = inventory.declared_counts(ROOT)
+        for program, count in counts.items():
+            with self.subTest(program=program):
+                self.assertIsNotNone(count)
+                source_count = len(list(
+                    (ROOT / "curriculum" / program).glob(f"{program}[0-9]*.md")
+                ))
+                self.assertEqual(count, source_count)
+
     def test_derived_counts_and_missing_programs(self):
         report = self.report()
         courses = {c["code"]: c for c in report["courses"]}
