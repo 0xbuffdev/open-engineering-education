@@ -1,4 +1,4 @@
-"""SEC1 staging checks; competency mapping, not arbitrary lesson-count quotas."""
+"""SEC1 course checks for competency coverage and assessment evidence."""
 
 from pathlib import Path
 import re
@@ -11,7 +11,7 @@ COURSE = ROOT / "curriculum" / "SEC" / "SEC1.md"
 CATALOG = COURSE.parent / "README.md"
 
 
-class SEC1MigrationTests(unittest.TestCase):
+class SEC1CurriculumTests(unittest.TestCase):
     def test_official_outcome_checker(self):
         result = subprocess.run(
             [sys.executable, str(ROOT / "scripts" / "check-outcome-curriculum.py"),

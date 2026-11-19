@@ -12,7 +12,7 @@ COURSE = SEC / "SEC3.md"
 CATALOG = SEC / "README.md"
 
 
-class SEC3MigrationTests(unittest.TestCase):
+class SEC3CurriculumTests(unittest.TestCase):
     def test_official_outcome_curriculum_validation(self):
         result = subprocess.run(
             [sys.executable, str(ROOT / "scripts" / "check-outcome-curriculum.py"),
