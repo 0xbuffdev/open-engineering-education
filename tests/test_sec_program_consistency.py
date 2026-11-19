@@ -158,7 +158,8 @@ class SECProgramConsistencyTests(unittest.TestCase):
         self.assertIn("14 core", index)
         self.assertIn("AI1–AI16 are required", ai)
         self.assertIn("AI17–AI20 are optional specializations", ai)
-        self.assertIn("SEC has thirteen specialist courses", root)
+        self.assertIn("[SEC](curriculum/SEC/README.md)", root)
+        self.assertIn("capstone", root)
         self.assertIn("# Curriculum inventory", inventory)
         for name, source in (
             ("SEC catalog", catalog),

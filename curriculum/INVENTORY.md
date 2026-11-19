@@ -28,7 +28,6 @@ The token is optional for public GitHub repositories, but recommended to avoid a
 
 The inventory workflow fails if a published course is missing, unlisted, uses an unsupported source format, has a structural error, or disagrees with its catalog or prerequisites. Unmerged course proposals discovered through the optional pull-request scan are identified separately and do not count as published courses.
 
-
 - `v0.2.0` identifies a source that declares the current outcome-driven format. The separate structural result shows whether its validation passed. Neither result establishes educational conformance.
 - Sources without the current outcome and summative assessment structure are reported as unsupported. They cannot pass the present course checks or count as completed course definitions.
 - `unsupported` is a declared unknown version or conflicting format signal. `missing` and `pending_pr_unreviewed` identify absent source, with the latter explicitly linked to an open PR.

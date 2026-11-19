@@ -48,7 +48,11 @@ def metadata(text: str) -> dict[str, str]:
 def prerequisites(raw: str) -> tuple[list[str], list[str]]:
     """Normalize explicit course-code references and bounded same-program ranges."""
     errors = []
+    # Preserve only direct prerequisite identifiers. Course catalogs may also
+    # describe earlier preparation or full-program capstone evidence in prose.
     source = re.sub(r"\[([A-Z]+[1-9]\d*)\]\([^)]*\)", r"\1", raw)
+    source = source.split(";", 1)[0]
+    source = re.sub(r"\([^)]*\)", "", source)
 
     def expand(match: re.Match[str]) -> str:
         first, last = match.groups()
@@ -109,12 +113,21 @@ def catalog_rows(program: str, index: Path) -> tuple[dict[str, dict], list[str]]
         if len(cells) < 5:
             errors.append(f"{name}: incomplete catalog row")
             continue
-        kind = cells[4].strip("`")
+        label = cells[4].strip("`").strip().lower()
+        if label in ("course", "required course"):
+            kind, track = "course", "core"
+        elif label in ("project", "required project"):
+            kind, track = "project", "core"
+        elif label in ("elective", "elective course"):
+            kind, track = "course", "elective"
+        else:
+            errors.append(f"{name}: unknown course type or track: {cells[4]}")
+            continue
         status = re.search(r"\b(draft|tested|verified)\b", cells[5], re.I) if len(cells) > 5 else None
         classification = re.search(r"\b(core|elective)\b", cells[5], re.I) if len(cells) > 5 else None
         codes, parse_errors = prerequisites(cells[3])
         rows[name] = {"title": cells[1], "kind": kind, "prerequisites": codes,
-                      "classification": classification.group(1).lower() if classification else "core",
+                      "classification": classification.group(1).lower() if classification else track,
                       "status": status.group(1).lower() if status else None}
         errors.extend(f"{name}: {err}" for err in parse_errors)
     if not rows:
