@@ -38,7 +38,7 @@ The learner must demonstrate the knowledge, practical skills, and engineering ju
 | [SEC5](SEC5.md) | Applied Cryptography & Secure Protocols | 12–16 weeks | SEC1 | `course` |
 | [SEC6](SEC6.md) | Cloud, Containers & Identity Security | 14–18 weeks | SEC2, SEC4, APP7 | `course` |
 | [SEC7](SEC7.md) | Detection, Incident Response & Threat Hunting | 12–16 weeks | SEC4, SEC6 | `course` |
-| [SEC8](SEC8.md) | AI Security & Authorized Red Teaming | 4 weeks | SEC1, SEC2, SEC7, and AI5 | `course` |
+| [SEC8](SEC8.md) | AI Security & Authorized Red Teaming | 12–16 weeks | SEC7 | `course` |
 | [SEC9](SEC9.md) | Security Engineering Capstone | 8–10 weeks | SEC1–SEC8 | `project` |
 
 Course definitions specify the required outcomes, learning sequence and completion evidence. Work can be completed in [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) or another learner-controlled environment. The [OEE specification](../../spec/README.md) governs course requirements.
