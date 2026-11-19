@@ -1,6 +1,6 @@
 # Curriculum Design Guide
 
-This guide explains how to **research, design, review, and revise** Open Engineering Education (OEE) programs, courses, modules, lessons, practice, and assessments. Use it for the existing [SEF](SEF/README.md) and [APP](APP/README.md) curricula and when designing or reviewing [SYS](SYS/README.md), [AI](AI/README.md), and [SEC](SEC/README.md).
+This guide explains how to **research, design, review, and revise** Open Engineering Education (OEE) programs, courses, modules, lessons, practice, and assessments. Use it across the published [SEF](SEF/README.md), [APP](APP/README.md), [SYS](SYS/README.md), [AI](AI/README.md), and [SEC](SEC/README.md) programs.
 
 **Status:** Non-normative editorial guidance. Binding educational requirements remain in [Course Format](../spec/course-format.md), [Evidence Rules](../spec/evidence-rules.md), [Status Labels](../spec/status-labels.md), and [Conformance](../spec/conformance.md). This is **not** a separate authoring specification, required document template, course-completion rubric, or new conformance test. It establishes no fixed counts of courses, modules, lessons, activities, assessments, or weeks. Where this guide and the OEE specification disagree, the specification takes precedence.
 
@@ -8,7 +8,7 @@ This guide explains how to **research, design, review, and revise** Open Enginee
 
 ## 1. Use the seven-stage curriculum-design workflow
 
-The same workflow applies to new programs, new courses, substantial revisions, and reviews of previously migrated curricula.
+The same workflow applies to new programs and courses, substantive revisions, and reviews of published curricula.
 
 1. **Establish the subject boundary.** Research the discipline, relevant primary technical documentation, appropriate academic syllabi and curriculum standards, representative engineering practice, and skills already taught by prerequisites. Define what belongs in the subject and what does not.
 2. **Revalidate course learning outcomes.** Specify observable exit capabilities at the appropriate depth. Retain existing stable identifiers when their competency meaning is unchanged; do not design toward a preferred outcome count.
@@ -257,25 +257,25 @@ A course can look comprehensive in isolation while creating gaps or redundant te
 | Scope | Are electives truly optional, and are project courses integrations rather than repetitions? |
 | Coherence | Are course outcomes, modules, lessons, practice, and required evidence mutually aligned? |
 
-For APP audits, scrutinize repetitive module structures **without presuming they are wrong solely because the counts match**. For SYS, AI and SEC redesigns, research the actual discipline and existing SEF/APP capabilities before selecting new modules. Do not transplant an APP-style outline, fixed duration, assessment count, or course architecture into another field.
+Across all five programs, examine repeated module and lesson structures against the actual competencies and prerequisite dependencies. Matching counts are not automatically a defect, but they are never a design target. Do not transplant one program's outline, fixed workload, assessment pattern, or course architecture into another discipline.
 
 A temporary coverage matrix or review notes may be useful for decisions, but the authoritative result is the revised public program catalog and course definitions—not a permanent duplicate curriculum registry.
 
-## 12. Review migration and preserve educational meaning
+## 12. Revise courses without losing educational meaning
 
-For a published course, compare old and proposed outcomes, assessments, modules, prerequisites, classification, workload and independent-study assumptions before revising it.
+Before changing a published course, compare its current and proposed outcomes, assessments, modules, prerequisites, classification, workload, and independent-study assumptions.
 
 - Preserve established course identities and stable outcome/assessment IDs where their meaning remains continuous.
 - Identify materially replaced outcomes and changed evaluation expectations explicitly.
-- Protect useful prior learning while moving or consolidating lessons; do not delete a capability because its old lesson was awkwardly placed.
+- Protect useful learning when reorganizing lessons; do not discard a required capability because its explanation was awkwardly placed.
 - Examine affected prerequisite closure and downstream courses, resource mappings and consumer integrations.
-- Keep historical course revisions and learner evidence interpretable; do not silently regrade old work against new requirements.
+- Keep course revision and learner-evidence records interpretable; do not silently regrade assessed work against changed requirements.
 - Update course source and its authoritative program catalog consistently through the repository's review process.
 - Record rationale and substantive review findings in the existing PR or governance channel, not in a permanent audit report that competes with the current curriculum.
 
 Editorial course reorganization alone does not automatically change normative OEE requirements. If a proposal actually alters binding specification rules, follow [OEE governance](../GOVERNANCE.md) and its RFC process.
 
-## 13. Academic review before source migration is called complete
+## 13. Academic review beyond source validation
 
 Use **separate review lenses**. A passing structural validator cannot establish whether lessons are well chosen or assessments really measure the claimed capability.
 
@@ -292,7 +292,7 @@ Use **separate review lenses**. A passing structural validator cannot establish 
 
 A reviewer should identify **the concrete defect, its effect on learner capability, the proposed correction, and evidence or reasoning for it**. Avoid vague labels such as "needs more depth" or replacing a uniform lesson count with a random distribution.
 
-A course can be **source-migrated** while still requiring independent pedagogical review and learner validation. Preserve the published readiness status until the evidence required by [Status Labels](../spec/status-labels.md) exists. Never describe a curriculum as verified solely because all files use the current format.
+A structurally valid course may still require independent expert review and observed learner evidence. Keep its published readiness status until the evidence required by [Status Labels](../spec/status-labels.md) supports a change. A successful source check alone cannot make a course `tested` or `verified`.
 
 ### Final editorial questions
 
@@ -308,7 +308,7 @@ Use these questions as a review aid, **not** a mandatory new metadata section or
 8. Are assessments aligned with outcomes and free of unnecessary duplicate evidence?
 9. Are failure cases, uncertainty, accessibility and safety addressed where materially relevant?
 10. Is the workload plausible under independently reproducible conditions?
-11. Are historical source identities and downstream consumers treated explicitly?
+11. Are versioned source records and downstream consumers treated explicitly?
 12. Are readiness, conformance and performance claims limited to available evidence?
 
 ## 14. Editorial foundations and further reading

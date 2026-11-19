@@ -7,9 +7,9 @@ study, OEE Workspace, 0xNAND, and other implementations. Learners MUST be able t
 understand the public course requirements without purchasing materials or using a
 commercial platform.
 
-The requirements below apply to courses authored or migrated under the `v0.2.0`
-draft specification. Earlier published course revisions retain the requirements
-of their original specification and course versions.
+The supported public course source and assessment contract is the OEE `v0.2.0`
+draft. Course claims are evaluated against the published requirements and the
+specific course revision being assessed.
 
 ## 1. Metadata
 
@@ -61,7 +61,7 @@ place where learners can discover mandatory outcomes and acceptance criteria.
 ## 3. Outcomes and stable identifiers
 
 Every required course outcome MUST describe an observable capability that can be
-evaluated. Each outcome in a course authored or migrated against this specification
+evaluated. Each outcome in a course claiming conformance to this specification
 MUST have a stable identifier, such as `APP1-O1`. Required summative assessments MUST
 have stable identifiers, such as `APP1-AS1`.
 
@@ -202,21 +202,22 @@ standards MUST remain understandable and independently usable without a
 commercial account. OEE does not require public disclosure of every exact exam
 item, private grading rule, answer key, or reusable challenge seed.
 
-## 9. Consistency, transition, and conformance
+## 9. Catalog consistency, revisions, and conformance
 
 Course IDs, program relationships, prerequisites, titles, durations, type, and
 status MUST agree with the relevant catalog. Internal links MUST resolve.
 
-This revision changes the authoring contract. Existing course revisions and
-historical learner evidence MUST remain identifiable by their original
-specification/course revision. New or migrated courses claiming conformance to
-the revised specification MUST meet its stable-ID, outcome-coverage, assessment,
-and evidence requirements. Legacy files MUST NOT be described as conforming to
-the revised requirements merely because they existed before migration.
+A course claiming conformance to OEE `v0.2.0` MUST satisfy the stable-ID,
+outcome-coverage, summative-assessment, and evidence requirements of this
+specification. A source that lacks the current course contract or declares an
+unsupported format MUST NOT claim `v0.2.0` conformance. A validation tool
+cannot accept an alternate source format as evidence of compliance.
 
-Course migration SHOULD retain useful learning activities while deciding which
-ones genuinely need summative evidence. Changes to competency expectations or
-evaluation criteria MUST be documented for downstream consumers and learners.
+Course source revisions and assessed learner evidence MUST remain identifiable
+by their original specification and course revision. A revision SHOULD retain
+useful instructional work while evaluating which activities genuinely establish
+the intended outcomes. Changes to competency expectations or evaluation
+criteria MUST be documented for downstream consumers and learners.
 
 Structural linting does not establish pedagogical validity, course status, or
 conformance. See [Conformance](conformance.md).

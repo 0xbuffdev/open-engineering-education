@@ -1,6 +1,6 @@
 # RFC 0004: Current-Only OEE Course Sources
 
-- **Status:** `draft`
+- **Status:** `accepted`
 - **Author:** 0xBUFF (proposal for steward review)
 - **Created:** 2026-11-19
 - **Last updated:** 2026-11-19
@@ -131,9 +131,9 @@ None for the proposed current-source contract. A future released versioning poli
 
 ## 10. Decision
 
-- **Decision:** Pending
-- **Decision date:** pending
-- **Decision-maker:** OEE steward
-- **Rationale:** Pending steward review
-- **Conditions:** Pending
-- **Implementation pull request:** pending
+- **Decision:** Accepted
+- **Decision date:** 2026-11-19
+- **Decision-maker:** OEE steward; explicit approval recorded in [PR #249 discussion](https://github.com/0xbuffdev/open-engineering-education/pull/249#issuecomment-7024184637)
+- **Rationale:** Use one current `v0.2.0` source and conformance contract, while retaining revision-attributed records for interpretability. Unsupported course formats are not alternative paths to assessed credit.
+- **Conditions:** Preserve all existing course outcome, evidence, status and independent-study rules. Implement the approved wording in a separately reviewed and signed pull request, keep prior records attributable, and do not modify `main` directly.
+- **Implementation pull request:** [PR #250 — current-only source and conformance wording](https://github.com/0xbuffdev/open-engineering-education/pull/250) (in review)
