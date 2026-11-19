@@ -14,15 +14,13 @@
 
 **AI7 develops the ability to represent, analyze, index, rank, retrieve, evaluate and defend work with natural-language data.** Learners must connect language meaning and ambiguity to explicit text-processing contracts, independently checked statistical and neural representations, faithful document indexing, reproducible query relevance judgments, lexical and semantic retrieval, and observed ranking quality. A plausible text label or a top-ranked document is not sufficient evidence that a system understood language, retrieved relevant information or generalized to an intended population. A correct result must be traceable to its source text, transformations, assumptions, evaluation protocol and failures.
 
-**History, use and applications.** Natural-language processing encompasses linguistic analysis, probabilistic modeling, sequence labeling and learned language representations. Information retrieval combines term indexing, matching, probabilistic ranking, relevance judgments, user information needs and increasingly vector-based semantic retrieval. These methods enable document search, knowledge discovery, language-aware classification, entity extraction, question-oriented lookup and multilingual access to collections. Their historical development runs from rule-based and count-based text systems through statistical sequence models and neural representations; contemporary systems often combine lexical evidence and learned similarity. High text similarity is not a truth guarantee, a model prediction is not a linguistic fact, and a high search metric on a small or incomplete judgment set cannot certify production usefulness.
-
 **Assessed prerequisite closure.** Direct entry requires completed [AI5](AI5.md), with its transitive [AI4](AI4.md) classical model comparison, sampling and evaluation; [AI2](AI2.md) probability, log loss and mathematical optimization; [AI1](AI1.md) data contracts, provenance and reproducible transformations; and completed Software Engineering Foundations. AI5 already assesses embedding lookup, small recurrent encoders, contrastive objectives, gradient-safe training and representation-transfer claims. AI7 **does not re-teach** those mathematical or general neural mechanisms: it applies them to **language-specific token/vocabulary semantics, annotation, morphology and syntactic ambiguity, supervised text/sequence tasks, linguistic error taxonomies, index mechanics, search ranking and relevance-based information retrieval**. [AI3](AI3.md) symbolic reasoning, [AI6](AI6.md) reinforcement learning and any APP/SYS course are not required prerequisites.
 
 **Deliberate neighboring-course exclusions.** AI9 owns transformer attention, causal/positional masking and generative language modeling; AI10 owns adaptation and advanced model optimization; AI11 owns full retrieval-augmented generation (RAG) including generation grounded in retrieved evidence; AI12 owns tool-using agents; AI13 owns larger AI-system assurance; AI14 owns broader AI governance; AI15 owns production service infrastructure and MLOps. AI7 teaches **retrieval itself**—including independently tested embedding-based search, lexical retrieval, ranked relevance and small reranking—without obliging a text generator, hosted embedding API, transformer architecture or operational RAG pipeline. Speech and audio belong to optional AI17; advanced graph embeddings to AI20. A small local neural sequence tagger or frozen embedding encoder is appropriate here, not a mandatory pretrained large language model.
 
 **Environment, rights and accessibility.** All compulsory evidence must be possible with a compact local **synthetic or permissively licensed** text collection, explicit relevance judgments, accessible textual traces and ordinary CPU computation. Python 3 standard-library text/collections/math operations suffice for lexical and metric oracles; an open library or small AI5-style locally trained or fixed-weight neural encoder may support semantic and tagging experiments, without GPU or an account. Indexes must preserve stable original document IDs, offsets, language/script metadata where available, source/license identifiers, content hashes or equivalent provenance and a declared Unicode/tokenization policy. No private chat logs, personal emails, high-risk personal data, copyrighted closed corpus, paid API, commercial index, cloud service or secret evaluation benchmark is required. Learners may use alternative languages/frameworks if they meet the public behavioral criteria. All graphical outputs require equivalent tables or descriptions.
 
-**Academic sequence and summative design.** Thirteen modules proceed from linguistic data contracts through segmentation and annotation, probabilistic and neural text models, lexical indexing, relevance evaluation, semantic retrieval, hybrid ranking and critical failure analysis. Their lesson counts reflect actual technical responsibilities rather than a fixed course template. Eight required summative assessments establish **20 observable outcomes** and may reuse one versioned, reproducible evidence repository: independent Unicode/annotation oracle; probabilistic and sequence labeling; small neural text representation; lexical search; retrieval evaluation; dense/hybrid search; robustness/error/privacy audit; and an integrated unfamiliar change with an individual technical defense. Exact synthetic oracles are defined below. Any additional neural accuracy, retrieval improvement, latency, language-transfer performance or confidence interval must be obtained from **actual executed experiments** and honestly reported with conditions and uncertainty. The workload estimate is provisional; validation tools and a coherent source file do not establish learner-tested educational readiness.
+**Academic sequence and summative design.** Thirteen competency stages connect language data and annotation contracts to independently checked probabilistic/neural text models, lexical indexing, relevance evaluation, semantic/hybrid retrieval and controlled failure analysis. Mechanism checks, counterexamples and reproducible evidence remain within the lessons they test rather than becoming repeated standalone objectives. Eight required summative assessments establish **20 observable outcomes** and may reuse one versioned, reproducible evidence repository: independent Unicode/annotation oracle; probabilistic and sequence labeling; small neural text representation; lexical search; retrieval evaluation; dense/hybrid search; robustness/error/privacy audit; and an integrated unfamiliar change with an individual technical defense. Exact synthetic oracles are defined below. Any additional neural accuracy, retrieval improvement, latency, language-transfer performance or confidence interval must be obtained from **actual executed experiments** and honestly reported with conditions and uncertainty. The workload estimate is provisional; validation tools and a coherent source file do not establish learner-tested educational readiness.
 
 ## Learning outcomes
 
@@ -60,13 +58,11 @@
 
 #### Lessons
 
-1. **Natural language as structured but ambiguous evidence** — Explain where deterministic rules, statistical inference and explicit human interpretation differ, and why a valid parser or plausible label need not reflect a speaker's intent.
-2. **Task and population contracts** — Distinguish classification, sequence tagging, span extraction, language understanding, query retrieval and query-level ranking; define independent sampling units and intended use.
-3. **Document, passage, query and session units** — Name stable IDs and boundaries for source documents, derived passages, repeated user queries and judgments, avoiding mistaken row independence.
-4. **Linguistic and retrieval success criteria** — Distinguish exact span identity, label correctness, top-k relevance and user satisfaction, predeclaring which one can actually be assessed locally.
-5. **History and core paradigms** — Map rule-based, n-gram/probabilistic, neural representation and modern lexical–dense search approaches to their proper evidence requirements without asserting a universal winner.
-6. **Source rights, privacy and query permissions** — Establish license, version, sensitive-content rules, document-level access restrictions, deletion and whether a legitimate user's query permits returning a passage.
-7. **Baselines, budgets and counterclaims** — Select transparent model/search baselines, a reproducible CPU budget, invalid/unknown-case behavior and at least one important claim the experiment cannot support.
+1. **Language and retrieval as historical, evidence-bearing engineering** — Connect rule-based linguistic analyses, count/probabilistic models, learned representations and lexical–dense search to appropriate applications in document discovery, text classification and entity extraction. Explain how language ambiguity, speaker intent, retrieval relevance and valid statistical predictions make different claims; neither a plausible label nor a top-ranked hit proves understanding, source truth or user authorization.
+2. **Task, population and source-unit contracts** — Distinguish text classification, sequence tagging, exact-span extraction, query retrieval and ranked results. Name the intended language/domain population, stable original document and derived passage IDs, query/session identities, annotation unit and sampling dependencies so repeated queries or passages cannot masquerade as independent evidence.
+3. **Linguistic and retrieval success criteria** — Distinguish exact span identity, label correctness, top-k relevance and user satisfaction, predeclaring which one can actually be assessed locally.
+4. **Source rights, privacy and query permissions** — Establish license, version, sensitive-content rules, document-level access restrictions, deletion and whether a legitimate user's query permits returning a passage.
+5. **Baselines, budgets and counterclaims** — Select transparent model/search baselines, a reproducible CPU budget, invalid/unknown-case behavior and at least one important claim the experiment cannot support.
 
 *Optional formative prompt:* Describe why retrieving a highly relevant restricted document is still a policy failure, even if its ranking metric is perfect.
 
@@ -82,14 +78,13 @@
 #### Lessons
 
 1. **Bytes, Unicode code points and grapheme clusters** — Separate UTF-8 storage length, code point index and user-perceived characters; show why blind byte slicing can corrupt valid source text.
-2. **Normalization with preserved source offsets** — Compare composed/decomposed accented strings under NFC and NFD, recording how normalized character positions map back to original source spans.
+2. **Reversible Unicode normalization, annotation and original offsets** — Compare composed/decomposed accent representations under NFC and NFD while preserving a mapping from normalized positions/tokens to the unmodified source. Independently check half-open original code-point spans and grapheme boundaries; reject impossible, shifted or silently reconstructed offsets when annotating or extracting source text.
 3. **Case handling and language specificity** — Distinguish lowercasing, case folding and language-specific casing; demonstrate a counterexample where indiscriminate case/diacritic removal changes identity or meaning.
 4. **Word boundaries, punctuation and apostrophes** — Specify analyzer behavior for contractions, hyphenation, hashtags, numbers, emojis and punctuation rather than assuming ASCII whitespace always defines a word.
 5. **Sentence segmentation and abbreviations** — Construct a bounded sentence-boundary ambiguity involving initials, periods or quotations, with an independently judged expected segmentation.
 6. **Morphology and segmentation variation** — Explain inflection, agglutination, compounds and languages with different written word boundaries; label a claimed universal segmentation heuristic as unsupported.
 7. **Subword vocabulary and rare forms** — Trace one finite byte/character/subword merge, specify reserved/unknown tokens, sequence-length effects and how learning a vocabulary on evaluation text contaminates the test boundary.
-8. **Offset-safe annotation and reversible transforms** — Show where normalized-token offsets must be translated back to the unmodified text, rejecting impossible or silently shifted offsets.
-9. **Tokenization stress harness** — Build a small fixed corpus with combining marks, mixed scripts, punctuation, empty text and a fabricated invalid byte stream; record recovery/refusal and language-specific limitations.
+8. **Tokenization stress harness** — Build a small fixed corpus with combining marks, mixed scripts, punctuation, empty text and a fabricated invalid byte stream; record recovery/refusal and language-specific limitations.
 
 ### Module 3 — Annotation, Linguistic Structure and Semantic Ambiguity
 
@@ -104,13 +99,12 @@
 
 1. **Annotation guidelines are measurement instruments** — Define the target task, ontology, evidence window, uncertain/unknown label, example boundaries and correction process before collecting labels.
 2. **POS and morphological features** — Distinguish syntactic category from a word's surface form in a short sentence, explaining why ambiguity can require context.
-3. **Named-entity spans and BIO notation** — Encode entity boundaries, types and exact source offsets; reject illegal I-tag openings under a declared BIO2 interpretation.
-4. **Nested/discontinuous entity limits** — Explain why a flat BIO scheme cannot faithfully encode every nested or discontiguous entity and choose a declared alternative or honest exclusion.
-5. **Constituency and dependency relationships** — Trace head–dependent or phrase-structure roles on a minimal sentence while distinguishing a chosen analysis from the entire space of possible parses.
-6. **Negation, scope and semantic roles** — Compare “dog chased cat” with “cat chased dog” and negated propositions; show what a count-only representation loses despite identical word counts in role-reversed sentences.
-7. **Ambiguity and pragmatic context** — Construct a sentence with genuinely multiple supported readings; state what context an annotation policy requires rather than claiming the model can infer the speaker's intent.
-8. **Inter-annotator agreement and adjudication** — Count exact matched/disagreed labels on a small fixed sample, compare observed agreement with simple prevalence, and explain why agreement is not validity or population representativeness.
-9. **Boundary-aware label evaluation** — Independently calculate exact span true/false positives and false negatives, contrasting token-level scores with full-span correctness.
+3. **BIO entity spans and representation limits** — Encode exact original-text entity boundaries and types under a stated BIO2 policy, reject illegal I-tag openings and diagnose mismatched source offsets. Demonstrate why a flat BIO representation cannot faithfully encode every nested or discontinuous entity, and choose an explicit alternative or an honest exclusion rather than inventing a legal tag sequence.
+4. **Constituency and dependency relationships** — Trace head–dependent or phrase-structure roles on a minimal sentence while distinguishing a chosen analysis from the entire space of possible parses.
+5. **Negation, scope and semantic roles** — Compare “dog chased cat” with “cat chased dog” and negated propositions; show what a count-only representation loses despite identical word counts in role-reversed sentences.
+6. **Ambiguity and pragmatic context** — Construct a sentence with genuinely multiple supported readings; state what context an annotation policy requires rather than claiming the model can infer the speaker's intent.
+7. **Inter-annotator agreement and adjudication** — Count exact matched/disagreed labels on a small fixed sample, compare observed agreement with simple prevalence, and explain why agreement is not validity or population representativeness.
+8. **Boundary-aware label evaluation** — Independently calculate exact span true/false positives and false negatives, contrasting token-level scores with full-span correctness.
 
 ### Module 4 — Count-Based Text Models and Language Probabilities
 
@@ -123,13 +117,12 @@
 #### Lessons
 
 1. **Term counts and document frequency** — Derive term/document counts from a fixed corpus with explicit duplication and normalization semantics, without retraining AI4's generic tabular statistics.
-2. **Bag-of-words feature limitations** — Compare texts with identical term multisets but different subject/object roles or negation scope; state the representation information irreversibly discarded.
-3. **n-gram conditional language evidence** — Calculate a tiny bigram probability from token counts, distinguish a conditional distribution from a complete model of discourse and identify zero-count behavior.
-4. **Smoothing and unseen text** — Apply an explicitly parameterized additive count prior to a small vocabulary and show why unknown-vocabulary treatment and denominator changes matter.
-5. **Naïve Bayes text classification** — Apply the AI4 probabilistic-classifier foundation to word-count/multinomial text evidence, independently deriving a small posterior from token likelihoods.
-6. **Class prior, length and correlated token assumptions** — Demonstrate why repeated correlated words, class imbalance and document length can make a simple conditional independence model overconfident.
-7. **Sparse linear lexical baselines** — Construct a transparent linear document classifier from TF–IDF or binary terms under training-only vocabulary/IDF fitting, contrasting its attribution with real linguistic understanding.
-8. **Error and negative controls** — Test empty text, unseen term, shuffled token order and annotation disagreement, separating a legitimate prior-only fallback from a false claim of robust comprehension.
+2. **n-gram conditional language evidence** — Calculate a tiny bigram probability from token counts, distinguish a conditional distribution from a complete model of discourse and identify zero-count behavior.
+3. **Smoothing and unseen text** — Apply an explicitly parameterized additive count prior to a small vocabulary and show why unknown-vocabulary treatment and denominator changes matter.
+4. **Naïve Bayes text classification** — Apply the AI4 probabilistic-classifier foundation to word-count/multinomial text evidence, independently deriving a small posterior from token likelihoods.
+5. **Class prior, length and correlated token assumptions** — Demonstrate why repeated correlated words, class imbalance and document length can make a simple conditional independence model overconfident.
+6. **Sparse linear lexical baselines** — Construct a transparent linear document classifier from TF–IDF or binary terms under training-only vocabulary/IDF fitting, contrasting its attribution with real linguistic understanding.
+7. **Count-model negative controls and lost linguistic structure** — Test empty/unseen text, changed token order, correlated evidence and annotation disagreements against an explicitly defined count-based baseline. Use a same-multiset role-reversal or altered-negation case to show what unordered bags irreversibly discard, and distinguish a lawful prior-only fallback from unsupported claims of language comprehension.
 
 ### Module 5 — Sequence Labeling and Structured Decoding
 
@@ -142,15 +135,14 @@
 
 #### Lessons
 
-1. **Token labels versus spans** — Connect per-token POS or BIO labels to the actual application target and prove that a locally plausible label sequence may not form a legal entity annotation.
+1. **Token/sequence labels, exact spans and legal training targets** — Connect POS and BIO token tags to actual source spans and downstream intended targets; check tag-sequence legality under a declared ontology. Diagnose an illegal BIO transition, subword-to-token mapping defect or accidental padding/duplicate-span loss contribution rather than accepting each locally plausible token label as a legal entity annotation.
 2. **Finite hidden-state emission model** — Define initial, transition and emission distributions with explicit normalization and token vocabulary, and distinguish learned probability tables from observed linguistic truth.
 3. **Viterbi dynamic programming** — Calculate best path scores and backpointers for a length-two finite HMM, keeping the maximum-path probability distinct from the observation's total likelihood.
 4. **Forward probabilities and alternatives** — Sum over possible hidden state sequences to obtain the observed token likelihood; explain why Viterbi's maximum path is not the same operation as marginalization.
 5. **Conditional sequence models and constraints** — Contrast a generative HMM with a discriminative linear-chain score or CRF-style normalization, showing where BIO constraints can forbid transitions.
 6. **Feature-based versus recurrent tagging** — Build a token/window baseline and a tiny AI5-style recurrent encoder head, demonstrating padding/length masks and correct output dimensions.
-7. **Training and decoding mismatch** — Diagnose illegal predicted BIO transitions, a misaligned subword-to-token label mapping and a loss that includes padding or duplicate annotation spans.
-8. **Annotation and entity metric audit** — Evaluate both token labels and exact-span entity predictions on a public fixture, declaring strict boundary/type matching and empty-span conventions.
-9. **Negative-case investigation** — Explain failures from unknown terms, disagreement between annotators, shortened context or a changed label ontology without reinterpreting test labels during fitting.
+7. **Annotation and entity metric audit** — Evaluate both token labels and exact-span entity predictions on a public fixture, declaring strict boundary/type matching and empty-span conventions.
+8. **Negative-case investigation** — Explain failures from unknown terms, disagreement between annotators, shortened context or a changed label ontology without reinterpreting test labels during fitting.
 
 ### Module 6 — Neural Language Representation and Bounded NLP Tasks
 
@@ -167,10 +159,9 @@
 2. **Embedding lookup with language vocabulary** — Apply AI5's trained lookup/gradient mechanics to an explicit token-to-index mapping, unknown/pad policy and source-language metadata.
 3. **Composition across token order** — Compare sum/mean pooling and a small recurrent encoder on order-sensitive texts, independently verifying what a bag representation cannot distinguish.
 4. **Sequence mask and length correctness** — Verify that padding tokens do not alter legitimate sequence summaries or classification/tagging losses and that length bookkeeping is reproducible.
-5. **Small classification and tagger heads** — Build a CPU-feasible label head with correct class vocabulary, output shape, loss and fixed training/validation split, without pretrained transformer weights.
-6. **Training-from-scratch and simpler baseline** — Compare learned representation or small recurrent tagger against a count/window/linear baseline under matched identity and evaluation boundaries.
-7. **Representation probing is limited evidence** — Inspect nearest neighbors, similarity rankings and a syntactic/semantic contrast while stating why they are not causal mechanisms or guarantees of lexical correctness.
-8. **Domain and language failure cases** — Test code-switching, negation, unfamiliar morphology or shortened context with actual observed scores and appropriate insufficient-evidence notes.
+5. **Small neural text heads, lawful training and simpler comparisons** — Build a CPU-feasible classifier or bounded sequence tagger using a language-specific vocabulary, output shape, label mask and correct train/validation selection. Compare the locally learned representation with a count/window/linear baseline under matched corpus and sample identities; observed improvement must be measured, not inferred from using neural layers.
+6. **Representation probing is limited evidence** — Inspect nearest neighbors, similarity rankings and a syntactic/semantic contrast while stating why they are not causal mechanisms or guarantees of lexical correctness.
+7. **Domain and language failure cases** — Test code-switching, negation, unfamiliar morphology or shortened context with actual observed scores and appropriate insufficient-evidence notes.
 
 ### Module 7 — Index Construction, Query Matching and Lexical Ranking
 
@@ -187,12 +178,11 @@
 2. **Inverted postings and term positions** — Build term→sorted document-ID postings, frequencies and positional lists; justify why lexical search does not rescan every byte of every document for every query.
 3. **Boolean retrieval and posting intersection** — Hand-evaluate AND/OR/NOT over a specified corpus universe, distinguishing missing query terms from missing documents.
 4. **Phrase and proximity matching** — Verify “red cat” consecutive positions and an altered-order phrase; explain why term co-occurrence alone cannot prove a phrase match.
-5. **Term frequency, IDF and length statistics** — Compute N, document frequency, per-document length and average length with consistent analyzer and deletion policies.
-6. **TF–IDF conventions and comparability** — Derive one explicitly chosen TF/IDF variant, noting that log base, TF normalization and smoothing alter values and ranking interpretations.
-7. **BM25's probabilistic ranking heuristic** — Calculate the published BM25 formula exactly with fixed k1, b and smoothed IDF; distinguish a ranking score from a probability of truth or relevance.
-8. **Ranking ties, unknown queries and top-k** — Return a deterministic result order under equal scores, handle zero-match queries, document invalid term policies and avoid claiming arbitrary top-k truncation preserves total recall.
-9. **Field weighting and analyzers** — Investigate one title/body, case or stemming variant with a published field/normalization contract instead of silently changing term frequencies.
-10. **Index mutation and provenance** — Add/update/delete an identified document, invalidate affected postings/corpus statistics, honor access restrictions and verify that a stale document never persists in results.
+5. **Term, document and TF–IDF statistics** — Calculate corpus size, per-document term frequency, document frequency, document length and mean length under one declared analyzer and deletion policy. Derive a specified TF–IDF scheme with its TF scaling, IDF smoothing and log base, and show how adding/removing an indexed document can change scores; these statistics also provide the independently checked inputs to BM25.
+6. **BM25's probabilistic ranking heuristic** — Calculate the published BM25 formula exactly with fixed k1, b and smoothed IDF; distinguish a ranking score from a probability of truth or relevance.
+7. **Ranking ties, unknown queries and top-k** — Return a deterministic result order under equal scores, handle zero-match queries, document invalid term policies and avoid claiming arbitrary top-k truncation preserves total recall.
+8. **Field weighting and analyzers** — Investigate one title/body, case or stemming variant with a published field/normalization contract instead of silently changing term frequencies.
+9. **Index mutation and provenance** — Add/update/delete an identified document, invalidate affected postings/corpus statistics, honor access restrictions and verify that a stale document never persists in results.
 
 *Optional feedback:* For the public L1 corpus, produce the postings for “red” and “cat,” and show which document satisfies the phrase “red cat” with exact offsets.
 
@@ -208,14 +198,13 @@
 #### Lessons
 
 1. **Information needs versus query strings** — Define a user's need, search query, document relevance and correct granularity; explain why matching tokens are not a universal relevance oracle.
-2. **Qrels, corpus version and labeling policy** — Create judgment entries keyed by query/document IDs with declared binary/graded scale, collection revision and assessor uncertainty.
-3. **Complete and pooled judgments** — Distinguish an exhaustively judged tiny synthetic collection from incomplete pooled judgments where “not judged” must not silently mean “not relevant.”
-4. **Rank and cutoff conventions** — Compute precision@k, recall@k, hit/reciprocal rank under specified k and denominator, tie ordering and no-relevant-query policy.
-5. **Average precision and MAP** — Sum precision at the ranks of relevant documents, normalize by the correct relevance count, and average across explicitly selected queries.
-6. **Graded DCG and nDCG** — Calculate discounted gain with a stated gain function/log base, derive the ideal ranking and handle an IDCG of zero as undefined or an explicitly documented evaluation convention.
-7. **Per-query uncertainty and aggregation** — Report each query's support and error, compare macro averaging and query-weighted metrics and avoid treating related queries or duplicate sessions as independent samples.
-8. **Judgment robustness and disagreement** — Recompute a metric after changing one disputed relevance label and state how the ranking conclusion depends on that label.
-9. **Evaluation leakage and post-selection bias** — Prevent query-specific tuning on a final evaluation pool, identify a collection/qrel mismatch and explain why a perfect mini-benchmark result cannot certify real search quality.
+2. **Qrels, corpus identity, completeness and judging policy** — Specify query/document IDs, corpus revision, binary/graded relevance scale, assessor uncertainty and the boundaries of exhaustive judgments versus incomplete pooled judgments. Preserve 'unjudged' separately from 'nonrelevant'; an incomplete pool is not a fully known negative set, and a mismatched corpus/qrel revision invalidates derived scores.
+3. **Rank and cutoff conventions** — Compute precision@k, recall@k, hit/reciprocal rank under specified k and denominator, tie ordering and no-relevant-query policy.
+4. **Average precision and MAP** — Sum precision at the ranks of relevant documents, normalize by the correct relevance count, and average across explicitly selected queries.
+5. **Graded DCG and nDCG** — Calculate discounted gain with a stated gain function/log base, derive the ideal ranking and handle an IDCG of zero as undefined or an explicitly documented evaluation convention.
+6. **Per-query uncertainty and aggregation** — Report each query's support and error, compare macro averaging and query-weighted metrics and avoid treating related queries or duplicate sessions as independent samples.
+7. **Judgment robustness and disagreement** — Recompute a metric after changing one disputed relevance label and state how the ranking conclusion depends on that label.
+8. **Evaluation leakage and post-selection bias** — Prevent query-specific tuning on a final evaluation pool, identify a collection/qrel mismatch and explain why a perfect mini-benchmark result cannot certify real search quality.
 
 ### Module 9 — Dense Semantic Retrieval and Vector Geometry
 
@@ -229,14 +218,13 @@
 #### Lessons
 
 1. **Query and document encoders** — Define a small embedding function with declared training provenance, dimension, language coverage and compatible input preprocessing.
-2. **Cosine, dot product and Euclidean distance** — Calculate exact finite vectors, normalized similarity and a changed norm/ranking case, rejecting zero-vector cosine without a documented alternative.
+2. **Cosine, dot, L2 and independent vector-failure checks** — Derive exact similarity and changed-norm ranking for small finite vectors, stating whether and how they are normalized. Reject a zero vector under cosine, mismatched dimensions, nonfinite components or an incompatible encoder revision instead of silently assigning a plausible score; similarity remains evidence of geometry, not established linguistic relevance or factual truth.
 3. **Semantic retrieval versus lexical matching** — Test synonym-like paraphrases and exact entity/product codes on synthetic paired queries, identifying where either lexical or embedding retrieval is systematically advantaged.
 4. **Vector-index construction** — Store document-ID vectors and a versioned encoder fingerprint, verify dimensions/finite components and refuse mixing incompatible encoder revisions.
 5. **Exact dense top-k retrieval** — Score all vectors in a small corpus under a published deterministic tie policy and independently verify rank/order before considering approximations.
 6. **Approximate nearest-neighbor intuition** — Explain graph/partition/compression search trade-offs and measured candidate recall, noting that approximate ranking results need not be exactly top-k.
 7. **Representation shift and multilingual coverage** — Investigate spelling, script, morphological and language changes, separating observed cross-language alignment from unearned universal multilingual capability.
-8. **Dense-negative controls** — Test zero vectors, swapped dimensions, encoder revision mismatch and irrelevant high-similarity examples, explaining why similarity is not a factual verification mechanism.
-9. **Resource and accuracy comparisons** — Compare exact local vector search with a simple lexical baseline on the same qrels, recording actual CPU/storage/dimension/query costs without requiring industrial indexes.
+8. **Resource and accuracy comparisons** — Compare exact local vector search with a simple lexical baseline on the same qrels, recording actual CPU/storage/dimension/query costs without requiring industrial indexes.
 
 ### Module 10 — Hybrid Retrieval, Reranking and Candidate Limits
 
@@ -250,13 +238,12 @@
 #### Lessons
 
 1. **Why scores cannot be naively added** — Contrast arbitrary BM25 scales with cosine intervals and show a counterexample in which uncalibrated sums produce an artificial ranking.
-2. **Rank-based fusion contract** — Derive reciprocal-rank fusion under a fixed positive smoothing constant, compatible query/document identities and missing-rank policy.
-3. **Finite hybrid ranking oracle** — Independently compute H1's two-run RRF scores, sort by a deterministic tie rule and identify which document changes position compared with either input ranking.
-4. **Candidate generation and reranker ceilings** — Explain why a reranker selecting from a top-k candidate set cannot recover relevant documents that all candidate generators omitted.
-5. **Lightweight feature-based reranking** — Construct a tiny feature vector from lexical match, dense similarity and explicit document signals; train a bounded AI4-style reranker only on permitted training judgments.
-6. **Pointwise, pairwise and listwise distinctions** — Explain what prediction target each ranking formulation learns and how group-by-query boundaries affect examples and leakage.
-7. **Ablation with relevance oracles** — Compare lexical-only, dense-only, RRF/hybrid and a permitted reranker, using fixed qrels, same index version and honestly obtained per-query metrics.
-8. **Interpretability and failure of fusion** — Diagnose a new query on which hybrid is worse, document the candidate/normalization cause and refuse a universal relevance-improvement claim.
+2. **Rank fusion, missing candidates and the exact H1 oracle** — Derive reciprocal-rank fusion using a fixed positive smoothing constant, correct corpus/document IDs, stable tie-breaking and a zero contribution for missing candidates. Independently calculate both H1 rankings and their combined scores, including why the new order differs from either input; never naively add incomparable BM25 and cosine values.
+3. **Candidate generation and reranker ceilings** — Explain why a reranker selecting from a top-k candidate set cannot recover relevant documents that all candidate generators omitted.
+4. **Lightweight feature-based reranking** — Construct a tiny feature vector from lexical match, dense similarity and explicit document signals; train a bounded AI4-style reranker only on permitted training judgments.
+5. **Pointwise, pairwise and listwise distinctions** — Explain what prediction target each ranking formulation learns and how group-by-query boundaries affect examples and leakage.
+6. **Ablation with relevance oracles** — Compare lexical-only, dense-only, RRF/hybrid and a permitted reranker, using fixed qrels, same index version and honestly obtained per-query metrics.
+7. **Interpretability and failure of fusion** — Diagnose a new query on which hybrid is worse, document the candidate/normalization cause and refuse a universal relevance-improvement claim.
 
 ### Module 11 — Multilinguality, Privacy and Failure Boundaries
 
@@ -273,10 +260,9 @@
 2. **Tokenization disparities across scripts** — Compare observed segmentation and retrieval failures for concatenated, morphologically rich and multi-script strings, stating what the tiny corpus does not represent.
 3. **Negation, ambiguity and domain drift** — Investigate one sentence with changed roles/negation and one shifted query intent; show how labels and rankings depend on the task's declared semantics.
 4. **Entity and annotation disagreements** — Diagnose boundary/type mistakes or a change in annotation ontology, preserving the original adjudication record rather than quietly overwriting qrels.
-5. **Evaluation sample coverage** — Count examples/queries per declared language or slice, report undefined or sparse metrics as such, and avoid global fairness certification from a few synthetic examples.
+5. **Measured slice coverage, disputed evidence and responsible refusal** — Count actual examples and queries per declared language/dialect/script slice, report sparse/undefined measures and annotation or judgment disagreement without claiming universal fairness or language support. When the evidence is missing, a result is out of scope or a relevant document is restricted, specify a justified abstention, review or safe refusal rather than filling unknown cases with invented relevance.
 6. **Licensing, private text and retention rules** — Decide whether a source can be indexed, copied, surfaced or retained; implement delete/restrict behavior for an identified sensitive or withdrawn document.
 7. **Query-time access and untrusted content** — Enforce visibility filtering **before** ranking/passage release; treat retrieved document text as data rather than instructions and do not infer authorization from high relevance.
-8. **Human review and refusal** — Specify when an uncertain label, missing relevance judgment, cross-language unsupported request or restricted passage needs clarification, abstention or documented failure.
 
 ### Module 12 — Reproducible Experiments, Error Forensics and Resource Accounting
 
@@ -291,14 +277,13 @@
 
 #### Lessons
 
-1. **Rebuild the corpus from a declared source** — Pin source revision, license, analyzer rules, document IDs, split boundaries, model versions and index/configuration hashes or equivalent reproducible identifiers.
+1. **Reproducible corpus, query and model-selection contract** — Pin source revision and license, analyzer/encoder versions, original document IDs, index/configuration hashes, query/judgment revisions and resource budget. Partition repeated or near-duplicate queries and their contexts consistently with the intended population; log every attempted ranking configuration and keep genuinely final evaluation judgments outside all tuning decisions.
 2. **Assert index invariants** — Validate postings order, term counts, positions, deletions, corpus statistics and absent documents with an independent brute-force oracle on a tiny public collection.
 3. **Reproduce small metric calculations** — Compute a published AP/MAP/nDCG/precision result without using the ranking implementation under test or trusting a library's default qrel handling.
-4. **Control query and model selection** — Prevent overlap across near-duplicate queries, contexts and judgments where the target population needs independent evaluation; record all attempted configurations.
-5. **Classify errors by mechanism** — Trace text normalization, segmentation, annotation, morphology, token matching, embedding similarity, candidate recall, reranking, access control and qrel disagreement to separate causes.
-6. **Memory, CPU and index-size accounting** — Measure observed index-build/query latency and memory under bounded conditions, distinguishing input/corpus scale and implementation overhead from broad performance guarantees.
-7. **Evaluate change and regression** — Modify one analyzer/embedding/index field and verify which previously correct term/spans/ranks/metrics must remain invariant, explicitly recording changed oracle expectations.
-8. **Report uncertainty and non-claims** — Present actual per-query and language-slice results with denominators, disagreement and missing judgments; distinguish completed local research from deployment readiness, factual truth or universal language coverage.
+4. **Classify errors by mechanism** — Trace text normalization, segmentation, annotation, morphology, token matching, embedding similarity, candidate recall, reranking, access control and qrel disagreement to separate causes.
+5. **Memory, CPU and index-size accounting** — Measure observed index-build/query latency and memory under bounded conditions, distinguishing input/corpus scale and implementation overhead from broad performance guarantees.
+6. **Evaluate change and regression** — Modify one analyzer/embedding/index field and verify which previously correct term/spans/ranks/metrics must remain invariant, explicitly recording changed oracle expectations.
+7. **Report uncertainty and non-claims** — Present actual per-query and language-slice results with denominators, disagreement and missing judgments; distinguish completed local research from deployment readiness, factual truth or universal language coverage.
 
 ### Module 13 — Integrated Language Retrieval Study and Unfamiliar Defense
 
@@ -319,14 +304,12 @@
 
 #### Lessons
 
-1. **Select a bounded independent corpus and question set** — Declare a tiny licensed/synthetic text collection, its language/domain, user information needs, index/relevance policies, provenance and an appropriate lexical baseline.
-2. **Reuse assessed components without repetition** — Consolidate valid tokenization, sequence-labeling, indexing and metrics evidence from previous assessments, selecting only the representations needed for a coherent retrieval investigation.
-3. **Build normal and changed-case oracles** — Independently establish a few correct postings, BM25 scores, a qrel-based ranking measure, and a vector/hybrid reference with the exact declared conventions.
-4. **Measure lexical and semantic behavior** — Execute comparable lexical, dense and optional hybrid runs under fixed corpus/query judgments, recording actual measured relevance and query-time trade-offs.
-5. **Test adverse and permission cases** — Introduce an inaccessible document, an unsupported language or query, a shifted token boundary, incomplete qrel, zero vector or duplicate and prove correct handling.
-6. **Inspect limits instead of polishing scores** — Analyze at least one false positive, false negative, unjudged item, annotator disagreement or embedding shortcut with independent evidence rather than unexplained model intuition.
-7. **Unfamiliar assessor-supplied change** — Predict the specific impact of a new document term, index deletion, punctuation/normalization rule, query variant, qrel correction, embedding revision or access restriction before execution; repair or safely refuse the affected output.
-8. **Accessible technical defense** — Provide a clean-start independently repeatable run, corrected/new oracle and traceable reasoning about provenance, evaluation split, actual metric/cost findings, known blind spots and individually attributable engineering decisions.
+1. **One bounded retrieval question with legitimately reused assessed evidence** — Choose a small permitted or synthetic corpus with a stated language, source rights, query-information needs, fixed relevance judgments, stable versioned index and meaningful lexical baseline. Reuse previous tokenization, tagging, postings, metric and neural evidence only where actually assessed, selecting representations that materially contribute to one coherent retrieval investigation rather than reimplementing seven disconnected projects.
+2. **Build normal and changed-case oracles** — Independently establish a few correct postings, BM25 scores, a qrel-based ranking measure, and a vector/hybrid reference with the exact declared conventions.
+3. **Measured lexical, dense and hybrid evidence with honest limits** — Execute comparable runs on one frozen corpus/query/qrel contract, report actual per-query relevance and CPU/index costs, and diagnose a false positive, false negative, missing judgment, annotator dispute or misleading embedding similarity from independently inspectable facts. Separate observed performance from assumptions about general language coverage, semantic truth, query intent or operational readiness.
+4. **Test adverse and permission cases** — Introduce an inaccessible document, an unsupported language or query, a shifted token boundary, incomplete qrel, zero vector or duplicate and prove correct handling.
+5. **Unfamiliar assessor-supplied change** — Predict the specific impact of a new document term, index deletion, punctuation/normalization rule, query variant, qrel correction, embedding revision or access restriction before execution; repair or safely refuse the affected output.
+6. **Accessible technical defense** — Provide a clean-start independently repeatable run, corrected/new oracle and traceable reasoning about provenance, evaluation split, actual metric/cost findings, known blind spots and individually attributable engineering decisions.
 
 Modules describe learning sequences rather than thirteen separate required submissions. The **eight** summative evaluations below are the sole required assessment contracts, and shared legitimate work may be reused when the relevant outcome is actually demonstrated.
 
