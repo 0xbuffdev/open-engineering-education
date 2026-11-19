@@ -550,18 +550,6 @@ protected information, evaluator
 decision and stated limitations under
 [OEE Evidence Rules](../../spec/evidence-rules.md).
 
-APP9 remains the core OEE `v0.2.0` **draft**
-`project`, preserving its name, classification,
-full list of thirteen prior core course links
-and eight independent summative judgments.
-The earlier legacy checkpoint migration and
-optional APP10–APP16 curricula are already
-reflected in the published catalog. This source
-review does not promote APP9 to `tested` or
-`verified`, reassess earlier completions, impose
-new electives or automatically update OEE Workspace,
-content or 0xNAND source/evidence pins.
-
 The source course remains `draft`
 after green structural CI. Learner
 `tested`, `verified` and educational

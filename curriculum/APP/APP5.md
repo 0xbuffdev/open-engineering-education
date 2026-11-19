@@ -106,8 +106,7 @@ entries do not prove lower study effort or learner-tested
 readiness. Each of the **seven explicitly required
 summative assessments** evaluates a distinct cross-layer
 decision using **one evolving full-stack vertical slice**.
-Former module practice remains formative, and prior
-accepted evidence may be referenced rather than copied.
+Module exercises remain formative. Accepted evidence may be referenced when it supports a later required assessment.
 
 ## Learning outcomes
 
@@ -641,17 +640,7 @@ observed failure and recovery, change analysis,
 accessibility investigations and unsupported claims
 according to [OEE Evidence Rules](../../spec/evidence-rules.md).
 
-APP5 remains an OEE `v0.2.0` **draft** with
-the already published APP20 + APP3 direct
-prerequisites. APP4 is supplied transitively through
-APP3; the legacy eight-week format and older direct
-requirements are historical, not pending migrations.
-This editorial source reassessment does not grant
-`tested`/`verified` learner-readiness status,
-reassess earlier completions or automatically update
-APP6–APP9, elective, OEE Workspace, content or 0xNAND
-evidence/source pins. Actual evaluated revisions and
-review decisions must be preserved.
+APP5 remains an OEE `v0.2.0` `draft` course requiring APP20 and APP3. APP4 preparation is supplied through APP3. Learner completion requires the published summative evidence; source validation does not establish `tested` or `verified` readiness. Records must retain the course/specification revision actually evaluated. Updates to OEE Workspace, content mappings or 0xNAND source pins require separate review.
 
 ### Public non-mandatory study references
 

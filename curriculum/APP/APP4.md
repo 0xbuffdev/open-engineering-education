@@ -504,13 +504,6 @@ the course/spec revision, assessment/outcome IDs, relevant
 evidence references, observed limitations and any further
 work necessary for a sound decision.
 
-This competency-first editorial reassessment preserves APP4's
-subject identity, SEF10 direct prerequisite, twelve public
-outcome IDs and six summative assessment IDs. Earlier completion
-records remain attributed to their actual course/specification
-revision; historical decisions and downstream APP3/APP5 learner
-evidence are not silently rewritten by source consolidation.
-
 APP4 is published as an OEE `v0.2.0` **draft**, not learner-tested,
 verified or independently pedagogically conforming merely
 because its source and structural validation pass.

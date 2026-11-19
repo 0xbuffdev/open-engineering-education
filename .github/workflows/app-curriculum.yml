@@ -1,4 +1,4 @@
-name: APP curriculum import integrity
+name: APP curriculum integrity
 
 on:
   pull_request:
@@ -8,6 +8,7 @@ on:
       - 'scripts/check-app-curriculum.py'
       - 'scripts/app_catalog.py'
       - 'tests/test_app_catalog.py'
+      - 'tests/test_app_program_consistency.py'
       - 'scripts/course_format_versions.py'
       - 'scripts/check-outcome-curriculum.py'
       - '.github/workflows/app-curriculum.yml'
@@ -19,6 +20,7 @@ on:
       - 'scripts/check-app-curriculum.py'
       - 'scripts/app_catalog.py'
       - 'tests/test_app_catalog.py'
+      - 'tests/test_app_program_consistency.py'
       - 'scripts/course_format_versions.py'
       - 'scripts/check-outcome-curriculum.py'
 
@@ -27,5 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Check APP import integrity
+      - name: Validate APP catalog and courses
         run: python3 scripts/check-app-curriculum.py
+      - name: Verify APP program prerequisites and graduation contract
+        run: python3 -m unittest discover -s tests -p 'test_app_program_consistency.py' -v

@@ -573,7 +573,7 @@ Passing APP12 requires independently inspectable satisfactory decisions for `APP
 
 Record OEE specification and APP12 source revision, assessment/outcome IDs, actual source and test artifacts, safe synthetic identity and environment, stream/snapshot/version contracts, real HTTP/SQL and transport/fault evidence, negative security results, resource and latency measures with uncertainty, privacy and accessible user-state checks, and review decision under [OEE Evidence Rules](../../spec/evidence-rules.md).
 
-APP12 remains the published OEE `v0.2.0` **draft** `course`, **optional `elective`**, with APP3 + APP5 + APP6 direct prerequisites. The seven-week checkpoint format is a historical migration already reflected in the current catalog, not a newly imposed revision. APP9's core graduation and APP13–APP16 remain unchanged; prior learner decisions stay bound to their actual assessed course revision, and OEE Workspace/content/0xNAND source/evidence pins require deliberate separate review. Neither source CI nor this editorial reassessment establishes learner `tested`/`verified` status, public production guarantees or external accreditation.
+APP12 remains an optional OEE `v0.2.0` `draft` course requiring APP3, APP5 and APP6. Graduation through APP9 does not require it. The six required assessments evaluate seventeen outcomes using inspectable live transport, data recovery, authorization and failure evidence. Record each learner decision against the evaluated course/specification revision. Source checks cannot establish `tested` or `verified` readiness or imply production fault-tolerance guarantees.
 
 ### Public non-mandatory references
 

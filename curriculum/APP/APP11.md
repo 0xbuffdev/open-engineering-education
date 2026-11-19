@@ -544,9 +544,7 @@ APP11 completion requires acceptable independently inspectable decisions for `AP
 
 Retain OEE/course revision, relevant outcome and assessment IDs, source/artifact identities, local environment, contracts and synthetic fixture identities, actual failure and independent SQL evidence, race/duplicate/compensation and security negatives, matched measurements, ADR/rollback decision, accessible technical defense, limitations and reviewer decision under [OEE Evidence Rules](../../spec/evidence-rules.md).
 
-APP11 remains an OEE `v0.2.0` **draft** `course`, **optional `elective`**, with already approved APP3 + APP4 + APP6 direct prerequisites. The nine-week checkpoint/final-lab format is a **past migration**, not a new requirement introduced by this review. APP9's thirteen-course graduation closure and all other core/elective publications remain unchanged. Historical learner decisions are bound to their actual assessed source revision; any OEE Workspace, content/resource or 0xNAND source/evidence pin updates need distinct reviewed work. This source edit does **not** certify learner-`tested`, independently `verified` or production-ready status.
-
-This draft's software structural CI does not certify independent learner testing, public educational conformance, genuine public-cloud fault tolerance or production readiness.
+APP11 remains an optional OEE `v0.2.0` `draft` course requiring APP3, APP4 and APP6. APP9 graduation does not depend on this specialization. Preserve independently evaluated source/specification revisions, assessment decisions and evidence references when a learner or implementation advances to a newer course revision. Structural CI cannot establish learner-tested readiness, formal educational conformance or production fault-tolerance guarantees.
 
 ### Public non-mandatory technical references
 
