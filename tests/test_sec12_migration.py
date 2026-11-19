@@ -58,7 +58,7 @@ class SEC12CurriculumTests(unittest.TestCase):
         self.assertIn(
             "**Prerequisites:** [SEC7](SEC7.md), [SEC10](SEC10.md)", sec11)
         self.assertIn(
-            "**Prerequisites:** [SEC4](SEC4.md), [SEC6](SEC6.md)", sec7)
+            "**Prerequisites:** [SEC6](SEC6.md)", sec7)
 
     def test_outcome_instruction_and_assessment_coverage(self):
         src = COURSE.read_text(encoding="utf-8")

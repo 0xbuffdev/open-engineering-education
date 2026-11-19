@@ -27,7 +27,7 @@ class SEC7MigrationTests(unittest.TestCase):
         for expected in (
             "**Program:** SEC — Security Engineering",
             "**Type:** `course`",
-            "**Prerequisites:** [SEC4](SEC4.md), [SEC6](SEC6.md)",
+            "**Prerequisites:** [SEC6](SEC6.md)",
             "**Duration:** 12–16 weeks",
             "**Status:** `draft`",
             "**Specification:** `v0.2.0`",
@@ -35,12 +35,12 @@ class SEC7MigrationTests(unittest.TestCase):
             self.assertIn(expected, source)
         self.assertIn(
             "| [SEC7](SEC7.md) | Detection, Incident Response & Threat Hunting "
-            "| 12–16 weeks | SEC4, SEC6 | `course` |", catalog)
+            "| 12–16 weeks | SEC6 | `course` |", catalog)
         prerequisites = re.search(
             r"(?m)^\*\*Prerequisites:\*\* (.+)$", source)
         self.assertIsNotNone(prerequisites)
         self.assertEqual(
-            prerequisites.group(1), "[SEC4](SEC4.md), [SEC6](SEC6.md)")
+            prerequisites.group(1), "[SEC6](SEC6.md)")
         self.assertNotIn("legacy", source.lower())
         self.assertNotIn("backward compatibility", source.lower())
 

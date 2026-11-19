@@ -38,17 +38,19 @@ Graduation requires two separate, independently reviewable decisions: verified a
 | --- | --- | --- | --- | --- |
 | [SEC1](SEC1.md) | Security Foundations & Threat Modeling | 7–10 weeks | SEF10 | `course` |
 | [SEC2](SEC2.md) | Web & Application Security | 12–16 weeks | SEC1, APP1 | `course` |
-| [SEC3](SEC3.md) | Systems & Binary Security | 10–14 weeks | SEC1, SEF6 | `course` |
-| [SEC4](SEC4.md) | Network & Infrastructure Security | 10–14 weeks | SEC2, SEF7 | `course` |
+| [SEC3](SEC3.md) | Systems & Binary Security | 10–14 weeks | SEC1 | `course` |
+| [SEC4](SEC4.md) | Network & Infrastructure Security | 10–14 weeks | SEC2 | `course` |
 | [SEC5](SEC5.md) | Applied Cryptography & Secure Protocols | 12–16 weeks | SEC1 | `course` |
-| [SEC6](SEC6.md) | Cloud, Containers & Identity Security | 14–18 weeks | SEC2, SEC4 | `course` |
-| [SEC7](SEC7.md) | Detection, Incident Response & Threat Hunting | 12–16 weeks | SEC4, SEC6 | `course` |
+| [SEC6](SEC6.md) | Cloud, Containers & Identity Security | 14–18 weeks | SEC4 | `course` |
+| [SEC7](SEC7.md) | Detection, Incident Response & Threat Hunting | 12–16 weeks | SEC6 | `course` |
 | [SEC8](SEC8.md) | AI Security & Authorized Red Teaming | 12–16 weeks | SEC7 | `course` |
-| [SEC10](SEC10.md) | Enterprise Identity & Access Security | 14–18 weeks | SEC2, SEC4 | `course` |
+| [SEC10](SEC10.md) | Enterprise Identity & Access Security | 14–18 weeks | SEC4 | `course` |
 | [SEC11](SEC11.md) | Endpoint & Platform Defense | 14–18 weeks | SEC7, SEC10 | `course` |
 | [SEC12](SEC12.md) | Vulnerability & Exposure Management | 12–16 weeks | SEC11 | `course` |
 | [SEC13](SEC13.md) | Security Architecture & Control Assurance | 14–18 weeks | SEC6, SEC10 | `course` |
 | [SEC14](SEC14.md) | Data Security & Privacy Engineering | 14–18 weeks | SEC5, SEC13 | `course` |
 | [SEC9](SEC9.md) | Security Engineering Capstone | 14–18 weeks | SEC1–SEC8, SEC10, SEC11, SEC12, SEC13, SEC14 | `project` |
+
+Catalog prerequisites are **direct** course-entry requirements. Prerequisites already established by an earlier required course still apply through that dependency path; omitting a redundant direct link does not waive its assessed mastery. The SEC9 admission gate separately verifies every required core course.
 
 Course definitions specify the required outcomes, learning sequence and completion evidence. Work can be completed in [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) or another learner-controlled environment. The [OEE specification](../../spec/README.md) governs course requirements.

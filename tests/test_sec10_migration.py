@@ -28,7 +28,7 @@ class SEC10CurriculumTests(unittest.TestCase):
             "# SEC10 — Enterprise Identity & Access Security",
             "**Program:** SEC — Security Engineering",
             "**Type:** `course`",
-            "**Prerequisites:** [SEC2](SEC2.md), [SEC4](SEC4.md)",
+            "**Prerequisites:** [SEC4](SEC4.md)",
             "**Duration:** 14–18 weeks",
             "**Status:** `draft`",
             "**Specification:** `v0.2.0`",
@@ -36,7 +36,7 @@ class SEC10CurriculumTests(unittest.TestCase):
             self.assertIn(x, src)
         self.assertIn(
             "| [SEC10](SEC10.md) | Enterprise Identity & Access Security "
-            "| 14–18 weeks | SEC2, SEC4 | `course` |", cat)
+            "| 14–18 weeks | SEC4 | `course` |", cat)
         self.assertIn(
             "| [SEC9](SEC9.md) | Security Engineering Capstone | "
             "14–18 weeks | SEC1–SEC8, SEC10, SEC11, SEC12, SEC13, SEC14 | `project` |", cat)

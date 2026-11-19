@@ -29,12 +29,12 @@ class SEC4MigrationTests(unittest.TestCase):
             "**Status:** `draft`",
             "**Specification:** `v0.2.0`",
             "**Duration:** 10–14 weeks",
-            "**Prerequisites:** [SEC2](SEC2.md), [SEF7](../SEF/SEF7.md)",
+            "**Prerequisites:** [SEC2](SEC2.md)",
         ):
             self.assertIn(expected, source)
         self.assertIn(
             "| [SEC4](SEC4.md) | Network & Infrastructure Security "
-            "| 10–14 weeks | SEC2, SEF7 | `course` |", catalog)
+            "| 10–14 weeks | SEC2 | `course` |", catalog)
         prereq = re.search(r"(?m)^\*\*Prerequisites:\*\* (.+)$", source)
         self.assertIsNotNone(prereq)
         self.assertNotIn("SYS4", prereq.group(1))
