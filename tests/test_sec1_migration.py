@@ -19,7 +19,7 @@ class SEC1MigrationTests(unittest.TestCase):
             capture_output=True, text=True, check=False, cwd=ROOT)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
-    def test_catalog_and_legacy_boundaries(self):
+    def test_course_catalog_and_prerequisite(self):
         source = COURSE.read_text(encoding="utf-8")
         catalog = CATALOG.read_text(encoding="utf-8")
         self.assertIn("**Prerequisites:** [SEF10](../SEF/SEF10.md)", source)
@@ -29,10 +29,11 @@ class SEC1MigrationTests(unittest.TestCase):
             self.assertIn(field, source)
         self.assertIn(
             "| [SEC1](SEC1.md) | Security Foundations & Threat Modeling "
-            "| 7–10 weeks | SEF10 (assessed SEF completion) | `course` |",
+            "| 7–10 weeks | SEF10 | `course` |",
             catalog)
-        self.assertIn("SEC2–SEC9 remain legacy", catalog)
-        self.assertIn("SEC8 legacy AI5 prerequisite", catalog)
+        self.assertNotIn("legacy", catalog.lower())
+        self.assertNotIn("assessed SEF completion", catalog)
+        self.assertNotIn("assessed completion of Software Engineering Foundations", source)
 
     def test_all_outcomes_taught_and_assessed(self):
         text = COURSE.read_text(encoding="utf-8")

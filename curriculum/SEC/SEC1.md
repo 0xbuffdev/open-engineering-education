@@ -2,7 +2,7 @@
 
 **Program:** SEC — Security Engineering
 **Type:** `course`
-**Prerequisites:** [SEF10](../SEF/SEF10.md) — assessed completion of Software Engineering Foundations
+**Prerequisites:** [SEF10](../SEF/SEF10.md)
 **Duration:** 7–10 weeks
 **Status:** `draft`
 **Specification:** `v0.2.0`
@@ -16,7 +16,7 @@
 
 **Context and scope.** Security practice protects people, systems, operations and information. Confidentiality, integrity and availability are important but incomplete: identity, privacy, authorized use, recoverability and accountable decisions depend on context. Threat modeling brings together architecture, realistic adversary capabilities, security properties, potential harms, control choices and reviewable evidence. STRIDE, abuse cases and attack paths are useful prompts, not proof of exhaustive coverage. The result is a revisable engineering argument, not a certificate of safety.
 
-**Preparation and ownership.** [SEF10](../SEF/SEF10.md) represents assessed foundation-level programming, tests, C memory, Unix interfaces, workflow and professional responsibility. SEC1 uses that preparation rather than reteaching basic code or networks. Brief examples of sessions, roles and access decisions develop a model of authority; [SEC2](SEC2.md) owns actual application vulnerabilities and repairs. SEC3–SEC8 own their distinct specialized risks, and [SEC9](SEC9.md) integrates previously assessed capabilities. No unmerged AI course, paid platform, production security clearance or specialist exploit skill is needed here.
+**Prerequisites and course boundaries.** [SEF10](../SEF/SEF10.md) provides the necessary programming, testing, C memory, Unix interfaces, engineering workflow and professional responsibility foundations. SEC1 applies these skills without repeating introductory programming or networking. Examples involving sessions, roles and access decisions establish the reasoning behind authority boundaries; [SEC2](SEC2.md) owns application vulnerabilities and repairs. SEC3–SEC8 develop specialized security capabilities, and [SEC9](SEC9.md) integrates them. No commercial platform, production security clearance or specialist exploitation skills are required.
 
 **Access, reproducibility and safety.** A learner-controlled loopback application or a supplied fictional system with explicit semantics is sufficient. The system must contain different actors, a protected resource, a meaningful authority/trust boundary and at least one external dependency or untrusted input. Use labeled data-flow diagrams *or equivalent textual tables*, plus supplied request traces, small programs or paper reasoning. No privileged OS access, commercial scanning tool, live production target or internet exploitation is required. Before examining a real system, record the owner's permission, exact scope, exclusions, data handling, stop rules and escalation channel. Public reachability, a software license or curiosity does not constitute permission.
 
