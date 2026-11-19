@@ -8,7 +8,7 @@ Security Engineering treats security as an engineering discipline. You begin wit
 
 ## Prerequisites
 
-**Program 1 — SEF — Software Engineering Foundations.**
+**Assessed completion of Program 1 — SEF — Software Engineering Foundations, including [SEF10](../SEF/SEF10.md).**
 
 Later courses may require specific Application, Systems, or AI knowledge. These dependencies are stated at the course level so learners can satisfy them through prior study or demonstrated equivalent knowledge.
 
@@ -31,11 +31,11 @@ The learner must demonstrate the knowledge, practical skills, and engineering ju
 
 ## Courses
 
-The nine published course files are **legacy drafts**. They preserve their original learning activities and completion requirements but have not been migrated or assessed against the `v0.2.0` outcome-driven contract. They are course outlines for study and review, not claims of learner-tested readiness or `v0.2.0` conformance. See the [curriculum inventory](../INVENTORY.md) for a reproducible structural audit.
+**SEC integration-branch review only; the current `main` catalog remains authoritative.** SEC1 is staged as a `v0.2.0` `draft` with observable outcomes and summative evidence. SEC2–SEC9 remain legacy course definitions until independently reassessed. The SEC8 legacy AI5 prerequisite is incompatible with the separate AI migration (where AI5 now means Deep Learning); it must be resolved before SEC cutover, not treated as a new mandatory learner requirement. See [SEC M0](https://github.com/0xbuffdev/open-engineering-education/issues/202) and the [derived inventory](../INVENTORY.md).
 
 | Course | Title | Duration | Prerequisites | Type |
 | --- | --- | --- | --- | --- |
-| [SEC1](SEC1.md) | Security Foundations & Threat Modeling | 5 weeks | Program 1 — SEF | `course` |
+| [SEC1](SEC1.md) | Security Foundations & Threat Modeling | 7–10 weeks | SEF10 (assessed SEF completion) | `course` |
 | [SEC2](SEC2.md) | Web & Application Security | 6 weeks | SEC1, APP1 and APP3 | `course` |
 | [SEC3](SEC3.md) | Systems & Binary Security | 6 weeks | SEC1 and SEF6 | `course` |
 | [SEC4](SEC4.md) | Network & Infrastructure Security | 5 weeks | SEC2 and SEF7 | `course` |
@@ -45,4 +45,4 @@ The nine published course files are **legacy drafts**. They preserve their origi
 | [SEC8](SEC8.md) | AI Security & Authorized Red Teaming | 4 weeks | SEC1, SEC2, SEC7, and AI5 | `course` |
 | [SEC9](SEC9.md) | Security Engineering Capstone | 8–10 weeks | SEC1–SEC8 | `project` |
 
-The course files remain the authoritative source for each course's published work and prerequisites. Use [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) or another learner-controlled environment for practical work and evidence. The [OEE specification](../../spec/README.md) governs newly authored or explicitly migrated course revisions.
+Only SEC1 is a proposed v0.2.0 revision on this integration branch; the full prerequisite graph, program completion rules and downstream identity history require later review before publication. The course files remain the authoritative source for their defined work and prerequisites. Use [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) or another learner-controlled environment for practical work and evidence. The [OEE specification](../../spec/README.md) governs newly authored or explicitly migrated course revisions.
