@@ -36,7 +36,7 @@ Graduation requires two separate, independently reviewable decisions: verified a
 | [SEC3](SEC3.md) | Systems & Binary Security | 10–14 weeks | SEC1, SEF6 | `course` |
 | [SEC4](SEC4.md) | Network & Infrastructure Security | 10–14 weeks | SEC2, SEF7 | `course` |
 | [SEC5](SEC5.md) | Applied Cryptography & Secure Protocols | 12–16 weeks | SEC1 | `course` |
-| [SEC6](SEC6.md) | Cloud, Containers & Identity Security | 14–18 weeks | SEC2, SEC4, APP7 | `course` |
+| [SEC6](SEC6.md) | Cloud, Containers & Identity Security | 14–18 weeks | SEC2, SEC4 | `course` |
 | [SEC7](SEC7.md) | Detection, Incident Response & Threat Hunting | 12–16 weeks | SEC4, SEC6 | `course` |
 | [SEC8](SEC8.md) | AI Security & Authorized Red Teaming | 12–16 weeks | SEC7 | `course` |
 | [SEC9](SEC9.md) | Security Engineering Capstone | 14–18 weeks | SEC1–SEC8 | `project` |

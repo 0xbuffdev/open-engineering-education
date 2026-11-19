@@ -27,8 +27,7 @@ class SEC6MigrationTests(unittest.TestCase):
         for field in (
             "**Program:** SEC — Security Engineering",
             "**Type:** `course`",
-            "**Prerequisites:** [SEC2](SEC2.md), [SEC4](SEC4.md), "
-            "[APP7](../APP/APP7.md)",
+            "**Prerequisites:** [SEC2](SEC2.md), [SEC4](SEC4.md)",
             "**Duration:** 14–18 weeks",
             "**Status:** `draft`",
             "**Specification:** `v0.2.0`",
@@ -36,7 +35,7 @@ class SEC6MigrationTests(unittest.TestCase):
             self.assertIn(field, source)
         self.assertIn(
             "| [SEC6](SEC6.md) | Cloud, Containers & Identity Security "
-            "| 14–18 weeks | SEC2, SEC4, APP7 | `course` |", catalog)
+            "| 14–18 weeks | SEC2, SEC4 | `course` |", catalog)
         line = re.search(r"(?m)^\*\*Prerequisites:\*\* (.+)$", source)
         self.assertIsNotNone(line)
         self.assertNotIn("SEC5", line.group(1))
@@ -44,6 +43,49 @@ class SEC6MigrationTests(unittest.TestCase):
         self.assertNotIn("SYS4", line.group(1))
         self.assertNotIn("legacy", source.lower())
         self.assertNotIn("backward compatibility", source.lower())
+
+    def test_prerequisite_graph_and_honest_sec7_preparation(self):
+        source = COURSE.read_text(encoding="utf-8")
+        downstream = (COURSE.parent / "SEC7.md").read_text(encoding="utf-8")
+        entry = next(
+            (line.split(": ", 1)[1] for line in source.splitlines()
+             if line.startswith("**Prerequisites:** ")),
+            None,
+        )
+        self.assertIsNotNone(entry)
+        self.assertEqual(entry, "[SEC2](SEC2.md), [SEC4](SEC4.md)")
+        for not_required in ("APP7", "APP6", "APP5", "APP3", "SEC5", "SYS4"):
+            self.assertNotIn(not_required, entry)
+        self.assertIn(
+            "neither full application-engineering course is a prerequisite",
+            source,
+        )
+        self.assertIn("are not SEC7 prerequisites", downstream)
+        self.assertNotIn("through APP7", downstream)
+        self.assertIn(
+            "**Prerequisites:** [SEC4](SEC4.md), [SEC6](SEC6.md)",
+            downstream,
+        )
+
+    def test_taught_local_oci_and_ci_preparation_retains_real_proof(self):
+        source = COURSE.read_text(encoding="utf-8")
+        for required in (
+            "source-inspectable and version-pinned service/release fixture",
+            "source → build inputs → image digest → actual running container",
+            "untrusted change → CI job permission → artifact",
+            "Trace a functioning source-to-runtime delivery path",
+            "Build, inspect and distrust an OCI image",
+            "Execute and inspect a minimal delivery trust boundary",
+            "executed normal low-privilege job result",
+            "source revision and build recipe",
+            "locally enforced runtime identity/mount or file-permission restriction",
+            "wrong digest and wrong signing identity",
+            "A valid signature by the wrong identity is a failure",
+            "real local container authority restriction",
+            "preserving normal service function",
+        ):
+            self.assertIn(required, source)
+        self.assertIn("actual container startup", source.lower())
 
     def test_every_outcome_taught_and_assessed(self):
         source = COURSE.read_text(encoding="utf-8")
@@ -105,7 +147,7 @@ class SEC6MigrationTests(unittest.TestCase):
         source = COURSE.read_text(encoding="utf-8")
         for phrase in (
             "real local container authority restriction",
-            "not be claimed as proof of live container isolation",
+            "does not prove live container isolation",
             "A valid signature by the wrong identity is a failure",
             "SLSA v1.2 Source and Build tracks",
             "No public cloud account",
