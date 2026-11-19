@@ -2,7 +2,7 @@
 
 The Open Engineering Education (OEE) curriculum publishes five engineering programs and their course definitions. It is designed for independent learners, educators, reviewers, and implementations that need a common, publicly inspectable educational contract.
 
-**Current state:** All five programs have published draft course definitions. [SEF](SEF/README.md) now has eleven outcome-driven `v0.2.0` core courses and a cumulative graduation capstone; [APP](APP/README.md) has fourteen outcome-driven `v0.2.0` core courses (including its capstone) and seven optional outcome-driven electives. All of these courses remain `draft` pending real learner and independent reviewer evidence. SYS now has ten outcome-driven `v0.2.0` draft core courses and a cumulative systems graduation capstone. **Integration branch only:** AI has sixteen staged outcome-driven draft **required core** course definitions (AI1–AI16, including its new project capstone) and four **optional** outcome-driven draft AI17 speech/audio, AI18 robotics/embodied, AI19 causal-inference, and AI20 graph-representation electives; all twenty AI source files are staged but the final academic/graduation-readiness review, downstream/historic evidence mappings and atomic program cutover remain incomplete, and the nine-course legacy AI catalog on `main` remains authoritative until an explicitly reviewed atomic cutover. SEC retains legacy course definitions. Source format or structural validation does not establish educational effectiveness or formal conformance.
+The five program catalogs below describe the courses in this repository revision. AI comprises sixteen required courses, including its capstone, and four optional electives. All twenty AI courses retain `draft` educational status. Consult each program catalog for its own study sequence and readiness information; source-format validation does not establish teaching effectiveness, learner mastery or formal conformance.
 
 ## Choose a program
 
@@ -13,7 +13,7 @@ Each program README is the authoritative catalog for its **current** courses, st
 | `SEF` | Software Engineering Foundations | 11 core | [Explore SEF](SEF/README.md) |
 | `APP` | Application Engineering | 14 core, 7 electives | [Explore APP](APP/README.md) |
 | `SYS` | Systems Engineering | 10 core | [Explore SYS](SYS/README.md) |
-| `AI` | AI Engineering | 16 staged core, 4 electives (integration only; cutover incomplete) | [Explore AI](AI/README.md) |
+| `AI` | AI Engineering | 16 core, 4 electives | [Explore AI](AI/README.md) |
 | `SEC` | Security Engineering | 9 core | [Explore SEC](SEC/README.md) |
 | **Total** | **Five programs** | **60 core, 11 electives** | |
 
@@ -34,7 +34,7 @@ The curriculum describes **what must be learned and demonstrated**, not a requir
 
 A course's `draft`, `tested`, or `verified` label describes its **educational readiness evidence**, not its specification-format version. The definitive thresholds and promotion rules belong to [Status Labels](../spec/status-labels.md).
 
-Likewise, a file being present or passing a structural check does not establish `v0.2.0` conformance. Legacy course revisions retain their historical requirements until explicitly migrated; they must not be silently reclassified. Consult the [curriculum inventory](INVENTORY.md) for reproducible, commit-pinned migration and structural reports.
+A course file or passing structural check does not establish `v0.2.0` conformance. The [curriculum inventory](INVENTORY.md) provides reproducible, commit-pinned source-format and structure reports; educational readiness follows independent review evidence.
 
 ## Where requirements live
 

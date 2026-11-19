@@ -279,13 +279,22 @@ class SEFProgramConsistencyTests(unittest.TestCase):
                     line for line in catalog.splitlines()
                     if re.match(r"^\| \[AI\d+\]\(AI\d+\.md\) \|", line)
                 ]
-                current_core = sum("Elective ·" not in line for line in entries)
-                current_elective = sum("Elective ·" in line for line in entries)
+                current_core = sum(
+                    line.rstrip().endswith(
+                        ("| Required course |", "| Required project |")
+                    )
+                    for line in entries
+                )
+                current_elective = sum(
+                    line.rstrip().endswith("| Elective |")
+                    for line in entries
+                )
                 self.assertEqual(
-                    (current_core, current_elective), (core, elective)
+                    (len(entries), current_core, current_elective),
+                    (core + elective, core, elective),
                 )
                 self.assertIn(
-                    "| `AI` | AI Engineering | 16 staged core, 4 electives (integration only; cutover incomplete) |",
+                    "| `AI` | AI Engineering | 16 core, 4 electives |",
                     overview,
                 )
             else:
