@@ -14,15 +14,13 @@
 
 **AI8 establishes the engineering and scientific foundations of understanding visual information and learning from more than one modality.** Learners must distinguish raw pixel measurements from objects, scenes and asserted meanings; preserve spatial and temporal evidence through preprocessing and annotation; implement and critically compare small vision models for classification, localization, detection, segmentation and sequence observations; and build bounded image–text alignment, retrieval and fusion systems with independently verifiable evaluation. A classifier output, bounding box, segmentation mask or shared embedding is never accepted as ground truth merely because a library produced it. The learner must show which image, annotation, coordinate system, source, sampling assumption, model and evaluation protocol support the result.
 
-**History, practice and applications.** Computer vision grew from image formation, geometry and local features into statistical visual recognition and learned hierarchical representations. Convolutional networks popularized end-to-end visual classification, while modern detection and segmentation systems organize spatial predictions, and contrastive visual–linguistic learning connects images with natural-language descriptions. Real-world applications include accessibility tools, remote sensing, manufacturing inspection, image search, bounded activity analysis and multimodal document discovery. The same techniques fail under lighting/scale changes, altered cameras, missing modalities, ambiguous annotation, visually similar objects, incorrect geographic context, unrepresentative datasets or unauthorized use. Synthetic benchmark success does not establish that a model can safely perceive, diagnose or act in the world.
-
 **Entry competence and progression.** The **single direct prerequisite is completed [AI7](AI7.md)**, which itself requires [AI5](AI5.md). AI5 already assesses tensor layout, convolution/backpropagation, neural training, learned embeddings and contrastive objectives. AI7 already assesses text normalization, annotation, linguistic ambiguity, semantic retrieval, per-query relevance judgments, and lexical/dense ranking. [AI4](AI4.md), [AI2](AI2.md), [AI1](AI1.md) and the complete SEF foundations are inherited through that chain. AI8 develops the previously unassessed **vision-specific** skills: image acquisition/coordinate geometry, label-preserving spatial transformations, image and scene identity leakage, visual feature/pattern failures, box assignment and detection metrics, pixel/instance masks, bounded video tracking, visual pretexts, actual image–text pairing and bidirectional retrieval, and multimodal fusion with missing/conflicting evidence. Re-deriving generic convolution kernels, text tokenization, cosine distance, the gradient chain rule, generic cross-validation or ordinary retrieval metrics is *not* a substitute for these new competencies. No APP, SYS or AI6 completion is directly required.
 
 **Course boundaries.** AI9 owns transformer and attention architectures, generative image/language modeling and diffusion-type generative mechanisms; AI10 owns advanced large-model optimization and adaptation; AI11 owns grounded retrieval-augmented generation and answer citation; AI12 owns tool-using application agents; AI13 owns broad AI systems assurance; AI14 owns systematic security, responsible AI and governance; AI15 owns serving and MLOps. AI8's vision-language work uses **small fixed or locally trained encoders and simple contrastive pairs**, not pretrained web-scale transformers, hosted VLMs, text/image generation, captioner finetuning or real autonomous agents. Basic video temporal sampling/identity tracking is an image-sequence specialty here, not an advanced reinforcement-learning or robotics course; embodied perception and sensor fusion for physical action belong to elective AI18. A vision or text retriever does not establish real-world scene semantics or image authenticity by similarity alone.
 
 **Assessed access and evidence conditions.** Every compulsory reference case is a tiny **synthetic image array, spatial annotation, finite frame sequence or synthetic image–caption pairing**. Python 3 standard library, NumPy or equivalent matrix operations suffice for exact geometry, index, detection matching, mask and retrieval oracles. A modest CPU-only open neural framework can support the small model experiments, or an equivalent transparent implementation can meet the same outcome criteria; no GPU, cloud credit, commercial dataset, hidden pretrained weights, personal photo library, premium labeling tool or licensed online API is required. Image data must include source/license/privacy provenance, stable image/scene IDs, versioned annotations, dimensions and channel conventions. Provide accessible equivalent numeric grids, coordinate descriptions and structured tables for visual evidence; do not make the ability to inspect a color-dependent plot the only way to demonstrate a result. All code must disclose dtype, coordinate conventions, image layout, train/validation/test grouping, padding and resizing policy, optimizer/seed and actual compute budgets.
 
-**Assessment architecture.** Thirteen modules are derived from distinct visual and multimodal skills with deliberately different lesson counts. Nine required cumulative summative assessments establish **22 observable learning outcomes**: visual data integrity; vision classification; detection and localization; segmentation; temporal data; visual representation; image–text contrastive learning and retrieval; fusion, evaluation and access controls; and an integrated unfamiliar technical defense. Learners may maintain **one reusable versioned collection** with several small model/analysis exercises instead of creating nine separate industrial systems. Exact public oracles below are checkable without trusting a framework; actual trained performance/latency/robustness must be genuinely measured and cannot be inferred from toy expected values. The estimated 20–28 weeks include study, proof, implementation, experiments, diagnosis and independent review; the course remains `draft` until authentic learner evidence supports a later status decision.
+**Assessment architecture.** Thirteen distinct competency stages connect pixel and annotation integrity with vision model selection, localization/detection, region segmentation, temporal identity, visual representation, image–text alignment, multimodal evidence and independent evaluation. Paired numerical/negative checks now sit with the mechanisms they test rather than becoming repeated standalone lessons. Nine required cumulative summative assessments establish **22 observable learning outcomes**: visual data integrity; vision classification; detection and localization; segmentation; temporal data; visual representation; image–text contrastive learning and retrieval; fusion, evaluation and access controls; and an integrated unfamiliar technical defense. Learners may maintain **one reusable versioned collection** with several small model/analysis exercises instead of creating nine separate industrial systems. Exact public oracles below are checkable without trusting a framework; actual trained performance/latency/robustness must be genuinely measured and cannot be inferred from toy expected values. The estimated 20–28 weeks include study, proof, implementation, experiments, diagnosis and independent review; the course remains `draft` until authentic learner evidence supports a later status decision.
 
 ## Learning outcomes
 
@@ -62,13 +60,12 @@
 
 #### Lessons
 
-1. **Pixel measurements versus interpreted scenes** — Distinguish digital image samples from physical objects, visual categories, descriptions and causal claims; reject reading semantic facts directly from pixel values.
-2. **Historical mechanisms and application boundaries** — Connect engineered image features, statistical recognition, convolutional vision and cross-modal alignment to their original engineering tradeoffs and modern bounded tasks.
-3. **Classification, localization, detection, segmentation and retrieval** — Define the prediction unit, output shape and criterion for each, contrasting an image-level label with a spatially grounded instance or caption match.
-4. **Camera and scene as sampling units** — Record image, scene, subject, device, frame and capture-session identities; identify why repeated frames, crops and near duplicates violate naïve row independence.
-5. **Annotation and permission requirements** — Define image ownership/license, personal-image restrictions, uncertain labels, redaction, missing source and who may inspect a raw visual artifact.
-6. **Baselines, compute and evaluation claims** — Choose an appropriate constant, pixel-feature or small neural baseline and a correct holdout population, refusing model-of-the-world claims unsupported by a synthetic task.
-7. **Public challenge and negative cases** — Establish a tiny numeric-image corpus with a source/annotation contract, shape/dtype error and one deliberately invalid or unauthorized image use.
+1. **Visual evidence, development and perception limits** — Distinguish measured pixel samples from objects, labels, scenes, inferred intent and physical facts. Trace engineered feature extraction, statistical classification, convolutional visual models and modern image–text alignment to the bounded applications and assumptions they address; explain why a high score on synthetic images does not establish causal scene understanding, image authenticity or safe real-world perception.
+2. **Classification, localization, detection, segmentation and retrieval** — Define the prediction unit, output shape and criterion for each, contrasting an image-level label with a spatially grounded instance or caption match.
+3. **Camera and scene as sampling units** — Record image, scene, subject, device, frame and capture-session identities; identify why repeated frames, crops and near duplicates violate naïve row independence.
+4. **Annotation and permission requirements** — Define image ownership/license, personal-image restrictions, uncertain labels, redaction, missing source and who may inspect a raw visual artifact.
+5. **Baselines, compute and evaluation claims** — Choose an appropriate constant, pixel-feature or small neural baseline and a correct holdout population, refusing model-of-the-world claims unsupported by a synthetic task.
+6. **Public challenge and negative cases** — Establish a tiny numeric-image corpus with a source/annotation contract, shape/dtype error and one deliberately invalid or unauthorized image use.
 
 *Optional formative prompt:* A detector sees the same item in ten adjacent video frames; explain why testing on eight frames after fitting on the other two may not measure a new-scene capability.
 
@@ -85,12 +82,11 @@
 1. **Image grids and channel layouts** — Translate H×W×C and C×H×W layouts with explicit batch axis, grayscale/color/alpha semantics and a concrete value/shape oracle.
 2. **Integer intensities and normalization** — Distinguish unsigned 8-bit pixels from normalized floating values, rounding/clipping and loss of precision on repeated conversions.
 3. **Color spaces and intensity interpretation** — Compare RGB, grayscale and a luminance-like transform using declared coefficients, channel order and encoding assumptions, avoiding an undocumented universal RGB-to-gray formula.
-4. **Spatial coordinate orientation** — Specify origin, x/y direction, pixel centers and half-open image/box bounds; reject swaps of width/height and off-by-one endpoint confusion.
-5. **Orientation and metadata** — Examine image rotation metadata and pixels' actual memory layout; demonstrate a case where ignoring orientation changes the annotation's spatial meaning.
-6. **Resizing and sampling** — Contrast nearest-neighbor, bilinear and area-based resampling on a tiny grid; identify aliasing from downsampling without an appropriate antialias policy.
-7. **Cropping, padding and boundary provenance** — Predict surviving coordinates and zero/reflect padding effects on a fixed image; explain when cropping changes a classification label or removes a labeled object.
-8. **Geometric transform chain and inverse mapping** — Apply scaling, translation and reflection to annotated points/boxes, preserving the transform order and whether an inverse exists after information loss.
-9. **Numeric image checks and invalid encodings** — Reproduce the public V1 image mean and flip, detect an invalid/empty array, incompatible channels or nonfinite pixel, and record a faithful text-grid oracle.
+4. **Spatial coordinate orientation, image metadata and physical pixels** — Specify image origin, x/y direction, centers, half-open bounds, width/height and actual memory-channel layout. Compare orientation metadata with the underlying pixel array, independently trace a rotation/orientation case and show why ignoring a camera's orientation can invalidate a spatial annotation or silently reverse axes; preserve a reproducible normalized view and the source orientation.
+5. **Resizing and sampling** — Contrast nearest-neighbor, bilinear and area-based resampling on a tiny grid; identify aliasing from downsampling without an appropriate antialias policy.
+6. **Cropping, padding and boundary provenance** — Predict surviving coordinates and zero/reflect padding effects on a fixed image; explain when cropping changes a classification label or removes a labeled object.
+7. **Geometric transform chain and inverse mapping** — Apply scaling, translation and reflection to annotated points/boxes, preserving the transform order and whether an inverse exists after information loss.
+8. **Numeric image checks and invalid encodings** — Reproduce the public V1 image mean and flip, detect an invalid/empty array, incompatible channels or nonfinite pixel, and record a faithful text-grid oracle.
 
 ### Module 3 — Visual Annotation, Target Geometry and Leakage-Safe Augmentation
 
@@ -105,14 +101,13 @@
 
 1. **Image-level, box, mask and keypoint annotation schemas** — Define annotation type, class ontology, object ID, confidence provenance and unknown/ignore label without conflating them.
 2. **Box representations and conversion** — Translate xyxy, xywh and normalized coordinates with declared half-open bounds and check equivalence on a non-square image.
-3. **Synchronized transforms of image and target** — Derive exact flipped/scaled bounding-box coordinates on G1, and apply equivalent pixel/keypoint transformations to avoid silent target misalignment.
+3. **Synchronized visual/target transforms and independent adversarial checks** — Derive G1's flipped and resized box coordinates on a declared transform chain, and apply corresponding pixel/keypoint/mask transformations. Deliberately introduce swapped image axes, a misaligned bounding box or a mismatched transform order, independently predict the violated coordinate/identity invariant and verify a repair; a transformed image with unchanged source boxes is not valid evidence.
 4. **Clipping and visibility decisions** — Define how partially clipped boxes, removed instances and valid-area thresholds affect a transformed label; distinguish a clipped target from its original uncropped object.
 5. **Masks, interpolation and class IDs** — Apply discrete nearest-neighbor mask transforms to preserve class indices, and explain why interpolated categorical IDs can invent an invalid class.
 6. **Augmentation invariance contract** — Decide whether horizontal reflection, rotation, color jitter and object crop preserve the *actual* target (left/right directions, text on signs, orientation or safety label may change).
 7. **Visual annotation ambiguity and disagreement** — Model occluded objects, uncertain boundaries, overlapping instances and unequal annotators without treating arbitrary labeling as unique ground truth.
 8. **Train/dev/test source grouping** — Partition scenes/subjects/capture sessions before deriving crops, patches or augmentations; show a contaminated split where near-identical scenes cross boundaries.
 9. **Revision and lineage** — Maintain immutable image ID, transform version, annotation version, source/license and authorized visibility, with reproducible changes rather than destructive silent relabeling.
-10. **Adversarial transform audit** — Deliberately misalign a box, swap axes, interpolate a categorical mask or duplicate a scene; independently predict and detect the resulting contract violation.
 
 ### Module 4 — Image Classification and Visual Generalization
 
@@ -128,12 +123,11 @@
 
 1. **Image-level target and baseline definition** — Specify the precise class label, input resolution, scene independence, majority/constant baseline and cost of a false visual prediction.
 2. **Simple handcrafted pattern features** — Build a compact edge, average intensity, color histogram or spatial count feature and show what changes under a documented shift in image structure.
-3. **Small learned classifier in a vision task** — Apply AI5's already-assessed convolution/training mechanics to a task that actually requires spatial features, with explicit image layout and normalizer provenance.
-4. **Image-level model selection** — Compare a pixel-feature/linear baseline, simple CNN and controlled architecture/augmentation variant under identical grouped data/metric/budget constraints.
-5. **Geometric invariance and equivariance tests** — Measure whether predictions/feature maps respond to translation, reflection, rotation and scale as the selected target requires, without claiming that a network is universally invariant.
-6. **Shortcut labels and confounders** — Construct a synthetic foreground-shape task where correlated background color makes training accuracy misleading; test a scene/background-balanced holdout.
-7. **Occlusion, blur and illumination errors** — Introduce one controlled camera-like perturbation, record actual model and baseline behavior, and separate image degradation from a new semantic label.
-8. **Per-class and group error interpretation** — Report class supports, confusion and group-level mistakes honestly, avoiding a real-world robustness claim based on a few artificial images.
+3. **A small vision classifier and fair model selection** — Apply AI5's assessed convolution/training mechanics to a spatial-pattern task with named image layout and training-only normalization. Compare a constant/handcrafted feature or linear baseline, the small CNN and one justified architecture/augmentation change under identical grouped scene partitions, evaluation metric, class supports, seeds and CPU budget. Record actual rather than presumed held-out improvements.
+4. **Geometric invariance and equivariance tests** — Measure whether predictions/feature maps respond to translation, reflection, rotation and scale as the selected target requires, without claiming that a network is universally invariant.
+5. **Shortcut labels and confounders** — Construct a synthetic foreground-shape task where correlated background color makes training accuracy misleading; test a scene/background-balanced holdout.
+6. **Occlusion, blur and illumination errors** — Introduce one controlled camera-like perturbation, record actual model and baseline behavior, and separate image degradation from a new semantic label.
+7. **Per-class and group error interpretation** — Report class supports, confusion and group-level mistakes honestly, avoiding a real-world robustness claim based on a few artificial images.
 
 ### Module 5 — Spatial Feature Representation and Visual Transfer
 
@@ -150,10 +144,9 @@
 2. **Spatial hierarchy and pooling tradeoffs** — Compare preserving a small local location with a globally pooled feature, showing what object-position evidence may be lost.
 3. **Scale and receptive fields in a real image task** — Use AI5 convolution understanding to explain why resizing or a low-resolution object may alter effective visual evidence, even when layer shapes remain valid.
 4. **Feature visualization and attribution restraint** — Inspect filter activations, occlusion responses or saliency as diagnostic observations, not unique causal explanations of what the model 'saw.'
-5. **Frozen versus locally adapted visual encoder** — Reuse a small locally trained visual backbone with a frozen head and a train-from-scratch baseline under one valid split; state what weights are trainable.
+5. **Frozen and locally adapted visual representation transfer** — Reuse a small locally trained visual backbone in a frozen-head task and, where justified, a bounded selectively updated variant, with explicit trainable weights and a true from-scratch baseline. Report actual held-out scene/domain performance, representation/feature drift, training CPU costs and unsupported gain claims; do not require a hidden pretrained model or assume frozen transfer outperforms scratch training.
 6. **Feature drift across cameras/scenes** — Measure embedding similarity and classification changes under synthetic brightness, viewpoint or background shift, avoiding claims that a close vector means the same physical object.
 7. **Representation collapse and unused dimensions** — Inspect a constant-output encoder, low-variance feature component and an unsupported nearest-neighbor claim, distinguishing a compact representation from a useful one.
-8. **Visual transfer evidence** — Record the actual baseline/frozen/adapted outcome and compute costs on a small held-out domain, not a fabricated improvement or hidden pretrained-weight requirement.
 
 ### Module 6 — Object Localization, Detection and Spatial Matching
 
@@ -169,12 +162,11 @@
 2. **Coordinate encoding and box validity** — Calculate center/size and corner formats, clip to image bounds and reject negative/zero-area or reversed boxes under the declared representation.
 3. **Intersection-over-union** — Derive G2's intersection, union and IoU exactly, including nonoverlap, coincident boxes and the distinction between area overlap and center distance.
 4. **Detection heads and candidate generation** — Compare anchor-like predefined candidates with grid/point-based predictions conceptually, naming objectness, classification and regression outputs without obliging a heavy detector library.
-5. **Class confidence and ranking** — Interpret confidence scores as a ranking signal with explicit background/class and threshold policies, refusing to equate score with factual existence or calibration.
-6. **Nonmaximum suppression** — Trace confidence-ordered same-class NMS on D1, show why an overlapping duplicate is suppressed under a stated IoU rule, and explain errors for tightly clustered real objects.
-7. **One-to-one ground-truth assignment** — Match high-score candidates to currently unmatched ground-truth objects of the appropriate class at a declared IoU threshold; identify double detections as false positives.
-8. **Detection precision–recall and AP convention** — Calculate D1's rank-level TP/FP and uninterpolated one-IoU-threshold AP, distinguishing it from COCO AP averaged across thresholds and recall samples.
-9. **Small detector construction** — Implement or transparently inspect a CPU-scale candidate generator/detector on synthetic geometric objects, with known box/count oracle and valid train/eval separation.
-10. **Negative geometry and threshold experiment** — Vary IoU/NMS/score threshold or create a missed/tiny/occluded object and explain which match, recall and diagnostic behavior changes without inventing a benchmark gain.
+5. **Confidence-ordered candidate ranking and nonmaximum suppression** — Treat detector confidence as a ranking signal under explicit class/background and score-threshold rules, not a calibrated probability of object existence. Independently trace D1 greedy same-class NMS on sorted candidates with a declared IoU suppression convention; identify duplicate suppression and a counterexample where strongly overlapping distinct true objects can be incorrectly removed.
+6. **One-to-one ground-truth assignment** — Match high-score candidates to currently unmatched ground-truth objects of the appropriate class at a declared IoU threshold; identify double detections as false positives.
+7. **Detection precision–recall and AP convention** — Calculate D1's rank-level TP/FP and uninterpolated one-IoU-threshold AP, distinguishing it from COCO AP averaged across thresholds and recall samples.
+8. **Small detector construction** — Implement or transparently inspect a CPU-scale candidate generator/detector on synthetic geometric objects, with known box/count oracle and valid train/eval separation.
+9. **Negative geometry and threshold experiment** — Vary IoU/NMS/score threshold or create a missed/tiny/occluded object and explain which match, recall and diagnostic behavior changes without inventing a benchmark gain.
 
 ### Module 7 — Semantic, Instance and Region Segmentation
 
@@ -188,14 +180,13 @@
 #### Lessons
 
 1. **Pixels, regions and object identity** — Distinguish image-wide classification from assigning every pixel a semantic class versus identifying each distinct object instance.
-2. **Mask formats, void pixels and label shape** — Define per-class semantic IDs, instance ID maps, background/ignored pixels and consistent H×W alignment.
+2. **Semantic/instance masks, valid transforms and label shapes** — Define per-pixel class IDs, distinct instance IDs, background/ignored pixels, consistent H×W image alignment and a valid class ontology. Apply resize/crop/flip jointly to image and categorical mask using an integer-preserving nearest-neighbor label policy; diagnose an interpolated invalid class or misaligned mask with an independent expected pixel grid.
 3. **Pixel-level overlap calculations** — Derive M1 TP/FP/FN/TN, intersection/union, IoU, Dice and accuracy independently with a published treatment for ignore and zero-union classes.
 4. **Segmentation objectives and class imbalance** — Compare pixel cross-entropy and Dice/IoU-oriented objectives on tiny masks, explaining why an all-background predictor may achieve misleading pixel accuracy.
-5. **Geometry-consistent mask transforms** — Co-transform categorical masks under resize/crop/flip without creating fractional invalid class labels; test a deliberately misaligned mask.
-6. **Connected components versus true instances** — Show why two touching objects of one semantic class cannot always be separated by a semantic mask alone; identify instance labels and overlapping/occluded boundaries.
-7. **Detection/instance-mask consistency** — Compute the enclosing box of a finite instance mask and check a separately reported detection box for matching object ID and spatial validity.
-8. **Boundary and annotation uncertainty** — Analyze one ambiguous border/void region and compare its contribution to a predicted metric under alternative, explicitly versioned label policies.
-9. **Bounded segmentation evidence** — Train/inspect a tiny pixel classifier or small encoder-decoder on synthetic shapes, compare with an image-processing baseline and disclose observed per-class counts rather than require large datasets.
+5. **Connected components versus true instances** — Show why two touching objects of one semantic class cannot always be separated by a semantic mask alone; identify instance labels and overlapping/occluded boundaries.
+6. **Detection/instance-mask consistency** — Compute the enclosing box of a finite instance mask and check a separately reported detection box for matching object ID and spatial validity.
+7. **Boundary and annotation uncertainty** — Analyze one ambiguous border/void region and compare its contribution to a predicted metric under alternative, explicitly versioned label policies.
+8. **Bounded segmentation evidence** — Train/inspect a tiny pixel classifier or small encoder-decoder on synthetic shapes, compare with an image-processing baseline and disclose observed per-class counts rather than require large datasets.
 
 ### Module 8 — Video Sampling, Motion and Object Identity
 
@@ -209,13 +200,12 @@
 #### Lessons
 
 1. **Frame versus event unit** — Define clip/scene/source identity, timestamps, frame rate and observation cadence so repeated image frames do not become independent training examples.
-2. **Finite motion trace** — Derive T1 displacement and pixels-per-second velocity from frame timestamps, and reject treating skipped frames as adjacent timestamps.
+2. **Timestamped finite motion, sampling and aliasing** — Independently derive T1 displacements and pixels/second from actual frame timestamps, and show how skipped frames or a wrongly assumed sampling interval change the result. Explain how sampling can erase or reverse the apparent direction of a fast event and why image-coordinate velocity without camera calibration is not physical-world speed; preserve clip/scene identity.
 3. **Frame differencing and brightness constancy** — Calculate a tiny changed-pixel map and explain why photometric change, object motion, occlusion and camera movement can produce similar differences.
-4. **Temporal sampling and aliasing** — Explain how subsampling can erase a fast event or change apparent direction and why the true physical motion requires actual calibration/evidence.
-5. **Track association and IDs** — Maintain identities across bounded frames with an explicit spatial match/tie rule, and demonstrate an identity switch despite correct per-frame object counts.
-6. **Occlusion and missing frames** — Handle a temporarily hidden object, dropped frame or empty detection using a defined unknown/stop policy rather than fabricate uninterrupted object presence.
-7. **Sequence-aware model alternative** — Compare per-frame aggregation with a small AI5-style recurrent or temporal feature head under identical clip-level splits; full video transformers remain outside the course.
-8. **Temporal evaluation/reporting** — Report per-clip and per-scene support, basic track/identity errors and CPU/frame budget without claiming autonomous real-time perception.
+4. **Track association and IDs** — Maintain identities across bounded frames with an explicit spatial match/tie rule, and demonstrate an identity switch despite correct per-frame object counts.
+5. **Occlusion and missing frames** — Handle a temporarily hidden object, dropped frame or empty detection using a defined unknown/stop policy rather than fabricate uninterrupted object presence.
+6. **Sequence-aware model alternative** — Compare per-frame aggregation with a small AI5-style recurrent or temporal feature head under identical clip-level splits; full video transformers remain outside the course.
+7. **Temporal evaluation/reporting** — Report per-clip and per-scene support, basic track/identity errors and CPU/frame budget without claiming autonomous real-time perception.
 
 ### Module 9 — Visual Self-Supervision and Representation Quality
 
@@ -228,14 +218,13 @@
 
 #### Lessons
 
-1. **Visual pretexts versus supervised labels** — Define masked-patch, denoising or view-prediction input targets and explain why the objective may exploit local pixels without learning a useful semantic category.
+1. **Visual pretext tasks and the boundary to image–text meaning** — Define masked-patch, denoising or paired-view prediction targets from images, distinguishing objective reconstruction from independently judged semantic labels. Contrast two views of one visual source with a caption that makes a linguistic proposition about it: visual pretext success cannot demonstrate image–text grounding, which has additional correspondence and relevance criteria in Module 10.
 2. **Legitimate paired image views** — Choose augmentations that preserve intended object identity/label while changing nuisance factors, and reject transforms that destroy required position, color or text labels.
 3. **Instance identity and false negatives** — Explain how two crops of one source image share a positive identity and why duplicated scenes/semantically identical images can invalidate naïve negative pairing.
 4. **Image encoder and embedding normalization** — Apply AI5's contrastive objective to an explicitly visual task with a small locally trained image encoder; independently verify dimensions and similarity.
 5. **Collapse, shortcut and augmentation negatives** — Construct constant embeddings, background-color shortcuts or destructive cropping, then demonstrate what fails in the actual measured representation.
 6. **Frozen visual probe and source leakage** — Train a small classifier on frozen image features with held-out scene grouping, comparing to a raw-pixel or supervised baseline under a valid split.
 7. **Augmentation and objective ablation** — Compare a legitimate/illegitimate visual-view strategy with fixed data and seed resources; report actual results and uncertainty without guaranteed improvement.
-8. **Boundary to image–text semantics** — Distinguish two views of the same visual source from a linguistically meaningful caption pairing and explain why cross-modal alignment needs additional contracts.
 
 ### Module 10 — Image–Text Pairing and Bidirectional Alignment
 
@@ -254,9 +243,8 @@
 4. **Similarity matrix and positive-pair indices** — Build a finite batch cosine/dot matrix from genuine paired IDs and explain how shuffling captions without updating labels corrupts training.
 5. **Bidirectional contrastive softmax loss** — Derive X2's image-row and text-column cross-entropies, explicit temperature, positive diagonal and average reduction; verify a permutation or duplicate-positive negative case.
 6. **False-negative and duplicated caption effects** — Explain why multiple valid descriptions or near-duplicate image sources violate naïve one-positive-per-row assumptions and choose a declared multilabel/soft-positive policy or honest exclusion.
-7. **Image-to-text retrieval as evidence** — Rank caption candidates for each image under a named metric, deterministic tie and complete synthetic qrel set, distinguishing score from caption truth.
-8. **Text-to-image retrieval as a distinct direction** — Compute X1 reverse rankings independently and explain why one direction's Recall@1 does not imply the other's, especially with ties/ambiguous descriptions.
-9. **Grounding, provenance and limitations** — Present candidate captions alongside the visual and source annotation evidence, refusing a claim of genuine scene-grounded understanding from embedding similarity alone.
+7. **Both directions of image–text retrieval as independently evaluated evidence** — Calculate image-to-caption and caption-to-image rankings separately from one explicitly paired corpus, complete directional judgments and deterministic tie rules. Reproduce X1 top-1 results in **both** directions, showing how asymmetric candidates and ties give different Recall@1; compare score/rank behavior without treating high cosine as proof that a caption describes the image truthfully.
+8. **Grounding, provenance and limitations** — Present candidate captions alongside the visual and source annotation evidence, refusing a claim of genuine scene-grounded understanding from embedding similarity alone.
 
 ### Module 11 — Multimodal Fusion and Missing Evidence
 
@@ -271,14 +259,13 @@
 #### Lessons
 
 1. **Alignment of modality samples** — Define which image, text, timestamp and observation unit correspond to the same entity; reject a deliberately swapped image/caption or wrong-time metadata join.
-2. **Early fusion versus late fusion** — Compare concatenating aligned image/text features with mixing independent modality predictions, naming input dimensions, assumptions and each modality's error.
+2. **Early versus late fusion and the distinction from retrieval** — Compare dimension-aligned image/text feature concatenation with an independently weighted combination of modality predictions, naming assumptions, units and modality-specific errors. Distinguish retrieving a matched caption or image from predicting a joint class/attribute: a nearest caption is neither a generated answer nor a causal semantic explanation of a scene.
 3. **Exactly specified fusion score** — Calculate F2's weighted logit combination, output decision and changed weight/label; state that logits from separately trained encoders need not share a calibrated scale.
 4. **Missing modality strategies** — Distinguish dropping a sample, using a trained missing-input token, authorized unimodal fallback and unjustified zero-fill, with a valid evaluation-time missingness pattern.
 5. **Conflicting modality evidence** — Analyze an image containing one object and a text statement describing a different one, resisting an unsupported assertion that either modality must be correct.
-6. **Cross-modal retrieval versus joint prediction** — Separate choosing a paired item from predicting a shared class/attribute; do not call a nearest caption a generated answer or a causal semantic explanation.
-7. **Fusion baseline and ablation** — Compare image-only, text-only and combined predictions under one valid split and fair resource budget, reporting when fusion worsens or fails.
-8. **Privacy and access in two channels** — Enforce independent image and text permissions before retrieval/fusion; a public caption must not reveal a restricted image's contents by indirect inference.
-9. **Evaluation under missing data/shift** — Disclose sample denominators and measured performance when a modality, language, camera or paired label is absent or changed, without extrapolating to general availability.
+6. **Fusion baseline and ablation** — Compare image-only, text-only and combined predictions under one valid split and fair resource budget, reporting when fusion worsens or fails.
+7. **Privacy and access in two channels** — Enforce independent image and text permissions before retrieval/fusion; a public caption must not reveal a restricted image's contents by indirect inference.
+8. **Evaluation under missing data/shift** — Disclose sample denominators and measured performance when a modality, language, camera or paired label is absent or changed, without extrapolating to general availability.
 
 ### Module 12 — Vision Evaluation, Shift, Rights and Resource Forensics
 
@@ -296,14 +283,13 @@
 #### Lessons
 
 1. **Versioned vision/multimodal experiments** — Pin synthetic source, scene/clip IDs, annotation revisions, augmentation, model weights, captions, splits and exact evaluation conventions.
-2. **Appropriate metric selection** — Match image accuracy/class support, detection IoU/AP, region IoU/Dice, track identity and paired-retrieval Recall@k to the actual research question.
-3. **COCO convention boundary** — Explain COCO-style multiple-IoU-threshold/recall-threshold scoring and why a hand-derived D1 single-IoU AP cannot be labeled official COCO mAP.
-4. **Per-slice support and uncertainty** — Count camera, light, occlusion, class, caption-language and annotation-uncertainty groups; reject universal robustness or fairness claims from small synthetic slices.
-5. **Train/validation/test scene integrity** — Demonstrate a same-scene crop/frame leakage, an augmentation identity error and a repaired grouped split with independent evaluation records.
-6. **Rights, redaction and deletion tests** — Reject a restricted or withdrawn image/caption from training and result exposure under the declared permission policy; verify caches/derived annotations obey the revision.
-7. **Resource accounting for CPU feasibility** — Measure actual tiny-model CPU runtime, memory/index footprint, image resolution and frame/caption inference costs with stated environment and bounded failure cases.
-8. **Failure cause versus correlation** — Investigate false detections, missing small objects, label boundaries, false caption matches or loss of temporal identity, distinguishing data/annotation, model and evaluation issues.
-9. **Evidence and status limits** — Write a concise model/dataset report with supported uses, limitations, uncertainty and human review gates; a clean CI run is not a learner-tested or deployed safety certificate.
+2. **Metric choice, exact spatial oracles and COCO compatibility boundaries** — Select image classification/support measures, detection IoU/ranked AP, semantic/instance-mask IoU/Dice, track identity and directional image–text Recall@k to match the actual prediction unit. Explain why D1's toy one-IoU-threshold uninterpolated AP is **not** COCO multi-IoU/multi-recall-threshold AP/mAP; no metric name should conceal its matching, ignore, interpolation, aggregate or support conventions.
+3. **Per-slice support and uncertainty** — Count camera, light, occlusion, class, caption-language and annotation-uncertainty groups; reject universal robustness or fairness claims from small synthetic slices.
+4. **Train/validation/test scene integrity** — Demonstrate a same-scene crop/frame leakage, an augmentation identity error and a repaired grouped split with independent evaluation records.
+5. **Rights, redaction and deletion tests** — Reject a restricted or withdrawn image/caption from training and result exposure under the declared permission policy; verify caches/derived annotations obey the revision.
+6. **Resource accounting for CPU feasibility** — Measure actual tiny-model CPU runtime, memory/index footprint, image resolution and frame/caption inference costs with stated environment and bounded failure cases.
+7. **Failure cause versus correlation** — Investigate false detections, missing small objects, label boundaries, false caption matches or loss of temporal identity, distinguishing data/annotation, model and evaluation issues.
+8. **Evidence and status limits** — Write a concise model/dataset report with supported uses, limitations, uncertainty and human review gates; a clean CI run is not a learner-tested or deployed safety certificate.
 
 ### Module 13 — Integrated Visual–Language Study and Unfamiliar Defense
 
@@ -317,14 +303,12 @@
 
 #### Lessons
 
-1. **Select one bounded visual or image–language question** — Choose a local shape/scene/class/box/mask plus caption task with stable source ID, annotation contract, population and honest baseline.
-2. **Reuse legitimate specialist evidence** — Consolidate prior assessed geometry, classification, detection, mask, video and alignment cases without repeating eight entire distinct model projects.
-3. **Independent numeric oracles and normal cases** — Verify actual image/annotation transform, at least one spatial IoU/detection or mask case, and a paired image–text ranking/contrastive outcome using an independent reference.
-4. **Actual small-model or retrieval comparison** — Compare an appropriate visual baseline with a CPU-scale learned representation, lexical/visual retrieval or explicit fusion option under fixed scene/paired splits and real measurements.
-5. **Failure and access demonstration** — Exercise a malformed bounding box, duplicate prediction, invalid mask, missing modality, mislabeled caption, unlicensed image, scene leak or unauthorized result and demonstrate a bounded correction/refusal.
-6. **Audit resource and evidence lineage** — Publish source/license/model revisions, exact paired IDs, transforms, output conventions, seed list, performance with supports and CPU/interaction budgets.
-7. **Unfamiliar reviewer-supplied variation** — Independently predict the consequence of a changed box coordinate, resized image, mask, frame timestamp, caption pair, temperature, language label, missing modality or access rule before executing an amended system; establish a new oracle or justify refusal.
-8. **Individual technical defense and transfer** — Explain the evidence from pixel measurements through representation and evaluation, which results remain unchanged under the variation and which wider perception claims the work does not establish.
+1. **One bounded vision–language study with reusable specialist evidence** — Choose a permitted small object/scene task with numeric image grids, box or mask labels, legitimate image/caption pairing, stable source/group identifiers and an honest baseline. Reuse prior assessed geometry, classification, detection, segmentation, video and alignment oracles where they meet the distinct underlying criteria rather than rebuilding eight unrelated model projects.
+2. **Independent numeric oracles and normal cases** — Verify actual image/annotation transform, at least one spatial IoU/detection or mask case, and a paired image–text ranking/contrastive outcome using an independent reference.
+3. **Actual comparisons, resource costs and versioned lineage** — Compare an appropriate visual baseline with a bounded learned representation and a justified image–text retrieval or fusion mechanism under fixed grouped/paired splits. Publish genuine measured supports, errors, seeds and CPU/resource budgets along with image, annotation, caption, model and permission revisions; independently distinguish a dataset change from an improvement in a model and do not claim unmeasured visual robustness.
+4. **Failure and access demonstration** — Exercise a malformed bounding box, duplicate prediction, invalid mask, missing modality, mislabeled caption, unlicensed image, scene leak or unauthorized result and demonstrate a bounded correction/refusal.
+5. **Unfamiliar reviewer-supplied variation** — Independently predict the consequence of a changed box coordinate, resized image, mask, frame timestamp, caption pair, temperature, language label, missing modality or access rule before executing an amended system; establish a new oracle or justify refusal.
+6. **Individual technical defense and transfer** — Explain the evidence from pixel measurements through representation and evaluation, which results remain unchanged under the variation and which wider perception claims the work does not establish.
 
 These modules are the instructional sequence, not thirteen additional compulsory submissions. Work and formative feedback can be reused where a new outcome is actually inspected; **the nine summative assessment contracts below** determine completion.
 
@@ -411,7 +395,7 @@ All reference cases are small enough for manual derivation and independent stand
 - **AI8-AS9** (integrated visual–language artifact and unfamiliar technical defense)
   - **Outcomes:** AI8-O1, AI8-O19, AI8-O20, AI8-O21, AI8-O22.
   - **Work:** Consolidate **one** local, source-licensed/synthetic, learner-owned visual/multimodal study reusing authentic evidence from AI8-AS1–AS8; **do not** require eight independent full-scale systems. Select a bounded visual object/scene and its language descriptor task with explicit rights, annotations, grouping and intended population. Implement one meaningful visual/spatial task and one interacting image–text alignment/retrieval/fusion mechanism, an independently derived numeric fixture, a fair baseline/learned comparison, actual metric/CPU resource evidence and a targeted negative/permission test. The assessor supplies an **unfamiliar bounded** modification such as changed crop/box, overlap threshold, mask or ignore label, frame timestamp, caption pairing, contrastive temperature, fusion weight, missing modality, scene split or visibility rule. Predict the specific changed oracle or nonidentifiable outcome *before execution*, implement a verified correction or safe refusal and prove unaffected behavior remains correct. Defend the actual design, measured uncertainty and unearned generalizations in accessible individual text, audio or live review.
-  - **Criteria:** Clean-state source/annotation/model reproduction needs no paid data, GPU, hosted VLM or inaccessible grader, and independently checked geometry, matching, mask, pairing and metric results justify the precise skills claimed. A valid normal/negative/unfamiliar-case set demonstrates a real changed prediction or justified refusal and regression checks. No historical AI8 responsible-AI equivalence, unapproved content release, generative-model mastery, global visual robustness or operational safety certification is inferred. Specialist competencies still require their own substantive AI8-AS1–AS8 outcome evidence even where reused in the integrated artifact; the final defense directly evaluates only integration, evaluation, provenance, permission, reproducibility and unfamiliar transfer outcomes.
+  - **Criteria:** Clean-state source/annotation/model reproduction needs no paid data, GPU, hosted VLM or inaccessible grader, and independently checked geometry, matching, mask, pairing and metric results justify the precise skills claimed. A valid normal/negative/unfamiliar-case set demonstrates a real changed prediction or justified refusal and regression checks. No broad responsible-AI certification, unapproved content release, generative-model mastery, global visual robustness or operational safety certification is inferred. Specialist competencies still require their own substantive AI8-AS1–AS8 outcome evidence even where reused in the integrated artifact; the final defense directly evaluates only integration, evaluation, provenance, permission, reproducibility and unfamiliar transfer outcomes.
   - **Evidence:** One coherent versioned source/evidence collection, synthetic images and captions, box/mask/clip annotations, licensing/permissions and split identity logs, independently checkable exact oracles, actual model/baseline/retrieval outputs, failure/changed-case proofs, budget/limitations report and individual technical defense.
 
 ### Required outcome-to-assessment coverage
