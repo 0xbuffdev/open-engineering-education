@@ -136,4 +136,4 @@ None for the proposed current-source contract. A future released versioning poli
 - **Decision-maker:** OEE steward; explicit approval recorded in [PR #249 discussion](https://github.com/0xbuffdev/open-engineering-education/pull/249#issuecomment-7024184637)
 - **Rationale:** Use one current `v0.2.0` source and conformance contract, while retaining revision-attributed records for interpretability. Unsupported course formats are not alternative paths to assessed credit.
 - **Conditions:** Preserve all existing course outcome, evidence, status and independent-study rules. Implement the approved wording in a separately reviewed and signed pull request, keep prior records attributable, and do not modify `main` directly.
-- **Implementation pull request:** [PR #250 — current-only source and conformance wording](https://github.com/0xbuffdev/open-engineering-education/pull/250) (in review)
+- **Implementation pull request:** [PR #250 — current-only source and conformance wording](https://github.com/0xbuffdev/open-engineering-education/pull/250) (merged into SEC integration in PR #250)
