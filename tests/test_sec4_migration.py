@@ -28,13 +28,13 @@ class SEC4MigrationTests(unittest.TestCase):
             "**Type:** `course`",
             "**Status:** `draft`",
             "**Specification:** `v0.2.0`",
-            "**Duration:** 10–14 weeks",
+            "**Duration:** 12–16 weeks",
             "**Prerequisites:** [SEC2](SEC2.md)",
         ):
             self.assertIn(expected, source)
         self.assertIn(
             "| [SEC4](SEC4.md) | Network & Infrastructure Security "
-            "| 10–14 weeks | SEC2 | `course` |", catalog)
+            "| 12–16 weeks | SEC2 | `course` |", catalog)
         prereq = re.search(r"(?m)^\*\*Prerequisites:\*\* (.+)$", source)
         self.assertIsNotNone(prereq)
         self.assertNotIn("SYS4", prereq.group(1))
@@ -115,6 +115,36 @@ class SEC4MigrationTests(unittest.TestCase):
         self.assertNotIn("kind: `test`", source)
         self.assertNotIn("kind: `lab`", source)
         self.assertNotIn("## Substantial course lab", source)
+
+
+    def test_dns_resolution_security_is_assessed_at_actual_boundary(self):
+        source = COURSE.read_text(encoding="utf-8")
+        learning = source.split("\n## Learning outcomes\n", 1)[1].split(
+            "\n## Modules\n", 1)[0]
+        modules = source.split("\n## Modules\n", 1)[1].split(
+            "\n## Completion requirements\n", 1)[0]
+        completion = source.split("\n## Completion requirements\n", 1)[1]
+        first = completion.split("- **SEC4-AS1**", 1)[1].split(
+            "- **SEC4-AS2**", 1)[0]
+        self.assertIn("SEC4-O12", learning)
+        self.assertIn("SEC4-O13", learning)
+        self.assertIn("DNS Resolution Trust and Protective Policy", modules)
+        self.assertIn("DNSSEC validation is not encrypted transport", modules)
+        self.assertIn("Protective DNS and actual enforcement", modules)
+        for requirement in (
+            "unprivileged DNS wire responder/resolver",
+            "independently predict and execute",
+            "authentic DNSSEC secure/insecure/bogus",
+            "one real local resolver policy correction",
+            "real client",
+            "alternate-resolver/direct-IP bypass",
+        ):
+            self.assertIn(requirement, first)
+        self.assertIn("DNSSEC-authenticated record", completion)
+        self.assertIn("NIST SP 800-81 Rev. 3 (final March 2026)", source)
+        self.assertIn("cannot demonstrate", learning)
+        catalog = CATALOG.read_text(encoding="utf-8")
+        self.assertIn("protective policy", catalog)
 
 
 if __name__ == "__main__":
