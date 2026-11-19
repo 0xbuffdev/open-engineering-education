@@ -78,9 +78,9 @@ def declared_counts(root: Path) -> dict[str, int | None]:
         program = cells[0].strip("`")
         if program not in counts:
             continue
-        if not re.search(rf"\\]\\({program}/(?:README\\.md)?\\)", cells[3]):
+        if not re.search(rf"\]\({program}/(?:README\.md)?\)", cells[3]):
             continue
-        amounts = [int(n) for n in re.findall(r"\\d+", cells[2])]
+        amounts = [int(n) for n in re.findall(r"\d+", cells[2])]
         if amounts:
             counts[program] = sum(amounts)
     return counts
