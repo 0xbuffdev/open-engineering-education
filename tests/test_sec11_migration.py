@@ -41,18 +41,19 @@ class SEC11CurriculumTests(unittest.TestCase):
             "| 14–18 weeks | SEC7, SEC10 | `course` |", catalog)
         self.assertIn(
             "| [SEC9](SEC9.md) | Security Engineering Capstone "
-            "| 14–18 weeks | SEC1–SEC8, SEC10, SEC11, SEC12 | `project` |", catalog)
+            "| 14–18 weeks | SEC1–SEC8, SEC10, SEC11, SEC12, SEC13 | `project` |", catalog)
         self.assertIn(
             "**Prerequisites:** [SEC1](SEC1.md)–[SEC8](SEC8.md), "
-            "[SEC10](SEC10.md), [SEC11](SEC11.md), [SEC12](SEC12.md)", capstone)
-        self.assertIn("Eleven-entry predecessor", capstone)
-        self.assertIn("eleven authentic predecessor decisions", capstone)
+            "[SEC10](SEC10.md), [SEC11](SEC11.md), [SEC12](SEC12.md), "
+            "[SEC13](SEC13.md)", capstone)
+        self.assertIn("Twelve-entry predecessor", capstone)
+        self.assertIn("twelve authentic predecessor decisions", capstone)
         self.assertIn(
-            "from SEC1 through SEC8, SEC10, SEC11 and SEC12 before admission to SEC9",
+            "from SEC1 through SEC8, SEC10, SEC11, SEC12 and SEC13 before admission to SEC9",
             catalog,
         )
-        self.assertIn("| `SEC` | Security Engineering | 12 core |", umbrella)
-        self.assertIn("**56 core, 7 electives**", umbrella)
+        self.assertIn("| `SEC` | Security Engineering | 13 core |", umbrella)
+        self.assertIn("**57 core, 7 electives**", umbrella)
         self.assertNotIn("legacy", source.lower())
         self.assertNotIn("backward compatibility", source.lower())
 
