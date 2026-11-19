@@ -39,11 +39,11 @@ class SEC10CurriculumTests(unittest.TestCase):
             "| 14–18 weeks | SEC2, SEC4 | `course` |", cat)
         self.assertIn(
             "| [SEC9](SEC9.md) | Security Engineering Capstone | "
-            "14–18 weeks | SEC1–SEC8, SEC10 | `project` |", cat)
+            "14–18 weeks | SEC1–SEC8, SEC10, SEC11 | `project` |", cat)
         self.assertIn(
             "**Prerequisites:** [SEC1](SEC1.md)–[SEC8](SEC8.md), "
             "[SEC10](SEC10.md)", cap)
-        self.assertIn("nine authentic predecessor decisions", cap)
+        self.assertIn("ten authentic predecessor decisions", cap)
         self.assertNotIn("legacy", src.lower())
 
     def test_all_outcomes_taught_and_independently_assessed(self):
