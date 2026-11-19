@@ -22,7 +22,7 @@
 
 **Teaching and engineering environment.** Public synthetic or appropriately licensed small datasets are sufficient. A local CPU-based Python 3 environment with NumPy, pandas and scikit-learn (or transparent language/library equivalents) supports practical experiments; learners must reproduce small reference cases with hand calculations or independent miniature code, not merely trust estimator outputs. Pure standard-library derivations are accepted when they demonstrate the same assessed mechanism. Explicit package version, random seeds, preprocessing fit boundary, fold identifiers, score orientation and decision thresholds must accompany numerical claims. No GPU, cloud credit, paid platform, private data, hidden benchmarking dataset or remote LLM inference is compulsory. All figures need accessible tables/text equivalents. No real-world automated decisions on consequential cases are required.
 
-**Course structure and honest evidence.** Twelve modules are derived from the responsibilities of empirical modeling, hypothesis selection, generalization, evaluation and error investigation, with varying lessons per module. Eight required summative assessments reuse a versioned evidence portfolio and award **21 independently reviewable outcomes**. Some assessments use compact exact fixtures; broader model comparisons use bounded seeded experiments where numeric results depend on a learner's environment and data-generation choices. Such experimental outcomes must be reported as observed, never invented or imposed as universal numeric targets. An unfamiliar reviewer variation checks whether the learner can revise a workflow without leaking the test set or overclaiming performance. Time is provisional; educational status remains draft until authentic learner/reviewer evidence warrants revision.
+**Course structure and honest evidence.** Twelve conceptually distinct stages connect empirical modeling, hypothesis selection, generalization, evaluation and error investigation. Closely related fit-boundary checks, negative cases and verification steps are taught with the mechanisms they test rather than repeated as separate lessons. Eight required summative assessments reuse a versioned evidence portfolio and award **21 independently reviewable outcomes**. Some assessments use compact exact fixtures; broader model comparisons use bounded seeded experiments where numeric results depend on a learner's environment and data-generation choices. Such experimental outcomes must be reported as observed, never invented or imposed as universal numeric targets. An unfamiliar reviewer variation checks whether the learner can revise a workflow without leaking the test set or overclaiming performance. Time is provisional; educational status remains draft until authentic learner/reviewer evidence warrants revision.
 
 ## Learning outcomes
 
@@ -61,13 +61,11 @@
 
 #### Lessons
 
-1. **From scientific data to prediction contracts** — Extend an AI1-qualified source table into an observable prediction question; name the sample unit, prediction time, target generation and legitimate source features.
-2. **Target population and sample construction** — Distinguish observed rows from independent units and the deployment population, including repeated-entity and chronological observations that invalidate naïve independent sampling.
+1. **From scientific data to a reproducible prediction contract** — Extend an AI1-qualified source table into a defensible prediction question; name the observation unit, prediction time, target provenance, legitimate features, source/split versions, random-state ownership, reproducible CPU environment, evaluation metric and limits on the resulting claim. A report must distinguish independently checked expected values from measured model performance.
+2. **Population, sampling and risk** — Distinguish observed rows from independent sampling units and the intended deployment population, including repeated entities and time dependence; connect empirical training loss to target-population risk without treating the observed sample minimum as a proven population result. State which sampling/selection assumptions would have to hold.
 3. **Learning task taxonomy** — Distinguish regression, binary/multiclass classification, unsupervised description and a downstream decision; specify which labels are truly observed and which are assumptions.
 4. **Measurable baseline and decision consequence** — Define a baseline a learner could actually beat, including no-change, majority, training-mean and appropriate deterministic heuristics; clarify what a score cannot tell a decision-maker.
-5. **Empirical risk and target risk** — Map training loss to observed outcomes and expected risk to a specified population; identify exactly when the two objects cannot be equated.
-6. **Permitted information at inference time** — Challenge a model that uses a future event, fold-wise aggregate, identity leakage or a target-derived feature that would not exist when making a real prediction.
-7. **Reproducibility and traceable reporting** — Specify training/split version, random-state ownership, CPU budget, environment, model choice, metric interpretation, errors and claim limitations in an inspectable experiment plan.
+5. **Permitted information at inference time** — Challenge a model that uses a future event, fold-wise aggregate, identity leakage or a target-derived feature that would not exist when making a real prediction.
 
 *Optional feedback:* For a repeat-customer dataset, distinguish row count from customer count and explain which unit a new-customer generalization claim requires.
 
@@ -83,14 +81,12 @@
 #### Lessons
 
 1. **Constant and simple linear baselines** — Compute a train-only mean predictor and compare it with a fitted linear response; a perfect fit on the same observations is not held-out validation.
-2. **Fitted coefficient interpretation** — Distinguish an intercept from slopes under fixed units and feature definitions, and identify changes caused by scaling or collinearity.
-3. **Least-squares fitting and residual checks** — Apply AI2's objective derivation to empirical modeling, verify a small fit with an independent reference and inspect systematic residuals.
-4. **Regularized linear models** — Compare unpenalized, ridge and sparse-penalty alternatives while controlling feature scaling, held-out selection and intercept handling; do not repeat AI2's full gradient derivation.
-5. **Binary logistic model as a classifier** — Convert a score to a probability under a declared link, compare with a training-prevalence baseline, and label assumptions required for probability interpretation.
-6. **Coefficient strength and uncertainty limits** — Explain why coefficient magnitude, predictive value, correlation and causal effect are distinct; record unstable estimates under correlated predictors.
-7. **Probabilistic classification versus hard labels** — Distinguish log loss, predicted probability, chosen action threshold and a binary decision; identify when a library's default threshold is not the declared objective.
-8. **Multiclass softmax/one-vs-rest interpretation** — Clarify label support, mutually exclusive categories, score normalization and difference between probability vectors and uncalibrated margins.
-9. **Failure/diagnostic comparison** — Inspect outliers, nonlinear misspecification, separated classification, class imbalance and invalid/missing feature input without giving a general model preference unsupported by evidence.
+2. **Fitted coefficients, residuals and independent checks** — Apply AI2's linear objective to an actual bounded regression fit; independently verify predictions and residual structure, distinguish intercept and slopes under declared feature units, and diagnose scaling, collinearity and extrapolation limits without repeating the full gradient derivation.
+3. **Regularized linear models** — Compare unpenalized, ridge and sparse-penalty alternatives while controlling feature scaling, held-out selection and intercept handling; do not repeat AI2's full gradient derivation.
+4. **Logistic probabilities, thresholds and the baseline** — Convert a binary linear score to a conditional probability under a declared link, compare with training prevalence, and distinguish a fitted score/probability, log loss and a separately justified decision threshold. Do not treat the package's default hard label as the decision objective or claim calibration merely from optimization.
+5. **Coefficient strength and uncertainty limits** — Explain why coefficient magnitude, predictive value, correlation and causal effect are distinct; record unstable estimates under correlated predictors.
+6. **Multiclass softmax/one-vs-rest interpretation** — Clarify label support, mutually exclusive categories, score normalization and difference between probability vectors and uncalibrated margins.
+7. **Failure/diagnostic comparison** — Inspect outliers, nonlinear misspecification, separated classification, class imbalance and invalid/missing feature input without giving a general model preference unsupported by evidence.
 
 ### Module 3 — Instance-Based and Probabilistic Classical Learners
 
@@ -103,14 +99,13 @@
 
 #### Lessons
 
-1. **k-nearest-neighbor classification** — Calculate Euclidean and Manhattan distances on an explicit scaled feature space and predict a label with deterministic tie handling.
+1. **Nearest neighbors, scaling and distance semantics** — Independently calculate Euclidean/Manhattan distances, nearest-neighbor labels and deterministic ties on a declared feature space. Show how one high-range feature can dominate distance, and fit any learned centering/scaling on training data alone; a correct distance calculation with a leaked transform is not a valid holdout prediction.
 2. **Neighborhood size as inductive bias** — Compare k=1, small odd k and a large k; explain sensitivity to noise, smoothness and class prevalence instead of claiming one k is optimal everywhere.
-3. **Distance and feature scales** — Show why a single high-range unit can dominate a distance metric and why scaling must be learned on the training partition alone.
-4. **Nearest-neighbor regression and costs** — Explain weighted/unweighted neighbor aggregation, memory and query cost, extrapolation limitations and when data volume changes feasibility.
-5. **Generative versus discriminative learning** — Contrast modeling class-conditional feature likelihoods and priors with learning a direct decision boundary; state what assumptions each estimate requires.
-6. **Naïve Bayes conditional independence** — Calculate a finite categorical likelihood product and posterior ranking, then build a correlated-feature counterexample where multiplication exaggerates evidence.
-7. **Smoothing and unseen categories** — Compare zero-count likelihood with a documented additive-smoothing rule on a small frequency table and explain why the smoothing choice alters predictions.
-8. **Comparable model-family experiment** — Evaluate a baseline, a neighbor method and a probabilistic classifier on one valid split, reporting the exact feature contract, failure cases, performance and resource use.
+3. **Nearest-neighbor regression and costs** — Explain weighted/unweighted neighbor aggregation, memory and query cost, extrapolation limitations and when data volume changes feasibility.
+4. **Generative versus discriminative learning** — Contrast modeling class-conditional feature likelihoods and priors with learning a direct decision boundary; state what assumptions each estimate requires.
+5. **Naïve Bayes conditional independence** — Calculate a finite categorical likelihood product and posterior ranking, then build a correlated-feature counterexample where multiplication exaggerates evidence.
+6. **Smoothing and unseen categories** — Compare zero-count likelihood with a documented additive-smoothing rule on a small frequency table and explain why the smoothing choice alters predictions.
+7. **Comparable model-family experiment** — Evaluate a baseline, a neighbor method and a probabilistic classifier on one valid split, reporting the exact feature contract, failure cases, performance and resource use.
 
 ### Module 4 — Decision Trees and Ensemble Methods
 
@@ -126,12 +121,11 @@
 1. **Recursive partitioning as a model** — Explain how a tree divides feature space into leaves and why axis-aligned boundaries differ from a linear hypothesis.
 2. **Classification impurity and information gain** — Compute Gini/entropy reductions on a tiny labeled set with explicit parent/child sample counts and reject a split that does not improve the declared objective.
 3. **Regression tree splitting** — Calculate within-leaf squared-error reduction for a small numerical target, comparing leaf means with an independently derived baseline.
-4. **Stopping rules and leaf reliability** — Explore maximum depth, minimum leaf size, categorical cardinality, missing values and rare-branch generalization limits.
+4. **Stopping, pruning and overfit diagnosis** — Compare depth, leaf size, rare/categorical branches, missing values and appropriate validation-based pruning. Reproduce one deliberately memorizing tree or noise-sensitive configuration and explain why an improved training impurity/accuracy does not establish better held-out performance. Preserve the distinct objective of conditional stopping and leaf reliability.
 5. **Pruning and feature importance caveats** — Relate complexity pruning to validation evidence; explain why impurity-based feature importance may be biased by high-cardinality predictors and is not causal.
 6. **Bootstrap sampling and bagging** — Derive a bootstrap sample with repeated/omitted original indices and explain how individual-tree variability can be reduced by aggregation.
 7. **Random forests** — Explain additional feature randomness, dependence among trees, out-of-bag prediction eligibility and why a sample absent from one tree is not necessarily out-of-bag for a forest-level score.
 8. **Additive boosting as sequential correction** — Trace one or two small stage-wise updates on residuals or negative gradients, identifying learning rate, weak learner capacity and holdout-dependent stopping.
-9. **Capacity and leakage challenge** — Deliberately overfit a tree or boosting configuration and demonstrate why a higher training score without a valid held-out comparison cannot justify its adoption.
 
 ### Module 5 — Large-Margin Learners and Kernel Methods
 
@@ -166,12 +160,11 @@
 1. **Empirical risk minimization under assumptions** — Define a finite hypothesis class, bounded loss, iid sampling process and the empirical-risk minimizer; state what the training minimization does and does not guarantee.
 2. **Training and generalization gaps** — Build a small example where selection improves empirical risk but worsens held-out risk; distinguish selection from estimating fixed-hypothesis performance.
 3. **Hoeffding for a precommitted hypothesis** — Apply a valid bounded independent-loss concentration inequality, distinguishing probability over draws from an observed model's posterior certainty.
-4. **Union bound and finite hypothesis class** — Explain why controlling all H candidate hypotheses incurs a multiple-comparison factor and why a set of candidates chosen adaptively after reading the evaluation data violates the simple setup.
-5. **Complexity and sample size** — Work a public finite-class confidence-bound fixture and explain how increasing the hypothesis count changes a uniform bound without proving a particular algorithm is poor.
-6. **Bias, variance and irreducible error** — Decompose expected squared prediction error under explicit squared-loss assumptions, and distinguish this statement from a universal decomposition for any loss/classification problem.
-7. **Inductive bias and approximation capacity** — Compare an overly restrictive line, an unstable high-degree polynomial or deep tree, and a constrained learner under matched data generation and honest resampling.
-8. **Learning curves and effective sample count** — Interpret training/validation gaps, fit instability and repeated observations; show why more rows of the same person need not supply independent evidence.
-9. **Guarantee boundary audit** — Identify where dependence, distribution shift, unbounded losses, label noise or data-driven repeated selection breaks a claimed numerical or asymptotic guarantee.
+4. **Finite-class union bounds and sample complexity** — Extend a fixed-hypothesis Hoeffding guarantee to a predeclared H-hypothesis class with a union bound; independently evaluate the public n=100, H=10 confidence fixture, explaining how hypothesis count and sample size change the bound. State why adapting the class after inspecting evaluation outcomes invalidates this simple argument, and why a loose bound does not establish that a particular learner fails.
+5. **Bias, variance and irreducible error** — Decompose expected squared prediction error under explicit squared-loss assumptions, and distinguish this statement from a universal decomposition for any loss/classification problem.
+6. **Inductive bias and approximation capacity** — Compare an overly restrictive line, an unstable high-degree polynomial or deep tree, and a constrained learner under matched data generation and honest resampling.
+7. **Learning curves and effective sample count** — Interpret training/validation gaps, fit instability and repeated observations; show why more rows of the same person need not supply independent evidence.
+8. **Guarantee boundary audit** — Identify where dependence, distribution shift, unbounded losses, label noise or data-driven repeated selection breaks a claimed numerical or asymptotic guarantee.
 
 ### Module 7 — Feature Representations and Model Selection Inputs
 
@@ -185,14 +178,12 @@
 #### Lessons
 
 1. **Domain features and time-of-information** — Separate legitimate predictors from post-outcome metadata, proxies for the label and attributes with unavailable inference-time values.
-2. **Train-only standardization and imputation** — Fit means, scales or missingness statistics only inside the training partition or fold, and transform validation/test without re-fitting.
+2. **Fold-safe fitted preprocessing, including unsupervised transforms** — Learn imputation, means, scales and any PCA or related data-dependent transform on training observations only, separately for every fold. Apply the frozen state to validation/test; demonstrate how even pooled label-free scaling or PCA contaminates an out-of-sample score, and distinguish this from permissible deterministic feature functions.
 3. **Categorical encoding and unseen values** — Design one-hot, ordinal and bucket encodings with fixed fit-time category vocabulary and explicit handling for novel inputs.
 4. **Learned polynomial and interaction features** — Introduce controlled expressive features for a baseline while reporting dimensionality and the additional hypothesis complexity.
 5. **Selection with the target is model fitting** — Show why univariate target-based feature selection on all folds leaks evaluation labels even when the downstream estimator appears to be correctly cross-validated.
 6. **High-cardinality encodings and target statistics** — Explain why target encoding requires fold-safe or cross-fitted construction and why a unique identifier can misleadingly act as an easy feature.
-7. **Unsupervised preprocessing can also leak** — Show why pooled scaling, imputation and PCA over the final test data contaminates a reported out-of-sample evaluation despite not using test labels.
-8. **Pipeline abstraction and independent checks** — Construct a fold-safe preprocessing-plus-model pipeline and inspect fit calls/learned state to ensure no held-out data influenced any training decision.
-9. **Ablation with a validity argument** — Remove one suspect feature or representation and compare controlled results without confusing a small observed metric difference with proof of general improvement.
+7. **Auditable fold-safe pipelines and ablation** — Construct a preprocessing-plus-model pipeline and inspect fit calls, learned state and fold identities to ensure no held-out information influenced a training decision. Remove a suspect feature or representation under the same valid comparison protocol, and interpret a small observed score difference as bounded evidence rather than a universal improvement.
 
 ### Module 8 — Resampling, Cross-Validation and Leakage-Safe Selection
 
@@ -205,16 +196,14 @@
 
 #### Lessons
 
-1. **Train, development and final test roles** — Explicitly designate which records may update weights, preprocessing, hyperparameters, thresholds and final one-time reported performance.
-2. **Held-out test as an information boundary** — Trace repeated manual experiments that consulted the test set and show why subsequent “final” use is no longer an independent test.
-3. **k-fold cross-validation mechanics** — Draw a complete fixed-fold index table, train a new estimator and every learned transform per fold, and aggregate correctly across scores and fold sizes.
-4. **Stratification and estimand caveats** — Explain why label-proportion balancing may be helpful for sparse classes but does not cure duplication, temporal dependence or selection bias.
-5. **Group-preserving validation** — Ensure that every entity/group occurs entirely on one side of a fold and justify when it is a better approximation to deployment than random row splitting.
-6. **Time-ordered evaluation** — Choose past-to-future fitting with correct label-availability windows, embargo/gap as needed and no later-observation-derived features; report the shift assumption.
-7. **Hyperparameter search is part of fitting** — Compare simple grid/randomized selection on inner folds and identify how selecting the maximum of noisy validation scores introduces optimism.
-8. **Nested cross-validation or separate untouched test** — Separate outer evaluation folds from inner tuning/threshold decisions, and explain what the outer estimate measures under a declared sampling scheme.
-9. **Cross-validation uncertainty and small samples** — Report per-fold support and performance variability without pretending that correlated fold scores are independent draws or that a naïve standard error always gives valid coverage.
-10. **Leakage forensics with changed partitions** — Diagnose a leaky preprocessing/feature selection procedure, repair the split-fit boundary, prove groups do not overlap and explain the residual limitations.
+1. **Train, development and final-test information boundaries** — Designate which records can fit weights, transformations, hyperparameters and thresholds, and reserve genuinely untouched data for final evaluation. Trace repeated manual test-set checks as adaptive fitting: after such reuse, the former test set is no longer an independent estimate, even if a model was never directly fit on its labels.
+2. **k-fold cross-validation mechanics** — Draw a complete fixed-fold index table, train a new estimator and every learned transform per fold, and aggregate correctly across scores and fold sizes.
+3. **Stratification and estimand caveats** — Explain why label-proportion balancing may be helpful for sparse classes but does not cure duplication, temporal dependence or selection bias.
+4. **Group-preserving partitions and independent overlap checks** — Ensure every entity/group lies on one side of each validation boundary and justify which population the grouping approximates. Construct a deliberately changed grouping or duplicated-identity case, independently verify zero overlap after repair, and distinguish a no-overlap proof from sufficient population representativeness.
+5. **Time-ordered evaluation and changed data availability** — Fit only on the past when predicting later observations, enforcing realistic label-availability windows, gaps or embargoes where justified. Inspect a shifted timestamp or unavailable future feature as an actual violation; repair the fold/feature contract without treating a chronology-respecting score as a guarantee under deployment shift.
+6. **Hyperparameter search is part of fitting** — Compare simple grid/randomized selection on inner folds and identify how selecting the maximum of noisy validation scores introduces optimism.
+7. **Nested cross-validation or separate untouched test** — Separate outer evaluation folds from inner tuning/threshold decisions, and explain what the outer estimate measures under a declared sampling scheme.
+8. **Cross-validation uncertainty and small samples** — Report per-fold support and performance variability without pretending that correlated fold scores are independent draws or that a naïve standard error always gives valid coverage.
 
 *Optional feedback:* Given repeated records for each customer, identify why a row-random 5-fold score is not evidence for a new-customer population and propose a group-aware alternative.
 
@@ -232,11 +221,10 @@
 2. **R-squared and baseline interpretation** — Define total versus residual variation and explain when an R-squared result is undefined, poor or negative on a held-out set.
 3. **Confusion matrix conventions** — Assign TP, FP, FN, TN to a named positive class with explicit prediction threshold and independently reproduce the class counts.
 4. **Precision, recall, specificity and prevalence** — Derive the ratios and show why prevalence and differing error costs can make accuracy an inadequate primary measure.
-5. **F-scores and class aggregation** — Compute F1, macro/micro/weighted variants with declared zero-denominator handling and demonstrate why class frequency affects summary interpretation.
-6. **Ranking metrics and base rates** — Contrast ROC-AUC and precision-recall summaries, score ranking versus threshold choice, and empirical behavior under rare positives.
+5. **F-scores, class aggregation and undefined cases** — Compute F1 and macro/micro/weighted variants with explicit class support, frequency weighting and declared zero-division conventions. Demonstrate zero predicted positives or a missing class without silently substituting a valid precision or recall where it is mathematically undefined.
+6. **Ranking metrics, base rates and degenerate samples** — Contrast ROC-AUC and precision-recall summaries, score ranking and threshold choices under rare positives. Explain why a one-class evaluation makes standard ROC-AUC undefined and why low-support samples or tiny subgroups cannot support confident comparisons; do not replace absent evidence with an invented score.
 7. **Probability and scoring rules** — Compare log loss and Brier score with the hard-label decision, including zero-probability and clipping/precision conventions.
 8. **Threshold choice on valid data** — Derive a simple expected-value decision threshold from explicit costs/probabilities and choose it using training/validation evidence, not by optimizing the reported test set.
-9. **Undefined and misleading metrics** — Demonstrate zero predicted positives, one-class evaluation, tiny subgroup and unstable precision; report undefined values or chosen conventions rather than silently scoring them as ordinary observations.
 
 ### Module 10 — Calibration, Error Analysis, and Robust Claims
 
@@ -250,15 +238,14 @@
 
 #### Lessons
 
-1. **Calibration versus ranking** — Distinguish a well-ranked score from a calibrated probability under the target population, and explain why threshold-dependent classification accuracy cannot establish either property alone.
+1. **Calibration, ranking and proper-score interpretation** — Distinguish ranking quality, calibrated population probabilities and threshold-dependent accuracy; compare Brier and log loss as proper probabilistic scores whose values reflect more than calibration alone, including error severity and uncertainty. Explain why improving a score need not improve an action under a different error cost and why an optimized loss alone does not certify calibration.
 2. **Reliability tables and binning** — Compute within-bin observed frequencies and mean predicted probabilities on a small labeled set; label bin choice and small-sample variability.
-3. **Brier/log-loss diagnostic interpretation** — Compare probabilistic score and error severity; explain why improving one metric need not improve a specific cost-sensitive decision.
-4. **Post-hoc calibration without contamination** — Fit Platt/logistic or isotonic calibration on appropriate disjoint or cross-validated training data and assess against an untouched evaluation partition; do not claim calibration on the fitting records.
-5. **Structured error taxonomy** — Categorize false positives/negatives and large residuals by meaningful task-specific failure families rather than listing anecdotes or assuming independent subgroup membership.
-6. **Subgroup denominators and sparse cells** — Report confusion and performance with actual group counts, disclose absent/underrepresented groups and avoid global disparity or fairness certification from tiny samples.
-7. **Shift diagnosis** — Distinguish covariate shift, prior/base-rate changes and concept/label changes with transparent synthetic experiments; state that a simulated shift is not a verified deployment environment.
-8. **Sensitivity and negative controls** — Vary random seed, train size, regularization or an irrelevant feature under a fair protocol, recording the actual behavior and explaining what remains untested.
-9. **Honest model report** — Document task, sample and split boundaries, intended use, metrics and uncertainty, failure populations, relevant access/privacy limits and explicit non-causal/nonproduction claims.
+3. **Post-hoc calibration without contamination** — Fit Platt/logistic or isotonic calibration on appropriate disjoint or cross-validated training data and assess against an untouched evaluation partition; do not claim calibration on the fitting records.
+4. **Structured error taxonomy** — Categorize false positives/negatives and large residuals by meaningful task-specific failure families rather than listing anecdotes or assuming independent subgroup membership.
+5. **Subgroup denominators and sparse cells** — Report confusion and performance with actual group counts, disclose absent/underrepresented groups and avoid global disparity or fairness certification from tiny samples.
+6. **Shift diagnosis** — Distinguish covariate shift, prior/base-rate changes and concept/label changes with transparent synthetic experiments; state that a simulated shift is not a verified deployment environment.
+7. **Sensitivity and negative controls** — Vary random seed, train size, regularization or an irrelevant feature under a fair protocol, recording the actual behavior and explaining what remains untested.
+8. **Honest model report** — Document task, sample and split boundaries, intended use, metrics and uncertainty, failure populations, relevant access/privacy limits and explicit non-causal/nonproduction claims.
 
 ### Module 11 — Clustering and Unsupervised Representation Analysis
 
@@ -272,14 +259,13 @@
 
 #### Lessons
 
-1. **Unsupervised problem definition** — Distinguish similarity-driven exploratory grouping from supervised prediction and define the features, scale, distance and intended interpretation.
+1. **Unsupervised question and permitted fit scope** — Distinguish exploratory similarity-driven grouping from supervised prediction; define the observations, feature units, distance, intended interpretation and authorized fit/evaluation partition. If cluster assignments are used as downstream features, show why fitting the clustering model on final-test records contaminates the claim.
 2. **k-means objective and updates** — Compute assignments and centroids on a small point set, examine empty clusters and identify sensitivity to starting centroids and k.
 3. **Cluster validation and label ambiguity** — Explain that cluster IDs can be permuted without changing the partition; distinguish inertia, silhouette-type evidence and external task truth.
 4. **Alternative clustering biases** — Contrast density-based, hierarchical and centroid methods on unequal-density, elongated or noise-contaminated synthetic examples; explain one family for which k-means is a poor fit.
 5. **Centering and covariance for PCA** — Derive sample mean and covariance for a two-feature small matrix, and check the chosen sample versus population normalization explicitly.
-6. **Principal components and projection** — Solve a small covariance eigenproblem, identify the sign ambiguity of eigenvectors, compute a 1D projection and its reconstruction error.
-7. **Explained variance and degeneracy** — Distinguish zero-variance columns, repeated eigenvalues and nonunique principal directions from valid strong interpretations of components.
-8. **Fold-safe unsupervised transforms** — Fit PCA/scaling/clustering only where their learned state is authorized, compare their effects on a downstream supervised learner without using final-test information to choose components.
+6. **Principal components, reconstruction and fold-safe transformation** — Solve a small centered covariance eigenproblem, identify eigenvector sign ambiguity, compute a one-dimensional projection and its reconstruction error. Fit the centering and PCA directions using only permitted training records or each training fold, and explain why pooled held-out information can change the chosen projection.
+7. **Explained variance, degeneracy and limited comparison** — Handle zero-variance columns, repeated eigenvalues and nonunique principal directions; compare a justified PCA/clustering feature representation with a baseline using valid fit boundaries. A favorable finite metric or plotted cluster is not a new verified semantic label or a guarantee of downstream generalization.
 
 ### Module 12 — Integrated Empirical Study and Unfamiliar Defense
 
@@ -298,14 +284,12 @@
 
 #### Lessons
 
-1. **Bounded independent modeling question** — Choose a small public or synthetic regression/classification target with clear observation units, intended population, timestamp/group rules, error costs and ethical limits.
-2. **Baseline and candidate protocol** — Preregister evaluation metric, baseline, candidate families, allowable preprocessing, selection budget and untouched final evaluation data.
-3. **Clean independent execution** — Rebuild training-only preprocessing, candidate models, fold assignments and exactly reproducible commands from a new local environment.
-4. **Model comparisons and diagnostics** — Report baseline, at least two meaningfully distinct classical model families, per-fold score/effective units, numerical and qualitative errors and CPU costs.
-5. **Calibrated decision or defensible refusal** — Assess probabilities and proposed action threshold when the task supports them; otherwise state why classification, calibration or deployment action is not justified.
-6. **Controlled ablation and negative control** — Change a suspect feature, dependency structure or hyperparameter under the valid selection protocol; record supported conclusions without test-set tuning.
-7. **Unfamiliar reviewer modification** — Predict consequences of a new group, shifted prevalence, duplicate identity, changed error cost, unseen category, revised fold plan or compromised test feature and repair the pipeline or refuse false claims.
-8. **Technical defense and handoff** — Reproduce the final artifact; defend assumptions, mathematical/statistical evidence, independent expected values, practical limitations, rejected alternatives and transfer under the reviewer variation.
+1. **One bounded question and predeclared comparison protocol** — Choose a small public/synthetic regression or classification task with explicit observation units, intended population, chronology/group restrictions, information availability, error costs and ethical limits. Define the training-only baseline, at least two substantively different classical candidate families, preprocessing, permitted tuning budget, primary metric, thresholds where applicable and a genuinely untouched final evaluation before fitting.
+2. **Clean independent execution** — Rebuild training-only preprocessing, candidate models, fold assignments and exactly reproducible commands from a new local environment.
+3. **Independent comparisons, diagnostic evidence and action limits** — Report baseline and candidate models, genuine per-fold/effective-unit scores, CPU/fit costs, numerical and qualitative failures and appropriate uncertainty. Where probability estimates permit a decision, assess calibration and an independently justified threshold without tuning on the final test; otherwise document the reason to abstain. Use the same artifact for evidence already evaluated in earlier AI4 assessments rather than creating another mandatory project.
+4. **Controlled ablation and negative control** — Change a suspect feature, dependency structure or hyperparameter under the valid selection protocol; record supported conclusions without test-set tuning.
+5. **Unfamiliar reviewer modification** — Predict consequences of a new group, shifted prevalence, duplicate identity, changed error cost, unseen category, revised fold plan or compromised test feature and repair the pipeline or refuse false claims.
+6. **Technical defense and handoff** — Reproduce the final artifact; defend assumptions, mathematical/statistical evidence, independent expected values, practical limitations, rejected alternatives and transfer under the reviewer variation.
 
 Module exercises and informal checks are formative. They are **not** one mandatory quiz-plus-lab for every module; all compulsory evidence is specified by the eight summative assessments below.
 
