@@ -111,5 +111,33 @@ class SEC3MigrationTests(unittest.TestCase):
         self.assertNotIn("## Substantial course lab", text)
 
 
+    def test_native_security_fuzzing_has_real_evidence_contract(self):
+        source = COURSE.read_text(encoding="utf-8")
+        outcomes = source.split("\n## Learning outcomes\n", 1)[1].split(
+            "\n## Modules\n", 1)[0]
+        modules = source.split("\n## Modules\n", 1)[1].split(
+            "\n## Completion requirements\n", 1)[0]
+        completion = source.split("\n## Completion requirements\n", 1)[1]
+        first = completion.split("- **SEC3-AS1**", 1)[1].split(
+            "- **SEC3-AS2**", 1)[0]
+        self.assertRegex(outcomes, r"SEC3-O6.*coverage-guided")
+        self.assertRegex(outcomes, r"SEC3-O10.*minimized")
+        self.assertIn("Coverage-guided inputs and minimized failures", modules)
+        for required in (
+            "actually run",
+            "coverage-guided",
+            "instrumented",
+            "seed corpus",
+            "minimize",
+            "replay",
+            "independent oracle",
+            "Tool/seed/corpus/coverage",
+        ):
+            self.assertIn(required, first)
+        self.assertIn("LLVM libFuzzer", source)
+        self.assertIn("AFL++", source)
+        self.assertIn("an empty crash log is not a substitute", source)
+
+
 if __name__ == "__main__":
     unittest.main()

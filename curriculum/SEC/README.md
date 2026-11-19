@@ -16,7 +16,7 @@ By the end of this program, you will be able to:
 
 - Model assets, trust boundaries, threats, abuse cases, and security requirements for real software systems.
 - Identify, reproduce safely, remediate, and regression-test web and application security weaknesses, including long-lived WebSocket sessions, messages and confidential server-push events.
-- Reason about memory-corruption risks, native binaries, operating-system protections, and safer systems designs.
+- Investigate native memory-corruption and binary-security risks through bounded coverage-guided input testing, minimized defect reproduction, verified repairs, operating-system protections and safer systems design.
 - Assess and harden networked services, hosts, containers, cloud environments, workload identities, and deployment pipelines.
 - Evaluate enterprise authentication and federation, identity lifecycle, privileged access, resource authorization and effective account/session revocation.
 - Assess and harden endpoint privilege, executable integrity and host configuration; distinguish actual Linux enforcement from authentic Windows platform policy and event evidence, verify sensor coverage and recover from safe configuration drift.
