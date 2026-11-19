@@ -27,7 +27,7 @@ class SEC6MigrationTests(unittest.TestCase):
         for field in (
             "**Program:** SEC — Security Engineering",
             "**Type:** `course`",
-            "**Prerequisites:** [SEC2](SEC2.md), [SEC4](SEC4.md)",
+            "**Prerequisites:** [SEC4](SEC4.md)",
             "**Duration:** 14–18 weeks",
             "**Status:** `draft`",
             "**Specification:** `v0.2.0`",
@@ -35,7 +35,7 @@ class SEC6MigrationTests(unittest.TestCase):
             self.assertIn(field, source)
         self.assertIn(
             "| [SEC6](SEC6.md) | Cloud, Containers & Identity Security "
-            "| 14–18 weeks | SEC2, SEC4 | `course` |", catalog)
+            "| 14–18 weeks | SEC4 | `course` |", catalog)
         line = re.search(r"(?m)^\*\*Prerequisites:\*\* (.+)$", source)
         self.assertIsNotNone(line)
         self.assertNotIn("SEC5", line.group(1))
@@ -53,7 +53,7 @@ class SEC6MigrationTests(unittest.TestCase):
             None,
         )
         self.assertIsNotNone(entry)
-        self.assertEqual(entry, "[SEC2](SEC2.md), [SEC4](SEC4.md)")
+        self.assertEqual(entry, "[SEC4](SEC4.md)")
         for not_required in ("APP7", "APP6", "APP5", "APP3", "SEC5", "SYS4"):
             self.assertNotIn(not_required, entry)
         self.assertIn(
@@ -63,7 +63,7 @@ class SEC6MigrationTests(unittest.TestCase):
         self.assertIn("are not SEC7 prerequisites", downstream)
         self.assertNotIn("through APP7", downstream)
         self.assertIn(
-            "**Prerequisites:** [SEC4](SEC4.md), [SEC6](SEC6.md)",
+            "**Prerequisites:** [SEC6](SEC6.md)",
             downstream,
         )
 
