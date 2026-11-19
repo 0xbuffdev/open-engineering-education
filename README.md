@@ -71,7 +71,7 @@ Changes to binding requirements follow [OEE governance](GOVERNANCE.md) and the [
 
 ## Status and limitations
 
-All eleven [Software Engineering Foundations (SEF)](curriculum/SEF/README.md) courses publish outcome-driven `v0.2.0` draft requirements, including their current study order and capstone completion standard. Every SEF course remains `draft`: published requirements and source checks do not establish learner-tested effectiveness, independent verification or formal program conformance. Other programs are at different migration stages and may still contain historical-format courses; consult the [curriculum inventory](curriculum/INVENTORY.md) for their current source-format status.
+All eleven [SEF](curriculum/SEF/README.md) courses and all twenty [AI](curriculum/AI/README.md) courses publish outcome-driven `v0.2.0` draft requirements. AI has sixteen required courses, including its capstone, and four optional electives. APP and SYS also have outcome-driven catalogs; SEC currently retains draft outlines without the complete outcome and assessment contracts. Source checks do not establish learner-tested effectiveness, independent verification or formal program conformance. Consult the [curriculum inventory](curriculum/INVENTORY.md) for current source-format status.
 
 The historical `v0.2.0` release tag also contains incorrect citation metadata; see the [citation erratum](releases/ERRATA.md) for accurate version and date information. The tag itself is unchanged.
 
