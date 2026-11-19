@@ -26,7 +26,8 @@ class SEC9MigrationTests(unittest.TestCase):
         for line in (
             "**Program:** SEC — Security Engineering",
             "**Type:** `project`",
-            "**Prerequisites:** [SEC1](SEC1.md)–[SEC8](SEC8.md)",
+            "**Prerequisites:** [SEC1](SEC1.md)–[SEC8](SEC8.md), "
+            "[SEC10](SEC10.md)",
             "**Duration:** 14–18 weeks",
             "**Status:** `draft`",
             "**Specification:** `v0.2.0`",
@@ -34,10 +35,10 @@ class SEC9MigrationTests(unittest.TestCase):
             self.assertIn(line, source)
         self.assertIn(
             "| [SEC9](SEC9.md) | Security Engineering Capstone "
-            "| 14–18 weeks | SEC1–SEC8 | `project` |", catalog)
+            "| 14–18 weeks | SEC1–SEC8, SEC10 | `project` |", catalog)
         for expected in (
-            "verified assessed completion of every required course "
-            "from SEC1 through SEC8",
+            "verified assessed completion of every required core course "
+            "from SEC1 through SEC8 and SEC10",
             "before admission to SEC9",
             "individual technical defense",
             "A completed capstone does not replace missing prerequisite mastery",
@@ -45,6 +46,19 @@ class SEC9MigrationTests(unittest.TestCase):
             self.assertIn(expected, catalog)
         self.assertNotIn("legacy", source.lower())
         self.assertNotIn("backward compatibility", source.lower())
+
+    def test_new_required_course_is_part_of_graduation(self):
+        source = COURSE.read_text(encoding="utf-8")
+        catalog = CATALOG.read_text(encoding="utf-8")
+        prereq = next(line for line in source.splitlines()
+                      if line.startswith("**Prerequisites:**"))
+        self.assertIn("[SEC10](SEC10.md)", prereq)
+        self.assertIn("[SEC1](SEC1.md)–[SEC8](SEC8.md)", prereq)
+        self.assertIn("all nine predecessor courses SEC1–SEC8 and SEC10", source)
+        self.assertIn("Nine-entry predecessor", source)
+        self.assertIn("enterprise identity lifecycle or federation", source)
+        self.assertIn("| SEC1–SEC8, SEC10 | `project` |", catalog)
+        self.assertTrue((COURSE.parent / "SEC10.md").is_file())
 
     def test_all_outcomes_taught_and_summatively_evaluated(self):
         source = COURSE.read_text(encoding="utf-8")
@@ -106,7 +120,7 @@ class SEC9MigrationTests(unittest.TestCase):
     def test_reviewer_admission_technical_defense_and_real_implementation(self):
         source = COURSE.read_text(encoding="utf-8")
         for phrase in (
-            "every one of SEC1–SEC8",
+            "every required course from SEC1–SEC8 and SEC10",
             "SEC3 and SEC5 separately",
             "Before admission",
             "one cumulative project",

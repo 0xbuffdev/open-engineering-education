@@ -48,7 +48,7 @@ class SEC6MigrationTests(unittest.TestCase):
         source = COURSE.read_text(encoding="utf-8")
         downstream = (COURSE.parent / "SEC7.md").read_text(encoding="utf-8")
         entry = next(
-            (line.split(": ", 1)[1] for line in source.splitlines()
+            (line[len("**Prerequisites:** "):] for line in source.splitlines()
              if line.startswith("**Prerequisites:** ")),
             None,
         )
