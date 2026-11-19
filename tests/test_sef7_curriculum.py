@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 COURSE = ROOT / "curriculum" / "SEF" / "SEF7.md"
 CATALOG = ROOT / "curriculum" / "SEF" / "README.md"
 
-class SEF7MigrationTests(unittest.TestCase):
+class SEF7CurriculumTests(unittest.TestCase):
     def test_strict_outcome_validator_accepts_course(self):
         run = subprocess.run(
             [sys.executable, str(ROOT / "scripts/check-outcome-curriculum.py"),

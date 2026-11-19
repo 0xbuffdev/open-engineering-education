@@ -15,7 +15,7 @@ SEF_DIR = COURSE.parent
 CATALOG = SEF_DIR / "README.md"
 
 
-class SEF9MigrationTests(unittest.TestCase):
+class SEF9CurriculumTests(unittest.TestCase):
     def test_strict_outcome_validator_accepts_course(self):
         result = subprocess.run(
             [sys.executable, str(ROOT / "scripts/check-outcome-curriculum.py"),

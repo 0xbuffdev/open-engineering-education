@@ -14,7 +14,7 @@ COURSE = ROOT / "curriculum" / "SEF" / "SEF6.md"
 CATALOG = ROOT / "curriculum" / "SEF" / "README.md"
 
 
-class SEF6MigrationTests(unittest.TestCase):
+class SEF6CurriculumTests(unittest.TestCase):
     def test_strict_outcome_validator_accepts_course(self):
         completed = subprocess.run(
             [sys.executable, str(ROOT / "scripts/check-outcome-curriculum.py"),
