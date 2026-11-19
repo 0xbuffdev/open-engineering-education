@@ -53,7 +53,7 @@ class SEC14Tests(unittest.TestCase):
             "every required core course from SEC1 through SEC8, SEC10, "
             "SEC11, SEC12, SEC13 and SEC14 before admission to SEC9", cat)
         self.assertIn("| `SEC` | Security Engineering | 14 core |", root)
-        self.assertIn("**58 core, 7 electives**", root)
+        self.assertIn("**65 core, 11 electives**", root)
         self.assertNotIn("legacy", s.lower())
 
     def test_outcomes_taught_and_summatively_assessed(self):

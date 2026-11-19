@@ -53,7 +53,7 @@ class SEC11CurriculumTests(unittest.TestCase):
             catalog,
         )
         self.assertIn("| `SEC` | Security Engineering | 14 core |", umbrella)
-        self.assertIn("**58 core, 7 electives**", umbrella)
+        self.assertIn("**65 core, 11 electives**", umbrella)
         self.assertNotIn("legacy", source.lower())
         self.assertNotIn("backward compatibility", source.lower())
 

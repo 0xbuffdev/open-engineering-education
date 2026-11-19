@@ -4,33 +4,38 @@
 
 ## Overview
 
-Security Engineering treats security as an engineering discipline. You begin with threat modeling and secure design, then work through web and application security, native-code and binary security, network and infrastructure security, applied cryptography, cloud and workload security, detection and incident response, authorized AI security assessment, enterprise identity and privileged access assurance, endpoint and platform defense, continuous vulnerability and exposure management, multi-component security architecture assurance, and data security and privacy across the processing lifecycle. Offensive work stays inside explicitly authorized or deliberately vulnerable environments.
+Security Engineering teaches learners to investigate and improve the security of software and the systems that run it. The sequence begins with threat modeling and application security, then develops native-code investigation, network controls, cryptography, cloud workload security and incident response. Later courses cover enterprise identity, endpoint defense, vulnerability management, security architecture and data privacy.
+
+Work is performed on owned or explicitly authorized systems and controlled training fixtures. Learners execute checks and repairs in free local environments where possible. For controls that require unavailable infrastructure, they analyze identified reference evidence and state what they could not execute. A written policy or a passing scan is never enough to establish that a control worked.
 
 ## Prerequisites
 
-[SEF10](../SEF/SEF10.md) is required for SEC1. Additional prerequisites are specified for each course in the catalog.
+[SEF10](../SEF/SEF10.md) is required for SEC1. [SEC2](SEC2.md) also requires [APP1](../APP/APP1.md) for web and Internet fundamentals. The catalog lists each course's direct prerequisites; earlier required preparation is inherited through the course sequence.
 
 ## Learning outcomes
 
-By the end of this program, you will be able to:
+Graduates can:
 
-- Model assets, trust boundaries, threats, abuse cases, and security requirements for real software systems.
-- Identify, reproduce safely, remediate, and regression-test web and application security weaknesses, including long-lived WebSocket sessions, messages and confidential server-push events.
-- Investigate native memory-corruption and binary-security risks through bounded coverage-guided input testing, minimized defect reproduction, verified repairs, operating-system protections and safer systems design.
-- Assess and harden networked services, DNS resolution and protective policy, hosts, containers, cloud environments, Kubernetes orchestration RBAC/admission and pod-network policy, workload identities, and deployment pipelines; distinguish source-verified platform policies from actually exercised enforcement.
-- Evaluate enterprise authentication and federation, identity lifecycle, privileged access, resource authorization and effective account/session revocation.
-- Assess and harden endpoint privilege, executable integrity and host configuration; distinguish actual Linux enforcement from authentic Windows platform policy and event evidence, verify sensor coverage and recover from safe configuration drift.
-- Reconcile owned assets and software versions against advisory evidence, distinguish actual affectedness from scanning and severity labels, prioritize active exposure, verify patch or containment effects, and maintain reviewable owner decisions and exceptions.
-- Engineer system-level security architectures with independently verifiable protection requirements, accountable control allocation, failure-safe inter-component trust and source-backed assurance evidence.
-- Track sensitive and personal data across primary, derived, logged, exported and backed-up copies; enforce purpose and recipient limits, verify logical deletion and restore-safe restrictions, and assess de-identification and residual privacy harms.
-- Use established cryptographic primitives and protocols correctly, including executed authenticated record protection and a real two-party vetted-library key agreement, and reason about peer-key trust, nonces, key lifecycle and failure behavior.
-- Design useful security telemetry, investigate controlled incidents, and perform evidence-based remediation.
-- Conduct scoped and authorized security assessments and communicate findings in a developer-actionable form.
-- Build and defend one independently reproducible security assessment of an actual interacting cross-boundary control path, with verified repair, incident signal, recovery and accountable risk decision in a bounded real or controlled system.
+- Identify assets and trust boundaries, develop realistic abuse cases, and turn risk decisions into testable security requirements.
+- Reproduce and repair web and API vulnerabilities, including authorization changes during long-lived WebSocket connections and confidential server-push events. Verify permitted and prohibited outcomes after the fix.
+- Investigate native memory and binary weaknesses using bounded coverage-guided testing, diagnostic evidence and secure repair. Explain what a crash or runtime mitigation can and cannot prove.
+- Assess reachable services, network policies, DNSSEC and DNS protective policy, TLS trust and host permissions. Verify intended access and failures with safe tests.
+- Use established cryptographic libraries for authenticated records, signatures, password protection, KDFs and a real two-party vetted-library key agreement. Verify expected peer identity, context binding, key lifecycle and rejection behavior.
+- Test container runtime boundaries, cloud workload identity, delivery and artifact provenance, and Kubernetes orchestration RBAC, admission and pod-network policy. Distinguish an executed control from a source-attributed policy or trace.
+- Evaluate enterprise authentication, federation, privileged access, account provisioning, permission changes and effective session or entitlement revocation.
+- Review Linux endpoint privileges and execution controls and interpret authentic Windows policy and event evidence. Check sensor coverage, configuration changes and recovery without claiming enforcement that was not tested.
+- Maintain an accurate asset and software exposure record, resolve advisory affectedness, prioritize vulnerability treatment and verify patch or containment effects. Record owners, exceptions and unresolved risk.
+- Design multi-component protection requirements, assign controls to their actual authority points, and support security architecture decisions with independent failure and protected-state evidence.
+- Track personal and sensitive data through primary storage, derived copies, logs, exports and backups. Apply purpose and recipient controls, test deletion and restore restrictions, and qualify privacy and reidentification claims.
+- Implement and test useful security telemetry, investigate evidence from authorized incidents, and verify proportionate containment and recovery.
+- Perform authorized security assessments with clear scope and stop conditions, then provide findings that developers and accountable owners can act on.
+- Complete an independently reproducible security assessment of an actual interacting cross-boundary control path, including a material correction or justified restriction, tested detection and recovery, an accountable risk decision and an individual technical defense.
 
 ## Program completion standard
 
-Graduation requires two separate, independently reviewable decisions: verified assessed completion of every required core course from SEC1 through SEC8, SEC10, SEC11, SEC12, SEC13 and SEC14 before admission to SEC9, and satisfactory evaluation of all published SEC9 outcomes, summative assessments, cumulative project evidence and individual technical defense. A completed capstone does not replace missing prerequisite mastery, and predecessor completion does not replace the capstone.
+Graduation has two independently reviewable decisions. The first requires verified assessed completion of every required core course from SEC1 through SEC8, SEC10, SEC11, SEC12, SEC13 and SEC14 before admission to SEC9. Each course decision must identify its revision and inspectable evidence.
+
+The second decision assesses all SEC9 outcomes and summative requirements through one cumulative project and an individual technical defense. A completed capstone does not replace missing prerequisite mastery. Completing the prerequisite courses does not replace the capstone.
 
 ## Courses
 
@@ -51,6 +56,6 @@ Graduation requires two separate, independently reviewable decisions: verified a
 | [SEC14](SEC14.md) | Data Security & Privacy Engineering | 14–18 weeks | SEC5, SEC13 | `course` |
 | [SEC9](SEC9.md) | Security Engineering Capstone | 14–18 weeks | SEC1–SEC8, SEC10, SEC11, SEC12, SEC13, SEC14 | `project` |
 
-Catalog prerequisites are **direct** course-entry requirements. Prerequisites already established by an earlier required course still apply through that dependency path; omitting a redundant direct link does not waive its assessed mastery. The SEC9 admission gate separately verifies every required core course.
+The catalog records direct prerequisites. Earlier required courses remain part of the preparation inherited through those links. SEC9 independently checks the completion evidence for every core predecessor.
 
-Course definitions specify the required outcomes, learning sequence and completion evidence. Work can be completed in [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) or another learner-controlled environment. The [OEE specification](../../spec/README.md) governs course requirements.
+Each course file publishes its learning outcomes, instructional sequence and required assessment evidence. Learners can organize their work in [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) or an environment they control. The [OEE specification](../../spec/README.md) defines the shared completion requirements.
