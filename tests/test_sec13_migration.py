@@ -41,18 +41,19 @@ class SEC13Tests(unittest.TestCase):
             "| 14–18 weeks | SEC6, SEC10 | `course` |", cat)
         self.assertIn(
             "| [SEC9](SEC9.md) | Security Engineering Capstone "
-            "| 14–18 weeks | SEC1–SEC8, SEC10, SEC11, SEC12, SEC13 "
+            "| 14–18 weeks | SEC1–SEC8, SEC10, SEC11, SEC12, SEC13, SEC14 "
             "| `project` |", cat)
         self.assertIn(
             "**Prerequisites:** [SEC1](SEC1.md)–[SEC8](SEC8.md), "
             "[SEC10](SEC10.md), [SEC11](SEC11.md), "
-            "[SEC12](SEC12.md), [SEC13](SEC13.md)", cap)
-        self.assertIn("all twelve predecessor courses", cap)
-        self.assertIn("Twelve-entry predecessor", cap)
+            "[SEC12](SEC12.md), [SEC13](SEC13.md), "
+            "[SEC14](SEC14.md)", cap)
+        self.assertIn("all thirteen predecessor courses", cap)
+        self.assertIn("Thirteen-entry predecessor", cap)
         self.assertIn("from SEC1 through SEC8, SEC10, SEC11, "
-                      "SEC12 and SEC13 before admission to SEC9", cat)
-        self.assertIn("| `SEC` | Security Engineering | 13 core |", root)
-        self.assertIn("**57 core, 7 electives**", root)
+                      "SEC12, SEC13 and SEC14 before admission to SEC9", cat)
+        self.assertIn("| `SEC` | Security Engineering | 14 core |", root)
+        self.assertIn("**58 core, 7 electives**", root)
         self.assertNotIn("legacy", src.lower())
 
     def test_all_outcomes_taught_and_assessed(self):
