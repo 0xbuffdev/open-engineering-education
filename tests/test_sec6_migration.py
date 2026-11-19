@@ -28,14 +28,14 @@ class SEC6MigrationTests(unittest.TestCase):
             "**Program:** SEC — Security Engineering",
             "**Type:** `course`",
             "**Prerequisites:** [SEC4](SEC4.md)",
-            "**Duration:** 14–18 weeks",
+            "**Duration:** 16–20 weeks",
             "**Status:** `draft`",
             "**Specification:** `v0.2.0`",
         ):
             self.assertIn(field, source)
         self.assertIn(
             "| [SEC6](SEC6.md) | Cloud, Containers & Identity Security "
-            "| 14–18 weeks | SEC4 | `course` |", catalog)
+            "| 16–20 weeks | SEC4 | `course` |", catalog)
         line = re.search(r"(?m)^\*\*Prerequisites:\*\* (.+)$", source)
         self.assertIsNotNone(line)
         self.assertNotIn("SEC5", line.group(1))
@@ -159,6 +159,38 @@ class SEC6MigrationTests(unittest.TestCase):
         self.assertNotIn("kind: `test`", source)
         self.assertNotIn("kind: `lab`", source)
         self.assertNotIn("## Substantial course lab", source)
+
+
+    def test_orchestration_security_has_independent_evidence_contract(self):
+        source = COURSE.read_text(encoding="utf-8")
+        catalog = CATALOG.read_text(encoding="utf-8")
+        outcomes = source.split("\n## Learning outcomes\n", 1)[1].split(
+            "\n## Modules\n", 1)[0]
+        modules = source.split("\n## Modules\n", 1)[1].split(
+            "\n## Completion requirements\n", 1)[0]
+        assessments = source.split("\n## Completion requirements\n", 1)[1]
+        iam = assessments.split("- **SEC6-AS2**", 1)[1].split(
+            "- **SEC6-AS3**", 1)[0]
+        for outcome_id in ("SEC6-O13", "SEC6-O14"):
+            self.assertIn(outcome_id, outcomes)
+            self.assertIn(outcome_id, iam)
+        self.assertIn("Orchestrator Authority, Admission and Workload Isolation", modules)
+        self.assertIn("Service-account grants and escalation paths", modules)
+        self.assertIn("Admission mode versus actual enforcement", modules)
+        self.assertIn("Pod-network isolation and real CNI limits", modules)
+        for phrase in (
+            "Execute a free", "source-inspectable declared-subset checker",
+            "genuine labeled cluster decision/effect records",
+            "cross-namespace/API", "pod egress cases",
+            "replay the original safe negative witness",
+            "absence of actual local cluster enforcement",
+        ):
+            self.assertIn(phrase, iam)
+        self.assertIn("does not certify independent production Kubernetes", source)
+        self.assertIn("Kubernetes RBAC good practices", source)
+        self.assertIn("Kubernetes NetworkPolicies", source)
+        self.assertIn("Kubernetes orchestration RBAC", catalog)
+        self.assertNotIn("PodSecurityPolicy", source)
 
 
 if __name__ == "__main__":
