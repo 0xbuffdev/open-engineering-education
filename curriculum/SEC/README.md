@@ -26,7 +26,7 @@ By the end of this program, you will be able to:
 - Use established cryptographic primitives and protocols correctly, including executed authenticated record protection and a real two-party vetted-library key agreement, and reason about peer-key trust, nonces, key lifecycle and failure behavior.
 - Design useful security telemetry, investigate controlled incidents, and perform evidence-based remediation.
 - Conduct scoped and authorized security assessments and communicate findings in a developer-actionable form.
-- Build and defend an independently reproducible security assessment and corrective risk decision for a bounded real or controlled system.
+- Build and defend one independently reproducible security assessment of an actual interacting cross-boundary control path, with verified repair, incident signal, recovery and accountable risk decision in a bounded real or controlled system.
 
 ## Program completion standard
 

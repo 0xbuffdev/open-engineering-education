@@ -151,5 +151,32 @@ class SEC9MigrationTests(unittest.TestCase):
         self.assertNotIn("## Substantial course lab", source)
 
 
+    def test_capstone_requires_real_cross_boundary_security_effect(self):
+        source = COURSE.read_text(encoding="utf-8")
+        catalog = CATALOG.read_text(encoding="utf-8")
+        assessments = source.split("\n## Completion requirements\n", 1)[1]
+        as1 = assessments.split("- **SEC9-AS1**", 1)[1].split(
+            "- **SEC9-AS2**", 1)[0]
+        as2 = assessments.split("- **SEC9-AS2**", 1)[1].split(
+            "- **SEC9-AS3**", 1)[0]
+        as3 = assessments.split("- **SEC9-AS3**", 1)[1].split(
+            "- **SEC9-AS4**", 1)[0]
+        as4 = assessments.split("- **SEC9-AS4**", 1)[1].split(
+            "- **SEC9-AS5**", 1)[0]
+        as5 = assessments.split("- **SEC9-AS5**", 1)[1].split(
+            "### Graduation and evidence integrity", 1)[0]
+        self.assertIn("cannot be the only second boundary", source)
+        self.assertIn("two causally interacting authority", as1)
+        self.assertIn("two-boundary expected/actual decision matrix", as2)
+        self.assertIn("A lone application 403", as2)
+        self.assertIn("across the real interacting boundaries", as3)
+        self.assertIn("the alert itself is neither", as4.lower())
+        self.assertIn("two actual authority/enforcement layers", as5)
+        self.assertIn("NIST SP 800-160 Vol. 1 Rev. 1", source)
+        self.assertIn("NIST SP 800-53A Rev. 5", source)
+        self.assertIn("independently reproducible security assessment of an actual interacting", catalog)
+        self.assertIn("before admission to SEC9", catalog)
+
+
 if __name__ == "__main__":
     unittest.main()
