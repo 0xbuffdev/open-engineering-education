@@ -25,7 +25,7 @@ By the end of this program, you will be able to:
 
 ## Program completion standard
 
-The learner must demonstrate the knowledge, practical skills, and engineering judgment described by the program outcomes and successfully complete the program capstone.
+Graduation requires two separate, independently reviewable decisions: verified assessed completion of every required course from SEC1 through SEC8 before admission to SEC9, and satisfactory evaluation of all published SEC9 outcomes, summative assessments, cumulative project evidence and individual technical defense. A completed capstone does not replace missing prerequisite mastery, and predecessor completion does not replace the capstone.
 
 ## Courses
 
@@ -39,6 +39,6 @@ The learner must demonstrate the knowledge, practical skills, and engineering ju
 | [SEC6](SEC6.md) | Cloud, Containers & Identity Security | 14–18 weeks | SEC2, SEC4, APP7 | `course` |
 | [SEC7](SEC7.md) | Detection, Incident Response & Threat Hunting | 12–16 weeks | SEC4, SEC6 | `course` |
 | [SEC8](SEC8.md) | AI Security & Authorized Red Teaming | 12–16 weeks | SEC7 | `course` |
-| [SEC9](SEC9.md) | Security Engineering Capstone | 8–10 weeks | SEC1–SEC8 | `project` |
+| [SEC9](SEC9.md) | Security Engineering Capstone | 14–18 weeks | SEC1–SEC8 | `project` |
 
 Course definitions specify the required outcomes, learning sequence and completion evidence. Work can be completed in [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) or another learner-controlled environment. The [OEE specification](../../spec/README.md) governs course requirements.
