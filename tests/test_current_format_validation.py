@@ -329,6 +329,58 @@ Show the artifact and explain its limitations.
         self.assertNotEqual(self.app.validate(), 0)
 
 
+    def test_public_course_contract_rejects_alternate_source_formats(self):
+        """Published rules must agree with current-only course validation."""
+        format_spec = (ROOT / "spec" / "course-format.md").read_text(
+            encoding="utf-8"
+        )
+        conformance = (ROOT / "spec" / "conformance.md").read_text(
+            encoding="utf-8"
+        )
+        specification_index = (ROOT / "spec" / "README.md").read_text(
+            encoding="utf-8"
+        )
+        contributor_guide = (ROOT / "CONTRIBUTING.md").read_text(
+            encoding="utf-8"
+        )
+        guide = (ROOT / "curriculum" / "DESIGN-GUIDE.md").read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn(
+            "supported public course source and assessment contract",
+            format_spec,
+        )
+        self.assertIn(
+            "A source that lacks the current course contract",
+            format_spec,
+        )
+        self.assertIn(
+            "Unsupported source formats do not provide another conformance path.",
+            " ".join(conformance.split()),
+        )
+        self.assertIn(
+            "A learner's recorded result MUST remain interpretable",
+            " ".join(conformance.split()),
+        )
+        self.assertIn(
+            "The active public curriculum uses the `v0.2.0`",
+            specification_index,
+        )
+        self.assertIn(
+            "inspects every active course",
+            contributor_guide,
+        )
+        self.assertIn(
+            "Academic review beyond source validation",
+            guide,
+        )
+        for source in (format_spec, conformance, specification_index,
+                       contributor_guide, guide):
+            self.assertNotIn("Legacy course revisions MAY remain published", source)
+            self.assertNotIn("explicitly skips legacy courses", source)
+
+
 
 if __name__ == "__main__":
     unittest.main()

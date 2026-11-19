@@ -108,14 +108,14 @@ npx --yes markdownlint-cli2@0.24.0
 
 Run both commands from the repository root. If a check cannot be completed, explain why and identify any remaining validation work in the pull request.
 
-For courses authored or migrated under OEE v0.2.0, also run the outcome-based structural validator:
+For every published course change, run the current OEE `v0.2.0` outcome-based structural validator:
 
 ```bash
 python3 scripts/check-outcome-curriculum.py --course curriculum/APP/APP1.md
 python3 -m unittest discover -s tests -p 'test_outcome_curriculum.py' -v
 ```
 
-Replace `APP1.md` with the course being reviewed. The `--all` option checks migrated/version-marked courses across the curriculum and explicitly skips legacy courses. See [Curriculum validation tools](scripts/README.md) for the supported pattern and limitations; automatic validation is not a substitute for review of assessment validity.
+Replace `APP1.md` with the course being reviewed. The `--all` option inspects every active course and reports incomplete or unsupported sources instead of passing them. See [Curriculum validation tools](scripts/README.md) for commands and limitations. Automated checks cannot determine whether the assessment actually demonstrates the published competency.
 
 ## Proposing a change
 

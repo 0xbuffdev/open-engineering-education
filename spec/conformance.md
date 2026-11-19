@@ -140,20 +140,20 @@ A review SHOULD record:
 A documented exception to a `SHOULD` requirement MUST be justified.
 A `MUST` requirement cannot be waived through an exception.
 
-## 7. Transitional course versions
+## 7. Current course sources and revision evidence
 
-This is a breaking revision of the prior draft authoring contract.
-Legacy course revisions MAY remain published and evaluated against
-the historical specification that governed them. Such legacy content
-MUST NOT automatically claim conformance to `v0.2.0`. A new
-or migrated course MUST satisfy the revised ID, coverage, evidence,
-and evaluation requirements before claiming conformance.
+Active course definitions follow the `v0.2.0` outcome and assessment
+contract. A course claiming `v0.2.0` conformance MUST meet the required
+identifier, coverage, evidence, and evaluation rules. Unsupported source
+formats do not provide another conformance path.
 
-A learner's historical result MUST remain interpretable against the
-course revision and requirements that were actually evaluated.
-Reclassifying an older result requires explicit substantive
-re-evaluation when outcome or success criteria materially change.
-Tooling and consumer migrations SHOULD be documented, reviewable,
+Past course and assessment records MAY remain published for attribution
+and review. Their availability does not make them supported active course
+sources or establish current conformance. A learner's recorded result
+MUST remain interpretable against the course revision and requirements
+that were actually evaluated. Reclassifying a result requires substantive
+re-evaluation when outcomes or success criteria materially change.
+Tooling and consumer updates SHOULD be documented, reviewable,
 and non-destructive.
 
 ## 8. Public claims

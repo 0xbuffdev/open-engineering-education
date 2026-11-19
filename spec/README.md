@@ -37,6 +37,6 @@ Changes to binding requirements MUST follow [OEE governance](../GOVERNANCE.md) a
 
 ## Version scope and limitations
 
-The `v0.2.0` draft specifies outcome-driven course assessment. Earlier published course revisions may still follow a different authoring contract and must be evaluated against their applicable historical requirements until explicitly migrated. Their publication does not imply conformance to `v0.2.0`.
+The active public curriculum uses the `v0.2.0` outcome-based course contract. Unsupported source formats cannot pass the current structural checker or support a current conformance claim. Source revisions and assessed evidence remain attributable to the requirements actually evaluated; their records do not introduce another supported course format.
 
-[Curriculum validation tools](../scripts/README.md) describes version-aware repository checks and their limitations. Passing an automated structural check does not establish educational validity, course-readiness status, or conformance. These claims require the evidence and review defined by the specification.
+[Curriculum validation tools](../scripts/README.md) describes current-course repository checks and their limitations. Passing an automated structural check does not establish educational validity, course-readiness status, or conformance. These claims require the evidence and review defined by the specification.
