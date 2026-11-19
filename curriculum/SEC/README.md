@@ -32,7 +32,7 @@ Graduation requires two separate, independently reviewable decisions: verified a
 | Course | Title | Duration | Prerequisites | Type |
 | --- | --- | --- | --- | --- |
 | [SEC1](SEC1.md) | Security Foundations & Threat Modeling | 7–10 weeks | SEF10 | `course` |
-| [SEC2](SEC2.md) | Web & Application Security | 12–16 weeks | SEC1, APP1, APP3 | `course` |
+| [SEC2](SEC2.md) | Web & Application Security | 12–16 weeks | SEC1, APP1 | `course` |
 | [SEC3](SEC3.md) | Systems & Binary Security | 10–14 weeks | SEC1, SEF6 | `course` |
 | [SEC4](SEC4.md) | Network & Infrastructure Security | 10–14 weeks | SEC2, SEF7 | `course` |
 | [SEC5](SEC5.md) | Applied Cryptography & Secure Protocols | 12–16 weeks | SEC1 | `course` |

@@ -30,15 +30,36 @@ class SEC2MigrationTests(unittest.TestCase):
             "**Status:** `draft`",
             "**Specification:** `v0.2.0`",
             "**Duration:** 12–16 weeks",
-            "**Prerequisites:** [SEC1](SEC1.md), [APP1](../APP/APP1.md), "
-            "[APP3](../APP/APP3.md)",
+            "**Prerequisites:** [SEC1](SEC1.md), [APP1](../APP/APP1.md)",
         ):
             self.assertIn(expected, source)
         self.assertIn(
             "| [SEC2](SEC2.md) | Web & Application Security | 12–16 weeks "
-            "| SEC1, APP1, APP3 | `course` |", catalog)
+            "| SEC1, APP1 | `course` |", catalog)
         self.assertNotIn("legacy", source.lower())
         self.assertNotIn("backward compatibility", source.lower())
+
+    def test_backend_preparation_is_taught_without_weakening_security_proof(self):
+        source = COURSE.read_text(encoding="utf-8")
+        metadata = next(
+            line for line in source.splitlines()
+            if line.startswith("**Prerequisites:**"))
+        self.assertNotIn("APP3", metadata)
+        self.assertIn("**Prerequisites:** [SEC1](SEC1.md), [APP1](../APP/APP1.md)", metadata)
+        for expected in (
+            "source-inspectable local HTTP service",
+            "reproducible setup",
+            "server-side actor/action/resource decision",
+            "actual local SQLite database",
+            "real security corrections",
+            "independently expected legitimate, denied and failure-state behavior",
+            "through its handler, session principal, authorization condition",
+        ):
+            self.assertIn(expected, source)
+        # Teaching a ready-to-run service is not a substitute for live boundary
+        # enforcement, source changes, authoritative data and negative evidence.
+        self.assertIn("locally executed state checks", source)
+        self.assertIn("a reintroduced fault", source)
 
     def test_each_outcome_has_instruction_and_summative_evidence(self):
         text = COURSE.read_text(encoding="utf-8")
