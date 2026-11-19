@@ -1,7 +1,7 @@
 """OT-I02: frozen v0.2.0 fixtures and unsupported-format rejection.
 
-The pre-Toolkit scripts are migration utilities, not supported public APIs.
-No legacy parser or new normative authoring format is introduced here.
+The repository scripts are maintenance tools, not public Toolkit APIs.
+They do not define additional course-format requirements.
 """
 
 from __future__ import annotations
@@ -43,15 +43,16 @@ class ToolkitFixtureContractTests(unittest.TestCase):
         self.assertTrue(is_outcome_course(self.good))
         self.assertEqual(errors(self.good), [])
 
-    def test_explicit_historical_format_is_not_toolkit_input(self):
-        legacy = fixture("legacy_v010_course.md")
-        self.assertFalse(is_outcome_course(legacy))
-        self.assertTrue(errors(legacy))
+    def test_unsupported_specification_is_not_toolkit_input(self):
+        source = fixture("unsupported_v010_course.md")
+        with self.assertRaisesRegex(ValueError, "unsupported"):
+            is_outcome_course(source)
+        self.assertTrue(errors(source))
 
     def test_unsupported_and_conflicting_version_markers(self):
-        for version, expected in [("v0.3.0", "unsupported"), ("v0.1.0", "conflicts")]:
+        for version in ("v0.3.0", "v0.1.0"):
             with self.subTest(version=version):
-                with self.assertRaisesRegex(ValueError, expected):
+                with self.assertRaisesRegex(ValueError, "unsupported"):
                     is_outcome_course(self.good.replace("`v0.2.0`", f"`{version}`"))
 
     def test_unmarked_recognizable_v020_source_is_checked(self):
@@ -117,15 +118,15 @@ class ToolkitFixtureContractTests(unittest.TestCase):
         self.assertEqual(report["structuralOutcome"], "incomplete")
         self.assertTrue(any(f["category"] == "missing_input" for f in report["findings"]))
 
-    def test_legacy_cli_does_not_pass_direct_outcome_check(self):
+    def test_unsupported_cli_does_not_pass_outcome_check(self):
         result = subprocess.run(
             [sys.executable, str(SCRIPTS / "check-outcome-curriculum.py"), "--course",
-             str(FIXTURES / "legacy_v010_course.md")],
+             str(FIXTURES / "unsupported_v010_course.md")],
             capture_output=True, text=True, check=False,
         )
         self.assertNotEqual(result.returncode, 0)
         self.assertEqual(result.returncode, 3)
-        self.assertIn("unsupported legacy/unknown course format", result.stderr)
+        self.assertIn("unsupported OEE course specification v0.1.0", result.stderr)
 
 
 if __name__ == "__main__":

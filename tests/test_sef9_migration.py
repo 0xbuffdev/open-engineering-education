@@ -30,7 +30,7 @@ class SEF9MigrationTests(unittest.TestCase):
             cwd=ROOT, capture_output=True, text=True, check=False,
         )
         self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
-        self.assertIn("11 v0.2.0, 0 legacy", result.stdout)
+        self.assertIn("(OEE v0.2.0)", result.stdout)
 
     def test_all_eleven_program_courses_are_current_draft_format(self):
         paths = sorted(SEF_DIR.glob("SEF[0-9]*.md"))

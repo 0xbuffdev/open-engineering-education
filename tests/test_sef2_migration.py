@@ -1,4 +1,4 @@
-"""Guard the first course-level SEF v0.2.0 migration after the initial pilots."""
+"""Regression checks for SEF2's current v0.2.0 course contract."""
 
 from __future__ import annotations
 
@@ -29,7 +29,7 @@ class SEF2MigrationTests(unittest.TestCase):
         )
         self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
 
-    def test_program_validator_accepts_mixed_sef_curriculum(self):
+    def test_program_validator_accepts_current_sef_curriculum(self):
         result = subprocess.run(
             [sys.executable, str(ROOT / "scripts" / "check-sef-curriculum.py")],
             cwd=ROOT,
@@ -38,11 +38,12 @@ class SEF2MigrationTests(unittest.TestCase):
             check=False,
         )
         self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
-        migrated = sum(
+        current = sum(
             "**Specification:** `v0.2.0`" in course.read_text(encoding="utf-8")
             for course in (ROOT / "curriculum" / "SEF").glob("SEF[0-9]*.md")
         )
-        self.assertIn(f"{migrated} v0.2.0, {11 - migrated} legacy", result.stdout)
+        self.assertEqual(current, 11)
+        self.assertIn("(OEE v0.2.0)", result.stdout)
 
     def test_stable_outcome_ids_are_covered_by_six_required_assessments(self):
         text = COURSE.read_text(encoding="utf-8")
@@ -69,7 +70,7 @@ class SEF2MigrationTests(unittest.TestCase):
             )
         self.assertEqual(covered, outcomes)
 
-    def test_revised_course_does_not_reintroduce_legacy_lab_gates(self):
+    def test_course_uses_current_summative_contract(self):
         text = COURSE.read_text(encoding="utf-8")
         self.assertIn("**Specification:** `v0.2.0`", text)
         self.assertIn("**Status:** `draft`", text)

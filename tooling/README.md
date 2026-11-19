@@ -48,10 +48,9 @@ mechanisms require a separate review.
 reference; 2 invalid CLI arguments; 3 missing/incomplete/unsupported
 input; 4 unexpected local Git or tool failure.
 
-A repository-wide `--all` inspection is **incomplete** while any active
-course remains in an older or unrecognized format, even if all migrated
-v0.2.0 courses pass. There is no old-format compatibility reader,
-converter or transparent schema negotiation.
+A repository-wide `--all` inspection is incomplete when any published
+course has an unsupported version or insufficient outcome/assessment data.
+Every course must satisfy the current OEE v0.2.0 structural contract.
 
 ## Architecture and authority
 
@@ -84,7 +83,7 @@ briefs. Unrecognized valid Markdown expressions yield explicit parser
 limitations/incomplete results rather than invented requirements.
 Cross-course prerequisite codes are checked for presence in the same
 Git tree; a course-level snapshot **does not invent program catalog order**
-or establish that legacy prerequisites conform to v0.2.0.
+or establish the assessed quality of prerequisite work.
 
 This draft implements course check and course export, with a read-only
 repository inspection. Full program-catalog export, a distributable CLI
@@ -95,7 +94,7 @@ remaining release-readiness work.
 Tests build isolated synthetic local Git repositories and exercise:
 immutable revisions across dirty worktrees/moved HEAD, byte-identical
 exports, valid/invalid public briefs, missing/unknown sources, unsupported
-legacy files, path traversal and symlinks, protected atomic output, and
+source versions, path traversal and symlinks, protected atomic output, and
 offline CLI behavior.
 
 Run:

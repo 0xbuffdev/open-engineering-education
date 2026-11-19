@@ -1,4 +1,4 @@
-name: Curriculum migration inventory
+name: Curriculum inventory
 
 on:
   pull_request:
