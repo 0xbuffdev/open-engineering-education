@@ -8,9 +8,7 @@ Security Engineering treats security as an engineering discipline. You begin wit
 
 ## Prerequisites
 
-**Program 1 — SEF — Software Engineering Foundations.**
-
-Later courses may require specific Application, Systems, or AI knowledge. These dependencies are stated at the course level so learners can satisfy them through prior study or demonstrated equivalent knowledge.
+[SEF10](../SEF/SEF10.md) is required for SEC1. Additional prerequisites are specified for each course in the catalog.
 
 ## Learning outcomes
 
@@ -31,11 +29,9 @@ The learner must demonstrate the knowledge, practical skills, and engineering ju
 
 ## Courses
 
-The nine published course files are **legacy drafts**. They preserve their original learning activities and completion requirements but have not been migrated or assessed against the `v0.2.0` outcome-driven contract. They are course outlines for study and review, not claims of learner-tested readiness or `v0.2.0` conformance. See the [curriculum inventory](../INVENTORY.md) for a reproducible structural audit.
-
 | Course | Title | Duration | Prerequisites | Type |
 | --- | --- | --- | --- | --- |
-| [SEC1](SEC1.md) | Security Foundations & Threat Modeling | 5 weeks | Program 1 — SEF | `course` |
+| [SEC1](SEC1.md) | Security Foundations & Threat Modeling | 7–10 weeks | SEF10 | `course` |
 | [SEC2](SEC2.md) | Web & Application Security | 6 weeks | SEC1, APP1 and APP3 | `course` |
 | [SEC3](SEC3.md) | Systems & Binary Security | 6 weeks | SEC1 and SEF6 | `course` |
 | [SEC4](SEC4.md) | Network & Infrastructure Security | 5 weeks | SEC2 and SEF7 | `course` |
@@ -45,4 +41,4 @@ The nine published course files are **legacy drafts**. They preserve their origi
 | [SEC8](SEC8.md) | AI Security & Authorized Red Teaming | 4 weeks | SEC1, SEC2, SEC7, and AI5 | `course` |
 | [SEC9](SEC9.md) | Security Engineering Capstone | 8–10 weeks | SEC1–SEC8 | `project` |
 
-The course files remain the authoritative source for each course's published work and prerequisites. Use [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) or another learner-controlled environment for practical work and evidence. The [OEE specification](../../spec/README.md) governs newly authored or explicitly migrated course revisions.
+Course definitions specify the required outcomes, learning sequence and completion evidence. Work can be completed in [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) or another learner-controlled environment. The [OEE specification](../../spec/README.md) governs course requirements.
