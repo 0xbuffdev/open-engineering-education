@@ -32,7 +32,7 @@ The learner must demonstrate the knowledge, practical skills, and engineering ju
 | Course | Title | Duration | Prerequisites | Type |
 | --- | --- | --- | --- | --- |
 | [SEC1](SEC1.md) | Security Foundations & Threat Modeling | 7–10 weeks | SEF10 | `course` |
-| [SEC2](SEC2.md) | Web & Application Security | 6 weeks | SEC1, APP1 and APP3 | `course` |
+| [SEC2](SEC2.md) | Web & Application Security | 12–16 weeks | SEC1, APP1, APP3 | `course` |
 | [SEC3](SEC3.md) | Systems & Binary Security | 6 weeks | SEC1 and SEF6 | `course` |
 | [SEC4](SEC4.md) | Network & Infrastructure Security | 5 weeks | SEC2 and SEF7 | `course` |
 | [SEC5](SEC5.md) | Applied Cryptography & Secure Protocols | 5 weeks | SEC1 | `course` |
