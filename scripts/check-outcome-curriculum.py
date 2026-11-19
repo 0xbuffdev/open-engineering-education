@@ -481,16 +481,9 @@ def inspect_course(path: Path, root: Path | None = None) -> dict:
 
 
 def validate_course(path: Path) -> list[str]:
-    """Single-parser compatibility for existing source-repo maintenance callers.
-
-    Does not provide a public Toolkit API.
-    """
-    path = path.resolve()
-    if not path.is_file():
-        return ["course source file does not exist"]
-    result = parse_structure(path, path.read_text(encoding="utf-8"),
-                             ROOT if path.is_relative_to(ROOT) else path.parent)
-    return [finding.message for finding in result]
+    """Return current-course inspection findings for repository maintenance."""
+    report = inspect_course(path)
+    return [finding["message"] for finding in report["findings"]]
 
 
 def main() -> int:

@@ -3,6 +3,7 @@ name: OEE Toolkit source-pinned export checks
 on:
   pull_request:
     paths:
+      - 'curriculum/**'
       - 'tooling/**'
       - 'scripts/check-outcome-curriculum.py'
       - 'tests/test_toolkit_pinned_export.py'
@@ -10,6 +11,7 @@ on:
   push:
     branches: [main]
     paths:
+      - 'curriculum/**'
       - 'tooling/**'
       - 'scripts/check-outcome-curriculum.py'
       - 'tests/test_toolkit_pinned_export.py'
