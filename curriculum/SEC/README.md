@@ -4,7 +4,7 @@
 
 ## Overview
 
-Security Engineering treats security as an engineering discipline. You begin with threat modeling and secure design, then work through web and application security, native-code and binary security, network and infrastructure security, applied cryptography, cloud and workload security, detection and incident response, authorized AI security assessment, enterprise identity and privileged access assurance, endpoint and platform defense, continuous vulnerability and exposure management, and multi-component security architecture assurance. Offensive work stays inside explicitly authorized or deliberately vulnerable environments.
+Security Engineering treats security as an engineering discipline. You begin with threat modeling and secure design, then work through web and application security, native-code and binary security, network and infrastructure security, applied cryptography, cloud and workload security, detection and incident response, authorized AI security assessment, enterprise identity and privileged access assurance, endpoint and platform defense, continuous vulnerability and exposure management, multi-component security architecture assurance, and data security and privacy across the processing lifecycle. Offensive work stays inside explicitly authorized or deliberately vulnerable environments.
 
 ## Prerequisites
 
@@ -22,6 +22,7 @@ By the end of this program, you will be able to:
 - Assess and harden endpoint privilege, executable integrity and host configuration; distinguish actual Linux enforcement from authentic Windows platform policy and event evidence, verify sensor coverage and recover from safe configuration drift.
 - Reconcile owned assets and software versions against advisory evidence, distinguish actual affectedness from scanning and severity labels, prioritize active exposure, verify patch or containment effects, and maintain reviewable owner decisions and exceptions.
 - Engineer system-level security architectures with independently verifiable protection requirements, accountable control allocation, failure-safe inter-component trust and source-backed assurance evidence.
+- Track sensitive and personal data across primary, derived, logged, exported and backed-up copies; enforce purpose and recipient limits, verify logical deletion and restore-safe restrictions, and assess de-identification and residual privacy harms.
 - Use established cryptographic primitives and protocols correctly and reason about keys, nonces, authentication, and failure behavior.
 - Design useful security telemetry, investigate controlled incidents, and perform evidence-based remediation.
 - Conduct scoped and authorized security assessments and communicate findings in a developer-actionable form.
@@ -29,7 +30,7 @@ By the end of this program, you will be able to:
 
 ## Program completion standard
 
-Graduation requires two separate, independently reviewable decisions: verified assessed completion of every required core course from SEC1 through SEC8, SEC10, SEC11, SEC12 and SEC13 before admission to SEC9, and satisfactory evaluation of all published SEC9 outcomes, summative assessments, cumulative project evidence and individual technical defense. A completed capstone does not replace missing prerequisite mastery, and predecessor completion does not replace the capstone.
+Graduation requires two separate, independently reviewable decisions: verified assessed completion of every required core course from SEC1 through SEC8, SEC10, SEC11, SEC12, SEC13 and SEC14 before admission to SEC9, and satisfactory evaluation of all published SEC9 outcomes, summative assessments, cumulative project evidence and individual technical defense. A completed capstone does not replace missing prerequisite mastery, and predecessor completion does not replace the capstone.
 
 ## Courses
 
@@ -47,6 +48,7 @@ Graduation requires two separate, independently reviewable decisions: verified a
 | [SEC11](SEC11.md) | Endpoint & Platform Defense | 14–18 weeks | SEC7, SEC10 | `course` |
 | [SEC12](SEC12.md) | Vulnerability & Exposure Management | 12–16 weeks | SEC11 | `course` |
 | [SEC13](SEC13.md) | Security Architecture & Control Assurance | 14–18 weeks | SEC6, SEC10 | `course` |
-| [SEC9](SEC9.md) | Security Engineering Capstone | 14–18 weeks | SEC1–SEC8, SEC10, SEC11, SEC12, SEC13 | `project` |
+| [SEC14](SEC14.md) | Data Security & Privacy Engineering | 14–18 weeks | SEC5, SEC13 | `course` |
+| [SEC9](SEC9.md) | Security Engineering Capstone | 14–18 weeks | SEC1–SEC8, SEC10, SEC11, SEC12, SEC13, SEC14 | `project` |
 
 Course definitions specify the required outcomes, learning sequence and completion evidence. Work can be completed in [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) or another learner-controlled environment. The [OEE specification](../../spec/README.md) governs course requirements.
