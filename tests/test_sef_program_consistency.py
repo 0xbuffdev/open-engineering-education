@@ -319,7 +319,7 @@ class SEFProgramConsistencyTests(unittest.TestCase):
     def test_umbrella_catalog_numbers_follow_actual_live_program_rows(self):
         overview = text(PROGRAMS)
         counts = {"SEF": (11, 0), "APP": (14, 7),
-                  "SYS": (10, 0), "AI": (9, 0), "SEC": (9, 0)}
+                  "SYS": (10, 0), "AI": (16, 4), "SEC": (9, 0)}
         for code, (core, elective) in counts.items():
             catalog = text(ROOT / "curriculum" / code / "README.md")
             if code == "APP":
@@ -327,25 +327,48 @@ class SEFProgramConsistencyTests(unittest.TestCase):
                     line for line in catalog.splitlines()
                     if re.match(r"^\| \[APP\d+\]\(APP\d+\.md\) \|", line)
                 ]
-                current_core = sum("Core · draft" in l for l in entries)
-                current_elective = sum("Elective · draft" in l for l in entries)
+                current_core = sum("Core · draft" in line for line in entries)
+                current_elective = sum("Elective · draft" in line for line in entries)
                 self.assertEqual(
                     (current_core, current_elective), (core, elective)
                 )
-                self.assertIn("| \x60APP\x60 | Application Engineering | 14 core, 7 electives |", overview)
+                self.assertIn(
+                    "| `APP` | Application Engineering | 14 core, 7 electives |",
+                    overview,
+                )
+            elif code == "AI":
+                entries = [
+                    line for line in catalog.splitlines()
+                    if re.match(r"^\| \[AI\d+\]\(AI\d+\.md\) \|", line)
+                ]
+                current_core = sum(
+                    line.rstrip().endswith(
+                        ("| Required course |", "| Required project |")
+                    )
+                    for line in entries
+                )
+                current_elective = sum(
+                    line.rstrip().endswith("| Elective |")
+                    for line in entries
+                )
+                self.assertEqual(
+                    (len(entries), current_core, current_elective),
+                    (core + elective, core, elective),
+                )
+                self.assertIn(
+                    "| `AI` | AI Engineering | 16 core, 4 electives |",
+                    overview,
+                )
             else:
                 current = re.findall(
                     rf"(?m)^\| \[{code}\d+\]\({code}\d+\.md\) \|",
                     catalog,
                 )
                 self.assertEqual(len(current), core)
-        self.assertIn(
-            "| `SYS` | Systems Engineering | 10 core |",
-            overview,
-        )
+        self.assertIn("| `SYS` | Systems Engineering | 10 core |", overview)
         expected_core = sum(core for core, _ in counts.values())
         expected_electives = sum(electives for _, electives in counts.values())
-        self.assertEqual((expected_core, expected_electives), (53, 7))
+        self.assertEqual((expected_core, expected_electives), (60, 11))
         self.assertIn(
             f"| **Total** | **Five programs** | "
             f"**{expected_core} core, {expected_electives} electives** |",
@@ -356,12 +379,18 @@ class SEFProgramConsistencyTests(unittest.TestCase):
         overview = text(PROGRAMS)
         ai = text(ROOT / "curriculum" / "AI" / "README.md")
         sef = text(CATALOG)
-        self.assertIn("AI1 publishes", overview)
-        self.assertIn("AI2–AI9", overview)
-        self.assertIn("SEC courses currently have draft outlines", overview)
-        self.assertIn("AI1 has been substantively migrated", ai)
-        self.assertIn("AI2–AI9 remain legacy", ai)
-        self.assertIn("eleven required draft courses", overview)
+        courses = sorted((ROOT / "curriculum" / "AI").glob("AI[0-9]*.md"))
+        self.assertEqual(len(courses), 20)
+        for course in courses:
+            with self.subTest(course=course.name):
+                source = text(course)
+                self.assertIn("**Status:** draft", source)
+                self.assertIn("**Specification:** v0.2.0", source)
+        self.assertIn("All twenty AI courses retain `draft`", overview)
+        self.assertIn("AI1–AI16 are required", ai)
+        self.assertIn("AI17–AI20 are optional specializations", ai)
+        self.assertIn("SEC courses currently remain draft outlines", overview)
+        self.assertIn("SEF provides the completed current", overview)
         self.assertIn("All eleven courses are required", sef)
 
     def test_readiness_is_truthful_and_has_normative_sources(self):

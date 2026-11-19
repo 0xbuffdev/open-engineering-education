@@ -2,22 +2,22 @@
 
 The Open Engineering Education (OEE) curriculum publishes five engineering programs and their course definitions. It is designed for independent learners, educators, reviewers, and implementations that need a common, publicly inspectable educational contract.
 
-**Current state:** All five programs have published draft course definitions. [SEF](SEF/README.md) now has eleven outcome-driven `v0.2.0` core courses and a cumulative graduation capstone; [APP](APP/README.md) has fourteen outcome-driven `v0.2.0` core courses (including its capstone) and seven optional outcome-driven electives. All of these courses remain `draft` pending real learner and independent reviewer evidence. SYS now has ten outcome-driven `v0.2.0` draft core courses and a cumulative systems graduation capstone; AI1 publishes an outcome-driven `v0.2.0` draft. AI2–AI9 and the SEC courses currently have draft outlines without complete `v0.2.0` outcome and assessment contracts; they require further academic design. Source format or structural validation does not establish educational effectiveness or formal conformance.
+The five program catalogs below describe the courses in this repository revision. AI comprises sixteen required courses, including its capstone, and four optional electives. All twenty AI courses retain `draft` educational status. SEC courses currently remain draft outlines without full v0.2.0 outcome and summative assessment contracts. Consult each program catalog for its own study sequence and readiness information; source-format validation does not establish teaching effectiveness, learner mastery or formal conformance.
 
 ## Choose a program
 
 Each program README is the authoritative catalog for its **current** courses, study order, classification, and prerequisites.
 
-| Code | Program | Published course files | Catalog |
+| Code | Program | Course files in this revision | Catalog |
 | --- | --- | --- | --- |
 | `SEF` | Software Engineering Foundations | 11 core | [Explore SEF](SEF/README.md) |
 | `APP` | Application Engineering | 14 core, 7 electives | [Explore APP](APP/README.md) |
 | `SYS` | Systems Engineering | 10 core | [Explore SYS](SYS/README.md) |
-| `AI` | AI Engineering | 9 core | [Explore AI](AI/README.md) |
+| `AI` | AI Engineering | 16 core, 4 electives | [Explore AI](AI/README.md) |
 | `SEC` | Security Engineering | 9 core | [Explore SEC](SEC/README.md) |
-| **Total** | **Five programs** | **53 core, 7 electives** | |
+| **Total** | **Five programs** | **60 core, 11 electives** | |
 
-SEF publishes eleven required draft courses, including [SEF11 discrete mathematics](SEF/SEF11.md) before algorithms and numerical mathematics and a one-project [SEF10 capstone](SEF/SEF10.md) that verifies all ten prior-course completions. Course requirements are public; learner-tested readiness has not yet been established. APP develops applications and production delivery; **SYS develops machine-level understanding, Rust, OS internals, concurrency, networking, storage, distributed correctness and production systems engineering**; AI develops data, model, and production AI capabilities; SEC applies security engineering to systems and applications.
+SEF provides the completed current **foundational curriculum design**, including [SEF11 discrete mathematics](SEF/SEF11.md) before algorithmic and numerical mathematics, plus a one-project [SEF10 capstone](SEF/SEF10.md) with ten prior-course evidence checks. APP develops applications and production delivery; **SYS develops machine-level understanding, Rust, OS internals, concurrency, networking, storage, distributed correctness and production systems engineering**; AI develops data, model, and production AI capabilities; SEC applies security engineering to systems and applications.
 
 The APP catalog contains 14 required core courses and seven genuinely optional electives. The [current APP catalog](APP/README.md) and linked course definitions publish the authoritative study sequence, prerequisites and graduation requirements; reviewed Git history preserves earlier design rationale. Learner completion records retain the course revisions under which their evidence was evaluated.
 
@@ -34,7 +34,7 @@ The curriculum describes **what must be learned and demonstrated**, not a requir
 
 A course's `draft`, `tested`, or `verified` label describes its **educational readiness evidence**, not its specification-format version. The definitive thresholds and promotion rules belong to [Status Labels](../spec/status-labels.md).
 
-Likewise, a file being present or passing a structural check does not establish `v0.2.0` conformance. An outline without the current outcome and assessment contract cannot count as a completed `v0.2.0` course. The [curriculum inventory](INVENTORY.md) reports which published sources meet the structural checks and which still need revision; those reports do not establish conformance.
+A course file or passing structural check does not establish `v0.2.0` conformance. The [curriculum inventory](INVENTORY.md) provides reproducible, commit-pinned source-format and structure reports; educational readiness follows independent review evidence.
 
 ## Where requirements live
 
