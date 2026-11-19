@@ -23,7 +23,7 @@ By the end of this program, you will be able to:
 - Reconcile owned assets and software versions against advisory evidence, distinguish actual affectedness from scanning and severity labels, prioritize active exposure, verify patch or containment effects, and maintain reviewable owner decisions and exceptions.
 - Engineer system-level security architectures with independently verifiable protection requirements, accountable control allocation, failure-safe inter-component trust and source-backed assurance evidence.
 - Track sensitive and personal data across primary, derived, logged, exported and backed-up copies; enforce purpose and recipient limits, verify logical deletion and restore-safe restrictions, and assess de-identification and residual privacy harms.
-- Use established cryptographic primitives and protocols correctly and reason about keys, nonces, authentication, and failure behavior.
+- Use established cryptographic primitives and protocols correctly, including executed authenticated record protection and a real two-party vetted-library key agreement, and reason about peer-key trust, nonces, key lifecycle and failure behavior.
 - Design useful security telemetry, investigate controlled incidents, and perform evidence-based remediation.
 - Conduct scoped and authorized security assessments and communicate findings in a developer-actionable form.
 - Build and defend an independently reproducible security assessment and corrective risk decision for a bounded real or controlled system.

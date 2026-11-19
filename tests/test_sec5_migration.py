@@ -117,5 +117,40 @@ class SEC5MigrationTests(unittest.TestCase):
         self.assertNotIn("## Substantial course lab", source)
 
 
+    def test_real_two_party_key_establishment_has_required_negative_evidence(self):
+        source = COURSE.read_text(encoding="utf-8")
+        outcomes = source.split("\n## Learning outcomes\n", 1)[1].split(
+            "\n## Modules\n", 1)[0]
+        modules = source.split("\n## Modules\n", 1)[1].split(
+            "\n## Completion requirements\n", 1)[0]
+        assessment = source.split("- **SEC5-AS3**", 1)[1].split(
+            "- **SEC5-AS4**", 1)[0]
+        catalog = CATALOG.read_text(encoding="utf-8")
+        self.assertIn("Execute and independently verify one vetted-library", outcomes)
+        self.assertIn("SEC5-O9", outcomes)
+        for phrase in (
+            "Execute a real local key agreement and derive session material",
+            "Peer-key trust, authenticated context and transcripts",
+            "wrong-party/wrong-context case",
+        ):
+            self.assertIn(phrase, modules)
+        for phrase in (
+            "Actually execute a second-party vetted-library",
+            "two independent locally generated test identities",
+            "explicit pretrusted identity map",
+            "Before execution",
+            "actively rejected at an explicit trust boundary",
+            "context-mismatch failure",
+            "redacted derived secrets",
+            "supplied KEM/HPKE/TLS",
+        ):
+            self.assertIn(phrase, assessment)
+        self.assertIn("No public endpoint or bespoke protocol", source)
+        self.assertIn("RFC 7748", source)
+        self.assertIn("Python `cryptography` X25519 key exchange", source)
+        self.assertIn("real two-party vetted-library key agreement", catalog)
+        self.assertNotIn("live public PKI is required", source)
+
+
 if __name__ == "__main__":
     unittest.main()
