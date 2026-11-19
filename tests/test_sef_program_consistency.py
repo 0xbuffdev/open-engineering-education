@@ -319,7 +319,7 @@ class SEFProgramConsistencyTests(unittest.TestCase):
     def test_umbrella_catalog_numbers_follow_actual_live_program_rows(self):
         overview = text(PROGRAMS)
         counts = {"SEF": (11, 0), "APP": (14, 7),
-                  "SYS": (10, 0), "AI": (9, 0), "SEC": (11, 0)}
+                  "SYS": (10, 0), "AI": (9, 0), "SEC": (12, 0)}
         for code, (core, elective) in counts.items():
             catalog = text(ROOT / "curriculum" / code / "README.md")
             if code == "APP":
@@ -344,12 +344,12 @@ class SEFProgramConsistencyTests(unittest.TestCase):
             overview,
         )
         self.assertIn(
-            "| `SEC` | Security Engineering | 11 core |",
+            "| `SEC` | Security Engineering | 12 core |",
             overview,
         )
         expected_core = sum(core for core, _ in counts.values())
         expected_electives = sum(electives for _, electives in counts.values())
-        self.assertEqual((expected_core, expected_electives), (55, 7))
+        self.assertEqual((expected_core, expected_electives), (56, 7))
         self.assertIn(
             f"| **Total** | **Five programs** | "
             f"**{expected_core} core, {expected_electives} electives** |",
@@ -362,7 +362,7 @@ class SEFProgramConsistencyTests(unittest.TestCase):
         sef = text(CATALOG)
         self.assertIn("AI1 publishes", overview)
         self.assertIn("AI2–AI9", overview)
-        self.assertIn("SEC catalog now publishes eleven outcome-driven", overview)
+        self.assertIn("SEC catalog now publishes twelve outcome-driven", overview)
         self.assertIn("AI1 has been substantively migrated", ai)
         self.assertIn("AI2–AI9 remain legacy", ai)
         self.assertIn("eleven required draft courses", overview)
