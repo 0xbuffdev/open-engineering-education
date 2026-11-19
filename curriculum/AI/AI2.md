@@ -22,7 +22,7 @@
 
 **Access, safety and reproducibility.** Use paper or accessible digital derivations plus local Python 3 with standard-library arithmetic and NumPy when useful; a small automatic-differentiation package is optional only for verification, never an authority for the expected answer. Reference cases fit on an ordinary CPU. Synthetic data, documented independent computations, free software and written/table-based visual equivalents must suffice. No GPU, specialized cloud, paid textbook, model API, private dataset or hidden grading service is required. Specify math conventions, numeric precision, tolerances, seeds and the limits of each example. Fractions or hand derivations are preferable where an exact reference is possible. A sufficiently explained counterexample or well-defended negative result is valid mathematical work.
 
-**Assessment philosophy and pacing.** Ten modules are organized by distinct mathematical responsibilities; their different lesson counts reflect conceptual coherence, not a course-wide template. Five cumulative required assessments separately judge matrix/objective reasoning, probabilistic inference, stable scoring/uncertainty, optimizer and regularization behavior, and unfamiliar independent mathematical defense. Worked traces and optional formative problems support understanding without separate compulsory per-module tests or labs. The 16–20-week estimate covers derivation, coding, debugging, counterexamples, assessment, explanation and revision at 10–15 focused hours/week; it is provisional until genuine learner evidence supports calibration. Status remains draft; source checks are not educational verification.
+**Assessment philosophy and pacing.** The modules follow the mathematical dependencies from model definition and derivation to probabilistic reasoning, optimization, uncertainty and independent defense. Lesson boundaries keep mechanisms, counterexamples and checks together rather than treating every error case or presentation stage as another subject. Five cumulative required assessments separately judge matrix/objective reasoning, probabilistic inference, stable scoring/uncertainty, optimizer and regularization behavior, and unfamiliar independent mathematical defense. Worked traces and optional formative problems support understanding without separate compulsory per-module tests or labs. The 16–20-week estimate covers derivation, coding, debugging, counterexamples, assessment, explanation and revision at 10–15 focused hours/week; it is provisional until genuine learner evidence supports calibration. Status remains draft; source checks are not educational verification.
 
 ## Learning outcomes
 
@@ -72,14 +72,12 @@
 
 #### Lessons
 
-1. **Design matrix semantics** — Represent n observations and d feature coordinates as an n-by-d matrix; trace predictions, parameter dimensions, an intercept column and single-record evaluation without relying on NumPy to infer the answer.
-2. **Linear versus affine maps** — Explain how an explicit intercept changes the parameterization and which consequences follow when an intercept is accidentally regularized or omitted.
-3. **Column space and projection** — Interpret a least-squares fit as choosing a model prediction inside the span of the observed feature columns, distinguishing what can be represented from what is statistically justified.
-4. **Normal-equation reasoning** — Derive the stationary condition for finite least squares with correct dimensions, including when a closed-form unique solution exists; do not present an unstable matrix inverse as the preferred numerical algorithm.
-5. **Rank deficiency and nonidentifiability** — Construct collinear features and exhibit distinct coefficient vectors with equal predictions; distinguish identifiability of parameters from an observed prediction.
-6. **Scaling and ill-conditioning** — Show how measuring a feature in meters versus millimeters alters numerical conditioning and optimizer trajectories without changing the underlying physical observation.
-7. **Solving without explicit inversion** — Explain residuals, least-squares solvers, QR or SVD at a conceptual/numerical-comparison level; compare well-conditioned and singular cases with an independently checkable answer.
-8. **Dimensional and negative-case audit** — Predict a wrong matrix product, a duplicated-intercept design and a zero-variance column; label the actual violated assumption instead of accepting a convenient solver warning at face value.
+1. **Design-matrix and affine-map semantics** — Represent n observations and d feature coordinates as an n-by-d design matrix; trace predictions, parameter dimensions, intercept columns and single-record evaluation. Distinguish a linear map from an affine predictor, explain what happens when an intercept is omitted or penalized, and reject an incompatible matrix product before trusting a NumPy result.
+2. **Column space and projection** — Interpret a least-squares fit as choosing a model prediction inside the span of the observed feature columns, distinguishing what can be represented from what is statistically justified.
+3. **Normal-equation reasoning** — Derive the stationary condition for finite least squares with correct dimensions, including when a closed-form unique solution exists; do not present an unstable matrix inverse as the preferred numerical algorithm.
+4. **Rank deficiency and nonidentifiability** — Construct collinear features, a duplicate intercept and a truly redundant column; exhibit distinct coefficient vectors with the same predictions. Distinguish parameter identifiability from a fitted prediction and use an explicit null direction to diagnose the failure, not just a solver warning.
+5. **Scaling and ill-conditioning** — Show how meters versus millimeters and a zero-variance feature affect the design and numerical conditioning; predict when an optimizer trace or parameter interpretation changes without changing the underlying observations.
+6. **Solving without explicit inversion** — Interpret residuals and compare a transparent small least-squares result with QR or SVD, including well-conditioned and singular inputs. Explain which shape or rank assumption is required before accepting a solution and why blindly inverting X-transpose-X is unsound.
 
 ### Module 3 — Derivatives of Statistical and One-Layer Objectives
 
@@ -94,15 +92,13 @@
 
 1. **Scalar objectives over parameter vectors** — Trace a map from parameter vector to predictions to residuals to a scalar objective, explicitly naming the shapes of each intermediate.
 2. **Jacobian orientation and matrix conventions** — Compute the Jacobian of a small affine map, choose a row/column convention and show that consistent notation prevents apparently valid dimension mistakes.
-3. **Squared-error gradient** — Derive the gradient of J(theta) = (1/(2n)) ||X theta - y|| squared and verify it against a hand-calculable fixture. Explain exactly where the denominator enters.
+3. **Squared-error gradient and scale checks** — Derive the gradient of J(theta) = (1/(2n)) ||X theta - y|| squared and verify it against a hand-calculable fixture. Trace a wrong denominator, reversed sign or axis swap to the incorrect update rather than relying on a successful broadcast.
 4. **Hessian and directional curvature** — Derive X-transpose-X/n for the same objective; use a nonzero direction to interpret local quadratic curvature and the effect of a singular design.
-5. **Chain rule for composed mappings** — Differentiate a small affine-plus-elementwise-nonlinearity map with a scalar loss; identify which Jacobian-vector or vector-Jacobian product avoids materializing a large dense Jacobian.
-6. **Finite-difference gradient checks** — Contrast analytic gradients with central finite differences across reasonable steps; diagnose truncation and floating-point cancellation rather than expecting exact equality.
+5. **Chain rule for composed mappings** — Differentiate a small affine-plus-elementwise-nonlinearity map with a scalar loss. Identify the proper Jacobian-vector or vector-Jacobian product and locate a missing chain factor or incompatible intermediate shape before an autodiff check.
+6. **Finite-difference gradient checks and failure diagnosis** — Compare analytic gradients with central finite differences across justified step sizes. Diagnose truncation, cancellation, incorrect reductions or regularization of the wrong parameter using independent expected values rather than treating one numerical match as proof.
 7. **Nondifferentiability and subgradients** — Explain the absolute-error cusp and simple piecewise activations, the conditions under which a subgradient is useful and what smooth-gradient assumptions do not apply.
-8. **Common derivative failures** — Diagnose missing chain factors, swapped axes, accidental broadcast, incorrect reduction and regularization of the wrong parameter using predictions made before execution.
-9. **Derivation defense** — Re-derive one result with altered observation weights or an extra feature; justify the accepted shapes and provide an independently computed small-n reference.
 
-*Optional feedback:* At theta = (0,1) for the public three-row design matrix, predict the mean squared half-loss gradient before checking with any numerical library.
+*Optional feedback:* For the public three-row design matrix at theta = (0,1), predict the mean half-squared-loss gradient before using a library. Then alter one observation weight or add one feature and defend the new gradient and intermediate shapes against a hand-computed reference.
 
 ### Module 4 — Likelihoods, Estimators and Statistical Assumptions
 
@@ -121,8 +117,7 @@
 4. **MLE for simple families** — Derive the Bernoulli success proportion and the Gaussian sample mean under their assumptions; inspect boundary cases and the effect of correlated records.
 5. **Logistic link and binary cross-entropy** — Derive sigmoid likelihood and the binary log-loss from a linear score; compute the derivative with respect to a logit at zero without assuming a model library.
 6. **Weights, imbalance and objective meaning** — Explain why class weighting, sample weighting or averaging conventions change the estimand or trade-off; distinguish a mathematically minimized reweighted objective from a calibrated population probability.
-7. **Mis-specified likelihoods** — Construct an obvious heavy-tail or dependent-observation example where a convenient Gaussian/iid likelihood does not describe the data, and limit interpretation accordingly.
-8. **Model comparison boundary** — Explain why a larger maximized training likelihood is not by itself evidence of a superior predictive model; reserve systematic learner selection and generalization evaluation for AI4.
+7. **Misspecified likelihoods and invalid comparisons** — Construct a heavy-tail or dependent-observation case in which Gaussian or iid likelihood assumptions fail. Explain why a higher maximized training likelihood cannot, on its own, establish better out-of-sample prediction; actual model selection and empirical generalization belong to AI4.
 
 ### Module 5 — Priors, Posteriors and Predictive Uncertainty
 
@@ -140,8 +135,7 @@
 4. **Posterior mean, mode and MLE** — Explain why these quantities can differ, including at boundaries. Do not report an undefined boundary mode using an interior formula that assumes shape parameters greater than one.
 5. **MAP as penalized estimation** — Demonstrate a legitimate connection between Gaussian parameter priors and squared L2 penalties under a declared likelihood scale, while explaining dependence on parameterization and prior variance.
 6. **Uncertainty is not a single score** — Distinguish posterior spread, uncertainty from finite samples, predictive noise and possible model misspecification; identify which requires assumptions not supplied by the fixture.
-7. **Prior sensitivity and shifted population** — Compare justified prior choices on a small dataset and explain why adding many highly correlated observations does not necessarily yield the advertised independent-information increase.
-8. **Auditable probabilistic report** — State numerical posterior/predictive values, assumptions, a counterexample and a bounded uncertainty claim that a reviewer can check without probabilistic-programming infrastructure.
+7. **Prior sensitivity, dependence and auditable inference** — Compare justified priors on a small dataset and explain why correlated observations need not provide the advertised independent information. Report the posterior, predictive result, assumptions, a checkable counterexample and the exact uncertainty claim an independent reviewer can verify without a probabilistic-programming service.
 
 ### Module 6 — Information Measures and Probabilistic Scoring
 
@@ -181,8 +175,7 @@
 5. **Adaptive scaling limitations** — Explain coordinatewise adaptive updates and their dependence on gradient magnitude history; compare on a toy ill-scaled objective rather than asserting Adam always converges or outperforms alternatives.
 6. **Stationary points and nonconvex structure** — Compare minima, maxima, saddles and flat regions; use a simple nonconvex scalar example to show why zero gradient is not proof of a useful global solution.
 7. **Condition numbers and update geometry** — Investigate a positive definite quadratic with differently scaled eigen-directions; justify why a step suited to one direction may be unstable in another.
-8. **Stopping criteria and deceptive success** — Contrast gradient norm, step norm, objective improvement and fixed iteration counts. Demonstrate a premature stop or nonfinite trajectory and specify safe failure behavior.
-9. **Numerical gradient and loss diagnostics** — Detect NaN, infinite loss, wrong sign, stale gradient, missing scale or incompatible tensor shapes; use independently derived expected values rather than a passing autograd check alone.
+8. **Stopping criteria and numerical failure diagnostics** — Contrast gradient norm, step norm, objective improvement and fixed iteration counts. Detect premature stopping, nonfinite losses, wrong-sign or stale gradients, missing reduction scales and incompatible shapes with independent expected values; implement a safe failure or refusal rather than reporting convergence from a successful autograd call.
 
 ### Module 8 — Regularization, Constraints and Model Stability
 
@@ -195,14 +188,12 @@
 
 #### Lessons
 
-1. **Ill-posed learning as a mathematical problem** — Explain why multiple parameter choices can fit the observed dataset equally and why improved numerical solvability is not the same as a statistically justified model.
-2. **L2 penalties and shrinkage** — Derive the gradient and stationary point for a squared-loss objective with an L2 penalty; state whether the intercept is penalized and reconcile factor-of-two and sample-size conventions.
-3. **Regularization as a prior, with caveats** — Compare a stated Gaussian prior/MAP construction with the optimizer's penalty and disclose where a change in likelihood scale or parameter units breaks a simple equivalence.
-4. **L1, sparsity and nondifferentiable objectives** — Explain the absolute-value penalty and why a zero coefficient/subgradient differs from smooth ridge shrinkage; no generic solver package survey is needed.
-5. **Constraints and projected updates** — Work a bounded parameter example with feasible sets and projection; show a step that must be corrected to meet the declared constraint.
-6. **Feature scaling and parameter meaning** — Compare penalty effects before and after a deterministic unit transformation and justify when normalization or domain-informed regularization is defensible.
-7. **Bias, variance and underfitting** — Analyze why a penalty can reduce sensitivity but introduce bias; use a small controlled simulation to identify limited observed behavior without claiming general proof of predictive improvement.
-8. **Ill-conditioning versus lack of identification** — Build a nearly collinear example and a truly rank-deficient example; explain why a regularized unique solution does not magically identify parameters from the data alone.
+1. **Ill-posed fits, ridge penalties and MAP assumptions** — Start from multiple parameter vectors with equal observed predictions; derive the squared-loss plus L2 penalty gradient and stationary point and state whether the intercept is penalized. Where appropriate, connect a Gaussian prior to the resulting MAP objective under an explicit likelihood scale, and identify how units, prior variance or normalization invalidate an unqualified equivalence.
+2. **L1, sparsity and nondifferentiable objectives** — Explain the absolute-value penalty and why a zero coefficient/subgradient differs from smooth ridge shrinkage; no generic solver package survey is needed.
+3. **Constraints and projected updates** — Work a bounded parameter example with feasible sets and projection; show a step that must be corrected to meet the declared constraint.
+4. **Feature scaling and parameter meaning** — Compare penalty effects before and after a deterministic unit transformation and justify when normalization or domain-informed regularization is defensible.
+5. **Bias, variance and underfitting** — Analyze why a penalty can reduce sensitivity but introduce bias; use a small controlled simulation to identify limited observed behavior without claiming general proof of predictive improvement.
+6. **Ill-conditioning versus lack of identification** — Build a nearly collinear example and a truly rank-deficient example; explain why a regularized unique solution does not magically identify parameters from the data alone.
 
 ### Module 9 — Evidence, Generalization Boundaries and Model Claims
 
@@ -218,10 +209,9 @@
 
 1. **Empirical risk versus population risk** — Define the two mathematical objects and the assumptions required to connect them; explain why the observed minimum does not identify the population optimum.
 2. **Dependence, reweighting and representativeness** — Analyze an example with repeated related observations and unequal sampling where naïve iid or uniform weighting overstates information or misrepresents the intended population.
-3. **Optimizer success is not model validation** — Contrast a correctly minimized loss with incorrect label semantics, wrong likelihood, poor held-out performance and shift from the target environment.
+3. **An optimized objective is not a validated claim** — Contrast a correctly minimized training loss with incorrect label semantics, dependent sampling, a wrong likelihood, poor held-out behavior and a shifted population. State which new model-selection and deployment claims belong to later AI courses rather than importing their deliverables into this mathematical investigation.
 4. **Uncertainty from finite experiments** — Use reproducible repeated synthetic samples to estimate observed variability; disclose simulation assumptions and avoid claiming an actual confidence bound from a convenient empirical trace alone.
 5. **Mathematical evidence and counterexamples** — Decide what is established by a proof, exact finite fixture, numerical approximation or randomized trial and what remains unresolved.
-6. **Transfer to subsequent AI courses** — Identify which choices AI4 will evaluate as actual supervised models and which mechanisms AI5 will reuse in more complex differentiable networks, without requiring those courses' deliverables here.
 
 ### Module 10 — Integrated Derivation, Reproduction and Defense
 
@@ -243,12 +233,10 @@
 
 #### Lessons
 
-1. **Select a bounded mathematical investigation** — Use one or two small synthetic examples to pose explicit least-squares and probabilistic questions with independently known results; define the assumptions before constructing an objective.
-2. **Link theory to executable oracles** — Produce hand-derived gradients, exact reference values and a tiny transparent implementation; identify which comparisons require finite-precision tolerances.
-3. **Demonstrate a meaningful failure** — Introduce a rank-deficient design, incorrect reduction, impossible likelihood, unstable log expression or mis-scaled optimizer; predict and observe the distinct failure signature.
-4. **Investigate a defensible correction** — Compare the corrected mathematical model or algorithm with the original baseline, stating the limits of what numerical evidence establishes.
-5. **Answer an unfamiliar bounded challenge** — Adapt the source to a reviewer-changed feature, loss scale, prior or constraint; re-derive the relevant result rather than editing parameters until a test passes.
-6. **Independent technical explanation** — Defend assumptions, signs, shapes, objective scales, numerical validity, support constraints, uncertainty and the difference between mathematical fit and trustworthy AI competence.
+1. **Frame one auditable mathematical investigation** — Select one or two bounded synthetic least-squares and probabilistic questions, declare assumptions, and construct independently known hand-derived gradients, exact numerical reference values and a tiny transparent implementation. Distinguish exact checks from finite-precision comparisons before inspecting the implementation.
+2. **Predict, reproduce and correct a mathematical failure** — Introduce rank deficiency, a wrong reduction, impossible likelihood, unstable log expression or mis-scaled update. Predict its failure signature from the stated mathematics, reproduce it with independent reference values, and defend the corrected objective or algorithm against the original baseline and its limits.
+3. **Answer an unfamiliar bounded challenge** — Adapt the source to a reviewer-changed feature, loss scale, prior or constraint; re-derive the relevant result rather than editing parameters until a test passes.
+4. **Independent technical explanation** — Defend assumptions, signs, shapes, objective scales, numerical validity, support constraints, uncertainty and the difference between mathematical fit and trustworthy AI competence.
 
 The modules are a learning sequence, **not ten mandatory assessment submissions**. Optional prompts, explanations, worked examples and practice traces are formative. Every required assessed performance is defined below.
 
