@@ -18,8 +18,6 @@ An RFC is required for a change that affects:
 
 Routine corrections that preserve normative meaning can proceed directly through a pull request. If the distinction is unclear, raise the question in a public issue before changing a requirement.
 
-The one-time exception for initial course-format stabilization has **expired**. Its original scope remains recorded in [Governance](../GOVERNANCE.md); it is not an exception available to new proposals.
-
 ## Write a self-contained proposal
 
 Start from the [RFC template](TEMPLATE.md). A reader should be able to understand the proposal and its trade-offs without consulting internal architecture decisions, private planning documents, or implementation tickets.

@@ -1,6 +1,6 @@
 # Curriculum validation tools
 
-The scripts check current OEE `v0.2.0` course structure, program catalogs and local references. Source validation and educational readiness are separate decisions. A passing check does not establish learner mastery or formal course conformance.
+The scripts check the current OEE `v0.2.0` course files, program catalogs, and local references. They help contributors find structural errors before review. Passing these checks does not establish course readiness, learner achievement, or educational conformance.
 
 ## Program checks
 
@@ -23,7 +23,7 @@ Check one source file:
 python3 scripts/check-outcome-curriculum.py --course curriculum/APP/APP1.md
 ```
 
-Check the full published course set:
+Check every published course:
 
 ```sh
 python3 scripts/check-outcome-curriculum.py --all --format json
@@ -47,7 +47,7 @@ python3 scripts/curriculum_inventory.py --output-dir ./inventory-report
 
 The repository-local [OEE Toolkit](../tooling/README.md) checks source data at an immutable Git revision and creates deterministic derived exports. Its distribution and stable public API require separate review.
 
-Run regression and documentation checks:
+Run the full regression suite and documentation checks:
 
 ```sh
 python3 -m unittest discover -s tests -p 'test_*.py' -v
@@ -56,6 +56,8 @@ python3 scripts/check-public-docs.py
 npx --yes markdownlint-cli2@0.24.0
 ```
 
-The documentation checks cover local links and prohibited references to internal planning repositories. They do not verify external websites or assess teaching quality.
+The documentation checks cover local links and references to non-public planning repositories. They do not verify external websites or assess teaching quality.
 
 The current [SEF](../curriculum/SEF/README.md), [APP](../curriculum/APP/README.md), [SYS](../curriculum/SYS/README.md), [AI](../curriculum/AI/README.md) and [SEC](../curriculum/SEC/README.md) catalogs publish their course requirements. Course changes must update the relevant outcomes, assessment criteria, prerequisites and catalog entries together. Use the [curriculum design guide](../curriculum/DESIGN-GUIDE.md) for competency review and the [specification](../spec/README.md) for binding rules. Automated checks do not promote a course beyond its published `draft` status.
+
+The [current curriculum CI workflow](../.github/workflows/outcome-curriculum.yml) requires every published course to pass. The [inventory CI workflow](../.github/workflows/curriculum-inventory.yml) also rejects catalog gaps, missing sources, unsupported formats, and prerequisite inconsistencies. Proposed course files in unmerged branches do not count toward the published inventory.

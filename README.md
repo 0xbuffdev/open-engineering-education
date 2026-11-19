@@ -3,37 +3,33 @@
 
 # Open Engineering Education (OEE)
 
-Open Engineering Education (OEE) publishes a free specification and curriculum for engineering education. Course definitions explain what learners should be able to do, how their work is assessed, and what evidence supports completion. Educators, reviewers and learning platforms can use the same published requirements.
+Open Engineering Education publishes a free specification and curriculum for practical engineering education. Each course describes the capabilities learners are expected to develop, the work that demonstrates those capabilities, and the evidence used to assess completion.
 
-**Current release:** `v0.2.0` (draft). OEE is evolving; its publication is not a claim that every course has been tested or verified.
+Educators can teach the material in different ways. Learners can study independently, and tools can present the curriculum, while the published requirements remain available to everyone.
 
-## Get started
+**Current specification:** `v0.2.0` (draft). Publication and automated checks do not mean a course has been tested with learners or formally verified.
 
-| Your goal | Start here |
+## Find what you need
+
+| I want to… | Read |
 | --- | --- |
-| Understand the educational requirements | [Specification](spec/README.md) |
-| Explore engineering programs and courses | [Curriculum](curriculum/README.md) |
-| Understand assessment and evidence | [Evidence Rules](spec/evidence-rules.md) |
-| Build a learner workspace | [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) |
-| Propose a correction or change | [Contributing](CONTRIBUTING.md) |
+| Understand OEE requirements | [Specification](spec/README.md) |
+| Browse programs and courses | [Curriculum](curriculum/README.md) |
+| Understand how completion is assessed | [Evidence Rules](spec/evidence-rules.md) |
+| Organize independent study | [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) |
+| Correct or improve OEE | [Contributing](CONTRIBUTING.md) |
 
-## The specification
+## How OEE works
 
-The specification defines the common requirements for courses, demonstrated learning, readiness status and conformance. The course files apply those requirements; automated checks and teaching platforms do not create additional completion rules.
+The [specification](spec/README.md) defines the shared educational requirements. Its documents cover [principles](spec/principles.md), [course structure](spec/course-format.md), [evidence](spec/evidence-rules.md), [readiness labels](spec/status-labels.md), and [conformance](spec/conformance.md).
 
-| Document | What it establishes |
-| --- | --- |
-| [Principles](spec/principles.md) | The values behind course and assessment decisions |
-| [Course Format](spec/course-format.md) | Required course structure and assessment definitions |
-| [Evidence Rules](spec/evidence-rules.md) | How learning and engineering work are demonstrated |
-| [Status Labels](spec/status-labels.md) | What `draft`, `tested`, and `verified` mean |
-| [Conformance](spec/conformance.md) | How claims about following OEE are evaluated |
+The curriculum applies those requirements to particular subjects. A course identifies its outcomes, modules, learning activities, and required assessments. Completion depends on meeting published assessment criteria with reviewable evidence. There is no required lesson count, prescribed teaching platform, or automatic credit for completing activities.
 
-Course definitions apply these requirements to specific topics. Automated checks can identify structural problems, but do not establish assessment quality or educational conformance by themselves.
+Automated checks find structural errors, missing references, and other inconsistencies. They cannot determine whether a learner has demonstrated a capability or whether a course's assessments are educationally sound.
 
-## Explore the curriculum
+## Programs
 
-The curriculum is organized into five programs. Each program's README is the entry point for its published course catalog.
+OEE currently contains five programs, with 65 required courses and 11 electives.
 
 | Code | Program |
 | --- | --- |
@@ -43,42 +39,42 @@ The curriculum is organized into five programs. Each program's README is the ent
 | [AI](curriculum/AI/README.md) | AI Engineering |
 | [SEC](curriculum/SEC/README.md) | Security Engineering |
 
-A course may combine explanations, exercises, investigations, labs and project work. Completion is determined by its required learning outcomes, published assessment criteria and supporting evidence. A fixed number of lessons is never a completion standard.
+Each program catalog lists its courses, prerequisites, and study order. Read the individual course files for the actual learning and assessment requirements. The [curriculum design guide](curriculum/DESIGN-GUIDE.md) explains how courses are researched and structured.
 
-Learner implementations, notes, and evidence belong in a learner-controlled workspace rather than in this specification repository.
+## Use OEE independently
 
-## Independent by design
+[0xBUFF](https://github.com/0xbuffdev) stewards the specification. [0xNAND](https://nand.0xbuff.com) provides an optional paid learning implementation. The free [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) helps learners organize their work and evidence.
 
-[0xBUFF](https://github.com/0xbuffdev) stewards OEE. [0xNAND](https://nand.0xbuff.com) is an optional paid learning implementation; it is not required to use the public specification or curriculum. The free [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) helps learners organize their own work.
+Neither product is required to follow OEE. An implementation may provide teaching, feedback, or additional tools, but it cannot silently change the public completion requirements. Using an OEE-related product does not establish conformance.
 
-An implementation may offer additional teaching or feedback without changing the public completion requirements. Use of an OEE-related product does not, by itself, establish conformance.
+Learners keep their implementations, notes, and assessment evidence in their own workspaces, outside this specification repository.
 
-## Repository guide
+## Repository structure
 
-| Path | Purpose |
+| Path | Contains |
 | --- | --- |
-| [`spec/`](spec/README.md) | Authoritative educational requirements |
+| [`spec/`](spec/README.md) | Binding educational requirements |
 | [`curriculum/`](curriculum/README.md) | Program catalogs and course definitions |
-| [`rfcs/`](rfcs/README.md) | Proposals and decisions explaining significant changes |
-| [`tooling/`](tooling/README.md) | Optional, repository-local checking and derived exports |
-| [`scripts/`](scripts/README.md) | Maintenance checks and validation utilities |
-| [`GOVERNANCE.md`](GOVERNANCE.md) | Stewardship and decision-making |
+| [`rfcs/`](rfcs/README.md) | Public proposals and decision records |
+| [`tooling/`](tooling/README.md) | Repository-local checks and derived exports |
+| [`scripts/`](scripts/README.md) | Curriculum and documentation validation |
+| [`GOVERNANCE.md`](GOVERNANCE.md) | Stewardship and the change process |
 | [`CONTRIBUTING.md`](CONTRIBUTING.md) | Contribution and review instructions |
 
-Changes to binding requirements follow [OEE governance](GOVERNANCE.md) and the [RFC process](rfcs/README.md). Accepted RFCs record decisions; the current requirements are published in `spec/`.
+Binding changes follow [governance](GOVERNANCE.md) and the [RFC process](rfcs/README.md). Accepted RFCs explain decisions; the current requirements remain in `spec/`.
 
-## Status and limitations
+## Current status
 
-All five programs publish draft course definitions under OEE `v0.2.0`. AI has sixteen required courses and four electives. SEC has thirteen specialist courses and an integrated capstone, which requires separate evidence of completion for every other SEC course before admission. Each program catalog publishes the requirements and study order for this revision.
+All five program catalogs publish `v0.2.0` draft course definitions. AI contains 16 required courses and four electives. SEC contains 13 specialist courses and a capstone; entry to the capstone requires separate completion evidence from the other SEC courses.
 
-Course publication, structural checks and academic review do not establish learner-tested effectiveness, professional accreditation or OEE conformance. A course can be promoted from `draft` only when the evidence specified in [Status Labels](spec/status-labels.md) is available. The [curriculum inventory](curriculum/INVENTORY.md) reports the source files and structural checks.
+Every course remains `draft`. Source completeness and academic review do not establish learner-tested effectiveness, professional accreditation, or OEE conformance. Course status can change only with the evidence required by [Status Labels](spec/status-labels.md). The [curriculum inventory](curriculum/INVENTORY.md) explains the generated source and structure reports.
 
-The `v0.2.0` release tag contains incorrect citation metadata. The [citation erratum](releases/ERRATA.md) gives the accurate version and date information. The tag itself is unchanged.
+The published `v0.2.0` tag contains an error in its citation metadata. The [release erratum](releases/ERRATA.md) records the correct citation information without changing the tag.
 
-OEE does not independently certify learners, accredit programs or guarantee employment outcomes.
+OEE does not independently certify learners, accredit programs, or guarantee employment outcomes.
 
 ## Contribute and reuse
 
-Contributions are welcome when they improve educational clarity, technical accuracy, assessment quality, or reproducibility. Read [Contributing](CONTRIBUTING.md), the [Code of Conduct](CODE_OF_CONDUCT.md), and the [DCO policy](DCO.md) before opening a pull request.
+Read [Contributing](CONTRIBUTING.md), the [Code of Conduct](CODE_OF_CONDUCT.md), and the [DCO policy](DCO.md) before opening a pull request. Corrections to technical content, learning outcomes, assessments, and documentation are welcome.
 
-The specification and curriculum use [CC BY 4.0](LICENSE); covered source code uses the [MIT license](LICENSE-MIT). Consult the [licensing notice](NOTICE), [Toolkit licensing boundaries](tooling/LICENSING.md), and [trademark notice](TRADEMARKS.md) for scope and attribution details.
+The specification and curriculum are licensed under [CC BY 4.0](LICENSE). Covered source code uses the [MIT license](LICENSE-MIT). See [NOTICE](NOTICE), [Toolkit licensing](tooling/LICENSING.md), and [trademark guidance](TRADEMARKS.md) for the applicable boundaries.

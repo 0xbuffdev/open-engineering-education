@@ -1,8 +1,8 @@
 # OEE Curriculum
 
-OEE publishes course definitions for five engineering programs. Each program catalog lists its courses, prerequisites and completion requirements. Learners, educators and reviewers can use the same public criteria without a required teaching platform.
+The curriculum contains course definitions for five engineering programs. Each program catalog sets out the study order, prerequisites, and completion requirements. Independent learners, educators, and reviewers work from the same published criteria.
 
-These catalogs contain 65 required courses and 11 electives. AI has sixteen required courses, including its capstone, and four optional electives. All twenty AI courses remain `draft`. SEC has thirteen specialist courses and a capstone, each with `v0.2.0` outcomes and summative evidence requirements. All fourteen SEC courses also remain `draft`. Published source structure is checked automatically; course readiness requires the learner and reviewer evidence described in the specification.
+There are 65 required courses and 11 electives. AI has sixteen required courses, including its capstone, plus four electives. SEC has thirteen specialist courses and a capstone. All 76 course files use the current `v0.2.0` outcomes and assessment structure and remain `draft`. Automated checks inspect the files; promotion to `tested` or `verified` depends on the evidence required by the specification.
 
 ## Choose a program
 
@@ -19,7 +19,7 @@ Each program README is the authoritative catalog for its **current** courses, st
 
 SEF develops programming and mathematical foundations. Its [SEF11 discrete mathematics](SEF/SEF11.md) course precedes later algorithm and numerical work; the [SEF10 capstone](SEF/SEF10.md) checks evidence from the other foundation courses. APP builds on these foundations to develop and operate applications. SYS studies machine-level behavior, Rust, operating systems, concurrent services, storage and distributed systems. AI develops data, models, evaluation and deployed AI systems. SEC covers application and native-code security, infrastructure, identity, incident response, exposure management, security architecture and data privacy.
 
-APP has fourteen required courses and seven optional electives. AI has sixteen required courses and four optional electives. SEC graduation requires evidence from every specialist course before its capstone. The linked program catalogs provide study order and prerequisites; each course file describes the assessed work. Reviewers record the revision under which a learner's evidence was evaluated.
+SEC graduation requires evidence from each specialist course before entry to the capstone. Every course file describes the assessed work; reviewers record the course revision used to evaluate learner evidence.
 
 ## Follow a course
 

@@ -1,16 +1,10 @@
-# OEE Toolkit — Immutable, offline curriculum views
+# OEE Toolkit
 
-The Toolkit is a public, repository-local implementation approved under
-[RFC 0002](../rfcs/0002-toolkit-stewardship-and-licensing.md).
-It checks supported course structure and produces deterministic exports.
-It is **not** an officially released package or a stabilized public library
-API. Distribution and support claims require separate release-readiness
-review. See [Toolkit licensing](LICENSING.md) for file-level license scope.
+The Toolkit checks OEE course structure and produces deterministic curriculum exports from Git. It is a repository-local implementation of the approach accepted in [RFC 0002](../rfcs/0002-toolkit-stewardship-and-licensing.md).
 
-This implementation reads outcome-driven **OEE v0.2.0 only** from local
-Git objects at one **full, immutable 40-character commit SHA**. It never
-reads educational input from moving HEAD, the index or an uncommitted
-worktree, and it never fetches a Git remote.
+The Toolkit has not been published as a standalone package, and its library API is not stable. Distribution and support will need a separate release review. [Toolkit licensing](LICENSING.md) explains which licenses apply to its files.
+
+The Toolkit reads **OEE v0.2.0 course sources only** at a full, immutable 40-character Git commit SHA. It reads local Git objects and does not fetch a remote or take educational source from a moving branch, the index, or an uncommitted worktree.
 
 The only editable educational source is the public OEE specification and
 curriculum Markdown. The exported JSON is derived data, not a second

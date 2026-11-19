@@ -1,6 +1,6 @@
 # Curriculum inventory
 
-Each relevant pull request and change to `main` produces a derived inventory of published course sources and structural checks. Course definitions and program catalogs in this repository remain authoritative. This page explains the report; it does not maintain a second curriculum registry.
+Curriculum pull requests and changes to `main` produce a derived inventory of published course sources and structural checks. Course definitions and program catalogs in this repository remain authoritative. This page explains the report; it does not maintain a second curriculum registry.
 
 - [Inventory workflow and run history](https://github.com/0xbuffdev/open-engineering-education/actions/workflows/curriculum-inventory.yml)
 - Each run contains the complete per-course matrix in the **job summary** and downloadable `inventory.md` and `inventory.json` artifacts.
@@ -25,6 +25,9 @@ GITHUB_TOKEN=<your-read-only-token> python3 scripts/curriculum_inventory.py \
 The token is optional for public GitHub repositories, but recommended to avoid anonymous API rate limits. The workflow supplies a read-only GitHub Actions token. PR discovery is opt-in and fails visibly if the API cannot be reached; it never silently treats an incomplete scan as complete.
 
 ## Read the report
+
+The inventory workflow fails if a published course is missing, unlisted, uses an unsupported source format, has a structural error, or disagrees with its catalog or prerequisites. Unmerged course proposals discovered through the optional pull-request scan are identified separately and do not count as published courses.
+
 
 - `v0.2.0` identifies a source that declares the current outcome-driven format. The separate structural result shows whether its validation passed. Neither result establishes educational conformance.
 - Sources without the current outcome and summative assessment structure are reported as unsupported. They cannot pass the present course checks or count as completed course definitions.
