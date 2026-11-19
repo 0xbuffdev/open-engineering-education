@@ -51,8 +51,19 @@ def prerequisites(raw: str) -> tuple[list[str], list[str]]:
     # Preserve only direct prerequisite identifiers. Course catalogs may also
     # describe earlier preparation or full-program capstone evidence in prose.
     source = re.sub(r"\[([A-Z]+[1-9]\d*)\]\([^)]*\)", r"\1", raw)
-    source = source.split(";", 1)[0]
-    source = re.sub(r"\([^)]*\)", "", source)
+    # A catalog may follow its direct prerequisites with a separate capstone
+    # evidence reminder. Semicolons separating direct courses remain valid.
+    source = re.split(r";\s*(?:verify|evidence|assessed completion)\b", source,
+                      maxsplit=1, flags=re.IGNORECASE)[0]
+
+    def remove_note(match: re.Match[str]) -> str:
+        inner = match.group(1).strip()
+        # "Completed SEF (SEF10)" is itself a direct prerequisite.
+        if not CODE.search(source[:match.start()]) and re.fullmatch(r"[A-Z]+[1-9]\d*", inner):
+            return inner
+        return ""
+
+    source = re.sub(r"\(([^)]*)\)", remove_note, source)
 
     def expand(match: re.Match[str]) -> str:
         first, last = match.groups()
