@@ -23,17 +23,18 @@ class SEF3MigrationTests(unittest.TestCase):
         )
         self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
 
-    def test_program_validator_accepts_sef3_with_legacy_courses(self):
+    def test_program_validator_accepts_current_sef_catalog(self):
         result = subprocess.run(
             [sys.executable, str(ROOT / "scripts" / "check-sef-curriculum.py")],
             cwd=ROOT, capture_output=True, text=True, check=False,
         )
         self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
-        migrated = sum(
+        current = sum(
             "**Specification:** `v0.2.0`" in course.read_text(encoding="utf-8")
             for course in COURSE.parent.glob("SEF[0-9]*.md")
         )
-        self.assertIn(f"{migrated} v0.2.0, {11 - migrated} legacy", result.stdout)
+        self.assertEqual(current, 11)
+        self.assertIn("(OEE v0.2.0)", result.stdout)
 
     def test_fourteen_outcomes_covered_by_seven_required_assessments(self):
         text = COURSE.read_text(encoding="utf-8")
@@ -91,7 +92,7 @@ class SEF3MigrationTests(unittest.TestCase):
             self.assertGreater(len(ordinals), 0)
         self.assertEqual(mapped_all, {f"SEF3-O{i}" for i in range(1, 15)})
 
-    def test_preserved_scope_and_no_legacy_assessment_quotas(self):
+    def test_scope_and_assessment_requirements_remain_specific(self):
         text = COURSE.read_text(encoding="utf-8")
         self.assertIn("**Prerequisites:** [SEF2](SEF2.md)", text)
         self.assertIn("**Duration:** 10–12 weeks", text)

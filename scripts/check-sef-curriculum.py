@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """Validate the active SEF program using only the OEE v0.2.0 course contract.
 
-All eleven SEF courses use v0.2.0. This validator rejects absent, old,
-unknown and partially migrated formats instead of interpreting historical
-quiz/lab authoring conventions. Educational readiness is evaluated separately.
+All eleven SEF courses publish current v0.2.0 outcomes and assessments.
+Unsupported source formats fail; educational readiness is reviewed separately.
 """
 
 from pathlib import Path
@@ -123,13 +122,13 @@ def validate() -> int:
             else:
                 metadata[key] = found.group(1)
 
-        # All active SEF input uses one strict parser. No historical fallback.
+        # Apply the current course contract to each published SEF source.
         if metadata.get("Specification") != "`v0.2.0`":
             ERRORS.append(f"{code}: active course must explicitly declare v0.2.0")
             continue
         try:
             if not is_outcome_course(content):
-                ERRORS.append(f"{code}: unsupported legacy course format")
+                ERRORS.append(f"{code}: unsupported course source; OEE v0.2.0 required")
                 continue
         except ValueError as exc:
             ERRORS.append(f"{code}: {exc}")
@@ -230,7 +229,7 @@ def validate() -> int:
     )
     print(
         f"SEF structural validation passed: {len(courses)} courses across "
-        f"{module_count} modules ({len(courses)} v0.2.0, 0 legacy), "
+        f"{module_count} modules (OEE v0.2.0), "
         "without fixed module/lesson caps"
     )
     return 0

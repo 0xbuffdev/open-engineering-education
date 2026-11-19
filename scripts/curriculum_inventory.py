@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Derived OEE migration and assessment inventory; never a course parser or grade.
+"""Derived OEE course structure inventory; never a course parser or grade.
 
 The public Markdown curriculum remains authoritative. This report is an audit
 of format and references, not a conformance, reviewer or learner decision.
@@ -206,7 +206,11 @@ def build_inventory(root: Path, commit: str, pull_requests: list[dict] | None = 
                     entry["structural_errors"].append("course kind differs from catalog")
             try:
                 outcome = classify(content)
-                entry["format"] = "v0.2.0" if outcome else "legacy_unsupported"
+                entry["format"] = "v0.2.0" if outcome else "unsupported"
+                if not outcome:
+                    entry["structural_errors"].append(
+                        "current OEE v0.2.0 outcome and assessment contract required"
+                    )
             except ValueError as exc:
                 entry["format"] = "unsupported"
                 entry["structural_errors"].append(str(exc))
@@ -268,11 +272,11 @@ def build_inventory(root: Path, commit: str, pull_requests: list[dict] | None = 
 
 
 def markdown(report: dict) -> str:
-    lines = ["# OEE curriculum migration inventory (generated)", "",
+    lines = ["# OEE curriculum inventory (generated)", "",
              f"Source: `{report['source_repository']}@{report['source_commit']}` (exact commit)",
              f"Open PR scan: `{report['pr_scan']}`", "",
              "> This is a derived structural inventory, not educational conformance, editorial approval, or learner evidence.",
-             "> `legacy_unsupported` courses are **not** v0.2.0 and were **not** validated against v0.2.0.", "",
+             "> Unsupported course sources are not credited with current structural validation.", "",
              "## Program coverage", "",
              "| Program | Listed courses | Declared courses | Catalog gap | Notes |",
              "| --- | ---: | ---: | ---: | --- |"]
@@ -289,8 +293,6 @@ def markdown(report: dict) -> str:
             issues.insert(0, "not in course catalog")
         if c["format"] in ("missing", "pending_pr_unreviewed"):
             issues.append("not in current source")
-        if c["format"] == "legacy_unsupported":
-            issues.append("v0.2.0 checks not applicable")
         course_link = (f"[{c['code']}](https://github.com/{report['source_repository']}/blob/{report['source_commit']}/{c['path']})" if c["source_sha"] else c["code"])
         lines.append(f"| {course_link} | {c['catalog']} | {c['format']} / {c['structural_validation']} | {c['status'] or 'unknown'} | {coverage} | {c['assessment_count'] if c['assessment_count'] is not None else '—'} | {', '.join(c['prerequisites']) or 'none/unknown'} | {prs} | {'; '.join(issues) or '—'} |")
     lines += ["", "Every existing course row uses the exact `source_commit` and relative `path` in the JSON report.",

@@ -142,9 +142,9 @@ class PinnedToolkitTests(unittest.TestCase):
         with self.assertRaisesRegex(SourceError, "no resolvable"):
             prerequisites("an unresolvable requirement")
 
-    def test_old_format_rejected_and_not_exported(self):
+    def test_unsupported_format_rejected_and_not_exported(self):
         self.course.write_text(
-            (FIXTURES / "legacy_v010_course.md").read_text(encoding="utf-8"),
+            (FIXTURES / "unsupported_v010_course.md").read_text(encoding="utf-8"),
             encoding="utf-8",
         )
         version = self.commit("unsupported old format")
@@ -225,7 +225,7 @@ class PinnedToolkitTests(unittest.TestCase):
 
     def test_cli_check_all_reports_unsupported_course_as_incomplete(self):
         other = self.repo / "curriculum" / "FXT" / "FXT2.md"
-        other.write_text((FIXTURES / "legacy_v010_course.md").read_text(),
+        other.write_text((FIXTURES / "unsupported_v010_course.md").read_text(),
                          encoding="utf-8")
         self.revision = self.commit("add unsupported active course")
         scan = self.cli("check", "--all", "--json")

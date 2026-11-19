@@ -27,12 +27,12 @@ class SEF7MigrationTests(unittest.TestCase):
             cwd=ROOT, capture_output=True, text=True, check=False,
         )
         self.assertEqual(run.returncode, 0, run.stderr or run.stdout)
-        migrated = sum(
+        current = sum(
             "**Specification:** `v0.2.0`" in path.read_text(encoding="utf-8")
             for path in COURSE.parent.glob("SEF[0-9]*.md")
         )
-        self.assertEqual(migrated, 11)
-        self.assertIn("11 v0.2.0", run.stdout)
+        self.assertEqual(current, 11)
+        self.assertIn("(OEE v0.2.0)", run.stdout)
 
     def test_all_fourteen_outcomes_map_to_seven_required_assessments(self):
         text = COURSE.read_text(encoding="utf-8")

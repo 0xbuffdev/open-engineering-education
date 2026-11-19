@@ -22,7 +22,7 @@ class SEF8MigrationTests(unittest.TestCase):
                 result = subprocess.run(cmd, cwd=ROOT, capture_output=True,
                                         text=True, check=False)
                 self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
-        self.assertIn("11 v0.2.0, 0 legacy", result.stdout)
+        self.assertIn("(OEE v0.2.0)", result.stdout)
 
     def test_retained_and_new_outcomes_have_six_required_assessments(self):
         text = COURSE.read_text(encoding="utf-8")

@@ -183,7 +183,7 @@ class StructuralDiagnosticsTests(unittest.TestCase):
                              for f in result["findings"]))
 
     def test_unsupported_format_exit_is_incomplete(self):
-        self.course.write_text((FIXTURES / "legacy_v010_course.md").read_text(
+        self.course.write_text((FIXTURES / "unsupported_v010_course.md").read_text(
             encoding="utf-8"), encoding="utf-8")
         run = subprocess.run([sys.executable, str(SCRIPT), "--course", str(self.course)],
                              capture_output=True, text=True, check=False)
