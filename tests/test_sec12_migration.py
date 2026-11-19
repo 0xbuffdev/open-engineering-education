@@ -36,17 +36,18 @@ class SEC12CurriculumTests(unittest.TestCase):
             "| 12–16 weeks | SEC11 | `course` |", cat)
         self.assertIn(
             "| [SEC9](SEC9.md) | Security Engineering Capstone | "
-            "14–18 weeks | SEC1–SEC8, SEC10, SEC11, SEC12 | `project` |", cat)
+            "14–18 weeks | SEC1–SEC8, SEC10, SEC11, SEC12, SEC13 | `project` |", cat)
         self.assertIn(
             "**Prerequisites:** [SEC1](SEC1.md)–[SEC8](SEC8.md), "
-            "[SEC10](SEC10.md), [SEC11](SEC11.md), [SEC12](SEC12.md)",
+            "[SEC10](SEC10.md), [SEC11](SEC11.md), [SEC12](SEC12.md), "
+            "[SEC13](SEC13.md)",
             cap)
-        self.assertIn("Eleven-entry predecessor", cap)
-        self.assertIn("eleven authentic predecessor decisions", cap)
+        self.assertIn("Twelve-entry predecessor", cap)
+        self.assertIn("twelve authentic predecessor decisions", cap)
         self.assertIn("every required core course from SEC1 through SEC8, "
-                      "SEC10, SEC11 and SEC12", cat)
-        self.assertIn("| `SEC` | Security Engineering | 12 core |", root)
-        self.assertIn("**56 core, 7 electives**", root)
+                      "SEC10, SEC11, SEC12 and SEC13", cat)
+        self.assertIn("| `SEC` | Security Engineering | 13 core |", root)
+        self.assertIn("**57 core, 7 electives**", root)
         self.assertNotIn("legacy", src.lower())
 
     def test_no_redundant_direct_predecessor(self):
