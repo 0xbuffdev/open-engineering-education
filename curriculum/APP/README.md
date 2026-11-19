@@ -4,7 +4,7 @@
 
 ## Overview
 
-Application Engineering is the professional software-development pathway after Software Engineering Foundations. Learners build, test, deploy and operate modern applications, beginning with first-principles internet and browser foundations, then accessible HTML/CSS authoring, and progressing through frontend and backend engineering, databases, integrated architecture, quality, operations and production deployment. Work is cumulative: implementations developed in earlier courses may become inputs to later practice and outcome-based assessments.
+Application Engineering follows Software Engineering Foundations. Learners trace how the Web works, author accessible documents, and develop JavaScript, TypeScript, browser, Node and database skills. They then integrate frontend and backend services, test their behavior, deploy a real application, investigate failures and defend engineering decisions. Work from one course may become the starting point for another, provided each course's own outcomes are assessed.
 
 ## Prerequisites
 
@@ -17,7 +17,7 @@ By the end of the core program, the learner will be able to:
 - Author accessible semantic documents and robust responsive styles, then design and build maintainable frontend, backend and full-stack applications.
 - Design HTTP APIs with validation, authentication, authorization and explicit failure handling.
 - Model relational data and reason about queries, indexes, transactions and schema migrations.
-- Integrate asynchronous work, caching, realtime features and external services without obscuring boundaries.
+- Integrate asynchronous work, caching and external services while preserving state, identity, authority and failure boundaries.
 - Build testing, CI, observability and production-debugging workflows.
 - Deploy and operate an application with secure configuration, HTTPS, health checks, monitoring and rollback.
 - Measure performance and capacity, investigate bottlenecks and make evidence-based architectural changes.
@@ -35,7 +35,7 @@ Electives provide optional specialization and are **not** prerequisites for the 
 
 ## Courses
 
-The table below is the **current** APP catalog, not its migration target. Core courses are required; electives are optional specializations. The `Core · draft` and `Elective · draft` entries show both course classification and educational readiness: `elective` is **not** an additional readiness label. Durations are provisional and require calibration with learner evidence.
+The catalog follows a prerequisite-valid study order. Core courses are required for graduation; electives are optional. Each status cell combines a course's classification with its educational readiness label. Durations are planning estimates that need calibration through learner work.
 
 | Course | Title | Duration | Prerequisites | Kind | Status |
 | --- | --- | --- | --- | --- | --- |
@@ -63,7 +63,7 @@ The table below is the **current** APP catalog, not its migration target. Core c
 
 **Current totals:** 14 core courses (including APP9's project capstone) and 7 optional electives, all `draft`. The electives APP10–APP16 are not required for graduation.
 
-**Active source status:** All 14 required core courses and all seven electives APP10–APP16 now use outcome-driven OEE `v0.2.0` draft source format. The APP16 migration introduces an independently assessable platform-as-product specialization; like the other courses, it remains subject to academic review, realistic workload calibration and learner testing. APP15 has published APP19 + APP21 + APP6 prerequisites and assumes demonstrated foundational Rust competence, for which its public readiness exercise provides guidance; it does not require an invented SYS course code. The current catalog and course definitions are authoritative for prerequisites and completion requirements; migration history remains in reviewed Git commits and pull requests. Source migration does not establish learner-tested readiness or formal conformance.
+**Current source:** All 21 APP courses publish OEE `v0.2.0` outcomes, ordered lessons and required assessments. Each remains `draft`. APP15 is an optional TypeScript–Rust specialization: it builds on APP19, APP21 and APP6 and expects Rust foundations from SYS2 or equivalent preparation, without requiring SYS enrollment. The catalog and course definitions specify current prerequisites and completion requirements.
 
 ```text
 SEF10 → APP1, APP18, APP4
@@ -81,7 +81,7 @@ APP1–APP8 + APP17–APP21 → APP9
 
 ## How the courses fit together
 
-The table is one **prerequisite-valid study order**, not compulsory serial enrollment. Stable APP identifiers preserve earlier published course references even when new foundation courses have higher numbers.
+The course order respects prerequisites. Independent branches may be studied concurrently. Course numbers identify courses; they do not prescribe enrollment order.
 
 - **Independent entry paths:** After completed SEF, APP1 establishes Internet/Web/browser mechanisms, APP18 teaches JavaScript using local Node/npm tooling, and APP4 teaches relational data/SQL independently. These paths can be studied concurrently.
 - **Web documents and typed code:** APP17 applies APP1 to semantic HTML, native forms, responsive CSS and accessibility. APP19 follows APP18 to teach TypeScript's static contracts and runtime-data boundaries. Neither assumes React or a backend framework.
@@ -92,7 +92,7 @@ The table is one **prerequisite-valid study order**, not compulsory serial enrol
 
 ## Workload and pacing
 
-The 14 required core course durations total approximately **174–228 course-weeks** when summed. At a typical **10–15 focused hours per week**, this is a broad planning range of approximately **1740–3420 focused course-hours**, **not** a guaranteed elapsed-time graduation requirement or validated completion estimate. Prerequisite-independent branches may be studied in parallel. Tool setup, experimentation, debugging, accessibility, assessor availability and substantive revisions affect actual workload. Electives are excluded from this core total.
+The published core durations add up to **174–228 course-weeks**. At **10–15 focused hours per week**, that corresponds to about **1740–3420 focused course-hours** if every course is taken in full. These totals are provisional estimates, not minimum attendance requirements or validated completion times. Independent branches can overlap; actual effort depends on practice, setup, debugging, assessment and revision. Electives are excluded.
 
 Workload must be calibrated against actual study, experimentation, debugging and summative work, not by counting lessons. Reusing a verified implementation across APP5–APP9 is permitted where later outcomes are independently demonstrated; APP9 remains one independently defended graduation product, not a requirement to resubmit each earlier lab. Outcome evidence, not elapsed weeks or lesson checkboxes, determines completion. Estimates remain provisional until genuine learner evidence supports calibration.
 
@@ -110,7 +110,7 @@ All seven electives remain outside APP9's required prerequisites and program gra
 
 ## Source format and readiness
 
-**All 21** course files—the entire 14-course core and all seven electives APP10–APP16—now use the outcome-driven OEE `v0.2.0` source format. All 21 remain **`draft`**, not `tested` or `verified`. Formative practice is feedback, not an automatic completion gate; independently inspectable summative work establishes the required outcomes. Course-format migration, structural checking, and this academic editorial realignment do not by themselves prove learner effectiveness or confer formal OEE conformance. The [curriculum inventory](../INVENTORY.md) reports derived structural state without becoming a parallel source of truth.
+All 21 APP courses publish OEE `v0.2.0` outcome and summative assessment contracts and remain `draft`. Formative practice provides feedback. Completion depends on the relevant required assessments, with evidence that reviewers can inspect independently. Successful source validation does not establish learner-tested effectiveness, `verified` status or formal OEE conformance. The [curriculum inventory](../INVENTORY.md) describes the current source structure and is not a second curriculum.
 
 ## Independent study
 

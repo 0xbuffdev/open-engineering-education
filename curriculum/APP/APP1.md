@@ -541,4 +541,4 @@ Recommended self-checks and exercises that do
 
 Each required assessment is complete only when its published Work, Criteria and Evidence are demonstrated. Together `APP1-AS1`–`APP1-AS4` cover all fourteen outcomes. Independent review distinguishes directly observed network/browser behavior from labeled synthetic public DNS/TLS cases; passing quizzes or copying tool output does not establish diagnosis.
 
-Historical completions remain interpretable against their original course and specification revisions; this editorial revision does not automatically re-evaluate learners. The course remains `draft`; structural validation alone cannot establish learner-tested or verified effectiveness. See [Evidence Rules](../../spec/evidence-rules.md) and [Status Labels](../../spec/status-labels.md).
+Completion records must identify the course and specification revision actually assessed. Editing the public curriculum does not change those decisions. APP1 remains `draft`; structural validation does not establish learner-tested or verified effectiveness. See [Evidence Rules](../../spec/evidence-rules.md) and [Status Labels](../../spec/status-labels.md).

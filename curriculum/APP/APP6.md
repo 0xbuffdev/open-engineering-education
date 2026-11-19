@@ -645,19 +645,7 @@ observations, protected artifacts, failures,
 retests, explanations and review decisions
 according to [OEE Evidence Rules](../../spec/evidence-rules.md).
 
-APP6 remains an OEE `v0.2.0` **draft** with its
-already published **sole direct prerequisite APP5**.
-The legacy seven-week lab and old APP3 + APP5
-requirements are historical migration decisions,
-not changes pending in this review. APP7–APP9
-and APP electives are already published; this
-source reassessment does not silently revise
-their criteria or earlier APP6 learner results.
-Passing source validation does **not** establish
-learner-`tested`, independent-`verified` or
-accredited readiness. Historical evidence and any
-OEE Workspace/content/0xNAND consumer pins require
-explicit assessed revision review, not auto-upgrade.
+APP6 remains an OEE `v0.2.0` `draft` course with APP5 as its sole direct prerequisite. Its published outcomes and required assessments determine completion. Source validation does not establish `tested` or `verified` educational readiness. Record the actually assessed course/specification revision and keep downstream OEE Workspace, content and 0xNAND consumer pins tied to their reviewed sources.
 
 ### Public non-mandatory study references
 

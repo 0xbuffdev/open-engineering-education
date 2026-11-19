@@ -583,7 +583,7 @@ APP13 is complete only when independent reviewers accept `APP13-AS1` through `AP
 
 Preserve OEE specification and course revision, all applicable outcome/assessment IDs, versioned source/lockfiles and Android package identities, actual device/OS configs, local DB/queued intent and PostgreSQL states, process/permission/network/conflict/upgrade fault traces, security/privacy/accessibility checks, build and signature provenance, recognized platform limitations and independent defense/reviewer decision under [OEE Evidence Rules](../../spec/evidence-rules.md).
 
-APP13 remains the already published OEE `v0.2.0` **draft** `course` and optional `elective`, with approved direct prerequisites **APP19 + APP3**, not APP20. The earlier APP2 + APP3 nine-week checkpoint migration is historical, not a new change introduced by this review. All prior learner completion evidence stays bound to its actually assessed source revision; APP9, APP14–APP16, OEE Workspace/content mappings and 0xNAND source/evidence pins are unchanged. Structural CI cannot promote this course to learner-`tested`, independently `verified`, accredited or production/mobile-store-ready status, and does not certify untested iOS behavior.
+APP13 remains an optional OEE `v0.2.0` `draft` course with APP19 and APP3 direct prerequisites. React/APP20 and public app-store distribution are not required. Completion requires independently reviewable installed Android, offline-data, security, lifecycle, accessibility and upgrade evidence under all seven assessments. Keep evaluated source/specification revisions attached to learner decisions. Structural CI does not certify learner-tested readiness, iOS behavior, accreditation or mobile-store production approval.
 
 ### Public optional technical references
 

@@ -498,7 +498,7 @@ A learner completes APP10 only when an evaluator accepts `APP10-AS1` through `AP
 
 Store course/OEE revision, assessment/outcome IDs, maintained source/lockfile and environment, browser/CPU/network/viewport and cached data profile, actual traces/sample summaries, security and accessibility negatives, before/after hypotheses and evidence, release/cache effects, privacy constraints, independent defense and review decision under [OEE Evidence Rules](../../spec/evidence-rules.md).
 
-APP10 remains the existing **optional `elective`** OEE `v0.2.0` **draft** with direct APP20 + APP6 prerequisites, fifteen published outcomes and six required assessments. The previous APP2 + APP6 and seven-week checkpoint design is an already completed historical migration, not a pending change in this PR. APP9 graduation, all other core/elective courses and historical assessed revisions remain unchanged. A structurally passing PR cannot establish learner `tested` or `verified` readiness or silently update content/book mappings, OEE Workspace/0xNAND source pins or prior learner records.
+APP10 remains an optional OEE `v0.2.0` `draft` course. Its APP20 and APP6 prerequisites prepare learners for fifteen outcomes and six required assessments. Course completion depends on independently assessed evidence, including user-visible correctness, accessibility and measurement validity. Structural validation does not establish `tested` or `verified` educational readiness. Record the evaluated source/specification revision and review changes to resource mappings or consumer pins separately.
 
 ### Public optional technical references
 
