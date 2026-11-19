@@ -96,12 +96,12 @@ class InventoryTests(unittest.TestCase):
         folder.mkdir()
         catalog = folder / "README.md"
         catalog.write_text(
-            "# AI Engineering\\n\\n## Courses\\n\\n"
-            "| Course | Title | Duration | Prerequisites | Track |\\n"
-            "| --- | --- | --- | --- | --- |\\n"
-            "| [AI1](AI1.md) | First | 10 weeks | SEF10 | Required course |\\n"
-            "| [AI16](AI16.md) | Capstone | 10 weeks | AI6, AI15; verify AI1–AI15 | Required project |\\n"
-            "| [AI17](AI17.md) | Extension | 10 weeks | AI9 | Elective |\\n",
+            "# AI Engineering\n\n## Courses\n\n"
+            "| Course | Title | Duration | Prerequisites | Track |\n"
+            "| --- | --- | --- | --- | --- |\n"
+            "| [AI1](AI1.md) | First | 10 weeks | SEF10 | Required course |\n"
+            "| [AI16](AI16.md) | Capstone | 10 weeks | AI6, AI15; verify AI1–AI15 | Required project |\n"
+            "| [AI17](AI17.md) | Extension | 10 weeks | AI9 | Elective |\n",
             encoding="utf-8",
         )
         rows, errors = inventory.catalog_rows("AI", catalog)
