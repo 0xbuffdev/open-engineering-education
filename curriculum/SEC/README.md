@@ -15,7 +15,7 @@ Security Engineering treats security as an engineering discipline. You begin wit
 By the end of this program, you will be able to:
 
 - Model assets, trust boundaries, threats, abuse cases, and security requirements for real software systems.
-- Identify, reproduce safely, remediate, and regression-test common web and application security weaknesses.
+- Identify, reproduce safely, remediate, and regression-test web and application security weaknesses, including long-lived WebSocket sessions, messages and confidential server-push events.
 - Reason about memory-corruption risks, native binaries, operating-system protections, and safer systems designs.
 - Assess and harden networked services, hosts, containers, cloud environments, workload identities, and deployment pipelines.
 - Evaluate enterprise authentication and federation, identity lifecycle, privileged access, resource authorization and effective account/session revocation.

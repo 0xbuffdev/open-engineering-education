@@ -113,6 +113,36 @@ class SEC2MigrationTests(unittest.TestCase):
         self.assertEqual(len(assessment_ids), len(set(assessment_ids)))
         self.assertEqual(covered, known)
 
+    def test_live_websocket_session_and_event_assurance(self):
+        source = COURSE.read_text(encoding="utf-8")
+        learning = source.split("\n## Learning outcomes\n", 1)[1].split(
+            "\n## Modules\n", 1)[0]
+        modules = source.split("\n## Modules\n", 1)[1].split(
+            "\n## Completion requirements\n", 1)[0]
+        assessments = source.split("\n## Completion requirements\n", 1)[1]
+        self.assertIn("actually running local WebSocket endpoint", source)
+        self.assertIn("Origin", source)
+        self.assertIn("browser's automatic cookie behavior", source)
+        self.assertIn("HTTP polling or a static policy simulator", source)
+        for term in (
+            "persistent WebSocket channel validity",
+            "WebSocket messages/subscriptions",
+            "revocation during open subscriptions",
+            "private server-push event leakage",
+            "subscription/queue limits",
+        ):
+            self.assertIn(term, learning)
+        self.assertIn("WebSocket session and subscription authority", modules)
+        self.assertIn("Outbound events and bounded persistent channels", modules)
+        self.assertIn("mid-connection", assessments)
+        self.assertIn("actual handshake and frames", assessments)
+        self.assertIn("no forbidden private event is delivered", assessments)
+        self.assertIn("bounded message-size, subscription-count", assessments)
+        self.assertIn("real bounded message/queue outcomes", assessments)
+        self.assertIn("The reviewed timing/expected in-flight limit", assessments)
+        self.assertIn("OWASP ASVS 5.0 V4 API and Web Service", source)
+        self.assertNotIn("legacy", source.lower())
+
     def test_safety_and_nonmandatory_practice(self):
         source = COURSE.read_text(encoding="utf-8")
         self.assertIn("Optional lesson investigations", source)
