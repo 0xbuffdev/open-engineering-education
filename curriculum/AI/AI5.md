@@ -14,15 +14,13 @@
 
 **AI5 develops deep learning as inspectable engineering rather than framework invocation.** Learners design differentiable models with a defensible inductive bias, reason independently about tensor shapes and gradient propagation, implement and diagnose real training loops, compare architectures without contaminating evaluation, and investigate what learned representations preserve, discard and fail to explain. Completion requires a working, reproducible small-scale neural learning system **and** convincing evidence that the learner understands its mathematics, training dynamics, input assumptions, evaluation limitations and failure modes.
 
-**Origins and applications.** Neural networks build expressive functions by composing parameterized transformations and nonlinearities. Backpropagation makes gradients of such compositions tractable; convolution introduces weight sharing and local receptive fields; recurrent computation models ordered state; embeddings and bottlenecks can organize representations learned from data. These mechanisms underpin speech, vision, language, anomaly detection, scientific data analysis and more. Their expressive power does not by itself provide valid labels, independent test performance, disentangled semantic concepts, causal explanations or safe operational decisions. A small controlled learner can demonstrate a mechanism, not the reliability of an industrial-scale model.
-
 **Prerequisite and responsibility boundary.** Entry requires assessed [AI4](AI4.md), which transitively requires [AI2](AI2.md), [AI1](AI1.md) and completed Software Engineering Foundations. AI2 already establishes calculus, matrix derivatives, log-likelihood, chain rule, parameter conditioning, probabilistic scoring and optimization mathematics; AI4 already assesses supervised baselines, classical algorithms, generalization claims, group/time-aware evaluation, calibration, leakage control, error analysis and PCA. This course **applies** those prerequisites: its new competence is building and understanding *multilayer differentiable programs*, automatic differentiation, actual neural training, normalization and regularization behavior, convolution, finite recurrent state, learned embeddings, reconstruction and contrastive representation objectives. SEF programming, Git/testing, numerical foundations and probability are not re-taught. A small mathematical warmup is formative review, not a redundant assessed prerequisite.
 
 **Future-course boundaries.** [AI3](AI3.md) is classical reasoning and is not required for neural training. AI7 owns language-specific tokenization, linguistics, retrieval and NLP evaluations; AI8 owns vision-specific datasets, geometric augmentation and image-system evaluation. AI9 owns transformer self-attention, positional mechanisms, masked language modeling and generative modeling. AI10 owns advanced adaptation, large-model fine-tuning, resource-aware training and optimization at scale; AI13 owns comprehensive AI-system evaluation/testing and reliability; AI15 owns deployment and MLOps. AI5 covers *foundational* convolutions, simple recurrence, embedding lookup and a small frozen-feature transfer exercise **only as transferable deep-learning mechanisms**. It must not silently require transformers, pretrained cloud models, production pipelines, domain-specific corpora or reinforcement learning. The optional speech, robotics and graph electives retain distinct application and architecture competencies.
 
 **Accessible reference environment.** A locally runnable CPU-based Python 3, NumPy and PyTorch environment is a convenient reference; learners may use another open tensor/autodiff library if it satisfies the published observable behavior and independent evidence requirements. Small synthetic numeric, spatial, ordered and categorical fixtures are mandatory alternatives to commercial datasets. All required models must be runnable on a typical CPU; no GPU, cloud service, paid weights, private corpus, remote inference API, unlicensed data or proprietary evaluator is required. State actual interpreter, package/library versions, precision/dtype, device, batch and gradient reduction conventions, seeds, deterministic settings, stopping decisions and permissible tolerances. Tensor drawings require equivalent labeled textual shapes/tables; conceptual and numerical derivations may use accessible written or equivalent reviewable media.
 
-**Evidence philosophy and workload.** Thirteen modules follow actual conceptual dependencies and have deliberately differing lesson counts. Seven required summative assessments progressively establish model graphs and manual gradients; stable optimization; training/evaluation mode and regularization; convolutions and recurrence; representation learning; genuine small-data transfer/evaluation; and an integrated unfamiliar defense. They may reuse a coherent versioned source tree instead of seven duplicated independent projects. Each algorithmic claim needs an independent oracle or a reasoned counterexample; stochastic training comparisons need **executed measurements**, not fictitious benchmark targets or guarantees from a seed. Exact bitwise equality across devices, library versions and different kernels is not promised even when randomness is controlled. The duration range is an *unverified planning estimate* including derivation, coding, experiments, debugging, independent checking, review and correction. The course remains `draft` until genuine learner and reviewer evidence justifies a change.
+**Evidence philosophy and workload.** The instructional sequence develops architecture and differentiation before actual training, specialized spatial and sequential computation, representation learning, and independent evaluation. Tests, negative cases and evidence activities accompany the mechanisms they examine instead of repeating as detached lessons. Seven required summative assessments progressively establish model graphs and manual gradients; stable optimization; training/evaluation mode and regularization; convolutions and recurrence; representation learning; genuine small-data transfer/evaluation; and an integrated unfamiliar defense. They may reuse a coherent versioned source tree instead of seven duplicated independent projects. Each algorithmic claim needs an independent oracle or a reasoned counterexample; stochastic training comparisons need **executed measurements**, not fictitious benchmark targets or guarantees from a seed. Exact bitwise equality across devices, library versions and different kernels is not promised even when randomness is controlled. The duration range is an *unverified planning estimate* including derivation, coding, experiments, debugging, independent checking, review and correction. The course remains `draft` until genuine learner and reviewer evidence justifies a change.
 
 ## Learning outcomes
 
@@ -60,13 +58,11 @@
 
 #### Lessons
 
-1. **From fitted statistical model to composed learner** — Identify what a multilayer differentiable model can express that a restricted linear family may not, using AI4's exact empirical-risk and held-out evaluation vocabulary without re-teaching it.
-2. **History and scope of trainable representations** — Connect perceptrons, backpropagation, shared convolutional parameters and modern learned embeddings to bounded applications, stating what each approach was designed to make feasible.
-3. **Observation, target and representation contracts** — Name the sample identity, inference-time inputs, target semantics, output type, allowed transformations and failure behavior for a synthetic neural task.
-4. **Baselines before architecture** — Choose a constant, linear or AI4 classical model whose assumptions and evaluation use are sufficiently clear to avoid a meaningless neural-network victory.
-5. **Inductive bias versus raw capacity** — Compare parameter sharing, local spatial structure, ordered hidden state and independent feature processing; explain which assumptions a real task might violate.
-6. **Nonlinearity on a tiny XOR problem** — Show why XOR corner labels cannot be realized by one affine threshold, then inspect an exact two-hidden-unit ReLU representation without claiming it generalizes from four points.
-7. **Predeclared evidence and limitations** — Specify the train/validation/test responsibilities, a limited compute budget, a negative control and one claim that will be rejected without independent evidence.
+1. **Neural learning in context** — Trace how perceptrons, backpropagation, shared convolutional parameters and trainable embeddings developed from limited linear predictors into composed differentiable representations. Connect them to bounded numeric, image, sequence and categorical applications without confusing a model's expressive capacity with valid prediction, trusted semantics or justified real-world use. Explain which new representation/architecture problem AI5 addresses beyond AI4.
+2. **Observation, target and representation contracts** — Name the sample identity, inference-time inputs, target semantics, output type, allowed transformations and failure behavior for a synthetic neural task.
+3. **Baselines before architecture** — Choose a constant, linear or AI4 classical model whose assumptions and evaluation use are sufficiently clear to avoid a meaningless neural-network victory.
+4. **Inductive bias, nonlinearity and finite evidence** — Compare shared spatial parameters, ordered hidden state, independent feature processing and trainable capacity; identify where each assumption may fail. Use XOR corner labels to explain why one affine threshold is inadequate and why a small nonlinear representation is possible, reserving its exact constructive calculation for Module 3. Four fitted corners do not establish generalization.
+5. **Predeclared evidence and limitations** — Specify the train/validation/test responsibilities, a limited compute budget, a negative control and one claim that will be rejected without independent evidence.
 
 *Optional formative investigation:* Draw or describe the exact four XOR corners and produce two reasons a perfect training fit does not establish a trustworthy classifier.
 
@@ -80,14 +76,12 @@
 
 #### Lessons
 
-1. **Batch and feature axes** — For X of shape (B,D), derive the shapes of XW+b, intermediate activations and output logits with named B, input, hidden and output dimensions.
-2. **Named-axis reasoning and broadcasting** — Explain legal broadcasting of a hidden-vector bias across batch rows, reject mismatched feature dimensions and investigate a silent broadcast that changes the task.
-3. **Parameters versus examples** — Count trainable weights/biases for a 2→2→1 feedforward network independently of batch size; distinguish activation memory from parameter memory.
-4. **Matrix and tensor layouts** — Trace contiguous/noncontiguous views, reshapes and transposes at an explanatory level, including why an arbitrary reshape that preserves element count can corrupt semantic axes.
-5. **Activation and loss shapes** — Align per-example logits, targets and reduced scalar losses; distinguish class indices, one-hot targets and signed regression values under declared library conventions.
-6. **Initialization and scale** — Compare zero, excessive and variance-aware random initializations, emphasizing symmetry-breaking and reasonable activation/gradient scales rather than reciting an initializer name.
-7. **Predicting resource growth** — Derive approximate memory and multiplication costs when doubling batch, width or depth, and document when optimizer-state or saved-backward activations dominate parameters.
-8. **Input contract tests** — Reject nonfinite, noninteger category indices, wrong dtype, wrong layout and missing channels with explicit understandable messages and independent shape expectations.
+1. **Batch/feature axes, broadcasting and valid tensor semantics** — For X of shape (B,D), derive XW+b, hidden activations and output-logit shapes with named batch/input/hidden/output dimensions. Explain which hidden-vector bias broadcasts legally across batch rows, detect an incompatible matrix product and independently diagnose a silent broadcast that changes the intended meaning of an axis.
+2. **Parameter counts and resource scaling** — Independently count the weights/biases of a 2→2→1 network, separating parameters from examples and forward activations. Derive how changes in batch size, width and depth affect approximate compute, activation/gradient and optimizer-state memory, and identify when retained backward activations or optimizer state exceed parameter storage.
+3. **Matrix and tensor layouts** — Trace contiguous/noncontiguous views, reshapes and transposes at an explanatory level, including why an arbitrary reshape that preserves element count can corrupt semantic axes.
+4. **Activation and loss shapes** — Align per-example logits, targets and reduced scalar losses; distinguish class indices, one-hot targets and signed regression values under declared library conventions.
+5. **Initialization, scale and symmetry** — Compare zero, excessive and variance-aware random initialization; independently explain why identical hidden-unit parameter values can preserve symmetry under deterministic gradients, while too-large scales can destabilize activation/gradient flow. Choose an initialization based on stated layer shape and mechanism, not merely a framework default.
+6. **Input contract tests** — Reject nonfinite, noninteger category indices, wrong dtype, wrong layout and missing channels with explicit understandable messages and independent shape expectations.
 
 ### Module 3 — Feedforward Networks and Nonlinear Function Families
 
@@ -103,11 +97,9 @@
 1. **Affine composition and collapse without nonlinearities** — Prove that composing two affine maps with no intervening nonlinearity is another affine map; show what parameterization changes and what functional capacity does not.
 2. **ReLU and its piecewise response** — Calculate exact positive/zero/negative outputs and note the derivative convention at zero is library-dependent for a nonsmooth function.
 3. **Sigmoid/tanh saturation** — Compare saturation regions and derivative magnitudes with piecewise linear activations, connecting the outcome to longer gradient paths.
-4. **Hidden width and approximation** — Investigate how one or two hidden units represent a simple boundary and distinguish finite demonstrated function fit from a global universal-approximation claim.
-5. **Exact XOR constructive representation** — Verify h1=ReLU(x1+x2), h2=ReLU(x1+x2−1), yhat=h1−2h2 at the four binary corners. Explain why the result remains a continuous real-valued function between the corners.
-6. **Output heads and objectives** — Choose regression score, binary logit or mutually exclusive class logits with compatible losses, keeping proper score/probability interpretation inherited from AI2/AI4.
-7. **Parameter initialization and symmetry failure** — Explain why making all identical neurons in the same hidden layer share identical parameters can preserve unwanted symmetry under deterministic gradients.
-8. **Capacity changes as hypotheses** — Design a fair width/depth experiment with constant evaluation controls and disclose that more parameters may improve optimization while worsening data-limited generalization.
+4. **Hidden width, nonlinear XOR and bounded capacity** — Construct and independently verify the public F1 two-hidden-ReLU witness h1=ReLU(x1+x2), h2=ReLU(x1+x2−1), yhat=h1−2h2 at the four binary corners. Explain why an affine threshold fails for XOR, why this finite witness remains a continuous real-valued function between its corners, and why varying hidden width/initialization does not automatically improve held-out generalization.
+5. **Output heads and objectives** — Choose regression score, binary logit or mutually exclusive class logits with compatible losses, keeping proper score/probability interpretation inherited from AI2/AI4.
+6. **Capacity changes as hypotheses** — Design a fair width/depth experiment with constant evaluation controls and disclose that more parameters may improve optimization while worsening data-limited generalization.
 
 ### Module 4 — Computational Graphs, Backpropagation and Autograd
 
@@ -126,11 +118,10 @@
 3. **Two-layer manual derivative** — Derive every weight, bias and input gradient on the public N1 reference fixture while naming shape and sign at each step.
 4. **Shared variables and branch aggregation** — Show how a parameter reused in two paths receives the sum of valid derivative contributions, not the gradient from whichever branch is visited last.
 5. **Batch loss-reduction convention** — Compare sum, mean and half-squared reductions, including how loss normalization affects gradient magnitude independently of optimizer choice.
-6. **Gradient checks away from nondifferentiability** — Use central finite differences at a point where all relevant ReLUs are strictly inside linear regions; specify perturbation, tolerance and a failure interpretation.
+6. **Independent finite-difference and gradient-failure diagnosis** — Use central finite differences at smooth reference points with explicit step size, tolerance and truncation/cancellation limitations. Independently locate a wrong sign, transposed weight, missing activation factor or unintended broadcast; distinguish a model-derivation error from an autograd match and diagnose stale gradient accumulation separately in the training loop of Module 5.
 7. **Automatic differentiation semantics** — Explain why a computational graph records differentiable operations and how parameter gradients are attached to leaves; an autograd call is a verification tool, not an oracle for a flawed mathematical model.
 8. **No-grad, inference and detach** — Demonstrate intentional graph-breaking for inference and parameter freezing versus accidentally detaching a required trainable path.
 9. **In-place mutation and saved tensors** — Investigate how altering a tensor needed for backward may invalidate derivatives or raise an error; distinguish the library's protection from a general numerical proof.
-10. **Gradient failure diagnosis** — Locate wrong sign, stale accumulator, transposed weight, omitted activation derivative or hidden broadcasting and independently predict the correct changed output.
 
 ### Module 5 — Complete Training Loops and Optimization Diagnostics
 
@@ -145,14 +136,12 @@
 
 1. **Batch and label lifecycle** — Prepare stable mini-batches with explicit input/target types, identity groups and fixed splits; preserve original sample identity throughout each epoch.
 2. **Forward/loss/backward/update ordering** — Implement prediction, scalar loss, gradient reset, backward pass and optimizer step in the correct order, distinguishing forward evaluation from mutation.
-3. **Gradient accumulation semantics** — Demonstrate that repeated backward calls can add gradients unless explicitly reset; compare a deliberately accumulated two-step trace against the intended independent mini-batches.
-4. **Reduction across batch sizes** — Explain why changing sum to mean changes gradients and why incorrectly comparing different batch sizes/learning rates can invalidate a claimed optimizer improvement.
-5. **SGD, momentum and adaptive updates in practice** — Apply AI2's mathematical optimizer reasoning to an actual trainable neural graph; inspect state handling and compare measured behavior on bounded tasks.
-6. **Initialization stress tests** — Deliberately start with a too-large scale or symmetric hidden parameters and diagnose exploding, saturated or unlearnable behavior from observed activations/gradients.
-7. **Vanishing, exploding and dead activations** — Record per-layer gradients and finite-value status; give a defensible example where saturation or a dead ReLU stops effective learning.
-8. **Clipping and safeguards** — Apply a declared norm or value clipping rule only when justified and detect NaN/inf in loss or gradients; clipping does not repair a wrong objective or create missing information.
-9. **Tiny-batch overfit as a diagnostic** — Try to fit a very small known training fixture as a mechanism check; if it fails, distinguish implementation defect, capacity mismatch, regularization, unsuitable objective and stopping choice.
-10. **Honest stopping and budget accounting** — Record training and validation curves, actual number of examples/updates, elapsed CPU cost and stop reason, avoiding hidden evaluation-based model selection.
+3. **Gradient lifecycle, reduction and accumulation** — Explain why repeated backward calls accumulate leaf gradients until reset, and trace a deliberate two-step error against independent minibatches. Compare sum versus mean reductions and unequal batch sizes, showing how a mismatched denominator or learning-rate convention changes the actual update and invalidates an optimizer comparison.
+4. **SGD, momentum and adaptive updates in practice** — Apply AI2's mathematical optimizer reasoning to an actual trainable neural graph; inspect state handling and compare measured behavior on bounded tasks.
+5. **Initialization stress, gradient pathologies and measured diagnosis** — Reproduce a large-scale or symmetric initialization failure and inspect activations and per-layer gradient values. Distinguish saturation, vanishing/exploding gradients, dead ReLU units and missing updates using an actual bounded trace; choose a causal repair rather than claiming clipping or a different optimizer universally resolves the problem.
+6. **Clipping and safeguards** — Apply a declared norm or value clipping rule only when justified and detect NaN/inf in loss or gradients; clipping does not repair a wrong objective or create missing information.
+7. **Tiny-batch overfit as a diagnostic** — Try to fit a very small known training fixture as a mechanism check; if it fails, distinguish implementation defect, capacity mismatch, regularization, unsuitable objective and stopping choice.
+8. **Honest stopping and budget accounting** — Record training and validation curves, actual number of examples/updates, elapsed CPU cost and stop reason, avoiding hidden evaluation-based model selection.
 
 ### Module 6 — Regularization, Normalization and Train/Evaluation Semantics
 
@@ -166,14 +155,13 @@
 #### Lessons
 
 1. **Regularization in neural capacity** — Extend AI4's bias–variance reasoning to depth/width, explicit weight penalties, controlled data perturbations and early stopping.
-2. **Dropout as sampled masks** — Apply the publicly specified inverted-dropout keep mask and scale; explain why an expectation property is not a guarantee for each realized batch or a justification for dropout at inference.
-3. **Dropout in train and evaluation modes** — Demonstrate the stochastic training transform, deterministic evaluation identity behavior for ordinary inverted dropout, and an invalid pipeline that leaves dropout active on validation.
-4. **Normalization axes and statistics** — Compute a single-feature batch normalization example and compare the axes of batch-normalization and layer-normalization; state epsilon and unbiased-versus-population variance conventions.
-5. **BatchNorm running estimates** — Distinguish statistics used for normalization of a current training batch from maintained evaluation running statistics and avoid claiming they are always numerically identical.
-6. **Small batch and distribution-shift limits** — Investigate why noisy small-batch statistics or changed population may destabilize BatchNorm; contrast a suitable per-example normalization strategy without universal ranking.
-7. **Data augmentation and label preservation** — Specify which transformations preserve the defined target in a selected synthetic task and reject augmentations that alter class meaning or leak between related examples.
-8. **Early stopping without test contamination** — Select a checkpoint on valid development records only, track actual stopping patience/metric direction, and leave the final test untouched until selection ends.
-9. **Ablation with comparable budgets** — Hold data/split/metric and training budget fixed, change one regularization or normalization mechanism, and report seeded variability and the actual observed rather than hoped-for effect.
+2. **Dropout masks and train/evaluation behavior** — Compute the D1 inverted-dropout keep mask and its scale, distinguishing a mathematical expectation over random masks from any one realized batch. Demonstrate ordinary stochastic training and deterministic identity behavior in evaluation mode, then diagnose validation or inference that mistakenly leaves dropout active; neither a seed nor a training loss justifies inference-time dropout by default.
+3. **Normalization axes and statistics** — Compute a single-feature batch normalization example and compare the axes of batch-normalization and layer-normalization; state epsilon and unbiased-versus-population variance conventions.
+4. **BatchNorm running estimates** — Distinguish statistics used for normalization of a current training batch from maintained evaluation running statistics and avoid claiming they are always numerically identical.
+5. **Small batch and distribution-shift limits** — Investigate why noisy small-batch statistics or changed population may destabilize BatchNorm; contrast a suitable per-example normalization strategy without universal ranking.
+6. **Data augmentation and label preservation** — Specify which transformations preserve the defined target in a selected synthetic task and reject augmentations that alter class meaning or leak between related examples.
+7. **Early stopping without test contamination** — Select a checkpoint on valid development records only, track actual stopping patience/metric direction, and leave the final test untouched until selection ends.
+8. **Ablation with comparable budgets** — Hold data/split/metric and training budget fixed, change one regularization or normalization mechanism, and report seeded variability and the actual observed rather than hoped-for effect.
 
 ### Module 7 — Convolutional Networks and Spatial Inductive Bias
 
@@ -187,13 +175,12 @@
 
 1. **Spatial locality and shared parameters** — Motivate a sliding spatial filter on a simple grid and explain how its shared weights differ from position-specific dense weights.
 2. **Cross-correlation convention** — Calculate the exact public 2D input/kernel outputs with no kernel flipping, padding or stride, and identify why a library may call this operation convolution.
-3. **Channels, batches and output dimensions** — Derive N,C,H,W and N,Cout,Hout,Wout shapes with explicit kernel, stride, padding, dilation and channel assumptions; reject impossible geometries.
+3. **Channels, convolution shape, parameter sharing and cost** — Derive N,C,H,W and N,Cout,Hout,Wout under specified kernel, stride, padding and dilation; reject impossible geometry. Independently count trainable shared kernel weights/biases and approximate output activation/compute costs, comparing the same input to a flattened dense layer under a declared layout. Parameter savings are not a guarantee of faster execution or better predictions.
 4. **Padding and boundary influence** — Trace valid versus zero-padded operations, identify synthetic border effects and account for how changing padding alters output size and receptive field.
 5. **Stride and downsampling** — Analyze overlapping and skipped positions, justify an output-size calculation and explain why aggressive stride may discard evidence.
 6. **Pooling and aggregation** — Compute maximum and average pooling on the fixture, describe which transformations preserve or lose information and how gradients route through a unique maximum.
 7. **Receptive-field growth** — Trace how stacked kernels, strides and pooling change the region of input that can influence a deeper feature; distinguish theoretical field from effective learned influence.
-8. **Parameter sharing and compute** — Compare conv layer trainable parameter count and activation cost with a dense layer processing the same flattened input under an explicit layout.
-9. **Convolutional miniature comparison** — Train or inspect a tiny local pattern classifier and compare with a dense baseline using the same train/validation contract; reserve real-world vision benchmarking and augmentation policy for AI8.
+8. **Convolutional miniature comparison** — Train or inspect a tiny local pattern classifier and compare with a dense baseline using the same train/validation contract; reserve real-world vision benchmarking and augmentation policy for AI8.
 
 ### Module 8 — Ordered Data and Simple Recurrent Computation
 
@@ -207,12 +194,11 @@
 
 1. **Order, variable length and hidden state** — Define a discrete ordered sequence and show why feature-independent examples cannot express every dependence on preceding observations.
 2. **Simple recurrent update** — Calculate h_t=f(Wxh x_t+Whh h_{t-1}+b) on a tiny scalar/vector fixture with clearly specified initial state and recurrence.
-3. **Unrolling and shared parameters** — Relate a recurrence to a depth-unrolled computation graph, noting repeated use of the same weights and gradient contributions over time.
-4. **Backpropagation through time** — Trace a short exact derivative along a recurrence and explain why repeated Jacobian products may cause vanishing or exploding gradients.
-5. **Variable-length masking and padding** — Explain why artificial pad steps must not create valid target/loss contributions and why a model may need masks or sequence lengths to handle batches correctly.
-6. **Hidden-state reset and sequence identity** — Investigate a state-carryover defect that leaks one entity's history into another or transports validation information into training.
-7. **Long-dependency limitations** — Contrast simple recurrence with gated-state intuition and training instability, without pretending that this module implements full transformer attention or language modeling.
-8. **Bounded ordered-task comparison** — Use a small synthetic sequence experiment with valid sampling units, baseline and explicit actual results; avoid NLP/vision-specific evaluation contracts.
+3. **Unrolled recurrence, shared parameters and backpropagation through time** — Expand a finite state update into a depth-unrolled graph with tied weights, independently trace an R1-like derivative through several time steps and sum the contributions of shared parameters. Explain why repeated Jacobian products may vanish or explode and why a correct short sequence trace is not evidence of long-context competence.
+4. **Variable-length masking and padding** — Explain why artificial pad steps must not create valid target/loss contributions and why a model may need masks or sequence lengths to handle batches correctly.
+5. **Hidden-state reset and sequence identity** — Investigate a state-carryover defect that leaks one entity's history into another or transports validation information into training.
+6. **Long-dependency limitations** — Contrast simple recurrence with gated-state intuition and training instability, without pretending that this module implements full transformer attention or language modeling.
+7. **Bounded ordered-task comparison** — Use a small synthetic sequence experiment with valid sampling units, baseline and explicit actual results; avoid NLP/vision-specific evaluation contracts.
 
 ### Module 9 — Embeddings and Learned Representation Geometry
 
@@ -224,14 +210,13 @@
 
 #### Lessons
 
-1. **Discrete IDs and vocabulary contracts** — Distinguish a categorical token index from continuous physical magnitude; define unknown/padding indices and stable train-time vocabulary ownership.
+1. **Discrete vocabulary, IDs and invalid lookup contracts** — Distinguish categorical indices from ordered physical magnitudes; declare vocabulary ownership, index allocation, unknown/padding behavior and permitted train-time information. Demonstrate a mismatched vocabulary, out-of-range index and unintended ID collision, rejecting invalid cases or applying an explicitly authorized unknown-token policy rather than silently changing semantic identity.
 2. **Embedding lookup as a parameterized table** — Independently calculate the public table rows selected by a sequence of discrete indices and check the returned shape without running a library.
 3. **Gradient scope for used and unused rows** — Show why an ordinary lookup updates only participating embedding rows, barring explicit global penalties or optimizer behavior; distinguish lookup from a one-hot multiply.
 4. **Aggregation for sets and bags** — Compute sum versus mean of selected embeddings and explain what order information each aggregator discards.
 5. **Similarity and learned geometry** — Compare dot product, Euclidean distance and cosine similarity with declared normalization; show how different scaling affects ranking.
-6. **Embedding collisions and unknown values** — Demonstrate a vocabulary mismatch, index out of range and unintended shared ID, with explicit rejection or an authenticated unknown-token policy.
-7. **Interpretation limits and shortcut evidence** — Explain why close embeddings are not proof of semantic equivalence, fairness or causal meaning; examine a shortcut or spurious correlate learned from synthetic labels.
-8. **Train-only representation inspection** — Evaluate a learned embedding on held-out categories where technically supported, state unobserved-category limitations, and reserve NLP retrieval performance for AI7/AI11.
+6. **Interpretation limits and shortcut evidence** — Explain why close embeddings are not proof of semantic equivalence, fairness or causal meaning; examine a shortcut or spurious correlate learned from synthetic labels.
+7. **Train-only representation inspection** — Evaluate a learned embedding on held-out categories where technically supported, state unobserved-category limitations, and reserve NLP retrieval performance for AI7/AI11.
 
 ### Module 10 — Bottlenecks, Reconstruction and Self-Supervised Representations
 
@@ -245,14 +230,13 @@
 #### Lessons
 
 1. **Encoder, bottleneck and decoder roles** — Formalize a deterministic small encoder z=f(x) and decoder xhat=g(z), with explicit shape and loss/normalization conventions.
-2. **Reconstruction objective and baselines** — Compare a constant, identity-like and bottlenecked reconstruction on a small exact numeric example, explaining why reconstruction loss alone is not a semantic score.
-3. **Capacity and identity solutions** — Investigate why an unconstrained wide autoencoder can simply copy data and how bottleneck width or regularization changes the learned objective.
-4. **Denoising and corruption contracts** — Choose a controlled synthetic corruption whose target remains the original input, preventing data leakage or a change in target semantics from going unacknowledged.
-5. **Self-supervised targets versus labels** — Distinguish reconstructive and discriminative objectives derived from the input from independent downstream ground-truth labels.
-6. **Positive/negative pair construction** — Define which synthetic perturbations preserve identity/class and how accidental false negatives, duplicates or class-derived pair construction undermine a representation claim.
-7. **Contrastive temperature and logits** — Calculate a one-anchor/one-positive/one-negative normalized exponential objective with the public numeric reference; explain why temperature changes relative scoring.
-8. **Collapse and shortcut tests** — Compare identical constant embeddings, a genuinely discriminative setup and a model using a nuisance feature, showing why a low contrastive or reconstruction loss may not yield useful transfer.
-9. **Representational evidence versus visualization** — Apply a downstream task probe with held-out fitting conditions, report performance and label it as measured—not a unique interpretation of latent axes.
+2. **Reconstruction baselines, bottleneck capacity and identity solutions** — Compare constant, identity-like and constrained bottleneck reconstruction on a small independently checkable numeric fixture. Vary a declared encoder width or regularizer to explain how an unconstrained wide autoencoder can copy inputs without learning transferable features; reconstruction loss alone is neither a semantic score nor a downstream generalization guarantee.
+3. **Denoising and corruption contracts** — Choose a controlled synthetic corruption whose target remains the original input, preventing data leakage or a change in target semantics from going unacknowledged.
+4. **Self-supervised targets versus labels** — Distinguish reconstructive and discriminative objectives derived from the input from independent downstream ground-truth labels.
+5. **Positive/negative pair construction** — Define which synthetic perturbations preserve identity/class and how accidental false negatives, duplicates or class-derived pair construction undermine a representation claim.
+6. **Contrastive temperature and logits** — Calculate a one-anchor/one-positive/one-negative normalized exponential objective with the public numeric reference; explain why temperature changes relative scoring.
+7. **Collapse and shortcut tests** — Compare identical constant embeddings, a genuinely discriminative setup and a model using a nuisance feature, showing why a low contrastive or reconstruction loss may not yield useful transfer.
+8. **Representational evidence versus visualization** — Apply a downstream task probe with held-out fitting conditions, report performance and label it as measured—not a unique interpretation of latent axes.
 
 ### Module 11 — Feature Reuse and Bounded Representation Transfer
 
@@ -265,14 +249,13 @@
 
 #### Lessons
 
-1. **What is being transferred** — Define a locally trained source encoder, a related but distinct downstream target and which input/label relationships permit a meaningful feature reuse hypothesis.
+1. **Legitimate source-to-target representation transfer** — Define a locally trained permitted source encoder, related but distinct target, label and identity boundaries, input/output contract and meaningful hypothesis for feature reuse. Record data/weight licenses, source provenance, group or distribution shift and legitimate reuse limits before fitting; a successful local frozen head is not evidence of safe production or high-stakes use.
 2. **Frozen encoder, trainable head** — Attach a small output head with correct feature dimensions, freeze encoder parameters and verify gradients/optimizer parameter lists do not silently mutate frozen weights.
 3. **Selective unfreezing under a budget** — Compare a bounded small-layer unfreeze with a frozen-head baseline, using a predeclared learning rate, update count and valid held-out selection.
 4. **From-scratch and constant baselines** — Train a small identical or comparable architecture from scratch and compare an AI4 classical/constant reference; disclose if measured differences are within run variation.
 5. **Representation quality versus downstream performance** — Diagnose when a reconstruction representation transfers poorly, a nuisance correlate dominates or fine-tuning overfits a small target sample.
 6. **Transfer sample/identity contamination** — Prevent target-test records, subject duplicates and mislabeled source overlaps from being used to select or fit representations; demonstrate a negative leak case.
 7. **Parameter and compute accounting** — Report trained/frozen parameter counts, run duration, memory constraints and realistic CPU feasibility rather than claiming transfer always saves computation.
-8. **Claims, licenses and reuse boundaries** — Disclose dataset/weights licensing, provenance, shift assumptions and what a successful local head does not establish about production or high-stakes use.
 
 ### Module 12 — Neural Evaluation, Reproducibility and Failure Forensics
 
@@ -287,15 +270,13 @@
 
 #### Lessons
 
-1. **Model and dataset lineage** — Pin code, package versions, exact synthetic generator or licensed dataset revision, preprocessing, training/selection folds and relevant sample identities.
-2. **Randomness and repeatable experiments** — Seed all actually used RNGs, log device/kernel settings and compare repeated runs; distinguish controlled stochasticity from a false promise of bitwise portability across versions/devices.
-3. **Saved and restored model contract** — Store architecture configuration and model parameters, restore in evaluation mode and independently verify predictions on a fixed held-out probe; label any tolerances and unsafe checkpoint-loading assumptions.
-4. **Optimizer state versus inference state** — Distinguish a model-weight-only inference checkpoint from a resumable training state with optimizer, scheduler and RNG information; prove or qualify actual continuation behavior.
-5. **Train/validation/test failure forensics** — Deliberately expose a hidden label leak, state carry-over, augmentation overlap, running-stat contamination or threshold tuning on final test, then repair and re-evaluate.
-6. **Gradient and activation instrumentation** — Observe correct parameter update, missing gradients, saturation, NaNs and layer-level signals with actual step/input context; explain why a norm histogram alone is not a diagnosis.
-7. **Generalization and subgroup reports** — Compare a neural run to an AI4 baseline with honest per-split/seed outcomes, error examples, support counts and limits on generalizing from a tiny synthetic population.
-8. **Resource and accessibility audit** — Measure actual CPU runtime, model size, parameter/activation counts and use a table/text summary for plots; disclose environmental effects and failure/timeout policy.
-9. **Limitations, privacy and decision boundary** — State why a model score or embedding neighborhood does not validate causal, fairness, robustness, medical, employment or safety conclusions; require human/permissions controls if discussing non-synthetic extensions.
+1. **Source, data, randomness and environment provenance** — Pin code and package revisions, data generation or licensed dataset identity, preprocessing and group-aware split/selection rules. Seed every RNG actually used, record device/kernel/dtype/configuration, and compare executed runs under known conditions. Reproducibility means a declared, checkable experimental contract, not promised bitwise equality across library versions, devices or nondeterministic kernels.
+2. **Saved and restored model contract** — Store architecture configuration and model parameters, restore in evaluation mode and independently verify predictions on a fixed held-out probe; label any tolerances and unsafe checkpoint-loading assumptions.
+3. **Optimizer state versus inference state** — Distinguish a model-weight-only inference checkpoint from a resumable training state with optimizer, scheduler and RNG information; prove or qualify actual continuation behavior.
+4. **Train/validation/test failure forensics** — Deliberately expose a hidden label leak, state carry-over, augmentation overlap, running-stat contamination or threshold tuning on final test, then repair and re-evaluate.
+5. **Gradient and activation instrumentation** — Observe correct parameter update, missing gradients, saturation, NaNs and layer-level signals with actual step/input context; explain why a norm histogram alone is not a diagnosis.
+6. **Generalization, subgroup support and claim limitations** — Compare neural outcomes with a legitimate AI4 baseline over valid partitions and seeds, recording class/group counts, error examples and measured variability. Explain why sparse synthetic subgroups, embedding proximity or one neural score cannot prove causality, fairness, privacy protection, medical/workplace safety or deployment suitability; disclose data rights, permission/human controls and unresolved failure modes before making consequential claims.
+7. **Resource and accessibility audit** — Measure actual CPU runtime, model size, parameter/activation counts and use a table/text summary for plots; disclose environmental effects and failure/timeout policy.
 
 ### Module 13 — Integrated Deep Learning System and Unfamiliar Defense
 
@@ -317,12 +298,11 @@
 
 1. **Choose one bounded learning question** — Select a small fully synthetic or permitted public task, define legitimate input/labels/groups, model output, baseline and a representation mechanism with no hidden paid prerequisite.
 2. **Construct the smallest defensible network** — Specify and implement a small feedforward, convolutional, recurrent or autoencoder-backed learner appropriate to the task, explaining all shape and parameter contracts.
-3. **Independent numerical and data oracles** — Reuse earlier assessed exact hand calculations, shape/invariant assertions and a deliberately wrong gradient or preprocessing control as independent evidence.
+3. **Independent numeric, data and adverse-case evidence** — Reuse prior assessed hand-derived shape/gradient and data-identity oracles alongside an intentionally incorrect preprocessing, mode, shape, state or gradient test. Show one reproducible mechanism failure and one representation/generalization or permission boundary with a clear, independently expected result and safe recovery/refusal; don't duplicate earlier summative work or accept library output alone as an oracle.
 4. **Execute and record a valid comparison** — Reproduce train-only fitting, baseline comparison, actual selected validation metrics and a held-out final report with honest stochastic variability and resource cost.
 5. **Inspect what the model learned** — Analyze relevant internal activations, embeddings, reconstruction failure or filter/hidden-state behavior and distinguish a plausible interpretation from an established fact.
-6. **Adverse and missing-evidence cases** — Demonstrate one nonfinite/mode/state/shape/data issue and one generalization/representation or policy boundary with explicit and safe dispositions.
-7. **Unfamiliar independently predicted change** — Before running the revised system, explain what a reviewer-changed weight, activation, batch norm mode, feature shape, target timing, grouped split or transferred input implies; repair or refuse the case and check regression behavior.
-8. **Independent technical defense** — Provide a clean-start reconstruction of the evidence collection and an attributable explanation of architecture choice, gradient/reproducibility mechanism, comparison fairness, unsupported claims and measured resource use.
+6. **Unfamiliar independently predicted change** — Before running the revised system, explain what a reviewer-changed weight, activation, batch norm mode, feature shape, target timing, grouped split or transferred input implies; repair or refuse the case and check regression behavior.
+7. **Independent technical defense** — Provide a clean-start reconstruction of the evidence collection and an attributable explanation of architecture choice, gradient/reproducibility mechanism, comparison fairness, unsupported claims and measured resource use.
 
 Modules are a teaching sequence and **not** thirteen additional summative submissions. Targeted exercises are optional formative feedback; the requirements below are the only required evaluations.
 
