@@ -80,11 +80,10 @@
 1. **Implicit search-space construction** — Represent a problem by a successor generator and legal-state predicate instead of materializing every vertex; distinguish finite reachable state counts from potentially unbounded histories.
 2. **Node records and frontier contracts** — Separate a problem state from a path node with parent, depth, action and accumulated cost; show how two paths reach the same state without becoming the same history.
 3. **Uninformed search guarantees** — Use existing SEF4 BFS/DFS competence to derive when breadth-first minimizes **step count** rather than weighted path cost; state completeness limits of depth-first search with cycles and infinite branches.
-4. **Uniform-cost search on nonnegative costs** — Trace priority by accumulated cost, goal testing when a minimum-cost entry is removed and the need for correct best-cost comparison and stale-entry handling. Identify why negative edges invalidate the usual guarantee.
+4. **Uniform-cost search and weighted-route comparison** — Trace priority by accumulated cost, goal testing when a minimum-cost entry is removed, and correct best-cost/stale-entry handling on the synthetic S1 graph. Compare BFS's deterministic shortest-edge route with the cheaper, longer weighted route; explain why negative edges invalidate the usual UCS optimality claim and why a plausible path cost cannot replace proof of its legality.
 5. **Graph-search duplicate and reopen behavior** — Contrast explored-on-generation, discovered-on-pop and best-known-cost policies; construct a counterexample where prematurely marking a state closed discards a cheaper later route.
 6. **Cycles, unreachable goals and bounded termination** — Return a distinguished no-solution result on a fully exhausted finite reachable graph and a distinct resource-budget-exceeded result on a cut-off search.
-7. **Cost-sensitive route investigation** — Compare BFS under a fixed neighbor order with uniform-cost search on a weighted synthetic graph; explain why a two-edge path can cost more than a three-edge path.
-8. **Independent path validation** — Check every returned edge, accumulated weight and goal independently of the solver's parent chain; reject fabricated or incorrectly costed paths even when the displayed cost is plausible.
+7. **Independent path validation** — Check every returned edge, accumulated weight and goal independently of the solver's parent chain; reject fabricated or incorrectly costed paths even when the displayed cost is plausible.
 
 *Optional feedback:* Predict the wrong answer from marking a node visited before a lower-cost alternative is processed; distinguish wrong optimality from malformed state encoding.
 
@@ -104,8 +103,7 @@
 4. **A* priority and goal extraction** — Work f = g + h, tie-breaking and correct goal-on-pop behavior on a finite nonnegative graph; explain the graph-search conditions for an optimal reported route.
 5. **Admissible versus inconsistent cases** — Construct a heuristic that is admissible but violates consistency and explain the need for appropriate reopening when a better g reaches a previously expanded state.
 6. **Overestimating and incorrectly pruning** — Demonstrate that an overestimate or unjustified closed-list rule can remove an optimality guarantee, even when a sample run happens to return the optimum.
-7. **Zero and weighted heuristics** — Compare h = 0 with uniform-cost behavior and a deliberately inflated heuristic, reporting speed/expansions as measured properties rather than universal superiority.
-8. **Performance and resource claims** — Measure expansions, frontier memory and path cost on controlled small fixtures; separate empirical search-effort improvements from mathematical optimality and state-space completeness proofs.
+7. **Zero, weighted and resource-limited heuristics** — Compare h = 0 with uniform-cost behavior and a deliberately inflated heuristic on controlled small fixtures. Report expanded states, frontier memory and path cost under an explicit tie/reopen/budget policy; distinguish empirical effort reduction from a proof of optimality or completeness, and do not claim one heuristic always dominates.
 
 ### Module 4 — Constraint Satisfaction, Propagation and Exhaustive Evidence
 
@@ -123,9 +121,8 @@
 4. **Variable selection and value ordering** — Compare fixed order, minimum-remaining-values and degree/value heuristics, identifying ties and which choices can change work without changing the set of valid solutions.
 5. **Forward checking with reversibility** — Remove invalid values from future domains after assignment, restore them on backtracking, and reproduce a failure caused by destructive nonrestored domain edits.
 6. **Arc consistency and AC-3 reasoning** — Revise a directed arc by removing values without support in its neighbor, explain the propagation queue and why pairwise arc consistency does not generally establish global satisfiability.
-7. **Solution counting versus one witness** — Enumerate or rigorously establish all solutions on a small fixture, detect duplicates and distinguish exhausted unsatisfiability from a resource-limited unsuccessful search.
+7. **Solution counting and independent CSP evidence** — Enumerate or rigorously establish all solutions on a bounded fixture, reject invalid/duplicate assignments, and verify legal assignments and the completeness claim independently of the solver. Contrast exhausted unsatisfiability with budget-limited unknown; report representative rejected partial states, reversible domain changes and whether propagation preserved the answer set rather than treating its trace as proof.
 8. **Problem symmetry and overconstraint** — Show a safe symmetry break only when an actual permutation symmetry exists; identify how a falsely assumed symmetry could remove legitimate solutions.
-9. **CSP trace and independently checked answers** — Publish legal assignments, rejected assignments, domain changes and whether propagation preserved the original answer set on a synthetic fixture.
 
 *Optional feedback:* Under A < C and domains {1,2}, predict which domain values arc consistency removes and explain why the result does not solve every CSP.
 
@@ -142,10 +139,9 @@
 1. **Two-player adversarial model** — Specify alternating turns, legal moves, terminal conditions, shared payoff convention, information available to each player and the strict zero-sum assumption.
 2. **Minimax backups** — Compute MAX and MIN values from terminal utilities on a finite tree; explain why locally attractive immediate rewards need not dominate a complete adversarial continuation.
 3. **Tie-breaking and strategy reconstruction** — Reconstruct the selected root action and a defensible continuation when leaves tie, noting that a single displayed leaf value does not establish the optimal move.
-4. **Alpha–beta bounds** — Trace alpha and beta updates and identify a branch whose remaining leaves cannot change the backed-up minimax choice; retain the same minimax value under correct pruning.
-5. **Move ordering and computational effect** — Compare leaf visit counts with and without favorable ordering while distinguishing pruning opportunity from correctness and avoiding a universal fixed complexity claim.
-6. **Cutoff evaluation and horizon failures** — Introduce a finite-depth approximate utility and show how its error or horizon can change the recommended move; label heuristic evaluation rather than claiming exact optimal play.
-7. **Non-zero-sum and incomplete-information boundaries** — Explain why minimax of a fixed shared utility may not model coordination, hidden information, multiple agents or arbitrary real opponents; reserve belief and sequential learning models for their appropriate owners.
+4. **Alpha–beta bounds and move ordering** — Trace alpha and beta updates to exhibit a branch whose unseen leaves cannot affect the backed-up minimax choice; compare leaf visit counts under fixed and favorable ordering, retain the exact minimax value, and explain why pruning effectiveness depends on the search order rather than guaranteeing one universal complexity.
+5. **Cutoff evaluation and horizon failures** — Introduce a finite-depth approximate utility and show how its error or horizon can change the recommended move; label heuristic evaluation rather than claiming exact optimal play.
+6. **Non-zero-sum and incomplete-information boundaries** — Explain why minimax of a fixed shared utility may not model coordination, hidden information, multiple agents or arbitrary real opponents; reserve belief and sequential learning models for their appropriate owners.
 
 ### Module 6 — Propositional Knowledge and Valid Inference
 
@@ -179,10 +175,9 @@
 2. **Free variables and substitution hygiene** — Identify bound versus free occurrences, prevent variable capture during substitution and diagnose an incorrect substitution that changes the meaning of a statement.
 3. **Unification and occurs-check intuition** — Compute substitutions for simple ground or variable-containing terms; reject conflicting constants and explain why careless recursive term unification can be invalid without suitable safeguards.
 4. **Definite Horn clauses** — Represent a finite implication with conjunction of positive premises and a single positive conclusion; distinguish what cannot be represented faithfully without negation/disjunction or additional logic.
-5. **Forward chaining on finite facts** — Iteratively derive new ground facts until a fixed point, preserving a terminating bound under function-free finite-domain assumptions.
-6. **Backward query reasoning** — Resolve a bounded goal into required subgoals and identify when recursion or cyclic rules need visited-goal or memoization treatment rather than endless derivation.
+5. **Forward chaining with traceable provenance** — Derive new ground facts to a fixed point from finite, function-free rules, recording applied rule IDs, exact substitutions and supporting premises. Check a multi-step relation conclusion against an independently enumerated finite reference and disclose why an unsupported query cannot be asserted from these rules.
+6. **Backward queries, recursion and independent failures** — Resolve a bounded goal into required subgoals, trace substitutions and premises against the actual fact base, and show how memoization or visited-goal handling stops cyclic derivations. Give an unsupported-query counterexample or open-world explanation instead of mistaking a missing proof for a false relation.
 7. **Existential evidence and missing facts** — Explain the difference between an existential witness, a named entity and a guess, and do not infer a negative relation simply because a positive fact is absent.
-8. **Independent derivation and provenance** — Trace a multistep relationship inference with exact substitutions, rule identifiers and an unsupported-query countermodel or open-world explanation.
 
 *Optional feedback:* Derive Grandparent(Ada,Cy) from Parent(Ada,Bo) and Parent(Bo,Cy) under the declared rule, then explain why absence of Parent(Cy,D) cannot entail its negation.
 
@@ -198,13 +193,12 @@
 #### Lessons
 
 1. **Plans are sequences of state changes** — Distinguish planning with modeled actions from graph traversal with arbitrary unlabeled edges; define state fluents, initial world, goal facts and the frame assumptions.
-2. **Preconditions and operator applicability** — Specify what must hold to execute an action and show how a precondition violation must be rejected rather than silently ignored.
-3. **Add and delete effects** — Apply deterministic grounded actions, checking that positive and negative changes are consistent with a declared state representation and do not unintentionally erase unrelated facts.
-4. **Goal conjunctions and regressions** — Identify required conditions for a chosen goal and calculate an appropriate predecessor-goal regression or alternative forward state plan.
-5. **Resource and mutual-exclusion invariants** — Express capacity, one-location or one-carried-object restrictions and show which apparently valid state transitions violate them.
-6. **Search in a planning domain** — Select a goal-directed state-space search or constrained planning strategy; distinguish sound plan validity from optimal plan length or cost.
-7. **Failure, unreachable goals and partial plans** — Explain why missing required operators or contradictory invariants make a declared goal unreachable, and return an explicit failure without inventing a completed action sequence.
-8. **Action-trace validation** — Use a separate tiny transition checker to verify every action's preconditions, effects and final goal, including an invalid order or conflicting resource condition.
+2. **Grounded action contracts, preconditions and effects** — Specify required positive/negative preconditions and deterministic add/delete effects, execute one grounded action against a declared state, and reject an inapplicable action rather than silently ignoring its guard. Verify that a valid action preserves unrelated fluents and that a malformed add/delete description or contradictory effect does not produce an accepted transition.
+3. **Goal conjunctions and regressions** — Identify required conditions for a chosen goal and calculate an appropriate predecessor-goal regression or alternative forward state plan.
+4. **Resource and mutual-exclusion invariants** — Express capacity, one-location or one-carried-object restrictions and show which apparently valid state transitions violate them.
+5. **Search in a planning domain** — Select a goal-directed state-space search or constrained planning strategy; distinguish sound plan validity from optimal plan length or cost.
+6. **Failure, unreachable goals and partial plans** — Explain why missing required operators or contradictory invariants make a declared goal unreachable, and return an explicit failure without inventing a completed action sequence.
+7. **Action-trace validation** — Use a separate tiny transition checker to verify every action's preconditions, effects and final goal, including an invalid order or conflicting resource condition.
 
 ### Module 9 — Bayesian Networks and Exact Belief Inference
 
@@ -238,13 +232,12 @@
 
 #### Lessons
 
-1. **Belief, action and loss are separate** — Name a posterior belief about an event, the available one-step actions, their state-dependent utility and what information an actor actually has before choosing.
+1. **Belief, action, loss and one-step scope** — Distinguish posterior belief about a finite event, allowed actions, state-dependent utility, observation availability and a hard action limit. This is a single-decision model, not an MDP, partially observable sequential policy or reinforcement-learning algorithm; those require different transition and feedback evidence in AI6.
 2. **Expected utility with transparent outcomes** — Compute the expected value of each bounded action by weighting its explicit consequences; justify why a lower expected loss can be preferred to a higher immediate positive payoff.
 3. **Decision thresholds** — Derive the posterior threshold where two options have equal expected value, and test both sides of the threshold using exact small probabilities.
 4. **Information value and its assumptions** — Estimate the value of a perfect hypothetical observation and a specified imperfect test, separating intrinsic signal quality, observation cost and the action changed by the result.
 5. **Model uncertainty and decision robustness** — Change a prior, an observation likelihood or a utility entry and show whether the preferred action changes; do not hide a brittle threshold behind a single point estimate.
 6. **Abstention, hard constraints and human control** — Distinguish expected-utility ranking from permission to act; apply declared hard safety/authorization rules even when a numerical payoff favors an unsafe action.
-7. **Boundary to sequential decision learning** — Explain why a one-step decision table is not an MDP value iteration, partially observable policy or reinforcement-learning algorithm; those methods belong to AI6 and require different evidence.
 
 ### Module 11 — Integrated Reasoning System and Unfamiliar Technical Defense
 
@@ -258,12 +251,10 @@
 #### Lessons
 
 1. **One credible bounded use case** — Select a local scheduling/assignment, diagnostic, route-planning or rule-guided decision problem and explain why two different AI mechanisms actually contribute, rather than collecting unrelated algorithms in one program.
-2. **Independent module contracts** — Specify input, outputs, assumptions, error types and resource limits for the chosen mechanisms; include a traceable boundary between observations, modeled world, conclusions and chosen actions.
-3. **Reused components and new integration** — Extend legitimate prior course work while stating what is newly integrated and reviewed; avoid repeating previous summative submissions as a disguised capstone requirement.
-4. **Normal and adversarial evidence** — Run a documented positive case and a purposely malformed, infeasible, contradictory or uncertain case that tests an actual mechanism invariant, supported by independent expected answers.
-5. **Budget, uncertainty and unsupported claims** — Record a bounded time/state/resource result and distinguish failure, budget exhaustion and unknown answer; disclose assumptions, safety limits and provenance without making a production certification claim.
-6. **Changed problem supplied by a reviewer** — Handle an unfamiliar small graph edge, CSP restriction, logical fact, action precondition or probability entry; predict the expected change independently and repair or refuse safely.
-7. **Individual defense and handoff** — Explain the chosen representation, two interacting mechanisms, verification strategy, result limitations and a transfer case in a written, recorded or live form a reviewer can inspect without private tools.
+2. **Interface contracts and genuinely new integration** — Specify inputs, outputs, assumptions, evidence traces, error types and resource budgets for two substantively interacting mechanisms. Extend legitimate prior assessed source where appropriate while identifying the new integration, source provenance and reviewer-visible responsibilities; do not require resubmission of unrelated predecessor assessments.
+3. **Independent positive, adverse and bounded evidence** — Run a reproducible normal case and a deliberately malformed, infeasible, contradictory or uncertain case that tests a real invariant using independent expected answers. Record expansion/time/memory limits and distinct invalid, exhausted, unknown and budget-stop dispositions; explain remaining model, provenance and safety limitations without claiming production certification.
+4. **Changed problem supplied by a reviewer** — Handle an unfamiliar small graph edge, CSP restriction, logical fact, action precondition or probability entry; predict the expected change independently and repair or refuse safely.
+5. **Individual defense and handoff** — Explain the chosen representation, two interacting mechanisms, verification strategy, result limitations and a transfer case in a written, recorded or live form a reviewer can inspect without private tools.
 
 The lessons above are instructional stages, not eleven separate required submissions. Work may reuse tested source, diagrams, proofs and explanations where a new outcome is genuinely evaluated.
 
