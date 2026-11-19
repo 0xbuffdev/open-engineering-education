@@ -37,7 +37,7 @@ The learner must demonstrate the knowledge, practical skills, and engineering ju
 | [SEC4](SEC4.md) | Network & Infrastructure Security | 10–14 weeks | SEC2, SEF7 | `course` |
 | [SEC5](SEC5.md) | Applied Cryptography & Secure Protocols | 12–16 weeks | SEC1 | `course` |
 | [SEC6](SEC6.md) | Cloud, Containers & Identity Security | 14–18 weeks | SEC2, SEC4, APP7 | `course` |
-| [SEC7](SEC7.md) | Detection, Incident Response & Threat Hunting | 5 weeks | SEC4 and SEC6 | `course` |
+| [SEC7](SEC7.md) | Detection, Incident Response & Threat Hunting | 12–16 weeks | SEC4, SEC6 | `course` |
 | [SEC8](SEC8.md) | AI Security & Authorized Red Teaming | 4 weeks | SEC1, SEC2, SEC7, and AI5 | `course` |
 | [SEC9](SEC9.md) | Security Engineering Capstone | 8–10 weeks | SEC1–SEC8 | `project` |
 
