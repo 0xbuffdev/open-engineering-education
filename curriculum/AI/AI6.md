@@ -14,15 +14,13 @@
 
 **AI6 develops the ability to reason about, implement, evaluate and defend agents learning from sequences of actions and delayed outcomes.** Its central problem is not fitting a static label or computing a fixed plan: actions can alter future observations and rewards, data depend on the behavior policy, and performance must be evaluated over explicitly defined sequential tasks. Learners design finite Markov decision processes (MDPs), derive value/Bellman relations, solve known small models, learn values and policies from trajectories, investigate exploration and feedback, inspect stable and unstable function-approximation methods, and establish when policy-evaluation evidence is insufficient or unsafe. They must independently verify numeric updates and state transitions instead of treating an environment's printed score as proof.
 
-**Scientific and historical context, use and limitations.** Sequential decision making links dynamic programming, Markov modeling and control to behavioral learning. Bandits isolate action-dependent feedback; tabular reinforcement learning learns action values without a supplied transition model; policy gradients optimize stochastic decision rules using sampled returns; approximate and deep RL make larger state representations possible while introducing instability. These methods appear in simulations, games, resource allocation, constrained scheduling research and control experiments. They do not imply that deploying exploratory policies in actual infrastructure, hospitals, vehicles or user-facing services is permitted or safe. Reward is a *declared proxy*, not evidence that the learner optimized human welfare.
-
 **Assessed entry readiness and course ownership.** Entry requires completed [AI3](AI3.md) **and** [AI5](AI5.md). AI3 already assesses state/action/goal modeling, deterministic plans, search, finite beliefs, probabilistic inference and **one-step** expected-utility decisions; AI6 extends them to stochastic transitions, delayed rewards, learned policies and multi-step belief-conditioned consequences. AI5 already assesses differentiable networks, PyTorch or equivalent autograd, gradients, optimization diagnostics, checkpoints and unbiased baseline comparison; AI6 applies those to value/policy approximation and tests their additional sequential-data failure modes. Through AI5 the learner has assessed AI4 classical statistical evaluation, AI2 mathematics, AI1 scientific data and the entire SEF program. **Do not repeat** basic probability, gradient descent, Python, planning search, ordinary train/test mechanics or elementary neural layers as a second course. No APP or SYS course is needed, and completing AI3 alone is insufficient for the deep RL assessments.
 
-**Deliberate scope limits.** AI6 owns bandits, finite MDPs, DP on *known* transition models, Monte Carlo/temporal difference learning, exploration, on/off-policy control, value approximation, bounded DQN, policy gradients/actor–critic, elementary model-based RL, partial observability and offline policy-evaluation limits. AI10 will own general-purpose advanced model adaptation, scaled optimization and large-model training engineering; AI12 will own LLM tool-using application agents; AI13 will own system-wide AI assurance, testing and operational evaluation; AI14 will own broader AI security, ethics and governance; AI15 will own deployed AI service reliability. [AI18](README.md) later specializes in robotics/embodied interaction and real physical constraints. This course does not assess high-dimensional robotics, extensive continuous-control suites, distributed model training, language-model post-training or unapproved real-world actuation. A bounded policy-gradient and actor–critic implementation **is required**; PPO/SAC algorithms may be compared conceptually but are not hidden implementation gates.
+**Deliberate scope limits.** AI6 owns bandits, finite MDPs, DP on *known* transition models, Monte Carlo/temporal difference learning, exploration, on/off-policy control, value approximation, bounded DQN, policy gradients/actor–critic, elementary model-based RL, partial observability and offline policy-evaluation limits. AI10 will own general-purpose advanced model adaptation, scaled optimization and large-model training engineering; AI12 will own LLM tool-using application agents; AI13 will own system-wide AI assurance, testing and operational evaluation; AI14 will own broader AI security, ethics and governance; AI15 will own deployed AI service reliability. [AI18](AI18.md) later specializes in robotics/embodied interaction and real physical constraints. This course does not assess high-dimensional robotics, extensive continuous-control suites, distributed model training, language-model post-training or unapproved real-world actuation. A bounded policy-gradient and actor–critic implementation **is required**; PPO/SAC algorithms may be compared conceptually but are not hidden implementation gates.
 
 **Teaching and computational conditions.** All mandatory tasks use **small synthetic, locally specified** bandits, state machines, trajectories and tabular data that can be hand-checked and simulated with Python 3's standard library. For the deep approximation component, a small CPU-only PyTorch or equivalent open autograd library is acceptable, but no GPU, cloud credit, commercial environment, remote account, paid benchmark, vendor API or unreleased dataset can be required. Gymnasium is an optional compatible convenience, **not** the authority for the state semantics. The learner must define observation/action/reward units, transition probabilities, horizon/discount, initialization, random-state ownership, behavior policy, policy evaluation protocol and correct distinctions among **termination, time-limit truncation, safety stop and invalid action**. Accessible transition tables, event traces and text descriptions must convey information otherwise shown graphically. All experiments declare seed lists, episode/update budget, reward convention, evaluation confidence limits and negative controls. A single seeded episode, simulator test, or high nominal return is never a generalization or safety guarantee.
 
-**Learning, progression and assessment.** Thirteen competency-derived modules progress from modeling to analysis, data-driven learning, approximation, policy optimization, offline evaluation and independent engineering defense. Lesson numbers follow conceptual necessity rather than a fixed uniform count. Nine required cumulative assessments establish **22 observable course outcomes** using shared code and evidence rather than nine unrelated full systems: finite model and Bellman reasoning, bandits/exploration, Monte Carlo/TD, policy control, approximate/deep Q learning, policy gradient/actor–critic, model-based/partial observation, logged-policy risk, and an unfamiliar end-to-end change. Exact examples and separately checkable oracles are published below. The 20–28-week estimate is provisional and includes derivation, simulation, implementation, debugging, repeated evaluation, review and corrections; no learner-tested duration or course status promotion is claimed.
+**Learning, progression and assessment.** The curriculum progresses from finite models and exact analysis to bandit and trajectory learning, tabular control, approximation, policy optimization, logged-data evaluation and independent engineering defense. Each distinct mechanism, uncertainty source and evidence obligation is taught where it is needed, rather than repeating a diagnostic or report as a detached lesson. Nine required cumulative assessments establish **22 observable course outcomes** using shared code and evidence rather than nine unrelated full systems: finite model and Bellman reasoning, bandits/exploration, Monte Carlo/TD, policy control, approximate/deep Q learning, policy gradient/actor–critic, model-based/partial observation, logged-policy risk, and an unfamiliar end-to-end change. Exact examples and separately checkable oracles are published below. The 20–28-week estimate is provisional and includes derivation, simulation, implementation, debugging, repeated evaluation, review and corrections; no learner-tested duration or course status promotion is claimed.
 
 ## Learning outcomes
 
@@ -61,13 +59,12 @@
 
 #### Lessons
 
-1. **From supervised prediction to action-dependent data** — Distinguish a fixed train/test labeled table from a sequence whose actions change subsequent observations and feedback.
-2. **History, applications and why reward is not a requirement** — Locate bandits, dynamic programming and RL in bounded scheduling/game/simulation applications, and explain why high reward can conflict with actual objectives.
-3. **Agent, environment and observer** — Define decision authority, available observations, hidden environment state, action effects, exogenous processes and what a simulator can or cannot establish.
-4. **Policies, plans, trajectories and value** — Contrast AI3's fixed action plan and one-step expected choice with a contingent multi-step stochastic policy and its expected return.
-5. **Known model versus sampled experience** — Separate an available transition/reward specification from logged events produced by a behavior policy; do not treat a model learner's estimates as ground truth.
-6. **Finite and continuing task contracts** — Specify start distribution, horizon/episode handling, reward units, action constraints and a precise comparator (fixed baseline or oracle).
-7. **Evidence and permission boundaries** — Define independent oracle, CPU/interaction budget, reward-hacking negative control, no real-world actuation and explicit refusal under unsafe/unsupported conditions.
+1. **Sequential learning in historical and engineering context** — Trace the progression from dynamic programming and bandits to tabular, approximate and policy-gradient reinforcement learning in bounded games, scheduling and simulation. Contrast fixed supervised labels with action-dependent observations and delayed rewards; explain why reward is a declared proxy that may conflict with the actual task or permissions, not an independent measure of human benefit. AI3 already owns deterministic planning and one-step choice.
+2. **Agent, environment and observer** — Define decision authority, available observations, hidden environment state, action effects, exogenous processes and what a simulator can or cannot establish.
+3. **Policies, plans, trajectories and value** — Contrast AI3's fixed action plan and one-step expected choice with a contingent multi-step stochastic policy and its expected return.
+4. **Known model versus sampled experience** — Separate an available transition/reward specification from logged events produced by a behavior policy; do not treat a model learner's estimates as ground truth.
+5. **Finite and continuing task contracts** — Specify start distribution, horizon/episode handling, reward units, action constraints and a precise comparator (fixed baseline or oracle).
+6. **Evidence and permission boundaries** — Define independent oracle, CPU/interaction budget, reward-hacking negative control, no real-world actuation and explicit refusal under unsafe/unsupported conditions.
 
 *Optional feedback:* In a two-step simulator, identify which variable is hidden state, which is observation, which data were generated by the behavior policy, and why a superficially “successful” one-step action may have worse long-run return.
 
@@ -84,13 +81,12 @@
 
 1. **Markov property and sufficient state** — Declare when next-state/reward distributions depend on the current state and action rather than on an unrecorded history; identify an omitted timer or resource variable that violates this assumption.
 2. **Finite transitions and legal actions** — Construct P(s',r | s,a) with all outcomes and normalized probabilities; reject zero-sum/incomplete rows and actions without a declared transition.
-3. **Terminal state versus restart observation** — Explain why a task-complete terminal transition has no next-step continuation value, irrespective of a simulator's next reset output.
+3. **True termination, finite horizons and state sufficiency** — Distinguish a completed terminal transition with no continuation value from the next reset observation or exogenous collection cutoff. Show why a finite horizon may require time-to-go as a state variable or explicit time index: the same position can demand a different policy near the last permitted step. Do not bootstrap at genuine task termination or silently assume a continuing model for a horizon-limited one.
 4. **Reward timing and discounted return** — Derive G_t=R_(t+1)+gamma G_(t+1) on a finite trajectory with explicitly assigned reward to transitions; distinguish gamma=0, discounted continuing and finite horizon.
 5. **Value and action-value definitions** — Write V^pi(s) and Q^pi(s,a) as expectation over legitimate future trajectories with specified start/policy assumptions, rather than a single observed score.
 6. **Bellman expectation equations** — Derive a stochastic fixed-policy expectation update using normalized probabilities and policy action weights; make all state, reward and discount conventions visible.
 7. **Optimal action values and feasible decisions** — Derive the Bellman optimality maximization over **authorized** legal actions only; explain why maximizing a numeric reward cannot override an external safety prohibition.
-8. **Horizon and remaining time in state** — Show why a finite horizon can make an otherwise identical observed location have a different optimal choice, requiring time-to-go in the state or explicit time indexing.
-9. **Hand-checkable MDP contract** — Independently verify every row, return and terminal behavior for the public M1 fixture and demonstrate an invalid nonnormalized/negative-cost claim without silently changing the task.
+8. **Independently checked MDP and reward contract** — Check every transition row, legal action, return and terminal disposition against the M1 exact fixture; reject nonnormalized probabilities and show that a negative reward is not inherently an illegal transition. Distinguish a valid but poorly specified reward from an unsupported safety/optimality conclusion and give an independent corrected result before running the solver.
 
 ### Module 3 — Planning with a Known MDP and Exact Policy Improvement
 
@@ -104,13 +100,11 @@
 
 1. **Evaluation of a fixed stochastic policy** — Derive the finite-state linear Bellman equations when policy and environment dynamics are known and solve a tiny nontrivial self-loop case.
 2. **Iterative policy evaluation** — Apply repeated expectation backups from specified initial values; explain stopping tolerance and the role of discount/contraction conditions.
-3. **Value iteration as optimality backup** — Trace simultaneous (not silently in-place asynchronous) updates from V0 and predict when the optimal choice changes across iterations.
-4. **Policy improvement theorem boundaries** — Select a greedy action against a correctly evaluated current policy and explain why it improves or preserves its value only under suitable finite discounted MDP assumptions.
+3. **Synchronous value iteration and stochastic optimality backup** — Trace simultaneous updates from V0 using expected values over every legal next-state/reward outcome rather than the most likely successor, with an explicit tie and time/reward convention. Predict when the preferred action changes, and distinguish a documented synchronous update from an in-place asynchronous one.
+4. **Policy improvement and model sensitivity** — Derive a valid greedy policy improvement from correctly evaluated state values under the specified finite discounted assumptions. Change one reward or gamma, independently predict whether the preferred action/value can change, and state when an exact improvement guarantee no longer follows; a solver agreement is not a proof.
 5. **Policy iteration and stable stopping** — Alternate exact/sufficient evaluation and improvement with specified tie policy, treating an unchanged policy as a candidate fixed point under declared conditions.
-6. **Optimality and reward scale** — Investigate a changed gamma or reward and explain which results remain valid and which policy ranking changes; distinguish an exact model proof from a simulator estimate.
-7. **Stochastic dynamics and expected backups** — Calculate a transition-weighted Bellman target rather than choosing the most likely single next state and treating it as certainty.
-8. **Unreachable states and invalid model conditions** — Distinguish states absent under the initial policy from states impossible by model; catch an invalid transition kernel and unsupported claims at gamma=1 for continuing nonterminating tasks.
-9. **Independent solver comparison** — Verify evaluation, value iteration and a policy-improvement result against a separately computed exact M1 oracle; do not infer correctness from agreement between two implementations sharing the same bug.
+6. **Unreachable states and invalid model conditions** — Distinguish states absent under the initial policy from states impossible by model; catch an invalid transition kernel and unsupported claims at gamma=1 for continuing nonterminating tasks.
+7. **Independent solver comparison** — Verify evaluation, value iteration and a policy-improvement result against a separately computed exact M1 oracle; do not infer correctness from agreement between two implementations sharing the same bug.
 
 ### Module 4 — Bandit Feedback, Exploration and Expected Regret
 
@@ -124,12 +118,11 @@
 
 1. **One-step bandit versus full MDP** — Formalize repeated choices with immediate action-dependent feedback and no action-induced evolving state, and explain what sequential dependence this abstraction deliberately omits.
 2. **Stationary reward distributions** — Define an arm's reward expectation and observed samples; distinguish an unknown fixed mean from a realized reward in a small Bernoulli experiment.
-3. **Sample-average and constant-step estimates** — Trace incremental action-value updates with correct denominators or learning rate, reporting how untried arms are represented.
+3. **Incremental bandit estimates and nonstationary tracking** — Trace sample-average and constant-step action-value updates with correct counts or learning rate, including never-tried arms. Under an explicitly changing arm mean, compare how accumulated averages and more recent weighted observations react; do not apply a stationary regret or confidence guarantee to nonstationary data.
 4. **Epsilon-greedy exploration** — Distinguish the greedy probability from the uniform exploration branch, including cases where exploration chooses the greedy action as well.
 5. **Optimism and confidence-based exploration** — Explain optimistic initialization and a UCB-style confidence term under its own observation/count/stationarity assumptions, without universal regret claims.
 6. **Expected regret with an oracle comparator** — Derive difference between optimal mean and the behavior policy's mean, and distinguish expected cumulative regret from a particular noisy reward sequence.
-7. **Nonstationarity and sample recency** — Compare sample-average and constant-step tracking under a documented changing arm mean, and explain why a stationary guarantee is then inapplicable.
-8. **Constrained action sets** — Enforce a forbidden arm or cost budget before exploration and state why the learning algorithm cannot legalize an action through optimism or high predicted reward.
+7. **Constrained action sets** — Enforce a forbidden arm or cost budget before exploration and state why the learning algorithm cannot legalize an action through optimism or high predicted reward.
 
 *Optional feedback:* Under uniform random selection between two fixed Bernoulli arms with means 3/4 and 1/4, derive expected per-step regret without simulating four sample outcomes.
 
@@ -144,14 +137,13 @@
 
 #### Lessons
 
-1. **Episodes and record ownership** — Store initial state, behavior policy, action probability, reward, successor, termination/truncation and stable episode identity; reject impossible transitions and mismatched resets.
+1. **Traceable episode records and independent trajectory audits** — Store initial state, episode/behavior-policy identity, sampled action probability, reward, successor and separate true-terminal/truncation flags; independently verify a finite M1 transition/return against the model. Detect missing rewards, illegal actions, mismatched resets or incorrect terminal flags instead of trusting the collector's log or assigning a fake outcome.
 2. **Generating a trajectory under a policy** — Explain which stochastic choices belong to the environment and which belong to the action selector, preserving their seed streams separately.
 3. **Return-to-go computation** — Compute Monte Carlo returns backward from the end of a *truly terminal* episode and account for gamma and each transition's observed reward.
 4. **First- versus every-visit estimates** — Trace a repeated-state episode and show exactly which returns contribute to each estimator under declared visit convention.
 5. **Policy evaluation using complete episodes** — Calculate empirical average return for a fixed policy, distinguishing estimated expected value, episode-level variance and unequal initial-state distributions.
 6. **Exploring starts and policy coverage** — Explain why an unvisited state-action has no direct return evidence and how on-policy data collection can change its visitation frequencies.
 7. **Truncated and incomplete episodes** — Distinguish a true task terminal state from a data-collection stop; describe why naive zeroing of all truncated returns biases the intended continuing-task value.
-8. **Independent trajectory audits** — Validate a small exact M1 trajectory with hand-calculated G_t; test a missing reward, illegal action and incorrect terminal flag as independent error cases.
 
 ### Module 6 — Temporal Difference Learning, n-Step Targets and Traces
 
@@ -163,15 +155,13 @@
 
 #### Lessons
 
-1. **Bootstrap target versus full sampled return** — Derive delta_t=r_(t+1)+gamma V(s_(t+1))−V(s_t), with no continuation value for a truly terminal successor.
-2. **TD(0) update order** — Hand-calculate the public T1 two-episode online updates using *current* estimates rather than an accidentally simultaneous or future value.
+1. **TD bootstrap targets and true versus truncated endpoints** — Derive delta_t=r_(t+1)+gamma V(s_(t+1))−V(s_t), suppressing continuation only for a genuine terminal successor. Show why an exogenous time-limit cutoff in a continuing task generally permits a bootstrap from the valid last observation, whereas a modeled finite-horizon terminal does not; calculate both boundary cases independently.
+2. **Online TD(0) updates, exact chronology and error forensics** — Hand-calculate T1's two-episode updates using the value estimates available at each actual step, not a future or accidentally simultaneous update. Independently correct a missing or off-by-one reward, unintended reset, wrong gamma power or stale successor value before rerunning the implementation.
 3. **Monte Carlo and TD bias/variance** — Explain why full returns and bootstrap estimates rely on different information and why neither universally dominates across tasks.
 4. **n-step bootstrapped return** — Derive the sum of up to n discounted rewards plus gamma^n V at the valid bootstrap boundary, handling a real terminal within the window.
-5. **Truncation-aware TD** — Show why a time-limit cutoff in a continuing task generally still permits bootstrapping from the last true observation, while true termination does not.
-6. **Eligibility traces and credit assignment** — Compute a small accumulating trace using e_t(s)=gamma lambda e_(t−1)(s)+1{s_t=s}, with stated update ordering and why λ changes how past states receive correction.
-7. **Off-policy and implementation constraints** — Explain why naive traces from behavior-policy samples do not automatically become an unbiased target-policy algorithm and why stale overwritten values matter.
-8. **Step size, coverage and nonstationarity** — Inspect alpha choices and online dependence, distinguishing textbook convergence under restrictive sampling/step-size conditions from finite observed success.
-9. **TD negative-case forensics** — Catch an off-by-one reward, an unintended reset, an incorrect gamma power or stale successor value; provide an independent exact corrected update before rerunning code.
+5. **Eligibility traces and credit assignment** — Compute a small accumulating trace using e_t(s)=gamma lambda e_(t−1)(s)+1{s_t=s}, with stated update ordering and why λ changes how past states receive correction.
+6. **Off-policy and implementation constraints** — Explain why naive traces from behavior-policy samples do not automatically become an unbiased target-policy algorithm and why stale overwritten values matter.
+7. **Step size, coverage and nonstationarity** — Inspect alpha choices and online dependence, distinguishing textbook convergence under restrictive sampling/step-size conditions from finite observed success.
 
 ### Module 7 — Tabular Control, Behavior Policies and Action-Value Learning
 
@@ -184,15 +174,14 @@
 
 #### Lessons
 
-1. **Action values and control improvement** — Extend state-value prediction to Q(s,a), legal action restrictions and an epsilon-greedy behavior policy.
+1. **Legal action-value policies, ties and coverage** — Construct Q(s,a) for declared legal actions, distinguish state-value prediction from control, and implement epsilon-greedy behavior with explicit deterministic or random tie rules. Mask forbidden actions before selection *and* successor maximization, identify never-tried actions and refrain from inventing policy coverage from unvisited state-action pairs.
 2. **On-policy SARSA update** — Calculate r+gamma Q(s',a') using the *actual next action sampled from the current behavior policy*, and demonstrate that a nongreedy next action changes the target.
 3. **Off-policy Q-learning update** — Calculate r+gamma max_a Q(s',a) regardless of exploratory next behavior action; explain why this does not remove requirements about state-action exploration and stationarity.
 4. **Expected SARSA expectation** — Compute the behavior-policy weighted successor Q rather than a sampled a' or max alone, specifying the correct epsilon action probabilities including tied greedy actions.
 5. **Online update chronology** — Walk through the M1-related T2 two-episode trace; distinguish a target computed before the next state's Q update from a value already modified by later steps.
-6. **Tie-breaking, invalid actions and coverage** — Implement declared deterministic/stochastic ties, legal-action masking and no coverage claims about actions the behavior never tries.
-7. **Exploration and control tension** — Compare optimistic, fixed epsilon and decaying epsilon behaviors on a tiny stochastic/unsafe branch, stating effects observed and which theoretical guarantees are absent.
-8. **Convergence limits** — Identify finite tabular discounted assumptions, sufficient state-action coverage and learning-rate conditions behind familiar convergence results, rejecting an assertion that a constant-alpha finite run always converges.
-9. **Policy comparison against exact MDP** — Compare sampled policy value on independent evaluation episodes with M1's true optimum and disclose sample variance and model correctness assumptions.
+6. **Exploration and control tension** — Compare optimistic, fixed epsilon and decaying epsilon behaviors on a tiny stochastic/unsafe branch, stating effects observed and which theoretical guarantees are absent.
+7. **Convergence limits** — Identify finite tabular discounted assumptions, sufficient state-action coverage and learning-rate conditions behind familiar convergence results, rejecting an assertion that a constant-alpha finite run always converges.
+8. **Policy comparison against exact MDP** — Compare sampled policy value on independent evaluation episodes with M1's true optimum and disclose sample variance and model correctness assumptions.
 
 ### Module 8 — Approximate Value Functions and Instability Mechanisms
 
@@ -205,13 +194,12 @@
 #### Lessons
 
 1. **Why tabular enumeration can fail** — Identify state-space dimensionality and representation requirements without assuming any arbitrary neural architecture is justified.
-2. **Features for value approximation** — Fit a small linear V(s)=theta·phi(s) or Q(s,a) representation with explicitly named feature/parameter dimensions and a separately checkable prediction.
+2. **Explicit features and independently checked value approximation** — Fit a tiny linear V(s)=theta·phi(s) or Q(s,a) representation with named feature and parameter dimensions. Compute a prediction and a changed-feature value from an independent exact oracle, then check that extrapolation, error and resource claims come from stated observations rather than a model's own output.
 3. **Semi-gradient TD** — Distinguish treating a bootstrap target as fixed during the update from differentiating through every model component, including where the approximation changes the theoretical objective.
 4. **Projection and distribution dependence** — Explain how representation restricts reachable value functions and how the behavior-policy state distribution affects approximation loss.
 5. **Deadly-triad interaction** — Identify **off-policy sampling + bootstrapping + function approximation** as a potential divergence configuration and explain why using each individually does not imply identical failure.
 6. **Stability is a measured property here** — Compare one stable and one unstable or badly specified learning configuration on a bounded fixture with explicit observed values, avoiding a fabricated universal divergence demonstration.
 7. **Confidence and extrapolation failure** — Show that a feature-based Q predictor may return unjustified values for unvisited actions or states, especially when trained on different behavior-policy data.
-8. **Independent function-value checks** — Derive a linear prediction and its changed-feature value exactly; separately verify error and resource behavior without treating neural output as proof.
 
 ### Module 9 — A Bounded Deep Q Learner
 
@@ -225,14 +213,13 @@
 #### Lessons
 
 1. **State representation and discrete action Q head** — Build a tiny CPU-scale network mapping a finite state-feature vector to legal-action Q values, with explicit output order, shape and invalid-action policy.
-2. **Bellman target versus prediction** — Derive the target y=r+gamma(1−terminated)max_a Q_target(s',a) and distinguish it from the current network's differentiable Q(s,a).
-3. **Gradient flow and stop-gradient** — Explain why target computations should not silently backpropagate through the target network and why a learnable online prediction differs from a fixed teaching signal.
-4. **Replay transition provenance** — Store state, action, reward, next state, real terminal and time-limit truncation with behavior origin and version; detect invalid transitions and sampling correlations.
-5. **Experience replay and its limits** — Sample bounded replay batches, report state-action coverage and explain why decorrelation/reuse is not a universal unbiasedness or convergence guarantee.
-6. **Target-network copy/lag** — Trace fixed target copies or slow updates and their intended stabilization role; compare a deliberately unstable shared-target variation with recorded rather than assumed outcomes.
-7. **Double-estimation intuition** — Analyze a small case where maximization of noisy Q estimates leads to optimism, then explain a double-Q target's action-selection/evaluation separation without making Double DQN a separate mandatory package project.
-8. **Episode handling and finite compute** — Implement deterministic reset evaluation, stop on true termination/truncation appropriately and handle continuing-task bootstrap semantics at collection cutoff.
-9. **Tiny independent training study** — Reproduce a small deep value-policy learning run on a synthetic MDP, compare against tabular/exact reference with actual scores and measure replay size, parameters, CPU update time and failure behavior.
+2. **Bellman target, bootstrap mask and gradient ownership** — Derive y=r+gamma(1−terminated)max_a Q_target(s',a) for a valid nonterminal next state and the corresponding zero-bootstrap terminal case, while preserving exogenous cutoff semantics. Distinguish the fixed target computation from the trainable online prediction Q(s,a): stop gradients through the target network and test that no accidental target-parameter update or illegal action enters the maximization.
+3. **Replay transition provenance** — Store state, action, reward, next state, real terminal and time-limit truncation with behavior origin and version; detect invalid transitions and sampling correlations.
+4. **Experience replay and its limits** — Sample bounded replay batches, report state-action coverage and explain why decorrelation/reuse is not a universal unbiasedness or convergence guarantee.
+5. **Target-network copy/lag** — Trace fixed target copies or slow updates and their intended stabilization role; compare a deliberately unstable shared-target variation with recorded rather than assumed outcomes.
+6. **Double-estimation intuition** — Analyze a small case where maximization of noisy Q estimates leads to optimism, then explain a double-Q target's action-selection/evaluation separation without making Double DQN a separate mandatory package project.
+7. **Episode handling and finite compute** — Implement deterministic reset evaluation, stop on true termination/truncation appropriately and handle continuing-task bootstrap semantics at collection cutoff.
+8. **Tiny independent training study** — Reproduce a small deep value-policy learning run on a synthetic MDP, compare against tabular/exact reference with actual scores and measure replay size, parameters, CPU update time and failure behavior.
 
 ### Module 10 — Stochastic Policy Gradients and Actor–Critic Estimation
 
@@ -247,13 +234,12 @@
 1. **Direct parameterization of actions** — Map a finite state feature to a categorical policy with valid normalized probabilities, legal-action masking and explicit log-probability conventions.
 2. **Log-derivative identity** — Derive the score-function form of the policy gradient under declared trajectory and reward assumptions; distinguish maximizing expected return from differentiating through sampled environment actions.
 3. **One-sample policy-gradient arithmetic** — Work P1's exact logistic policy update on a single sampled action with a declared step size, and show why a particular sample cannot guarantee improvement.
-4. **Reward-to-go and variance** — Compare weighting a log-action gradient by total episode return versus causally appropriate future return with explicit discount conventions and known limitations.
-5. **Baselines and advantage** — Explain how an action-independent state baseline can reduce variance under correct weighting without changing the true expected score-function gradient when assumptions hold.
-6. **Value critic fitting** — Construct a one-step TD critic target and diagnose leakage/bootstrapping changes in the critic's own estimation, using AI5's autograd infrastructure.
-7. **Actor–critic integration** — Trace a small actor update weighted by an advantage estimate and a separate critic value update, explicitly controlling gradient ownership and stale estimator behavior.
-8. **On-policy data freshness** — Explain why a Vanilla Policy Gradient rollout gathered under an earlier policy cannot simply be reused under a changed policy without additional correction or changed objective.
-9. **Entropy regularization and collapse** — Investigate the effect of an entropy incentive or overly decisive early policy on action coverage, documenting the chosen coefficient, legitimate action set and actual measurements.
-10. **Independent policy evidence** — Compare a policy-gradient or actor–critic small run to a fixed/random/tabular baseline on independently seeded evaluation episodes, reporting variability, instability and the lack of a safety guarantee.
+4. **Reward-to-go, advantage baselines and variance** — Compare full-episode return with causal future return weighting under explicitly stated discount/timestep conventions. Show how an action-independent state baseline may reduce variance without changing the true expected score-function gradient when the sampling and weighting assumptions hold; a particular return-to-go or baseline sample need not improve the next policy.
+5. **Value critic fitting** — Construct a one-step TD critic target and diagnose leakage/bootstrapping changes in the critic's own estimation, using AI5's autograd infrastructure.
+6. **Actor–critic integration** — Trace a small actor update weighted by an advantage estimate and a separate critic value update, explicitly controlling gradient ownership and stale estimator behavior.
+7. **On-policy data freshness** — Explain why a Vanilla Policy Gradient rollout gathered under an earlier policy cannot simply be reused under a changed policy without additional correction or changed objective.
+8. **Entropy regularization and collapse** — Investigate the effect of an entropy incentive or overly decisive early policy on action coverage, documenting the chosen coefficient, legitimate action set and actual measurements.
+9. **Independent policy evidence** — Compare a policy-gradient or actor–critic small run to a fixed/random/tabular baseline on independently seeded evaluation episodes, reporting variability, instability and the lack of a safety guarantee.
 
 ### Module 11 — Model-Based Interaction and Partial Observability
 
@@ -265,14 +251,13 @@
 
 #### Lessons
 
-1. **Known model planning versus estimated dynamics** — Distinguish AI3's deterministic modeled plan, Module 3's known stochastic MDP and a transition model estimated from action-conditioned interaction.
+1. **From known-model planning to learned dynamics and embodied limits** — Distinguish AI3's deterministic modeled plan, the exactly known stochastic MDP of Module 3 and an action-conditioned transition model estimated from finite interaction. Explain why approximate sensors, continuous controls, dynamics uncertainty, physical hazard constraints and sim-to-real gaps require separate robotics and closed-loop competency in AI18; a synthetic policy cannot authorize real-world actuation.
 2. **Transition/reward counts and uncertainty** — Estimate a finite categorical next-state distribution from declared counts, explain unseen state-action pairs and why smoothing priors are assumptions rather than observed outcomes.
 3. **Model error in value backups** — Compare exact M1 and a deliberately biased transition estimate and calculate the effect on one Bellman target and action choice.
 4. **Dyna-style real and imagined updates** — Trace one actual interaction, one model-estimation update and one synthetic planning update, identifying where a wrong model can amplify erroneous value estimates.
 5. **State versus observation under partial observability** — Introduce finite hidden-state dynamics, observation likelihoods and an action-dependent belief update; a single raw observation is not necessarily Markov.
 6. **Small Bayesian belief filter** — Compute public P2 prior-to-posterior update exactly and explain what additional transition information would be required for multi-step belief prediction.
 7. **Uncertainty, safe observation and abstention** — Compare acting under a point guess versus a belief distribution and describe when restrictions on sensing/action/uncertainty require refusal despite attractive expected returns.
-8. **Boundary to robotics and large-scale control** — Identify unresolved dynamics, continuous observations/actions, sensors, physical hazards and sim-to-real mismatch; reserve engineering of actual embodied systems for AI18.
 
 ### Module 12 — Offline Policy Evidence, Generalization and Safety
 
@@ -287,16 +272,14 @@
 
 #### Lessons
 
-1. **Logging policy and target policy** — Declare behavior-policy action probabilities and a target policy for the same state/context, distinguishing the policy that generated a record from the one being evaluated.
-2. **Support/positivity and identifiability** — Explain why a target action with zero probability under the logging policy has no direct counterfactual reward evidence, regardless of the target network's confidence.
-3. **One-step importance weighting** — Derive and compute P3's ordinary inverse-propensity estimator with exact recorded probabilities and an honest out-of-range finite-sample result.
-4. **Self-normalization and variance** — Compute the same tiny example using self-normalized weights, explain its distinct bias/variance behavior and why neither point estimate is a reliable guarantee with two records.
-5. **Sequential behavior mismatch** — Explain why a multi-step trajectory weight is a product of action ratios along the observed history and why unsupported paths and long horizons cause severe variance.
-6. **Model-based and doubly robust intuition** — Compare supervised fitted-Q/model-based evaluation with inverse-propensity weighting under explicit assumptions; no unimplemented large-scale statistical theorem is implied.
-7. **Independent held-out evaluation episodes** — Fix evaluation policies after selection, use fresh start-state and environment seeds, report return distribution, episode length, constraint violations and a justified uncertainty summary.
-8. **Reward hacking, proxy failure and forbidden actions** — Demonstrate a synthetic agent exploiting an incomplete reward (e.g. repeated locally rewarded action that violates an external task constraint), and enforce declared hard limits independent of learned Q.
-9. **Termination, truncation and auditability** — Use an explicit step API that distinguishes task termination, time-limit data cutoff, invalid action and safety stop; show the different target/bootstrap and decision consequences.
-10. **Claim discipline and rollback conditions** — Define unsupported generalization, offline confidence, exploration harm, compute/inference constraints and human stop controls; a bounded simulator result authorizes no external actuation.
+1. **Logged behavior, target policy, support and identifiability** — Declare the policy that actually sampled an action and its recorded propensity versus the policy being evaluated; show why a target action with zero behavior support has no identified logged counterfactual reward, even if a trained value function returns a confident number. A nonzero importance ratio requires a correctly recorded probability on the actual state or history, not a policy label or a division-by-zero workaround.
+2. **One-step importance weighting** — Derive and compute P3's ordinary inverse-propensity estimator with exact recorded probabilities and an honest out-of-range finite-sample result.
+3. **Self-normalization and variance** — Compute the same tiny example using self-normalized weights, explain its distinct bias/variance behavior and why neither point estimate is a reliable guarantee with two records.
+4. **Sequential behavior mismatch** — Explain why a multi-step trajectory weight is a product of action ratios along the observed history and why unsupported paths and long horizons cause severe variance.
+5. **Model-based and doubly robust intuition** — Compare supervised fitted-Q/model-based evaluation with inverse-propensity weighting under explicit assumptions; no unimplemented large-scale statistical theorem is implied.
+6. **Independent held-out evaluation episodes** — Fix evaluation policies after selection, use fresh start-state and environment seeds, report return distribution, episode length, constraint violations and a justified uncertainty summary.
+7. **Proxy reward failures, hard action limits and accountable claims** — Reproduce C1's reward-hacking example, including the changed repeated-Wait proxy and the externally stated Finish requirement. Enforce permitted actions and stop/review conditions *before* exploration or policy scoring, and disclose the limits of offline confidence, shifted populations, compute budgets and human approval; a simulator return never authorizes external action or proves a safe policy.
+8. **Termination, truncation and auditability** — Use an explicit step API that distinguishes task termination, time-limit data cutoff, invalid action and safety stop; show the different target/bootstrap and decision consequences.
 
 ### Module 13 — Integrated Sequential-Agent Study and Unfamiliar Defense
 
@@ -311,14 +294,12 @@
 
 #### Lessons
 
-1. **Select one finite local decision system** — Specify a synthetic task with observation/state/action/reward/termination, intended start population, safe action set and a meaningful nonlearning baseline.
-2. **Reuse independent algorithmic evidence** — Collect previous MDP/DP, bandit, TD, tabular, deep and policy-gradient work as legitimate references, selecting only the mechanisms needed for a coherent final investigation rather than rebuilding all of them.
-3. **Implement and audit a learner–environment contract** — Make reset, legal actions, state transitions, numerical reward and termination/truncation visible through a separate exact finite oracle.
-4. **Fit and compare under a real interaction budget** — Run a tabular RL or small neural policy method appropriate to the task, compare with exact/planning or fixed-policy reference under reserved evaluation seeds and disclose actual outcomes.
-5. **Perform a negative and safety experiment** — Diagnose a bad bootstrap mask, policy-support hole, stale target, missing state, reward loophole or prohibited action, recording the incorrect behavior and real repaired outcome.
-6. **Review data and computational provenance** — Document behavior/target policies, sample/episode IDs, policy checkpoint, random seeds, library/environment versions, CPU time, number of interactions, and evaluation/selection separation.
-7. **Unfamiliar bounded reviewer variation** — Independently predict the effect of a changed reward, transition distribution, time limit, action restriction, behavior propensity, observation model or evaluation population; compute a new reference value or justify inability to infer and repair or safely refuse the case.
-8. **Individual technical defense** — Explain exact versus sampled evidence, why chosen learning mechanisms are warranted, what the observed returns do not prove and how a reader can reproduce every declared outcome without private resources.
+1. **One bounded agent study with legitimately reused evidence** — Select a finite permitted synthetic task with explicit state, observations, legal actions, reward, termination, start population and a meaningful fixed or exact comparator. Reuse prior assessed MDP, bandit, TD, tabular/deep and policy-gradient evidence where it genuinely meets criteria; choose only the mechanisms required for one coherent experiment instead of rebuilding eight separate projects.
+2. **Implement and audit a learner–environment contract** — Make reset, legal actions, state transitions, numerical reward and termination/truncation visible through a separate exact finite oracle.
+3. **Controlled comparisons, policy provenance and actual budgets** — Fit an appropriate tabular learner or small neural policy using a declared interaction/update budget; compare against a fixed/exact/planning reference on independently reserved seeds. Publish actual return/constraint statistics, behavior and target-policy versions, episode IDs, checkpoints, environment/library revisions, CPU time, and selection/evaluation boundaries. Neither repeated training seeds nor a simulator score alone certify generalization.
+4. **Perform a negative and safety experiment** — Diagnose a bad bootstrap mask, policy-support hole, stale target, missing state, reward loophole or prohibited action, recording the incorrect behavior and real repaired outcome.
+5. **Unfamiliar bounded reviewer variation** — Independently predict the effect of a changed reward, transition distribution, time limit, action restriction, behavior propensity, observation model or evaluation population; compute a new reference value or justify inability to infer and repair or safely refuse the case.
+6. **Individual technical defense** — Explain exact versus sampled evidence, why chosen learning mechanisms are warranted, what the observed returns do not prove and how a reader can reproduce every declared outcome without private resources.
 
 These modules are instructional stages rather than thirteen forced submissions. Optional exercises and diagnostics support learning; **the nine assessments below**, not the number of lessons completed, establish the summative evidence contract.
 
