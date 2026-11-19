@@ -1,4 +1,4 @@
-# FXT1 — Historical Course Format (Negative Fixture)
+# FXT1 — Unsupported Specification (Negative Fixture)
 
 **Type:** `course`
 **Prerequisites:** none
@@ -8,7 +8,7 @@
 
 ## Overview
 
-This historical format is deliberately unsupported by the future Toolkit.
+This test source declares a specification version that the current validator rejects.
 
 ## Learning outcomes
 
@@ -16,7 +16,7 @@ This historical format is deliberately unsupported by the future Toolkit.
 
 ## Modules
 
-### Module 1 — Legacy Pattern
+### Module 1 — Unrecognized Pattern
 
 #### Outcomes
 

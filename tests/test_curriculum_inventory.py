@@ -1,4 +1,4 @@
-"""Regression tests for the derived, non-normative migration inventory."""
+"""Regression tests for the derived, non-normative curriculum inventory."""
 
 import importlib.util
 import json
@@ -33,8 +33,8 @@ def course(code, prereqs="none", version="v0.2.0", assessment=True):
             f"{evaluation}")
 
 
-def legacy_course(code, prereqs="none"):
-    return (f"# {code} — Legacy\n\n**Type:** `course`\n"
+def unsupported_course(code, prereqs="none"):
+    return (f"# {code} — Unsupported\n\n**Type:** `course`\n"
             f"**Prerequisites:** {prereqs}\n**Duration:** 1 week\n**Status:** `draft`\n\n"
             "## Overview\n\nA sample.\n\n## Learning outcomes\n\n"
             "- Explain a concept without a stable ID.\n\n## Modules\n\n"
@@ -68,7 +68,7 @@ class InventoryTests(unittest.TestCase):
             "| [SEF1](SEF1.md) | Sample | 1 week | — | `course` |\n"
             "| [SEF2](SEF2.md) | Second | 1 week | SEF1 | `course` |\n", encoding="utf-8")
         (folder / "SEF1.md").write_text(course("SEF1"), encoding="utf-8")
-        (folder / "SEF2.md").write_text(legacy_course("SEF2", "SEF1"), encoding="utf-8")
+        (folder / "SEF2.md").write_text(unsupported_course("SEF2", "SEF1"), encoding="utf-8")
 
     def report(self, prs=None):
         return inventory.build_inventory(self.root, SHA, prs)
@@ -83,7 +83,7 @@ class InventoryTests(unittest.TestCase):
         self.assertEqual(courses["SEF1"]["assessment_count"], 1)
         self.assertEqual(courses["SEF1"]["learner_validation"], "not_established")
         self.assertEqual(courses["SEF2"]["prerequisites"], ["SEF1"])
-        self.assertEqual(courses["SEF2"]["format"], "legacy_unsupported")
+        self.assertEqual(courses["SEF2"]["format"], "unsupported")
         self.assertIsNone(courses["SEF2"]["outcome_count"])
         self.assertEqual(next(p for p in report["programs"] if p["program"] == "SYS")["missing_catalog_entries"], 9)
 
@@ -109,7 +109,7 @@ class InventoryTests(unittest.TestCase):
 
     def test_missing_prerequisite_and_catalog_mismatch_visible(self):
         path = self.root / "curriculum" / "SEF" / "SEF2.md"
-        path.write_text(legacy_course("SEF2", "SEF3"), encoding="utf-8")
+        path.write_text(unsupported_course("SEF2", "SEF3"), encoding="utf-8")
         row = next(r for r in self.report()["courses"] if r["code"] == "SEF2")
         self.assertIn("course prerequisites differ from catalog", row["prerequisite_issues"])
         self.assertIn("missing prerequisite course: SEF3", row["prerequisite_issues"])

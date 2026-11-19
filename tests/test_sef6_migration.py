@@ -1,4 +1,4 @@
-"""Regression checks for the SEF6 C and memory ownership migration."""
+"""Regression tests for SEF6 C and memory ownership."""
 
 from __future__ import annotations
 
@@ -23,17 +23,18 @@ class SEF6MigrationTests(unittest.TestCase):
         )
         self.assertEqual(completed.returncode, 0, completed.stderr or completed.stdout)
 
-    def test_mixed_sef_program_validator_accepts_migrated_course(self):
+    def test_sef_program_validator_accepts_current_course(self):
         completed = subprocess.run(
             [sys.executable, str(ROOT / "scripts/check-sef-curriculum.py")],
             cwd=ROOT, capture_output=True, text=True, check=False,
         )
         self.assertEqual(completed.returncode, 0, completed.stderr or completed.stdout)
-        migrated = sum(
+        current = sum(
             "**Specification:** `v0.2.0`" in p.read_text(encoding="utf-8")
             for p in COURSE.parent.glob("SEF[0-9]*.md")
         )
-        self.assertIn(f"{migrated} v0.2.0, {11 - migrated} legacy", completed.stdout)
+        self.assertEqual(current, 11)
+        self.assertIn("(OEE v0.2.0)", completed.stdout)
 
     def test_all_sixteen_outcomes_have_required_assessment_coverage(self):
         course = COURSE.read_text(encoding="utf-8")

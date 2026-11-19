@@ -3,9 +3,7 @@
 
 # Open Engineering Education (OEE)
 
-**An open specification and curriculum for engineering education grounded in demonstrable capability.**
-
-Open Engineering Education defines what learners should be able to do, how courses make those expectations public, and what evidence supports a claim of achievement. The specification and curriculum are free to read, teach, and implement independently.
+Open Engineering Education (OEE) publishes a free specification and curriculum for engineering education. Course definitions explain what learners should be able to do, how their work is assessed, and what evidence supports completion. Educators, reviewers and learning platforms can use the same published requirements.
 
 **Current release:** `v0.2.0` (draft). OEE is evolving; its publication is not a claim that every course has been tested or verified.
 
@@ -21,7 +19,7 @@ Open Engineering Education defines what learners should be able to do, how cours
 
 ## The specification
 
-OEE publishes a common contract for course structure, demonstrated learning, course status, and conformance. These requirements are owned by the specification, not by a course template, a validation script, or a particular teaching platform.
+The specification defines the common requirements for courses, demonstrated learning, readiness status and conformance. The course files apply those requirements; automated checks and teaching platforms do not create additional completion rules.
 
 | Document | What it establishes |
 | --- | --- |
@@ -45,7 +43,7 @@ The curriculum is organized into five programs. Each program's README is the ent
 | [AI](curriculum/AI/README.md) | AI Engineering |
 | [SEC](curriculum/SEC/README.md) | Security Engineering |
 
-A course may combine explanations, exercises, investigations, labs, and project work. **Completion depends on the required outcomes, public assessment criteria, and supporting evidence**, not on consuming a fixed number of lessons or repeating a universal test-and-lab sequence.
+A course may combine explanations, exercises, investigations, labs and project work. Completion is determined by its required learning outcomes, published assessment criteria and supporting evidence. A fixed number of lessons is never a completion standard.
 
 Learner implementations, notes, and evidence belong in a learner-controlled workspace rather than in this specification repository.
 
@@ -71,11 +69,13 @@ Changes to binding requirements follow [OEE governance](GOVERNANCE.md) and the [
 
 ## Status and limitations
 
-All eleven [SEF](curriculum/SEF/README.md) courses and all twenty [AI](curriculum/AI/README.md) courses publish outcome-driven `v0.2.0` draft requirements. AI has sixteen required courses, including its capstone, and four optional electives. APP and SYS also have outcome-driven catalogs; SEC currently retains draft outlines without the complete outcome and assessment contracts. Source checks do not establish learner-tested effectiveness, independent verification or formal program conformance. Consult the [curriculum inventory](curriculum/INVENTORY.md) for current source-format status.
+All five programs publish draft course definitions under OEE `v0.2.0`. AI has sixteen required courses and four electives. SEC has thirteen specialist courses and an integrated capstone, which requires separate evidence of completion for every other SEC course before admission. Each program catalog publishes the requirements and study order for this revision.
 
-The historical `v0.2.0` release tag also contains incorrect citation metadata; see the [citation erratum](releases/ERRATA.md) for accurate version and date information. The tag itself is unchanged.
+Course publication, structural checks and academic review do not establish learner-tested effectiveness, professional accreditation or OEE conformance. A course can be promoted from `draft` only when the evidence specified in [Status Labels](spec/status-labels.md) is available. The [curriculum inventory](curriculum/INVENTORY.md) reports the source files and structural checks.
 
-OEE does not independently certify learners, accredit programs, guarantee employment outcomes, or establish that published courses have been tested or verified without the required review evidence.
+The `v0.2.0` release tag contains incorrect citation metadata. The [citation erratum](releases/ERRATA.md) gives the accurate version and date information. The tag itself is unchanged.
+
+OEE does not independently certify learners, accredit programs or guarantee employment outcomes.
 
 ## Contribute and reuse
 

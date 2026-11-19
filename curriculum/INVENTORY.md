@@ -1,6 +1,6 @@
-# Curriculum migration inventory
+# Curriculum inventory
 
-OEE publishes a **derived** migration and assessment audit on every relevant pull request and main-branch change. The authoritative course definitions and catalog remain the Markdown files in this repository; this page is an entry point, **not a second curriculum registry**.
+Each relevant pull request and change to `main` produces a derived inventory of published course sources and structural checks. Course definitions and program catalogs in this repository remain authoritative. This page explains the report; it does not maintain a second curriculum registry.
 
 - [Inventory workflow and run history](https://github.com/0xbuffdev/open-engineering-education/actions/workflows/curriculum-inventory.yml)
 - Each run contains the complete per-course matrix in the **job summary** and downloadable `inventory.md` and `inventory.json` artifacts.
@@ -26,8 +26,8 @@ The token is optional for public GitHub repositories, but recommended to avoid a
 
 ## Read the report
 
-- `v0.2.0` means the existing OEE outcome classifier selected the outcome-driven format. The separate structural result says whether the existing checker passed; **neither outcome is a conformance claim**.
-- `legacy_unsupported` means the course remains in the pre-outcome authoring format. Outcome and summative coverage are **not measurable** with the current checker. The inventory does not accept or convert the legacy format.
+- `v0.2.0` identifies a source that declares the current outcome-driven format. The separate structural result shows whether its validation passed. Neither result establishes educational conformance.
+- Sources without the current outcome and summative assessment structure are reported as unsupported. They cannot pass the present course checks or count as completed course definitions.
 - `unsupported` is a declared unknown version or conflicting format signal. `missing` and `pending_pr_unreviewed` identify absent source, with the latter explicitly linked to an open PR.
 - Course/curriculum catalog discrepancies, absent prerequisites, prerequisite cycles, missing summative coverage and required project defense indicators are audit findings for human review.
 - An absent program course table is a catalog gap even if the repository-wide overview declares expected courses. A source course without a catalog row remains **unlisted**, not automatically adopted.
@@ -37,4 +37,4 @@ The token is optional for public GitHub repositories, but recommended to avoid a
 
 This inventory is a repository-maintenance report, not a Toolkit course export or an assessment of educational quality. It uses the existing `course_format_versions.py` classifier and `check-outcome-curriculum.py` structural validator to report the state of published course files. It does not define curriculum requirements, grade learner work, or establish course readiness or conformance.
 
-Generated reports are not checked in as an independently maintained curriculum registry. Regenerate the report for the desired source commit and inspect the underlying course definitions and review evidence before making curriculum or status decisions. Those decisions remain subject to [OEE governance](../GOVERNANCE.md).
+Regenerate the report for the source commit you need. Curriculum and readiness decisions require review of the course files and their supporting evidence under [OEE governance](../GOVERNANCE.md); generated reports do not replace that review.

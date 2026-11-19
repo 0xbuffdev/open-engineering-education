@@ -1,148 +1,206 @@
 # SEC5 — Applied Cryptography & Secure Protocols
 
-**Duration:** 5 weeks
-**Expected workload:** 10–15 focused hours/week
-**Prerequisite:** SEC1
+**Program:** SEC — Security Engineering
+**Type:** `course`
+**Prerequisites:** [SEC1](SEC1.md)
+**Duration:** 12–16 weeks
+**Status:** `draft`
+**Specification:** `v0.2.0`
+**Expected workload:** approximately 10–14 focused hours/week (provisional; 120–224 hours)
+
+> [Security Engineering](README.md) · [Design guide](../DESIGN-GUIDE.md) · [Course format](../../spec/course-format.md) · [Evidence rules](../../spec/evidence-rules.md)
 
 ## Overview
 
-Learn practical cryptography from security goals through symmetric encryption, AEAD, hashes, MACs, key exchange, signatures, and TLS. The course emphasizes correct library use and protocol design rather than implementing primitives yourself.
+**Cryptographic security is a property of the entire use of a primitive: its keys, randomness, message boundaries, identities, versioning and failure behavior.** SEC5 teaches learners to turn concrete confidentiality, integrity, authenticity and trust requirements into evidence-backed uses of established cryptographic libraries and protocols. They will distinguish protection goals and adversary capabilities, implement bounded authenticated data protection, reason about key derivation and credential storage, execute a bounded, vetted-library two-party key agreement with explicit peer trust and context binding, inspect standard authenticated key-establishment flows, analyze composition mistakes, and defend a protocol component against an unfamiliar change. Correct-looking ciphertext, a valid signature and an encrypted connection are not comprehensive security guarantees.
 
-## Prerequisites
+**Context and applications.** Cryptography supports protected records, authenticated messages, software signatures, credentials, transport sessions, encrypted backups and inter-service communication. The same algorithm can fail when a nonce repeats, the wrong message context is authenticated, a key is reused across purposes, an identity is not bound to a peer, plaintext leaks on authentication failure, or old encrypted data becomes unreadable after rotation. The analysis must distinguish what a mathematically defined primitive offers from the guarantees established by its implementation and use. Security strength depends on selection, parameter and key-management assumptions; neither a home-built cipher nor an untested protocol composition is suitable as a production security claim.
 
-**SEC1 — Security Foundations & Threat Modeling** (prerequisite)
+**Prerequisite and course boundaries.** [SEC1](SEC1.md) establishes permission, protected assets, trust models, abuse reasoning, threat prioritization and independent security oracles. Its underlying SEF preparation supplies programming and basic mathematical reasoning. SEC5 introduces the additional cryptographic vocabulary and mathematical models needed for application; it does not assume prior number-theory or a specialist cryptography course. [APP1](../APP/APP1.md) explains HTTPS/TLS at the network-to-browser level, while [SEC4](SEC4.md) tests deployed TLS certificate, hostname and proxy trust configuration. SEC5 instead explains **why** authenticated key establishment, transcript binding, key schedules, replay/downgrade protections and failure rules make a protocol sound or unsound under stated assumptions. No SEC4, APP1, advanced math elective or particular implementation language becomes a hidden direct prerequisite. [SEC2](SEC2.md) addresses web-session and application authorization failures; SEC6 owns cloud secret services and deployment supply chains. Do not duplicate their complete projects.
 
-**Kind:** `course`
+**Free, independent reference environment.** A learner-controlled local Python environment is a suitable option because standard-library `secrets`, `hmac`, `hashlib` and `unittest` support relevant demonstrations; *the Python standard library does not supply the required general-purpose AEAD and signature APIs*. Use a maintained, freely available, pinned and documented cryptographic library such as Python `cryptography` for AES-GCM or ChaCha20-Poly1305, HKDF, Ed25519 and X25519 where supported, or an equivalent reviewed library with the same substantive properties. A local pair of separately modeled synthetic parties must **actually execute** a vetted X25519/ECDH key agreement (or supported equivalent standard key-establishment API) and independently test peer trust, key derivation and rejection; the exercise does not implement a custom public key exchange protocol, full handshake, certificate authority or live network service. A free Argon2id library, or a supported `hashlib.scrypt` implementation, can demonstrate the password-hashing assessment. Tooling may be provisioned in advance; record pinned versions and observed library capabilities, and provide offline-replayable fixtures and known-answer test vectors after setup. No paid service, HSM, network account, public CA, dedicated accelerator, quantum computer or proprietary test oracle is required. Do not force implementations to expose a cryptographic algorithm their installed version does not support.
+
+**Security and test constraints.** All assessed keys, credentials and messages are synthetic and confined to a locally owned fixture. Use OS-backed cryptographic random generation for live test-key creation; use deterministic **test-only** known-answer vectors separately, not a fixed production RNG seed. Never print, commit or submit private production keys or actual user passwords. Wrong-key, changed-ciphertext, invalid-tag, substituted-peer-key and replay tests must establish explicit reject behavior; keep ephemeral private keys and derived shared secrets local, never publish raw secret outputs, and reject unsupported or invalid peer public inputs according to the selected maintained API's actual validation semantics; a decryption routine must not deliver unauthenticated plaintext to its caller. A controlled demonstration of nonce reuse is by **analysis or supplied vectors**, not by creating a reusable insecure application artifact. If an experiment explores a defective interface, isolate it as a disposable fixture and make the corrected implementation authoritative. Avoid timing/side-channel claims based on noisy microbenchmarks or invented cryptanalytic results.
+
+**Scope, assessment and workload.** SEC5 assesses the disciplined engineering of a **small local protected-record and authenticated-message component**, plus independent protocol and lifecycle analysis—not the invention of new cryptographic primitives, a full TLS/HPKE stack, custom authenticated key exchange, an operational public PKI or post-quantum algorithm implementation. Four summative evaluations share fixtures and a versioned implementation where useful, each with its own success criteria; the required two-party vetted-library exchange reuses the signature/KDF trust fixture already taught and assessed in AS2/AS3, so a separate project or inferred extra duration is not justified. Optional lesson experiments are formative only. The 12–16-week planning range at 10–14 hours/week reflects reading formal guarantees, configuring a vetted library, constructing independent vectors, assessing failure boundaries, implementing the component, analyzing asymmetric transcripts, key rotation and unfamiliar variants. It is not learner-tested duration or evidence of competence; the course remains `draft`.
 
 ## Learning outcomes
 
-By the end of the course, you will be able to:
-
-- Map security requirements to appropriate cryptographic primitives and protocols.
-- Explain randomness, key management, nonces, authentication, confidentiality, and integrity.
-- Use established cryptographic libraries without inventing primitives.
-- Analyze common protocol failures such as nonce reuse and unauthenticated encryption.
-- Document and test a small secure protocol component.
+- **SEC5-O1:** Translate a bounded security problem into precise cryptographic confidentiality, integrity, authenticity, identity, freshness and availability claims, identifying the adversary's control, non-cryptographic obligations, trust anchors and evidence that would falsify a proposed guarantee.
+- **SEC5-O2:** Select and use supported cryptographic random generation, keys and unique per-key nonces with explicit key/nonce length and usage policies; distinguish unpredictability from uniqueness, reproducible test vectors from production randomness, and uncertain entropy from a demonstrable protocol property.
+- **SEC5-O3:** Use a vetted authenticated-encryption API correctly for real local messages, binding associated data to the intended record or protocol context and rejecting wrong keys, corrupted ciphertext, changed context, truncation and invalid tags without exposing unauthenticated plaintext.
+- **SEC5-O4:** Analyze nonce collisions/reuse, counters across restarts and writers, AEAD invocation/size limits, message ordering and replay; design and test a justified nonce-state and freshness policy appropriate to a declared bounded environment.
+- **SEC5-O5:** Distinguish cryptographic hashes, keyed MACs, digital signatures, authenticated encryption and password verifiers by actual security properties, then implement and test appropriate integrity authentication and rejection with safe comparisons.
+- **SEC5-O6:** Choose and verify a salted, tunable password-hashing or password-based derivation scheme, justify actual runtime/memory limits, and separate low-entropy passwords from high-entropy key material and from fast hash/HKDF use.
+- **SEC5-O7:** Use a standard extract-and-expand key derivation API with correctly understood input key material, salt, context-specific information and output lengths; demonstrate separated purpose keys and identify where HKDF cannot create missing input entropy or replace a password KDF.
+- **SEC5-O8:** Use a reviewed digital-signature API to verify an explicitly scoped message and trusted public-key identity, detecting tampering, wrong keys and canonicalization/format ambiguity while distinguishing signatures from confidentiality and from certificate authority.
+- **SEC5-O9:** Execute and independently verify one vetted-library two-party key agreement with actual distinct local private/public keys, correctly derived and context-separated session key material, explicit expected peer public-key identity and negative substituted/unknown-peer checks; distinguish matching secrets from authenticated peer identity and key confirmation, and analyze standard KEM-based establishment, active-interception and unknown-key-share risks without implementing a custom protocol.
+- **SEC5-O10:** Analyze protocol framing, domain separation, version and algorithm negotiation, transcript binding, authenticated context, replay/order rules, downgrade resistance and error behavior using specified message/state semantics and independent negative cases.
+- **SEC5-O11:** Establish a defensible cryptographic key lifecycle and algorithm policy covering generation, storage access, purpose separation, key identifiers, rotation, revocation/compromise response, recoverability, deprecation and credible post-quantum migration constraints without mistaking a key-ID change for re-encryption.
+- **SEC5-O12:** Build, reproduce and defend a small locally tested cryptographic component and associated trust/protocol argument with independently derived expected values, honest library/platform limitations, actionable defect remediation and transfer to a previously unseen bounded variant.
 
 ## Modules
 
-### Module 1 — Security Goals & Randomness
+### Module 1 — Security Claims, Adversaries and Cryptographic Randomness
 
-#### Module outcomes
+#### Outcomes
 
-By the end of this module, the learner can:
+- SEC5-O1
+- SEC5-O2
+- SEC5-O5
 
-- Explain **Confidentiality, integrity, authenticity, and availability** in the context of the course.
-- Apply **Entropy and secure randomness** in a problem, implementation, experiment, or design decision.
+#### Lessons
 
-1. **Confidentiality, integrity, authenticity, and availability**
-   - kind: `lesson`
-2. **Entropy and secure randomness**
-   - kind: `lesson`
-3. **Checkpoint: cryptographic goals**
-   - kind: `test`
+1. **Which property must cryptography establish?** — Compare a private record, signed update, login credential, tamper-evident message and two-party exchange. For each, name exactly who must verify confidentiality, authenticity or integrity, whether freshness matters, and which trust or authorization problem cryptography does not solve. Disprove the claim that encrypting a message proves who sent it.
+2. **Threat models and boundaries of a proof** — Identify attacker visibility, control over messages, access to keys, ability to replay/drop traffic and the assumptions under which a primitive's guarantee is stated. Distinguish a formal property for a primitive, a vetted implementation's claim, a tested use case and untested deployment behavior. Draw a precise boundary around claims about availability, endpoint compromise and authorized use.
+3. **Random bytes, secrets and predictable values** — Compare a CSPRNG-backed symmetric key or token with a timestamp, PID, ordinary pseudorandom simulation and an exposed fixed seed. Use a supported OS-backed generator with requested lengths; explain why counting unique samples is not an entropy audit or proof that an RNG cannot fail.
+4. **Unpredictable keys versus unique nonces** — Explain which values must remain secret or unpredictable and which must be unique per key, accounting for algorithm-specific constraints. Trace the danger of copying a deterministic seed into deployment, confusing salts with nonces, or creating two writers that reuse one counter space. Plan observations that test a system's state logic without purporting to prove global randomness quality.
 
-4. **Micro-lab: Identify where predictable randomness would break a protocol.**
-   - kind: `lab`
+*Optional formative feedback:* Given five candidate designs, reject a proposal using `random.random` for encryption keys and explain why a deterministic published test vector remains valid in a test suite.
 
-### Module 2 — Symmetric Protection
+### Module 2 — Authenticated Encryption and Nonce State
 
-#### Module outcomes
+#### Outcomes
 
-By the end of this module, the learner can:
+- SEC5-O2
+- SEC5-O3
+- SEC5-O4
+- SEC5-O10
 
-- Explain **Symmetric encryption and AEAD** in the context of the course.
-- Apply **Hashes and MACs** in a problem, implementation, experiment, or design decision.
+#### Lessons
 
-1. **Symmetric encryption and AEAD**
-   - kind: `lesson`
-2. **Hashes and MACs**
-   - kind: `lesson`
-3. **Checkpoint: symmetric primitives**
-   - kind: `test`
+1. **Why encryption alone is not enough** — Compare confidentiality-only encryption, encrypt-then-authenticate and standard authenticated encryption with associated data. Trace plaintext, key, nonce, AAD, ciphertext and tag through a published AEAD interface; identify which bytes are protected but not encrypted. Distinguish an AEAD algorithm's guarantee from endpoint identity or replay protection.
+2. **Real AEAD library behavior** — Use a maintained AES-GCM or ChaCha20-Poly1305 high-level API for a synthetic record with an independently specified byte encoding. Verify correct decryption, empty and boundary records, invalid key/nonce sizes and selected known-answer vectors or an independent compatible implementation where available. State exact algorithm/key/message limits.
+3. **Context binding and invalid ciphertext** — Bind a record's purpose, version, record identifier and relevant ownership context through correctly encoded AAD. Challenge the tag, ciphertext, AAD, key, length and algorithm identifier in negative cases. Assert that no plaintext is accepted or released before authentication succeeds, and distinguish an authentication error from a parse or unsupported-version error without leaking secrets.
+4. **Nonce uniqueness, restart and multi-writer hazards** — Model random-nonce collision probability versus managed counter/sequence allocation for a named AEAD. Show why uniqueness is per *key*, why resets/restarts or simultaneous writers can make naive counters unsafe, and how a local single-writer durable sequence, separate subkeys or properly bounded random-nonce policy changes the risk. Evaluate supplied nonce-reuse cases analytically rather than demanding unsafe payloads.
+5. **Replay, duplication and usage ceilings** — Inspect an authenticated record replayed with identical nonce and tag: authentication can succeed even when the application must reject a duplicate. Specify a recipient-side sequence/record-ID policy, relevant state persistence and mode-specific per-key invocation/size bounds. Test an out-of-order/duplicate record and a counter-exhaustion or failed-state update through a controlled fixture.
 
-4. **Micro-lab: Choose the primitive that matches a stated security goal.**
-   - kind: `lab`
+*Optional investigation:* Predict decryption and application acceptance separately for a tampered tag, changed AAD, a valid replay and a clean record under a new key ID.
 
-### Module 3 — Public-Key Cryptography
+### Module 3 — Hashes, MACs, Password Verification and Derived Keys
 
-#### Module outcomes
+#### Outcomes
 
-By the end of this module, the learner can:
+- SEC5-O5
+- SEC5-O6
+- SEC5-O7
 
-- Explain **Key exchange and public-key encryption** in the context of the course.
-- Apply **Digital signatures and trust** in a problem, implementation, experiment, or design decision.
+#### Lessons
 
-1. **Key exchange and public-key encryption**
-   - kind: `lesson`
-2. **Digital signatures and trust**
-   - kind: `lesson`
-3. **Checkpoint: asymmetric cryptography**
-   - kind: `test`
+1. **Unkeyed hashes versus message authentication** — Distinguish collision/second-preimage considerations, checksum uses and HMAC verification with secret key possession. Construct and inspect a local signed-looking message whose unkeyed digest can be recomputed by an attacker, then repair the authenticator using a supported HMAC API and independent correct/incorrect-key tests. Use a library comparison suited to secret-derived authenticators; do not claim a timing guarantee from a single benchmark.
+2. **Password verifiers need a different cost model** — Explain how a human-chosen password differs in entropy from a generated symmetric key and why fast hash, HMAC-only and HKDF-only storage are unsuitable. Use a salted password verifier with free Argon2id or scrypt/PBKDF2 support justified for the actual environment. Test correct/wrong password, independent salts, stored parameter metadata and invalid record handling without recording the synthetic password in report artifacts.
+3. **Work-factor calibration and denial limits** — Measure a small, documented local cost configuration and compare its memory/latency constraints, particularly on lower-resource devices. Distinguish offline guessing economics from online rate controls and credential compromise. Choose a recorded parameter policy and a safe upper bound preventing attacker-controlled cost fields from exhausting the training process.
+4. **Extract-and-expand with key-purpose isolation** — Inspect HKDF's input key material, salt, extract, expand and `info` context. Derive distinct output keys for encryption and authentication or two named record purposes from a true shared secret; test that domains differ and that repeating inputs yields the same result. State why changing `info` cannot manufacture entropy or safely stretch a human password without a password KDF.
 
-4. **Micro-lab: Trace a simplified key-exchange and signature verification flow.**
-   - kind: `lab`
+*Optional feedback:* Classify six supplied values as password salt, AEAD nonce, KDF salt, KDF context, key ID and authentication tag and identify which must be unique, secret, verifiable or domain-separated.
 
-### Module 4 — Protocol Design & Key Management
+### Module 4 — Public-Key Identity and Authenticated Key Establishment
 
-#### Module outcomes
+#### Outcomes
 
-By the end of this module, the learner can:
+- SEC5-O1
+- SEC5-O7
+- SEC5-O8
+- SEC5-O9
 
-- Explain **TLS concepts and secure protocol composition** in the context of the course.
-- Apply **Nonce handling, key management, and failure behavior** in a problem, implementation, experiment, or design decision.
+#### Lessons
 
-1. **TLS concepts and secure protocol composition**
-   - kind: `lesson`
-2. **Nonce handling, key management, and failure behavior**
-   - kind: `lesson`
-3. **Checkpoint: protocol correctness**
-   - kind: `test`
+1. **Public-key identity and trust bootstrap** — Trace who owns a key pair, how a public key is bound to a claimed signer or peer, and what changes when a trusted key is substituted. Distinguish a raw fingerprint/pinned key, an application-owned trust registry and a certificate chain; a successful signature check authenticates a key, not an unspecified person.
+2. **Signing exact bytes rather than mutable meaning** — Use a reviewed signature API such as Ed25519 on a clearly encoded synthetic message. Verify legitimate and tampered payloads, wrong public keys, mismatched key purpose and altered representation. Explain why an unambiguous protocol message format or canonical representation matters, and why a signature neither encrypts data nor proves that an authorized signer made a sound decision.
+3. **Execute a real local key agreement and derive session material** — In a small non-networked synthetic two-party fixture, use an available maintained X25519/ECDH key-establishment API (or a reviewed equivalent standard API) to generate separate real private/public key pairs, exchange public values, compute matching private shared-secret results and derive the same intended scoped session key through HKDF or the standard scheme's specified KDF. Independently predict acceptable party, public-key identity, purpose and transcript context before execution. Exercise a wrong-party/wrong-context case and compare legitimate derived-key use with rejected protected-record verification. Never log private keys/shared secrets or treat agreement alone as proof of authenticated identity. For low-order/invalid public input, use published vectors or a safely supported API rejection case and document the exact library guarantee; no custom group-arithmetic implementation is required. Compare ECDH agreement to documented KEM encapsulation/decapsulation without claiming to have executed an unprovided KEM.
+4. **Peer-key trust, authenticated context and transcripts** — Start with a versioned synthetic trusted peer-key map or independently verified signature for a named party, distinct from the fresh key-establishment public value. Execute a safe synthetic substituted/unknown-peer case that must fail the expected-peer policy even if the underlying mathematical exchange can produce some shared secret. Bind correctly ordered sender/recipient identities, protocol purpose, negotiated version and transcript to the derived session-key context and compare an independent wrong-context test. Distinguish proof of a trusted binding from exchange success, mutual authentication, explicit key confirmation and any proof a production TLS/HPKE implementation would add. Use supplied standard message traces for additional active-interception, replay and unknown-key-share analysis; do not implement a production handshake or attack an external peer.
+5. **Standard secure composition as a reference** — Reconcile the executed local agreement/KDF evidence with the intended roles of KEM, KDF, AEAD and optional sender authentication in RFC 9180 HPKE and the authenticated transcript/key schedule of TLS 1.3. Identify what base HPKE does **not** authenticate about the sender and why merely wrapping data in encryption is not equivalent to TLS. Use supplied trace and protocol documentation; an entire HPKE or TLS implementation is not required.
 
-4. **Micro-lab: Inspect a protocol transcript and identify where nonce reuse or key misuse would matter.**
-   - kind: `lab`
+*Optional formative feedback:* Given two valid signatures with one substituted untrusted public key, determine which cryptographic checks passed and why the expected sender-identity claim still fails.
 
-### Module 5 — Secure Protocol Component
+### Module 5 — Protocol Composition and Failure-Path Security
 
-1. **Build and evaluate a protocol component using established cryptographic libraries only**
-   - kind: `lab`
+#### Outcomes
 
-## Topics
+- SEC5-O1
+- SEC5-O3
+- SEC5-O4
+- SEC5-O8
+- SEC5-O9
+- SEC5-O10
 
-- security goals
-- entropy
-- randomness
-- symmetric encryption
-- AEAD
-- hashes
-- MACs
-- key exchange
-- public-key cryptography
-- signatures
-- TLS
-- key management
-- nonce handling
+#### Lessons
 
-## Labs
+1. **Message framing and unambiguous fields** — Define a bounded, versioned local record envelope containing algorithm/key-ID and a length-delimited header, nonce, ciphertext and tag as appropriate. Explain why concatenation without encoding can alias two different field tuples; parse and reject unsupported or truncated data *before* invoking cryptography while preserving an independent error policy.
+2. **Domain/context binding and key separation** — Connect protocol purpose, role, message type, version and relevant record ID to AAD, signed input or KDF `info` as justified by the chosen scheme. Identify an authenticated but incorrectly interpreted record when binding is missing, including cross-purpose or cross-tenant confusion. Test the wrong-domain rejection using actual component behavior or a fully specified counterexample.
+3. **Replay, ordering and state transitions** — Specify whether the protected record is a static file, a sequence of updates or a network message. Identify which replay/order semantics the application truly needs; a valid AEAD tag or signature does not reject replay by itself. Evaluate duplicate, missing, out-of-order and stale-key cases against a documented monotonic or unique-ID policy and clean state.
+4. **Negotiation, downgrade and algorithm confusion** — Examine a transcript where the parties offer several versions or algorithms and a mediator can alter negotiation. Explain how a standard protocol authenticates negotiated choices, while an unprotected fallback or attacker-selected algorithm identifier can defeat the design. Require explicit allowed suites, rejected unknown identifiers and no silent downgrade; do not construct a new public transport protocol.
+5. **Failure atomicity, error surfaces and side channels** — Trace parse, authentication, key lookup, file write and acknowledgment stages of a local component. Show that malformed/unverified data is not returned as plaintext, that failed writes do not mark a record accepted and that errors do not disclose keys or unsafe internal state. Discuss constant-time comparisons and potential timing leakage with honest library guarantees; no noisy microbenchmark is presented as proof of side-channel resistance.
 
-- authenticated-encryption experiment
-- nonce-reuse demonstration
-- signature verification
-- protocol transcript analysis
+*Optional investigation:* Evaluate two plausible but subtly different record decoders: one authenticates version and recipient context, the other trusts an unauthenticated header. Predict a counterexample and the smallest sufficient fix.
 
-## Substantial course lab
+### Module 6 — Key Lifecycle, Cryptographic Agility and Independent Review
 
-### Secure Protocol Component
+#### Outcomes
 
-Build a small protocol using established cryptographic libraries and document:
+- SEC5-O1
+- SEC5-O2
+- SEC5-O4
+- SEC5-O7
+- SEC5-O10
+- SEC5-O11
+- SEC5-O12
 
-- threat model
-- primitives
-- key handling
-- nonce rules
-- failure behavior
-- compatibility tests
+#### Lessons
 
-Never invent cryptographic primitives.
+1. **Key lifecycle and compromise response** — Model creation, allowed purpose, identifiers, authorization, storage boundaries, rotation, retirement, recovery, revocation and incident handling for a local record key. Explain where process memory/copies and backups undermine a simplistic secure-deletion claim, and distinguish preventing new encryption under a key from decrypting old retained records.
+2. **Key IDs, nonces and safe rotation** — Add an explicit key ID and permitted-suite policy to a versioned local envelope. Test successful decrypt of authorized earlier records after changing the active encryption key, failed unknown/retired-key uses, wrong-purpose key reuse and nonce counters/registries across restart. State which old keys remain accessible and when actual re-encryption is needed; changing only an ID is not rotation.
+3. **Password, derived and asymmetric key inventories** — Produce a proportionate table of who generates/holds each secret, where it may be used, how access is restricted and what compromise reveals. Distinguish a password verifier, a symmetric data key, a derived purpose subkey, a signing private key and a trust anchor. Recommend a genuine key-storage service for production when applicable without requiring one in the free local assessment.
+4. **Post-quantum exposure and algorithm inventory** — Apply NIST FIPS 203/204/205 and **final NIST IR 8547 (October 2026)** to a supplied realistic inventory of classical ECDH/KEM and signature use, key lifetimes, long-lived ciphertext and remote dependencies. Distinguish ML-KEM key encapsulation from ML-DSA/SLH-DSA signatures; prioritize based on data lifetime and ecosystem readiness, and recognize hybrid migration, compatibility and downgrade risks without requiring an unapproved PQ library or custom PQ implementation.
+5. **Unseen cryptographic defect and individual defense** — Investigate a bounded variant such as reset nonce state, missing AAD context, swapped trusted signing key, broken rotation, untrusted suite selection or wrong key-purpose assignment. Before inspecting results, predict which guarantees fail and which still hold; propose a minimal reviewable fix, test positive/negative/invalid/failure behavior, defend the key/trust decision and retract any security claim unsupported by evidence.
 
----
+*Optional formative feedback:* Review a synthetic cryptography migration plan that promises all historical ciphertexts are safe after changing a key ID and deploying one post-quantum signature library.
+
+## Completion requirements
+
+**Four required summative evaluations** collectively establish all SEC5 outcomes; they may share one versioned synthetic record-protection component and its test fixtures. No lesson-level check, optional reading or formative activity is an additional completion condition. Every evaluation must identify the exact algorithm and library version actually used, security property and threat assumptions, independent expected results, observed or explicitly modeled outcomes, reviewer decision and material untested behavior. A collection of green unit tests or a claimed "industry-standard" algorithm is not sufficient without a defended context and negative evidence.
+
+- **SEC5-AS1** — Authenticated Record Protection and Nonce/Replay Contract
+  - **Outcomes:** SEC5-O1, SEC5-O2, SEC5-O3, SEC5-O4, SEC5-O10, SEC5-O12.
+  - **Work:** Implement a small **local, non-networked** authenticated record encoder/decoder using an established vetted AEAD API and synthetic data. Publish permitted plaintext sizes, authenticated context fields, chosen key/nonce scheme, record format and precise acceptance/rejection criteria. Use OS-backed randomness for test keys, a documented nonce policy for a declared single-writer or correctly coordinated environment, and an explicit recipient-side duplicate/replay rule where the fictional workflow requires freshness. Establish expectations before execution, then verify normal, empty/boundary, wrong-key, altered AAD, modified tag/ciphertext, truncation, repeated-record and nonce-exhaustion/failed-state cases using valid fixtures; do not deliberately execute an unsafe same-key repeated-nonce encryption outside supplied analytical vectors.
+  - **Criteria:** The selected AEAD API is actually authenticated and supports the stated lengths and usage bounds. No unauthenticated plaintext escapes or is persisted when verification fails. AAD binds the declared version/purpose/record identity, with appropriately unambiguous encoding. Per-key nonce uniqueness is justified under actual writer and restart assumptions rather than a uniqueness assertion based only on a handful of samples. Replays are accepted or rejected according to the *explicit* application policy, not assumed automatically solved by AEAD. Legitimate operations continue to work, expected outputs precede observations, and a safely weakened guard or controlled invalid-case fixture makes the regression suite fail.
+  - **Evidence:** Source and pinned library/tool versions; local fixture and permission/synthetic-key plan; cryptographic record/nonce/AAD specification; independent expected accept/reject table; clean encrypt/decrypt reproduction and failure tests; patched code/diff if starting from a defective fixture; declared collision, concurrency, restart and coverage limitations without raw private keys.
+
+- **SEC5-AS2** — Message Authentication, Password and KDF Boundary Verification
+  - **Outcomes:** SEC5-O1, SEC5-O5, SEC5-O6, SEC5-O7, SEC5-O12.
+  - **Work:** For three **different** fictional security needs—authenticate a message, store a user-selected password verifier, and derive separate purpose keys from a suitably strong shared secret—choose and exercise a maintained library API for HMAC or equivalent keyed authentication, a supported salted adaptive password hash, and HKDF or a vetted extract-and-expand API. Establish independently expected valid/invalid-message and password results, key-purpose separation and bounded verifier cost. Demonstrate why replacing any of the three with a fast unkeyed hash or treating a password as high-entropy key material fails the declared goal. Record actual local password-hash runtime/memory settings and a defensible limit on attacker-controlled parameters.
+  - **Criteria:** The message authenticator rejects modifications and wrong keys without relying on an unkeyed digest. Correct and incorrect test passwords are evaluated with distinct salted verifiers and an explicit work-factor policy; password values are not disclosed in assessment artifacts. HKDF derivations have purpose-separated context and do not purport to amplify weak password entropy. The explanation accurately separates salt, nonce, `info`, key ID and tag, and distinguishes what the selected library verifies from timing/side-channel properties it does not prove. Positive, invalid, wrong-purpose and failure cases are independently reviewable.
+  - **Evidence:** Scoped synthetic use cases, vetted API declarations, confidential-local test fixtures, public expected outcome matrix, safe code/test results, password-hash parameter/latency rationale, separated derived-key comparisons using redacted representations, and a brief mistake/remediation and residual-risk analysis.
+
+- **SEC5-AS3** — Signer Identity and Key-Establishment Protocol Review
+  - **Outcomes:** SEC5-O1, SEC5-O7, SEC5-O8, SEC5-O9, SEC5-O10.
+  - **Work:** Use a reviewed asymmetric signature API on an explicitly encoded synthetic message with a declared trusted public key and actor policy; verify original, tampered, substituted-key and ambiguous-format cases. **Actually execute a second-party vetted-library X25519/ECDH exchange or supported equivalent standard key-establishment API** with two independent locally generated test identities; bind the intended peer public key through an explicit pretrusted identity map or independently verified signing key, compute real matching shared-secret outputs locally without disclosing them, and derive scoped traffic-key material using a documented HKDF/standard KDF with fixed, unambiguous sender/recipient and purpose/transcript context. **Before execution**, specify the independent expected matching, unknown/substituted-peer, changed context and invalid-public-input or API-rejection outcomes. Run separate actual positive and negative tests, including an attempt that can yield mathematical key agreement but fails the trusted-peer policy; verify wrong-context/wrong-peer protection at the real derived-key or authenticated-record boundary rather than treating matching secret bytes as an identity proof. For invalid/low-order peer input, use a safe maintained API failure if supported, otherwise correctly interpret public documented vectors and state that it was not locally tested. Independently review supplied accurate KEM and authenticated-transcript traces, identifying sender/recipient/peer roles, identity-binding, active-interception and unknown-key-share preconditions. Examine a documented HPKE or TLS 1.3 transcript example to distinguish base encryption, authenticated modes, signature identity, transcript protection and downgrade failure semantics. An entire handshake, TLS stack, custom crypto primitive or live public PKI is not required.
+  - **Criteria:** Successful signature verification is correctly tied to **the specified trusted key and exact bytes**, not automatically to an arbitrary user, authority or confidentiality claim. Wrong keys and altered or ambiguously represented signed content are rejected or explicitly detected by the declared trust/format policy. The actual local two-party agreement uses reviewed primitive interfaces and independent test actor keys; matching raw shared-secret output is confirmed without public disclosure and cannot by itself pass the trusted-peer identity decision. A substituted/unknown peer is actively rejected at an explicit trust boundary, with a separate context-mismatch failure demonstrated through KDF/record use; the positive test preserves intended operation. The protocol analysis still separates successful key derivation, authenticated peer binding, key confirmation and fuller TLS/HPKE protocol assurances, including at least one realistic message substitution/downgrade counterexample. The learner selects meaningful transcript/KDF/AAD bindings and acknowledges which supplied observations do not establish production transport security. Independent predeclared expected cases and justified residual gaps appear in the evidence.
+  - **Evidence:** Public synthetic keys and test messages only, source and pinned maintained agreement/KDF library versions, signed-message format, pretrusted expected peer-key/identity policy, signature results, two local actor fixtures and executable two-party agreement/KDF tests with **redacted derived secrets**, independent matching/unknown/substituted-peer/changed-context expectations and observed allowed/denied results, genuine labeled invalid-input evidence and untested cases, supplied KEM/HPKE/TLS protocol transcript with source/provenance, and a reviewer-checkable authenticated-versus-unauthenticated conclusion.
+
+- **SEC5-AS4** — Key Lifecycle, Post-Quantum Transition and Unfamiliar Defense
+  - **Outcomes:** SEC5-O1, SEC5-O2, SEC5-O3, SEC5-O4, SEC5-O7, SEC5-O10, SEC5-O11, SEC5-O12.
+  - **Work:** Extend the AS1 local record-protection fixture with an allowed-suite and key-ID policy, at least one test rotation event, safe decrypt rules for retained authorized records and a documented revocation/compromise decision. Test current, retained, unknown, wrong-purpose and retired-key use, a restart/duplicate condition and a safe failure/rollback scenario. For a supplied organization inventory, apply final NIST IR 8547 and FIPS 203/204/205 to distinguish classical key establishment, post-quantum KEMs and signatures and justify a prioritized migration/crypto-agility plan; do **not** implement PQ primitives. Diagnose an unseen changed security assumption, predict an allowed and forbidden result before checking it, repair or reject the design, and defend the outcome independently.
+  - **Criteria:** Version/algorithm identifiers are bound to authenticated context or governed by explicit reject-before-accept rules with no silent insecure fallback. New encryption uses the correct active key and justified nonce policy; authorized old data remain decryptable only while a permitted retained key exists, and a key-ID switch is not misrepresented as re-encryption or key erasure. Unknown, revoked and wrong-purpose keys are rejected as specified, while legitimate use still works. The post-quantum plan distinguishes ML-KEM from ML-DSA/SLH-DSA and identifies data-lifetime risks, transition dependencies, hybrid/negotiation limitations and unverified deployment assumptions without claiming quantum safety from an unsupported local library. The unseen variant elicits a genuine independently reasoned correction, precise risk communication and evidence-limited defense.
+  - **Evidence:** Declared local key inventory and recorded active/retained/revoked states, versioned synthetic envelope and policy, independent before/after and negative tests, rotation/restart/failure/rollback evidence, risk-prioritized cryptographic transition decision tied to named standards, and written/recorded/live defense with corrected hypothesis and unresolved limitations.
+
+### Evaluation and readiness
+
+Record the source revision and exact `SEC5-AS#` and `SEC5-O#` identifiers for each required decision. Executable work must reproduce from a clean installation using documented open-source dependencies and synthetic fixtures. Use public standard vectors where available and independently derived expected accept/reject behavior; never claim that decrypting data you just encrypted is independent interoperability proof. The required actual local vetted-library two-party key agreement is distinct from the separately supplied KEM/HPKE/TLS transcript analysis; the latter is *analysis*, never misrepresented as an executed full handshake. No public endpoint or bespoke protocol implementation is necessary for the local exchange. Key material generated for testing can be disposed of locally; do not collect real passwords, production secrets or unrecoverable private keys as assessment evidence.
+
+The course remains `draft` pending the relevant [course readiness criteria](../../spec/status-labels.md). Its completion does not certify a production cryptosystem, guarantee side-channel resistance, grant formal cryptographic accreditation or establish compliance with a regulation.
+
+### Optional disciplinary references
+
+- [RFC 5116](https://www.rfc-editor.org/rfc/rfc5116.html) and [RFC 9771](https://www.rfc-editor.org/rfc/rfc9771.html) — AEAD interface, nonce obligations, associated data and security-property distinctions.
+- [NIST SP 800-38D](https://csrc.nist.gov/pubs/sp/800/38/d/final) — currently final GCM guidance. A 2026 pre-draft revision must not be treated as final.
+- [RFC 8439](https://www.rfc-editor.org/rfc/rfc8439.html) — ChaCha20-Poly1305 construction and interoperability reference, not an invitation to reimplement it.
+- [RFC 5869](https://www.rfc-editor.org/rfc/rfc5869.html) and [RFC 9106](https://www.rfc-editor.org/rfc/rfc9106.html) — standard HKDF roles and Argon2 password-hashing parameters.
+- [RFC 7748](https://www.rfc-editor.org/rfc/rfc7748.html) and [NIST SP 800-56A Rev. 3](https://csrc.nist.gov/pubs/sp/800/56/a/r3/final) — X25519/Diffie–Hellman shared-secret semantics, KDF, public-key trust and key confirmation distinctions; learners use tested library APIs rather than implementing curve operations.
+- [Python `cryptography` X25519 key exchange](https://cryptography.io/en/stable/hazmat/primitives/asymmetric/x25519/) — maintained library API and example HKDF usage; actual guarantees depend on the version/platform used.
+- [RFC 9180](https://www.rfc-editor.org/rfc/rfc9180.html) and [RFC 8446](https://www.rfc-editor.org/rfc/rfc8446.html) — standard KEM/KDF/AEAD composition and TLS 1.3 authenticated key schedule/transcripts.
+- [NIST SP 800-57 Part 1 Rev. 5](https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final) — currently final key management guidance; newer draft material does not replace it.
+- [NIST FIPS 203](https://csrc.nist.gov/pubs/fips/203/final), [FIPS 204](https://csrc.nist.gov/pubs/fips/204/final), [FIPS 205](https://csrc.nist.gov/pubs/fips/205/final) and [NIST IR 8547, final October 2026](https://csrc.nist.gov/pubs/ir/8547/final) — established post-quantum algorithms and transition requirements.
+- [OWASP Cryptographic Storage](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html), [Key Management](https://cheatsheetseries.owasp.org/cheatsheets/Key_Management_Cheat_Sheet.html) and [Password Storage](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html) — applied key, nonce, storage and password-security practice.
+
+These public sources are aids for verification and deeper study, not paid prerequisites or substitute evaluations.

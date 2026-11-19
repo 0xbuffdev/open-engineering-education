@@ -5,7 +5,7 @@ This is a repository maintenance checker, not an official Toolkit release.
 Its parser is the single source of structural findings for the text CLI,
 JSON diagnostics, and existing program/inventory validation callers.
 
-No legacy course-format reader is provided. Structural success does not
+Only current OEE v0.2.0 sources can pass. Structural success does not
 establish pedagogy, graded learner achievement, or course conformance.
 """
 
@@ -466,7 +466,7 @@ def inspect_course(path: Path, root: Path | None = None) -> dict:
                 skipped.append({"check": "v0.2.0-structure", "reason": "unsupported_format"})
                 if not findings:
                     findings.append(Finding("OEE034", "unsupported_format",
-                                            "unsupported legacy/unknown course format (requires OEE v0.2.0)",
+                                            "unsupported course source; OEE v0.2.0 outcome/assessment format required",
                                             label, 1))
     return {
         "toolVersion": "maintenance-ot-i03",
@@ -483,7 +483,7 @@ def inspect_course(path: Path, root: Path | None = None) -> dict:
 def validate_course(path: Path) -> list[str]:
     """Single-parser compatibility for existing source-repo maintenance callers.
 
-    Does not provide a legacy format reader or a public Toolkit API.
+    Does not provide a public Toolkit API.
     """
     path = path.resolve()
     if not path.is_file():

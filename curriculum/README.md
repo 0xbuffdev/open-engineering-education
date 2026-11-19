@@ -1,8 +1,8 @@
 # OEE Curriculum
 
-The Open Engineering Education (OEE) curriculum publishes five engineering programs and their course definitions. It is designed for independent learners, educators, reviewers, and implementations that need a common, publicly inspectable educational contract.
+OEE publishes course definitions for five engineering programs. Each program catalog lists its courses, prerequisites and completion requirements. Learners, educators and reviewers can use the same public criteria without a required teaching platform.
 
-The five program catalogs below describe the courses in this repository revision. AI comprises sixteen required courses, including its capstone, and four optional electives. All twenty AI courses retain `draft` educational status. SEC courses currently remain draft outlines without full v0.2.0 outcome and summative assessment contracts. Consult each program catalog for its own study sequence and readiness information; source-format validation does not establish teaching effectiveness, learner mastery or formal conformance.
+These catalogs contain 65 required courses and 11 electives. AI has sixteen required courses, including its capstone, and four optional electives. All twenty AI courses remain `draft`. SEC has thirteen specialist courses and a capstone, each with `v0.2.0` outcomes and summative evidence requirements. All fourteen SEC courses also remain `draft`. Published source structure is checked automatically; course readiness requires the learner and reviewer evidence described in the specification.
 
 ## Choose a program
 
@@ -14,12 +14,12 @@ Each program README is the authoritative catalog for its **current** courses, st
 | `APP` | Application Engineering | 14 core, 7 electives | [Explore APP](APP/README.md) |
 | `SYS` | Systems Engineering | 10 core | [Explore SYS](SYS/README.md) |
 | `AI` | AI Engineering | 16 core, 4 electives | [Explore AI](AI/README.md) |
-| `SEC` | Security Engineering | 9 core | [Explore SEC](SEC/README.md) |
-| **Total** | **Five programs** | **60 core, 11 electives** | |
+| `SEC` | Security Engineering | 14 core | [Explore SEC](SEC/README.md) |
+| **Total** | **Five programs** | **65 core, 11 electives** | |
 
-SEF provides the completed current **foundational curriculum design**, including [SEF11 discrete mathematics](SEF/SEF11.md) before algorithmic and numerical mathematics, plus a one-project [SEF10 capstone](SEF/SEF10.md) with ten prior-course evidence checks. APP develops applications and production delivery; **SYS develops machine-level understanding, Rust, OS internals, concurrency, networking, storage, distributed correctness and production systems engineering**; AI develops data, model, and production AI capabilities; SEC applies security engineering to systems and applications.
+SEF develops programming and mathematical foundations. Its [SEF11 discrete mathematics](SEF/SEF11.md) course precedes later algorithm and numerical work; the [SEF10 capstone](SEF/SEF10.md) checks evidence from the other foundation courses. APP builds on these foundations to develop and operate applications. SYS studies machine-level behavior, Rust, operating systems, concurrent services, storage and distributed systems. AI develops data, models, evaluation and deployed AI systems. SEC covers application and native-code security, infrastructure, identity, incident response, exposure management, security architecture and data privacy.
 
-The APP catalog contains 14 required core courses and seven genuinely optional electives. The [current APP catalog](APP/README.md) and linked course definitions publish the authoritative study sequence, prerequisites and graduation requirements; reviewed Git history preserves earlier design rationale. Learner completion records retain the course revisions under which their evidence was evaluated.
+APP has fourteen required courses and seven optional electives. AI has sixteen required courses and four optional electives. SEC graduation requires evidence from every specialist course before its capstone. The linked program catalogs provide study order and prerequisites; each course file describes the assessed work. Reviewers record the revision under which a learner's evidence was evaluated.
 
 ## Follow a course
 

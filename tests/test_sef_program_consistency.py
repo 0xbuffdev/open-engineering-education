@@ -319,7 +319,7 @@ class SEFProgramConsistencyTests(unittest.TestCase):
     def test_umbrella_catalog_numbers_follow_actual_live_program_rows(self):
         overview = text(PROGRAMS)
         counts = {"SEF": (11, 0), "APP": (14, 7),
-                  "SYS": (10, 0), "AI": (16, 4), "SEC": (9, 0)}
+                  "SYS": (10, 0), "AI": (16, 4), "SEC": (14, 0)}
         for code, (core, elective) in counts.items():
             catalog = text(ROOT / "curriculum" / code / "README.md")
             if code == "APP":
@@ -365,10 +365,11 @@ class SEFProgramConsistencyTests(unittest.TestCase):
                     catalog,
                 )
                 self.assertEqual(len(current), core)
+        self.assertIn("| `SEC` | Security Engineering | 14 core |", overview)
         self.assertIn("| `SYS` | Systems Engineering | 10 core |", overview)
         expected_core = sum(core for core, _ in counts.values())
         expected_electives = sum(electives for _, electives in counts.values())
-        self.assertEqual((expected_core, expected_electives), (60, 11))
+        self.assertEqual((expected_core, expected_electives), (65, 11))
         self.assertIn(
             f"| **Total** | **Five programs** | "
             f"**{expected_core} core, {expected_electives} electives** |",
@@ -386,11 +387,11 @@ class SEFProgramConsistencyTests(unittest.TestCase):
                 source = text(course)
                 self.assertIn("**Status:** draft", source)
                 self.assertIn("**Specification:** v0.2.0", source)
-        self.assertIn("All twenty AI courses retain `draft`", overview)
+        self.assertIn("All twenty AI courses remain `draft`", overview)
         self.assertIn("AI1–AI16 are required", ai)
         self.assertIn("AI17–AI20 are optional specializations", ai)
-        self.assertIn("SEC courses currently remain draft outlines", overview)
-        self.assertIn("SEF provides the completed current", overview)
+        self.assertIn("All fourteen SEC courses also remain `draft`", overview)
+        self.assertIn("SEF develops programming and mathematical foundations", overview)
         self.assertIn("All eleven courses are required", sef)
 
     def test_readiness_is_truthful_and_has_normative_sources(self):

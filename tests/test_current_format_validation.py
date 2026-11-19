@@ -1,4 +1,4 @@
-"""Integration tests for legacy APP and strictly v0.2.0 SEF course contracts.
+"""Integration tests for current OEE v0.2.0 APP and SEF course contracts.
 
 Tests use copied curriculum directories. No published course is rewritten.
 """
@@ -79,10 +79,10 @@ Develop and demonstrate a coherent capability without prescribed test/lab pairs.
 """
 
 
-class DualFormatValidationTests(unittest.TestCase):
+class CurrentFormatValidationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.app = load_validator("app_legacy_validation_test", "check-app-curriculum.py")
+        cls.app = load_validator("app_current_validation_test", "check-app-curriculum.py")
         cls.sef = load_validator("sef_strict_validation_test", "check-sef-curriculum.py")
 
     def setUp(self):
@@ -116,7 +116,7 @@ class DualFormatValidationTests(unittest.TestCase):
         self.assertEqual(self.app.validate(), 0)
         self.assertEqual(self.sef.validate(), 0)
 
-    def test_migrated_app1_has_no_required_lab_or_quiz(self):
+    def test_current_app1_has_no_required_lab_or_quiz(self):
         course = example_course(
             "APP1", "Web & Internet Foundations", "APP — Application Engineering",
             self.app1_duration, "[SEF10](../SEF/SEF10.md) — Software Engineering Foundations",
@@ -124,7 +124,7 @@ class DualFormatValidationTests(unittest.TestCase):
         self.replace_course("APP1", course)
         self.assertEqual(self.app.validate(), 0)
 
-    def test_migrated_sef1_has_no_required_lab_or_quiz(self):
+    def test_current_sef1_has_no_required_lab_or_quiz(self):
         course = example_course(
             "SEF1", "Demystifying the Computer System",
             "SEF — Software Engineering Foundations", "5 weeks", "none",
@@ -132,7 +132,7 @@ class DualFormatValidationTests(unittest.TestCase):
         self.replace_course("SEF1", course)
         self.assertEqual(self.sef.validate(), 0)
 
-    def test_migrated_sef10_uses_project_evidence_and_defense(self):
+    def test_current_sef10_uses_project_evidence_and_defense(self):
         course = example_course(
             "SEF10", "Software Engineering Foundations Capstone",
             "SEF — Software Engineering Foundations", "10–14 weeks",
@@ -177,7 +177,7 @@ class DualFormatValidationTests(unittest.TestCase):
         self.replace_course("APP1", course)
         self.assertNotEqual(self.app.validate(), 0)
 
-    def test_unmarked_partial_migration_gets_new_validation(self):
+    def test_unmarked_outcome_source_is_still_checked(self):
         course = example_course(
             "SEF1", "Demystifying the Computer System",
             "SEF — Software Engineering Foundations", "5 weeks", "none",
@@ -198,17 +198,17 @@ class DualFormatValidationTests(unittest.TestCase):
         self.replace_course("SEF1", course)
         self.assertNotEqual(self.sef.validate(), 0)
 
-    def test_legacy_marker_cannot_coexist_with_new_ids(self):
+    def test_unsupported_version_with_outcome_ids_is_rejected(self):
         course = example_course(
             "APP1", "Web & Internet Foundations", "APP — Application Engineering",
             self.app1_duration, "[SEF10](../SEF/SEF10.md) — Software Engineering Foundations",
         ).replace("**Specification:** `v0.2.0`", "**Specification:** `v0.1.0`")
-        with self.assertRaisesRegex(ValueError, "conflicts"):
+        with self.assertRaisesRegex(ValueError, "unsupported"):
             is_outcome_course(course)
         self.replace_course("APP1", course)
         self.assertNotEqual(self.app.validate(), 0)
 
-    def test_explicit_legacy_sef_is_rejected_without_old_reader(self):
+    def test_sef_rejects_unsupported_specification(self):
         old_style = """# SEF1 — Demystifying the Computer System
 
 **Program:** SEF — Software Engineering Foundations
@@ -220,7 +220,7 @@ class DualFormatValidationTests(unittest.TestCase):
 
 ## Overview
 
-Legacy course input must be rejected by active SEF tooling.
+Unsupported course input must be rejected by active SEF tooling.
 
 ## Learning outcomes
 
@@ -290,19 +290,13 @@ Complete the required exercises, checkpoints and lab.
         self.assertTrue(any("SEF10: prerequisites differ from catalog" in e
                             for e in self.sef.ERRORS))
 
-    def test_legacy_course_without_final_lab_still_fails(self):
-        # Construct a legacy-format fixture from current catalog metadata.
-        # Do not depend on any particular APP elective remaining unmigrated.
+    def test_app_rejects_unversioned_old_style_even_with_final_lab(self):
         path = self.root / "curriculum" / "APP" / "APP16.md"
-        source = path.read_text(encoding="utf-8")
-        header = source.split("## Overview", 1)[0]
-        header = re.sub(
-            r"^\*\*Specification:\*\* `v0\.2\.0`\n", "", header,
-            flags=re.MULTILINE,
-        )
-        legacy = header + """## Overview
+        header = path.read_text(encoding="utf-8").split("## Overview", 1)[0]
+        header = header.replace("**Specification:** `v0.2.0`\n", "")
+        unsupported = header + """## Overview
 
-        Validate the legacy final-lab contract independently of migration state.
+An unsupported source with only descriptive outcomes and a final lab.
 
 ## Learning outcomes
 
@@ -318,8 +312,8 @@ Complete the required exercises, checkpoints and lab.
 
 #### Lessons
 
-1. **Course introduction: Legacy integration** — `lesson`
-2. **Final integration lab — required** — `lab`
+1. **Course introduction** — `lesson`
+2. **Final lab** — `lab`
 
 ## Completion requirements
 
@@ -331,13 +325,61 @@ Explain and demonstrate the integration.
 
 Show the artifact and explain its limitations.
 """
-        self.replace_course("APP16", legacy)
-        self.assertEqual(self.app.validate(), 0)
-        self.replace_course("APP16", legacy.replace(
-            "**Final integration lab — required:**",
-            "**Removed integration lab — required:**",
-        ))
+        self.replace_course("APP16", unsupported)
         self.assertNotEqual(self.app.validate(), 0)
+
+
+    def test_public_course_contract_rejects_alternate_source_formats(self):
+        """Published rules must agree with current-only course validation."""
+        format_spec = (ROOT / "spec" / "course-format.md").read_text(
+            encoding="utf-8"
+        )
+        conformance = (ROOT / "spec" / "conformance.md").read_text(
+            encoding="utf-8"
+        )
+        specification_index = (ROOT / "spec" / "README.md").read_text(
+            encoding="utf-8"
+        )
+        contributor_guide = (ROOT / "CONTRIBUTING.md").read_text(
+            encoding="utf-8"
+        )
+        guide = (ROOT / "curriculum" / "DESIGN-GUIDE.md").read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn(
+            "supported public course source and assessment contract",
+            format_spec,
+        )
+        self.assertIn(
+            "A source that lacks the current course contract",
+            format_spec,
+        )
+        self.assertIn(
+            "Unsupported source formats do not provide another conformance path.",
+            " ".join(conformance.split()),
+        )
+        self.assertIn(
+            "A learner's recorded result MUST remain interpretable",
+            " ".join(conformance.split()),
+        )
+        self.assertIn(
+            "The active public curriculum uses the `v0.2.0`",
+            specification_index,
+        )
+        self.assertIn(
+            "inspects every active course",
+            contributor_guide,
+        )
+        self.assertIn(
+            "Academic review beyond source validation",
+            guide,
+        )
+        for source in (format_spec, conformance, specification_index,
+                       contributor_guide, guide):
+            self.assertNotIn("Legacy course revisions MAY remain published", source)
+            self.assertNotIn("explicitly skips legacy courses", source)
+
 
 
 if __name__ == "__main__":

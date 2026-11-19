@@ -23,17 +23,18 @@ class SEF5MigrationTests(unittest.TestCase):
         )
         self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
 
-    def test_sef_validator_accepts_current_mixed_catalog(self):
+    def test_sef_validator_accepts_current_catalog(self):
         result = subprocess.run(
             [sys.executable, str(ROOT / "scripts" / "check-sef-curriculum.py")],
             cwd=ROOT, capture_output=True, text=True, check=False,
         )
         self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
-        migrated = sum(
+        current = sum(
             "**Specification:** `v0.2.0`" in course.read_text(encoding="utf-8")
             for course in COURSE.parent.glob("SEF[0-9]*.md")
         )
-        self.assertIn(f"{migrated} v0.2.0, {11 - migrated} legacy", result.stdout)
+        self.assertEqual(current, 11)
+        self.assertIn("(OEE v0.2.0)", result.stdout)
 
     def test_fifteen_stable_outcomes_covered_by_seven_required_assessments(self):
         text = COURSE.read_text(encoding="utf-8")

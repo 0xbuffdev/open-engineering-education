@@ -1,223 +1,61 @@
 # Curriculum validation tools
 
-OEE currently has two course-format generations. The scripts serve different
-purposes, and **none** replaces a substantive conformance review.
+The scripts check current OEE `v0.2.0` course structure, program catalogs and local references. Source validation and educational readiness are separate decisions. A passing check does not establish learner mastery or formal course conformance.
 
-## Program validators
+## Program checks
 
-- `python3 scripts/check-sef-curriculum.py` validates **all eleven** published SEF v0.2.0 courses, catalog-defined prerequisite-valid study order, new SEF11 mathematical prerequisites and capstone closure. SEF course IDs are stable identities, not numeric study order.
-- `python3 scripts/check-app-curriculum.py` validates the published APP catalog and the current outcome-driven APP course contracts. The checker still contains legacy-format support for historical cases, but **all 21 published APP course files now use `v0.2.0`**.
+Run the published program validators from the repository root:
 
-Both program validators now classify courses using the shared
-`course_format_versions.py` helper. **Untouched legacy courses** retain
-their original per-module test/lab, final-lab, and public brief checks.
-**Migrated v0.2.0 courses** are routed to the outcome-based validator
-instead of being required to preserve legacy assessment patterns.
+```sh
+python3 scripts/check-sef-curriculum.py
+python3 scripts/check-app-curriculum.py
+```
 
-Both program validators continue checking shared metadata, catalog
-consistency, course prerequisites, and local links. The APP validator also
-checks the basic integrity of authored Markdown tables, including stable
-column counts and closed inline code spans, so truncation cannot silently
-hide evidence-summary text. These editorial checks are not normative OEE
-format requirements. A failed outcome check
-also fails the applicable APP or SEF validator. Neither type of successful
-structural check proves educational conformance or learner mastery.
+SEF validation checks course metadata, prerequisites, study order and the SEF10 capstone's predecessor requirements. APP validation reads the [APP catalog](../curriculum/APP/README.md) for its course identities, study order, types, classifications, durations and direct prerequisites. It checks missing or duplicate files, prerequisite cycles, graduation closure and local links. A required APP course cannot depend on an elective. The APP script also detects inconsistent Markdown tables as an editorial check; this adds no course completion requirement.
 
-### APP catalog order and classification
+Each published APP and SEF course is checked with the same outcome-based OEE `v0.2.0` structural validator. Unsupported source versions and files without the required outcome/assessment structure fail. There is no alternate format reader, required quiz/lab pattern or final-lab shortcut.
 
-The `APP/README.md` course table is the **authoritative ordered program
-catalog**. `app_catalog.py` reads its explicit Core/Elective label, type,
-readiness status, title, duration, prerequisites, and row order. Course IDs
-are identifiers, **not sequence numbers**: APP17 already appears between
-APP1 and APP2 in the published catalog without changing existing IDs.
+## Course structure
 
-The APP validator compares every linked catalog row with exactly one
-course file and rejects missing, duplicate, extra, or malformed rows,
-missing files, contradictory metadata, prerequisite cycles, and new
-core prerequisites omitted from the APP9 graduation capstone.
-A core course cannot require an elective. Elective course files must declare the `elective` classification
-in metadata. The catalog explicitly classifies every course, and a core
-course may optionally declare the `core` classification as well.
-
-A catalog entry's displayed prerequisite codes must agree with
-the course's own prerequisite metadata, including expanded ranges
-such as `APP1–APP8`. APP17–APP19 are published new core courses;
-APP4 provides an independent SEF10-entry database foundation,
-APP21 provides Node.js backend runtime foundations after APP18,
-APP2 follows APP17 + APP19 as framework-neutral browser engineering,
-APP20 follows APP2 as React Application Engineering, APP3
-follows APP19 + APP21 + APP4 for typed framework API engineering,
-APP5 combines APP20 + APP3 for full-stack integration (with
-APP4 included transitively through APP3), APP6 follows APP5
-for risk-based quality, CI, supply-chain evidence, observability,
-performance and incident-driven improvement, and APP7 follows
-APP5 + APP6 for deployable artifacts, verified HTTPS, applied
-infrastructure, safe releases, data restoration and recovery,
-and APP8 follows APP5 + APP6 + APP7 for measured architecture
-capacity, overload fairness, cache/data consistency, failure
-containment and reversible performance/cost evolution.
-APP9 is the independently assessed `project` capstone with direct
-prerequisite closure over all 13 preceding APP core courses and
-eight outcome-mapped v0.2.0 summative graduation assessments.
-APP10 follows APP20 + APP6 as an optional advanced frontend
-performance elective: browser/React traces, meaningful Core Web
-Vitals, critical delivery, correct cache/version and accessibility,
-long-session memory and reproducible performance regression gates.
-APP11 follows APP3 + APP4 + APP6 as an optional advanced backend
-architecture elective: domain/module ownership, PostgreSQL
-transactional outbox/inbox correctness, compensation and
-reconciliation, tenant-safe cross-boundary work and measured
-compatible extraction. APP9 graduation remains unchanged.
-APP12 follows APP3 + APP5 + APP6 as an optional realtime
-application elective: SSE/WebSocket and polling choices, secure
-subscriptions, snapshot/cursor replay and two-client conflict
-reconciliation, bounded fan-out and reconnect recovery.
-APP13 follows APP19 + APP3 as an optional TypeScript/mobile elective:
-real Android packaging, accessible device interaction, lifecycle and
-local transactional storage, offline command replay, secure native
-permissions, mobile OS/background limits and compatible test upgrades.
-APP20 is required only for an optional React-based implementation.
-APP14 is the optional gateway and edge-delivery specialization after APP3 + APP7. APP15 is the optional TypeScript–Rust interoperation specialization after APP19 + APP21 + APP6, plus demonstrated prior Rust foundations; no provisional SYS course code is forced. APP16 now also publishes an outcome-driven platform-as-product specialization with 17 outcomes and seven independently checkable assessments; all 21 APP courses are v0.2.0 drafts. The [current APP catalog](../curriculum/APP/README.md) and [APP16 course](../curriculum/APP/APP16.md) publish the platform competency boundary and active requirements.
-The [current APP catalog](../curriculum/APP/README.md) contains
-**14 core courses and 7 electives** and is authoritative until reviewed
-course-migration PRs change it. The validator does not change course
-requirements or historical learner records.
-
-## Outcome-based v0.2.0 courses
-
-Validate a specific file, including a course still under development:
+Check one source file:
 
 ```sh
 python3 scripts/check-outcome-curriculum.py --course curriculum/APP/APP1.md
 ```
 
-Inspect the entire active curriculum, **including unsupported legacy files**:
+Check the full published course set:
 
 ```sh
 python3 scripts/check-outcome-curriculum.py --all --format json
 ```
 
-The full inspection returns `incomplete` (exit code `3`) until every
-active course uses v0.2.0; legacy drafts cannot silently count as a pass.
-Run `--course` on selected migrated courses to require structural success
-(exit code `0`). Structural violations exit `1`; an incomplete or
-unsupported course exits `3`. Machine-readable diagnostics have stable
-rule IDs and actual source path/line. The current JSON report is an
-**internal maintenance diagnostic**, not a published Toolkit export API.
+The checker verifies declared learning outcomes, module mappings, required summative assessment references and published `Outcomes`, `Work`, `Criteria` and `Evidence` fields. One assessment can support multiple outcomes where its success criteria actually demonstrate each capability. Project courses also require public deliverables and a reviewable technical defense.
 
-Run regression tests:
+Exit code `0` means the inspected source passes structural checks. Code `1` reports a structural violation; code `3` means a source is missing, incomplete or unsupported. JSON diagnostics identify rule IDs and source locations. They are maintenance output, not a published Toolkit export API.
+
+A source may declare `**Specification:** v0.2.0` in metadata. The checker also inspects unmarked sources with recognizable outcome or assessment IDs, so an incomplete current-style file cannot bypass validation. Any explicitly declared unsupported version fails. This detection behavior does not add a normative metadata requirement beyond [Course Format](../spec/course-format.md).
+
+Required assessment fields can be written inline or included through one explicit local public Markdown brief. The checker resolves only safe repository-contained paths. A missing brief or supported source expressed in an unrecognized Markdown layout is reported as incomplete with a diagnostic; the parser cannot certify every possible valid Markdown presentation.
+
+## Inventory and review
+
+The derived [curriculum inventory](../curriculum/INVENTORY.md) reports course/catalog presence, declared versions, structural results and open source review information. Generate a report with:
+
+```sh
+python3 scripts/curriculum_inventory.py --output-dir ./inventory-report
+```
+
+The repository-local [OEE Toolkit](../tooling/README.md) checks source data at an immutable Git revision and creates deterministic derived exports. Its distribution and stable public API require separate review.
+
+Run regression and documentation checks:
 
 ```sh
 python3 -m unittest discover -s tests -p 'test_*.py' -v
-```
-
-All three validators use the same course-revision classification rules.
-The `--all` mode checks recognizable v0.2.0 courses and reports older
-active courses as unsupported/incomplete. Recognizable sources contain
-outcome/assessment IDs or declare the optional metadata:
-
-```markdown
-**Specification:** `v0.2.0`
-```
-
-The metadata prevents partially migrated courses from being silently
-classified as legacy, but is a **validator opt-in convention** rather than
-a new mandatory field in the public specification. An unmarked course
-that has begun defining recognizable stable outcome or assessment IDs is
-also routed to v0.2.0 checks. Because detection uses the recognized ID
-pattern, a malformed, unmarked partial migration could still be mistaken
-for a legacy course; newly migrated files should therefore declare their
-specification version explicitly. An explicitly declared unknown version,
-or a legacy version declaration mixed with recognized new IDs, fails closed.
-
-### Inline assessment example
-
-```markdown
-## Learning outcomes
-
-- **APP1-O1:** Diagnose a browser request failure with evidence.
-- **APP1-O2:** Distinguish DNS and HTTP errors.
-
-## Modules
-
-### Module 1 — Request Lifecycle
-
-#### Outcomes
-- APP1-O1
-- APP1-O2
-
-#### Lessons
-1. Requests and responses
-2. Browser network diagnostics
-3. Optional investigation of a reference trace
-
-## Completion requirements
-
-- **APP1-AS1** (required practical investigation)
-  - Outcomes: APP1-O1, APP1-O2
-  - Work: diagnose an unfamiliar request trace.
-  - Criteria: classify the failure and support the conclusion.
-  - Evidence: annotated observations and technical explanation.
-```
-
-A required assessment must map to existing outcome IDs and provide nonempty
-`Outcomes`, `Work`, `Criteria`, and `Evidence` fields. One assessment may
-cover several outcomes. A course need not have per-module knowledge tests or
-labs when the evidence genuinely supports the required outcomes. Project
-courses must also define deliverables and a reviewable defense.
-
-**Parser coverage:** In addition to inline assessment fields, the checker
-resolves one explicit local public assessment-brief link on an assessment
-heading or a `Brief:` line, using safe repository-contained relative Markdown
-paths. It reads the required `Outcomes`, `Work`, `Criteria`, and
-`Evidence` fields from that brief. It rejects missing or escaping files
-without silently treating them as empty validated assessments. Unsupported
-remote links, multiple competing brief links, and unrecognized valid Markdown
-presentations are reported as `parser_limitation` / `incomplete`, not a
-definitive violation of OEE's authoring rules. This maintenance checker reads supplied working files, not a pinned Git
-source revision. The separate, repository-local
-[OEE Toolkit](../tooling/README.md) provides source-pinned, immutable
-course checks and exports; its package and public API are not released
-or stabilized.
-
-The checker cannot establish pedagogical validity, reproducibility in
-practice, learner mastery, `tested` or `verified` status, or course
-conformance. Every course migration also requires a documented substantive
-review of assessment quality, evidence, and independence from paid tools.
-
-## Current coverage and limitations
-
-**All eleven SEF course-level RFC 0003 changes are merged**; all 11 current course files publish outcome-driven v0.2.0 draft contracts and still remain `draft`. The [SEF catalog](../curriculum/SEF/README.md) publishes their prerequisite-valid study order, provisional workload and capstone graduation conditions; automated checks verify source structure, not educational effectiveness. SEF11 precedes SEF4/SEF8 and SEF10 requires all other ten courses. Earlier curriculum design decisions remain documented in [RFC 0003](../rfcs/0003-sef-academic-progression.md) and Git history. Structural checks do not establish learner-tested effectiveness or full program conformance.
-
-The [current APP catalog](../curriculum/APP/README.md) has **14 core courses and seven electives**. All 14 core courses and all seven electives (APP10–APP16) now publish outcome-driven OEE `v0.2.0` `draft` definitions, including the APP9 `project` capstone; **no APP source course remains legacy**. APP still requires independent academic/learner readiness review, distinct from finalized SEF. Neither a legacy checker pass nor successful v0.2.0 structural validation alone establishes educational conformance.
-
-The repository-local [Toolkit](../tooling/README.md) implements pinned
-course checks and derived exports. Its
-[interoperability tests](../tooling/interop/README.md) check a pinned
-Workspace consumer, but they do not make Workspace resource mappings
-current, release a supported Toolkit package, or validate educational
-quality. A stabilized package/API and official release require separate
-readiness review.
-
-Future course revisions require public outcome and assessment criteria,
-substantive quality review, careful catalog and prerequisite updates,
-and explicit treatment of historical source/evidence revisions. Automated
-success is never proof of learner mastery.
-
-## Public documentation checks
-
-Run from the repository root:
-
-```sh
 python3 scripts/check-links
 python3 scripts/check-public-docs.py
-python3 -m unittest discover -s tests -p 'test_public_docs.py' -v
 npx --yes markdownlint-cli2@0.24.0
 ```
 
-The link checker validates local paths and anchors without network
-access. The public-document check rejects links to 0xBUFF's internal
-planning repositories in the main entry points, specifications, RFCs,
-program catalogs, issue templates, and tooling guides. It does not
-verify external links, assess educational claims, or replace editorial
-review.
+The documentation checks cover local links and prohibited references to internal planning repositories. They do not verify external websites or assess teaching quality.
+
+The current [SEF](../curriculum/SEF/README.md), [APP](../curriculum/APP/README.md), [SYS](../curriculum/SYS/README.md), [AI](../curriculum/AI/README.md) and [SEC](../curriculum/SEC/README.md) catalogs publish their course requirements. Course changes must update the relevant outcomes, assessment criteria, prerequisites and catalog entries together. Use the [curriculum design guide](../curriculum/DESIGN-GUIDE.md) for competency review and the [specification](../spec/README.md) for binding rules. Automated checks do not promote a course beyond its published `draft` status.

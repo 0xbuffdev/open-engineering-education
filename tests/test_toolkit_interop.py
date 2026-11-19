@@ -130,7 +130,7 @@ class PinnedGoldenAndDriftTests(unittest.TestCase):
         report = compare(self.repo, self.base, self.original, new)
         self.assertEqual(report["status"], "unsupported_version")
 
-    def test_legacy_workspace_map_is_not_reinterpreted(self):
+    def test_unsupported_workspace_map_is_not_reinterpreted(self):
         wrong_map = self.pins.parent / "old-map.json"
         wrong_map.write_text(json.dumps({
             "schemaVersion": 1,
