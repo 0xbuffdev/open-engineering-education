@@ -3,7 +3,7 @@
 - **Status:** `accepted`
 - **Author:** Public Toolkit proposal; contributor attribution through the reviewed PR and DCO
 - **Created:** 2026-11-14
-- **Last updated:** 2026-11-15
+- **Last updated:** 2026-11-20
 - **Related issue:** [Public Toolkit decision #57](https://github.com/0xbuffdev/open-engineering-education/issues/57)
 - **Affected specification version:** OEE v0.2.0 draft; **no course-format change proposed**
 
@@ -23,15 +23,14 @@ and merged [PR #63](https://github.com/0xbuffdev/open-engineering-education/pull
 This decision authorizes the optional Toolkit source and its scoped
 licensing boundaries; it does **not** publish or stabilize an official
 release, override contributor rights, or claim normative OEE conformance.
-See [Section 10](#10-decision).
+See [Section 10](#10-decision). All five current program catalogs use the `v0.2.0` source format, and the Toolkit has no alternate-format reader. The design discussions below record the original approval and do not authorize a migration utility or compatibility interface.
 
 ## 2. Problem
 
-The existing [OEE scripts](../scripts/README.md) provide version
-classification, structural checks and catalog validation. They are useful
-maintenance/migration utilities, and, before the implementation changes
-reviewed in PRs #59–#62, did not provide an independent Toolkit with pinned-revision
-source resolution, source-located diagnostics and deterministic export.
+The [OEE scripts](../scripts/README.md) provide version classification,
+structural checks and catalog validation for current course sources. Before
+PRs #59–#62, they did not expose the Toolkit's pinned-revision source
+resolution, source-located diagnostics or deterministic export.
 The source implementation is now merged, but release readiness and
 stabilized packaging remain separate approvals.
 
@@ -64,8 +63,8 @@ and OEE governance.
    Toolkit exports.
 3. Reuse/refactor the proven v0.2.0 structural checker and its tests so the
    Toolkit has **one production parser and rule interpretation**.
-   Existing legacy program validators may temporarily serve curriculum
-   migration but are **not** supported Toolkit APIs.
+   Program-level validators are repository checks for current course
+   sources. They are **not** independent Toolkit APIs.
 4. No public package, official release or steward endorsement is implied
    until this RFC is explicitly accepted and a separate implementation and
    release review passes. A future normative change requires a separate
@@ -478,9 +477,9 @@ schema-v2 map adoption remains an independent downstream dependency.
    a separate public release-readiness decision; internal
    `toolVersion: 0.0.0-dev` is not a release.
 4. **Maintenance scripts:** `scripts/check-outcome-curriculum.py` is the
-   shared v0.2.0 source parser called by the Toolkit; other historic
-   program validation scripts remain repository maintenance/migration
-   tooling, **not a Toolkit legacy API or supported old-format mode**.
+   shared `v0.2.0` source parser called by the Toolkit. Program validators
+   remain repository checks for current course definitions, not public
+   Toolkit APIs or alternative-format readers.
 5. **External integration:** Workspace's schema-v2 resources and reviewed
    source mapping remain separate work and cannot be assumed accepted
    merely because an interop consumer test passes.
