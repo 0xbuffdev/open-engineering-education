@@ -5,6 +5,8 @@ OEE Workspace consumer. The Toolkit architecture was accepted in
 [RFC 0002](../../rfcs/0002-toolkit-stewardship-and-licensing.md).
 Passing the checks does **not** publish an official Toolkit package,
 establish educational conformance, or promote a course's readiness status.
+See the [OT-I05 release-readiness checklist](../RELEASE-READINESS.md)
+for independent smoke and separate public steward approval.
 
 ## Immutable source and generated fixtures
 
@@ -42,7 +44,13 @@ The emitted records are candidates for a **separately reviewed PR**.
 Never auto-repin to the latest branch or infer that same-identifier
 assessments are pedagogically equivalent after a criteria change.
 
-## Independent Workspace consumer
+## Independent current Workspace consumer
+
+The manifest's full Workspace consumer commit now references the **merged
+current Workspace v2 and CLI release-readiness source**, rather than an
+old pre-v2 checkout. The golden exports continue to represent their own
+**historical exact OEE source revision**, preserving independent regression
+provenance.
 
 The [interoperability workflow](../../.github/workflows/toolkit-interop.yml)
 checks out the **public Workspace consumer at the exact commit
@@ -54,8 +62,14 @@ against real committed OEE golden exports and requires:
   outcomes and assessment coverage, and a matching selected 40-char SHA.
 - Explicit **wrong-SHA rejection**, including when all other output
   fields remain plausible.
-- Explicit rejection of Workspace **resource-map schema v1**, without
-  a converter, old-course parser, or reusing stale module numbers.
+- Explicit rejection of the **resource-map schema v1 negative
+  fixture**, without a runtime converter or acceptance of stale module
+  numbers.
+- The current reviewed Workspace v2 map is **rejected** against
+  historical golden exports from a different source commit and
+  **accepted** against a fresh Toolkit export from the map's recorded
+  exact OEE revision. An exported historical snapshot does not certify
+  the contents of a newer mapping.
 - No private service, paid resource, network lookup or competing OEE
   Markdown interpretation in Workspace.
 

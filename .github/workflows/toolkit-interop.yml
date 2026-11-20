@@ -79,15 +79,47 @@ jobs:
               assert negative.returncode == 1, (code, negative.stdout)
               assert json.loads(negative.stdout)["finding"]["code"] == "WSX005"
               print(f"{code}: independent consumer accepts exact SHA, rejects wrong SHA")
-          old_map = Path("_workspace/resources/mappings/SEF/SEF1.json")
-          result = subprocess.run([
+          historic_map = Path("_workspace/tests/fixtures/resource-map-v1-SEF1.json")
+          previous = subprocess.run([
               sys.executable, "_workspace/scripts/verify-oee-export.py",
               "--export", "tooling/interop/golden/SEF1.json",
-              "--revision", target, "--map", str(old_map), "--json",
+              "--revision", target, "--map", str(historic_map), "--json",
           ], capture_output=True, text=True, check=False)
-          assert result.returncode == 3, result.stdout
-          assert json.loads(result.stdout)["finding"]["code"] == "WSX012"
-          print("Historic Workspace v1 map rejected; no converter or false review.")
+          assert previous.returncode == 3, previous.stdout
+          assert json.loads(previous.stdout)["finding"]["code"] == "WSX012"
+          print("Unsupported v1 negative fixture rejected (no runtime reader).")
+
+          current_map = Path("_workspace/resources/mappings/SEF/SEF1.json")
+          mapping = json.loads(current_map.read_text(encoding="utf-8"))
+          assert mapping["schemaVersion"] == 2 and mapping["status"] == "reviewed"
+          current_revision = mapping["curriculum"]["revision"]
+          assert len(current_revision) == 40 and current_revision != target
+          historic = subprocess.run([
+              sys.executable, "_workspace/scripts/verify-oee-export.py",
+              "--export", "tooling/interop/golden/SEF1.json",
+              "--revision", target, "--map", str(current_map), "--json",
+          ], capture_output=True, text=True, check=False)
+          assert historic.returncode == 1, historic.stdout
+          assert json.loads(historic.stdout)["finding"]["code"] == "WSX013"
+          print("Current v2 map refuses historical golden from another OEE revision.")
+
+          from tempfile import TemporaryDirectory
+          with TemporaryDirectory() as temporary:
+              current_export = Path(temporary) / "SEF1-current.json"
+              created = subprocess.run([
+                  sys.executable, "-m", "tooling.oee_toolkit", "export",
+                  "--repo", ".", "--revision", current_revision,
+                  "--course", "SEF1", "--output", str(current_export),
+              ], capture_output=True, text=True, check=False)
+              assert created.returncode == 0, created.stderr
+              tested = subprocess.run([
+                  sys.executable, "_workspace/scripts/verify-oee-export.py",
+                  "--export", str(current_export), "--revision", current_revision,
+                  "--map", str(current_map), "--json",
+              ], capture_output=True, text=True, check=False)
+              assert tested.returncode == 0, tested.stdout
+              assert json.loads(tested.stdout)["mapInspected"] is True
+          print("Reviewed Workspace v2 map accepts its exact OEE Toolkit export.")
           PY
       - name: Advisory changed-HEAD drift (never alters a Workspace map)
         run: |
@@ -109,7 +141,7 @@ jobs:
               (Path(os.environ["RUNNER_TEMP"]) / "oee-source-drift.json")
               .read_text(encoding="utf-8")
           )
-          assert report["mapping"]["status"] == "unsupported_map_schema"
+          assert report["mapping"]["status"] == "source_mismatch"
           assert report["manualReviewRequired"]
-          print("Drift advisory recorded; historic map was not reinterpreted.")
+          print("Current reviewed map belongs to another pin; no automatic remap.")
           PY
