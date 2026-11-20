@@ -3,10 +3,10 @@
 - **Status:** `accepted`
 - **Author:** 0xBUFF (proposal for steward review)
 - **Created:** 2026-11-07
-- **Last updated:** 2026-11-07
+- **Last updated:** 2026-11-20
 - **Affected specification version:** published draft `v0.1.0`; normative implementation delivered as draft `v0.2.0`
 
-**Implementation status (2026-11-07):** Accepted and implemented in the published `v0.2.0` draft specification through [PR #34](https://github.com/0xbuffdev/open-engineering-education/pull/34). SEF1, SEF10, and APP1 have been migrated as draft curriculum pilots; other courses and downstream implementations still require separate migration. The proposal-era problem statements and alternatives below are retained as historical context, not descriptions of the currently normative text.
+**Implementation status (2026-11-20):** [PR #34](https://github.com/0xbuffdev/open-engineering-education/pull/34) established the draft `v0.2.0` specification. All five program catalogs now publish `v0.2.0` course definitions, and current validators reject unsupported formats. The proposal and its staged implementation plan below record the original decision; they are not outstanding course-migration tasks. Current requirements are in the [specification](../spec/README.md) and [curriculum](../curriculum/README.md).
 
 ## 1. Summary
 
@@ -14,7 +14,7 @@ Make demonstrated learning outcomes, rather than a uniform activity template, th
 
 The curriculum will continue to be independently usable without any paid platform. OEE Workspace and 0xNAND will share a stable public educational contract rather than independently redefining course completion.
 
-This RFC is an accepted design decision implemented in the draft `v0.2.0` specification. Earlier published course revisions remain governed by their original course and specification requirements until explicitly migrated.
+This RFC is implemented in the draft `v0.2.0` specification. Learner evidence from another course revision remains attributable to the requirements against which it was originally assessed; it does not establish completion of newer outcomes.
 
 ## 2. Problem
 

@@ -73,6 +73,55 @@ class InventoryTests(unittest.TestCase):
     def report(self, prs=None):
         return inventory.build_inventory(self.root, SHA, prs)
 
+    def test_current_direct_prerequisite_notes_are_not_extra_requirements(self):
+        cases = (
+            ("Completed SEF (SEF10)", ["SEF10"]),
+            ("[SYS1](SYS1.md) (completed SEF includes SEF6 and SEF7)", ["SYS1"]),
+            ("[SYS10](SYS10.md) (including SYS1/SYS2 foundations)", ["SYS10"]),
+            ("[AI3](AI3.md) — Search; [AI5](AI5.md) — Deep Learning (both completed)",
+             ["AI3", "AI5"]),
+            ("AI6, AI15; verify AI1–AI15", ["AI6", "AI15"]),
+            ("[AI6](AI6.md) — Decisions; [AI15](AI15.md) — MLOps "
+             "(both completed; verified assessed completion of AI1–AI15 required)",
+             ["AI6", "AI15"]),
+        )
+        for raw, expected in cases:
+            with self.subTest(raw=raw):
+                values, errors = inventory.prerequisites(raw)
+                self.assertEqual(errors, [])
+                self.assertEqual(values, expected)
+
+    def test_ai_catalog_tracks_have_correct_types_and_classifications(self):
+        folder = self.root / "curriculum" / "AI"
+        folder.mkdir()
+        catalog = folder / "README.md"
+        catalog.write_text(
+            "# AI Engineering\n\n## Courses\n\n"
+            "| Course | Title | Duration | Prerequisites | Track |\n"
+            "| --- | --- | --- | --- | --- |\n"
+            "| [AI1](AI1.md) | First | 10 weeks | SEF10 | Required course |\n"
+            "| [AI16](AI16.md) | Capstone | 10 weeks | AI6, AI15; verify AI1–AI15 | Required project |\n"
+            "| [AI17](AI17.md) | Extension | 10 weeks | AI9 | Elective |\n",
+            encoding="utf-8",
+        )
+        rows, errors = inventory.catalog_rows("AI", catalog)
+        self.assertEqual(errors, [])
+        self.assertEqual(rows["AI1"]["kind"], "course")
+        self.assertEqual(rows["AI16"]["kind"], "project")
+        self.assertEqual(rows["AI16"]["prerequisites"], ["AI6", "AI15"])
+        self.assertEqual(rows["AI17"]["kind"], "course")
+        self.assertEqual(rows["AI17"]["classification"], "elective")
+
+    def test_published_overview_counts_match_source_courses(self):
+        counts = inventory.declared_counts(ROOT)
+        for program, count in counts.items():
+            with self.subTest(program=program):
+                self.assertIsNotNone(count)
+                source_count = len(list(
+                    (ROOT / "curriculum" / program).glob(f"{program}[0-9]*.md")
+                ))
+                self.assertEqual(count, source_count)
+
     def test_derived_counts_and_missing_programs(self):
         report = self.report()
         courses = {c["code"]: c for c in report["courses"]}

@@ -11,7 +11,7 @@ COURSE = ROOT / "curriculum" / "SEF" / "SEF8.md"
 CATALOG = COURSE.parent / "README.md"
 
 
-class SEF8MigrationTests(unittest.TestCase):
+class SEF8CurriculumTests(unittest.TestCase):
     def test_outcome_and_program_validators_accept_sef8(self):
         for cmd in (
             [sys.executable, str(ROOT / "scripts/check-outcome-curriculum.py"),

@@ -1,100 +1,39 @@
-name: OEE v0.2.0 outcome curriculum validation
+name: OEE current curriculum validation
 
 on:
   pull_request:
     paths:
       - 'curriculum/**'
-      - 'scripts/check-outcome-curriculum.py'
-      - 'scripts/course_format_versions.py'
-      - 'scripts/check-app-curriculum.py'
-      - 'scripts/app_catalog.py'
-      - 'tests/test_app_catalog.py'
-      - 'tests/test_app_program_consistency.py'
-      - 'scripts/check-sef-curriculum.py'
-      - 'tests/test_outcome_curriculum.py'
-      - 'tests/test_sys_program_consistency.py'
-      - 'tests/test_outcome_diagnostics.py'
-      - 'tests/test_dual_format_validation.py'
-      - 'tests/test_sef*_migration.py'
-      - 'tests/test_toolkit_fixture_contract.py'
-      - 'tests/fixtures/ot_i02/**'
+      - 'spec/**'
+      - 'scripts/**'
+      - 'tests/**'
+      - 'tooling/oee_toolkit/**'
       - '.github/workflows/outcome-curriculum.yml'
   push:
     branches: [main]
     paths:
       - 'curriculum/**'
-      - 'scripts/check-outcome-curriculum.py'
-      - 'scripts/course_format_versions.py'
-      - 'scripts/check-app-curriculum.py'
-      - 'scripts/app_catalog.py'
-      - 'tests/test_app_catalog.py'
-      - 'tests/test_app_program_consistency.py'
-      - 'scripts/check-sef-curriculum.py'
-      - 'tests/test_outcome_curriculum.py'
-      - 'tests/test_sys_program_consistency.py'
-      - 'tests/test_outcome_diagnostics.py'
-      - 'tests/test_dual_format_validation.py'
-      - 'tests/test_sef*_migration.py'
-      - 'tests/test_toolkit_fixture_contract.py'
-      - 'tests/fixtures/ot_i02/**'
+      - 'spec/**'
+      - 'scripts/**'
+      - 'tests/**'
+      - 'tooling/oee_toolkit/**'
       - '.github/workflows/outcome-curriculum.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
-  outcome-curriculum:
+  current-curriculum:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Unit-test curriculum validators
+      - name: Run repository regression tests
         run: python3 -m unittest discover -s tests -p 'test_*.py' -v
-      - name: Validate all published outcome-driven courses
+      - name: Require every published course to pass the current source contract
+        run: python3 scripts/check-outcome-curriculum.py --all
+      - name: Require the pinned Toolkit to accept every published course
         run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          import subprocess
-          import sys
-
-          sys.path.insert(0, "scripts")
-          from course_format_versions import is_outcome_course
-
-          courses = []
-          for path in sorted(Path("curriculum").glob("*/*.md")):
-              if path.name == "README.md" or path.name == "ARCHITECTURE.md":
-                  continue
-              text = path.read_text(encoding="utf-8")
-              if is_outcome_course(text):
-                  courses.append(path)
-          if not courses:
-              raise SystemExit("No outcome-driven courses found")
-          args = [sys.executable, "scripts/check-outcome-curriculum.py"]
-          for course in courses:
-              args.extend(("--course", str(course)))
-          print("Validating", len(courses), "outcome-driven courses", flush=True)
-          subprocess.run(args, check=True)
-          PY
-      - name: Inspect full repository honestly including unsupported legacy
-        run: |
-          python3 - <<'PY'
-          import json
-          import subprocess
-          import sys
-
-          result = subprocess.run(
-              [sys.executable, "scripts/check-outcome-curriculum.py",
-               "--all", "--format", "json"],
-              capture_output=True, text=True, check=False,
-          )
-          if result.returncode not in (0, 3):
-              print(result.stderr or result.stdout, file=sys.stderr)
-              sys.exit(1)
-          report = json.loads(result.stdout)
-          expected = "passed" if result.returncode == 0 else "incomplete"
-          if report["structuralOutcome"] != expected or report["failedCourses"]:
-              print(report, file=sys.stderr)
-              sys.exit(1)
-          print(
-              f"Scan: {report['inspectedCourses']} courses, "
-              f"{report['passedCourses']} supported/passed, "
-              f"{report['incompleteCourses']} unsupported/incomplete. "
-              "No educational conformance claim."
-          )
-          PY
+          REVISION="$(git rev-parse HEAD)"
+          python3 -m tooling.oee_toolkit check \
+            --repo . --revision "$REVISION" --all

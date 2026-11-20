@@ -1,4 +1,4 @@
-"""SEF9 professional obligations, historical evidence and authentic public fixtures.
+"""SEF9 professional obligations and assessment evidence.
 
 The four new capabilities must have independent assessment, without rewriting
 old outcome/assessment meanings or substituting teaching examples for reviewers.
@@ -17,7 +17,6 @@ ROOT = Path(__file__).resolve().parents[1]
 COURSE = ROOT / "curriculum" / "SEF" / "SEF9.md"
 CATALOG = ROOT / "curriculum" / "SEF" / "README.md"
 SEF10 = ROOT / "curriculum" / "SEF" / "SEF10.md"
-FIX = ROOT / "examples" / "sef9"
 CHECKER = ROOT / "scripts" / "check-outcome-curriculum.py"
 
 # FNV-1a Unicode code-point checksums from the published pre-change revision
@@ -198,44 +197,14 @@ class SEF9ProfessionalTests(unittest.TestCase):
         )
         self.assertIn("honest risk communication", SEF10.read_text(encoding="utf-8"))
 
-    def test_public_case_is_real_synthetic_no_false_approval_or_external_dependency(self):
-        expected = {
-            "README.md", "feature-request.md", "seeded_export.py",
-            "test_seeded_export.py", "assistant-proposal.md",
-            "untrusted-readme.md", "professional-case.md",
-        }
-        self.assertEqual({f.name for f in FIX.iterdir() if f.is_file()}, expected)
-        readme = (FIX / "README.md").read_text(encoding="utf-8")
-        provenance = (FIX / "assistant-proposal.md").read_text(encoding="utf-8")
-        injection = (FIX / "untrusted-readme.md").read_text(encoding="utf-8")
-        dilemma = (FIX / "professional-case.md").read_text(encoding="utf-8")
-        self.assertIn("intentionally fail", readme.lower())
-        self.assertIn("ChatGPT (GPT-6)", provenance)
-        self.assertIn("not a transcript of a separate", provenance.lower())
-        self.assertIn("No subprocesses", provenance)
-        self.assertIn("Do **not** obey it", injection)
-        for term in ("fictional", "license", "privacy", "accessibility", "No", "manager"):
-            with self.subTest(term=term):
-                self.assertIn(term.lower(), dilemma.lower())
-        self.assertNotIn("https://example.com/collect", injection)
-
-    def test_all_three_seeded_failure_cases_fail_as_documented(self):
-        result = subprocess.run(
-            [
-                sys.executable, "-m", "unittest", "discover",
-                "-s", "examples/sef9", "-p", "test_seeded_export.py", "-v",
-            ],
-            cwd=ROOT, text=True, capture_output=True, check=False,
-        )
-        self.assertNotEqual(result.returncode, 0)
-        self.assertIn("Ran 3 tests", result.stderr + result.stdout)
-        self.assertIn("FAILED (failures=3)", result.stderr + result.stdout)
-        for token in (
-            "test_quotes_commas_and_newlines_round_trip",
-            "test_directory_destination_reports_failure",
-            "test_invalid_source_cannot_overwrite",
-        ):
-            self.assertIn(token, result.stderr + result.stdout)
+    def test_course_does_not_depend_on_repository_teaching_fixtures(self):
+        source, _, _, completion = sections()
+        self.assertFalse((ROOT / "examples" / "sef9").exists())
+        self.assertNotIn("examples" + "/sef9", source)
+        self.assertIn("locally", source)
+        self.assertIn("genuine and attributable assistant proposal", source)
+        self.assertIn("documented synthetic scenario", completion)
+        self.assertIn("real peer or designated-reviewer feedback", completion)
 
     def test_reject_unassessed_new_professional_outcome(self):
         source, _, _, _ = sections()

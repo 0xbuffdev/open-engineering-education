@@ -48,7 +48,22 @@ def metadata(text: str) -> dict[str, str]:
 def prerequisites(raw: str) -> tuple[list[str], list[str]]:
     """Normalize explicit course-code references and bounded same-program ranges."""
     errors = []
+    # Preserve only direct prerequisite identifiers. Course catalogs may also
+    # describe earlier preparation or full-program capstone evidence in prose.
     source = re.sub(r"\[([A-Z]+[1-9]\d*)\]\([^)]*\)", r"\1", raw)
+    # A catalog may follow its direct prerequisites with a separate capstone
+    # evidence reminder. Semicolons separating direct courses remain valid.
+    source = re.split(r";\s*(?:verify|evidence|assessed completion)\b", source,
+                      maxsplit=1, flags=re.IGNORECASE)[0]
+
+    def remove_note(match: re.Match[str]) -> str:
+        inner = match.group(1).strip()
+        # "Completed SEF (SEF10)" is itself a direct prerequisite.
+        if not CODE.search(source[:match.start()]) and re.fullmatch(r"[A-Z]+[1-9]\d*", inner):
+            return inner
+        return ""
+
+    source = re.sub(r"\(([^)]*)\)", remove_note, source)
 
     def expand(match: re.Match[str]) -> str:
         first, last = match.groups()
@@ -65,12 +80,24 @@ def prerequisites(raw: str) -> tuple[list[str], list[str]]:
 
 
 def declared_counts(root: Path) -> dict[str, int | None]:
+    """Read published course totals from the current overview catalog table."""
     index = root / "curriculum" / "README.md"
     text = index.read_text(encoding="utf-8") if index.exists() else ""
-    counts: dict[str, int | None] = {}
-    for program in PROGRAMS:
-        match = re.search(rf"^\|\s*`?{program}`?\s*\|[^\n]*\|\s*([^|]+)\|\s*\[{program}/\]", text, re.MULTILINE)
-        counts[program] = sum(map(int, re.findall(r"\d+", match.group(1)))) if match else None
+    counts: dict[str, int | None] = {program: None for program in PROGRAMS}
+    for line in text.splitlines():
+        if not line.startswith("|"):
+            continue
+        cells = [cell.strip() for cell in line.strip("|").split("|")]
+        if len(cells) < 4:
+            continue
+        program = cells[0].strip("`")
+        if program not in counts:
+            continue
+        if not re.search(rf"\]\({program}/(?:README\.md)?\)", cells[3]):
+            continue
+        amounts = [int(n) for n in re.findall(r"\d+", cells[2])]
+        if amounts:
+            counts[program] = sum(amounts)
     return counts
 
 
@@ -97,12 +124,21 @@ def catalog_rows(program: str, index: Path) -> tuple[dict[str, dict], list[str]]
         if len(cells) < 5:
             errors.append(f"{name}: incomplete catalog row")
             continue
-        kind = cells[4].strip("`")
+        label = cells[4].strip("`").strip().lower()
+        if label in ("course", "required course"):
+            kind, track = "course", "core"
+        elif label in ("project", "required project"):
+            kind, track = "project", "core"
+        elif label in ("elective", "elective course"):
+            kind, track = "course", "elective"
+        else:
+            errors.append(f"{name}: unknown course type or track: {cells[4]}")
+            continue
         status = re.search(r"\b(draft|tested|verified)\b", cells[5], re.I) if len(cells) > 5 else None
         classification = re.search(r"\b(core|elective)\b", cells[5], re.I) if len(cells) > 5 else None
         codes, parse_errors = prerequisites(cells[3])
         rows[name] = {"title": cells[1], "kind": kind, "prerequisites": codes,
-                      "classification": classification.group(1).lower() if classification else "core",
+                      "classification": classification.group(1).lower() if classification else track,
                       "status": status.group(1).lower() if status else None}
         errors.extend(f"{name}: {err}" for err in parse_errors)
     if not rows:

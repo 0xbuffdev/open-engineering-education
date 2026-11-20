@@ -387,10 +387,9 @@ class SEFProgramConsistencyTests(unittest.TestCase):
                 source = text(course)
                 self.assertIn("**Status:** draft", source)
                 self.assertIn("**Specification:** v0.2.0", source)
-        self.assertIn("All twenty AI courses remain `draft`", overview)
+        self.assertIn("All 76 course files", overview)
         self.assertIn("AI1–AI16 are required", ai)
         self.assertIn("AI17–AI20 are optional specializations", ai)
-        self.assertIn("All fourteen SEC courses also remain `draft`", overview)
         self.assertIn("SEF develops programming and mathematical foundations", overview)
         self.assertIn("All eleven courses are required", sef)
 

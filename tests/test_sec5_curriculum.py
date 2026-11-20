@@ -11,7 +11,7 @@ COURSE = ROOT / "curriculum" / "SEC" / "SEC5.md"
 CATALOG = COURSE.parent / "README.md"
 
 
-class SEC5MigrationTests(unittest.TestCase):
+class SEC5CurriculumTests(unittest.TestCase):
     def test_official_outcome_curriculum_validation(self):
         result = subprocess.run(
             [sys.executable, str(ROOT / "scripts" / "check-outcome-curriculum.py"),

@@ -40,6 +40,36 @@ jobs:
           python3 scripts/curriculum_inventory.py \
             --include-open-prs --output-dir "$RUNNER_TEMP/oee-inventory"
           cat "$RUNNER_TEMP/oee-inventory/inventory.md" >> "$GITHUB_STEP_SUMMARY"
+      - name: Require complete current-format course coverage
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          report_path = Path(os.environ["RUNNER_TEMP"]) / "oee-inventory" / "inventory.json"
+          report = json.loads(report_path.read_text(encoding="utf-8"))
+          problems = []
+          for program in report["programs"]:
+              if not program["catalog_present"] or program["issues"]:
+                  problems.append(f'{program["program"]}: {program["issues"] or "missing catalog"}')
+          published = 0
+          for course in report["courses"]:
+              if course["format"] == "pending_pr_unreviewed" and not course["source_sha"]:
+                  continue
+              published += 1
+              if (course["catalog"] != "listed"
+                      or course["format"] != "v0.2.0"
+                      or course["structural_validation"] != "passed"
+                      or course["prerequisite_issues"]
+                      or course["structural_errors"]):
+                  problems.append(f'{course["code"]}: source, catalog or prerequisite validation failed')
+          if not published:
+              problems.append("No published courses found")
+          if problems:
+              raise SystemExit("\n".join(problems))
+          print(f"{published} published courses agree with their catalogs and current format.")
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: oee-curriculum-inventory

@@ -14,7 +14,7 @@ COURSE = ROOT / "curriculum" / "SEF" / "SEF2.md"
 CATALOG = ROOT / "curriculum" / "SEF" / "README.md"
 
 
-class SEF2MigrationTests(unittest.TestCase):
+class SEF2CurriculumTests(unittest.TestCase):
     def test_v020_outcome_checker_accepts_sef2(self):
         result = subprocess.run(
             [

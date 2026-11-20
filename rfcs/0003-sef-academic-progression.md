@@ -3,9 +3,11 @@
 - **Status:** `accepted`
 - **Author:** 0xBUFF (proposal for steward review)
 - **Created:** 2026-11-16
-- **Last updated:** 2026-11-16
+- **Last updated:** 2026-11-20
 - **Related issue:** [#79 — SEF academic hardening](https://github.com/0xbuffdev/open-engineering-education/issues/79)
 - **Affected specification version:** existing draft `v0.2.0` course format; proposed SEF curriculum revisions only
+
+**Current implementation:** The eleven-course SEF catalog and its assessment contracts are published as `v0.2.0` drafts. The original problems and delivery steps below describe the November 16 decision. The [SEF catalog](../curriculum/SEF/README.md) and course definitions describe current requirements; no course-format migration or bundled SEF9 example is required.
 
 ## 1. Summary
 
@@ -220,7 +222,9 @@ These questions do not alter the central proposed prerequisite and competency-ow
 | Proof/algorithm correctness transfer in SEF4 | [PR #92](https://github.com/0xbuffdev/open-engineering-education/pull/92) |
 | C11 memory and data-structure library in SEF6 | [PR #94](https://github.com/0xbuffdev/open-engineering-education/pull/94) |
 | Unix/POSIX foundations and non-normative SYS destination mapping in SEF7 | [PR #96](https://github.com/0xbuffdev/open-engineering-education/pull/96) |
-| Non-AI ethics, rights, privacy, accessibility and public fixtures in SEF9 | [PR #98](https://github.com/0xbuffdev/open-engineering-education/pull/98) |
+| Non-AI ethics, rights, privacy and accessibility in SEF9, including the original public examples | [PR #98](https://github.com/0xbuffdev/open-engineering-education/pull/98) |
 | Ten-prerequisite closure, integrated capstone and responsible release in SEF10 | [PR #101](https://github.com/0xbuffdev/open-engineering-education/pull/101) |
+
+The SEF9 example files introduced during the original implementation are no longer part of the current repository. [SEF9](../curriculum/SEF/SEF9.md) specifies the synthetic scenarios and attributable assistant material that learners or instructors must prepare, without requiring a bundled example pack.
 
 The [SEF catalog](../curriculum/SEF/README.md) now publishes the current course order, prerequisites, workload guidance and graduation requirements. Authentic learner completions, feedback and qualified review remain necessary for course-readiness promotion. **This closes the RFC's planned course-edit milestones, not the learner-testing or program-conformance requirements.** All eleven current SEF courses are still labelled `draft`. None is promoted to `tested` or `verified` by the merge of the course PRs, by a structural validator, or by this closure record. The original `## 9. Open questions` remain informative historically; workload calibration, learner pilots, real independent review and any future SYS transfer continue to require actual evidence and separately reviewed decisions.

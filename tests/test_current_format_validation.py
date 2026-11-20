@@ -94,10 +94,6 @@ class CurrentFormatValidationTests(unittest.TestCase):
         # The public SEF catalog and SEF11 link the accepted architecture RFC.
         # Keep the isolated repository fixture faithful to those local links.
         shutil.copytree(ROOT / "rfcs", self.root / "rfcs")
-        # SEF9 publicly links to reproducible example fixtures; isolated repo
-        # validator tests must copy linked examples instead of manufacturing
-        # missing-link failures unrelated to the mutation under inspection.
-        shutil.copytree(ROOT / "examples", self.root / "examples")
         self.app.ROOT = self.root
         self.app.APP = self.root / "curriculum" / "APP"
         self.sef.ROOT = self.root

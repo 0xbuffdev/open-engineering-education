@@ -20,12 +20,6 @@ Examples include spelling corrections, broken-link fixes, formatting improvement
 
 Routine changes may proceed through a pull request. The pull request and its review history form the decision record.
 
-### Historical exception: initial format stabilization (expired)
-
-When OEE started with the draft `v0.0.1` curriculum and no established canonical course definitions, governance allowed **one direct, publicly reviewed specification pull request** to establish the initial course-format baseline without a separate RFC. The exception was limited to course-format rules and directly related conformance and governance documentation. The change still required a recorded rationale, compatibility analysis, public review, and final decision; it did not waive DCO sign-offs, licensing, evidence requirements, or other substantive obligations.
-
-**This one-time exception has expired.** It is retained here only to explain the historical approval path. All current and future normative changes follow the established [RFC process](rfcs/README.md).
-
 ### Normative changes
 
 Changes to `spec/`, required course structure, assessment requirements, status-label definitions, conformance criteria, or other binding requirements MUST follow the [RFC process](rfcs/README.md).
