@@ -6,16 +6,14 @@ source-located checker; it does not implement a second course grammar.
 
 from __future__ import annotations
 
-import importlib.util
 import json
-from pathlib import Path
 import re
-import sys
 
+from . import _outcome_parser
+from . import __version__ as TOOL_VERSION
 from .source import GitSource, SourceError, VIRTUAL_ROOT
 
 REPOSITORY = "0xbuffdev/open-engineering-education"
-TOOL_VERSION = "0.0.0-dev"
 RULE_SET_VERSION = "v0.2.0-ot-i04"
 SPECIFICATION = "v0.2.0"
 CODE_RE = re.compile(r"([A-Z]{2,6})([1-9]\d*)\Z")
@@ -23,24 +21,6 @@ PREREQUISITE_TOKEN_RE = re.compile(
     r"\b([A-Z]{2,6})([1-9]\d*)(?:\s*[–—-]\s*([A-Z]{2,6})([1-9]\d*))?\b"
 )
 MARKDOWN_LINK_RE = re.compile(r"\[([^\]]+)\]\([^)]+\)")
-
-
-def _load_validator():
-    """Import the existing OEE source checker rather than fork its parser."""
-    scripts = Path(__file__).resolve().parents[2] / "scripts"
-    if str(scripts) not in sys.path:
-        sys.path.insert(0, str(scripts))
-    name = "oee_outcome_parser_for_toolkit"
-    if name not in sys.modules:
-        spec = importlib.util.spec_from_file_location(
-            name, scripts / "check-outcome-curriculum.py"
-        )
-        if spec is None or spec.loader is None:
-            raise SourceError("tool_error", "source parser cannot be loaded")
-        module = importlib.util.module_from_spec(spec)
-        sys.modules[name] = module
-        spec.loader.exec_module(module)
-    return sys.modules[name]
 
 
 def course_path(code: str) -> str:
@@ -102,7 +82,7 @@ def inspect(source: GitSource, code: str) -> tuple[dict, dict | None]:
     skipped = []
     try:
         content = source.read_file(path)
-        parser = _load_validator()
+        parser = _outcome_parser
         try:
             supported = parser.is_outcome_course(content)
         except ValueError as exc:

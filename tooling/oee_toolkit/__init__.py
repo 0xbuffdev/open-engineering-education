@@ -1,5 +1,9 @@
-"""Unreleased draft OEE Toolkit: offline, pinned v0.2.0 inspection and export.
+"""OEE Toolkit — optional first-party structural inspection and export.
 
-The normative OEE specification remains the source of educational authority.
-Governance acceptance and a release review are prerequisites to official status.
+The OEE specification and curriculum Markdown remain authoritative.
+Package installation does not certify educational conformance or a learner.
 """
+
+# Sole package-version authority; pyproject.toml reads this value dynamically.
+# A development candidate is not an authorized published Toolkit release.
+__version__ = "0.1.0.dev0"
