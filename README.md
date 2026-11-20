@@ -55,6 +55,7 @@ Learners keep their implementations, notes, and assessment evidence in their own
 | --- | --- |
 | [`spec/`](spec/README.md) | Binding educational requirements |
 | [`curriculum/`](curriculum/README.md) | Program catalogs and course definitions |
+| [`examples/sef9/`](examples/sef9/README.md) | Public, synthetic assessment fixtures used by SEF9 |
 | [`rfcs/`](rfcs/README.md) | Public proposals and decision records |
 | [`tooling/`](tooling/README.md) | Repository-local checks and derived exports |
 | [`scripts/`](scripts/README.md) | Curriculum and documentation validation |
