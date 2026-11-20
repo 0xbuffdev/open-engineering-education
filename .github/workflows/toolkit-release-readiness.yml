@@ -1,0 +1,63 @@
+name: Independent OEE Toolkit release readiness
+
+# OT-I05 is a validation gate. It does not build, tag, package or publish.
+on:
+  pull_request:
+    paths:
+      - "tooling/**"
+      - "scripts/check-outcome-curriculum.py"
+      - "tests/**"
+      - "NOTICE"
+      - "LICENSE*"
+      - "docs/TOOLKIT-RELEASE-READINESS.md"
+      - ".github/workflows/toolkit-release-readiness.yml"
+      - ".github/workflows/toolkit-interop.yml"
+  push:
+    branches: [main]
+    paths:
+      - "tooling/**"
+      - "scripts/check-outcome-curriculum.py"
+      - "tests/**"
+      - "NOTICE"
+      - "LICENSE*"
+      - "docs/TOOLKIT-RELEASE-READINESS.md"
+      - ".github/workflows/toolkit-release-readiness.yml"
+      - ".github/workflows/toolkit-interop.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  release-smoke:
+    name: External Toolkit CLI and notices (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - name: Check out full public OEE source without persisted credentials
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Install supported Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Independent local Git clone and offline Toolkit verification
+        shell: bash
+        env:
+          RELEASE_SMOKE_REPORT: ${{ runner.temp }}/toolkit-release-readiness.json
+        run: |
+          python tooling/interop/verify_release_readiness.py \
+            --source . --report "$RELEASE_SMOKE_REPORT"
+      - name: Preserve independent verification evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: toolkit-release-readiness-${{ matrix.os }}
+          path: ${{ runner.temp }}/toolkit-release-readiness.json
+          if-no-files-found: warn
+          retention-days: 30

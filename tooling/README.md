@@ -11,6 +11,25 @@ curriculum Markdown. The exported JSON is derived data, not a second
 authoring format, conformance certificate, learner grade or evidence of
 the course having been tested or verified.
 
+## Independent release-readiness verification
+
+The [OT-I05 public release checklist](RELEASE-READINESS.md) documents the
+24 Toolkit acceptance gates, licensing/source provenance, independent
+Windows/macOS/Linux smoke and the separate OEE steward decision needed
+before any official distribution. The [release smoke](interop/verify_release_readiness.py)
+clones the public OEE checkout locally and executes the **repository-local**
+Toolkit without network access or private services:
+
+~~~sh
+python3 tooling/interop/verify_release_readiness.py --source . \
+  --report ../toolkit-readiness.json
+~~~
+
+This is **engineering verification, not package publication**. The
+accepted RFC approves optional Toolkit source, not a package version,
+installed importable API or an official release tag. The current
+CLI and OEE curriculum specification remain versioned separately.
+
 ## Commands
 
 From the public OEE repository checkout (Python 3.11+ and Git installed):
