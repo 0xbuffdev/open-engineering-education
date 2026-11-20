@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/0xbuffdev/open-engineering-education/blob/main/tooling/oee_toolkit/schemas/curriculum-release-manifest-v1.schema.json",
+  "title": "OEE Curriculum Release Manifest Format 1",
+  "description": "Derived read-only curriculum-release source inventory. Not an authoring format, accreditation statement, course readiness promotion, learner record, or release publication.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "formatVersion",
+    "releaseId",
+    "source",
+    "files"
+  ],
+  "properties": {
+    "formatVersion": {
+      "type": "integer",
+      "const": 1
+    },
+    "releaseId": {
+      "type": "string",
+      "pattern": "^[0-9]{4}\\.(0[1-9]|1[0-2])\\.[1-9][0-9]*$"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "commit",
+        "specification"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "const": "0xbuffdev/open-engineering-education"
+        },
+        "commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "specification": {
+          "type": "string",
+          "const": "v0.2.0"
+        }
+      }
+    },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 2000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "sha256",
+          "size"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "pattern": "^(?:curriculum|spec)/(?:[A-Za-z0-9_-]+/)*[A-Za-z0-9_-]+\\.md$|^(?:LICENSE|NOTICE|CITATION\\.cff)$"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "size": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000000
+          }
+        }
+      }
+    }
+  }
+}
