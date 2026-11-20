@@ -1,0 +1,89 @@
+name: OEE curriculum release manifest (REL-I01)
+
+# Read-only candidate manifest validation. No registry permissions, uploads
+# to a release, tags, publishing credentials or consumer activation.
+on:
+  pull_request:
+    paths:
+      - "tooling/oee_toolkit/release_manifest.py"
+      - "tooling/oee_toolkit/schemas/curriculum-release-manifest-v1.schema.json"
+      - "tests/test_curriculum_release_manifest.py"
+      - "scripts/build-curriculum-release-manifest.py"
+      - "tooling/RELEASE-MANIFEST.md"
+      - ".github/workflows/curriculum-release-manifest.yml"
+  push:
+    branches: [main]
+    paths:
+      - "tooling/oee_toolkit/release_manifest.py"
+      - "tooling/oee_toolkit/schemas/curriculum-release-manifest-v1.schema.json"
+      - "tests/test_curriculum_release_manifest.py"
+      - "scripts/build-curriculum-release-manifest.py"
+      - ".github/workflows/curriculum-release-manifest.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  manifest:
+    name: Candidate manifest / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - name: Checkout immutable OEE candidate with full Git history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run synthetic release contract and malformed-source negatives
+        shell: bash
+        run: python -m unittest discover -s tests -p 'test_curriculum_release_manifest.py' -v
+      - name: Build and verify unpublished whole-curriculum candidate at exact CI checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+          rev="$(git rev-parse HEAD)"
+          python scripts/build-curriculum-release-manifest.py \
+            --repo . --revision "$rev" --release-id 2099.01.1 \
+            --output release-manifest-candidate.json
+          python scripts/build-curriculum-release-manifest.py \
+            --repo . --revision "$rev" --check release-manifest-candidate.json
+          python -c "import json; from pathlib import Path; p=json.loads(Path('release-manifest-candidate.json').read_text()); assert len(p['files']) >= 76; assert len([f for f in p['files'] if f['path'].startswith('curriculum/') and f['path'].endswith('.md')]) >= 76"
+      - name: Upload only non-published manifest byte-comparison evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: manifest-${{ matrix.os }}
+          path: release-manifest-candidate.json
+          retention-days: 1
+          if-no-files-found: error
+
+  compare:
+    name: Cross-platform manifest byte equality (no release)
+    needs: manifest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download per-platform test evidence
+        uses: actions/download-artifact@v4
+        with:
+          pattern: manifest-*
+          path: candidate-inputs
+      - name: Compare exact canonical bytes across operating systems
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib
+          files = sorted(Path("candidate-inputs").rglob("release-manifest-candidate.json"))
+          assert len(files) == 3, f"expected three platform results, got {files}"
+          bodies = [file.read_bytes() for file in files]
+          assert bodies[0] == bodies[1] == bodies[2], "cross-platform manifest drift"
+          print("REL-I01 cross-platform SHA-256:", hashlib.sha256(bodies[0]).hexdigest())
+          print("No OEE curriculum release published")
+          PY

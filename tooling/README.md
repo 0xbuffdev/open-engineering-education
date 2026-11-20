@@ -69,6 +69,20 @@ intentional provenance guarantee, not a public usability requirement we
 intend to keep indefinitely. Package installation and curriculum source
 selection are separate concerns.
 
+## Immutable curriculum release manifest (REL-I01)
+
+The [release manifest candidate](RELEASE-MANIFEST.md) inventories the
+**entire** current public curriculum and specification at an exact
+publisher-selected Git commit, using the Toolkit's existing course parser
+and a deterministic, full-digest source file manifest. The publisher-only
+command is `python3 scripts/build-curriculum-release-manifest.py`.
+
+This is source-integrity preparation **only**. The accepted
+[RFC 0005](../rfcs/0005-immutable-curriculum-releases.md) separately gates
+the archive, installed release lock, Git-free Toolkit export, and consumer
+cutovers. No archive, package, release tag, learner data, or publication
+is created by REL-I01.
+
 ## Commands
 
 From the public OEE repository checkout (Python 3.11+ and Git installed):
