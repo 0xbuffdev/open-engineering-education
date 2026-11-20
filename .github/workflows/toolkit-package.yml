@@ -1,0 +1,68 @@
+name: Toolkit package build and clean-install smoke
+
+# Source packaging and provenance verification only. This workflow has no
+# registry credentials, ID token, publishing step or release/tag creation.
+on:
+  pull_request:
+    paths:
+      - "pyproject.toml"
+      - "MANIFEST.in"
+      - "tooling/oee_toolkit/**"
+      - "tooling/interop/verify_package_install.py"
+      - "tooling/README.md"
+      - "tooling/LICENSING.md"
+      - "tooling/RELEASE-READINESS.md"
+      - "scripts/check-outcome-curriculum.py"
+      - "scripts/course_format_versions.py"
+      - ".github/workflows/toolkit-package.yml"
+  push:
+    branches: [main]
+    paths:
+      - "pyproject.toml"
+      - "MANIFEST.in"
+      - "tooling/oee_toolkit/**"
+      - "tooling/interop/verify_package_install.py"
+      - "scripts/check-outcome-curriculum.py"
+      - "scripts/course_format_versions.py"
+      - ".github/workflows/toolkit-package.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  clean-wheel:
+    name: Installed Toolkit / ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout source and full Git history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install build-only packaging prerequisites
+        run: python -m pip install "build>=1" "setuptools>=77" wheel
+      - name: Build wheel and source archive without publishing
+        run: python -m build --wheel --sdist
+      - name: Verify installed CLI from outside source, sdist and license scope
+        run: python tooling/interop/verify_package_install.py --dist dist
+      - name: Confirm source archive independently builds a wheel
+        shell: bash
+        run: |
+          mkdir -p .cache/sdist-wheel
+          python -m pip wheel --no-deps dist/*.tar.gz --wheel-dir .cache/sdist-wheel
+          python -c "from pathlib import Path; assert len(list(Path('.cache/sdist-wheel').glob('*.whl'))) == 1"
+      - name: Run canonical repository tests after parser relocation
+        shell: bash
+        run: |
+          python -m unittest discover -s tests -p 'test_toolkit_*.py' -v
+          python -m unittest discover -s tests -p 'test_outcome_*.py' -v
+          python -m unittest discover -s tests -p 'test_current_format_validation.py' -v

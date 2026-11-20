@@ -2,7 +2,7 @@
 
 The Toolkit checks OEE course structure and produces deterministic curriculum exports from Git. It is a repository-local implementation of the approach accepted in [RFC 0002](../rfcs/0002-toolkit-stewardship-and-licensing.md).
 
-The Toolkit has not been published as a standalone package, and its library API is not stable. Distribution and support will need a separate release review. [Toolkit licensing](LICENSING.md) explains which licenses apply to its files.
+The Toolkit has not been published as an official standalone package, and its library API is not stable. The first independent wheel/source-archive **candidate** is buildable from the public repository; publication, distribution terms and support still need a separate steward approval. [Toolkit licensing](LICENSING.md) explains which licenses apply to its files.
 
 The Toolkit reads **OEE v0.2.0 course sources only** at a full, immutable 40-character Git commit SHA. It reads local Git objects and does not fetch a remote or take educational source from a moving branch, the index, or an uncommitted worktree.
 
@@ -30,6 +30,45 @@ accepted RFC approves optional Toolkit source, not a package version,
 installed importable API or an official release tag. The current
 CLI and OEE curriculum specification remain versioned separately.
 
+## Installable-package candidate (Stage 1)
+
+This repository now carries Python packaging metadata in
+[`pyproject.toml`](../pyproject.toml), one package version authority in
+[`oee_toolkit/__init__.py`](oee_toolkit/__init__.py), and a console
+entrypoint, `oee-toolkit`. The version currently denotes an **unreleased
+development candidate**. No PyPI project claim, release tag or official
+package version is implied by building it.
+
+The package contains only the MIT-covered Toolkit implementation, the shared
+v0.2.0 parser, the source reader, and the software export JSON Schema.
+The CC BY educational course Markdown and actual-course golden JSON exports
+are **not bundled**. The OEE repository maintenance checker calls the exact
+same installed-package parser implementation. `scripts/` is no longer a
+runtime dependency of the installed Toolkit.
+
+To inspect a local candidate, without publishing:
+
+~~~sh
+python3 -m pip install build
+python3 -m build --wheel --sdist
+python3 tooling/interop/verify_package_install.py --dist dist
+~~~
+
+The verifier installs the built wheel in an isolated environment outside
+this source repository, exercises the `oee-toolkit` CLI against a source
+commit, compares exports byte-for-byte with the repository's CLI, and checks
+software-license attribution and source-archive contents. The
+[`toolkit-package.yml`](../.github/workflows/toolkit-package.yml) workflow
+repeats the test on Linux, macOS and Windows; it has no publishing
+permissions or registry credentials.
+
+Until Stage 2's separately approved immutable **curriculum-release
+manifest** exists, the installed command continues to require a trusted
+local OEE Git repository and an exact full source revision. This is an
+intentional provenance guarantee, not a public usability requirement we
+intend to keep indefinitely. Package installation and curriculum source
+selection are separate concerns.
+
 ## Commands
 
 From the public OEE repository checkout (Python 3.11+ and Git installed):
@@ -51,11 +90,10 @@ python3 -m tooling.oee_toolkit export \
 Use `--output -` to write derived JSON to stdout. A file export is written
 atomically only **after** the entire selected course passes structural
 checks; a missing/unsupported source leaves an existing destination
-untouched. The implemented repository-local Python command is
-`python3 -m tooling.oee_toolkit`; no separately installed
-`oee_toolkit` package, stabilized importable API or Toolkit semantic
-version is approved yet. Public distribution, API support and release
-mechanisms require a separate review.
+untouched. The repository-local command remains `python3 -m tooling.oee_toolkit`. The
+installable candidate exposes `oee-toolkit` and `python3 -m oee_toolkit`.
+A stabilized importable API, official package release version and public
+distribution still require separate approval.
 
 **Exit codes:** 0 structurally passed; 1 structural violation or unsafe
 reference; 2 invalid CLI arguments; 3 missing/incomplete/unsupported
@@ -71,8 +109,9 @@ Every course must satisfy the current OEE v0.2.0 structural contract.
   selected blobs. It rejects missing objects, symlinks, path escapes and
   unsupported file contents. Linked public briefs resolve only at the
   selected Git tree, without reading current disk files.
-- The existing scripts/check-outcome-curriculum.py remains the **single
-  parser and structural validator**. Its optional extraction callback
+- The packaged `oee_toolkit/_outcome_parser.py` is the **single
+  parser and structural validator**. The repository's checker imports it;
+  its optional extraction callback
   collects exactly the outcome, assessment, module and coverage identities
   observed by validation. There is no second Markdown course parser in
   this package.
@@ -99,8 +138,9 @@ Git tree; a course-level snapshot **does not invent program catalog order**
 or establish the assessed quality of prerequisite work.
 
 This draft implements course check and course export, with a read-only
-repository inspection. Full program-catalog export, a distributable CLI
-package and public release numbering are **not implemented or claimed**.
+repository inspection. Full program-catalog export and an **approved published** Toolkit package
+or public release numbering are **not yet implemented or claimed**. The
+source-buildable package candidate is verification work, not publication.
 RFC 0002 has been accepted, but its approval does not complete the
 remaining release-readiness work.
 

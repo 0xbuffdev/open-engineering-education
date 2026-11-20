@@ -1,0 +1,20 @@
+# Distribute only first-party Toolkit software and its interface schema.
+# Normative OEE curriculum, public assessment briefs and golden exports are
+# CC BY educational content, not MIT-only Toolkit package assets.
+include pyproject.toml
+include tooling/README.md
+include LICENSE-MIT
+include NOTICE
+recursive-include tooling/oee_toolkit *.py *.json
+
+prune curriculum
+prune spec
+prune rfcs
+prune docs
+prune scripts
+prune tests
+prune tooling/interop
+prune .github
+
+exclude LICENSE
+global-exclude __pycache__ *.py[cod] *.swp

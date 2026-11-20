@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "oee-toolkit"
+dynamic = ["version"]
+description = "First-party Open Engineering Education structural validator and immutable-source exporter"
+readme = "tooling/README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE-MIT", "NOTICE"]
+authors = [{ name = "0xBUFF" }]
+keywords = ["education", "curriculum", "validation", "oee"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Operating System :: OS Independent",
+]
+dependencies = []
+
+[project.urls]
+Source = "https://github.com/0xbuffdev/open-engineering-education"
+Documentation = "https://github.com/0xbuffdev/open-engineering-education/tree/main/tooling"
+Specification = "https://github.com/0xbuffdev/open-engineering-education/tree/main/spec"
+
+[project.scripts]
+oee-toolkit = "oee_toolkit.__main__:main"
+
+[tool.setuptools]
+package-dir = { "" = "tooling" }
+packages = ["oee_toolkit"]
+include-package-data = true
+
+[tool.setuptools.dynamic]
+version = { attr = "oee_toolkit.__version__" }
+
+[tool.setuptools.package-data]
+oee_toolkit = ["schemas/*.json"]

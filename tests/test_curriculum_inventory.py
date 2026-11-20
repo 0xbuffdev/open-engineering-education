@@ -50,6 +50,13 @@ class InventoryTests(unittest.TestCase):
         (self.root / "scripts").mkdir()
         for filename in ("course_format_versions.py", "check-outcome-curriculum.py"):
             shutil.copyfile(ROOT / "scripts" / filename, self.root / "scripts" / filename)
+        # Maintenance commands now import the one packaged parser. Include
+        # that package in the synthetic checkout rather than a second parser.
+        shutil.copytree(
+            ROOT / "tooling" / "oee_toolkit",
+            self.root / "tooling" / "oee_toolkit",
+            ignore=shutil.ignore_patterns("__pycache__", "*.pyc"),
+        )
         (self.root / "curriculum").mkdir()
         (self.root / "curriculum" / "README.md").write_text(
             "| Code | Program | Courses | Directory |\n"

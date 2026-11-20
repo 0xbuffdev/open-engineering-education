@@ -130,6 +130,35 @@ relabelled as a packaged-install test or official distribution.
 Human legal/source-provenance review and any external distribution
 approval also remain outstanding.
 
+## Proposed packaged distribution candidate (Stage 1)
+
+A source-buildable, **unpublished** Python distribution now lives in the
+repository's `pyproject.toml` and `MANIFEST.in`. The actual course parser
+and version classifier have one owner inside `tooling/oee_toolkit/`; the
+repository checker invokes them rather than maintaining another
+implementation. The installable CLI is `oee-toolkit`, with no required
+third-party Python runtime dependencies.
+
+[`toolkit-package.yml`](../.github/workflows/toolkit-package.yml) builds
+wheel and source archives on Linux, macOS and Windows and invokes
+[`verify_package_install.py`](interop/verify_package_install.py) from a
+fresh isolated virtual environment outside the OEE source tree. That test
+checks that the wheel works without repository maintenance scripts, produces
+byte-identical pinned JSON, includes MIT and NOTICE files, excludes CC BY
+curriculum and golden exports, and rejects unavailable immutable revisions.
+The source archive must independently rebuild into a wheel.
+
+These are **new OT-20 technical acceptance tests**, not proof that the
+artifact has been successfully tested until the CI run passes. The original
+manual copyright, third-party rights, release-number selection, maintainer
+smoke and explicit publication authorization below remain mandatory.
+No PyPI publishing, GitHub Release or tag workflow has been added.
+
+Until a distinct approved curriculum-release manifest is adopted, the
+installed CLI still selects an exact source Git commit. The proposed next
+stage would replace this consumer-facing requirement with an immutable,
+digest-checked release ID while retaining reproducible source provenance.
+
 ## Cross-repository provenance and SSOT
 
 The immutable [golden fixtures](../tooling/interop/golden/) are

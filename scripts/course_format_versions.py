@@ -1,35 +1,14 @@
-"""Classify supported OEE v0.2.0 sources and run structural validation.
-
-An explicit unsupported version fails closed. Unmarked sources with recognizable
-current outcome or assessment identifiers are still checked for completeness.
-"""
+"""Repository maintenance callers of the packaged OEE format detector."""
 
 from pathlib import Path
-import re
 import subprocess
 import sys
 
-SPEC_RE = re.compile(
-    r"^\*\*(?:Specification|OEE specification):\*\*\s*`?(v\d+\.\d+\.\d+)`?\s*$",
-    re.IGNORECASE | re.MULTILINE,
-)
-ID_HINT_RE = re.compile(
-    r"^\s*-\s+\*\*[A-Z]{2,6}[1-9]\d*-(?:O|AS)[1-9]\d*",
-    re.MULTILINE,
-)
-OUTCOME_VERSION = "v0.2.0"
+_REPO = Path(__file__).resolve().parents[1]
+if str(_REPO) not in sys.path:
+    sys.path.insert(0, str(_REPO))
 
-
-def is_outcome_course(content: str) -> bool:
-    """Reject unsupported declared versions; detect the current format."""
-    metadata = content.split("\n## ", 1)[0]
-    match = SPEC_RE.search(metadata)
-    if match:
-        version = match.group(1)
-        if version != OUTCOME_VERSION:
-            raise ValueError(f"unsupported OEE course specification {version}")
-        return True
-    return bool(ID_HINT_RE.search(content))
+from tooling.oee_toolkit._course_format_versions import is_outcome_course  # noqa: E402
 
 
 def validate_outcome_course(path: Path) -> list[str]:
