@@ -83,6 +83,21 @@ the archive, installed release lock, Git-free Toolkit export, and consumer
 cutovers. No archive, package, release tag, learner data, or publication
 is created by REL-I01.
 
+## Signed, offline curriculum archive (REL-I02)
+
+[REL-I02's release archive proposal](RELEASE-ARCHIVE.md) builds a canonical,
+uncompressed TAR from the **REL-I01-verified complete OEE manifest**, and
+supplies explicit Ed25519 attestation verification and no-clobber offline
+installation. Signing uses a separately trusted key and the optional
+`oee-toolkit[release]` dependency; it is not part of the default course
+parser. No GitHub Release, package upload, source promotion or learner
+mutation is performed or authorized by this implementation.
+
+The separate REL-I03 gate will replace consumer-facing Git revisions with a
+pinned manifest lock and current-only Toolkit exportVersion 2. Until it
+lands, this candidate is **not** a ready-to-use Workspace/Content source
+contract.
+
 ## Commands
 
 From the public OEE repository checkout (Python 3.11+ and Git installed):

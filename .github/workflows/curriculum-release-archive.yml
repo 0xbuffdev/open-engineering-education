@@ -1,0 +1,170 @@
+name: OEE release archive candidate and trust gate (REL-I02)
+
+# Test-only candidate TARs. No release, tag, registry credentials, upload
+# permissions, installed learner data, or persistent signing key.
+on:
+  pull_request:
+    paths:
+      - "tooling/oee_toolkit/release_archive.py"
+      - "scripts/build-curriculum-release-archive.py"
+      - "tests/test_curriculum_release_archive.py"
+      - "tooling/RELEASE-ARCHIVE.md"
+      - "pyproject.toml"
+      - ".github/workflows/curriculum-release-archive.yml"
+  push:
+    branches: [main]
+    paths:
+      - "tooling/oee_toolkit/release_archive.py"
+      - "scripts/build-curriculum-release-archive.py"
+      - "tests/test_curriculum_release_archive.py"
+      - "tooling/RELEASE-ARCHIVE.md"
+      - "pyproject.toml"
+      - ".github/workflows/curriculum-release-archive.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  candidate:
+    name: Signed offline candidate / ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout complete immutable source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install test-only Ed25519 dependency
+        run: python -m pip install "cryptography>=44,<50"
+      - name: Run publisher manifest and archive attacker/installer tests
+        shell: bash
+        run: |
+          python -m unittest discover -s tests -p 'test_curriculum_release_manifest.py' -v
+          python -m unittest discover -s tests -p 'test_curriculum_release_archive.py' -v
+      - name: Build and verify full-curriculum, uncompressed candidate bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p candidate-evidence
+          rev="$(git rev-parse HEAD)"
+          python scripts/build-curriculum-release-archive.py build \
+            --repo . --revision "$rev" --release-id 2099.01.1 \
+            --output candidate-evidence/candidate.tar
+          python - <<'PY'
+          from pathlib import Path
+          from tooling.oee_toolkit.release_archive import inspect_archive, sha256
+          from tooling.oee_toolkit.release_manifest import read_canonical_manifest
+          from tooling.oee_toolkit.core import canonical_json
+          from tooling.oee_toolkit.release_archive import canonical_archive
+          data = Path("candidate-evidence/candidate.tar").read_bytes()
+          # For this candidate-only test, derive digest locally to confirm
+          # internal consistency. Real acquisition REQUIRES a separately
+          # reviewed digest lock and steward public key.
+          import io,tarfile,hashlib
+          with tarfile.open(fileobj=io.BytesIO(data),mode="r:") as t:
+              original=t.extractfile("release.json").read()
+          digest=hashlib.sha256(original).hexdigest()
+          manifest,files=inspect_archive(data,digest)
+          assert len([x for x in manifest["files"] if x["path"].startswith("curriculum/") and x["path"].endswith(".md")]) >= 76
+          assert len(manifest["files"]) >= 94
+          assert canonical_archive(manifest,files) == data
+          Path("candidate-evidence/manifest.sha256").write_bytes((digest+"\n").encode("ascii"))
+          print("REL-I02 candidate archive digest:",sha256(data))
+          print("REL-I02 candidate manifest digest:",digest)
+          PY
+      - name: Verify real offline signature and no-clobber staging with disposable key
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          from cryptography.hazmat.primitives import serialization
+          from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+          key=Ed25519PrivateKey.generate()
+          parent=Path("candidate-evidence")
+          (parent/"ephemeral.pem").write_bytes(key.private_bytes(
+              serialization.Encoding.PEM,serialization.PrivateFormat.PKCS8,
+              serialization.NoEncryption()))
+          (parent/"ephemeral.pub.pem").write_bytes(key.public_key().public_bytes(
+              serialization.Encoding.PEM,serialization.PublicFormat.SubjectPublicKeyInfo))
+          PY
+          digest="$(cat candidate-evidence/manifest.sha256)"
+          python scripts/build-curriculum-release-archive.py sign \
+            --archive candidate-evidence/candidate.tar \
+            --expected-manifest-sha256 "$digest" \
+            --private-key candidate-evidence/ephemeral.pem \
+            --attestation candidate-evidence/ephemeral.attestation.json \
+            --signature candidate-evidence/ephemeral.sig
+          python scripts/build-curriculum-release-archive.py verify \
+            --archive candidate-evidence/candidate.tar \
+            --expected-manifest-sha256 "$digest" \
+            --attestation candidate-evidence/ephemeral.attestation.json \
+            --signature candidate-evidence/ephemeral.sig \
+            --trusted-public-key candidate-evidence/ephemeral.pub.pem
+          mkdir -p candidate-installed
+          python scripts/build-curriculum-release-archive.py install \
+            --archive candidate-evidence/candidate.tar \
+            --expected-manifest-sha256 "$digest" \
+            --attestation candidate-evidence/ephemeral.attestation.json \
+            --signature candidate-evidence/ephemeral.sig \
+            --trusted-public-key candidate-evidence/ephemeral.pub.pem \
+            --store candidate-installed
+          test -f "candidate-installed/$digest/release.json"
+          # Verify a second installation fails without destroying old bytes.
+          if python scripts/build-curriculum-release-archive.py install \
+            --archive candidate-evidence/candidate.tar \
+            --expected-manifest-sha256 "$digest" \
+            --attestation candidate-evidence/ephemeral.attestation.json \
+            --signature candidate-evidence/ephemeral.sig \
+            --trusted-public-key candidate-evidence/ephemeral.pub.pem \
+            --store candidate-installed; then
+            echo "ERROR: immutable release was overwritten" >&2; exit 1
+          fi
+          # Never upload or persist even the synthetic private key to CI artifacts.
+          rm -f candidate-evidence/ephemeral*
+      - name: Retain test-only candidate for 24-hour cross-platform comparison
+        uses: actions/upload-artifact@v4
+        with:
+          name: rel-i02-${{ matrix.os }}
+          path: |
+            candidate-evidence/candidate.tar
+            candidate-evidence/manifest.sha256
+          retention-days: 1
+          if-no-files-found: error
+
+  compare:
+    name: Cross-platform canonical TAR bytes (no publication)
+    needs: candidate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download disposable candidate evidence only
+        uses: actions/download-artifact@v4
+        with:
+          pattern: rel-i02-*
+          path: candidates
+      - name: Verify independent archive bytes and manifest digest identity
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from hashlib import sha256
+          archives=sorted(Path("candidates").rglob("candidate.tar"))
+          digests=sorted(Path("candidates").rglob("manifest.sha256"))
+          assert len(archives)==len(digests)==3, (archives,digests)
+          values=[p.read_bytes() for p in archives]
+          assert values[0]==values[1]==values[2], "USTAR bytes differ across OSs"
+          locks=[p.read_bytes() for p in digests]
+          assert locks[0]==locks[1]==locks[2], "manifest digests differ across OSs"
+          print("REL-I02 byte-identical candidate SHA-256:",sha256(values[0]).hexdigest())
+          print("REL-I02 manifest SHA-256:",locks[0].decode().strip())
+          print("No release is published by this workflow")
+          PY
