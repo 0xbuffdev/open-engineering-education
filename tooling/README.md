@@ -54,6 +54,23 @@ python3 -m build --wheel --sdist
 python3 tooling/interop/verify_package_install.py --dist dist
 ~~~
 
+The verifier needs a Python installation that can create a fresh virtual
+environment with pip. On Debian/Ubuntu, install the matching `python3-venv`
+package (for example `python3.12-venv`). If you cannot install system
+packages, select another Python with `venv` and `ensurepip`:
+
+~~~sh
+python3 tooling/interop/verify_package_install.py --dist dist \
+  --python /path/to/uv-managed/python3.12
+~~~
+
+Install the test-only `cryptography` dependency in the selected interpreter.
+If `ensurepip` is unavailable, the verifier reports an actionable host
+environment error before any wheel is tested. Separately, the source-readiness
+JSON's `packagedDistributionVerified: false` only means its source-only checks
+do not run a wheel/sdist install. Keep the independent package-verifier JSON
+as distinct evidence.
+
 The verifier installs the built wheel in an isolated environment outside
 this source repository, exercises the `oee-toolkit` CLI against a disposable, signed and locally installed
 release, compares v2 exports byte-for-byte with the source consumer CLI, and checks
