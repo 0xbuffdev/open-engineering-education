@@ -1,0 +1,318 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/0xbuffdev/open-engineering-education/blob/main/tooling/oee_toolkit/schemas/course-export-v2.schema.json",
+  "title": "OEE Toolkit Immutable Curriculum Release — Derived Course Export Format 2",
+  "description": "One-parser structural export from a locally installed, digest-locked immutable curriculum release; never authoring, conformance, credit or completion evidence.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "exportVersion",
+    "source",
+    "toolkit",
+    "course",
+    "outcomes",
+    "assessments",
+    "modules",
+    "coverage",
+    "validation"
+  ],
+  "properties": {
+    "exportVersion": {
+      "type": "integer",
+      "const": 2
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "releaseId",
+        "manifestSha256",
+        "specification",
+        "coursePath",
+        "courseSha256",
+        "originCommit"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "const": "0xbuffdev/open-engineering-education"
+        },
+        "releaseId": {
+          "type": "string",
+          "pattern": "^[0-9]{4}\\.(0[1-9]|1[0-2])\\.[1-9][0-9]*$"
+        },
+        "manifestSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "specification": {
+          "type": "string",
+          "const": "v0.2.0"
+        },
+        "coursePath": {
+          "type": "string",
+          "pattern": "^curriculum/[A-Z]{2,6}/[A-Z]{2,6}[1-9][0-9]*\\.md$"
+        },
+        "courseSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "originCommit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        }
+      }
+    },
+    "course": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "program",
+        "type",
+        "status",
+        "prerequisites"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Z]{2,6}[1-9][0-9]*$"
+        },
+        "program": {
+          "type": "string",
+          "minLength": 2
+        },
+        "type": {
+          "enum": [
+            "course",
+            "project"
+          ]
+        },
+        "status": {
+          "enum": [
+            "draft",
+            "tested",
+            "verified"
+          ]
+        },
+        "prerequisites": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z]{2,6}[1-9][0-9]*$"
+          }
+        }
+      }
+    },
+    "outcomes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "description",
+          "location"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Z]{2,6}[1-9][0-9]*-O[1-9][0-9]*$"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "location": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "line"
+            ],
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "line": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "assessments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "required",
+          "outcomeIds",
+          "work",
+          "criteria",
+          "evidence",
+          "location"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Z]{2,6}[1-9][0-9]*-AS[1-9][0-9]*$"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "outcomeIds": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Z]{2,6}[1-9][0-9]*-O[1-9][0-9]*$"
+            }
+          },
+          "work": {
+            "type": "string",
+            "minLength": 1
+          },
+          "criteria": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence": {
+            "type": "string",
+            "minLength": 1
+          },
+          "location": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "line"
+            ],
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "line": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "modules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "number",
+          "title",
+          "outcomeIds",
+          "lessons"
+        ],
+        "properties": {
+          "number": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "outcomeIds": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Z]{2,6}[1-9][0-9]*-O[1-9][0-9]*$"
+            }
+          },
+          "lessons": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "ordinal",
+                "title"
+              ],
+              "properties": {
+                "ordinal": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "title": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "patternProperties": {
+        "^[A-Z]{2,6}[1-9][0-9]*-O[1-9][0-9]*$": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z]{2,6}[1-9][0-9]*-AS[1-9][0-9]*$"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "structural",
+        "manualReviewRequired"
+      ],
+      "properties": {
+        "structural": {
+          "const": "passed"
+        },
+        "manualReviewRequired": {
+          "const": true
+        }
+      }
+    },
+    "toolkit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "toolVersion",
+        "ruleSetVersion"
+      ],
+      "properties": {
+        "toolVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ruleSetVersion": {
+          "type": "string",
+          "const": "v0.2.0-ot-i04"
+        }
+      }
+    }
+  }
+}

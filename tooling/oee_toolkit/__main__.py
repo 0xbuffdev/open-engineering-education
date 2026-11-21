@@ -1,144 +1,134 @@
-"""Offline command interface for the proposed OEE Toolkit (not yet released)."""
+"""OEE Toolkit consumer CLI: offline releases, no Git or moving source refs.
+
+The approved project lock is the only source selector. This entrypoint
+accepts only release exportVersion 2 and never falls back to v1, HEAD,
+a repository checkout, guessed default course, network, or cached latest.
+"""
 
 from __future__ import annotations
 
 import argparse
-import os
 from pathlib import Path
 import sys
-import tempfile
 
-from .core import ExportBlocked, canonical_json, export_course, inspect, outcome
-from .source import GitSource, SourceError
+from .core import ExportBlocked, canonical_json, outcome
+from ._publisher_cli import atomic_write
+from .release_manifest import ReleaseManifestError
+from .release_source import (
+    LOCK_FILENAME, export_release_course, inspect_release, resolve_release,
+)
+from .source import SourceError
 
 
-def status_code(state: str) -> int:
-    return {"passed": 0, "failed": 1, "incomplete": 3}[state]
+def build_parser() -> argparse.ArgumentParser:
+    cli = argparse.ArgumentParser(description=__doc__)
+    actions = cli.add_subparsers(dest="command", required=True)
+    for name in ("check", "export"):
+        cmd = actions.add_parser(name, help=(
+            "inspect selected release course(s)" if name == "check"
+            else "export a structurally valid course from the pinned release"
+        ))
+        if name == "check":
+            cmd.add_argument("course", nargs="?",
+                             help="canonical OEE course code, for example SEF1")
+        else:
+            cmd.add_argument("course",
+                             help="required canonical OEE course code, for example SEF1")
+        cmd.add_argument("--lock", type=Path, default=None,
+                         help="explicit project lock; defaults only to ./oee-curriculum.lock.json")
+        cmd.add_argument("--store", type=Path, default=None,
+                         help="existing trusted installed-release store")
+        if name == "check":
+            cmd.add_argument("--all", action="store_true",
+                             help="inspect every course from the locked release")
+            cmd.add_argument("--json", action="store_true",
+                             help="emit deterministic inspection JSON")
+        else:
+            cmd.add_argument("--output", required=True,
+                             help="write UTF-8 JSON atomically to path, or '-' for stdout")
+    return cli
 
 
-def print_inspection(report: dict) -> None:
-    source = report["source"]
-    location = source.get("coursePath", "(repository)")
-    print(f"{location} [{source['revision']}]: {report['structuralOutcome']}",
-          file=sys.stderr)
+def _summarize(reports: list[dict], source, *, all_courses: bool) -> dict:
+    findings = [item for report in reports for item in report["findings"]]
+    return {
+        "toolVersion": reports[0]["toolVersion"],
+        "ruleSetVersion": reports[0]["ruleSetVersion"],
+        "source": {
+            "repository": source.manifest["source"]["repository"],
+            "releaseId": source.release_id,
+            "manifestSha256": source.manifest_sha256,
+            "specification": source.manifest["source"]["specification"],
+            "originCommit": source.revision,
+        },
+        "scope": "repository" if all_courses else "course",
+        "checksPerformed": ["v0.2.0-structure"] if any(
+            r["checksPerformed"] for r in reports) else [],
+        "checksSkipped": [
+            {"course": r["source"]["coursePath"], **skip}
+            for r in reports for skip in r["checksSkipped"]
+        ],
+        "findings": findings,
+        "structuralOutcome": outcome(findings),
+        "manualReviewRequired": True,
+        "courses": reports,
+    }
+
+
+def _print_report(report: dict) -> None:
+    address = report["source"]
+    print(f"{address['coursePath']} [release {address['releaseId']}]: "
+          f"{report['structuralOutcome']}", file=sys.stderr)
     for finding in report["findings"]:
         at = finding["location"]
         print(f"{at['path']}:{at['line']}: {finding['code']} "
-              f"[{finding['category']}]: {finding['message']}",
-              file=sys.stderr)
-    print("Structural inspection only; substantive review required.",
+              f"[{finding['category']}]: {finding['message']}", file=sys.stderr)
+    print("Structural check only; academic review remains necessary.",
           file=sys.stderr)
 
 
-def atomic_write(target: str, data: bytes) -> None:
-    if target == "-":
-        sys.stdout.buffer.write(data)
-        return
-    file = Path(target).expanduser()
-    if not file.parent.is_dir():
-        raise SourceError("missing_input", "output parent directory does not exist")
-    if file.is_symlink():
-        raise SourceError("unsafe_reference", "refusing to replace a symlink output")
-    temp_path = None
-    try:
-        with tempfile.NamedTemporaryFile(
-            dir=file.parent, prefix=f".{file.name}.", suffix=".tmp", delete=False
-        ) as temp:
-            temp_path = Path(temp.name)
-            temp.write(data)
-            temp.flush()
-            os.fsync(temp.fileno())
-        os.replace(temp_path, file)
-    except OSError as exc:
-        raise SourceError("tool_error", f"atomic export write failed: {type(exc).__name__}") from exc
-    finally:
-        if temp_path is not None:
-            temp_path.unlink(missing_ok=True)
-
-
-def parser() -> argparse.ArgumentParser:
-    root = argparse.ArgumentParser(description=__doc__)
-    sub = root.add_subparsers(dest="command", required=True)
-    check = sub.add_parser("check", help="inspect a pinned course or repository")
-    export = sub.add_parser("export", help="export one structurally valid pinned course")
-    for command in (check, export):
-        command.add_argument("--repo", required=True, type=Path,
-                             help="local OEE Git repository (never fetched remotely)")
-        command.add_argument("--revision", required=True,
-                             help="exact full 40-character Git commit SHA")
-    selector = check.add_mutually_exclusive_group(required=True)
-    selector.add_argument("--course", help="canonical course code, e.g. SEF1")
-    selector.add_argument("--all", action="store_true",
-                          help="inspect all active course files; unsupported inputs are incomplete")
-    check.add_argument("--json", action="store_true",
-                       help="write deterministic machine-readable structural diagnostics")
-    export.add_argument("--course", required=True)
-    export.add_argument("--output", required=True,
-                        help="write UTF-8 JSON atomically to path, or '-' for stdout")
-    return root
-
-
 def main(argv: list[str] | None = None) -> int:
-    args = parser().parse_args(argv)
+    cli = build_parser()
+    args = cli.parse_args(argv)
+    if args.command == "check" and bool(args.course) == bool(args.all):
+        cli.error("check requires exactly one course or --all")
+    lock = args.lock if args.lock is not None else Path.cwd() / LOCK_FILENAME
     try:
-        source = GitSource(args.repo, args.revision)
+        source = resolve_release(lock, args.store)
         if args.command == "export":
             try:
-                result = export_course(source, args.course)
+                data = export_release_course(source, args.course)
             except ExportBlocked as exc:
-                print_inspection(exc.report)
-                return status_code(exc.report["structuralOutcome"])
-            atomic_write(args.output, canonical_json(result))
+                _print_report(exc.report)
+                return 1 if exc.report["structuralOutcome"] == "failed" else 3
+            atomic_write(args.output, canonical_json(data))
             return 0
 
-        codes = ([args.course] if args.course else [
-            Path(path).stem for path in source.list_courses()
-        ])
+        codes = source.list_courses() if args.all else [args.course]
+        if args.all:
+            codes = [Path(code).stem for code in codes]
         if not codes:
-            print("No active OEE course files at selected revision", file=sys.stderr)
+            print("missing_input: no courses in the selected curriculum release",
+                  file=sys.stderr)
             return 3
-        reports = [inspect(source, code)[0] for code in codes]
-        overall = outcome([finding for report in reports
-                           for finding in report["findings"]])
+        reports = [inspect_release(source, code)[0] for code in codes]
+        summary = _summarize(reports, source, all_courses=args.all)
         if args.json:
-            summary = {
-                "toolVersion": reports[0]["toolVersion"],
-                "ruleSetVersion": reports[0]["ruleSetVersion"],
-                "source": {"repository": reports[0]["source"]["repository"],
-                           "revision": source.revision,
-                           "specification": reports[0]["source"]["specification"]},
-                "scope": "repository" if args.all else "course",
-                "checksPerformed": ["v0.2.0-structure"] if any(
-                    report["checksPerformed"] for report in reports
-                ) else [],
-                "checksSkipped": [
-                    {"course": r["source"]["coursePath"], **skipped}
-                    for r in reports for skipped in r["checksSkipped"]
-                ],
-                "findings": [
-                    finding for report in reports for finding in report["findings"]
-                ],
-                "structuralOutcome": overall,
-                "manualReviewRequired": True,
-                "courses": reports,
-            }
             sys.stdout.buffer.write(canonical_json(summary))
         else:
             for report in reports:
-                print_inspection(report)
-            print(f"{len(reports)} inspected, "
-                  f"{sum(r['structuralOutcome'] == 'passed' for r in reports)} passed, "
-                  f"{sum(r['structuralOutcome'] == 'incomplete' for r in reports)} incomplete, "
-                  f"{sum(r['structuralOutcome'] == 'failed' for r in reports)} failed.",
-                  file=sys.stderr)
-        return status_code(overall)
+                _print_report(report)
+        return 0 if summary["structuralOutcome"] == "passed" else (
+            1 if summary["structuralOutcome"] == "failed" else 3)
+    except ReleaseManifestError as exc:
+        print(f"invalid_release: {exc}", file=sys.stderr)
+        return 3
     except SourceError as exc:
         print(f"{exc.category}: {exc}", file=sys.stderr)
-        return 4 if exc.category == "tool_error" else (
-            1 if exc.category in ("unsafe_reference", "invalid_reference") else 3
-        )
-    except Exception as exc:
-        print(f"tool_error: unexpected {type(exc).__name__}: {exc}", file=sys.stderr)
+        return 1 if exc.category in ("invalid_reference", "unsafe_reference") else 3
+    except OSError as exc:
+        print(f"tool_error: release filesystem input unavailable: {type(exc).__name__}",
+              file=sys.stderr)
         return 4
 
 

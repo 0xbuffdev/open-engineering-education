@@ -49,7 +49,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install build-only packaging prerequisites
-        run: python -m pip install "build>=1" "setuptools>=77" wheel
+        run: python -m pip install "build>=1" "setuptools>=77" wheel "cryptography>=44,<50"
       - name: Build wheel and source archive without publishing
         run: python -m build --wheel --sdist
       - name: Verify installed CLI from outside source, sdist and license scope

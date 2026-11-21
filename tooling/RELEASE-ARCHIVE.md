@@ -22,11 +22,11 @@ learner assessment or Workspace/Content/0xNAND production cutover.**
   course-export format. It is never a moving pointer or an authentication claim.
 - **Verified identity:** full SHA-256 of the exact UTF-8 `release.json`,
   **not** only the release ID, tag, GitHub asset URL or a text string `latest`.
-  Consumers will carry this value in a separately approved release lock.
+  Consumers carry this value in an independently reviewed release lock.
 
 A full Git commit SHA remains inside the verified manifest for publisher audit,
-but **not** in the target learner/author consumer interface. REL-I03 will
-implement the installed release resolver and exportVersion 2.
+but **not** in the target learner/author consumer interface. REL-I03 implements the installed release resolver and current-only
+exportVersion 2; adoption in Workspace/Content remains separately gated.
 
 ## Deterministic archive format
 

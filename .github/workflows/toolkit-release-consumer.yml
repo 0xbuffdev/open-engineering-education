@@ -1,0 +1,146 @@
+name: Git-free installed curriculum consumer (REL-I03)
+
+# Candidate-only proof of source/content identity; no official release,
+# signer key, publication token, network lookups or downstream deployment.
+on:
+  pull_request:
+    paths:
+      - "tooling/oee_toolkit/release_source.py"
+      - "tooling/oee_toolkit/__main__.py"
+      - "tooling/oee_toolkit/_publisher_cli.py"
+      - "tooling/oee_toolkit/schemas/course-export-v2.schema.json"
+      - "tests/test_toolkit_release_consumer.py"
+      - "tooling/RELEASE-CONSUMER.md"
+      - ".github/workflows/toolkit-release-consumer.yml"
+  push:
+    branches: [main]
+    paths:
+      - "tooling/oee_toolkit/release_source.py"
+      - "tooling/oee_toolkit/__main__.py"
+      - "tooling/oee_toolkit/schemas/course-export-v2.schema.json"
+      - "tests/test_toolkit_release_consumer.py"
+      - ".github/workflows/toolkit-release-consumer.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-consumer:
+    name: Signed snapshot and v2 export / ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout full OEE source for publisher-side candidate creation
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install optional test-only signing verification library
+        run: python -m pip install "cryptography>=44,<50"
+      - name: Verify malformed caches, unknown locks and Git-free CLI
+        shell: bash
+        run: |
+          python -m unittest discover -s tests -p 'test_toolkit_release_consumer.py' -v
+      - name: Produce complete unpublished candidate and verify installed consumer
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p candidate-evidence candidate-store
+          python - <<'PY'
+          from pathlib import Path
+          from cryptography.hazmat.primitives import serialization
+          from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+          from tooling.oee_toolkit.release_archive import build_archive, install_verified_archive
+          from tooling.oee_toolkit.release_archive import sign_candidate
+          from tooling.oee_toolkit.release_manifest import digest_manifest
+          from tooling.oee_toolkit.core import canonical_json
+          from tooling.oee_toolkit.source import GitSource
+          import subprocess
+          revision=subprocess.check_output(["git","rev-parse","HEAD"], text=True).strip()
+          manifest,archive=build_archive(GitSource(Path.cwd(),revision),"2099.01.1")
+          digest=digest_manifest(manifest)
+          key=Ed25519PrivateKey.generate()
+          private=key.private_bytes(serialization.Encoding.PEM,
+            serialization.PrivateFormat.PKCS8,serialization.NoEncryption())
+          public=key.public_key().public_bytes(serialization.Encoding.PEM,
+            serialization.PublicFormat.SubjectPublicKeyInfo)
+          attestation,signature=sign_candidate(archive,digest,private)
+          install_verified_archive(archive,digest,attestation,signature,public,
+            Path("candidate-store"))
+          Path("oee-curriculum.lock.json").write_bytes(canonical_json({
+            "formatVersion":1,"releaseId":manifest["releaseId"],
+            "manifestSha256":digest
+          }))
+          Path("candidate-evidence/manifest.sha256").write_bytes(
+            (digest+"\n").encode("ascii"))
+          assert len(manifest["files"]) >= 94
+          print("CI test-only signed OEE release:",manifest["releaseId"],digest)
+          PY
+          python -m tooling.oee_toolkit check --all \
+            --lock oee-curriculum.lock.json --store candidate-store --json \
+            > candidate-evidence/full-check-v2.json
+          python -m tooling.oee_toolkit export SEF1 \
+            --lock oee-curriculum.lock.json --store candidate-store \
+            --output candidate-evidence/SEF1-v2.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          report=json.loads(Path("candidate-evidence/full-check-v2.json").read_bytes())
+          body=json.loads(Path("candidate-evidence/SEF1-v2.json").read_bytes())
+          digest=Path("candidate-evidence/manifest.sha256").read_bytes().decode().strip()
+          assert report["structuralOutcome"]=="passed",report["findings"]
+          assert len(report["courses"])==76,len(report["courses"])
+          assert body["exportVersion"]==2,body["exportVersion"]
+          assert body["source"]["manifestSha256"]==digest
+          assert body["source"]["releaseId"]=="2099.01.1"
+          assert body["course"]["code"]=="SEF1"
+          assert len(body["outcomes"])==7 and len(body["assessments"])==3
+          assert body["validation"]=={
+            "structural":"passed","manualReviewRequired":True}
+          print("Full 76-course signed snapshot validated without Git by consumer CLI")
+          PY
+      - name: Retain ephemeral JSON evidence without any keys or release TAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: rel-i03-${{ matrix.os }}
+          path: |
+            candidate-evidence/SEF1-v2.json
+            candidate-evidence/manifest.sha256
+          retention-days: 1
+          if-no-files-found: error
+
+  compare:
+    name: Cross-platform Git-free v2 export identity
+    needs: offline-consumer
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download only disposable current-format export evidence
+        uses: actions/download-artifact@v4
+        with:
+          pattern: rel-i03-*
+          path: candidates
+      - name: Assert identical v2 JSON and exact lock digests
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from hashlib import sha256
+          sources=sorted(Path("candidates").rglob("SEF1-v2.json"))
+          digests=sorted(Path("candidates").rglob("manifest.sha256"))
+          assert len(sources)==len(digests)==3,(sources,digests)
+          values=[p.read_bytes() for p in sources]
+          locks=[p.read_bytes() for p in digests]
+          assert values[0]==values[1]==values[2], "v2 export bytes differ across operating systems"
+          assert locks[0]==locks[1]==locks[2], "release digest drift"
+          print("REL-I03 identical v2 export SHA-256:",sha256(values[0]).hexdigest())
+          print("REL-I03 candidate manifest SHA-256:",locks[0].decode().strip())
+          print("No official curriculum release or consumer cutover published")
+          PY

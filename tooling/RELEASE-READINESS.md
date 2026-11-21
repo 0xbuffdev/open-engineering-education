@@ -15,12 +15,16 @@ authority over any derived Toolkit export.
 
 ## One supported format, one parser
 
-The current, source-repository Toolkit is run as
-`python -m tooling.oee_toolkit`. Its only active educational input is
-**OEE v0.2.0**; its current JSON course export is
-**`exportVersion: 1`**. These are separate identities from any future
-Toolkit software release version. Python **3.11+**, a trusted local Git
-checkout and the Python standard library are sufficient.
+The **internal publisher/golden test CLI** is
+`python -m tooling.oee_toolkit._publisher_cli`, using exact immutable
+Git-source v0.2.0 data and historical export format 1 only for source
+regression evidence. The **installed Toolkit consumer CLI** is
+`oee-toolkit` and exports **only version 2** from a separately verified
+and digest-locked curriculum release. The source commit remains internal
+provenance, not a consumer input. See
+[REL-I03](RELEASE-CONSUMER.md) for the new active consumer contract.
+Python 3.11+ and the standard library suffice for offline export; the
+optional release-signing helper uses an approved cryptography dependency.
 
 The implementation uses the existing shared
 [course checker](../scripts/check-outcome-curriculum.py), rather than a
@@ -44,7 +48,7 @@ compatibility or migration adapters are authorized by OT-I05.
 
 The [release smoke](../tooling/interop/verify_release_readiness.py)
 creates a **new temporary local Git clone** from an existing trusted
-OEE checkout, then invokes the actual public Toolkit CLI in that
+OEE checkout, then invokes the internal publisher-only inspection/test CLI in that
 independent checkout. No Python package install, account, paid
 resource, private repository, model API or network service is needed
 once the public Git checkout is available.
@@ -143,9 +147,9 @@ third-party Python runtime dependencies.
 wheel and source archives on Linux, macOS and Windows and invokes
 [`verify_package_install.py`](interop/verify_package_install.py) from a
 fresh isolated virtual environment outside the OEE source tree. That test
-checks that the wheel works without repository maintenance scripts, produces
-byte-identical pinned JSON, includes MIT and NOTICE files, excludes CC BY
-curriculum and golden exports, and rejects unavailable immutable revisions.
+checks that the wheel works without repository maintenance scripts, produces byte-identical digest-locked **v2 JSON** from a locally installed
+signed test release, includes MIT/NOTICE, excludes CC BY curricula and v1
+golden exports, and refuses absent locks or Git consumer flags.
 The source archive must independently rebuild into a wheel.
 
 These are **new OT-20 technical acceptance tests**, not proof that the

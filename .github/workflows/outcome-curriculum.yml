@@ -35,5 +35,5 @@ jobs:
       - name: Require the pinned Toolkit to accept every published course
         run: |
           REVISION="$(git rev-parse HEAD)"
-          python3 -m tooling.oee_toolkit check \
+          python3 -m tooling.oee_toolkit._publisher_cli check \
             --repo . --revision "$REVISION" --all
