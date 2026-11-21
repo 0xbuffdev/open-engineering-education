@@ -47,7 +47,8 @@ release and the independent OEE Workspace software version.
 | --- | --- |
 | Delegated release preparation approval | 2026-11-21 |
 | Release source commit SHA | Pending final signed merge |
-| Toolkit package/version and file digests | Pending |
+| Proposed Toolkit distribution | `oee-toolkit` `0.1.0` (first stable package candidate) |
+| Toolkit wheel/sdist file digests | Pending exact final candidate artifacts; do not infer from CI status |
 | Source-readiness check URL | Pending exact-commit run |
 | Wheel/sdist install test URL | Pending exact-commit run |
 | Curriculum CalVer and manifest digest | Pending |
@@ -62,3 +63,20 @@ This record is a delegated, **conditional release authorization**, not a
 claim that the missing evidence was produced or that the releases already
 exist. Do not tag or distribute official artifacts until the checkboxes are
 satisfied and linked to the exact final commits.
+
+## First package candidate preflight
+
+The first independent distribution proposes Python package version
+`0.1.0`. This is **not** the OEE specification `v0.1.0` tag.
+The package CI preserves the Linux wheel and source archive for 30 days
+as a named, unpublished workflow artifact. Linux/macOS/Windows clean
+installation and installed Toolkit contract checks still run on all
+three platforms. No registry credentials, GitHub Release creation,
+package-signing action or automatic release tagging are added.
+
+Record the **new exact merged main SHA**, wheel and sdist SHA-256 values,
+the artifact run URL and independently reviewed license/NOTICE.
+Publishing from this candidate requires deliberate official artifact
+selection. The source-only readiness report and separate wheel/sdist
+verifier must both be preserved. A previous green CI result cannot
+approve a new stable version commit.
