@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import shutil
 import sys
 from pathlib import Path
 import os
@@ -24,6 +25,35 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 EXCLUDED = {"curriculum", "rfcs", "spec", "docs", "tests", ".github"}
 PACKAGE = "oee_toolkit"
+
+
+class PackageVerificationEnvironmentError(Exception):
+    """A clean pip-equipped verification environment cannot be created."""
+
+
+def make_verification_venv(directory: Path) -> None:
+    """Provide an actionable diagnostic for Python without ensurepip."""
+    try:
+        venv.EnvBuilder(with_pip=True).create(directory)
+    except (OSError, RuntimeError, subprocess.CalledProcessError) as exc:
+        raise PackageVerificationEnvironmentError(
+            "Could not create an isolated Python environment with pip. "
+            "On Debian/Ubuntu, install the matching python3-venv package "
+            "(for example python3.12-venv). Without system package access, "
+            "use --python /path/to/ensurepip-enabled/python (such as a "
+            "uv-managed CPython). The wheel was NOT tested by this invocation."
+        ) from exc
+
+
+def selected_python(value: str) -> Path:
+    """Resolve an explicitly selected interpreter; never choose one silently."""
+    path = Path(value).expanduser()
+    executable = str(path) if path.is_absolute() else shutil.which(value)
+    if not executable or not Path(executable).is_file():
+        raise PackageVerificationEnvironmentError(
+            f"Selected --python interpreter was not found: {value}"
+        )
+    return Path(executable).resolve()
 
 
 def run(*args: object, cwd: Path, expected: int = 0, env: dict | None = None) -> bytes:
@@ -97,7 +127,7 @@ def verify(wheel: Path, archive: Path, source: Path) -> dict:
     with tempfile.TemporaryDirectory(prefix="oee-toolkit-wheel-") as temp:
         outside = Path(temp)
         envdir = outside / "venv"
-        venv.EnvBuilder(with_pip=True).create(envdir)
+        make_verification_venv(envdir)
         if os.name == "nt":
             installed_python = envdir / "Scripts/python.exe"
             executable = envdir / "Scripts/oee-toolkit.exe"
@@ -193,16 +223,31 @@ def verify(wheel: Path, archive: Path, source: Path) -> dict:
             "publication": "not-authorized",
         }
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--dist", type=Path, required=True)
     parser.add_argument("--source", type=Path, default=ROOT)
-    args = parser.parse_args()
-    files = list(args.dist.glob("*.whl"))
-    archives = list(args.dist.glob("*.tar.gz"))
-    if len(files) != 1 or len(archives) != 1:
-        parser.error("requires exactly one wheel and one source archive")
-    result = verify(files[0].resolve(), archives[0].resolve(), args.source.resolve())
+    parser.add_argument("--python", help=(
+        "alternate Python with venv/ensurepip; rerun under it before the clean install"
+    ))
+    args = parser.parse_args(argv)
+    try:
+        if args.python is not None:
+            interpreter = selected_python(args.python)
+            if interpreter != Path(sys.executable).resolve():
+                return subprocess.call([
+                    str(interpreter), str(Path(__file__).resolve()),
+                    "--dist", str(args.dist.resolve()),
+                    "--source", str(args.source.resolve()),
+                ])
+        files = list(args.dist.glob("*.whl"))
+        archives = list(args.dist.glob("*.tar.gz"))
+        if len(files) != 1 or len(archives) != 1:
+            parser.error("requires exactly one wheel and one source archive")
+        result = verify(files[0].resolve(), archives[0].resolve(), args.source.resolve())
+    except PackageVerificationEnvironmentError as exc:
+        print(f"toolkit_verifier_environment: {exc}", file=sys.stderr)
+        return 3
     print(json.dumps(result, sort_keys=True, indent=2))
     return 0
 

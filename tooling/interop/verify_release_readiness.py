@@ -81,6 +81,11 @@ def main(argv: list[str] | None = None) -> int:
         "result": "incomplete",
         "toolkitReleasePublished": False,
         "packagedDistributionVerified": False,
+        "packagedDistributionVerificationScope": (
+            "source-only smoke does not run a wheel/sdist verifier; "
+            "execute tooling/interop/verify_package_install.py separately "
+            "and retain that result for the release decision"
+        ),
         "formalOeeConformanceDetermined": False,
         "manualEducationalReviewRequired": True,
         "requiresPrivateService": False,

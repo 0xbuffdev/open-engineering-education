@@ -233,3 +233,17 @@ must independently approve:
 A clean test report is engineering evidence, not curriculum
 accreditation or an endorsement of a particular student's work.
 The source-only CLI remains available without an installed package.
+
+## Separate source and package verification reports
+
+The OT-I05 source-readiness report deliberately leaves
+`packagedDistributionVerified: false` and includes
+`packagedDistributionVerificationScope`, because its scope is structural
+source readiness. It does not run the installed wheel/sdist check. A passing
+standalone `tooling/interop/verify_package_install.py` result verifies the
+wheel/sdist in a separate isolated environment and must be retained alongside
+the source report. Do not change the source field to `true` unless that script
+actually gains package verification behavior.
+
+See [the release decision](RELEASE-DECISION.md) for the final commit, checks,
+signature and official publication gates.
