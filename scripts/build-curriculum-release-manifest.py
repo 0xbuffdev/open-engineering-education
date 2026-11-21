@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from tooling.oee_toolkit.__main__ import atomic_write  # noqa: E402
+from tooling.oee_toolkit._publisher_cli import atomic_write  # noqa: E402
 from tooling.oee_toolkit.core import canonical_json  # noqa: E402
 from tooling.oee_toolkit.release_manifest import (  # noqa: E402
     ReleaseManifestError, build_manifest, digest_manifest, read_canonical_manifest,

@@ -58,7 +58,7 @@ class PinnedToolkitTests(unittest.TestCase):
 
     def cli(self, command, *options):
         return subprocess.run(
-            [sys.executable, "-m", "tooling.oee_toolkit", command,
+            [sys.executable, "-m", "tooling.oee_toolkit._publisher_cli", command,
              "--repo", str(self.repo), "--revision", self.revision, *options],
             cwd=ROOT, capture_output=True, text=True, check=False,
         )
@@ -247,7 +247,7 @@ class PinnedToolkitTests(unittest.TestCase):
 
     def test_cli_invalid_revision_is_incomplete(self):
         result = subprocess.run(
-            [sys.executable, "-m", "tooling.oee_toolkit", "export",
+            [sys.executable, "-m", "tooling.oee_toolkit._publisher_cli", "export",
              "--repo", str(self.repo), "--revision", "1" * 40,
              "--course", "FXT1", "--output", "-"],
             cwd=ROOT, capture_output=True, text=True, check=False,

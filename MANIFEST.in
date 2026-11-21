@@ -6,6 +6,8 @@ include tooling/README.md
 include LICENSE-MIT
 include NOTICE
 recursive-include tooling/oee_toolkit *.py *.json
+# The source-only v1 golden schema is not shipped in the consumer wheel.
+exclude tooling/oee_toolkit/schemas/course-export-v1.schema.json
 
 prune curriculum
 prune spec

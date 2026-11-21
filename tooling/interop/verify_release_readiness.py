@@ -130,7 +130,7 @@ def main(argv: list[str] | None = None) -> int:
 
             def toolkit(*params: str, expected: int = 0):
                 return run([
-                    sys.executable, "-m", "tooling.oee_toolkit", *params,
+                    sys.executable, "-m", "tooling.oee_toolkit._publisher_cli", *params,
                 ], checkout, expected=expected, env=offline)
 
             def input_for(course: str, selected: str):

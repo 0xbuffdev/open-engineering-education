@@ -1,7 +1,9 @@
 # Pinned curriculum exports and Workspace interoperability
 
-These checks verify reproducible Toolkit exports and an independently pinned
-OEE Workspace consumer. The Toolkit architecture was accepted in
+These internal source-golden checks verify reproducible historical pinned
+exports and an independently pinned OEE Workspace consumer. The active
+installed Toolkit uses only offline digest-locked release exports v2;
+see [REL-I03](../RELEASE-CONSUMER.md). The Toolkit architecture was accepted in
 [RFC 0002](../../rfcs/0002-toolkit-stewardship-and-licensing.md).
 Passing the checks does **not** publish an official Toolkit package,
 establish educational conformance, or promote a course's readiness status.

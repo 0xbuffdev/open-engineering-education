@@ -135,18 +135,15 @@ def inspect(source: GitSource, code: str) -> tuple[dict, dict | None]:
     return report, extracted if report["structuralOutcome"] == "passed" else None
 
 
-def export_course(source: GitSource, code: str) -> dict:
-    report, data = inspect(source, code)
-    if data is None:
-        raise ExportBlocked(report)
+def course_payload(data: dict) -> dict:
+    """Build once from canonical parser capture; version-specific envelopes
+    must never reinterpret academic outcomes, assessments or criteria.
+    """
     coverage = {
-        outcome["id"]: sorted(set(data["coverage"].get(outcome["id"], [])))
-        for outcome in data["outcomes"]
+        item["id"]: sorted(set(data["coverage"].get(item["id"], [])))
+        for item in data["outcomes"]
     }
-    # Only an approved structurally complete inspection may be exported.
     return {
-        "exportVersion": 1,
-        "source": report["source"],
         "course": {
             "code": data["code"],
             "program": CODE_RE.fullmatch(data["code"]).group(1),
@@ -159,6 +156,18 @@ def export_course(source: GitSource, code: str) -> dict:
         "modules": data["modules"],
         "coverage": coverage,
         "validation": {"structural": "passed", "manualReviewRequired": True},
+    }
+
+
+def export_course(source: GitSource, code: str) -> dict:
+    """Internal pinned-Git golden source exporter, not the consumer CLI."""
+    report, data = inspect(source, code)
+    if data is None:
+        raise ExportBlocked(report)
+    return {
+        "exportVersion": 1,
+        "source": report["source"],
+        **course_payload(data),
     }
 
 

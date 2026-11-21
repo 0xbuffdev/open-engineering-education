@@ -27,14 +27,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Full regression suite
-        run: python3 -m unittest discover -s tests -p 'test_*.py' -v
+        run: |
+          python3 -m pip install 'cryptography>=44,<50'
+          python3 -m unittest discover -s tests -p 'test_*.py' -v
       - name: Verify representative v0.2.0 exports at this commit
         run: |
           REVISION="$(git rev-parse HEAD)"
           for COURSE in SEF1 SEF10 APP1 APP17 SYS1 AI1 SEC1 SEC9; do
-            python3 -m tooling.oee_toolkit check \
+            python3 -m tooling.oee_toolkit._publisher_cli check \
               --repo . --revision "$REVISION" --course "$COURSE"
-            python3 -m tooling.oee_toolkit export \
+            python3 -m tooling.oee_toolkit._publisher_cli export \
               --repo . --revision "$REVISION" --course "$COURSE" \
               --output "$RUNNER_TEMP/$COURSE.json"
             python3 -m json.tool "$RUNNER_TEMP/$COURSE.json" > /dev/null
@@ -49,7 +51,7 @@ jobs:
               ["git", "rev-parse", "HEAD"], text=True
           ).strip()
           result = subprocess.run(
-              ["python3", "-m", "tooling.oee_toolkit", "check",
+              ["python3", "-m", "tooling.oee_toolkit._publisher_cli", "check",
                "--repo", ".", "--revision", revision, "--all", "--json"],
               capture_output=True, text=True, check=False,
           )

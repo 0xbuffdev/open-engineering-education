@@ -107,7 +107,7 @@ jobs:
           with TemporaryDirectory() as temporary:
               current_export = Path(temporary) / "SEF1-current.json"
               created = subprocess.run([
-                  sys.executable, "-m", "tooling.oee_toolkit", "export",
+                  sys.executable, "-m", "tooling.oee_toolkit._publisher_cli", "export",
                   "--repo", ".", "--revision", current_revision,
                   "--course", "SEF1", "--output", str(current_export),
               ], capture_output=True, text=True, check=False)
