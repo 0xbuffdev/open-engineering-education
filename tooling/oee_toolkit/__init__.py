@@ -5,5 +5,5 @@ Package installation does not certify educational conformance or a learner.
 """
 
 # Sole package-version authority; pyproject.toml reads this value dynamically.
-# A development candidate is not an authorized published Toolkit release.
-__version__ = "0.1.0.dev0"
+# A stable package version does not itself authorize publication.
+__version__ = "0.1.0"

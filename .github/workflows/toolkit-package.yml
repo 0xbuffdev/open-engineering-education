@@ -66,3 +66,17 @@ jobs:
           python -m unittest discover -s tests -p 'test_toolkit_*.py' -v
           python -m unittest discover -s tests -p 'test_outcome_*.py' -v
           python -m unittest discover -s tests -p 'test_current_format_validation.py' -v
+      - name: Record verified Linux package file digests
+        if: matrix.os == 'ubuntu-latest'
+        shell: bash
+        run: sha256sum dist/*.whl dist/*.tar.gz
+      - name: Preserve Linux wheel and sdist candidate for release review
+        if: matrix.os == 'ubuntu-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: oee-toolkit-0.1.0-unpublished-${{ github.sha }}
+          path: |
+            dist/*.whl
+            dist/*.tar.gz
+          if-no-files-found: error
+          retention-days: 30
