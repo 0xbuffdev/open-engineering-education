@@ -1,0 +1,171 @@
+name: Unsigned OEE curriculum release candidate
+
+# Manual and source-pinned. Never signs, publishes, creates a tag or accesses
+# private signing material. Build bytes may become official only after review.
+run-name: "Unsigned curriculum ${{ inputs.release_id }} from ${{ inputs.source_sha }}"
+on:
+  workflow_dispatch:
+    inputs:
+      release_id:
+        description: "Unallocated curriculum CalVer YYYY.MM.N; e.g. 2026.11.1"
+        type: string
+        required: true
+      source_sha:
+        description: "Reviewed full 40-character OEE source SHA"
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Reviewable unsigned archive / ${{ matrix.os }}
+    if: github.ref == 'refs/heads/main'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    env:
+      RELEASE_ID: ${{ inputs.release_id }}
+      SOURCE_SHA: ${{ inputs.source_sha }}
+    steps:
+      - name: Checkout full public Git history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate explicit version and reviewed ancestor commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]] || exit 2
+          [[ "$RELEASE_ID" =~ ^[0-9]{4}\.(0[1-9]|1[0-2])\.[1-9][0-9]*$ ]] || exit 2
+          git cat-file -e "${SOURCE_SHA}^{commit}"
+          git merge-base --is-ancestor "$SOURCE_SHA" HEAD
+          test "$(git rev-parse "$SOURCE_SHA")" = "$SOURCE_SHA"
+          echo "Approved-source candidate: $SOURCE_SHA; identity: $RELEASE_ID"
+      - name: Install only disposable signing-test dependency
+        run: python -m pip install "cryptography>=44,<50"
+      - name: Validate manifest and canonical archive against complete public source
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m unittest discover -s tests -p 'test_curriculum_release_manifest.py' -v
+          python -m unittest discover -s tests -p 'test_curriculum_release_archive.py' -v
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+      - name: Build exact unsigned complete-curriculum archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p candidate
+          python scripts/build-curriculum-release-archive.py build \
+            --repo . --revision "$SOURCE_SHA" --release-id "$RELEASE_ID" \
+            --output candidate/curriculum.tar
+          python - <<'PY'
+          from pathlib import Path
+          from hashlib import sha256
+          import io
+          import json
+          import os
+          import tarfile
+          import re
+          from tooling.oee_toolkit.release_archive import inspect_archive, canonical_archive
+
+          raw = Path("candidate/curriculum.tar").read_bytes()
+          with tarfile.open(fileobj=io.BytesIO(raw), mode="r:") as tar:
+              manifest_bytes = tar.extractfile("release.json").read()
+          digest = sha256(manifest_bytes).hexdigest()
+          manifest, files = inspect_archive(raw, digest)
+          assert canonical_archive(manifest, files) == raw
+          assert manifest["source"]["commit"] == os.environ["SOURCE_SHA"]
+          assert manifest["releaseId"] == os.environ["RELEASE_ID"]
+          assert manifest["source"]["specification"] == "v0.2.0"
+          courses = sorted(
+              name for name in files
+              if name.startswith("curriculum/")
+              and re.fullmatch(r"[A-Z]{2,6}[1-9][0-9]*\.md", name.split("/")[-1])
+          )
+          assert len(courses) >= 76, "incomplete current course inventory"
+          audit = {
+              "releaseId": manifest["releaseId"],
+              "sourceCommit": manifest["source"]["commit"],
+              "manifestSha256": digest,
+              "archiveSha256": sha256(raw).hexdigest(),
+              "archiveSize": len(raw),
+              "fileCount": len(manifest["files"]),
+              "courseCount": len(courses),
+              "signed": False,
+              "publicationApproved": False,
+          }
+          Path("candidate/manifest.sha256").write_text(digest+"\n", encoding="ascii")
+          Path("candidate/audit.json").write_text(
+              json.dumps(audit, indent=2, sort_keys=True)+"\n", encoding="utf-8")
+          print(json.dumps(audit, indent=2, sort_keys=True))
+          PY
+      - name: Preserve unsigned, platform-specific review evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: unsigned-oee-${{ inputs.release_id }}-${{ matrix.os }}
+          path: candidate/
+          retention-days: 30
+          if-no-files-found: error
+
+  compare:
+    name: Confirm identical complete source bytes across three systems
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download unsigned platform candidates
+        uses: actions/download-artifact@v4
+        with:
+          pattern: unsigned-oee-${{ inputs.release_id }}-*
+          path: candidate-artifacts
+      - name: Verify byte equality and retain one unsigned candidate
+        shell: bash
+        env:
+          RELEASE_ID: ${{ inputs.release_id }}
+          SOURCE_SHA: ${{ inputs.source_sha }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          from hashlib import sha256
+          import json
+          import os
+          import shutil
+
+          roots = sorted(Path("candidate-artifacts").glob("unsigned-oee-*"))
+          assert len(roots) == 3, f"expected three platform candidates, got {len(roots)}"
+          archives = [(p / "curriculum.tar").read_bytes() for p in roots]
+          reports = [json.loads((p / "audit.json").read_text()) for p in roots]
+          pins = [(p / "manifest.sha256").read_bytes() for p in roots]
+          assert archives[0] == archives[1] == archives[2], "archive bytes differ across OS"
+          assert reports[0] == reports[1] == reports[2], "release identity/audits differ"
+          assert pins[0] == pins[1] == pins[2], "manifest digests differ across OS"
+          r = reports[0]
+          assert r["releaseId"] == os.environ["RELEASE_ID"]
+          assert r["sourceCommit"] == os.environ["SOURCE_SHA"]
+          assert sha256(archives[0]).hexdigest() == r["archiveSha256"]
+          assert r["signed"] is False and r["publicationApproved"] is False
+          out = Path("verified-unsigned")
+          out.mkdir()
+          shutil.copyfile(roots[0] / "curriculum.tar", out / "curriculum.tar")
+          shutil.copyfile(roots[0] / "manifest.sha256", out / "manifest.sha256")
+          shutil.copyfile(roots[0] / "audit.json", out / "audit.json")
+          print(json.dumps(r, indent=2, sort_keys=True))
+          print("Identical on Linux, macOS and Windows. No official signing or publication.")
+          PY
+      - name: Retain reproducible unsigned candidate for local steward signing
+        uses: actions/upload-artifact@v4
+        with:
+          name: oee-curriculum-${{ inputs.release_id }}-unsigned-${{ inputs.source_sha }}
+          path: verified-unsigned/
+          retention-days: 30
+          if-no-files-found: error
