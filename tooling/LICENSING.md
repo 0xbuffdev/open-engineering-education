@@ -92,8 +92,4 @@ Additional code and educational content contributed later remain
 subject to their own provenance, contributor rights, applicable
 licenses and the project's authentic DCO policy.
 
-For the independent release-verification and explicit steward
-distribution approval, see the [OT-I05 release-readiness
-checklist](RELEASE-READINESS.md). Testing the source-repository CLI or
-presence of these notices does **not** alone verify all third-party
-copyright permissions or authorize a distributable package.
+For the signed Toolkit `0.1.0` package, consult the [original release decision](RELEASE-DECISION.md) and [publication record](RELEASE-PUBLICATION.md). They identify the audited source and distribution checks. Future versions require a fresh licensing and provenance review; passing source tests or including notices does not by itself establish third-party copyright permissions or authorize publication.

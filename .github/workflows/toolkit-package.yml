@@ -11,7 +11,8 @@ on:
       - "tooling/interop/verify_package_install.py"
       - "tooling/README.md"
       - "tooling/LICENSING.md"
-      - "tooling/RELEASE-READINESS.md"
+      - "tooling/RELEASE-PUBLICATION.md"
+      - "tooling/RELEASE-DECISION.md"
       - "scripts/check-outcome-curriculum.py"
       - "scripts/course_format_versions.py"
       - ".github/workflows/toolkit-package.yml"
@@ -74,7 +75,7 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         uses: actions/upload-artifact@v4
         with:
-          name: oee-toolkit-0.1.0-unpublished-${{ github.sha }}
+          name: oee-toolkit-candidate-${{ github.sha }}
           path: |
             dist/*.whl
             dist/*.tar.gz

@@ -45,7 +45,7 @@ The derived [curriculum inventory](../curriculum/INVENTORY.md) reports course/ca
 python3 scripts/curriculum_inventory.py --output-dir ./inventory-report
 ```
 
-The repository-local [OEE Toolkit](../tooling/README.md) checks source data at an immutable Git revision and creates deterministic derived exports. Its distribution and stable public API require separate review.
+The [published OEE Toolkit `0.1.0`](https://github.com/0xbuffdev/open-engineering-education/releases/tag/toolkit-v0.1.0) provides deterministic, release-locked course checks and exportVersion 2 for consumers. Maintainers use the repository-local publisher tools with exact Git revisions to inspect and package academic sources. The installed CLI works offline without Git; its importable Python API is not yet promised to be stable. See [Toolkit documentation](../tooling/README.md).
 
 Run the full regression suite and documentation checks:
 

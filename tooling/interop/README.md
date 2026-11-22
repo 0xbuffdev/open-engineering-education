@@ -5,10 +5,7 @@ exports and an independently pinned OEE Workspace consumer. The active
 installed Toolkit uses only offline digest-locked release exports v2;
 see [REL-I03](../RELEASE-CONSUMER.md). The Toolkit architecture was accepted in
 [RFC 0002](../../rfcs/0002-toolkit-stewardship-and-licensing.md).
-Passing the checks does **not** publish an official Toolkit package,
-establish educational conformance, or promote a course's readiness status.
-See the [OT-I05 release-readiness checklist](../RELEASE-READINESS.md)
-for independent smoke and separate public steward approval.
+These historical regression checks do not publish a release, establish educational conformance or promote a course's readiness status. The [Toolkit `0.1.0`](https://github.com/0xbuffdev/open-engineering-education/releases/tag/toolkit-v0.1.0) and [signed curriculum `2026.11.1`](https://github.com/0xbuffdev/open-engineering-education/releases/tag/curriculum-2026.11.1) have separately approved [release evidence](../RELEASE-DECISION.md) and [package validation](../../.github/workflows/toolkit-package.yml).
 
 ## Immutable source and generated fixtures
 
@@ -46,17 +43,11 @@ The emitted records are candidates for a **separately reviewed PR**.
 Never auto-repin to the latest branch or infer that same-identifier
 assessments are pedagogically equivalent after a criteria change.
 
-## Independent current Workspace consumer
+## Pinned historical Workspace consumer regression
 
-The manifest's full Workspace consumer commit now references the **merged
-current Workspace v2 and CLI release-readiness source**, rather than an
-old pre-v2 checkout. The golden exports continue to represent their own
-**historical exact OEE source revision**, preserving independent regression
-provenance.
+The fixture manifest pins Workspace commit `8855b21d5cbe784e004664625f21cab55f0bf833`, with source-revision exports and resource-map schema v2. These tests preserve historical regression evidence only. The published [Workspace `v0.1.0`](https://github.com/0xbuffdev/oee-workspace/releases/tag/v0.1.0) uses the signed curriculum, Toolkit exportVersion 2 and resource-map schema v3. Its [official smoke workflow](https://github.com/0xbuffdev/oee-workspace/actions/workflows/official-release-smoke.yml) verifies the current consumer separately.
 
-The [interoperability workflow](../../.github/workflows/toolkit-interop.yml)
-checks out the **public Workspace consumer at the exact commit
-declared in the fixture manifest**, not moving Workspace main.
+The [interoperability workflow](../../.github/workflows/toolkit-interop.yml) checks out that historical Workspace commit by its exact recorded revision, never moving Workspace `main`. It tests old fixtures without introducing an old-format runtime reader.
 It runs `scripts/verify-oee-export.py` from that Workspace source
 against real committed OEE golden exports and requires:
 
@@ -67,9 +58,9 @@ against real committed OEE golden exports and requires:
 - Explicit rejection of the **resource-map schema v1 negative
   fixture**, without a runtime converter or acceptance of stale module
   numbers.
-- The current reviewed Workspace v2 map is **rejected** against
+- The pinned historical Workspace v2 map is **rejected** against
   historical golden exports from a different source commit and
-  **accepted** against a fresh Toolkit export from the map's recorded
+  **accepted** against a publisher-only test export from the map's recorded
   exact OEE revision. An exported historical snapshot does not certify
   the contents of a newer mapping.
 - No private service, paid resource, network lookup or competing OEE
@@ -98,7 +89,7 @@ outcome descriptions, assessment work/criteria/evidence, required
 coverage, module/lesson navigation and prerequisites. For a valid
 baseline-pinned **v2** map, it also identifies affected resource IDs.
 
-The advisory distinguishes `source_missing`, `unsupported_version`,
+This historical publisher-side advisory distinguishes `source_missing`, `unsupported_version`,
 `unsupported_map_schema` and `source_mismatch`. No old schema is
 reinterpreted, no learner evidence is rewritten, and **no resource
 map or course revision is automatically updated**. An output of

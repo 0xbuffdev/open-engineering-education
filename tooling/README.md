@@ -8,9 +8,9 @@ To run a consumer command, install a verified curriculum release and pin it in `
 
 The specification and curriculum Markdown remain the editable educational source. The Toolkit's JSON exports are derived from that source. They do not certify a course, grade learners or create a separate authoring format.
 
-## Independent release-readiness verification
+## Check source and distribution
 
-The [OT-I05 release checklist](RELEASE-READINESS.md) records 24 acceptance checks, licensing and source provenance, and the Linux/macOS/Windows smoke tests used before publication. To run the source-only checks yourself, use the [release smoke](interop/verify_release_readiness.py). It works on a local checkout without external services:
+The published Toolkit passed separate source and clean-install verification on Linux, macOS and Windows. To repeat the source-only smoke, use [verify_release_readiness.py](interop/verify_release_readiness.py) on a local checkout:
 
 ~~~sh
 python3 tooling/interop/verify_release_readiness.py --source . \
@@ -75,7 +75,7 @@ Manifest generation checks source integrity without signing or publishing anythi
 
 The [release archive format](RELEASE-ARCHIVE.md) is a canonical, uncompressed TAR built from the complete OEE manifest. The release tools verify the Ed25519 attestation and install the archive without replacing existing data. Signing uses a separately trusted key and the optional `oee-toolkit[release]` dependency. The installer does not publish releases, modify learner work or change course status.
 
-The Toolkit's release resolver and v2 exporter are available now. [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) is integrating the published archive into its learner setup. Content and 0xNAND integration remains a separate consumer task.
+The release resolver and v2 exporter are available in the published Toolkit. [OEE Workspace v0.1.0](https://github.com/0xbuffdev/oee-workspace/releases/tag/v0.1.0) uses the signed curriculum and its reviewed lock. Content and 0xNAND integration is a separate consumer task.
 
 ## Consumer commands (REL-I03)
 
@@ -89,11 +89,11 @@ A project must commit a reviewed `oee-curriculum.lock.json`:
 {
   "formatVersion": 1,
   "releaseId": "2026.11.1",
-  "manifestSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  "manifestSha256": "57441494eb69c2ff9cb3f6029c8adc3c6a56f8c6ecabc43196c9b686e5959a6c"
 }
 ~~~
 
-The JSON above illustrates the lock structure; its placeholder digest is deliberately invalid. For the real `2026.11.1` lock, use the verified digest `57441494eb69c2ff9cb3f6029c8adc3c6a56f8c6ecabc43196c9b686e5959a6c` from the [signed curriculum release](https://github.com/0xbuffdev/open-engineering-education/releases/tag/curriculum-2026.11.1). Install that release in the trusted cache before running:
+The lock above identifies the actual published `2026.11.1` release, not a disposable test fixture. Before installing, independently confirm the manifest digest and steward signing key against the [published release decision](RELEASE-DECISION.md) and [curriculum release](https://github.com/0xbuffdev/open-engineering-education/releases/tag/curriculum-2026.11.1). Then install the signed archive into a trusted local store and run:
 
 ~~~sh
 oee-toolkit check SEF1 --json
@@ -185,6 +185,8 @@ Run:
 python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 -m unittest discover -s tests -p 'test_toolkit_release_consumer.py' -v
 ~~~
+
+**Release records:** The [0.1.0 and 2026.11.1 release decision](RELEASE-DECISION.md) preserves verified hashes and the independent signing-key fingerprint. The [publication runbook](RELEASE-PUBLICATION.md) documents steward signing, key security and how releases are audited. Future packages and curriculum archives need their own source review, cross-platform acceptance, and explicit publication approval.
 
 **License boundaries:** Original Toolkit implementation, software
 interface schemas and tests are MIT; normative OEE curriculum and actual

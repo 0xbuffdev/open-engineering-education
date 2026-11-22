@@ -1,8 +1,6 @@
 # REL-I03 — Git-free installed curriculum resolution and export v2
 
-**Status: current-only Toolkit implementation candidate, not a published
-OEE curriculum release, approved Toolkit release, Workspace/Content migration,
-academic conformance decision, learner credit or hosted deployment.**
+**Current status:** This offline consumer is shipped in [OEE Toolkit `0.1.0`](https://github.com/0xbuffdev/open-engineering-education/releases/tag/toolkit-v0.1.0) and reads the steward-signed [curriculum `2026.11.1`](https://github.com/0xbuffdev/open-engineering-education/releases/tag/curriculum-2026.11.1). [Workspace `v0.1.0`](https://github.com/0xbuffdev/oee-workspace/releases/tag/v0.1.0) consumes the published release. This does not grade learners, certify courses or authorize a Content/0xNAND deployment.
 
 This milestone implements the consumer side of
 [accepted RFC 0005](../rfcs/0005-immutable-curriculum-releases.md), after
@@ -54,13 +52,11 @@ Consumers commit one reviewed lock, with the exact active format:
 {
   "formatVersion": 1,
   "releaseId": "2026.11.1",
-  "manifestSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  "manifestSha256": "57441494eb69c2ff9cb3f6029c8adc3c6a56f8c6ecabc43196c9b686e5959a6c"
 }
 ```
 
-**These values are illustrative only and not a released source identity.**
-The lock must use unique keys, a supported format, a valid independent
-`YYYY.MM.N` identifier and a full lowercase 64-character manifest SHA-256.
+The example identifies the actual signed `2026.11.1` curriculum. Check its independently approved [source digest and steward public-key fingerprint](RELEASE-DECISION.md) before accepting or installing the release. A lock must use unique keys, a supported format, an approved `YYYY.MM.N` identifier and a full lowercase 64-character manifest SHA-256.
 Unknown/missing fields, duplicate keys, invalid UTF-8 and symlinks are
 rejected. A lock digest is expected to be obtained from a **reviewed,
 approved release record**, not derived solely from an untrusted download.
@@ -104,13 +100,9 @@ The existing source-only v1 golden snapshots remain internal test evidence
 for detecting parser drift. The *distributed package* does not expose
 v1 as a supported runtime schema or fallback input/output.
 
-## Local candidate validation (no publication)
+## Offline use and disposable test releases
 
-The CLI becomes useful to an author only **after** an explicitly approved
-release has been securely acquired and installed. REL-I03 CI creates a
-temporary test-only signed snapshot using a disposable key; it does not
-publish a release, accept the test key as an official steward or generate
-a trusted public lock for real users.
+An author or learner must acquire and verify the approved release before using its locked course source. CI also creates a temporary test-only signed archive with a disposable key. That fixture checks the consumer's failure handling; its signing key and generated lock cannot establish trust in a public curriculum release.
 
 For an already verified, installed release with a separately approved
 lockfile:
@@ -124,7 +116,7 @@ No Git binary, remote fetch, file-writing installation, version fallback or
 repository path is needed for this operation. Verification is offline.
 All source and parser metadata is read from the pinned local snapshot.
 
-## Tests and cutover gate
+## Tests and integration
 
 [REL-I03 test suite](../tests/test_toolkit_release_consumer.py) verifies
 tampered files, changed manifest hashes, duplicate/invalid JSON fields,
@@ -139,10 +131,4 @@ exports format-2 SEF1 and checks all courses on Linux, macOS and Windows.
 It compares exact JSON export bytes and manifest digests independently;
 ephemeral private keys and public release artifacts are **not uploaded**.
 
-REL-I04 replaces Workspace's resource map and evidence source keys only
-after editorial review of the selected curriculum release. REL-I05
-coordinates private Content's compiler with the 0xNAND host and removes
-obsolete academic feeds. Neither downstream repository is modified by
-this PR. Official Toolkit package publication, steward key authority,
-OEE release asset publication, and production consumer deployment remain
-separate reviewed decisions.
+[Workspace `v0.1.0`](https://github.com/0xbuffdev/oee-workspace/releases/tag/v0.1.0) uses the current release-locked Toolkit export and independently governs its resource maps and learner evidence. Its optional reading plans require a separately approved release-keyed resource map. Content/0xNAND host integration remains an independent consumer decision. Toolkit publication, curriculum publication and hosted deployment require separate approvals.
