@@ -26,4 +26,6 @@ python3 scripts/check-release-citation.py --tag v0.3.0 --published-at 2026-12-01
 
 The command above uses **example** future values; substitute the actual intended tag and UTC date. The tag must be created **only after** the tested metadata is committed. Do not reuse or rewrite the already-published `v0.2.0` tag.
 
-The GitHub Actions release workflow also validates the **actual tag checkout** after publication, using the real GitHub release timestamp. A manual workflow dispatch checks an existing tag against a selected announced UTC date. The publication-triggered job is a detection mechanism, not a guarantee that an incorrect release was blocked before publication: run the preflight first. Neither check performs a normative OEE conformance assessment.
+The GitHub Actions workflow checks citation metadata for **OEE specification releases** whose tags match `vMAJOR.MINOR.PATCH` (with an optional prerelease suffix). It skips independently versioned Toolkit (`toolkit-v...`) and signed curriculum (`curriculum-...`) GitHub Releases. A manual dispatch requires a specification tag and rejects other release types. For specification releases, the check examines the **actual tagged `CITATION.cff`** and GitHub's UTC publication timestamp, not a moving branch.
+
+The publication-triggered check detects mistakes after release. Before publishing a specification tag, run the preflight against the intended release commit and date. Neither check performs a normative OEE conformance assessment.

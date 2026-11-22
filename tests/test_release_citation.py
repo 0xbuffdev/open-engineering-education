@@ -1,9 +1,12 @@
 """Release citation checks cover matching, mismatched, and immutable historic tags."""
 
+import os
 from pathlib import Path
+import shutil
 import subprocess
 import sys
 import tempfile
+import textwrap
 import unittest
 import importlib.util
 
@@ -73,6 +76,65 @@ class ReleaseCitationTests(unittest.TestCase):
             bad = subprocess.run(cmd[:-1] + ["2026-11-08"], capture_output=True, text=True, check=False)
             self.assertNotEqual(bad.returncode, 0)
             self.assertIn("FAILED", bad.stderr)
+
+
+class ReleaseWorkflowRoutingTests(unittest.TestCase):
+    @unittest.skipUnless(shutil.which("bash") and os.name != "nt", "Bash workflow smoke requires Unix Bash")
+    def test_only_specification_releases_run_citation_validation(self):
+        """Run the actual release-classification Bash used by GitHub Actions."""
+        workflow = (ROOT / ".github" / "workflows" / "release-citation.yml").read_text(
+            encoding="utf-8"
+        )
+        start = workflow.index("      - name: Classify release tag\n")
+        end = workflow.index("      - name: Check out the exact specification release tag", start)
+        step = workflow[start:end]
+        script = textwrap.dedent(step.split("        run: |\n", 1)[1])
+        self.assertIn("if: steps.tag_kind.outputs.is_specification == 'true'", workflow)
+        self.assertEqual(
+            workflow.count("if: steps.tag_kind.outputs.is_specification == 'true'"), 2
+        )
+
+        cases = (
+            ("v0.2.1", "release", True, True),
+            ("v1.0.0", "release", True, True),
+            ("v1.2.3-rc.1", "release", True, True),
+            ("toolkit-v0.1.0", "release", False, True),
+            ("curriculum-2026.11.1", "release", False, True),
+            ("v01.2.3", "release", False, True),
+            ("v1.2", "release", False, True),
+            ("v1.2.3+build", "release", False, True),
+            ("toolkit-v0.1.0", "workflow_dispatch", False, False),
+            ("curriculum-2026.11.1", "workflow_dispatch", False, False),
+            ("v0.3.0", "workflow_dispatch", True, True),
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / "workflow-output.txt"
+            for tag, event, is_specification, succeeds in cases:
+                with self.subTest(tag=tag, event=event):
+                    output.write_text("", encoding="utf-8")
+                    env = os.environ.copy()
+                    env.update(
+                        RELEASE_TAG=tag,
+                        GITHUB_EVENT_NAME=event,
+                        GITHUB_OUTPUT=str(output),
+                    )
+                    run = subprocess.run(
+                        ["bash", "-c", script],
+                        env=env, text=True, capture_output=True, check=False
+                    )
+                    self.assertEqual(run.returncode == 0, succeeds, run.stderr)
+                    if succeeds:
+                        expected = "true" if is_specification else "false"
+                        self.assertEqual(
+                            output.read_text(encoding="utf-8").strip(),
+                            f"is_specification={expected}",
+                        )
+                    else:
+                        self.assertIn("require an OEE specification tag", run.stdout)
+                    self.assertEqual(
+                        bool(checker.RELEASE_TAG.fullmatch(tag)),
+                        is_specification,
+                    )
 
 
 if __name__ == "__main__":

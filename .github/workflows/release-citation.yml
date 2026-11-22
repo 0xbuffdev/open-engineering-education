@@ -48,12 +48,27 @@ jobs:
       RELEASE_TAG: ${{ github.event.release.tag_name || inputs.release_tag }}
       PUBLISHED_AT: ${{ github.event.release.published_at || inputs.published_at }}
     steps:
-      - name: Check out the exact release tag (not main)
+      - name: Classify release tag
+        id: tag_kind
+        shell: bash
+        run: |
+          if [[ "$RELEASE_TAG" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-[0-9A-Za-z][0-9A-Za-z.-]*)?$ ]]; then
+            echo "is_specification=true" >> "$GITHUB_OUTPUT"
+          elif [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]]; then
+            echo "::error::Manual citation checks require an OEE specification tag (vMAJOR.MINOR.PATCH)."
+            exit 1
+          else
+            echo "Skipping citation validation for $RELEASE_TAG: not an OEE specification release."
+            echo "is_specification=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Check out the exact specification release tag (not main)
+        if: steps.tag_kind.outputs.is_specification == 'true'
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.release.tag_name || inputs.release_tag }}
           persist-credentials: false
       - name: Validate tag CFF against release version and UTC publication date
+        if: steps.tag_kind.outputs.is_specification == 'true'
         run: |
           python3 scripts/check-release-citation.py \
             --tag "$RELEASE_TAG" --published-at "$PUBLISHED_AT"
