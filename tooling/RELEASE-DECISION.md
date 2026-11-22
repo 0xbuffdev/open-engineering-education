@@ -16,7 +16,7 @@ The OEE `v0.2.0` specification, Python Toolkit `0.1.0`, curriculum `2026.11.1` a
   contents and a source-free installed consumer.
 - Apply the Debian/Ubuntu `ensurepip` portability fix and accurate separate
   source/package readiness reporting.
-- Publish Toolkit and curriculum artifacts only after their source, signing and verification checks pass. Complete the independent Workspace release afterward.
+- Publish Toolkit and curriculum artifacts after source, signing and verification checks; release Workspace independently after passing its own acceptance.
 - Finish the existing Content/0xNAND integration after the software
   releases; return to course-resource mapping afterward.
 
@@ -36,8 +36,7 @@ The OEE `v0.2.0` specification, Python Toolkit `0.1.0`, curriculum `2026.11.1` a
 - [x] Both [Toolkit](https://github.com/0xbuffdev/open-engineering-education/releases/tag/toolkit-v0.1.0) and [curriculum](https://github.com/0xbuffdev/open-engineering-education/releases/tag/curriculum-2026.11.1) releases published with the reviewed hashes.
       Local signing, signature verification and offline installation completed
       during the steward's release script, which exited successfully.
-- [ ] Workspace released from its exact passing final commit, under its
-      own signed-off release decision record.
+- [x] [Workspace `v0.1.0`](https://github.com/0xbuffdev/oee-workspace/releases/tag/v0.1.0) published November 22, 2026, from signed main commit `5dd6b5acd2b4620f3a7818b0d84ed9a1669300fc`, with [official signed-release smoke](https://github.com/0xbuffdev/oee-workspace/actions/runs/45005744426) and [independent disposable smoke](https://github.com/0xbuffdev/oee-workspace/actions/runs/45005744423) passed on that commit.
 
 ## Final decision log
 
@@ -55,7 +54,7 @@ The OEE `v0.2.0` specification, Python Toolkit `0.1.0`, curriculum `2026.11.1` a
 | Steward public-key DER SHA-256 fingerprint | `0cbd8335bf39fab19b17a7bfaa33502d121d007fca4bddd5df0f43a9c814e2ef` |
 | Cross-platform unsigned archive comparison | [Four successful jobs](https://github.com/0xbuffdev/open-engineering-education/actions/runs/44997272152) |
 | Official steward key and signed attestation | [Published with curriculum](https://github.com/0xbuffdev/open-engineering-education/releases/tag/curriculum-2026.11.1) |
-| Publication status | Both releases public since 2026-11-22 |
+| Publication status | Toolkit, signed curriculum and separately released Workspace public since 2026-11-22 |
 | Academic course status | Unchanged, draft until learner evidence |
 
 The source-only report's `packagedDistributionVerified: false` is expected.

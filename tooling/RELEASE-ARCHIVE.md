@@ -1,9 +1,6 @@
 # REL-I02 — Deterministic curriculum archive and trusted installation
 
-**Status:** implementation candidate under [accepted RFC 0005](../rfcs/0005-immutable-curriculum-releases.md)
-and [Stage 2 tracker #257](https://github.com/0xbuffdev/open-engineering-education/issues/257).
-**Not authorized for GitHub Release, PyPI publication, OEE readiness promotion,
-learner assessment or Workspace/Content/0xNAND production cutover.**
+The archive builder and verifier are part of the published OEE release process under [RFC 0005](../rfcs/0005-immutable-curriculum-releases.md). The first [signed curriculum `2026.11.1`](https://github.com/0xbuffdev/open-engineering-education/releases/tag/curriculum-2026.11.1) and [Toolkit `0.1.0`](https://github.com/0xbuffdev/open-engineering-education/releases/tag/toolkit-v0.1.0) were published November 22, 2026. An authenticated source archive does not promote course status, grade learner work or authorize a separate Content/0xNAND deployment.
 
 ## Source of truth and artifact identities
 
@@ -25,8 +22,7 @@ learner assessment or Workspace/Content/0xNAND production cutover.**
   Consumers carry this value in an independently reviewed release lock.
 
 A full Git commit SHA remains inside the verified manifest for publisher audit,
-but **not** in the target learner/author consumer interface. REL-I03 implements the installed release resolver and current-only
-exportVersion 2; adoption in Workspace/Content remains separately gated.
+but **not** in the learner/author consumer interface. [REL-I03](RELEASE-CONSUMER.md) implements the offline resolver and exportVersion 2. [Workspace v0.1.0](https://github.com/0xbuffdev/oee-workspace/releases/tag/v0.1.0) consumes this release; Content/0xNAND integration remains separate.
 
 ## Deterministic archive format
 
@@ -46,7 +42,7 @@ REL-I02 uses deterministic **serialization**, not a second course grammar.
 
 ## Detached signature and trusted key
 
-The proposed local proof mechanism is **Ed25519** over a canonical
+The signed-release proof uses **Ed25519** over a canonical
 `attestationVersion: 1` JSON record containing the release ID, full manifest
 SHA-256 and full TAR SHA-256. It is detached from the archive.
 
@@ -64,13 +60,10 @@ SHA-256 and full TAR SHA-256. It is detached from the archive.
   package publication or OEE academic conformance.
 - Signing and verification require the optional Python dependency
   `cryptography`, available when installing the Toolkit as
-  `oee-toolkit[release]` from a future approved distribution. The default
+  `oee-toolkit[release]` from the published wheel or a separately approved future distribution. The default
   core parser remains dependency-free.
 
-Before a real release, the steward must separately approve the trusted
-public key distribution, signed provenance/attestation policy, rights and
-notice audit, archived source hash, and GitHub Release upload. This candidate
-PR grants **none** of these approvals.
+Each future release still requires independent steward approval of the trusted public key, source hash, provenance, rights/notices, archive bytes, signature and publication. The prior approval covers only the published `2026.11.1` artifacts; see the [release decision](RELEASE-DECISION.md).
 
 ## Local disposable candidate example
 
@@ -134,7 +127,7 @@ not substitute for filesystem permissions. Installer behavior for revoked
 signers or an untrusted publisher still depends on a separately reviewed
 trust/attestation policy.
 
-## Tests and remaining gates
+## Tests and source security
 
 The new [archive test suite](../tests/test_curriculum_release_archive.py)
 covers identical full committed bytes, invalid signatures/keys/digests,
@@ -149,6 +142,4 @@ candidate TAR bytes across Linux, Windows and macOS. Ephemeral private keys
 are removed before artifact upload. This CI does not publish or certify
 any academic content.
 
-**Next:** REL-I03 consumer resolver and current-only Toolkit export v2, then
-separately reviewed Workspace and Content/0xNAND integration. No fallback
-reader for old JSON export versions or moving Git refs will be added.
+The [offline consumer contract](RELEASE-CONSUMER.md) and published Workspace implement the current release interface. Each new signed release still needs fresh review and testing. Unsupported old exports and moving Git references are never a consumer fallback.

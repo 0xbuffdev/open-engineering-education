@@ -9,7 +9,8 @@ on:
       - "tests/**"
       - "NOTICE"
       - "LICENSE*"
-      - "docs/TOOLKIT-RELEASE-READINESS.md"
+      - "CONTRIBUTING.md"
+      - "rfcs/README.md"
       - ".github/workflows/toolkit-release-readiness.yml"
       - ".github/workflows/toolkit-interop.yml"
   push:
@@ -20,7 +21,8 @@ on:
       - "tests/**"
       - "NOTICE"
       - "LICENSE*"
-      - "docs/TOOLKIT-RELEASE-READINESS.md"
+      - "CONTRIBUTING.md"
+      - "rfcs/README.md"
       - ".github/workflows/toolkit-release-readiness.yml"
       - ".github/workflows/toolkit-interop.yml"
   workflow_dispatch:

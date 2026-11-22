@@ -1,4 +1,4 @@
-# Publishing the first official OEE Toolkit and curriculum release
+# OEE release publication record and maintainer runbook
 
 **Release status (2026-11-22):** [OEE Toolkit `0.1.0`](https://github.com/0xbuffdev/open-engineering-education/releases/tag/toolkit-v0.1.0) and [signed curriculum `2026.11.1`](https://github.com/0xbuffdev/open-engineering-education/releases/tag/curriculum-2026.11.1) are public. This document records how the first release was prepared, signed and verified. **Do not rerun the publication commands below for these tags.** They are retained for auditing the original release; new versions need new reviewed IDs, manifests and release decisions.
 
@@ -128,56 +128,21 @@ Then check an installed `oee-toolkit export SEF1` using an explicitly
 reviewed `oee-curriculum.lock.json`. No network or Git source should be
 needed by the installed consumer.
 
-## 5. Published artifacts and original draft-publishing commands
+## 5. Published artifacts and future release decisions
 
-Toolkit software and curriculum source have separate GitHub Release tags. The OEE specification has its own version:
+The specification, Toolkit distribution and curriculum archive have independent versions. The first official artifacts are permanently identified by their public tags:
 
-| Artifact class | Proposed tag | Required assets |
+| Artifact | Published tag | Source and verification |
 | --- | --- | --- |
-| Toolkit Python software | `toolkit-v0.1.0` | Exact audited wheel and sdist, digests, package notes |
-| Immutable curriculum | `curriculum-2026.11.1` | Signed `curriculum.tar`, detached `.attestation.json`, raw `.sig`, trusted public PEM, full SHA-256 records, release notes |
+| Toolkit Python wheel and sdist | [toolkit-v0.1.0](https://github.com/0xbuffdev/open-engineering-education/releases/tag/toolkit-v0.1.0) | Reviewed source, exact package hashes and three-platform clean-install results |
+| Signed curriculum TAR and attestation | [curriculum-2026.11.1](https://github.com/0xbuffdev/open-engineering-education/releases/tag/curriculum-2026.11.1) | Manifest/archive digests, approved public-key fingerprint and three-platform canonical archive checks |
 
-Both releases were created as drafts, checked and then published. The commands below show the original draft creation procedure. They will fail for already allocated tags and must not be used to replace existing assets:
+The [release decision](RELEASE-DECISION.md) retains the original hashes, signing-key fingerprint and verification runs. Published tags and release assets remain immutable. The original draft-creation commands are available in the tagged Git history; they are omitted from this current runbook to avoid accidentally recreating the same release.
 
-~~~sh
-# The wheel/sdist must match the approved digests above.
-gh release create toolkit-v0.1.0 \
-  /path/to/oee_toolkit-0.1.0-py3-none-any.whl \
-  /path/to/oee_toolkit-0.1.0.tar.gz \
-  --repo 0xbuffdev/open-engineering-education \
-  --target f2afed3e36f6ae0495e2b44a8d9337661defeda1 \
-  --title "OEE Toolkit 0.1.0" --draft \
-  --notes "First independently tested Toolkit distribution. Academic review remains separate."
+For a **new** release, choose a new version and source commit, independently review license notices and source closure, test the package and archive across supported platforms, approve the public key and manifest digest separately, and verify the exact draft artifacts before publication. A downloaded checksum or passing CI run cannot establish steward trust on its own. Key rotation and revocation remain explicit steward decisions.
 
-gh release create curriculum-2026.11.1 \
-  "$OUT/curriculum.tar" \
-  "$OUT/oee-curriculum-2026.11.1.attestation.json" \
-  "$OUT/oee-curriculum-2026.11.1.sig" \
-  "$PUBLIC_KEY" \
-  --repo 0xbuffdev/open-engineering-education \
-  --target f2afed3e36f6ae0495e2b44a8d9337661defeda1 \
-  --title "OEE Curriculum 2026.11.1" --draft \
-  --notes "Immutable signed OEE curriculum snapshot; course readiness remains as authored."
-~~~
+## 6. Consumer status
 
-The [release decision record](RELEASE-DECISION.md) now contains the approved source, file digests, signing-key fingerprint and verification runs. For future releases, check all assets by downloading them again and verifying the signature before changing a draft to public.
+[OEE Workspace v0.1.0](https://github.com/0xbuffdev/oee-workspace/releases/tag/v0.1.0) installs and verifies the signed curriculum through the published Toolkit. Its [official](https://github.com/0xbuffdev/oee-workspace/actions/runs/45005744426) and [disposable](https://github.com/0xbuffdev/oee-workspace/actions/runs/45005744423) smoke tests passed on Ubuntu, macOS and Windows before publication.
 
-## 6. Workspace and Content follow-up
-
-The signed OEE releases are public. Consumer work follows in this order:
-
-1. Pin the official toolkit distribution and trusted curriculum digest,
-   distribute the approved public-key trust instructions, and record
-   exact install paths for Linux, macOS and Windows.
-2. Update [OEE Workspace](https://github.com/0xbuffdev/oee-workspace)
-   `README.md` and `CONTRIBUTING.md` with real installation, signature,
-   release lock and local-course steps. Run the independent three-OS
-   Workspace acceptance again on the **exact merged docs commit**.
-3. Publish the new Workspace release from that passing commit; do not
-   assert that draft courses are verified or learners have passed.
-4. Finish the already planned Content and 0xNAND release-v2 academic
-   consumer integration without adding a second curriculum parser.
-5. Resume reviewed lesson-level resource mapping once the stable
-   released course digest and source access are available.
-
-The signed archive preserves the academic source as authored. Learner outcomes still require assessment, and optional resource mappings cannot force paid purchases or overwrite learner work.
+Content/0xNAND integration requires separate consumer approval. Optional lesson-level resource maps need review against the actual released course source before activation. A signature proves source identity; it cannot promote academic course status, certify learners or authorize changes to learner files.

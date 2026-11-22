@@ -117,6 +117,12 @@ python3 -m unittest discover -s tests -p 'test_outcome_curriculum.py' -v
 
 Replace `APP1.md` with the course being reviewed. The `--all` option inspects every active course and reports incomplete or unsupported sources instead of passing them. See [Curriculum validation tools](scripts/README.md) for commands and limitations. Automated checks cannot determine whether the assessment actually demonstrates the published competency.
 
+## Release verification
+
+OEE specification releases, Toolkit software versions and signed curriculum snapshots have separate publication decisions. The [Toolkit documentation](tooling/README.md) explains current verification. The [release decision](tooling/RELEASE-DECISION.md) records the initial distribution hashes and independently approved signing-key fingerprint; the [publication runbook](tooling/RELEASE-PUBLICATION.md) covers source verification and key handling.
+
+For a new version, independently review its exact source and licenses, verify package or archive artifacts on Linux, macOS and Windows, and record explicit steward approval before tagging or publishing. Do not reuse an existing release identity, replace published assets or treat disposable CI keys as production trust anchors. Academic course status requires its own evidence and review.
+
 ## Proposing a change
 
 1. Open or identify an issue describing the problem.

@@ -1,12 +1,6 @@
 # REL-I01 — Immutable OEE curriculum release manifest
 
-**Status:** Candidate source-integrity implementation, **not an OEE curriculum
-release or a published Toolkit package**.
-
-The authority is [accepted RFC 0005](../rfcs/0005-immutable-curriculum-releases.md).
-This implementation is deliberately narrower than REL-I02 (deterministic
-archive, signatures and safe installation) and REL-I03 (Git-free, locked
-consumer resolver and Toolkit exportVersion 2).
+The manifest builder is part of the published [OEE Toolkit `0.1.0`](https://github.com/0xbuffdev/open-engineering-education/releases/tag/toolkit-v0.1.0) release pipeline. The first steward-signed curriculum release is [`2026.11.1`](https://github.com/0xbuffdev/open-engineering-education/releases/tag/curriculum-2026.11.1). This document describes the publisher-side format established under [RFC 0005](../rfcs/0005-immutable-curriculum-releases.md). The archive and offline consumer are covered in [REL-I02](RELEASE-ARCHIVE.md) and [REL-I03](RELEASE-CONSUMER.md).
 
 ## Publisher and consumer responsibilities
 
@@ -28,11 +22,7 @@ consumer resolver and Toolkit exportVersion 2).
   version and independent curriculum release ID. Paths are sorted
   lexicographically by UTF-8 bytes; canonical UTF-8 JSON has a single LF
   terminator, no timestamps and no absolute machine paths.
-- The **consumer** will eventually select an approved release by an
-  independently reviewed `oee-curriculum.lock.json` manifest digest.
-  That Git-free lockfile resolver, source archive, signature and version-2
-  course exporter are **not implemented by REL-I01**. No consumer is
-  permitted to treat this candidate manifest as a trusted publication.
+- The **consumer** selects an approved release by its reviewed `oee-curriculum.lock.json` manifest digest. Archive verification, Ed25519 signature checks, and the Git-free Toolkit version-2 exporter operate separately from manifest construction. An unsigned candidate manifest cannot authorize installation.
 
 Academic course status (`draft` / `tested` / `verified`) remains exactly as
 authored. Structural verification is not academic conformance, independent
@@ -87,15 +77,6 @@ catalog**. The OEE Markdown and program READMEs stay authoritative. A future
 change to the source creates a new manifest digest and requires a separately
 approved release; never silently repin an existing lockfile.
 
-## Remaining explicit milestones
+## Current consumers
 
-1. **REL-I02:** reproducible uncompressed TAR, complete archive/manifest
-   checks, safe immutable installation, signed provenance and attestation
-   tests; release publication is a separate steward decision.
-2. **REL-I03:** Git-free Toolkit resolver using the reviewed manifest lock,
-   one existing parser, only the current output `exportVersion: 2`.
-3. **REL-I04/REL-I05:** reviewed Workspace and private Content/0xNAND
-   consumer replacements, without compatibility adapters or silent changes
-   to existing non-disposable learner records and entitlements.
-
-See [Stage 2 tracker #257](https://github.com/0xbuffdev/open-engineering-education/issues/257).
+The first published curriculum uses this manifest format. The [signed archive contract](RELEASE-ARCHIVE.md) and [offline Toolkit consumer](RELEASE-CONSUMER.md) implement the remaining release boundaries. [Workspace v0.1.0](https://github.com/0xbuffdev/oee-workspace/releases/tag/v0.1.0) consumes the signed release; private Content/0xNAND integration has its own review and rollout. New curriculum versions require a new immutable manifest and steward approval. Historical implementation work is recorded in [issue #257](https://github.com/0xbuffdev/open-engineering-education/issues/257).
