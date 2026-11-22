@@ -1,17 +1,10 @@
 # Publishing the first official OEE Toolkit and curriculum release
 
-**Current state (2026-11-22):** the Toolkit 0.1.0 wheel/sdist has passed
-independent clean-install tests on Linux, macOS and Windows, but is
-**not published**. A trusted OEE curriculum CalVer archive and the
-steward's official Ed25519 key have **not** been approved or published.
-These are distinct release decisions.
+**Release status (2026-11-22):** [OEE Toolkit `0.1.0`](https://github.com/0xbuffdev/open-engineering-education/releases/tag/toolkit-v0.1.0) and [signed curriculum `2026.11.1`](https://github.com/0xbuffdev/open-engineering-education/releases/tag/curriculum-2026.11.1) are public. This document records how the first release was prepared, signed and verified. **Do not rerun the publication commands below for these tags.** They are retained for auditing the original release; new versions need new reviewed IDs, manifests and release decisions.
 
-This runbook is for the OEE steward. It uses the existing deterministic
-source archive, detached-signature, install and Toolkit export
-implementations. It creates no alternate parser, release identity or
-automatic Git/HEAD fallback.
+This runbook is for OEE release maintainers. It uses the current archive builder, detached Ed25519 signature, installer and Toolkit exporter. Each archive is built from an explicit commit. The consumer never searches Git or follows a moving branch.
 
-## 1. Verified first Toolkit package candidate
+## 1. Toolkit package source and distribution
 
 - **Source SHA:** `f2afed3e36f6ae0495e2b44a8d9337661defeda1`.
 - **Package/version:** `oee-toolkit 0.1.0` (independent of OEE specification
@@ -23,22 +16,13 @@ automatic Git/HEAD fallback.
 - [Exact-final-commit three-platform package smoke](https://github.com/0xbuffdev/open-engineering-education/actions/runs/44959716559) passed.
 - [Retained ZIP artifact](https://github.com/0xbuffdev/open-engineering-education/actions/runs/44959716559/artifacts/14729286140) contains the wheel and source archive.
 
-The wheel and source archive were independently downloaded, their file
-hashes matched the runner logs, their license/NOTICE entries were
-inspected and neither contained educational curriculum source. The ZIP
-itself has a **different** SHA-256, so approve each distribution file's
-digest, not only the ZIP hash.
+The wheel and source archive were checked against the runner's SHA-256 records and inspected for the expected license and NOTICE files. Neither package includes educational curriculum source. The enclosing GitHub Actions ZIP has its own hash; the per-file hashes are the distribution identities.
 
-Do not upload to PyPI or create a public GitHub Release until you
-independently authorize this exact distribution, name and licensing.
-The initially recommended distribution path is an OEE-owned GitHub
-Release with both files; a registry release can follow separately.
+These exact files were published in the [Toolkit GitHub Release](https://github.com/0xbuffdev/open-engineering-education/releases/tag/toolkit-v0.1.0). PyPI publication, if introduced later, needs a separate distribution decision.
 
-## 2. Prepare one source-pinned, unsigned complete curriculum archive
+## 2. Source-pinned unsigned curriculum archive
 
-The next human-facing **candidate** release ID is `2026.11.1`. It is
-not final until checked against previous allocation and approved by the
-steward. Never reuse an ID if it has already been assigned or withdrawn.
+The first published curriculum release ID is `2026.11.1`. The successful [three-platform candidate run](https://github.com/0xbuffdev/open-engineering-education/actions/runs/44997272152) used the exact source commit below. Future release IDs must be new; never reuse an allocated or withdrawn ID.
 
 Use [Unsigned OEE curriculum release candidate](../.github/workflows/curriculum-official-candidate.yml)
 on the repository's **main** branch with these exact workflow inputs:
@@ -48,21 +32,11 @@ on the repository's **main** branch with these exact workflow inputs:
 | `release_id` | `2026.11.1` |
 | `source_sha` | `f2afed3e36f6ae0495e2b44a8d9337661defeda1` |
 
-The workflow checks that the SHA is a real ancestor of `main`, builds
-the complete allowlisted archive from that **exact commit**, inspects
-the source closure, independently rebuilds the same CalVer archive on
-Linux, macOS and Windows, and compares all bytes and source identities.
-It retains an **unsigned**, unpublished artifact for 30 days. It
-neither handles production private keys nor creates a GitHub Release.
+The workflow checks that the source commit exists in `main` history. It then builds the complete allowlisted archive on Linux, macOS and Windows and compares the resulting bytes. The archived output is unsigned; the workflow has no production private key or publishing permissions.
 
-Inspect the three passing platform jobs and the byte-comparison job.
-Record the workflow run URL and approved values of `archiveSha256`,
-`manifestSha256`, `fileCount` and `sourceCommit` from `audit.json`.
-Check that the academic source remains explicitly `draft` where authored;
-a structural check is not a human educational approval.
+The comparison passed on all three platforms. The approved manifest SHA-256 is `57441494eb69c2ff9cb3f6029c8adc3c6a56f8c6ecabc43196c9b686e5959a6c`, and the archive SHA-256 is `931b30209a2727717af331f4fd46bfc8e637c94c4d1d95d08d6ffeee753c78d2`. The archive contains 76 courses across 94 source and notice files. Course status remains `draft` where authored.
 
-To download the candidate using GitHub CLI (after replacing
-`RUN_ID` with the successful workflow's numeric run ID):
+The following command downloads the historical unsigned candidate. Use the actual run ID (`44997272152`) in place of `RUN_ID` when reproducing the audit:
 
 ~~~sh
 REPO="0xbuffdev/open-engineering-education"
@@ -84,15 +58,11 @@ confirms byte consistency, not steward authenticity. Compare its digest
 with the independently reviewed workflow log and approved release
 decision before signing. Do not automatically trust the downloaded ZIP.
 
-## 3. Establish steward key trust once, offline
+## 3. Steward key trust and custody
 
-**Only the steward performs this step.** Choose a trusted local machine,
-an encrypted volume, a protected backup and an offline signing location.
-The current signer accepts an **unencrypted PEM private key**, so never
-leave that file on a shared/untrusted disk or store it in a source
-repository, connected chat, cloud workflow artifact or CI secret.
+The steward created the production Ed25519 signing key on a local machine. The private key remains under steward control. The signer reads an unencrypted PEM, so it must be stored on protected, encrypted media and backed up securely. Never place the private key in the repository, CI, a chat or a public release asset.
 
-For a brand-new key only (do not overwrite any existing key):
+The commands below document first-time key generation. **Do not run them for the existing `2026.11.1` key** or overwrite any current key:
 
 ~~~sh
 umask 077
@@ -111,9 +81,7 @@ chmod 600 "$PRIVATE_KEY"
 openssl pkey -pubin -in "$PUBLIC_KEY" -outform DER | sha256sum
 ~~~
 
-Record the SHA-256 fingerprint of the **DER-encoded public key** as
-the trust reference. The public PEM and its fingerprint are safe to
-publish after independent steward review; the private key is not.
+The independently approved DER public-key SHA-256 fingerprint for this release is `0cbd8335bf39fab19b17a7bfaa33502d121d007fca4bddd5df0f43a9c814e2ef`. The public PEM and fingerprint can be shared; the private key must stay private.
 
 Before approving the key, record who controls it, where recovery
 backups are stored, which release classes it may sign, and the
@@ -123,12 +91,9 @@ channel, use a separately approved replacement key for future
 releases, and review previously published attestations. Do not
 silently replace a pinned release or delete historical evidence.
 
-## 4. Sign only the independently reviewed archive
+## 4. Local signing and verification
 
-Use a local OEE checkout containing the tested publisher script and
-a Python environment with `cryptography>=44,<50`. Copy the downloaded
-unsigned candidate to that machine. After comparing its digest with
-the approved source review, set the **actual** manifest digest:
+The steward signed the verified archive locally using the OEE release script and `cryptography>=44,<50`. The following publisher commands document the same steps. They expect an unsigned candidate and the approved digest; **do not sign or overwrite the already published `2026.11.1` release again**:
 
 ~~~sh
 # The source root is the full checkout containing scripts/.
@@ -163,19 +128,16 @@ Then check an installed `oee-toolkit export SEF1` using an explicitly
 reviewed `oee-curriculum.lock.json`. No network or Git source should be
 needed by the installed consumer.
 
-## 5. Publish only after signing and artifact approval
+## 5. Published artifacts and original draft-publishing commands
 
-These are **separate OEE-owned GitHub Releases** to avoid collisions
-with existing OEE specification tags.
+Toolkit software and curriculum source have separate GitHub Release tags. The OEE specification has its own version:
 
 | Artifact class | Proposed tag | Required assets |
 | --- | --- | --- |
 | Toolkit Python software | `toolkit-v0.1.0` | Exact audited wheel and sdist, digests, package notes |
 | Immutable curriculum | `curriculum-2026.11.1` | Signed `curriculum.tar`, detached `.attestation.json`, raw `.sig`, trusted public PEM, full SHA-256 records, release notes |
 
-Create the releases in **draft** first and inspect assets and checksums.
-Only the GitHub account with publishing permission should make them
-public. On a machine authenticated to the official repository:
+Both releases were created as drafts, checked and then published. The commands below show the original draft creation procedure. They will fail for already allocated tags and must not be used to replace existing assets:
 
 ~~~sh
 # The wheel/sdist must match the approved digests above.
@@ -198,15 +160,11 @@ gh release create curriculum-2026.11.1 \
   --notes "Immutable signed OEE curriculum snapshot; course readiness remains as authored."
 ~~~
 
-Do not publish drafts until the approved manifest digest, signature,
-source commit, public-key fingerprint and file hashes have been
-recorded in an authoritative release decision and an independent
-download/verify/install succeeds. After that review, the steward may
-publish by editing the draft releases in GitHub's release UI.
+The [release decision record](RELEASE-DECISION.md) now contains the approved source, file digests, signing-key fingerprint and verification runs. For future releases, check all assets by downloading them again and verifying the signature before changing a draft to public.
 
-## 6. Complete dependent Workspace and Content activation
+## 6. Workspace and Content follow-up
 
-After the real Toolkit and signed curriculum archive are public:
+The signed OEE releases are public. Consumer work follows in this order:
 
 1. Pin the official toolkit distribution and trusted curriculum digest,
    distribute the approved public-key trust instructions, and record
@@ -222,6 +180,4 @@ After the real Toolkit and signed curriculum archive are public:
 5. Resume reviewed lesson-level resource mapping once the stable
    released course digest and source access are available.
 
-Neither Toolkit package publication nor the curriculum archive
-retroactively validates learner outcomes. Resource maps remain optional
-and must not force paid books or overwrite existing learner work.
+The signed archive preserves the academic source as authored. Learner outcomes still require assessment, and optional resource mappings cannot force paid purchases or overwrite learner work.

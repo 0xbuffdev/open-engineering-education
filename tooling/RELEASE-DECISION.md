@@ -4,13 +4,9 @@ The OEE steward authorized preparation and approval of the OEE and Workspace
 releases on 2026-11-21, with technical preflight, accurate installation
 documentation and tested source artifacts required before publication.
 
-**Decision: release preparation approved; official publication is conditional.**
-A GitHub code-review approval is not a signed curriculum attestation,
-public signing-key trust decision, or package upload.
+**Release outcome:** OEE Toolkit `0.1.0` and the signed curriculum `2026.11.1` were published on 2026-11-22. The [Toolkit release](https://github.com/0xbuffdev/open-engineering-education/releases/tag/toolkit-v0.1.0) contains the audited wheel and source distribution. The [curriculum release](https://github.com/0xbuffdev/open-engineering-education/releases/tag/curriculum-2026.11.1) contains the archive, detached signature, attestation and public key. The original approval required independent package tests and steward-controlled signing; both were completed before publication.
 
-The existing OEE `v0.2.0` specification release is separate from the first
-official Toolkit wheel/sdist, the immutable signed whole-curriculum CalVer
-release and the independent OEE Workspace software version.
+The OEE `v0.2.0` specification, Python Toolkit `0.1.0`, curriculum `2026.11.1` and OEE Workspace software are versioned separately. Publishing the signed source archive does not change any course's academic status.
 
 ## Approved scope
 
@@ -20,8 +16,7 @@ release and the independent OEE Workspace software version.
   contents and a source-free installed consumer.
 - Apply the Debian/Ubuntu `ensurepip` portability fix and accurate separate
   source/package readiness reporting.
-- After all exact-commit checks and signing policies pass, authorize
-  official Toolkit and curriculum publication, then Workspace.
+- Publish Toolkit and curriculum artifacts only after their source, signing and verification checks pass. Complete the independent Workspace release afterward.
 - Finish the existing Content/0xNAND integration after the software
   releases; return to course-resource mapping afterward.
 
@@ -32,13 +27,15 @@ release and the independent OEE Workspace software version.
       independent clean wheel/sdist installation and licensing checks passed
       on Linux/macOS/Windows for `f2afed3e36f6ae0495e2b44a8d9337661defeda1`.
       Exact run URLs recorded below.
-- [ ] Verified curriculum source closure, licenses, notices and third-party
-      rights; selected CalVer release ID and full manifest SHA-256.
-- [ ] Steward-owned Ed25519 private key managed outside the repository, with
-      separately trusted public key, attestation, rotation/revocation policy.
-      No disposable CI/test key may be substituted.
-- [ ] Official Toolkit package and signed curriculum archive published
-      with their final digests, then reinstalled and independently verified.
+- [x] Complete curriculum source and notices reviewed for the signed
+      `2026.11.1` archive. The manifest and archive SHA-256s are recorded below.
+- [x] Steward-generated Ed25519 signing key used locally. The public key,
+      its independently recorded fingerprint, detached attestation and signature
+      are available with the release. The private key remains outside the repository.
+      Key recovery, revocation and rotation remain steward responsibilities.
+- [x] Both [Toolkit](https://github.com/0xbuffdev/open-engineering-education/releases/tag/toolkit-v0.1.0) and [curriculum](https://github.com/0xbuffdev/open-engineering-education/releases/tag/curriculum-2026.11.1) releases published with the reviewed hashes.
+      Local signing, signature verification and offline installation completed
+      during the steward's release script, which exited successfully.
 - [ ] Workspace released from its exact passing final commit, under its
       own signed-off release decision record.
 
@@ -48,52 +45,32 @@ release and the independent OEE Workspace software version.
 | --- | --- |
 | Delegated release preparation approval | 2026-11-21 |
 | Selected package/source commit SHA | `f2afed3e36f6ae0495e2b44a8d9337661defeda1` |
-| Proposed Toolkit distribution | `oee-toolkit` `0.1.0` (first stable package candidate) |
+| Published Toolkit distribution | `oee-toolkit` `0.1.0` ([release](https://github.com/0xbuffdev/open-engineering-education/releases/tag/toolkit-v0.1.0)) |
 | Wheel SHA-256 | `eb20281dea91d16a03d79535d65a7b8b271894a5d7a5988cc2d356c88993ecf6` |
 | Sdist SHA-256 | `8eb21f512b4a0e27615b18261b10cd59495f11049a6d141be9e4ae02505d6501` |
 | Source-readiness check URL | [Final selected commit: passed](https://github.com/0xbuffdev/open-engineering-education/actions/runs/44959716491) |
 | Wheel/sdist install test URL | [Three-platform final build/install: passed](https://github.com/0xbuffdev/open-engineering-education/actions/runs/44959716559) |
-| Curriculum CalVer and manifest digest | Pending |
-| Official steward key and signed attestation | Pending independent approval |
-| Publication status | Not published by this PR |
+| Curriculum CalVer and manifest digest | `2026.11.1`; `57441494eb69c2ff9cb3f6029c8adc3c6a56f8c6ecabc43196c9b686e5959a6c` |
+| Curriculum TAR SHA-256 | `931b30209a2727717af331f4fd46bfc8e637c94c4d1d95d08d6ffeee753c78d2` |
+| Steward public-key DER SHA-256 fingerprint | `0cbd8335bf39fab19b17a7bfaa33502d121d007fca4bddd5df0f43a9c814e2ef` |
+| Cross-platform unsigned archive comparison | [Four successful jobs](https://github.com/0xbuffdev/open-engineering-education/actions/runs/44997272152) |
+| Official steward key and signed attestation | [Published with curriculum](https://github.com/0xbuffdev/open-engineering-education/releases/tag/curriculum-2026.11.1) |
+| Publication status | Both releases public since 2026-11-22 |
 | Academic course status | Unchanged, draft until learner evidence |
 
 The source-only report's `packagedDistributionVerified: false` is expected.
 The standalone package-install verifier provides separate evidence.
 
-This record is a delegated, **conditional release authorization**, not a
-claim that the missing evidence was produced or that the releases already
-exist. Do not tag or distribute official artifacts until the checkboxes are
-satisfied and linked to the exact final commits.
+The publication decisions above are recorded against exact source and distribution hashes. Follow the same checks for future releases; a successful CI run for this version cannot approve a different package, manifest or signing key.
 
-## First package candidate preflight
+## Toolkit package evidence
 
-The first independent distribution proposes Python package version
-`0.1.0`. This is **not** the OEE specification `v0.1.0` tag.
-The package CI preserves the Linux wheel and source archive for 30 days
-as a named, unpublished workflow artifact. Linux/macOS/Windows clean
-installation and installed Toolkit contract checks still run on all
-three platforms. No registry credentials, GitHub Release creation,
-package-signing action or automatic release tagging are added.
+The first Toolkit distribution is Python package version `0.1.0`. Its package tests installed the wheel and source archive on Linux, macOS and Windows. CI preserved the audited files as a workflow artifact, and the steward published them separately to GitHub Releases. The packaging workflow has no registry credentials or automatic publishing step.
 
-Record the **new exact merged main SHA**, wheel and sdist SHA-256 values,
-the artifact run URL and independently reviewed license/NOTICE.
-Publishing from this candidate requires deliberate official artifact
-selection. The source-only readiness report and separate wheel/sdist
-verifier must both be preserved. A previous green CI result cannot
-approve a new stable version commit.
+The package source commit, per-file hashes and package-test run are recorded in the decision log. Keep the source-only and wheel/sdist verification reports as separate evidence for any future Toolkit release.
 
-## First signed-curriculum release procedure
+## Signed curriculum release evidence
 
-Follow [the official release runbook](RELEASE-PUBLICATION.md). The proposed
-first unallocated curriculum CalVer is `2026.11.1`. Its manifest digest,
-signed archive, steward public key, and independent publication audit have
-**not** yet been created or approved. The new on-demand candidate workflow
-builds the full archive byte-identically on Linux/macOS/Windows, then retains
-an unsigned candidate without CI-owned persistent signing material.
+The [release runbook](RELEASE-PUBLICATION.md) explains the signing and publication procedure used for `2026.11.1`. The unsigned curriculum archive was built byte-identically on Linux, macOS and Windows. The steward signed the reviewed archive locally with the production Ed25519 key and published the attestation, signature and approved public key.
 
-Do not interpret the verified unsigned package ZIP as an official GitHub
-Release, or mistake a build-time disposable Ed25519 test signature for the
-steward's production attestation. The checked source SHA remains a valid
-explicit release input even if future documentation-only commits advance
-`main`; publisher-side signing requires its own recorded source identity.
+The signed release refers to source commit `f2afed3e36f6ae0495e2b44a8d9337661defeda1`; documentation commits after that source snapshot do not change its contents. Consumers must validate the published attestation with the separately trusted public-key fingerprint. CI test keys are never release trust anchors.

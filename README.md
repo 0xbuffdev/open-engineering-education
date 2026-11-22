@@ -3,11 +3,11 @@
 
 # Open Engineering Education (OEE)
 
-Open Engineering Education publishes a free specification and curriculum for practical engineering education. Each course describes the capabilities learners are expected to develop, the work that demonstrates those capabilities, and the evidence used to assess completion.
+Open Engineering Education (OEE) is a free, public specification and curriculum for learning software engineering through practical work. Every course explains what a learner should understand or build, how that work will be assessed, and what evidence they need to keep.
 
-Educators can teach the material in different ways. Learners can study independently, and tools can present the curriculum, while the published requirements remain available to everyone.
+You can use OEE on your own or teach it in a classroom or program. The requirements stay in the public curriculum, regardless of how the lessons are delivered.
 
-**Current specification:** `v0.2.0` (draft). Publication and automated checks do not mean a course has been tested with learners or formally verified.
+**Current specification:** `v0.2.0` (draft). The [signed curriculum release `2026.11.1`](https://github.com/0xbuffdev/open-engineering-education/releases/tag/curriculum-2026.11.1) and [OEE Toolkit `0.1.0`](https://github.com/0xbuffdev/open-engineering-education/releases/tag/toolkit-v0.1.0) are available for download. A signed release establishes the source and version; it does not mean courses have been tested with learners.
 
 ## Find what you need
 
@@ -25,7 +25,7 @@ The [specification](spec/README.md) defines the shared educational requirements.
 
 The curriculum applies those requirements to particular subjects. A course identifies its outcomes, modules, learning activities, and required assessments. Completion depends on meeting published assessment criteria with reviewable evidence. There is no required lesson count, prescribed teaching platform, or automatic credit for completing activities.
 
-Automated checks find structural errors, missing references, and other inconsistencies. They cannot determine whether a learner has demonstrated a capability or whether a course's assessments are educationally sound.
+Automated checks catch malformed courses, broken references and inconsistent structures. Assessment quality and learner achievement still need human review.
 
 ## Programs
 
@@ -47,7 +47,7 @@ Each program catalog lists its courses, prerequisites, and study order. Read the
 
 Neither product is required to follow OEE. An implementation may provide teaching, feedback, or additional tools, but it cannot silently change the public completion requirements. Using an OEE-related product does not establish conformance.
 
-Learners keep their implementations, notes, and assessment evidence in their own workspaces, outside this specification repository.
+Learners keep their code, notes and assessment evidence in their own workspaces. Those files do not belong in this specification repository.
 
 ## Repository structure
 
@@ -67,7 +67,7 @@ Binding changes follow [governance](GOVERNANCE.md) and the [RFC process](rfcs/RE
 
 All five program catalogs publish `v0.2.0` draft course definitions. AI contains 16 required courses and four electives. SEC contains 13 specialist courses and a capstone; entry to the capstone requires separate completion evidence from the other SEC courses.
 
-Every course remains `draft`. Source completeness and academic review do not establish learner-tested effectiveness, professional accreditation, or OEE conformance. Course status can change only with the evidence required by [Status Labels](spec/status-labels.md). The [curriculum inventory](curriculum/INVENTORY.md) explains the generated source and structure reports.
+All courses remain `draft`, including those in the signed `2026.11.1` snapshot. Structural checks and academic review alone cannot establish how well a course works with learners. The evidence needed to change a course status is defined in [Status Labels](spec/status-labels.md). The [curriculum inventory](curriculum/INVENTORY.md) explains the source and structure reports.
 
 The published `v0.2.0` tag contains an error in its citation metadata. The [release erratum](releases/ERRATA.md) records the correct citation information without changing the tag.
 
