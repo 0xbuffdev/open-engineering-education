@@ -2,42 +2,26 @@
 
 The Toolkit checks OEE course structure and produces deterministic exports from a digest-locked, locally installed curriculum release. It is the first-party implementation of the approach accepted in [RFC 0002](../rfcs/0002-toolkit-stewardship-and-licensing.md) and [RFC 0005](../rfcs/0005-immutable-curriculum-releases.md).
 
-The Toolkit has not been published as an official standalone package, and its library API is not stable. The first independent wheel/source-archive **candidate** is buildable from the public repository; publication, distribution terms and support still need a separate steward approval. [Toolkit licensing](LICENSING.md) explains which licenses apply to its files.
+The [OEE Toolkit `0.1.0`](https://github.com/0xbuffdev/open-engineering-education/releases/tag/toolkit-v0.1.0) is published as a Python wheel and source distribution. It has a supported command-line interface; its importable Python library API is not yet promised to be stable. See [Toolkit licensing](LICENSING.md) for the software and curriculum license boundaries.
 
-**Consumer commands require an approved `oee-curriculum.lock.json` and verified installed release**. They never need a Git checkout, fetch the network or consult moving `main`. Git source revisions remain publisher-only provenance of a complete archive and the historical golden regression tests.
+To run a consumer command, install a verified curriculum release and pin it in `oee-curriculum.lock.json`. Consumer commands work without Git or network access and never follow a moving `main` branch. Git revisions are used by maintainers to record where a release came from and to run source regression tests.
 
-The only editable educational source is the public OEE specification and
-curriculum Markdown. The exported JSON is derived data, not a second
-authoring format, conformance certificate, learner grade or evidence of
-the course having been tested or verified.
+The specification and curriculum Markdown remain the editable educational source. The Toolkit's JSON exports are derived from that source. They do not certify a course, grade learners or create a separate authoring format.
 
 ## Independent release-readiness verification
 
-The [OT-I05 public release checklist](RELEASE-READINESS.md) documents the
-24 Toolkit acceptance gates, licensing/source provenance, independent
-Windows/macOS/Linux smoke and the separate OEE steward decision needed
-before any official distribution. The [release smoke](interop/verify_release_readiness.py)
-clones the public OEE checkout locally and executes the **repository-local**
-Toolkit without network access or private services:
+The [OT-I05 release checklist](RELEASE-READINESS.md) records 24 acceptance checks, licensing and source provenance, and the Linux/macOS/Windows smoke tests used before publication. To run the source-only checks yourself, use the [release smoke](interop/verify_release_readiness.py). It works on a local checkout without external services:
 
 ~~~sh
 python3 tooling/interop/verify_release_readiness.py --source . \
   --report ../toolkit-readiness.json
 ~~~
 
-This is **engineering verification, not package publication**. The
-accepted RFC approves optional Toolkit source, not a package version,
-installed importable API or an official release tag. The current
-CLI and OEE curriculum specification remain versioned separately.
+This command tests repository source. To check the distributed wheel and source archive, run the separate package verifier below. The Toolkit's software version and the OEE specification version are independent.
 
-## Installable-package candidate (Stage 1)
+## Install and test the Toolkit package
 
-This repository now carries Python packaging metadata in
-[`pyproject.toml`](../pyproject.toml), one package version authority in
-[`oee_toolkit/__init__.py`](oee_toolkit/__init__.py), and a console
-entrypoint, `oee-toolkit`. The version currently denotes an **unreleased
-development candidate**. No PyPI project claim, release tag or official
-package version is implied by building it.
+Packaging is configured in [`pyproject.toml`](../pyproject.toml). The version is defined in [`oee_toolkit/__init__.py`](oee_toolkit/__init__.py), and the installed command is `oee-toolkit`. Download the audited wheel or source distribution from the [Toolkit `0.1.0` GitHub release](https://github.com/0xbuffdev/open-engineering-education/releases/tag/toolkit-v0.1.0). The project has not claimed a PyPI distribution here.
 
 The package contains only the MIT-covered Toolkit implementation, the shared
 v0.2.0 parser, the release resolver, and the current `course-export-v2` JSON Schema.
@@ -46,7 +30,7 @@ are **not bundled**. The OEE repository maintenance checker calls the exact
 same installed-package parser implementation. `scripts/` is no longer a
 runtime dependency of the installed Toolkit.
 
-To inspect a local candidate, without publishing:
+To build and test a distribution from your checkout:
 
 ~~~sh
 python3 -m pip install build
@@ -79,41 +63,19 @@ software-license attribution and source-archive contents. The
 repeats the test on Linux, macOS and Windows; it has no publishing
 permissions or registry credentials.
 
-REL-I03 has implemented the **offline installed-release resolver and
-current-only export format 2**, without approving an official curriculum
-release, Toolkit package version or steward key. A consumer must first
-acquire an explicitly approved, independently verified release artifact
-using REL-I02's trusted installation process. Package installation and
-curriculum-release selection are separate concerns.
+The installed Toolkit reads an approved curriculum archive through the offline release resolver and exports course data in format 2. The current public curriculum is [signed release `2026.11.1`](https://github.com/0xbuffdev/open-engineering-education/releases/tag/curriculum-2026.11.1). Verify its Ed25519 signature against the independently approved steward public-key fingerprint before installing it. Installing the Toolkit package alone does not install a curriculum.
 
 ## Immutable curriculum release manifest (REL-I01)
 
-The [release manifest candidate](RELEASE-MANIFEST.md) inventories the
-**entire** current public curriculum and specification at an exact
-publisher-selected Git commit, using the Toolkit's existing course parser
-and a deterministic, full-digest source file manifest. The publisher-only
-command is `python3 scripts/build-curriculum-release-manifest.py`.
+The [release manifest format](RELEASE-MANIFEST.md) records the complete curriculum and specification at an explicit Git commit. The publisher uses the Toolkit's course parser to inventory source files and record their hashes with `python3 scripts/build-curriculum-release-manifest.py`.
 
-This is source-integrity preparation **only**. The accepted
-[RFC 0005](../rfcs/0005-immutable-curriculum-releases.md) separately gates
-the archive, installed release lock, Git-free Toolkit export, and consumer
-cutovers. No archive, package, release tag, learner data, or publication
-is created by REL-I01.
+Manifest generation checks source integrity without signing or publishing anything. [RFC 0005](../rfcs/0005-immutable-curriculum-releases.md) also requires a verified archive, explicit release lock and offline consumer export.
 
 ## Signed, offline curriculum archive (REL-I02)
 
-[REL-I02's release archive proposal](RELEASE-ARCHIVE.md) builds a canonical,
-uncompressed TAR from the **REL-I01-verified complete OEE manifest**, and
-supplies explicit Ed25519 attestation verification and no-clobber offline
-installation. Signing uses a separately trusted key and the optional
-`oee-toolkit[release]` dependency; it is not part of the default course
-parser. No GitHub Release, package upload, source promotion or learner
-mutation is performed or authorized by this implementation.
+The [release archive format](RELEASE-ARCHIVE.md) is a canonical, uncompressed TAR built from the complete OEE manifest. The release tools verify the Ed25519 attestation and install the archive without replacing existing data. Signing uses a separately trusted key and the optional `oee-toolkit[release]` dependency. The installer does not publish releases, modify learner work or change course status.
 
-REL-I03 implements the pinned release resolver and current-only v2
-export, but Workspace and private Content remain on their existing
-interfaces until the separately approved REL-I04/REL-I05 cutovers. No
-official release archive has yet been published.
+The Toolkit's release resolver and v2 exporter are available now. [OEE Workspace](https://github.com/0xbuffdev/oee-workspace) is integrating the published archive into its learner setup. Content and 0xNAND integration remains a separate consumer task.
 
 ## Consumer commands (REL-I03)
 
@@ -131,9 +93,7 @@ A project must commit a reviewed `oee-curriculum.lock.json`:
 }
 ~~~
 
-The example values are **illustrative only**, not a released curriculum or
-a trusted manifest digest. With an independently approved, signed
-curriculum release already installed in the user's trusted cache:
+The JSON above illustrates the lock structure; its placeholder digest is deliberately invalid. For the real `2026.11.1` lock, use the verified digest `57441494eb69c2ff9cb3f6029c8adc3c6a56f8c6ecabc43196c9b686e5959a6c` from the [signed curriculum release](https://github.com/0xbuffdev/open-engineering-education/releases/tag/curriculum-2026.11.1). Install that release in the trusted cache before running:
 
 ~~~sh
 oee-toolkit check SEF1 --json
@@ -192,8 +152,8 @@ complete validation succeeds.
   outcomes or outcomes for unsupported files.
 - The current consumer format is
   [course-export-v2.schema.json](oee_toolkit/schemas/course-export-v2.schema.json).
-  The old source-only v1 golden fixture format remains internal test
-  evidence and is **not shipped as an active consumer export schema**.
+  Historical source-regression fixtures remain internal test evidence
+  and are **not shipped as an active consumer export schema**.
   Curriculum release, specification, parser software and JSON format
   are distinct identities. Academic outcome and assessment IDs remain
   exactly the OEE-authored identities; lesson ordinals are navigation.
@@ -211,13 +171,7 @@ Cross-course prerequisite codes are checked against the same verified
 installed release. Course-level exports **do not invent program catalog
 order** or establish the assessed quality of prerequisite work.
 
-This implementation provides offline course check and export, plus
-read-only full-release inspection. Full program-catalog export and an
-**approved published** Toolkit package/curriculum release are **not yet
-implemented or claimed**. The source-buildable package remains
-engineering verification, not publication.
-RFC 0002 has been accepted, but its approval does not complete the
-remaining release-readiness work.
+The Toolkit supports offline course checks, deterministic exports and read-only inspection of an installed release. Full program-catalog export is not available. The [Toolkit package](https://github.com/0xbuffdev/open-engineering-education/releases/tag/toolkit-v0.1.0) and [signed curriculum](https://github.com/0xbuffdev/open-engineering-education/releases/tag/curriculum-2026.11.1) have been published; future software changes still require their own release review.
 
 Tests first build disposable signed releases from synthetic Git fixtures,
 then exercise the installed consumer **without Git**: deterministic v2
@@ -237,6 +191,4 @@ interface schemas and tests are MIT; normative OEE curriculum and actual
 course-derived golden exports remain CC BY 4.0. See
 [Toolkit licensing](LICENSING.md) and the repository
 [NOTICE](../NOTICE). RFC 0002 records these boundaries. A separate
-release-readiness review must verify distribution notices before an
-official release. This does not retroactively change any contributor's
-license or rights.
+release review checks distribution notices. Publication does not change any contributor's license or rights.

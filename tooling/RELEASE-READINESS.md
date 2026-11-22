@@ -1,17 +1,11 @@
 # OEE Toolkit release-readiness verification
 
-**Milestone:** OT-I05 — independent execution, provenance, licensing and
+**Milestone:** OT-I05: independent execution, provenance, licensing and
 distribution decision.
 
-**Status:** Candidate for public steward review. This document records
-**release-readiness evidence**, not an official Toolkit package, CLI
-installation, stabilized Python API or new release tag.
+**Status:** Toolkit `0.1.0` was published on 2026-11-22 after this engineering preflight. This document preserves the source and package verification process behind the [published distribution](https://github.com/0xbuffdev/open-engineering-education/releases/tag/toolkit-v0.1.0). Its checks do not promise a stable importable Python API.
 
-The [accepted RFC 0002](../rfcs/0002-toolkit-stewardship-and-licensing.md)
-approves source stewardship and file-scoped licensing. It does **not**
-automatically authorize a packaged Toolkit release. The canonical
-[OEE specification](../spec/README.md) and educational Markdown retain
-authority over any derived Toolkit export.
+[RFC 0002](../rfcs/0002-toolkit-stewardship-and-licensing.md) sets the ownership and licensing boundaries for Toolkit code. The steward separately approved and published the `0.1.0` distribution. The [OEE specification](../spec/README.md) and educational Markdown remain authoritative over Toolkit exports.
 
 ## One supported format, one parser
 
@@ -121,27 +115,17 @@ conditions**, not blanket pre-approval or normative OEE requirements.
 | OT-17 | Reordered lesson/module revision locators | Pinned source and drift unit tests |
 | OT-18 | Independent consumer, versioned export | Live current Workspace v2 integration and golden consumer pins |
 | OT-19 | Unsafe links, oversized source and traversal | Source/fixture safety regression tests, failure-closed output |
-| OT-20 | Independent public release artifact | **Not yet authorized**: source execution verified; packaged distribution still needs steward approval |
+| OT-20 | Independent public release artifact | [Published Toolkit `0.1.0`](https://github.com/0xbuffdev/open-engineering-education/releases/tag/toolkit-v0.1.0); three-platform package smoke passed before publication |
 | OT-21 | External consumer without private grading | Workspace export checker and Toolkit public integration CI |
 | OT-22 | Course `tested` status not auto-certified | Structural-only diagnostics, `manualReviewRequired` |
 | OT-23 | Repository scan with unsupported courses | `check --all` and negative unsupported-course tests |
 | OT-24 | Deterministic policy and source | Repeated byte-identical exports and golden checks |
 
-**Important:** OT-20's independent, installable **package artifact**
-is a **separate gate** if a package is proposed. A source-repository
-CLI that runs independently is verified here; that fact must not be
-relabelled as a packaged-install test or official distribution.
-Human legal/source-provenance review and any external distribution
-approval also remain outstanding.
+OT-20 has separate source and package tests. The [package verification run](https://github.com/0xbuffdev/open-engineering-education/actions/runs/44959716559) passed on Linux, macOS and Windows for the distribution that was published. Source-only checks remain useful but must not be reported as wheel-install evidence. Future releases still need the steward's source and rights review.
 
-## Proposed packaged distribution candidate (Stage 1)
+## Packaged distribution verification
 
-A source-buildable, **unpublished** Python distribution now lives in the
-repository's `pyproject.toml` and `MANIFEST.in`. The actual course parser
-and version classifier have one owner inside `tooling/oee_toolkit/`; the
-repository checker invokes them rather than maintaining another
-implementation. The installable CLI is `oee-toolkit`, with no required
-third-party Python runtime dependencies.
+Toolkit `0.1.0` is published as a wheel and source distribution. Its package metadata lives in `pyproject.toml` and `MANIFEST.in`. The course parser and version classifier live in `tooling/oee_toolkit/`, and the repository checker calls the same implementation. The installed command is `oee-toolkit`. Core offline commands have no required third-party Python dependencies.
 
 [`toolkit-package.yml`](../.github/workflows/toolkit-package.yml) builds
 wheel and source archives on Linux, macOS and Windows and invokes
@@ -152,16 +136,9 @@ signed test release, includes MIT/NOTICE, excludes CC BY curricula and v1
 golden exports, and refuses absent locks or Git consumer flags.
 The source archive must independently rebuild into a wheel.
 
-These are **new OT-20 technical acceptance tests**, not proof that the
-artifact has been successfully tested until the CI run passes. The original
-manual copyright, third-party rights, release-number selection, maintainer
-smoke and explicit publication authorization below remain mandatory.
-No PyPI publishing, GitHub Release or tag workflow has been added.
+OT-20 package tests passed on the exact selected source commit. The steward separately approved the release number and published the audited files to GitHub Releases. CI has no automatic publication step or PyPI credentials. New versions still require package checks, source-rights review and an explicit release decision.
 
-Until a distinct approved curriculum-release manifest is adopted, the
-installed CLI still selects an exact source Git commit. The proposed next
-stage would replace this consumer-facing requirement with an immutable,
-digest-checked release ID while retaining reproducible source provenance.
+The installed CLI now selects a verified curriculum archive using an exact release ID and manifest digest in `oee-curriculum.lock.json`. It reads the locally installed files without consulting Git. Source commits remain recorded for provenance. See [signed curriculum `2026.11.1`](https://github.com/0xbuffdev/open-engineering-education/releases/tag/curriculum-2026.11.1).
 
 ## Cross-repository provenance and SSOT
 
@@ -208,8 +185,7 @@ source revision. Contributor rights and third-party provenance
 are **not** established merely by checking filenames. The OEE/0xBUFF
 marks have separate trademark rules.
 
-Before **any official Toolkit release or package**, the OEE steward
-must independently approve:
+The following is the prepublication checklist used for Toolkit `0.1.0`. It remains a checklist for future software releases; the [release decision](RELEASE-DECISION.md) records the evidence and publication result for this version:
 
 - [ ] The signed OT-I05 PR, exact release-candidate SHA, and public
   release notes describing only existing implemented behavior.
@@ -245,5 +221,4 @@ wheel/sdist in a separate isolated environment and must be retained alongside
 the source report. Do not change the source field to `true` unless that script
 actually gains package verification behavior.
 
-See [the release decision](RELEASE-DECISION.md) for the final commit, checks,
-signature and official publication gates.
+The [release decision](RELEASE-DECISION.md) records the exact `0.1.0` package hashes, the separately signed `2026.11.1` curriculum and the three-platform test evidence.
