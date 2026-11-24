@@ -208,6 +208,7 @@ def parse_structure(path: Path, text: str, root: Path, *,
             "prerequisitesText": metadata_value("Prerequisites"),
             "outcomes": [],
             "assessments": [],
+            "assessmentBriefs": {},
             "modules": [],
             "coverage": {},
         })
@@ -384,6 +385,8 @@ def parse_structure(path: Path, text: str, root: Path, *,
                         add("OEE023", f"{ident}: missing or empty {key} field", header.start())
             refs = ID_REF_RE.findall(inline.get("outcomes", ("", "", 0))[0])
             if capture is not None:
+                if link and linked_path is not None:
+                    capture["assessmentBriefs"][ident] = format_path(linked_path)
                 assessment_location = (
                     {"path": inline["work"][1], "line": inline["work"][2]}
                     if link and inline.get("work") else

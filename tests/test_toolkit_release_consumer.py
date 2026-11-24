@@ -22,6 +22,7 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 
 import test_curriculum_release_manifest as fixtures
 from tooling.oee_toolkit.core import canonical_json
+from tooling.oee_toolkit.assessment_context import export_assessment_context
 from tooling.oee_toolkit.release_archive import (
     build_archive, install_verified_archive, sign_candidate,
 )
@@ -103,6 +104,35 @@ class OfflineReleaseConsumerTests(unittest.TestCase):
         self.assertEqual(first["course"]["status"], "draft")
         self.assertEqual(first["validation"],
                          {"structural": "passed", "manualReviewRequired": True})
+
+    def test_context_is_exact_source_bound_and_does_not_infer_mandatory_practice(self):
+        source = resolve_release(self.lock, self.store)
+        with patch.object(ReleaseSource, "_git", side_effect=AssertionError("Git forbidden")):
+            context = export_assessment_context(source, "FXT1")
+            self.assertEqual(context, export_assessment_context(source, "FXT1"))
+        self.assertEqual(context["contextVersion"], 1)
+        self.assertEqual(context["applicability"], "manual-resolution-required")
+        self.assertEqual(context["reviewedRanges"], [])
+        self.assertTrue(context["manualReviewRequired"])
+        self.assertEqual(context["assessments"], [{
+            "assessmentId": "FXT1-AS1",
+            "sourcePaths": ["curriculum/FXT/FXT1.md"],
+        }])
+        document = context["documents"][0]
+        self.assertEqual(document["markdown"], source.read_file(document["path"]))
+        self.assertEqual(document["sha256"], hashlib.sha256(
+            document["markdown"].encode()).hexdigest())
+        self.assertEqual(context["courseExportSha256"], hashlib.sha256(
+            canonical_json(export_release_course(source, "FXT1"))).hexdigest())
+        digest = context.pop("contextSha256")
+        self.assertEqual(digest, hashlib.sha256(canonical_json(context)).hexdigest())
+        context["documents"][0]["markdown"] += "\\nChanged shared requirement"
+        self.assertNotEqual(digest, hashlib.sha256(canonical_json(context)).hexdigest())
+        first = self.explicit("assessment-context", "FXT1", "--output", "-")
+        self.assertEqual(first.returncode, 0, first.stderr)
+        self.assertEqual(first.stdout, self.explicit(
+            "assessment-context", "FXT1", "--output", "-").stdout)
+        self.assertEqual(json.loads(first.stdout)["contextSha256"], digest)
 
     def test_pure_offline_cli_without_git_checkout_or_default_network(self):
         # Change and remove publisher-side source: installed bytes remain fixed.
@@ -226,6 +256,12 @@ class OfflineReleaseConsumerTests(unittest.TestCase):
         self.assertIn("traceable cause", body["assessments"][0]["criteria"])
         self.assertEqual(body["source"]["originCommit"], latest)
         self.assertEqual(body["source"]["manifestSha256"], digest)
+        context = export_assessment_context(source, "FXT1")
+        self.assertEqual(context["assessments"][0]["sourcePaths"], [
+            "curriculum/FXT/FXT1.md", "curriculum/FXT/linked_brief.md",
+        ])
+        self.assertEqual(context["documents"][1]["markdown"], source.read_file(
+            "curriculum/FXT/linked_brief.md"))
 
     def test_nested_project_never_inherits_parent_lock(self):
         nested = self.directory / "unreviewed-subproject"

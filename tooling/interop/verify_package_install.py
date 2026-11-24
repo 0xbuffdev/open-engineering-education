@@ -198,6 +198,20 @@ def verify(wheel: Path, archive: Path, source: Path) -> dict:
         if (len(body["outcomes"]), len(body["assessments"])) != (7, 3):
             raise AssertionError("current SEF1 acceptance identities changed")
 
+        context = run(executable, "assessment-context", "SEF1", *args,
+                      "--output", "-", cwd=outside, env=safe_env)
+        source_context = run(sys.executable, "-m", "tooling.oee_toolkit",
+                             "assessment-context", "SEF1", *args,
+                             "--output", "-", cwd=source)
+        if context != source_context:
+            raise AssertionError("installed and source assessment context bytes differ")
+        context_body = json.loads(context)
+        if (context_body["contextVersion"] != 1 or
+                context_body["source"] != body["source"] or
+                context_body["manualReviewRequired"] is not True or
+                context_body["applicability"] != "source-indexed"):
+            raise AssertionError("wheel assessment context identity or index mismatch")
+
         # No consumer fallback to Git revisions or an absent project lock.
         if run(executable, "export", "SEF1", "--repo", str(source),
                "--revision", full_revision, "--output", "-",

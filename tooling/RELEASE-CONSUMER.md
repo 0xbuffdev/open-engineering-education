@@ -132,3 +132,44 @@ It compares exact JSON export bytes and manifest digests independently;
 ephemeral private keys and public release artifacts are **not uploaded**.
 
 [Workspace `v0.1.0`](https://github.com/0xbuffdev/oee-workspace/releases/tag/v0.1.0) uses the current release-locked Toolkit export and independently governs its resource maps and learner evidence. Its optional reading plans require a separately approved release-keyed resource map. Content/0xNAND host integration remains an independent consumer decision. Toolkit publication, curriculum publication and hosted deployment require separate approvals.
+
+## Source-bound assessment context (Toolkit 0.2.0 candidate)
+
+Course export v2 remains unchanged in shape. It is a structural projection,
+not the complete academic task specification. The separate context v1 command
+preserves shared constraints, multiline fields, and required linked briefs
+from the same verified release:
+
+```sh
+oee-toolkit assessment-context SEF1 --output sef1-context.json
+```
+
+The [context schema](oee_toolkit/schemas/assessment-context-v1.schema.json)
+identifies the exact release, course, Toolkit, canonical course-export SHA-256,
+and complete original UTF-8 Markdown for the course and each required linked
+brief. Documents carry their manifest digest and inclusive source-line range.
+The context SHA-256 covers canonical JSON of every field except itself.
+
+The reviewed SEF1 index is applicable only to the exact published course
+SHA-256. Its ranges point to shared rules, individual assessment definitions,
+completion rules and explicitly optional practice. Each mandatory range names
+the assessment IDs to which it applies; optional ranges name none. The
+shared investigation range retains the source's conditional applicability
+(e.g. inspectable circuits for AS1/AS2 and the permitted AS3 state-model
+alternatives); consumers must not interpret every sentence as a separate
+submission or change its conditions.
+
+For other source revisions or courses without an index, applicability is
+`manual-resolution-required`; no automatic classification is invented.
+The complete course and applicable linked brief are the review scope.
+Reviewers must resolve all relevant requirements, including referenced
+public specification rules, or refuse approval. Optional practice remains
+optional. A source index is not academic approval.
+
+Consumers must verify the context and course export against the same trusted
+installed release, recompute document and range hashes from the source, bind
+the context digest and independently reviewed applicability to approval and
+learner-facing tasks, and reject stale or unresolved context. No private
+Markdown parser or second curriculum is needed. The current published
+Toolkit 0.1.0 does not provide this command; separate package review and
+release are required before downstream adoption.

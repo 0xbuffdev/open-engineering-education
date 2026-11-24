@@ -39,7 +39,7 @@ include-package-data = true
 version = { attr = "oee_toolkit.__version__" }
 
 [tool.setuptools.package-data]
-oee_toolkit = ["schemas/course-export-v2.schema.json", "schemas/curriculum-release-manifest-v1.schema.json"]
+oee_toolkit = ["schemas/course-export-v2.schema.json", "schemas/assessment-context-v1.schema.json", "schemas/curriculum-release-manifest-v1.schema.json"]
 
 [tool.setuptools.exclude-package-data]
 oee_toolkit = ["schemas/course-export-v1.schema.json"]

@@ -1,0 +1,280 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/0xbuffdev/open-engineering-education/blob/main/tooling/oee_toolkit/schemas/assessment-context-v1.schema.json",
+  "title": "OEE Toolkit source-bound assessment context v1",
+  "description": "Exact verified course and required brief bytes for human assessment review; reviewed source ranges never establish approval or learner completion.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contextVersion",
+    "source",
+    "toolkit",
+    "courseExportSha256",
+    "documents",
+    "assessments",
+    "reviewedRanges",
+    "applicability",
+    "manualReviewRequired",
+    "contextSha256"
+  ],
+  "properties": {
+    "contextVersion": {
+      "const": 1
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "releaseId",
+        "manifestSha256",
+        "specification",
+        "coursePath",
+        "courseSha256",
+        "originCommit"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "const": "0xbuffdev/open-engineering-education"
+        },
+        "releaseId": {
+          "type": "string",
+          "pattern": "^[0-9]{4}\\.(0[1-9]|1[0-2])\\.[1-9][0-9]*$"
+        },
+        "manifestSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "specification": {
+          "type": "string",
+          "const": "v0.2.0"
+        },
+        "coursePath": {
+          "type": "string",
+          "pattern": "^curriculum/[A-Z]{2,6}/[A-Z]{2,6}[1-9][0-9]*\\.md$"
+        },
+        "courseSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "originCommit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        }
+      }
+    },
+    "toolkit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "toolVersion",
+        "ruleSetVersion"
+      ],
+      "properties": {
+        "toolVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ruleSetVersion": {
+          "type": "string",
+          "const": "v0.2.0-ot-i04"
+        }
+      }
+    },
+    "courseExportSha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "documents": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "sha256",
+          "startLine",
+          "endLine",
+          "markdown"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "startLine": {
+            "const": 1
+          },
+          "endLine": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "markdown": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "assessments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "assessmentId",
+          "sourcePaths"
+        ],
+        "properties": {
+          "assessmentId": {
+            "type": "string",
+            "pattern": "^[A-Z]{2,6}[1-9][0-9]*-AS[1-9][0-9]*$"
+          },
+          "sourcePaths": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "reviewedRanges": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kind",
+          "location",
+          "assessmentIds",
+          "sha256"
+        ],
+        "properties": {
+          "kind": {
+            "enum": [
+              "completion-rules",
+              "shared-rules",
+              "assessment-definition",
+              "optional-practice"
+            ]
+          },
+          "location": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "startLine",
+              "endLine"
+            ],
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "startLine": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "endLine": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          },
+          "assessmentIds": {
+            "type": "array",
+            "minItems": 0,
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Z]{2,6}[1-9][0-9]*-AS[1-9][0-9]*$"
+            },
+            "uniqueItems": true
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "applicability": {
+      "enum": [
+        "source-indexed",
+        "manual-resolution-required"
+      ]
+    },
+    "manualReviewRequired": {
+      "const": true
+    },
+    "contextSha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "applicability": {
+            "const": "manual-resolution-required"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "reviewedRanges": {
+            "maxItems": 0
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "reviewedRanges": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "reviewedRanges": {
+          "items": {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "optional-practice"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "assessmentIds": {
+                  "maxItems": 0
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "assessmentIds": {
+                  "minItems": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

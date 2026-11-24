@@ -5,7 +5,9 @@ name: Git-free installed curriculum consumer (REL-I03)
 on:
   pull_request:
     paths:
-      - "tooling/oee_toolkit/release_source.py"
+      - "tooling/oee_toolkit/**"
+      - "pyproject.toml"
+      - "curriculum/**"
       - "tooling/oee_toolkit/__main__.py"
       - "tooling/oee_toolkit/_publisher_cli.py"
       - "tooling/oee_toolkit/schemas/course-export-v2.schema.json"
@@ -15,7 +17,9 @@ on:
   push:
     branches: [main]
     paths:
-      - "tooling/oee_toolkit/release_source.py"
+      - "tooling/oee_toolkit/**"
+      - "pyproject.toml"
+      - "curriculum/**"
       - "tooling/oee_toolkit/__main__.py"
       - "tooling/oee_toolkit/schemas/course-export-v2.schema.json"
       - "tests/test_toolkit_release_consumer.py"
@@ -90,9 +94,34 @@ jobs:
           python -m tooling.oee_toolkit export SEF1 \
             --lock oee-curriculum.lock.json --store candidate-store \
             --output candidate-evidence/SEF1-v2.json
+          python -m tooling.oee_toolkit assessment-context SEF1 \
+            --lock oee-curriculum.lock.json --store candidate-store \
+            --output candidate-evidence/SEF1-context.json
           python - <<'PY'
           import json
           from pathlib import Path
+          from tooling.oee_toolkit.core import canonical_json
+          from hashlib import sha256
+          context=json.loads(Path("candidate-evidence/SEF1-context.json").read_bytes())
+          assert context["applicability"]=="source-indexed",context["source"]
+          assert context["manualReviewRequired"] is True
+          assert context["courseExportSha256"]==sha256(Path("candidate-evidence/SEF1-v2.json").read_bytes()).hexdigest()
+          text=context["documents"][0]["markdown"]
+          lines=text.splitlines(keepends=True)
+          for item in context["reviewedRanges"]:
+              loc=item["location"]
+              excerpt="".join(lines[loc["startLine"]-1:loc["endLine"]])
+              assert sha256(excerpt.encode()).hexdigest()==item["sha256"]
+              if item["kind"]=="optional-practice":
+                  assert not item["assessmentIds"]
+                  assert "not additional summative submissions" in excerpt
+              if item["kind"]=="shared-rules" and "SEF1-AS1" in item["assessmentIds"]:
+                  assert "inspectable simulator circuits" in excerpt and "SEF1-AS2" in item["assessmentIds"]
+              if item["kind"]=="shared-rules" and item["assessmentIds"]==["SEF1-AS3"]:
+                  for phrase in ("reset `Z=0`", "**untaken** `JZ`", "without changing `PC`", "LOAD F1", "STORE F0"):
+                      assert phrase in excerpt,phrase
+          digest=context.pop("contextSha256")
+          assert digest==sha256(canonical_json(context)).hexdigest()
           report=json.loads(Path("candidate-evidence/full-check-v2.json").read_bytes())
           body=json.loads(Path("candidate-evidence/SEF1-v2.json").read_bytes())
           digest=Path("candidate-evidence/manifest.sha256").read_bytes().decode().strip()
@@ -113,6 +142,7 @@ jobs:
           name: rel-i03-${{ matrix.os }}
           path: |
             candidate-evidence/SEF1-v2.json
+            candidate-evidence/SEF1-context.json
             candidate-evidence/manifest.sha256
           retention-days: 1
           if-no-files-found: error
@@ -139,6 +169,8 @@ jobs:
           values=[p.read_bytes() for p in sources]
           locks=[p.read_bytes() for p in digests]
           assert values[0]==values[1]==values[2], "v2 export bytes differ across operating systems"
+          contexts=[p.read_bytes() for p in sorted(Path("candidates").rglob("SEF1-context.json"))]
+          assert len(contexts)==3 and contexts[0]==contexts[1]==contexts[2], "context bytes differ across platforms"
           assert locks[0]==locks[1]==locks[2], "release digest drift"
           print("REL-I03 identical v2 export SHA-256:",sha256(values[0]).hexdigest())
           print("REL-I03 candidate manifest SHA-256:",locks[0].decode().strip())
