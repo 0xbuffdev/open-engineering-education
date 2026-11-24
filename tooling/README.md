@@ -75,7 +75,10 @@ Manifest generation checks source integrity without signing or publishing anythi
 
 The [release archive format](RELEASE-ARCHIVE.md) is a canonical, uncompressed TAR built from the complete OEE manifest. The release tools verify the Ed25519 attestation and install the archive without replacing existing data. Signing uses a separately trusted key and the optional `oee-toolkit[release]` dependency. The installer does not publish releases, modify learner work or change course status.
 
-The release resolver and v2 exporter are available in the published Toolkit. [OEE Workspace v0.1.0](https://github.com/0xbuffdev/oee-workspace/releases/tag/v0.1.0) uses the signed curriculum and its reviewed lock. Content and 0xNAND integration is a separate consumer task.
+The release resolver and v2 exporter are available in the published Toolkit.
+The next Toolkit candidate also provides a separate, versioned
+[assessment context export](RELEASE-CONSUMER.md#source-bound-assessment-context-toolkit-020-candidate)
+for complete source-bound review; it does not change course export v2. [OEE Workspace v0.1.0](https://github.com/0xbuffdev/oee-workspace/releases/tag/v0.1.0) uses the signed curriculum and its reviewed lock. Content and 0xNAND integration is a separate consumer task.
 
 ## Consumer commands (REL-I03)
 

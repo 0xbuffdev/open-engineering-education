@@ -73,7 +73,9 @@ def contents_ok(wheel: Path, archive: Path) -> None:
         names = zipped.namelist()
         for member in ("oee_toolkit/_outcome_parser.py",
                        "oee_toolkit/_course_format_versions.py",
-                       "oee_toolkit/schemas/course-export-v2.schema.json"):
+                       "oee_toolkit/schemas/course-export-v2.schema.json",
+                       "oee_toolkit/assessment_context.py",
+                       "oee_toolkit/schemas/assessment-context-v1.schema.json"):
             if member not in names:
                 raise AssertionError(f"wheel missing {member}")
         if "oee_toolkit/schemas/course-export-v1.schema.json" in names:
@@ -100,7 +102,9 @@ def contents_ok(wheel: Path, archive: Path) -> None:
             raise AssertionError("consumer source archive still ships obsolete v1 schema")
         for required in ("tooling/oee_toolkit/_outcome_parser.py",
                          "tooling/oee_toolkit/_course_format_versions.py",
-                         "tooling/oee_toolkit/schemas/course-export-v2.schema.json"):
+                         "tooling/oee_toolkit/schemas/course-export-v2.schema.json",
+                         "tooling/oee_toolkit/assessment_context.py",
+                         "tooling/oee_toolkit/schemas/assessment-context-v1.schema.json"):
             if not any(Path(*parts).as_posix() == required for parts in names):
                 raise AssertionError(f"sdist missing {required}")
 
@@ -141,7 +145,9 @@ def verify(wheel: Path, archive: Path, source: Path) -> dict:
             "import oee_toolkit, oee_toolkit.release_source; "
             "print(oee_toolkit.__version__); "
             "assert files('oee_toolkit').joinpath("
-            "'schemas/course-export-v2.schema.json').is_file()",
+            "'schemas/course-export-v2.schema.json').is_file(); "
+            "assert files('oee_toolkit').joinpath("
+            "'schemas/assessment-context-v1.schema.json').is_file()",
             cwd=outside, env=safe_env).decode().strip()
         if not marker:
             raise AssertionError("wheel package version not importable")
@@ -197,6 +203,20 @@ def verify(wheel: Path, archive: Path, source: Path) -> dict:
             raise AssertionError("wheel exported incorrect v2 academic release identity")
         if (len(body["outcomes"]), len(body["assessments"])) != (7, 3):
             raise AssertionError("current SEF1 acceptance identities changed")
+
+        context = run(executable, "assessment-context", "SEF1", *args,
+                      "--output", "-", cwd=outside, env=safe_env)
+        source_context = run(sys.executable, "-m", "tooling.oee_toolkit",
+                             "assessment-context", "SEF1", *args,
+                             "--output", "-", cwd=source)
+        if context != source_context:
+            raise AssertionError("installed and source assessment context bytes differ")
+        context_body = json.loads(context)
+        if (context_body["contextVersion"] != 1 or
+                context_body["source"] != body["source"] or
+                context_body["manualReviewRequired"] is not True or
+                context_body["applicability"] not in ("source-indexed", "manual-resolution-required")):
+            raise AssertionError("wheel assessment context identity or index mismatch")
 
         # No consumer fallback to Git revisions or an absent project lock.
         if run(executable, "export", "SEF1", "--repo", str(source),

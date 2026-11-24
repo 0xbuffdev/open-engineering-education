@@ -204,10 +204,16 @@ def inspect_release(source: ReleaseSource, code: str) -> tuple[dict, dict | None
 
 def export_release_course(source: ReleaseSource, code: str) -> dict:
     """Only active consumer format v2; no v1 runtime export or fallback."""
-    from .core import ExportBlocked, course_payload
+    from .core import ExportBlocked
     report, data = inspect_release(source, code)
     if data is None:
         raise ExportBlocked(report)
+    return release_course_payload(report, data)
+
+
+def release_course_payload(report: dict, data: dict) -> dict:
+    """One v2 envelope shared with the assessment-context digest."""
+    from .core import course_payload
     return {
         "exportVersion": 2,
         "source": report["source"],

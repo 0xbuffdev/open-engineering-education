@@ -1,7 +1,8 @@
 """OEE Toolkit consumer CLI: offline releases, no Git or moving source refs.
 
 The approved project lock is the only source selector. This entrypoint
-accepts only release exportVersion 2 and never falls back to v1, HEAD,
+retains course exportVersion 2 and offers a separately versioned assessment-context
+export; neither falls back to v1 course export, HEAD,
 a repository checkout, guessed default course, network, or cached latest.
 """
 
@@ -23,10 +24,11 @@ from .source import SourceError
 def build_parser() -> argparse.ArgumentParser:
     cli = argparse.ArgumentParser(description=__doc__)
     actions = cli.add_subparsers(dest="command", required=True)
-    for name in ("check", "export"):
+    for name in ("check", "export", "assessment-context"):
         cmd = actions.add_parser(name, help=(
             "inspect selected release course(s)" if name == "check"
-            else "export a structurally valid course from the pinned release"
+            else ("export a structurally valid course from the pinned release"
+                  if name == "export" else "export source-bound assessment review context")
         ))
         if name == "check":
             cmd.add_argument("course", nargs="?",
@@ -95,9 +97,13 @@ def main(argv: list[str] | None = None) -> int:
     lock = args.lock if args.lock is not None else Path.cwd() / LOCK_FILENAME
     try:
         source = resolve_release(lock, args.store)
-        if args.command == "export":
+        if args.command in ("export", "assessment-context"):
             try:
-                data = export_release_course(source, args.course)
+                if args.command == "assessment-context":
+                    from .assessment_context import export_assessment_context
+                    data = export_assessment_context(source, args.course)
+                else:
+                    data = export_release_course(source, args.course)
             except ExportBlocked as exc:
                 _print_report(exc.report)
                 return 1 if exc.report["structuralOutcome"] == "failed" else 3
