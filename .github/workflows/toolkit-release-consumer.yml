@@ -8,9 +8,6 @@ on:
       - "tooling/oee_toolkit/**"
       - "pyproject.toml"
       - "curriculum/**"
-      - "tooling/oee_toolkit/__main__.py"
-      - "tooling/oee_toolkit/_publisher_cli.py"
-      - "tooling/oee_toolkit/schemas/course-export-v2.schema.json"
       - "tests/test_toolkit_release_consumer.py"
       - "tooling/RELEASE-CONSUMER.md"
       - ".github/workflows/toolkit-release-consumer.yml"
@@ -20,8 +17,6 @@ on:
       - "tooling/oee_toolkit/**"
       - "pyproject.toml"
       - "curriculum/**"
-      - "tooling/oee_toolkit/__main__.py"
-      - "tooling/oee_toolkit/schemas/course-export-v2.schema.json"
       - "tests/test_toolkit_release_consumer.py"
       - ".github/workflows/toolkit-release-consumer.yml"
   workflow_dispatch:
@@ -103,10 +98,13 @@ jobs:
           from tooling.oee_toolkit.core import canonical_json
           from hashlib import sha256
           context=json.loads(Path("candidate-evidence/SEF1-context.json").read_bytes())
-          assert context["applicability"]=="source-indexed",context["source"]
+          assert context["applicability"] in ("source-indexed","manual-resolution-required")
+          if context["applicability"]=="manual-resolution-required":
+              assert not context["reviewedRanges"]
           assert context["manualReviewRequired"] is True
           assert context["courseExportSha256"]==sha256(Path("candidate-evidence/SEF1-v2.json").read_bytes()).hexdigest()
           text=context["documents"][0]["markdown"]
+          assert sha256(text.encode()).hexdigest()==context["source"]["courseSha256"]
           lines=text.splitlines(keepends=True)
           for item in context["reviewedRanges"]:
               loc=item["location"]

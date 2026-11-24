@@ -147,7 +147,7 @@ oee-toolkit assessment-context SEF1 --output sef1-context.json
 The [context schema](oee_toolkit/schemas/assessment-context-v1.schema.json)
 identifies the exact release, course, Toolkit, canonical course-export SHA-256,
 and complete original UTF-8 Markdown for the course and each required linked
-brief. Documents carry their manifest digest and inclusive source-line range.
+brief. Documents carry their file SHA-256 from the manifest and inclusive source-line range.
 The context SHA-256 covers canonical JSON of every field except itself.
 
 The reviewed SEF1 index is applicable only to the exact published course

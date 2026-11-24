@@ -134,6 +134,98 @@ class OfflineReleaseConsumerTests(unittest.TestCase):
             "assessment-context", "FXT1", "--output", "-").stdout)
         self.assertEqual(json.loads(first.stdout)["contextSha256"], digest)
 
+    def test_released_sef1_context_preserves_exact_shared_and_optional_rules(self):
+        # Rebuild the exact released bytes with a disposable test-only
+        # signature. The historical published manifest/archive hashes are
+        # independently recorded in the steward's release decision.
+        revision = "f2afed3e36f6ae0495e2b44a8d9337661defeda1"
+        available = subprocess.run(
+            ["git", "-C", str(ROOT), "cat-file", "-t", revision],
+            capture_output=True, check=False,
+        )
+        if available.returncode:
+            if os.environ.get("CI"):
+                self.fail("released SEF1 fixture commit unavailable in CI")
+            self.skipTest("full OEE Git history required for released-source fixture")
+        manifest, archive = build_archive(GitSource(ROOT, revision), "2026.11.1")
+        digest = digest_manifest(manifest)
+        self.assertEqual(digest,
+            "57441494eb69c2ff9cb3f6029c8adc3c6a56f8c6ecabc43196c9b686e5959a6c")
+        self.assertEqual(hashlib.sha256(archive).hexdigest(),
+            "931b30209a2727717af331f4fd46bfc8e637c94c4d1d95d08d6ffeee753c78d2")
+        key = Ed25519PrivateKey.generate()
+        private = key.private_bytes(
+            serialization.Encoding.PEM, serialization.PrivateFormat.PKCS8,
+            serialization.NoEncryption())
+        public = key.public_key().public_bytes(
+            serialization.Encoding.PEM, serialization.PublicFormat.SubjectPublicKeyInfo)
+        claims, signature = sign_candidate(archive, digest, private)
+        store = self.directory / "released-fixture"
+        store.mkdir()
+        install_verified_archive(archive, digest, claims, signature, public, store)
+        lock = self.directory / "released-lock.json"
+        lock.write_bytes(canonical_json({
+            "formatVersion": 1, "releaseId": "2026.11.1", "manifestSha256": digest,
+        }))
+        source = resolve_release(lock, store)
+        context = export_assessment_context(source, "SEF1")
+        self.assertEqual(context["applicability"], "source-indexed")
+        self.assertTrue(context["manualReviewRequired"])
+        self.assertEqual(context["source"]["originCommit"], revision)
+        course = context["documents"][0]
+        self.assertEqual(course["sha256"], context["source"]["courseSha256"])
+        lines = course["markdown"].splitlines(keepends=True)
+        shared = {}
+        optional = []
+        for item in context["reviewedRanges"]:
+            loc = item["location"]
+            excerpt = "".join(lines[loc["startLine"]-1:loc["endLine"]])
+            self.assertEqual(hashlib.sha256(excerpt.encode()).hexdigest(), item["sha256"])
+            if item["kind"] == "shared-rules":
+                shared[tuple(item["assessmentIds"])] = excerpt
+            elif item["kind"] == "optional-practice":
+                self.assertEqual(item["assessmentIds"], [])
+                optional.append(excerpt)
+        environment = shared[("SEF1-AS1", "SEF1-AS2", "SEF1-AS3")]
+        self.assertIn("inspectable simulator circuits", environment)
+        self.assertIn("minimum steps another learner needs to", environment)
+        self.assertIn("fully gate-implemented CPU is **not required**", environment)
+        machine = shared[("SEF1-AS3",)]
+        for phrase in ("reset `Z=0`", "**untaken** `JZ`", "without changing `PC`",
+                       "LOAD F1", "STORE F0", "latch starts **unset**"):
+            self.assertIn(phrase, machine)
+        self.assertEqual(len(optional), 1)
+        self.assertIn("not additional summative submissions", optional[0])
+        self.assertEqual({a["assessmentId"] for a in context["assessments"]},
+                         {"SEF1-AS1", "SEF1-AS2", "SEF1-AS3"})
+
+        # Model a newly verified source revision at the parser boundary.
+        # No claim of signing or installing this modified in-memory fixture.
+        changed = copy.deepcopy(source)
+        path = course["path"]
+        modified = course["markdown"].replace(
+            "Record the actual tool and version", "Record the exact tool and version")
+        self.assertNotEqual(modified, course["markdown"])
+        changed._files[path] = modified.encode()
+        changed._hashes[path] = hashlib.sha256(modified.encode()).hexdigest()
+        changed.manifest_sha256 = "f" * 64
+        next_context = export_assessment_context(changed, "SEF1")
+        self.assertEqual(next_context["applicability"], "manual-resolution-required")
+        self.assertEqual(next_context["reviewedRanges"], [])
+        self.assertNotEqual(next_context["contextSha256"], context["contextSha256"])
+        self.assertIn("Record the exact tool and version",
+                      next_context["documents"][0]["markdown"])
+
+    def test_context_rejects_wrong_lock_without_replacing_existing_output(self):
+        output = self.directory / "context.json"
+        output.write_bytes(b"previous review")
+        self.lock.write_bytes(canonical_json({
+            "formatVersion": 1, "releaseId": "2026.11.1", "manifestSha256": "a" * 64,
+        }))
+        result = self.explicit("assessment-context", "FXT1", "--output", str(output))
+        self.assertNotEqual(result.returncode, 0)
+        self.assertEqual(output.read_bytes(), b"previous review")
+
     def test_pure_offline_cli_without_git_checkout_or_default_network(self):
         # Change and remove publisher-side source: installed bytes remain fixed.
         source_dir = self.repo
