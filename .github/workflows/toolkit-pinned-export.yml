@@ -6,7 +6,7 @@ on:
       - 'curriculum/**'
       - 'tooling/**'
       - 'scripts/check-outcome-curriculum.py'
-      - 'tests/test_toolkit_pinned_export.py'
+      - 'tests/test_toolkit_*.py'
       - '.github/workflows/toolkit-pinned-export.yml'
   push:
     branches: [main]
@@ -14,7 +14,7 @@ on:
       - 'curriculum/**'
       - 'tooling/**'
       - 'scripts/check-outcome-curriculum.py'
-      - 'tests/test_toolkit_pinned_export.py'
+      - 'tests/test_toolkit_*.py'
       - '.github/workflows/toolkit-pinned-export.yml'
 
 permissions:
@@ -26,6 +26,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Released-source regression fixtures require historical Git objects.
+          fetch-depth: 0
       - name: Full regression suite
         run: |
           python3 -m pip install 'cryptography>=44,<50'

@@ -28,6 +28,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Released-source regression fixtures require historical Git objects.
+          fetch-depth: 0
+      - name: Install test-only signature verification dependency
+        run: python3 -m pip install 'cryptography>=44,<50'
       - name: Run repository regression tests
         run: python3 -m unittest discover -s tests -p 'test_*.py' -v
       - name: Require every published course to pass the current source contract
