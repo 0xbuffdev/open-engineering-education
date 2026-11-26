@@ -361,6 +361,148 @@ tokens, cookies, private browsing history, and unrelated
 user data. Browser and OS versions and actual commands
 should be recorded when materially relevant.
 
+### Public reference cases
+
+The following small **synthetic** records and static starter files are
+available directly in the course for independent study. They are inputs
+to the existing assessments, not additional required submissions or
+worked answers. Equivalent supplied, sanitized or reviewer-selected
+cases remain valid under the published criteria. Addresses and names in
+the records are reserved documentation examples; do not send traffic to
+them. The records are not packet captures, live DNS responses or
+observed TLS sessions.
+
+#### Network and naming records
+
+A fictional host has interface `eth0`, IPv4 address
+`192.0.2.18/27`, IPv4 default gateway `192.0.2.1`, IPv6 address
+`2001:db8:1::18/64`, and IPv6 default router `fe80::1` on
+`eth0`. The destination service is `198.51.100.40:443` or
+`[2001:db8:2::40]:443`. The default routes are installed; a local
+peer is at `192.0.2.25` / `2001:db8:1::25`. In the IPv4 case
+only, a fictional edge may translate the source to
+`203.0.113.12` with an independently assigned source port.
+
+| Case | Synthetic observations |
+| --- | --- |
+| Healthy | Interface up; neighbor resolution for gateway succeeds; TCP connection to the service completes; application receives response. |
+| A | Interface reports no carrier; neighbor resolution incomplete; no gateway response. |
+| B | Interface up; default routes removed; local peer responds; off-link destination produces a local no-route error. |
+| C | Route and neighbor available; destination responds to initial TCP SYN with RST/ACK. |
+| D | Route and neighbor available; three SYN attempts recorded; no response before deadline; no application bytes. |
+| E | TCP to resolver succeeds; DNS query for `missing.example.test` returns NXDOMAIN with an SOA negative-cache indication. |
+| F | Same resolver transport succeeds; query for `www.example.test` returns SERVFAIL; no address answer. |
+
+For the naming record, assume a fictional registrar registers
+`example.test` with a fictional registry. A recursive resolver with
+an empty cache receives a referral to the `test` nameservers, then
+a referral to `ns1.example.test` with glue address
+`192.0.2.53`. The authoritative server answers
+`www.example.test CNAME edge.example.test` (TTL 300 seconds),
+`edge.example.test A 198.51.100.40` and
+`AAAA 2001:db8:2::40` (both TTL 60 seconds). Assume the negative
+answer in E permits 30 seconds of negative caching. Compare a repeated
+query after 20 seconds and one after 80 seconds with no intervening
+updates. A synthetic UDP DNS reply with the truncation bit set is
+followed by a TCP DNS retry. Treat these as input records for
+APP1-AS1, not live measurements or a claim about real `test`
+delegation.
+
+#### Resource delivery and trust records
+
+For APP1-AS2, use the fictional origin
+`https://www.example.test:443/docs/index.html`, edge address
+`198.51.100.40` and origin address `203.0.113.80`.
+The edge forwards a request to the origin over a separately
+authenticated connection. The page references `../styles.css`,
+`/media/logo.svg`, `https://assets.example.test/logo.svg`
+and `#details`.
+
+| Request or observation | Synthetic response or state |
+| --- | --- |
+| GET /docs/index.html | 200, Content-Type: text/html, ETag: "v1", Cache-Control: max-age=60, body present |
+| GET same URL 20 seconds later | Fresh cached representation, no origin request recorded |
+| GET same URL at 80 seconds, If-None-Match: "v1" | 304, no response content, stored body retained |
+| GET /old | 301, Location: /docs/index.html |
+| HEAD /media/logo.svg | 200, image/svg+xml metadata, no response content |
+| GET /missing.svg | 404, text/plain |
+| POST /read-only | 405, Allow: GET, HEAD |
+| TLS case G | Requested hostname matches certificate SAN; chain trusted; certificate within validity; handshake completes |
+| TLS case H | Same hostname but certificate validity ended before observation |
+| TLS case I | Validity and hostname match; issuing chain not trusted |
+| TLS case J | Chain trusted and validity current; SAN contains only `assets.example.test`; requested host is `www.example.test` |
+
+For APP1-AS3, compare the following hypothetical browser cases in
+addition to the actual local inspection: same-origin style resource;
+cross-origin Fetch with no matching Access-Control-Allow-Origin;
+cross-origin Fetch with an explicitly matching allowed origin; HTTPS
+page requesting an HTTP script; a Secure cookie on HTTPS and on
+ordinary HTTP at a non-loopback host; host-only cookie on a different
+subdomain; and local storage accessed from a different scheme or
+port. Identify which results depend on request type, credential
+mode, cookie policy and browser/version. Treat these scenarios as
+synthetic, not executed browser observations.
+
+Public protocol references for interpreting the cases include
+[RFC 1034 (DNS)](https://www.rfc-editor.org/rfc/rfc1034),
+[RFC 2308 (negative DNS caching)](https://www.rfc-editor.org/rfc/rfc2308),
+[RFC 9110 (HTTP semantics)](https://www.rfc-editor.org/rfc/rfc9110),
+[RFC 9111 (HTTP caching)](https://www.rfc-editor.org/rfc/rfc9111),
+[RFC 8446 (TLS 1.3)](https://www.rfc-editor.org/rfc/rfc8446),
+[RFC 9525 (TLS service identity)](https://www.rfc-editor.org/rfc/rfc9525),
+and the [Fetch Standard](https://fetch.spec.whatwg.org/).
+The references explain mechanisms, not additional assessment criteria.
+
+#### Local browser starter
+
+Copy these three files to a disposable directory; authoring a complete
+site is not an entry requirement. Serve the directory with the
+unprivileged command above. The files contain no third-party assets,
+JavaScript or network dependencies.
+
+`index.html`:
+
+```html
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Local browser investigation</title>
+<link rel="stylesheet" href="styles.css">
+<main>
+  <h1>Local browser investigation</h1>
+  <a href="#details">Details</a>
+  <img src="logo.svg" width="64" height="64" alt="Blue square">
+  <p id="details">A local document, stylesheet and image.</p>
+</main>
+</html>
+```
+
+`styles.css`:
+
+```css
+main { max-width: 32rem; margin: 1rem auto; padding: 1rem; }
+h1 { color: navy; }
+img { display: block; max-width: 100%; height: auto; }
+```
+
+`logo.svg`:
+
+```xml
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="navy"/>
+</svg>
+```
+
+Open `http://127.0.0.1:8000/` and use this starter or an
+equivalent local site for APP1-AS3 and APP1-AS4. The learner chooses,
+predicts, investigates and verifies the controlled changes already
+specified in the assessments. For parser-blocking or mixed-content
+cases that the starter cannot demonstrate, use supplied or explicitly
+synthetic evidence and distinguish it from actual local observations.
+The starter is not a completed submission or a claim that live
+Internet routing, DNS, CDN or TLS behavior was observed.
+
 ### Required assessments
 
 - **APP1-AS1** (required network and naming investigation)
