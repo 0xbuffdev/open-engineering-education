@@ -26,6 +26,92 @@ The provisional allocation increases from six to **10–12 weeks** at 10–15 fo
 
 Optional professional reference material includes the [ACM Code of Ethics](https://www.acm.org/code-of-ethics), [SPDX handling of license identifiers and expressions](https://spdx.dev/learn/handling-license-info/), [NIST Privacy Framework](https://www.nist.gov/privacy-framework), and [W3C WCAG2ICT accessibility guidance for non-web software and documents](https://www.w3.org/TR/wcag2ict-22/). Such standards provide reasoning tools, **not** a claim that a license is legally cleared, a jurisdiction's privacy law is satisfied or a product has passed an accessibility certification.
 
+### Public recorded assistant proposal
+
+For SEF9-AS4 and SEF9-AS5, the following is an accessible prepared
+assistant proposal for the synthetic CSV-export task. It was authored
+by ChatGPT (GPT-6.2) on 2026-11-26 during the curriculum remediation
+review for [issue #272](https://github.com/0xbuffdev/open-engineering-education/issues/272).
+It is an intentionally seeded review exercise, not a claim that a
+previous user conversation or an accidental production failure was
+observed. The proposal itself was generated as text for this exercise;
+it did not execute code, invoke a repository tool or run tests.
+No private project, account or actual learner record was supplied.
+Equivalent authentic assistant proposals remain acceptable under the
+existing assessment criteria.
+
+**Input context and request:** A disposable Python 3.11+
+command-line task manager stores a JSON list of records with
+nonempty string `id` and `title` fields and a Boolean
+`completed` field. IDs must be unique. A user requests a
+CSV export with the header `id,title,completed`. Correctly
+represent commas, quotes and newlines; report input/output failure
+with a nonzero exit status; preserve an existing valid destination
+on invalid input or failed processing. No external dependencies,
+network access or changes outside the two supplied paths are
+authorized. For this assessment input, generate one intentionally
+defective candidate implementation containing naive CSV serialization,
+a swallowed I/O error and premature destination overwrite. Do not
+supply tests, fixes or asserted execution results.
+
+**Recorded assistant proposal (intentionally defective; review before
+use):** Add this proposed standalone command to the disposable
+reference project. It is not a recommended solution.
+
+```python
+import json
+import sys
+from pathlib import Path
+
+
+def export_tasks(source: Path, destination: Path) -> int:
+    try:
+        records = json.loads(source.read_text(encoding="utf-8"))
+        with destination.open("w", encoding="utf-8") as output:
+            output.write("id,title,completed\n")
+            seen = set()
+            for record in records:
+                task_id = record["id"]
+                title = record["title"]
+                completed = record["completed"]
+                if (
+                    not isinstance(task_id, str)
+                    or not task_id
+                    or task_id in seen
+                    or not isinstance(title, str)
+                    or not title
+                    or not isinstance(completed, bool)
+                ):
+                    return 2
+                seen.add(task_id)
+                output.write(
+                    f"{task_id},{title},{str(completed).lower()}\n"
+                )
+    except OSError:
+        return 0
+    except (ValueError, TypeError, KeyError):
+        return 2
+    return 0
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        raise SystemExit(2)
+    raise SystemExit(export_tasks(Path(sys.argv[1]), Path(sys.argv[2])))
+```
+
+Save the proposal only in a disposable review directory. Use the
+published requirements to prepare synthetic input, independent test
+oracles and safe temporary destinations; do not run it against
+valuable files. Record the proposal as a prerecorded assistant
+artifact, with the source and provenance above, not a live
+assistant session or a successful implementation. No executed
+results, correction, independent reviewer decision or learner
+completion are supplied by this record. The learner still performs
+the applicable work, tests, review, correction and defense under
+SEF9-AS4 and SEF9-AS5. The same exercise may be adapted to the
+learner's existing task manager without requiring another project.
+
 ## Learning outcomes
 
 - **SEF9-O1:** Translate a stakeholder need into clear user stories that identify users, capabilities, value, assumptions, and bounded delivery scope without prematurely prescribing an implementation.
