@@ -52,8 +52,6 @@ Make a **working competency coverage map** before drafting or removing lessons. 
 
 Research informs the public curriculum. It must not silently become a required paid reading list or hidden assessment prerequisite.
 
-For a substantial review, record the full OEE commit SHA (or an immutable curriculum release and its source revision), repository-relative file path, relevant stable outcome or assessment ID where available, and heading or line range. For external research, identify the issuing body, edition or version, relevant section, and persistent link; for evolving online documentation, record the inspected revision or access date. Explain why the cited material applies to the actual OEE claim, rather than treating a citation as a requirement. A pinned source review remains reproducible even if `main` changes; recheck affected findings against the proposed merge base before editing.
-
 ## 3. Define program architecture and competency ownership
 
 A program should develop recognizable graduate capabilities through a sequence of distinct, complementary courses. Begin with those capabilities and their dependencies; choose course names and ordering afterward.
@@ -70,25 +68,6 @@ A useful working matrix is:
 These are **illustrative** rows, not newly adopted OEE course assignments.
 
 Review the **entire prerequisite graph**, including transitive preparation. A course prerequisite should supply knowledge actually needed before starting, not merely be numerically earlier or fashionable. Do not introduce an elective as a hidden core-graduation condition. When competence is available through a different program or equivalent preparation, document that boundary appropriately without inventing a current course code.
-
-### Test prerequisite closure against real work
-
-For each significant entry assumption, identify the specific earlier outcome and evidence that establish it, not just a prerequisite course title. Trace direct and transitive edges, including branches that can run in parallel. Inspect the actual tasks, environment and language or framework assumptions before adding or removing a prerequisite.
-
-| Question | Possible editorial response |
-| --- | --- |
-| Is the required competence already assessed in the closure? | Reference the owning course; avoid redundant edges and introductory work. |
-| Is the missing mechanism small enough to teach in the dependent course? | Design a bounded bridge with practice and a check of readiness before the dependent work. |
-| Is substantial prior competence absent? | Investigate an appropriate prerequisite or governed equivalent preparation; check downstream impact. |
-| Does a reference technology require skills not needed by the underlying outcome? | Teach the necessary setup or offer an equivalent accessible implementation path, where the course permits it. |
-
-A diagnostic can identify preparation needs; it does not establish mastery merely by being administered. Do not use an elective, a private resource or an unassessed assumption as a hidden graduation condition. A proposed change to binding requirements follows the existing governance process.
-
-### Distribute cross-cutting competencies deliberately
-
-Some capabilities, including system design, security, verification and professional practice, develop across several courses. Locate the first substantial teaching and assessment, identify its later applications, and specify the new depth each later owner contributes. Use actual outcome and assessment references in working review notes; avoid a duplicate canonical competency registry.
-
-For system design, for example, distinguish small-program decomposition and interface invariants from application integration, then from production-scale capacity, consistency, failure recovery and cost, and finally from domain-specific assurance. Architecture diagrams and decision records can support evidence, but are not substitutes for reasoning, observed behavior or verification. A justified simple architecture should not lose credit merely because it lacks distributed components. This progression is illustrative; derive ownership from actual course requirements.
 
 ### Distinguish repetition from progression
 
@@ -129,23 +108,6 @@ Review the intended boundary:
 4. What new mechanism or failure mode makes this course different?
 5. Would splitting, merging, or reordering genuinely improve the learning pathway?
 6. Does the course depend on a single vendor even when the competency is portable?
-
-### Decide what belongs in the common core
-
-Separate competencies needed by every graduate of a named program from optional specialist depth. A topic's importance to one professional role does not by itself make it a universal prerequisite for all roles. Compare current graduate claims, prerequisite closure, alternative pathways, assessment effort and the cost of losing a capability before changing classification or graduation scope.
-
-A useful classification exercise begins with representative roles and their actual engineering tasks, using disciplinary competency frameworks and primary technical sources rather than job-title popularity. Compare those tasks against the published program's graduate claims and assessed prerequisite closure. For each capability, distinguish:
-
-| Candidate classification | Decision question |
-| --- | --- |
-| Shared program core | Would a graduate of the published program be unable to substantiate a common graduate claim without this capability? |
-| Role-specific or elective depth | Does it primarily support a particular specialization while the common graduate claims remain demonstrable without it? |
-| Prior or equivalent preparation | Is it already established elsewhere, or can an existing permitted preparation path supply it without an unassessed dependency? |
-| Research or expansion candidate | Is the value, level, ownership or feasibility still unestablished? |
-
-For a candidate elective, trace every required successor and capstone through the graph to ensure the proposed classification does not create an indirect mandatory elective. Compare the actual assessed capabilities of alternative routes, not just their titles, time estimates or popularity. Role profiles are research aids, not new OEE credentials or a second catalog; classification changes remain subject to the published curriculum and governance.
-
-If investigating a narrower or alternative pathway, identify the competencies it retains, omits or moves; the claims graduates could honestly make; and impacts on current learner evidence, dependent courses and implementation consumers. Treat intermediate milestones as descriptions of evidenced competence, not automatic credentials. Do not adopt new graduation conditions through this guide; use the existing [RFC process](../rfcs/README.md) when required.
 
 ### Write observable learning outcomes
 
@@ -262,18 +224,6 @@ Challenge each assessment:
 
 The binding rules for assessed work and evidence remain in [Course Format](../spec/course-format.md) and [Evidence Rules](../spec/evidence-rules.md). This guide does not impose a test-then-lab sequence or a universal final integration exercise.
 
-### Sample assessment validity before expanding a review
-
-A source audit can start by sampling risk-bearing assessments: first exposure to a prerequisite, a cross-cutting capability, an integration or capstone task, a safety-critical or expensive exercise, or a repeated assessment pattern. Record the reason for selecting the sample, the source revision, the outcome and assessment identifiers, and the portion of the program not yet inspected. Choose a different sample when the risk differs; no fixed sample size or percentage is implied.
-
-For a sampled assessment, trace the outcome through the learning sequence to the required work, criteria and evidence. Try a plausible acceptable response and a counterexample that meets superficial instructions but lacks the intended competence. Where executable work is involved, inspect or attempt a clean-state reproduction and relevant negative cases when feasible. Report the observed result, not an assumed one. A criterion that accepts the counterexample may reveal a confirmed assessment defect; an unexecuted example or an uninspected course remains an open question. Expand the review when a repeated failure pattern or important dependency warrants it. Sampling supports prioritization, not a declaration that every unsampled assessment is valid or a relaxation of the requirement to demonstrate every required outcome.
-
-### Distinguish individual performance from collaborative performance
-
-An individual Git exercise, a simulated review and a genuine contribution to shared work can teach different things. Where an outcome claims collaborative engineering, inspect whether evidence actually shows independent contributions, negotiated interfaces or decisions, review and integration. A role-play or self-review may support learning but should not be represented as observed team performance or independent endorsement.
-
-Consider accessible ways for independent learners to collaborate, such as bounded peer exercises or authorized open-source contributions, without imposing a particular hosting platform. Where only individual or simulated work is feasible, state the limits of the evidence and align the claim to the published outcome. Individual technical ownership remains assessable even when work is shared.
-
 ## 9. Recalculate workload after designing the real work
 
 Estimate time from **conceptual study, worked reasoning, setup, practice, experimentation, debugging, assessment, evidence preparation, feedback and revision**. A short lesson list may demand substantial time, while a long list of terminology items may be shallow.
@@ -282,11 +232,7 @@ Make the assumptions explicit: prior knowledge, weekly focused hours, access to 
 
 If the total looks excessive, inspect unrelated scope, repeated onboarding, duplicated submissions, needless technology requirements and artificial course boundaries **before removing important mechanisms**. If it looks unrealistically short, look for unspoken prerequisites and tasks whose difficulty was underestimated.
 
-A lightweight workload sample can trace a representative learner path through an actual lesson, setup, practice, required assessment and revision. Estimate effort per activity with an explicit range and preparation assumptions; separate active work, elapsed waiting time and optional enrichment. Where feasible, perform a clean-environment setup or task walkthrough and record elapsed time as an editorial or reviewer observation, not a novice completion time. Compare a familiar task with one that has new concepts, uncertain tooling or substantial debugging. When sampling, disclose unexamined activities, possible shared setup and the uncertainty of extrapolating to the whole course; do not multiply a convenient average by a lesson count. Compare the resulting estimate against the published course duration and any declared weekly study commitment without inventing one.
-
 Duration is provisional until learner evidence supports calibration. A repository check, author's intuition, or another university's credit timetable is not proof that OEE learners can complete the work at the stated pace.
-
-For a program-wide review, distinguish additive course effort from the prerequisite-constrained calendar sequence. Check catalog arithmetic, concurrent branches, competing weekly workloads, repeated setup and assessment effort, and the time to intermediate competence. Compare alternative paths against the actual capabilities they preserve; parallel scheduling does not remove work. Record assumed hours separately from observed learner timings, and revise estimates when genuine feedback warrants it.
 
 ## 10. Build accessibility and independent study into the curriculum
 
@@ -295,14 +241,6 @@ The public curriculum should be understandable without a commercial service, a p
 Review whether required work can be understood and demonstrated using accessible explanations, diagrams or equivalent descriptions, keyboard/assistive navigation where relevant, inspectable examples, and appropriate alternative forms of expression that preserve the same competency. Do not equate accessibility with removing important reasoning or safety criteria.
 
 OEE publishes competencies and assessment expectations. OEE Workspace, 0xNAND and other implementations may add teaching, guidance, practice and feedback without becoming the only place where the public completion contract can be discovered. This guide is about curriculum **design**, not a platform-specific lesson-content schema.
-
-### Inspect the availability of required assessment resources
-
-Where an assessment depends on a supplied fixture, dataset, recorded model proposal, provider trace, reviewer-selected case or reference service, inspect how a learner can obtain it legitimately. Check provenance and license, version, setup and reset instructions, accessible environment and independent observation of required behavior. Distinguish a resource actually inspected or reproduced from one merely described in a course. A fixture can be intentionally defective or synthetic without being fabricated evidence of real external behavior.
-
-Start from the canonical course and any explicitly linked public assessment brief, as an independent learner would. Follow the actual acquisition route rather than searching a private author workspace: find the artifact or generation procedure, check the declared version or seed when relevant, access it without a commercial account, and attempt setup or reproduction if possible. Distinguish public availability, discoverability, license permission, environmental feasibility and successful reproduction. An accessible equivalent can be a public synthetic fixture, a documented learner-generated case or a permitted alternative with the same evaluation criteria; a private item bank need not expose its answers or exact hidden variants. A missing public path is a confirmed access defect only when the assessment genuinely requires that resource and no usable equivalent path is published. Otherwise record the unresolved question and what was inspected.
-
-If a resource is inaccessible, investigate a free reproducible alternative, a public resource maintained at an appropriate implementation boundary, or a revision that preserves the competency. Record what has not been executed and avoid implying that a simulation proves production behavior. Review the practical route to independent feedback and assessment, not just the existence of an instruction to seek a reviewer. This guidance does not require moving all teaching materials into the specification repository.
 
 ## 11. Review a whole program, not just one course file
 
@@ -322,21 +260,6 @@ A course can look comprehensive in isolation while creating gaps or redundant te
 Across all five programs, examine repeated module and lesson structures against the actual competencies and prerequisite dependencies. Matching counts are not automatically a defect, but they are never a design target. Do not transplant one program's outline, fixed workload, assessment pattern, or course architecture into another discipline.
 
 A temporary coverage matrix or review notes may be useful for decisions, but the authoritative result is the revised public program catalog and course definitions—not a permanent duplicate curriculum registry.
-
-### Classify and close review findings
-
-Use a pinned source revision and record the affected course, outcome, lesson, assessment or catalog. A finding may be a confirmed defect (for example a demonstrated missing prerequisite), a suspected gap requiring inspection, a proposed expansion or architectural alternative, or an unestablished readiness claim. A keyword absence or module title alone does not prove missing competence. Check adjacent courses, criteria and evidence before recommending new requirements.
-
-Use the following distinctions when triaging evidence; they are not repository labels or a new scoring rubric:
-
-| Finding kind | Evidence that supports the classification |
-| --- | --- |
-| Confirmed defect | A specific contradiction of an adopted requirement, demonstrable technical error, broken published path, or concrete mismatch between a claimed capability and its assessment or prerequisite evidence. Cite the actual sources and show the discrepancy. |
-| Coverage hypothesis | A plausible missing or weak capability suggested by disciplinary research, a keyword search or limited inspection. State what additional course, prerequisite, criterion or experiment would resolve it. |
-| Expansion or design proposal | A possible new capability, pathway or architectural choice. Compare alternatives and consequences; do not treat external guidance alone as an adopted OEE obligation. |
-| Readiness evidence gap | An unestablished educational claim that needs actual learner or independent review evidence under the existing status rules. Do not infer learner failure or success from source quality alone. |
-
-For a substantial finding, explain the observed behavior or source, expected competency, consequence, supporting disciplinary evidence, alternatives, and an independently checkable acceptance condition. Prioritize defects by impact on learner safety, correctness, preparation and assessment validity; distinguish a research opportunity from a blocker. Record a disposition and rationale even if the proposal is rejected or deferred. In the issue or PR, link the baseline and proposed revision, distinguish inspected source, executed checks and untested assumptions, and describe the scope of the impact review. Reconcile only affected course/catalog metadata, outcomes and IDs, assessment mappings, prerequisites, workload and downstream resource or implementation references; explicitly state when none changed. Record the relevant [source checks](../scripts/README.md), their outcomes and limitations. A finding resolved in source is not automatically a learner-validation finding resolved in practice. Keep these records in issues and PRs rather than treating a review backlog as a binding curriculum.
 
 ## 12. Revise courses without losing educational meaning
 
@@ -371,10 +294,6 @@ A reviewer should identify **the concrete defect, its effect on learner capabili
 
 A structurally valid course may still require independent expert review and observed learner evidence. Keep its published readiness status until the evidence required by [Status Labels](../spec/status-labels.md) supports a change. A successful source check alone cannot make a course `tested` or `verified`.
 
-### Plan learner validation separately
-
-Source-level review can establish accuracy and plausible assessment design; it cannot establish observed learner success. Plan trials with appropriate learner preparation, accessible resources, actual effort, observed misconceptions, assessment difficulties, review and revision. Distinguish anonymized or consented evidence from author assumptions; do not publish private learner records. Apply the existing [Status Labels](../spec/status-labels.md) thresholds independently of source checks, release publication or completion of a remediation backlog.
-
 ### Final editorial questions
 
 Use these questions as a review aid, **not** a mandatory new metadata section or a scoring formula:
@@ -399,8 +318,7 @@ These public sources informed the guide's research-led, outcome-aligned approach
 - [Carnegie Mellon Eberly Center — Align Assessments, Objectives, Instructional Strategies](https://www.cmu.edu/teaching/assessment/basics/alignment.html): alignment between learning outcomes, evaluation and teaching.
 - [Carnegie Mellon Eberly Center — Plan Your Course Content and Schedule](https://www.cmu.edu/teaching/designteach/design/contentschedule.html): purposeful topic selection, sequencing, practice and workload planning.
 - [Carnegie Mellon Eberly Center — Learning Objectives](https://www.cmu.edu/teaching/designteach/syllabus/newcourse/learningobjectives.html): measurable, student-centered objectives.
-- [ACM/IEEE-CS/AAAI, Computer Science Curricula 2023 (final report, 2024)](https://doi.org/10.1145/3664191): the Knowledge Model, Competency Framework and Software Engineering knowledge area support capability mapping, role-sensitive curriculum design and review of collaboration. Compare the report's scope and expected competencies with the relevant OEE program, not its course counts.
-- [IEEE Computer Society, Guide to the Software Engineering Body of Knowledge (SWEBOK), version 4.0 (2024)](https://www.computer.org/education/bodies-of-knowledge/software-engineering): software architecture, design, testing and professional practice knowledge areas offer disciplinary reference points for system-design progression and assessment review. A body of knowledge is not a prescribed OEE course catalog.
-- [CAST Universal Design for Learning Guidelines, version 3.0 (2024)](https://udlguidelines.cast.org/): accessible engagement, representation, feedback and expression of learning.
+- [ACM/IEEE-CS/AAAI CS2023](https://csed.acm.org/): knowledge-area comparison, competence-driven curricula and flexible course packaging.
+- [CAST Universal Design for Learning Guidelines 3.0](https://udlguidelines.cast.org/): accessible engagement, representation, feedback and expression of learning.
 
 Sources guide editorial reasoning rather than overriding OEE's adopted curriculum, specifications, governance or evidence requirements.
