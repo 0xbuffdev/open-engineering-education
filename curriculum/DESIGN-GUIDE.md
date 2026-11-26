@@ -69,6 +69,25 @@ These are **illustrative** rows, not newly adopted OEE course assignments.
 
 Review the **entire prerequisite graph**, including transitive preparation. A course prerequisite should supply knowledge actually needed before starting, not merely be numerically earlier or fashionable. Do not introduce an elective as a hidden core-graduation condition. When competence is available through a different program or equivalent preparation, document that boundary appropriately without inventing a current course code.
 
+### Test prerequisite closure against real work
+
+For each significant entry assumption, identify the specific earlier outcome and evidence that establish it, not just a prerequisite course title. Trace direct and transitive edges, including branches that can run in parallel. Inspect the actual tasks, environment and language or framework assumptions before adding or removing a prerequisite.
+
+| Question | Possible editorial response |
+| --- | --- |
+| Is the required competence already assessed in the closure? | Reference the owning course; avoid redundant edges and introductory work. |
+| Is the missing mechanism small enough to teach in the dependent course? | Design a bounded bridge with practice and a check of readiness before the dependent work. |
+| Is substantial prior competence absent? | Investigate an appropriate prerequisite or governed equivalent preparation; check downstream impact. |
+| Does a reference technology require skills not needed by the underlying outcome? | Teach the necessary setup or offer an equivalent accessible implementation path, where the course permits it. |
+
+A diagnostic can identify preparation needs; it does not establish mastery merely by being administered. Do not use an elective, a private resource or an unassessed assumption as a hidden graduation condition. A proposed change to binding requirements follows the existing governance process.
+
+### Distribute cross-cutting competencies deliberately
+
+Some capabilities, including system design, security, verification and professional practice, develop across several courses. Locate the first substantial teaching and assessment, identify its later applications, and specify the new depth each later owner contributes. Use actual outcome and assessment references in working review notes; avoid a duplicate canonical competency registry.
+
+For system design, for example, distinguish small-program decomposition and interface invariants from application integration, then from production-scale capacity, consistency, failure recovery and cost, and finally from domain-specific assurance. Architecture diagrams and decision records can support evidence, but are not substitutes for reasoning, observed behavior or verification. A justified simple architecture should not lose credit merely because it lacks distributed components. This progression is illustrative; derive ownership from actual course requirements.
+
 ### Distinguish repetition from progression
 
 Concepts may legitimately recur when the next course makes a **new claim of competence**:
@@ -108,6 +127,12 @@ Review the intended boundary:
 4. What new mechanism or failure mode makes this course different?
 5. Would splitting, merging, or reordering genuinely improve the learning pathway?
 6. Does the course depend on a single vendor even when the competency is portable?
+
+### Decide what belongs in the common core
+
+Separate competencies needed by every graduate of a named program from optional specialist depth. A topic's importance to one professional role does not by itself make it a universal prerequisite for all roles. Compare current graduate claims, prerequisite closure, alternative pathways, assessment effort and the cost of losing a capability before changing classification or graduation scope.
+
+If investigating a narrower or alternative pathway, identify the competencies it retains, omits or moves; the claims graduates could honestly make; and impacts on current learner evidence, dependent courses and implementation consumers. Treat intermediate milestones as descriptions of evidenced competence, not automatic credentials. Do not adopt new graduation conditions through this guide; use the existing [RFC process](../rfcs/README.md) when required.
 
 ### Write observable learning outcomes
 
@@ -224,6 +249,12 @@ Challenge each assessment:
 
 The binding rules for assessed work and evidence remain in [Course Format](../spec/course-format.md) and [Evidence Rules](../spec/evidence-rules.md). This guide does not impose a test-then-lab sequence or a universal final integration exercise.
 
+### Distinguish individual performance from collaborative performance
+
+An individual Git exercise, a simulated review and a genuine contribution to shared work can teach different things. Where an outcome claims collaborative engineering, inspect whether evidence actually shows independent contributions, negotiated interfaces or decisions, review and integration. A role-play or self-review may support learning but should not be represented as observed team performance or independent endorsement.
+
+Consider accessible ways for independent learners to collaborate, such as bounded peer exercises or authorized open-source contributions, without imposing a particular hosting platform. Where only individual or simulated work is feasible, state the limits of the evidence and align the claim to the published outcome. Individual technical ownership remains assessable even when work is shared.
+
 ## 9. Recalculate workload after designing the real work
 
 Estimate time from **conceptual study, worked reasoning, setup, practice, experimentation, debugging, assessment, evidence preparation, feedback and revision**. A short lesson list may demand substantial time, while a long list of terminology items may be shallow.
@@ -234,6 +265,8 @@ If the total looks excessive, inspect unrelated scope, repeated onboarding, dupl
 
 Duration is provisional until learner evidence supports calibration. A repository check, author's intuition, or another university's credit timetable is not proof that OEE learners can complete the work at the stated pace.
 
+For a program-wide review, distinguish additive course effort from the prerequisite-constrained calendar sequence. Check catalog arithmetic, concurrent branches, competing weekly workloads, repeated setup and assessment effort, and the time to intermediate competence. Compare alternative paths against the actual capabilities they preserve; parallel scheduling does not remove work. Record assumed hours separately from observed learner timings, and revise estimates when genuine feedback warrants it.
+
 ## 10. Build accessibility and independent study into the curriculum
 
 The public curriculum should be understandable without a commercial service, a particular instructor, or undisclosed paid books. Identify essential environment requirements, free reproducible alternatives where reasonable, assumptions about devices and operating systems, and limitations of a simulation versus real-world behavior.
@@ -241,6 +274,12 @@ The public curriculum should be understandable without a commercial service, a p
 Review whether required work can be understood and demonstrated using accessible explanations, diagrams or equivalent descriptions, keyboard/assistive navigation where relevant, inspectable examples, and appropriate alternative forms of expression that preserve the same competency. Do not equate accessibility with removing important reasoning or safety criteria.
 
 OEE publishes competencies and assessment expectations. OEE Workspace, 0xNAND and other implementations may add teaching, guidance, practice and feedback without becoming the only place where the public completion contract can be discovered. This guide is about curriculum **design**, not a platform-specific lesson-content schema.
+
+### Inspect the availability of required assessment resources
+
+Where an assessment depends on a supplied fixture, dataset, recorded model proposal, provider trace, reviewer-selected case or reference service, inspect how a learner can obtain it legitimately. Check provenance and license, version, setup and reset instructions, accessible environment and independent observation of required behavior. Distinguish a resource actually inspected or reproduced from one merely described in a course. A fixture can be intentionally defective or synthetic without being fabricated evidence of real external behavior.
+
+If a resource is inaccessible, investigate a free reproducible alternative, a public resource maintained at an appropriate implementation boundary, or a revision that preserves the competency. Record what has not been executed and avoid implying that a simulation proves production behavior. Review the practical route to independent feedback and assessment, not just the existence of an instruction to seek a reviewer. This guidance does not require moving all teaching materials into the specification repository.
 
 ## 11. Review a whole program, not just one course file
 
@@ -260,6 +299,12 @@ A course can look comprehensive in isolation while creating gaps or redundant te
 Across all five programs, examine repeated module and lesson structures against the actual competencies and prerequisite dependencies. Matching counts are not automatically a defect, but they are never a design target. Do not transplant one program's outline, fixed workload, assessment pattern, or course architecture into another discipline.
 
 A temporary coverage matrix or review notes may be useful for decisions, but the authoritative result is the revised public program catalog and course definitions—not a permanent duplicate curriculum registry.
+
+### Classify and close review findings
+
+Use a pinned source revision and record the affected course, outcome, lesson, assessment or catalog. A finding may be a confirmed defect (for example a demonstrated missing prerequisite), a suspected gap requiring inspection, a proposed expansion or architectural alternative, or an unestablished readiness claim. A keyword absence or module title alone does not prove missing competence. Check adjacent courses, criteria and evidence before recommending new requirements.
+
+For a substantial finding, explain the observed behavior or source, expected competency, consequence, supporting disciplinary evidence, alternatives, and an independently checkable acceptance condition. Prioritize defects by impact on learner safety, correctness, preparation and assessment validity; distinguish a research opportunity from a blocker. Record a disposition and rationale even if the proposal is rejected or deferred. Keep these records in issues and PRs rather than treating a review backlog as a binding curriculum.
 
 ## 12. Revise courses without losing educational meaning
 
@@ -293,6 +338,10 @@ Use **separate review lenses**. A passing structural validator cannot establish 
 A reviewer should identify **the concrete defect, its effect on learner capability, the proposed correction, and evidence or reasoning for it**. Avoid vague labels such as "needs more depth" or replacing a uniform lesson count with a random distribution.
 
 A structurally valid course may still require independent expert review and observed learner evidence. Keep its published readiness status until the evidence required by [Status Labels](../spec/status-labels.md) supports a change. A successful source check alone cannot make a course `tested` or `verified`.
+
+### Plan learner validation separately
+
+Source-level review can establish accuracy and plausible assessment design; it cannot establish observed learner success. Plan trials with appropriate learner preparation, accessible resources, actual effort, observed misconceptions, assessment difficulties, review and revision. Distinguish anonymized or consented evidence from author assumptions; do not publish private learner records. Apply the existing [Status Labels](../spec/status-labels.md) thresholds independently of source checks, release publication or completion of a remediation backlog.
 
 ### Final editorial questions
 
