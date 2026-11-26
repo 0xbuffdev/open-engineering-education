@@ -190,6 +190,13 @@ Every summative decision identifies `SEC10-AS#`, the applicable `SEC10-O#` outco
 
 No paid Microsoft/Google/Okta service, production realm, sensitive identity proofing, administrator-level directory configuration, custom JWT/SAML cryptography, general endpoint hardening or full incident response is required. Successful completion does **not** constitute IAM vendor certification, NIST IAL/AAL/FAL certification, comprehensive enterprise directory administration, Windows security engineer qualification or a guarantee that a deployed organization's identities cannot be compromised. Course status remains `draft` pending [Status Labels](../../spec/status-labels.md) and independent learner-calibrated evaluation.
 
+### Optional fixture starting points
+
+- [Keycloak source at the reviewed revision](https://github.com/keycloak/keycloak/tree/d22c7c587818ecf3517c349e9efa199b24623bbe) (Apache-2.0) and its [local container quick start](https://www.keycloak.org/getting-started/getting-started-docker) provide a potential free identity-provider component for an isolated OIDC/SAML lab. Pin the actual compatible release or image digest and configure disposable synthetic identities, not production accounts. A provider alone does not supply the two independently observable resource contexts required by SEC10.
+- The [OpenID Connect Core specification](https://openid.net/specs/openid-connect-core-1_0.html), [OASIS SAML overview](https://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-tech-overview-2.0.html) and [Kerberos V5 specification](https://www.rfc-editor.org/rfc/rfc4120.html) provide primary mechanisms for interpreting genuine records. Specifications are not captured identity-provider or directory events.
+
+These references do not establish a complete identity fixture, especially the genuine SAML and Kerberos/AD directory/ticket/audit material in AS3. Locate or legitimately generate versioned, attributable records with the stated target/issuer, authorization scope and permissions; where the published assessment permits authentic supplied evidence, use that path instead of requiring a paid account or Windows domain. Distinguish supplied observations from locally executed verifier and resource-policy decisions. Report missing provenance or coverage, not a simulated provider as authentic enterprise execution.
+
 ### Optional disciplinary references
 
 - [NIST SP 800-63-4, final July 2025](https://csrc.nist.gov/pubs/sp/800/63/4/final) — digital identity guidance; [SP 800-63B-4](https://csrc.nist.gov/pubs/sp/800/63/b/4/final) for authentication and [SP 800-63C-4](https://csrc.nist.gov/pubs/sp/800/63/c/4/final) for federation.

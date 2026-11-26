@@ -180,6 +180,13 @@ Each assessment identifies its `SEC8-AS#` and covered `SEC8-O#` identifiers, cou
 
 A successful security gate is not evidence that the model always obeys its instructions; a failed prompt-attack attempt does not prove the system has no other exposed path. The course remains `draft` pending the qualified [course readiness criteria](../../spec/status-labels.md). Completion does not constitute legal penetration-test authorization, formal AI safety certification, general model robustness, a guarantee against prompt injection, live agent exploitation competence or completion of the AI Engineering program.
 
+### Optional fixture starting points
+
+- [AIGoat source at the reviewed revision](https://github.com/AISecurityConsortium/AIGoat/tree/bb3cd1bbd1e051d16b8cceaa9467676d5e47d7ac) documents a locally run model-assisted application. Its platform code is Apache-2.0; its training content has separate CC BY-NC-SA 4.0 terms. Check model-weight licenses separately. Its documented local setup calls for 8 GB of free RAM and the Docker route for 12 GB allocated RAM; those are upstream requirements for that project, not SEC8 hardware minima. Some labs require a tool-capable model. Do not assume that all learners can run it.
+- [OWASP DonkAI source at the reviewed revision](https://github.com/OWASP/DonkAI/tree/f05d71dace23df0b1a22d18181767951eeba484d) (GPL-3.0) documents another local application and reset procedure. Inspect its actual model and control implementations before interpreting observations; deterministic or simulated output is not an authentic model-mediated observation.
+
+Neither candidate is an approved complete SEC8 fixture. Select only the relevant authorized, isolated local resources and confirm the required retrieval, dispatcher, persistence and output boundaries, independent oracles and reset path. If using the existing authentic recorded-model alternative, retain the actual model/version, input and provenance; locally execute the required real enforcement and state checks separately. No paid API, public target, Google account, GPU or particular training product is required. Record any unresolved fixture coverage rather than claiming all AS1–AS4 requirements are met by downloading a resource.
+
 ### Optional disciplinary references
 
 - [OWASP Top 10 for LLM Applications 2026](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/) — current categories and risks, not an assessment checklist or security certification.

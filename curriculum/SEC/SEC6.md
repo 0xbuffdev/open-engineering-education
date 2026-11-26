@@ -228,6 +228,13 @@ Every summative result identifies course revision, `SEC6-AS#` and applicable `SE
 
 No complete public cloud tenancy, managed Kubernetes deployment, local cluster, production incident, real privileged exploit or live secret is required. Completing Kubernetes source policy interpretation and a bounded local policy checker does not certify independent production Kubernetes administration or actual CNI admission enforcement without a tested authorized cluster. Passing this course does **not** assert cloud-provider certification, universal image sandbox isolation, SLSA level achievement, verified compliance of a real organization's delivery pipeline or completed incident-response competence. Course readiness remains `draft` pending [Status Labels](../../spec/status-labels.md).
 
+### Optional fixture starting points
+
+- The official [kind quick start](https://kind.sigs.k8s.io/docs/user/quick-start/) documents a local Kubernetes environment for an educator or learner who already has an appropriate isolated container host and sufficient resources. Use a pinned Kubernetes/node-image version and record actual authorization, admission and runtime decisions.
+- Kubernetes' [RBAC reference](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) and [NetworkPolicy task](https://kubernetes.io/docs/tasks/administer-cluster/declare-network-policy/) provide public policy examples. The [Kubernetes network-policy local quick start](https://kube-network-policies.sigs.k8s.io/docs/quick-start/) documents one possible compatible enforcement environment; an installed policy object alone is not evidence of packet enforcement.
+
+These are optional ways to obtain or generate authentic observations, not a mandatory cluster or an approved complete SEC6 fixture. The existing supplied-evidence path remains valid: a reusable record needs the actual Kubernetes version, API authorization and admission modes, CNI implementation, original configuration, observed decisions/effects, and reproducible collection context. Public policy examples or the learner's limited checker cannot replace genuine observations. If those records are unavailable, identify the missing evidence; do not make a paid cloud account or a high-resource machine the default requirement. Pin the chosen sources and their terms, and retain independently testable local container and pipeline work as specified above.
+
 ### Optional disciplinary references
 
 - [NIST SP 800-190](https://csrc.nist.gov/pubs/sp/800/190/final) — application container and host/runtime security boundaries.

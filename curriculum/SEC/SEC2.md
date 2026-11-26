@@ -205,6 +205,13 @@ For each required evaluation, record the course revision, assessment ID, actual 
 
 This course remains `draft` until the relevant educational readiness requirements in [Status Labels](../../spec/status-labels.md) are met. Course completion establishes only the published SEC2 outcomes; it does not certify a product's general safety or authorize security testing elsewhere.
 
+### Optional fixture starting points
+
+- [OWASP Juice Shop source at the reviewed revision](https://github.com/juice-shop/juice-shop/tree/c9f99228d9d56afb5f5ca7925376292f7fa44b13) (MIT) and its [run instructions](https://help.owasp-juice.shop/part1/running.html) provide a source-inspectable, resettable local Web/API training application. Use a disposable isolated copy, restrict access to the local learner, and record the exact executable source or image digest and dependency licenses. Reproduce the intended normal operation before evaluating a repair.
+- [OWASP WebGoat source at the reviewed revision](https://github.com/WebGoat/WebGoat/tree/4e98f1cbbf896fdd06edcc9930515ebe0ade7c69) provides another local training starting point. Review its license and dependency terms before reuse.
+
+These are candidate resources, not certified complete SEC2 fixtures. In particular, a general Web training application does not by itself establish the required authenticated WebSocket message/subscription and revocation evidence, independent persistent-state oracles, or all the other AS1–AS5 criteria. Use a source-inspectable equivalent or supplement the missing mechanisms in the authorized local environment; do not replace required execution with a walkthrough, screenshot or external-host test. If a suitable complete fixture is unavailable, record the missing coverage before starting that assessed work. No project above, proprietary proxy or paid training service is compulsory.
+
 ### Optional disciplinary references
 
 - [OWASP Application Security Verification Standard 5.0.0](https://asvs.owasp.org/) — verification criteria for authentication, authorization, data handling and Web security.
